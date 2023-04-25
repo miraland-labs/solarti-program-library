@@ -1,5 +1,5 @@
 [package]
-name = "spl-token-lending"
+name = "solarti-token-lending"
 version = "0.2.0"
 description = "Solana Program Library Token Lending"
 authors = ["Solana Labs Maintainers <maintainers@solanalabs.com>"]
@@ -17,7 +17,7 @@ bytemuck = "1.13.0"
 num-derive = "0.3"
 num-traits = "0.2"
 solana-program = "1.14.12"
-spl-token = { version = "3.5", path = "../../token/program", features = [ "no-entrypoint" ] }
+solarti-token = { version = "3.5", path = "../../token/program", features = [ "no-entrypoint" ] }
 thiserror = "1.0"
 uint = "0.9"
 

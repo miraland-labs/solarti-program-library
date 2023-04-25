@@ -1,9 +1,9 @@
 [package]
 authors = ["Solana Labs Maintainers <maintainers@solanalabs.com>"]
-description = "SPL-Token Rust Client"
+description = "solarti-token Rust Client"
 edition = "2021"
 license = "Apache-2.0"
-name = "spl-token-client"
+name = "solarti-token-client"
 repository = "https://github.com/solana-labs/solana-program-library"
 version = "0.4.1"
 
@@ -17,8 +17,8 @@ solana-sdk = "=1.14.12"
 # testing token
 spl-associated-token-account = { version = "1.1", path = "../../associated-token-account/program", features = ["no-entrypoint"] }
 spl-memo = { version = "3.0.1", path = "../../memo/program", features = ["no-entrypoint"] }
-spl-token = { version = "3.5", path="../program", features = [ "no-entrypoint" ] }
-spl-token-2022 = { version = "0.6", path="../program-2022" }
+solarti-token = { version = "3.5", path="../program", features = [ "no-entrypoint" ] }
+solarti-token-2022 = { version = "0.6", path="../program-2022" }
 thiserror = "1.0"
 
 [features]
