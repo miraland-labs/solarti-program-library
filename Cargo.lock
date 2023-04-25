@@ -4791,7 +4791,7 @@ dependencies = [
  "solana-sdk",
  "solana-transaction-status",
  "solana-vote-program",
- "spl-memo 3.0.1 (registry+https://github.com/rust-lang/crates.io-index)",
+ "spl-memo",
 ]
 
 [[package]]
@@ -4975,7 +4975,7 @@ dependencies = [
  "solana-metrics",
  "solana-sdk",
  "solana-version",
- "spl-memo 3.0.1 (registry+https://github.com/rust-lang/crates.io-index)",
+ "spl-memo",
  "thiserror",
  "tokio",
 ]
@@ -5772,7 +5772,7 @@ dependencies = [
  "solana-sdk",
  "solana-vote-program",
  "spl-associated-token-account",
- "spl-memo 3.0.1 (registry+https://github.com/rust-lang/crates.io-index)",
+ "spl-memo",
  "spl-token",
  "spl-token-2022",
  "thiserror",
@@ -5906,6 +5906,15 @@ dependencies = [
 ]
 
 [[package]]
+name = "solarti-memo"
+version = "3.0.1"
+dependencies = [
+ "solana-program",
+ "solana-program-test",
+ "solana-sdk",
+]
+
+[[package]]
 name = "solarti-token"
 version = "3.5.0"
 dependencies = [
@@ -5942,8 +5951,8 @@ dependencies = [
  "solana-program-test",
  "solana-sdk",
  "solana-zk-token-sdk",
+ "solarti-memo",
  "solarti-token",
- "spl-memo 3.0.1",
  "thiserror",
 ]
 
@@ -5956,10 +5965,10 @@ dependencies = [
  "solana-program-test",
  "solana-sdk",
  "solarti-associated-token-account",
+ "solarti-memo",
  "solarti-token-2022",
  "solarti-token-client",
  "spl-instruction-padding",
- "spl-memo 3.0.1",
  "walkdir",
 ]
 
@@ -5986,10 +5995,10 @@ dependencies = [
  "solana-test-validator",
  "solana-transaction-status",
  "solarti-associated-token-account",
+ "solarti-memo",
  "solarti-token",
  "solarti-token-2022",
  "solarti-token-client",
- "spl-memo 3.0.1",
  "strum",
  "strum_macros",
  "tempfile",
@@ -6007,9 +6016,9 @@ dependencies = [
  "solana-program-test",
  "solana-sdk",
  "solarti-associated-token-account",
+ "solarti-memo",
  "solarti-token",
  "solarti-token-2022",
- "spl-memo 3.0.1",
  "thiserror",
 ]
 
@@ -6432,15 +6441,6 @@ dependencies = [
 [[package]]
 name = "spl-memo"
 version = "3.0.1"
-dependencies = [
- "solana-program",
- "solana-program-test",
- "solana-sdk",
-]
-
-[[package]]
-name = "spl-memo"
-version = "3.0.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "bd0dc6f70db6bacea7ff25870b016a65ba1d1b6013536f08e4fd79a8f9005325"
 dependencies = [
@@ -6570,7 +6570,7 @@ dependencies = [
  "num_enum",
  "solana-program",
  "solana-zk-token-sdk",
- "spl-memo 3.0.1 (registry+https://github.com/rust-lang/crates.io-index)",
+ "spl-memo",
  "spl-token",
  "thiserror",
 ]
@@ -6826,9 +6826,9 @@ name = "test-client"
 version = "0.1.0"
 dependencies = [
  "solana-sdk",
+ "solarti-memo",
  "solarti-token",
  "solarti-token-swap",
- "spl-memo 3.0.1",
 ]
 
 [[package]]
