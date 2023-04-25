@@ -4,7 +4,9 @@
 pub const DECIMALS: u8 = 9;
 
 // The Mint for native SOL Token accounts
-solana_program::declare_id!("9pan9bMn5HatX4EJdBwg9VgCa7Uz5HL8N1m5D3NdXejP");
+// solana_program::declare_id!("9pan9bMn5HatX4EJdBwg9VgCa7Uz5HL8N1m5D3NdXejP");
+// MI: The Mint for native MLN Token accounts in lieu of spl progressive token program id
+solana_program::declare_id!("968j6eVSgVdL7NeJoEjtRD7XV9LFSt4Bt6MsAtvtAxvx");
 
 /// Seed for the native_mint's program-derived address
 pub const PROGRAM_ADDRESS_SEEDS: &[&[u8]] = &["native-mint".as_bytes(), &[255]];
