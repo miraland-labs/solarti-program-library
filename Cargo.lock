@@ -2735,7 +2735,7 @@ dependencies = [
  "num-traits",
  "shank 0.0.11",
  "solana-program",
- "spl-associated-token-account 1.1.2",
+ "spl-associated-token-account",
  "spl-token",
  "thiserror",
 ]
@@ -5771,7 +5771,7 @@ dependencies = [
  "solana-metrics",
  "solana-sdk",
  "solana-vote-program",
- "spl-associated-token-account 1.1.2",
+ "spl-associated-token-account",
  "spl-memo 3.0.1 (registry+https://github.com/rust-lang/crates.io-index)",
  "spl-token",
  "spl-token-2022",
@@ -5880,6 +5880,32 @@ dependencies = [
 ]
 
 [[package]]
+name = "solarti-associated-token-account"
+version = "1.1.3"
+dependencies = [
+ "assert_matches",
+ "borsh",
+ "num-derive",
+ "num-traits",
+ "solana-program",
+ "solarti-token",
+ "solarti-token-2022",
+ "thiserror",
+]
+
+[[package]]
+name = "solarti-associated-token-account-test"
+version = "0.0.1"
+dependencies = [
+ "solana-program",
+ "solana-program-test",
+ "solana-sdk",
+ "solarti-associated-token-account",
+ "solarti-token",
+ "solarti-token-2022",
+]
+
+[[package]]
 name = "solarti-token"
 version = "3.5.0"
 dependencies = [
@@ -5929,9 +5955,9 @@ dependencies = [
  "solana-program",
  "solana-program-test",
  "solana-sdk",
+ "solarti-associated-token-account",
  "solarti-token-2022",
  "solarti-token-client",
- "spl-associated-token-account 1.1.3",
  "spl-instruction-padding",
  "spl-memo 3.0.1",
  "walkdir",
@@ -5959,10 +5985,10 @@ dependencies = [
  "solana-sdk",
  "solana-test-validator",
  "solana-transaction-status",
+ "solarti-associated-token-account",
  "solarti-token",
  "solarti-token-2022",
  "solarti-token-client",
- "spl-associated-token-account 1.1.3",
  "spl-memo 3.0.1",
  "strum",
  "strum_macros",
@@ -5980,9 +6006,9 @@ dependencies = [
  "solana-client",
  "solana-program-test",
  "solana-sdk",
+ "solarti-associated-token-account",
  "solarti-token",
  "solarti-token-2022",
- "spl-associated-token-account 1.1.3",
  "spl-memo 3.0.1",
  "thiserror",
 ]
@@ -6086,11 +6112,11 @@ dependencies = [
  "solana-remote-wallet",
  "solana-sdk",
  "solana-test-validator",
+ "solarti-associated-token-account",
  "solarti-token",
  "solarti-token-2022",
  "solarti-token-client",
  "solarti-token-upgrade",
- "spl-associated-token-account 1.1.3",
  "tokio",
  "walkdir",
 ]
@@ -6131,32 +6157,6 @@ dependencies = [
  "spl-token",
  "spl-token-2022",
  "thiserror",
-]
-
-[[package]]
-name = "spl-associated-token-account"
-version = "1.1.3"
-dependencies = [
- "assert_matches",
- "borsh",
- "num-derive",
- "num-traits",
- "solana-program",
- "solarti-token",
- "solarti-token-2022",
- "thiserror",
-]
-
-[[package]]
-name = "spl-associated-token-account-test"
-version = "0.0.1"
-dependencies = [
- "solana-program",
- "solana-program-test",
- "solana-sdk",
- "solarti-token",
- "solarti-token-2022",
- "spl-associated-token-account 1.1.3",
 ]
 
 [[package]]
@@ -6406,7 +6406,7 @@ dependencies = [
  "solana-program",
  "solana-program-test",
  "solana-sdk",
- "spl-associated-token-account 1.1.2",
+ "spl-associated-token-account",
  "spl-token",
  "thiserror",
  "tokio",
@@ -6537,8 +6537,8 @@ dependencies = [
  "solana-program",
  "solana-remote-wallet",
  "solana-sdk",
+ "solarti-associated-token-account",
  "solarti-token",
- "spl-associated-token-account 1.1.3",
  "spl-stake-pool",
 ]
 
@@ -6584,8 +6584,8 @@ dependencies = [
  "solana-program",
  "solana-program-test",
  "solana-sdk",
+ "solarti-associated-token-account",
  "solarti-token",
- "spl-associated-token-account 1.1.3",
  "thiserror",
 ]
 
