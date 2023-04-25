@@ -15,10 +15,10 @@ use solana_program::{
 
 /// Legacy symbols from Memo v1
 pub mod v1 {
-    solana_program::declare_id!("Memo1UhkJRfHyvLMcVucJwxXeuD728EqVDDwQDxFMNo");
+    solana_program::declare_id!("MemojWWmbFiRdUEQtRpMkeeyNB181Mr9uWEzdrgHUnc");
 }
 
-solana_program::declare_id!("MemoSq4gqABAXKb96qnH8TysNcWxMyWCqXgDLGmfcHr");
+solana_program::declare_id!("MemoE5FsL5zWDjihivRfHTpkR8RdviRbziKsfGS9Ntd");
 
 /// Build a memo instruction, possibly signed
 ///
