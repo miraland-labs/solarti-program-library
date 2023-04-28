@@ -1,9 +1,9 @@
 [package]
-name = "spl-feature-proposal"
+name = "solarti-feature-proposal"
 version = "1.0.0"
-description = "Solana Program Library Feature Proposal Program"
+description = "Solarti Program Library Feature Proposal Program"
 authors = ["Solana Labs Maintainers <maintainers@solanalabs.com>"]
-repository = "https://github.com/solana-labs/solana-program-library"
+repository = "https://github.com/miraland-labs/solarti-program-library"
 license = "Apache-2.0"
 edition = "2021"
 
@@ -22,6 +22,7 @@ solana-sdk = "1.14.12"
 
 [lib]
 crate-type = ["cdylib", "lib"]
+name = "spl_feature_proposal"
 
 [package.metadata.docs.rs]
 targets = ["x86_64-unknown-linux-gnu"]

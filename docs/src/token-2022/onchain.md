@@ -81,13 +81,13 @@ In your program-test setup, you must include `spl_token_2022.so` at the correct
 address. You can add it as normal to `tests/fixtures/` after downloading it using:
 
 ```console
-$ solana program dump TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb spl_token_2022.so
+$ solana program dump Token8N5ecJeFxL83iFa2h7AgJ8AtufM7bbg63LrW89 spl_token_2022.so
 ```
 
 If you're using `solana-test-validator` for your tests, you can include it using:
 
 ```console
-$ solana-test-validator -c TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb
+$ solana-test-validator -c Token8N5ecJeFxL83iFa2h7AgJ8AtufM7bbg63LrW89
 ```
 
 **Note**: This step is temporary, until Token-2022 is included by default in
