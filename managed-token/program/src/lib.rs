@@ -1,4 +1,4 @@
-solana_program::declare_id!("mTok58Lg4YfcmwqyrDHpf7ogp599WRhzb6PxjaBqAxS");
+solana_program::declare_id!("MgTkZ2uns1oBn688aY1xJ6TJ1sVnEmcvNGdrpT7c9r2");
 
 use borsh::BorshDeserialize;
 use solana_program::{

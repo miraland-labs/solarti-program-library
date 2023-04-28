@@ -19,7 +19,7 @@ use std::{
     slice::{from_raw_parts, from_raw_parts_mut},
 };
 
-declare_id!("shmem4EWT2sPdVGvTZCzXXRAURL9G5vpPxNwSeKhHUL");
+declare_id!("shmFc7FxFPiLQHchdHLMLWAS8yjroAP56dpToM3sHz1");
 
 /// A more efficient `copy_from_slice` implementation.
 fn fast_copy(mut src: &[u8], mut dst: &mut [u8]) {

@@ -71,7 +71,7 @@ export const approveInstructionDiscriminator = 6
 export function createApproveInstruction(
   accounts: ApproveInstructionAccounts,
   args: ApproveInstructionArgs,
-  programId = new web3.PublicKey('mTok58Lg4YfcmwqyrDHpf7ogp599WRhzb6PxjaBqAxS')
+  programId = new web3.PublicKey('MgTkZ2uns1oBn688aY1xJ6TJ1sVnEmcvNGdrpT7c9r2')
 ) {
   const [data] = ApproveStruct.serialize({
     instructionDiscriminator: approveInstructionDiscriminator,

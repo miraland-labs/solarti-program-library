@@ -1,9 +1,9 @@
 [package]
-name = "spl-instruction-padding"
+name = "solarti-instruction-padding"
 version = "0.1.0"
-description = "Solana Program Library Instruction Padding Program"
+description = "Solarti Program Library Instruction Padding Program"
 authors = ["Solana Labs Maintainers <maintainers@solanalabs.com>"]
-repository = "https://github.com/solana-labs/solana-program-library"
+repository = "https://github.com/miraland-labs/solarti-program-library"
 license = "Apache-2.0"
 homepage = "https://solana.com/"
 edition = "2021"
@@ -22,6 +22,7 @@ solana-sdk = "1.14.4"
 
 [lib]
 crate-type = ["cdylib", "lib"]
+name = "spl_instruction_padding"
 
 [package.metadata.docs.rs]
 targets = ["x86_64-unknown-linux-gnu"]

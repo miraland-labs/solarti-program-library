@@ -24,5 +24,5 @@ solana-sdk = "=1.14.12"
 solarti-associated-token-account = { version = "1.1", path = "../../associated-token-account/program" }
 solarti-memo = { version = "3.0.1", path = "../../memo/program", features = ["no-entrypoint"] }
 solarti-token-2022 = { version = "0.6", path="../program-2022", features = ["no-entrypoint"] }
-spl-instruction-padding = { version = "0.1.0", path="../../instruction-padding/program", features = ["no-entrypoint"] }
+solarti-instruction-padding = { version = "0.1.0", path="../../instruction-padding/program", features = ["no-entrypoint"] }
 solarti-token-client = { version = "0.4", path = "../client" }

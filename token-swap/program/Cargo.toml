@@ -18,7 +18,7 @@ enum_dispatch = "0.3.7"
 num-derive = "0.3"
 num-traits = "0.2"
 solana-program = "1.14.12"
-spl-math = { version = "0.1", path = "../../libraries/math", features = [ "no-entrypoint" ] }
+solarti-math = { version = "0.1", path = "../../libraries/math", features = [ "no-entrypoint" ] }
 solarti-token = { version = "3.5", path = "../../token/program", features = [ "no-entrypoint" ] }
 solarti-token-2022 = { version = "0.6", path = "../../token/program-2022", features = [ "no-entrypoint" ] }
 thiserror = "1.0"
