@@ -1,9 +1,9 @@
 [package]
-name = "spl-record"
+name = "solarti-record"
 version = "0.1.0"
-description = "Solana Program Library Record Program"
+description = "Solarti Program Library Record Program"
 authors = ["Solana Labs Maintainers <maintainers@solanalabs.com>"]
-repository = "https://github.com/solana-labs/solana-program-library"
+repository = "https://github.com/miraland-labs/solarti-program-library"
 license = "Apache-2.0"
 edition = "2021"
 
@@ -25,6 +25,7 @@ solana-sdk = "1.14.12"
 
 [lib]
 crate-type = ["cdylib", "lib"]
+name = "spl_record"
 
 [package.metadata.docs.rs]
 targets = ["x86_64-unknown-linux-gnu"]
