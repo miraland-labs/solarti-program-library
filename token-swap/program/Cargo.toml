@@ -1,9 +1,9 @@
 [package]
 name = "solarti-token-swap"
 version = "3.0.0"
-description = "Solana Program Library Token Swap"
+description = "Solarti Program Library Token Swap"
 authors = ["Solana Labs Maintainers <maintainers@solanalabs.com>"]
-repository = "https://github.com/solana-labs/solana-program-library"
+repository = "https://github.com/miraland-labs/solarti-program-library"
 license = "Apache-2.0"
 edition = "2021"
 
@@ -33,6 +33,7 @@ test-case = "2.2"
 
 [lib]
 crate-type = ["cdylib", "lib"]
+name = "spl_token_swap"
 
 [package.metadata.docs.rs]
 targets = ["x86_64-unknown-linux-gnu"]

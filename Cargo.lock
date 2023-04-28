@@ -5906,6 +5906,31 @@ dependencies = [
 ]
 
 [[package]]
+name = "solarti-feature-proposal"
+version = "1.0.0"
+dependencies = [
+ "borsh",
+ "solana-program",
+ "solana-program-test",
+ "solana-sdk",
+ "solarti-token",
+]
+
+[[package]]
+name = "solarti-feature-proposal-cli"
+version = "1.2.0"
+dependencies = [
+ "chrono",
+ "clap 2.34.0",
+ "solana-clap-utils",
+ "solana-cli-config",
+ "solana-client",
+ "solana-logger",
+ "solana-sdk",
+ "solarti-feature-proposal",
+]
+
+[[package]]
 name = "solarti-memo"
 version = "3.0.1"
 dependencies = [
@@ -5915,8 +5940,85 @@ dependencies = [
 ]
 
 [[package]]
+name = "solarti-name-service"
+version = "0.2.0"
+dependencies = [
+ "borsh",
+ "num-derive",
+ "num-traits",
+ "solana-program",
+ "solana-program-test",
+ "solana-sdk",
+ "thiserror",
+]
+
+[[package]]
+name = "solarti-record"
+version = "0.1.0"
+dependencies = [
+ "borsh",
+ "borsh-derive",
+ "num-derive",
+ "num-traits",
+ "solana-program",
+ "solana-program-test",
+ "solana-sdk",
+ "thiserror",
+]
+
+[[package]]
+name = "solarti-stake-pool"
+version = "0.7.0"
+dependencies = [
+ "arrayref",
+ "bincode",
+ "borsh",
+ "mpl-token-metadata",
+ "num-derive",
+ "num-traits",
+ "num_enum",
+ "proptest",
+ "serde",
+ "serde_derive",
+ "solana-program",
+ "solana-program-test",
+ "solana-sdk",
+ "solana-vote-program",
+ "solarti-token",
+ "solarti-token-2022",
+ "spl-math",
+ "test-case",
+ "thiserror",
+]
+
+[[package]]
+name = "solarti-stake-pool-cli"
+version = "0.7.0"
+dependencies = [
+ "bincode",
+ "borsh",
+ "bs58",
+ "clap 2.34.0",
+ "serde",
+ "serde_derive",
+ "serde_json",
+ "solana-account-decoder",
+ "solana-clap-utils",
+ "solana-cli-config",
+ "solana-cli-output",
+ "solana-client",
+ "solana-logger",
+ "solana-program",
+ "solana-remote-wallet",
+ "solana-sdk",
+ "solarti-associated-token-account",
+ "solarti-stake-pool",
+ "solarti-token",
+]
+
+[[package]]
 name = "solarti-token"
-version = "3.5.0"
+version = "3.5.1"
 dependencies = [
  "arrayref",
  "bytemuck",
@@ -5974,7 +6076,7 @@ dependencies = [
 
 [[package]]
 name = "solarti-token-cli"
-version = "2.3.0"
+version = "2.3.1"
 dependencies = [
  "assert_cmd",
  "clap 2.34.0",
@@ -6252,31 +6354,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "spl-feature-proposal"
-version = "1.0.0"
-dependencies = [
- "borsh",
- "solana-program",
- "solana-program-test",
- "solana-sdk",
- "solarti-token",
-]
-
-[[package]]
-name = "spl-feature-proposal-cli"
-version = "1.2.0"
-dependencies = [
- "chrono",
- "clap 2.34.0",
- "solana-clap-utils",
- "solana-cli-config",
- "solana-client",
- "solana-logger",
- "solana-sdk",
- "spl-feature-proposal",
-]
-
-[[package]]
 name = "spl-governance"
 version = "3.1.0"
 dependencies = [
@@ -6456,33 +6533,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "spl-name-service"
-version = "0.2.0"
-dependencies = [
- "borsh",
- "num-derive",
- "num-traits",
- "solana-program",
- "solana-program-test",
- "solana-sdk",
- "thiserror",
-]
-
-[[package]]
-name = "spl-record"
-version = "0.1.0"
-dependencies = [
- "borsh",
- "borsh-derive",
- "num-derive",
- "num-traits",
- "solana-program",
- "solana-program-test",
- "solana-sdk",
- "thiserror",
-]
-
-[[package]]
 name = "spl-shared-memory"
 version = "2.0.6"
 dependencies = [
@@ -6490,56 +6540,6 @@ dependencies = [
  "solana-program",
  "solana-program-test",
  "solana-sdk",
-]
-
-[[package]]
-name = "spl-stake-pool"
-version = "0.7.0"
-dependencies = [
- "arrayref",
- "bincode",
- "borsh",
- "mpl-token-metadata",
- "num-derive",
- "num-traits",
- "num_enum",
- "proptest",
- "serde",
- "serde_derive",
- "solana-program",
- "solana-program-test",
- "solana-sdk",
- "solana-vote-program",
- "solarti-token",
- "solarti-token-2022",
- "spl-math",
- "test-case",
- "thiserror",
-]
-
-[[package]]
-name = "spl-stake-pool-cli"
-version = "0.7.0"
-dependencies = [
- "bincode",
- "borsh",
- "bs58",
- "clap 2.34.0",
- "serde",
- "serde_derive",
- "serde_json",
- "solana-account-decoder",
- "solana-clap-utils",
- "solana-cli-config",
- "solana-cli-output",
- "solana-client",
- "solana-logger",
- "solana-program",
- "solana-remote-wallet",
- "solana-sdk",
- "solarti-associated-token-account",
- "solarti-token",
- "spl-stake-pool",
 ]
 
 [[package]]

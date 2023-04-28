@@ -38,19 +38,19 @@ The Feature Proposal Program's source is available on
 [github](https://github.com/solana-labs/solana-program-library)
 
 ## Interface
-The Feature Proposal Program is written in Rust and available on [crates.io](https://crates.io/crates/spl-feature-proposal) and [docs.rs](https://docs.rs/spl-feature-proposal).
+The Feature Proposal Program is written in Rust and available on [crates.io](https://crates.io/crates/solarti-feature-proposal) and [docs.rs](https://docs.rs/solarti-feature-proposal).
 
 ## Command-line Utility
-The `spl-feature-proposal` command-line utility can be used to manage feature
+The `solarti-feature-proposal` command-line utility can be used to manage feature
 proposal.  Once you have [Rust installed](https://rustup.rs/), run:
 ```sh
-$ cargo install spl-feature-proposal-cli
+$ cargo install solarti-feature-proposal-cli
 ```
 
-Run `spl-feature-proposal --help` for a full description of available commands.
+Run `solarti-feature-proposal --help` for a full description of available commands.
 
 ### Configuration
-The `spl-feature-proposal` configuration is shared with the `solana` command-line tool.
+The `solarti-feature-proposal` configuration is shared with the `solana` command-line tool.
 
 ## Feature Proposal Life Cycle
 
@@ -71,9 +71,9 @@ $ solana-keygen new --outfile feature-proposal.json --silent --no-passphrase
 Wrote new keypair to feature-proposal.json
 ```
 
-Now run the `spl-feature-proposal` program to derive the *feature id*:
+Now run the `solarti-feature-proposal` program to derive the *feature id*:
 ```
-$ spl-feature-proposal address feature-proposal.json
+$ solarti-feature-proposal address feature-proposal.json
 Feature Id: HQ3baDfNU7WKCyWvtMYZmi51YPs7vhSiLn1ESYp3jhiA
 Token Mint Address: ALvA7Lv9jbo8JFhxqnRpjWWuR3aD12uCb5KBJst4uc3d
 Acceptance Token Address: AdqKm3mSJf8AtTWjfpA5ZbJszWQPcwyLA2XkRyLbf3Di
@@ -96,7 +96,7 @@ proposer* may initiate the community proposal process.
 
 This is done by running:
 ```
-$ spl-feature-proposal propose feature-proposal.json
+$ solarti-feature-proposal propose feature-proposal.json
 Feature Id: HQ3baDfNU7WKCyWvtMYZmi51YPs7vhSiLn1ESYp3jhiA
 Token Mint Address: ALvA7Lv9jbo8JFhxqnRpjWWuR3aD12uCb5KBJst4uc3d
 Distributor Token Address: GK55hNft4TGc3Hg4KzbjEmju8VfaNuXK8jQNDTZKcsNF
@@ -117,7 +117,7 @@ and then submit their vote by running:
     $ spl-token --owner ~/validator-keypair.json transfer <TOKEN_ACCOUNT_ADDRESS> ALL AdqKm3mSJf8AtTWjfpA5ZbJszWQPcwyLA2XkRyLbf3Di
 
 Periodically the votes must be tallied by running:
-  $ spl-feature-proposal tally 8CyUVvio2oYAP28ZkMBPHq88ikhRgWet6i4NYsCW5Cxa
+  $ solarti-feature-proposal tally 8CyUVvio2oYAP28ZkMBPHq88ikhRgWet6i4NYsCW5Cxa
 Tallying is permissionless and may be run by anybody.
 Once this feature proposal is accepted, the HQ3baDfNU7WKCyWvtMYZmi51YPs7vhSiLn1ESYp3jhiA feature will be activated at the next epoch.
 
@@ -138,7 +138,7 @@ feature proposal on a network with 500 validators is approximately 1 SOL.
 After advertising to the validators that a feature proposal is pending their
 acceptance, the votes are tallied by running:
 ```
-$ spl-feature-proposal tally 8CyUVvio2oYAP28ZkMBPHq88ikhRgWet6i4NYsCW5Cxa
+$ solarti-feature-proposal tally 8CyUVvio2oYAP28ZkMBPHq88ikhRgWet6i4NYsCW5Cxa
 ```
 Anybody may tally the vote.  Once the required number of votes are tallied, the
 feature will be automatically activated at the start of the next epoch.

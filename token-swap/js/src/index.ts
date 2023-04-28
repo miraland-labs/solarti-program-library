@@ -20,7 +20,7 @@ import * as Layout from './layout';
 import {loadAccount} from './util/account';
 
 export const TOKEN_SWAP_PROGRAM_ID: PublicKey = new PublicKey(
-  'SwapsVeCiPHMUAtzQWZw7RjsKjgCjhwU55QGu4U1Szw',
+  'Swapxy418CiVrU7RL7ZF5RuJKgncm7efhS8msyREZod',
 );
 
 export const OLD_TOKEN_SWAP_PROGRAM_ID: PublicKey = new PublicKey(
