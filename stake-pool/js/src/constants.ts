@@ -2,7 +2,7 @@ import { Buffer } from 'buffer';
 import { LAMPORTS_PER_SOL, PublicKey } from '@solana/web3.js';
 
 // Public key that identifies the SPL Stake Pool program.
-export const STAKE_POOL_PROGRAM_ID = new PublicKey('SPoo1Ku8WFXoNDMHPsrGSTSG1Y47rzgn41SLUNakuHy');
+export const STAKE_POOL_PROGRAM_ID = new PublicKey('spooqgqqDxZgVc3pR6EvuVFZJ1kj7ABM4Hccz1gwAN1');
 
 // Maximum number of validators to update during UpdateValidatorListBalance.
 export const MAX_VALIDATORS_TO_UPDATE = 5;
