@@ -24,7 +24,7 @@ import {
 ////////////////////////////////////////////////////////////
 
 export const NAME_PROGRAM_ID = new PublicKey(
-  'namesLPneVptA9Z5rqUDD9tMTWEJwofgaYwp8cawRkX'
+  'NamSVdu81GY7ntoqY5Ts4ojoch1JZoetQXb8cuS8gbx'
 );
 export const HASH_PREFIX = 'SPL Name Service';
 

@@ -20,7 +20,7 @@ chai.use(chaiAsPromised);
 
 describe('SplNameService Instructions', () => {
   const nameServiceAddress = new PublicKey(
-    'namesLPneVptA9Z5rqUDD9tMTWEJwofgaYwp8cawRkX'
+    'NamSVdu81GY7ntoqY5Ts4ojoch1JZoetQXb8cuS8gbx'
   );
   const nameAccountKey = Keypair.generate().publicKey;
   const nameOwnerKey = Keypair.generate().publicKey;

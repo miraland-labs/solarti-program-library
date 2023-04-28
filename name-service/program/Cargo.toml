@@ -1,8 +1,8 @@
 [package]
-name = "spl-name-service"
-description = "Solana Program Library Name Service"
+name = "solarti-name-service"
+description = "Solarti Program Library Name Service"
 version = "0.2.0"
-repository = "https://github.com/solana-labs/solana-program-library"
+repository = "https://github.com/miraland-labs/solarti-program-library"
 authors = [
   "lcchy <lucas@bonfida.com>",
   "Solana Labs Maintainers <maintainers@solanalabs.com>"
