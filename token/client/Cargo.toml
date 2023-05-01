@@ -9,10 +9,10 @@ version = "0.4.1"
 
 [dependencies]
 async-trait = "0.1"
-solana-cli-output = { version = "=1.14.12", optional = true }
-solana-client = "=1.14.12"
-solana-program-test = "=1.14.12"
-solana-sdk = "=1.14.12"
+miraland-cli-output = {path = "../../../miraland-1.14.17/cli-output", version = "=1.14.17-rc3", optional = true }
+miraland-client = {path = "../../../miraland-1.14.17/client", version = "=1.14.17-rc3"}
+miraland-program-test = {path = "../../../miraland-1.14.17/program-test", version = "1.14.17-rc3"}
+miraland-sdk = {path = "../../../miraland-1.14.17/sdk", version = "1.14.17-rc3"}
 # We never want the entrypoint for ATA, but we want the entrypoint for token when
 # testing token
 solarti-associated-token-account = { version = "1.1", path = "../../associated-token-account/program", features = ["no-entrypoint"] }
@@ -23,5 +23,5 @@ thiserror = "1.0"
 
 [features]
 default = ["display"]
-display = ["dep:solana-cli-output"]
+display = ["dep:miraland-cli-output"]
 proof-program = []

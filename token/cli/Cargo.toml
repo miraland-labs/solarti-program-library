@@ -18,15 +18,15 @@ indicatif = "0.16.2"
 serde = "1.0.130"
 serde_derive = "1.0.103"
 serde_json = "1.0.68"
-solana-account-decoder = "=1.14.12"
-solana-clap-utils = "=1.14.12"
-solana-cli-config = "=1.14.12"
-solana-cli-output = "=1.14.12"
-solana-client = "=1.14.12"
-solana-logger = "=1.14.12"
-solana-remote-wallet = "=1.14.12"
-solana-sdk = "=1.14.12"
-solana-transaction-status = "=1.14.12"
+miraland-account-decoder = {path = "../../../miraland-1.14.17/account-decoder", version = "=1.14.17-rc3"}
+miraland-clap-utils = {path = "../../../miraland-1.14.17/clap-utils", version = "=1.14.17-rc3"}
+miraland-cli-config = {path = "../../../miraland-1.14.17/cli-config", version = "=1.14.17-rc3"}
+miraland-cli-output = {path = "../../../miraland-1.14.17/cli-output", version = "=1.14.17-rc3"}
+miraland-client = {path = "../../../miraland-1.14.17/client", version = "=1.14.17-rc3"}
+miraland-logger = {path = "../../../miraland-1.14.17/logger", version = "=1.14.17-rc3"}
+miraland-remote-wallet = {path = "../../../miraland-1.14.17/remote-wallet", version = "=1.14.17-rc3"}
+miraland-sdk = {path = "../../../miraland-1.14.17/sdk", version = "=1.14.17-rc3"}
+miraland-transaction-status = {path = "../../../miraland-1.14.17/transaction-status", version = "=1.14.17-rc3"}
 solarti-token = { version = "3.5", path="../program", features = [ "no-entrypoint" ] }
 solarti-token-2022 = { version = "0.6", path="../program-2022", features = [ "no-entrypoint" ] }
 solarti-token-client = { version = "0.4", path="../client" }
@@ -37,7 +37,7 @@ strum_macros = "0.24"
 tokio = "1.14"
 
 [dev-dependencies]
-solana-test-validator = "=1.14.12"
+miraland-test-validator = {path = "../../../miraland-1.14.17/test-validator", version = "=1.14.17-rc3"}
 assert_cmd = "2.0.4"
 serial_test = "0.8.0"
 tempfile = "3.4.0"
