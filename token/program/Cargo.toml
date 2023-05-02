@@ -18,7 +18,7 @@ bytemuck = "1.13.0"
 num-derive = "0.3"
 num-traits = "0.2"
 num_enum = "0.5.9"
-miraland-program = {path = "../../../miraland-1.14.17/sdk/program", version = "1.14.17-rc4"}
+miraland-program = "=1.14.17-rc3"
 thiserror = "1.0"
 winnow = "=0.4.1"
 

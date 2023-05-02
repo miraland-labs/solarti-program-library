@@ -18,7 +18,7 @@ walkdir = "2"
 
 [dev-dependencies]
 async-trait = "0.1"
-miraland-program = {path = "../../../miraland-1.14.17/sdk/program", version = "1.14.17-rc4"}
+miraland-program = "=1.14.17-rc3"
 miraland-program-test = {path = "../../../miraland-1.14.17/program-test", version = "1.14.17-rc4"}
 miraland-sdk = {path = "../../../miraland-1.14.17/sdk", version = "1.14.17-rc4"}
 solarti-associated-token-account = { version = "1.1", path = "../../associated-token-account/program" }
