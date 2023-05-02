@@ -27,7 +27,7 @@ lazy_static = "1.4.0"
 proptest = "1.0"
 serial_test = "0.5.1"
 solana-program-test = "=1.14.17"
-miraland-sdk = {path = "../../../miraland-1.14.17/sdk", version = "1.14.17-rc4"}
+miraland-sdk = "=1.14.17-rc3"
 
 [lib]
 crate-type = ["cdylib", "lib"]
