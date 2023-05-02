@@ -12,11 +12,11 @@ no-entrypoint = []
 test-sbf = []
 
 [dependencies]
-miraland-program = {path = "../../../miraland-1.14.17/sdk/program", version = "1.14.17-rc3"}
+miraland-program = {path = "../../../miraland-1.14.17/sdk/program", version = "1.14.17-rc4"}
 
 [dev-dependencies]
 solana-program-test = "=1.14.17"
-miraland-sdk = {path = "../../../miraland-1.14.17/sdk", version = "1.14.17-rc3"}
+miraland-sdk = {path = "../../../miraland-1.14.17/sdk", version = "1.14.17-rc4"}
 
 [lib]
 crate-type = ["cdylib", "lib"]
