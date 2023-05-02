@@ -35,7 +35,7 @@ serde_with = { version = "1.14.0", optional = true }
 lazy_static = "1.4.0"
 proptest = "1.0"
 serial_test = "0.5.1"
-miraland-program-test = {path = "../../../miraland-1.14.17/program-test", version = "1.14.17-rc3"}
+solana-program-test = "=1.14.17"
 miraland-sdk = {path = "../../../miraland-1.14.17/sdk", version = "1.14.17-rc3"}
 serde_json = "1.0.81"
 
