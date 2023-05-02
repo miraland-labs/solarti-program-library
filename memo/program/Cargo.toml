@@ -15,7 +15,7 @@ test-sbf = []
 miraland-program = {path = "../../../miraland-1.14.17/sdk/program", version = "1.14.17-rc3"}
 
 [dev-dependencies]
-miraland-program-test = {path = "../../../miraland-1.14.17/program-test", version = "1.14.17-rc3"}
+solana-program-test = "=1.14.17"
 miraland-sdk = {path = "../../../miraland-1.14.17/sdk", version = "1.14.17-rc3"}
 
 [lib]
