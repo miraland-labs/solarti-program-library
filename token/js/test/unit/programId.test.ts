@@ -19,7 +19,7 @@ import {
 } from '../../src';
 chai.use(chaiAsPromised);
 
-describe('unsupported extensions in spl-token', () => {
+describe('unsupported extensions in solarti-token', () => {
     const mint = new PublicKey('7o36UsWR1JQLpZ9PE2gn9L4SQ69CNNiWAXd4Jt7rqz9Z');
     const account = new PublicKey('7o36UsWR1JQLpZ9PE2gn9L4SQ69CNNiWAXd4Jt7rqz9Z');
     const authority = new PublicKey('7o36UsWR1JQLpZ9PE2gn9L4SQ69CNNiWAXd4Jt7rqz9Z');

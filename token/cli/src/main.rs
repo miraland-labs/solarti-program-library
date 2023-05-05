@@ -4,11 +4,11 @@ use clap::{
     ArgMatches, SubCommand,
 };
 use serde::Serialize;
-use solana_account_decoder::{
+use miraland_account_decoder::{
     parse_token::{get_token_account_mint, parse_token, TokenAccountType, UiAccountState},
     UiAccountData,
 };
-use solana_clap_utils::{
+use miraland_clap_utils::{
     fee_payer::fee_payer_arg,
     input_parsers::{pubkey_of_signer, pubkeys_of_multiple_signers, value_of},
     input_validators::{
@@ -21,12 +21,12 @@ use solana_clap_utils::{
     offline::{self, *},
     ArgConstant,
 };
-use solana_cli_output::{
+use miraland_cli_output::{
     return_signers_data, CliSignOnlyData, CliSignature, OutputFormat, QuietDisplay,
     ReturnSignersConfig, VerboseDisplay,
 };
-use solana_client::rpc_request::TokenAccountsFilter;
-use solana_remote_wallet::remote_wallet::RemoteWalletManager;
+use miraland_client::rpc_request::TokenAccountsFilter;
+use miraland_remote_wallet::remote_wallet::RemoteWalletManager;
 use solana_sdk::{
     native_token::*,
     program_option::COption,
@@ -3265,7 +3265,7 @@ fn app<'a, 'b>(
         )
         .subcommand(
             SubCommand::with_name(CommandName::AccountInfo.into())
-                .about("Query details of an SPL Token account by address (DEPRECATED: use `spl-token display`)")
+                .about("Query details of an SPL Token account by address (DEPRECATED: use `solarti-token display`)")
                 .setting(AppSettings::Hidden)
                 .arg(
                     Arg::with_name("token")
@@ -3298,7 +3298,7 @@ fn app<'a, 'b>(
         )
         .subcommand(
             SubCommand::with_name(CommandName::MultisigInfo.into())
-                .about("Query details of an SPL Token multisig account by address (DEPRECATED: use `spl-token display`)")
+                .about("Query details of an SPL Token multisig account by address (DEPRECATED: use `solarti-token display`)")
                 .setting(AppSettings::Hidden)
                 .arg(
                     Arg::with_name("address")
@@ -4089,7 +4089,7 @@ async fn process_command<'a>(
             match config.output_format {
                 OutputFormat::Json | OutputFormat::JsonCompact => {
                     eprintln!(
-                        "`spl-token gc` does not support the `--ouput` parameter at this time"
+                        "`solarti-token gc` does not support the `--ouput` parameter at this time"
                     );
                     exit(1);
                 }
@@ -4315,7 +4315,7 @@ mod tests {
             system_instruction,
             transaction::Transaction,
         },
-        solana_test_validator::{ProgramInfo, TestValidator, TestValidatorGenesis},
+        miraland_test_validator::{ProgramInfo, TestValidator, TestValidatorGenesis},
         spl_token_2022::{extension::non_transferable::NonTransferable, state::Multisig},
         spl_token_client::client::{
             ProgramClient, ProgramOfflineClient, ProgramRpcClient, ProgramRpcClientSendTransaction,
@@ -4640,7 +4640,7 @@ mod tests {
             let result = process_test_command(
                 &config,
                 &payer,
-                &["spl-token", CommandName::CreateToken.into()],
+                &["solarti-token", CommandName::CreateToken.into()],
             )
             .await;
             let value: serde_json::Value = serde_json::from_str(&result.unwrap()).unwrap();
@@ -4662,7 +4662,7 @@ mod tests {
             &config,
             &payer,
             &[
-                "spl-token",
+                "solarti-token",
                 CommandName::CreateToken.into(),
                 "--interest-rate",
                 &rate_bps.to_string(),
@@ -4705,7 +4705,7 @@ mod tests {
             &config,
             &payer,
             &[
-                "spl-token",
+                "solarti-token",
                 CommandName::SetInterestRate.into(),
                 &token.to_string(),
                 &new_rate.to_string(),
@@ -4731,7 +4731,7 @@ mod tests {
             let result = process_test_command(
                 &config,
                 &payer,
-                &["spl-token", CommandName::Supply.into(), &token.to_string()],
+                &["solarti-token", CommandName::Supply.into(), &token.to_string()],
             )
             .await;
             let value: serde_json::Value = serde_json::from_str(&result.unwrap()).unwrap();
@@ -4751,7 +4751,7 @@ mod tests {
                 &config,
                 &payer,
                 &[
-                    "spl-token",
+                    "solarti-token",
                     CommandName::CreateAccount.into(),
                     &token.to_string(),
                 ],
@@ -4774,7 +4774,7 @@ mod tests {
                 &config,
                 &payer,
                 &[
-                    "spl-token",
+                    "solarti-token",
                     CommandName::AccountInfo.into(),
                     &token.to_string(),
                 ],
@@ -4807,7 +4807,7 @@ mod tests {
             let result = process_test_command(
                 &config,
                 &payer,
-                &["spl-token", CommandName::Balance.into(), &token.to_string()],
+                &["solarti-token", CommandName::Balance.into(), &token.to_string()],
             )
             .await;
             let value: serde_json::Value = serde_json::from_str(&result.unwrap()).unwrap();
@@ -4831,7 +4831,7 @@ mod tests {
                 &config,
                 &payer,
                 &[
-                    "spl-token",
+                    "solarti-token",
                     CommandName::Mint.into(),
                     &token.to_string(),
                     "1",
@@ -4853,7 +4853,7 @@ mod tests {
                 &config,
                 &payer,
                 &[
-                    "spl-token",
+                    "solarti-token",
                     CommandName::Mint.into(),
                     &token.to_string(),
                     "1",
@@ -4876,7 +4876,7 @@ mod tests {
                 &config,
                 &payer,
                 &[
-                    "spl-token",
+                    "solarti-token",
                     CommandName::Mint.into(),
                     &token.to_string(),
                     "1",
@@ -4910,7 +4910,7 @@ mod tests {
             let result = process_test_command(
                 &config,
                 &payer,
-                &["spl-token", CommandName::Balance.into(), &token.to_string()],
+                &["solarti-token", CommandName::Balance.into(), &token.to_string()],
             )
             .await;
             let value: serde_json::Value = serde_json::from_str(&result.unwrap()).unwrap();
@@ -4933,7 +4933,7 @@ mod tests {
                 &config,
                 &payer,
                 &[
-                    "spl-token",
+                    "solarti-token",
                     CommandName::Balance.into(),
                     &token.to_string(),
                     "--owner",
@@ -4963,7 +4963,7 @@ mod tests {
             let result = process_test_command(
                 &config,
                 &payer,
-                &["spl-token", CommandName::Accounts.into()],
+                &["solarti-token", CommandName::Accounts.into()],
             )
             .await
             .unwrap();
@@ -4991,7 +4991,7 @@ mod tests {
                 &config,
                 &payer,
                 &[
-                    "spl-token",
+                    "solarti-token",
                     CommandName::Accounts.into(),
                     "--owner",
                     &payer.pubkey().to_string(),
@@ -5021,7 +5021,7 @@ mod tests {
             let _result = process_test_command(
                 &config,
                 &payer,
-                &["spl-token", CommandName::Wrap.into(), "0.5"],
+                &["solarti-token", CommandName::Wrap.into(), "0.5"],
             )
             .await
             .unwrap();
@@ -5061,7 +5061,7 @@ mod tests {
                 &config,
                 &payer,
                 &[
-                    "spl-token",
+                    "solarti-token",
                     CommandName::Unwrap.into(),
                     &account.to_string(),
                 ],
@@ -5087,7 +5087,7 @@ mod tests {
                 &config,
                 &payer,
                 &[
-                    "spl-token",
+                    "solarti-token",
                     CommandName::Transfer.into(),
                     &token.to_string(),
                     "10",
@@ -5121,7 +5121,7 @@ mod tests {
                 &config,
                 &payer,
                 &[
-                    "spl-token",
+                    "solarti-token",
                     CommandName::Transfer.into(),
                     "--fund-recipient",
                     "--allow-unfunded-recipient",
@@ -5183,7 +5183,7 @@ mod tests {
                     &config,
                     &payer,
                     &[
-                        "spl-token",
+                        "solarti-token",
                         CommandName::Transfer.into(),
                         "--fund-recipient",
                         &token.to_string(),
@@ -5199,7 +5199,7 @@ mod tests {
                     &config,
                     &payer,
                     &[
-                        "spl-token",
+                        "solarti-token",
                         CommandName::Transfer.into(),
                         "--fund-recipient",
                         "--allow-unfunded-recipient",
@@ -5224,7 +5224,7 @@ mod tests {
                     &config,
                     &payer,
                     &[
-                        "spl-token",
+                        "solarti-token",
                         CommandName::Transfer.into(),
                         "--fund-recipient",
                         &token.to_string(),
@@ -5240,7 +5240,7 @@ mod tests {
                     &config,
                     &payer,
                     &[
-                        "spl-token",
+                        "solarti-token",
                         CommandName::Transfer.into(),
                         "--fund-recipient",
                         "--allow-non-system-account-recipient",
@@ -5265,7 +5265,7 @@ mod tests {
                     &config,
                     &payer,
                     &[
-                        "spl-token",
+                        "solarti-token",
                         CommandName::Transfer.into(),
                         "--fund-recipient",
                         "--allow-non-system-account-recipient",
@@ -5283,7 +5283,7 @@ mod tests {
                     &config,
                     &payer,
                     &[
-                        "spl-token",
+                        "solarti-token",
                         CommandName::Transfer.into(),
                         "--fund-recipient",
                         "--allow-non-system-account-recipient",
@@ -5314,7 +5314,7 @@ mod tests {
             &config,
             &payer,
             &[
-                "spl-token",
+                "solarti-token",
                 CommandName::Transfer.into(),
                 "--fund-recipient",
                 "--allow-non-system-account-recipient",
@@ -5380,7 +5380,7 @@ mod tests {
                     &config,
                     &payer,
                     &[
-                        "spl-token",
+                        "solarti-token",
                         CommandName::Close.into(),
                         "--address",
                         &source.to_string(),
@@ -5441,7 +5441,7 @@ mod tests {
                 &config,
                 &payer,
                 &[
-                    "spl-token",
+                    "solarti-token",
                     CommandName::Close.into(),
                     "--address",
                     &source.to_string(),
@@ -5473,7 +5473,7 @@ mod tests {
                 &config,
                 &payer,
                 &[
-                    "spl-token",
+                    "solarti-token",
                     CommandName::Authorize.into(),
                     &token.to_string(),
                     "mint",
@@ -5505,7 +5505,7 @@ mod tests {
                 &config,
                 &payer,
                 &[
-                    "spl-token",
+                    "solarti-token",
                     CommandName::Accounts.into(),
                     &token.to_string(),
                 ],
@@ -5516,7 +5516,7 @@ mod tests {
             assert_eq!(value["accounts"].as_array().unwrap().len(), 4);
             config.output_format = OutputFormat::Display; // fixup eventually?
             let _result =
-                process_test_command(&config, &payer, &["spl-token", CommandName::Gc.into()])
+                process_test_command(&config, &payer, &["solarti-token", CommandName::Gc.into()])
                     .await
                     .unwrap();
             config.output_format = OutputFormat::JsonCompact;
@@ -5524,7 +5524,7 @@ mod tests {
                 &config,
                 &payer,
                 &[
-                    "spl-token",
+                    "solarti-token",
                     CommandName::Accounts.into(),
                     &token.to_string(),
                 ],
@@ -5543,7 +5543,7 @@ mod tests {
             mint_tokens(&config, &payer, token, 1.0, ata).await;
             mint_tokens(&config, &payer, token, 1.0, aux).await;
 
-            process_test_command(&config, &payer, &["spl-token", CommandName::Gc.into()])
+            process_test_command(&config, &payer, &["solarti-token", CommandName::Gc.into()])
                 .await
                 .unwrap();
 
@@ -5566,7 +5566,7 @@ mod tests {
                 &config,
                 &payer,
                 &[
-                    "spl-token",
+                    "solarti-token",
                     CommandName::Gc.into(),
                     "--close-empty-associated-accounts",
                 ],
@@ -5587,7 +5587,7 @@ mod tests {
                 &config,
                 &payer,
                 &[
-                    "spl-token",
+                    "solarti-token",
                     CommandName::Gc.into(),
                     "--close-empty-associated-accounts",
                 ],
@@ -5617,7 +5617,7 @@ mod tests {
                 &config,
                 &payer,
                 &[
-                    "spl-token",
+                    "solarti-token",
                     CommandName::Authorize.into(),
                     &aux.to_string(),
                     "close",
@@ -5627,7 +5627,7 @@ mod tests {
             .await
             .unwrap();
 
-            process_test_command(&config, &payer, &["spl-token", CommandName::Gc.into()])
+            process_test_command(&config, &payer, &["solarti-token", CommandName::Gc.into()])
                 .await
                 .unwrap();
 
@@ -5656,7 +5656,7 @@ mod tests {
                 &config,
                 &payer,
                 &[
-                    "spl-token",
+                    "solarti-token",
                     CommandName::Authorize.into(),
                     &aux_string,
                     "owner",
@@ -5712,7 +5712,7 @@ mod tests {
             exec_test_cmd(
                 &config,
                 &[
-                    "spl-token",
+                    "solarti-token",
                     CommandName::Approve.into(),
                     &source.to_string(),
                     "10",
@@ -5740,7 +5740,7 @@ mod tests {
             let result = exec_test_cmd(
                 &config,
                 &[
-                    "spl-token",
+                    "solarti-token",
                     CommandName::Transfer.into(),
                     &token.to_string(),
                     "10",
@@ -5809,7 +5809,7 @@ mod tests {
             exec_test_cmd(
                 &config,
                 &[
-                    "spl-token",
+                    "solarti-token",
                     CommandName::Approve.into(),
                     &source.to_string(),
                     "10",
@@ -5837,7 +5837,7 @@ mod tests {
             let result = exec_test_cmd(
                 &config,
                 &[
-                    "spl-token",
+                    "solarti-token",
                     CommandName::Burn.into(),
                     &source.to_string(),
                     "10",
@@ -5902,7 +5902,7 @@ mod tests {
             &config,
             &payer,
             &[
-                "spl-token",
+                "solarti-token",
                 CommandName::CloseMint.into(),
                 &token_pubkey.to_string(),
             ],
@@ -5967,7 +5967,7 @@ mod tests {
         exec_test_cmd(
             &config,
             &[
-                "spl-token",
+                "solarti-token",
                 CommandName::Burn.into(),
                 &source.to_string(),
                 "10",
@@ -6051,7 +6051,7 @@ mod tests {
         exec_test_cmd(
             &config,
             &[
-                "spl-token",
+                "solarti-token",
                 CommandName::Transfer.into(),
                 &token.to_string(),
                 "50",
@@ -6101,7 +6101,7 @@ mod tests {
             &config,
             &payer,
             &[
-                "spl-token",
+                "solarti-token",
                 CommandName::EnableRequiredTransferMemos.into(),
                 &token_account.to_string(),
             ],
@@ -6126,7 +6126,7 @@ mod tests {
             &config,
             &payer,
             &[
-                "spl-token",
+                "solarti-token",
                 CommandName::Transfer.into(),
                 "--from",
                 &source_account.to_string(),
@@ -6141,7 +6141,7 @@ mod tests {
             &config,
             &payer,
             &[
-                "spl-token",
+                "solarti-token",
                 CommandName::Transfer.into(),
                 "--from",
                 &source_account.to_string(),
@@ -6164,7 +6164,7 @@ mod tests {
             &config,
             &payer,
             &[
-                "spl-token",
+                "solarti-token",
                 CommandName::DisableRequiredTransferMemos.into(),
                 &token_account.to_string(),
             ],
@@ -6200,7 +6200,7 @@ mod tests {
             &config,
             &payer,
             &[
-                "spl-token",
+                "solarti-token",
                 CommandName::EnableCpiGuard.into(),
                 &token_account.to_string(),
             ],
@@ -6225,7 +6225,7 @@ mod tests {
             &config,
             &payer,
             &[
-                "spl-token",
+                "solarti-token",
                 CommandName::DisableCpiGuard.into(),
                 &token_account.to_string(),
             ],
@@ -6287,7 +6287,7 @@ mod tests {
             &config,
             &payer,
             &[
-                "spl-token",
+                "solarti-token",
                 CommandName::CreateAccount.into(),
                 &token.to_string(),
                 aux_keypair_file.path().to_str().unwrap(),
@@ -6314,7 +6314,7 @@ mod tests {
             &config,
             &payer,
             &[
-                "spl-token",
+                "solarti-token",
                 CommandName::Wrap.into(),
                 "--create-aux-account",
                 "--immutable",
@@ -6387,7 +6387,7 @@ mod tests {
             &config,
             &payer,
             &[
-                "spl-token",
+                "solarti-token",
                 CommandName::Transfer.into(),
                 "--from",
                 &associated_account.to_string(),
@@ -6448,7 +6448,7 @@ mod tests {
             &config,
             &payer,
             &[
-                "spl-token",
+                "solarti-token",
                 CommandName::UpdateDefaultAccountState.into(),
                 &token_pubkey.to_string(),
                 "initialized",
@@ -6530,7 +6530,7 @@ mod tests {
             &config,
             &payer,
             &[
-                "spl-token",
+                "solarti-token",
                 CommandName::Transfer.into(),
                 "--from",
                 &source_account.to_string(),
@@ -6555,7 +6555,7 @@ mod tests {
             &config,
             &payer,
             &[
-                "spl-token",
+                "solarti-token",
                 CommandName::WithdrawWithheldTokens.into(),
                 &token_account.to_string(),
                 &token_account.to_string(),
@@ -6575,7 +6575,7 @@ mod tests {
             &config,
             &payer,
             &[
-                "spl-token",
+                "solarti-token",
                 CommandName::Transfer.into(),
                 "--from",
                 &source_account.to_string(),
@@ -6597,7 +6597,7 @@ mod tests {
             &config,
             &payer,
             &[
-                "spl-token",
+                "solarti-token",
                 CommandName::Burn.into(),
                 &token_account.to_string(),
                 &burn_amount.to_string(),
@@ -6617,7 +6617,7 @@ mod tests {
             &config,
             &payer,
             &[
-                "spl-token",
+                "solarti-token",
                 CommandName::Close.into(),
                 "--address",
                 &token_account.to_string(),
@@ -6639,7 +6639,7 @@ mod tests {
             &config,
             &payer,
             &[
-                "spl-token",
+                "solarti-token",
                 CommandName::WithdrawWithheldTokens.into(),
                 &source_account.to_string(),
                 "--include-mint",
@@ -6660,7 +6660,7 @@ mod tests {
             &config,
             &payer,
             &[
-                "spl-token",
+                "solarti-token",
                 CommandName::SetTransferFee.into(),
                 &token_pubkey.to_string(),
                 &new_transfer_fee_basis_points.to_string(),
@@ -6688,7 +6688,7 @@ mod tests {
             &config,
             &payer,
             &[
-                "spl-token",
+                "solarti-token",
                 CommandName::Authorize.into(),
                 "--disable",
                 &token_pubkey.to_string(),
@@ -6712,7 +6712,7 @@ mod tests {
             &config,
             &payer,
             &[
-                "spl-token",
+                "solarti-token",
                 CommandName::Authorize.into(),
                 "--disable",
                 &token_pubkey.to_string(),
@@ -6785,7 +6785,7 @@ mod tests {
             exec_test_cmd(
                 &config,
                 &[
-                    "spl-token",
+                    "solarti-token",
                     CommandName::Transfer.into(),
                     &token.to_string(),
                     "10",
@@ -6860,7 +6860,7 @@ mod tests {
             let result = exec_test_cmd(
                 &config,
                 &[
-                    "spl-token",
+                    "solarti-token",
                     CommandName::Transfer.into(),
                     &token.to_string(),
                     "10",

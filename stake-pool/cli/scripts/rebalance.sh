@@ -8,9 +8,9 @@ stake_pool_keyfile=$1
 validator_list=$2
 sol_amount=$3
 
-spl_stake_pool=spl-stake-pool
+spl_stake_pool=solarti-stake-pool
 # Uncomment to use a locally build CLI
-#spl_stake_pool=../../../target/debug/spl-stake-pool
+#spl_stake_pool=../../../target/debug/solarti-stake-pool
 
 increase_stakes () {
   stake_pool_pubkey=$1

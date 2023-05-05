@@ -52,30 +52,30 @@ The Token Upgrade Program's source is available on
 ## Interface
 
 The Token Upgrade Program is written in Rust and available on
-[crates.io](https://crates.io/crates/spl-token-upgrade) and
-[docs.rs](https://docs.rs/spl-token-upgrade).
+[crates.io](https://crates.io/crates/solarti-token-upgrade) and
+[docs.rs](https://docs.rs/solarti-token-upgrade).
 
 ## Command-line Utility
 
-The `spl-token-upgrade` command-line utility can be used to manage token upgrades.
+The `solarti-token-upgrade` command-line utility can be used to manage token upgrades.
 Once you have [Rust installed](https://rustup.rs/), run:
 
 ```sh
-$ cargo install spl-token-upgrade-cli
+$ cargo install solarti-token-upgrade-cli
 ```
 
-Run `spl-token-upgrade --help` for a full description of available commands.
+Run `solarti-token-upgrade --help` for a full description of available commands.
 
 ### Configuration
 
-The `spl-token-upgrade` configuration is shared with the `solana` command-line tool.
+The `solarti-token-upgrade` configuration is shared with the `solana` command-line tool.
 
 ## Token Upgrade Process
 
 This section describes how to upgrade tokens from Token to Token-2022, for the
 mint owner and token holders.
 
-This guide also uses the `spl-token` command-line tool. Please see the full
+This guide also uses the `solarti-token` command-line tool. Please see the full
 [Token documentation](token.mdx) for more info.
 
 ### Setup
@@ -91,7 +91,7 @@ The command-line tool allows anyone to create a new token account owned by the
 escrow authority, given the original and new mint addresses:
 
 ```sh
-$ spl-token-upgrade create-escrow o1d5Jt8z8vszx4FJ2gNJ3FZH34cer9sbparg7GVt7qm NewnQeoDG4BbHRCodgjscuypfXdiixcWDPyLiseziQZ
+$ solarti-token-upgrade create-escrow o1d5Jt8z8vszx4FJ2gNJ3FZH34cer9sbparg7GVt7qm NewnQeoDG4BbHRCodgjscuypfXdiixcWDPyLiseziQZ
 Creating escrow account 2mW9oGUbaJiCHtkhN5TNTaucY2ziJmAdcJtp5Ud6m4Jy owned by escrow authority A38VXB1Qgssz2qkKgzEkyZNQ27oTuy18T6tA9HRP5mpE
 Signature: 4tuJffE4DTrsXb7AM3UWNjd286vyAQcvhQaSKPVThaZMzaBiptKCKudaMWjbbygTUEaho87Ar288Mih5Hx6PpKke
 ```
@@ -107,13 +107,13 @@ With the escrow account created, the mint owner must now add tokens to that acco
 They can do this by minting new tokens or transferring existing tokens.
 
 ```sh
-$ spl-token mint NewnQeoDG4BbHRCodgjscuypfXdiixcWDPyLiseziQZ 1000 2mW9oGUbaJiCHtkhN5TNTaucY2ziJmAdcJtp5Ud6m4Jy
+$ solarti-token mint NewnQeoDG4BbHRCodgjscuypfXdiixcWDPyLiseziQZ 1000 2mW9oGUbaJiCHtkhN5TNTaucY2ziJmAdcJtp5Ud6m4Jy
 ```
 
 Or:
 
 ```sh
-$ spl-token transfer NewnQeoDG4BbHRCodgjscuypfXdiixcWDPyLiseziQZ 1000 2mW9oGUbaJiCHtkhN5TNTaucY2ziJmAdcJtp5Ud6m4Jy
+$ solarti-token transfer NewnQeoDG4BbHRCodgjscuypfXdiixcWDPyLiseziQZ 1000 2mW9oGUbaJiCHtkhN5TNTaucY2ziJmAdcJtp5Ud6m4Jy
 ```
 
 ### Upgrade original tokens into new tokens
@@ -124,13 +124,13 @@ whenever they want.
 First, they must create a new token account to receive the tokens:
 
 ```sh
-$ spl-token create-account NewnQeoDG4BbHRCodgjscuypfXdiixcWDPyLiseziQZ
+$ solarti-token create-account NewnQeoDG4BbHRCodgjscuypfXdiixcWDPyLiseziQZ
 ```
 
 Next, they perform the exchange:
 
 ```sh
-$ spl-token-upgrade exchange o1d5Jt8z8vszx4FJ2gNJ3FZH34cer9sbparg7GVt7qm NewnQeoDG4BbHRCodgjscuypfXdiixcWDPyLiseziQZ
+$ solarti-token-upgrade exchange o1d5Jt8z8vszx4FJ2gNJ3FZH34cer9sbparg7GVt7qm NewnQeoDG4BbHRCodgjscuypfXdiixcWDPyLiseziQZ
 Burning tokens from account 4YfpfMzHYCCYVBJqvTG9VtTPLMuPzVBi77aMRxVB4TDg, receiving tokens into account JCaWYSvLZkja51RbToWBaV4kp1PhfddX64cTLUqpdMzE
 Signature: 3Zs1PtMV7XyRpfX9k7cPg7Hd43URvBD3aYEnd6hb5deKvSWXrEW5yoRaCuqtYJSsoa2WtkdprTsHEh3VLYWEGhkb
 ```
@@ -140,7 +140,7 @@ and new token mints, and for the escrow authority on the new mint. It's possible
 to specify each of these individually:
 
 ```sh
-$ spl-token-upgrade exchange o1d5Jt8z8vszx4FJ2gNJ3FZH34cer9sbparg7GVt7qm NewnQeoDG4BbHRCodgjscuypfXdiixcWDPyLiseziQZ --burn-from 4YfpfMzHYCCYVBJqvTG9VtTPLMuPzVBi77aMRxVB4TDg --destination JCaWYSvLZkja51RbToWBaV4kp1PhfddX64cTLUqpdMzE --escrow 2mW9oGUbaJiCHtkhN5TNTaucY2ziJmAdcJtp5Ud6m4Jy
+$ solarti-token-upgrade exchange o1d5Jt8z8vszx4FJ2gNJ3FZH34cer9sbparg7GVt7qm NewnQeoDG4BbHRCodgjscuypfXdiixcWDPyLiseziQZ --burn-from 4YfpfMzHYCCYVBJqvTG9VtTPLMuPzVBi77aMRxVB4TDg --destination JCaWYSvLZkja51RbToWBaV4kp1PhfddX64cTLUqpdMzE --escrow 2mW9oGUbaJiCHtkhN5TNTaucY2ziJmAdcJtp5Ud6m4Jy
 Burning tokens from account 4YfpfMzHYCCYVBJqvTG9VtTPLMuPzVBi77aMRxVB4TDg, receiving tokens into account JCaWYSvLZkja51RbToWBaV4kp1PhfddX64cTLUqpdMzE
 Signature: 3P4o4Fxnm4yvB9i6jQzyniqNUqnNLsaQZmCw5q5n5J8nwv9wxJ73ZRYH3XNFT4ferDbCXMqc5egCkhZEkyfCxhgC
 ```
@@ -149,5 +149,5 @@ After the upgrade, the user may clean up the old token account to recover the
 rent-exempt lamports.
 
 ```sh
-$ spl-token close o1d5Jt8z8vszx4FJ2gNJ3FZH34cer9sbparg7GVt7qm
+$ solarti-token close o1d5Jt8z8vszx4FJ2gNJ3FZH34cer9sbparg7GVt7qm
 ```

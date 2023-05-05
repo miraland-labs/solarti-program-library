@@ -4,7 +4,7 @@ set -e
 cd "$(dirname "$0")/.."
 
 source ./ci/rust-version.sh stable
-source ./ci/solana-version.sh
+source ./ci/miraland-version.sh
 
 export RUSTFLAGS="-D warnings"
 export RUSTBACKTRACE=1
@@ -15,8 +15,8 @@ set -x
 make -C examples/c
 
 # Build/test all host crates
-cargo +"$rust_stable" build --workspace --exclude spl-token-cli --exclude spl-token-upgrade-cli
-cargo +"$rust_stable" test --workspace --exclude spl-token-cli --exclude spl-token-upgrade-cli -- --nocapture
+cargo +"$rust_stable" build --workspace --exclude solarti-token-cli --exclude solarti-token-upgrade-cli
+cargo +"$rust_stable" test --workspace --exclude solarti-token-cli --exclude solarti-token-upgrade-cli -- --nocapture
 
 # Run test-client sanity check
 cargo +"$rust_stable" run --manifest-path=utils/test-client/Cargo.toml

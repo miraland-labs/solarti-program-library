@@ -1,17 +1,17 @@
-# `@solana/spl-account-compression`
+# `@solarti/solarti-account-compression`
 
 A TypeScript library for interacting with SPL Account Compression and SPL NoOp. [Docs here](https://solana-labs.github.io/solana-program-library/account-compression/sdk/docs/).
 
 ## Install
 
 ```shell
-npm install --save @solana/spl-account-compression @solana/web3.js
+npm install --save @solarti/solarti-account-compression @solana/web3.js
 ```
 
 __OR__
 
 ```shell
-yarn add @solana/spl-account-compression @solana/web3.js
+yarn add @solarti/solarti-account-compression @solana/web3.js
 ```
 
 ## Information

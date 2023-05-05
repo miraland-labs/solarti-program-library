@@ -466,7 +466,7 @@ pub enum TokenInstruction<'a> {
     },
     // Any new variants also need to be added to program-2022 `TokenInstruction`, so that the
     // latter remains a superset of this instruction set. New variants also need to be added to
-    // token/js/src/instructions/types.ts to maintain @solana/spl-token compatibility
+    // token/js/src/instructions/types.ts to maintain @solana/solarti-token compatibility
 }
 impl<'a> TokenInstruction<'a> {
     /// Unpacks a byte buffer into a [TokenInstruction](enum.TokenInstruction.html).
@@ -686,7 +686,8 @@ impl<'a> TokenInstruction<'a> {
     fn unpack_pubkey(input: &[u8]) -> Result<(Pubkey, &[u8]), ProgramError> {
         if input.len() >= 32 {
             let (key, rest) = input.split_at(32);
-            let pk = Pubkey::new(key);
+            // let pk = Pubkey::new(key);
+            let pk = Pubkey::try_from(key).expect("Slice must be the same length as a Pubkey"); // MI
             Ok((pk, rest))
         } else {
             Err(TokenError::InvalidInstruction.into())
@@ -698,7 +699,8 @@ impl<'a> TokenInstruction<'a> {
             Option::Some((&0, rest)) => Ok((COption::None, rest)),
             Option::Some((&1, rest)) if rest.len() >= 32 => {
                 let (key, rest) = rest.split_at(32);
-                let pk = Pubkey::new(key);
+                // let pk = Pubkey::new(key);
+                let pk = Pubkey::try_from(key).expect("Slice must be the same length as a Pubkey"); // MI
                 Ok((COption::Some(pk), rest))
             }
             _ => Err(TokenError::InvalidInstruction.into()),
@@ -1437,7 +1439,7 @@ mod test {
     fn test_instruction_packing() {
         let check = TokenInstruction::InitializeMint {
             decimals: 2,
-            mint_authority: Pubkey::new(&[1u8; 32]),
+            mint_authority: Pubkey::from([1u8; 32]),
             freeze_authority: COption::None,
         };
         let packed = check.pack();
@@ -1450,8 +1452,8 @@ mod test {
 
         let check = TokenInstruction::InitializeMint {
             decimals: 2,
-            mint_authority: Pubkey::new(&[2u8; 32]),
-            freeze_authority: COption::Some(Pubkey::new(&[3u8; 32])),
+            mint_authority: Pubkey::from([2u8; 32]),
+            freeze_authority: COption::Some(Pubkey::from([3u8; 32])),
         };
         let packed = check.pack();
         let mut expect = vec![0u8, 2];
@@ -1499,7 +1501,7 @@ mod test {
 
         let check = TokenInstruction::SetAuthority {
             authority_type: AuthorityType::FreezeAccount,
-            new_authority: COption::Some(Pubkey::new(&[4u8; 32])),
+            new_authority: COption::Some(Pubkey::from([4u8; 32])),
         };
         let packed = check.pack();
         let mut expect = Vec::from([6u8, 1]);
@@ -1585,7 +1587,7 @@ mod test {
         assert_eq!(unpacked, check);
 
         let check = TokenInstruction::InitializeAccount2 {
-            owner: Pubkey::new(&[2u8; 32]),
+            owner: Pubkey::from([2u8; 32]),
         };
         let packed = check.pack();
         let mut expect = vec![16u8];
@@ -1602,7 +1604,7 @@ mod test {
         assert_eq!(unpacked, check);
 
         let check = TokenInstruction::InitializeAccount3 {
-            owner: Pubkey::new(&[2u8; 32]),
+            owner: Pubkey::from([2u8; 32]),
         };
         let packed = check.pack();
         let mut expect = vec![18u8];
@@ -1620,7 +1622,7 @@ mod test {
 
         let check = TokenInstruction::InitializeMint2 {
             decimals: 2,
-            mint_authority: Pubkey::new(&[1u8; 32]),
+            mint_authority: Pubkey::from([1u8; 32]),
             freeze_authority: COption::None,
         };
         let packed = check.pack();
@@ -1633,8 +1635,8 @@ mod test {
 
         let check = TokenInstruction::InitializeMint2 {
             decimals: 2,
-            mint_authority: Pubkey::new(&[2u8; 32]),
-            freeze_authority: COption::Some(Pubkey::new(&[3u8; 32])),
+            mint_authority: Pubkey::from([2u8; 32]),
+            freeze_authority: COption::Some(Pubkey::from([3u8; 32])),
         };
         let packed = check.pack();
         let mut expect = vec![20u8, 2];

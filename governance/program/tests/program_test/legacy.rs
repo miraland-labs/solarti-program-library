@@ -2,7 +2,7 @@ use borsh::{BorshDeserialize, BorshSchema, BorshSerialize};
 use solana_program::pubkey::Pubkey;
 use spl_governance::state::{enums::GovernanceAccountType, governance::GovernanceV2};
 
-/// Legacy Governance account as of spl-gov V1
+/// Legacy Governance account as of solarti-gov V1
 #[derive(Clone, Debug, PartialEq, BorshDeserialize, BorshSerialize, BorshSchema)]
 pub struct LegacyGovernanceV1 {
     /// Account type.
@@ -24,7 +24,7 @@ pub struct LegacyGovernanceV1 {
     pub reserved: [u8; 8],
 }
 
-/// Legacy GovernanceConfig as of spl-gov V1
+/// Legacy GovernanceConfig as of solarti-gov V1
 #[derive(Clone, Debug, PartialEq, BorshDeserialize, BorshSerialize, BorshSchema)]
 pub struct LegacyGovernanceConfigV1 {
     /// The type of the vote threshold used for voting
@@ -52,7 +52,7 @@ pub struct LegacyGovernanceConfigV1 {
     pub min_council_tokens_to_create_proposal: u64,
 }
 
-/// Legacy VoteWeightSource as of spl-gov V1
+/// Legacy VoteWeightSource as of solarti-gov V1
 #[derive(Clone, Debug, PartialEq, BorshDeserialize, BorshSerialize, BorshSchema)]
 pub enum VoteWeightSource {
     /// Governing token deposits into the Realm are used as voter weights
@@ -63,7 +63,7 @@ pub enum VoteWeightSource {
     Snapshot,
 }
 
-/// Legacy VoteThresholdPercentage as of spl-gov V1
+/// Legacy VoteThresholdPercentage as of solarti-gov V1
 #[repr(C)]
 #[derive(Clone, Debug, PartialEq, BorshDeserialize, BorshSerialize, BorshSchema)]
 pub enum VoteThresholdPercentage {

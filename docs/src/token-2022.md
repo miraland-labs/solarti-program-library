@@ -123,7 +123,7 @@ The Token-2022 Program's source is available on
 [GitHub](https://github.com/solana-labs/solana-program-library/tree/master/token/program-2022).
 
 For information about the types and instructions, the Rust docs are available at
-[docs.rs](https://docs.rs/spl-token-2022/latest/spl_token_2022/).
+[docs.rs](https://docs.rs/solarti-token-2022/latest/spl_token_2022/).
 
 ## Security Audits
 

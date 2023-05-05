@@ -38,9 +38,9 @@ command_args+=( --max-validators 2350 ) # Maximum number of validators in the st
 ###################################################
 
 keys_dir=keys
-spl_stake_pool=spl-stake-pool
+spl_stake_pool=solarti-stake-pool
 # Uncomment to use a local build
-#spl_stake_pool=../../../target/debug/spl-stake-pool
+#spl_stake_pool=../../../target/debug/solarti-stake-pool
 
 mkdir -p $keys_dir
 

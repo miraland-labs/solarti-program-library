@@ -1,5 +1,5 @@
 {
-    "name": "@solana/spl-token",
+    "name": "@solana/solarti-token",
     "description": "SPL Token Program JS API",
     "version": "0.3.7",
     "author": "Solana Labs Maintainers <maintainers@solanalabs.com>",
@@ -58,7 +58,7 @@
         "buffer": "^6.0.3"
     },
     "devDependencies": {
-        "@solana/spl-memo": "^0.2.2",
+        "@solarti/solarti-memo": "^0.2.2",
         "@solana/web3.js": "^1.47.4",
         "@types/chai-as-promised": "^7.1.4",
         "@types/chai": "^4.3.3",

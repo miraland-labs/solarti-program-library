@@ -1,14 +1,14 @@
 use crate::{config::Config, sort::UnsupportedAccount};
 use console::{style, Emoji};
 use serde::{Deserialize, Serialize, Serializer};
-use solana_account_decoder::{
+use miraland_account_decoder::{
     parse_token::{UiAccountState, UiMint, UiMultisig, UiTokenAccount, UiTokenAmount},
     parse_token_extension::{
         UiCpiGuard, UiDefaultAccountState, UiExtension, UiInterestBearingConfig, UiMemoTransfer,
         UiMintCloseAuthority, UiPermanentDelegate, UiTransferFeeAmount, UiTransferFeeConfig,
     },
 };
-use solana_cli_output::{display::writeln_name_value, OutputFormat, QuietDisplay, VerboseDisplay};
+use miraland_cli_output::{display::writeln_name_value, OutputFormat, QuietDisplay, VerboseDisplay};
 use std::fmt::{self, Display};
 
 pub(crate) trait Output: Serialize + fmt::Display + QuietDisplay + VerboseDisplay {}
@@ -256,7 +256,7 @@ impl fmt::Display for CliTokenAccount {
 
         if !self.is_associated {
             writeln!(f)?;
-            writeln!(f, "* Please run `spl-token gc` to clean up Aux accounts")?;
+            writeln!(f, "* Please run `solarti-token gc` to clean up Aux accounts")?;
         }
 
         if self.has_permanent_delegate {
@@ -474,7 +474,7 @@ impl VerboseDisplay for CliTokenAccounts {
         }
         if gc_alert {
             writeln!(w)?;
-            writeln!(w, "* Please run `spl-token gc` to clean up Aux accounts")?;
+            writeln!(w, "* Please run `solarti-token gc` to clean up Aux accounts")?;
         }
         Ok(())
     }
@@ -540,7 +540,7 @@ impl fmt::Display for CliTokenAccounts {
         }
         if gc_alert {
             writeln!(f)?;
-            writeln!(f, "* Please run `spl-token gc` to clean up Aux accounts")?;
+            writeln!(f, "* Please run `solarti-token gc` to clean up Aux accounts")?;
         }
         Ok(())
     }
@@ -691,7 +691,7 @@ fn display_ui_extension(
         _ => writeln_name_value(
             f,
             "    Unparseable extension:",
-            "Consider upgrading to a newer version of spl-token",
+            "Consider upgrading to a newer version of solarti-token",
         ),
     }
 }

@@ -43,7 +43,7 @@ and transferring its upgrade authority to the DAO.
 In cases where deploying the owned instance is not practical a shared instances of the program can be used.
 There are two instances available for anybody to use on mainnet
 
-`GovER5Lthms3bLBqWub97yVrMmEogzX7xNjdXpPPCVZw` - default `spl-governance` instance
+`GovER5Lthms3bLBqWub97yVrMmEogzX7xNjdXpPPCVZw` - default `solarti-governance` instance
 
 `GTesTBiEWE32WHXXE2S4XbZvA5CrEc4xs6ZgRe895dP` - test instance which can be used to setup test DAOs
 
@@ -63,13 +63,13 @@ There are two UIs available which showcase the programs capabilities:
 
 ## Client SDK
 
-[@solana/spl-governance](https://www.npmjs.com/package/@solana/spl-governance)
+[@solarti/solarti-governance](https://www.npmjs.com/package/@solarti/solarti-governance)
 
 ## Documentation and Help
 
-Program and UI documentation: [spl-governance-docs](https://docs.realms.today)
+Program and UI documentation: [solarti-governance-docs](https://docs.realms.today)
 
-Discord server: [spl-governance-discord](https://discord.gg/VsPbrK2hJk)
+Discord server: [solarti-governance-discord](https://discord.gg/VsPbrK2hJk)
 
 ## Program Accounts
 

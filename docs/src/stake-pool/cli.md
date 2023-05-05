@@ -7,17 +7,17 @@ with examples using the command-line utility.
 
 ## Installation
 
-The `spl-stake-pool` command-line utility can be used to experiment with SPL
+The `solarti-stake-pool` command-line utility can be used to experiment with SPL
 tokens.  Once you have [Rust installed](https://rustup.rs/), run:
 ```console
-$ cargo install spl-stake-pool-cli
+$ cargo install solarti-stake-pool-cli
 ```
 
-Run `spl-stake-pool --help` for a full description of available commands.
+Run `solarti-stake-pool --help` for a full description of available commands.
 
 ## Configuration
 
-The `spl-stake-pool` configuration is shared with the `solana` command-line tool.
+The `solarti-stake-pool` configuration is shared with the `solana` command-line tool.
 
 ### Current Configuration
 
@@ -73,7 +73,7 @@ sets the fee on creation. Let's create a pool with a 3% fee and a maximum of 100
 validator stake accounts:
 
 ```console
-$ spl-stake-pool create-pool --epoch-fee-numerator 3 --epoch-fee-denominator 100 --max-validators 1000
+$ solarti-stake-pool create-pool --epoch-fee-numerator 3 --epoch-fee-denominator 100 --max-validators 1000
 Creating reserve stake DVwDn4LTRztuai4QeenM6fyzgiwUGpVXVNZ1mgKE1Pyc
 Creating mint BoNneHKDrX9BHjjvSpPfnQyRjsnc9WFH71v8wrgCd7LB
 Creating associated token account DgyZrAq88bnG1TNRxpgDQzWXpzEurCvfY2ukKFWBvADQ to receive stake pool tokens of mint BoNneHKDrX9BHjjvSpPfnQyRjsnc9WFH71v8wrgCd7LB, owned by 4SnSuUtJGKvk2GYpBwmEsWG53zTurVM8yXGsoiZQyMJn
@@ -111,7 +111,7 @@ pre-generated values, including:
 
 Otherwise, these will all default to newly-generated keypairs.
 
-You can always check out the available options by running `spl-stake-pool create-pool -h`.
+You can always check out the available options by running `solarti-stake-pool create-pool -h`.
 
 ### Create a restricted stake pool
 
@@ -119,7 +119,7 @@ If a manager would like to restrict deposits (stake and SOL) to one key in
 particular, they can set a deposit authority at creation:
 
 ```console
-$ spl-stake-pool create-pool --epoch-fee-numerator 3 --epoch-fee-denominator 100 --max-validators 1000 --deposit-authority authority_keypair.json
+$ solarti-stake-pool create-pool --epoch-fee-numerator 3 --epoch-fee-denominator 100 --max-validators 1000 --deposit-authority authority_keypair.json
 Creating reserve stake DVwDn4LTRztuai4QeenM6fyzgiwUGpVXVNZ1mgKE1Pyc
 Creating mint BoNneHKDrX9BHjjvSpPfnQyRjsnc9WFH71v8wrgCd7LB
 Creating associated token account DgyZrAq88bnG1TNRxpgDQzWXpzEurCvfY2ukKFWBvADQ to receive stake pool tokens of mint BoNneHKDrX9BHjjvSpPfnQyRjsnc9WFH71v8wrgCd7LB, owned by 4SnSuUtJGKvk2GYpBwmEsWG53zTurVM8yXGsoiZQyMJn
@@ -143,7 +143,7 @@ so anyone with pool tokens will still be able to withdraw from the pool.
 The stake pool manager may pass their administrator privileges to another account.
 
 ```console
-$ spl-stake-pool set-manager Zg5YBPAk8RqBR9kaLLSoN5C8Uv7nErBz1WC63HTsCPR --new-manager 4SnSuUtJGKvk2GYpBwmEsWG53zTurVM8yXGsoiZQyMJn
+$ solarti-stake-pool set-manager Zg5YBPAk8RqBR9kaLLSoN5C8Uv7nErBz1WC63HTsCPR --new-manager 4SnSuUtJGKvk2GYpBwmEsWG53zTurVM8yXGsoiZQyMJn
 Signature: 39N5gkaqXuWm6JPEUWfenKXeG4nSa71p7iHb9zurvdZcsWmbjdmSXwLVYfhAVHWucTY77sJ8SkUNpVpVAhe4eZ53
 ```
 
@@ -152,7 +152,7 @@ every epoch. The mint for the provided token account must be the SPL token mint,
 `BoNneHKDrX9BHjjvSpPfnQyRjsnc9WFH71v8wrgCd7LB` in our example.
 
 ```console
-$ spl-stake-pool set-manager Zg5YBPAk8RqBR9kaLLSoN5C8Uv7nErBz1WC63HTsCPR --new-fee-receiver HoCsh97wRxRXVjtG7dyfsXSwH9VxdDzC7GvAsBE1eqJz
+$ solarti-stake-pool set-manager Zg5YBPAk8RqBR9kaLLSoN5C8Uv7nErBz1WC63HTsCPR --new-fee-receiver HoCsh97wRxRXVjtG7dyfsXSwH9VxdDzC7GvAsBE1eqJz
 Signature: 4aK8yzYvPBkP4PyuXTcCm529kjEH6tTt4ixc5D5ZyCrHwc4pvxAHj6wcr4cpAE1e3LddE87J1GLD466aiifcXoAY
 ```
 
@@ -164,7 +164,7 @@ passing the numerator and denominator for the fraction that make up the fee.
 For an epoch fee of 10%, they could run:
 
 ```console
-$ spl-stake-pool set-fee Zg5YBPAk8RqBR9kaLLSoN5C8Uv7nErBz1WC63HTsCPR epoch 10 100
+$ solarti-stake-pool set-fee Zg5YBPAk8RqBR9kaLLSoN5C8Uv7nErBz1WC63HTsCPR epoch 10 100
 Signature: 5yPXfVj5cbKBfZiEVi2UR5bXzVDuc2c3ruBwSjkAqpvxPHigwGHiS1mXQVE4qwok5moMWT5RNYAMvkE9bnfQ1i93
 ```
 
@@ -194,7 +194,7 @@ in a percentage amount.
 To set a stake deposit referral fee of 80%, they may run:
 
 ```console
-$ spl-stake-pool set-referral-fee Zg5YBPAk8RqBR9kaLLSoN5C8Uv7nErBz1WC63HTsCPR stake 80
+$ solarti-stake-pool set-referral-fee Zg5YBPAk8RqBR9kaLLSoN5C8Uv7nErBz1WC63HTsCPR stake 80
 Signature: 4vhaBEDhuKkVwMxy7TpyfHEk3Z5kGZKerD1AgajQBdiMRQLZuNZKVR3KQaqbUYZM7UyfRXgkZNdAeP1NfvmwKdqb
 ```
 
@@ -207,7 +207,7 @@ In order to manage the stake accounts, the stake pool manager or
 staker can set the staker authority of the stake pool's managed accounts.
 
 ```console
-$ spl-stake-pool set-staker Zg5YBPAk8RqBR9kaLLSoN5C8Uv7nErBz1WC63HTsCPR 4SnSuUtJGKvk2GYpBwmEsWG53zTurVM8yXGsoiZQyMJn
+$ solarti-stake-pool set-staker Zg5YBPAk8RqBR9kaLLSoN5C8Uv7nErBz1WC63HTsCPR 4SnSuUtJGKvk2GYpBwmEsWG53zTurVM8yXGsoiZQyMJn
 Signature: 39N5gkaqXuWm6JPEUWfenKXeG4nSa71p7iHb9zurvdZcsWmbjdmSXwLVYfhAVHWucTY77sJ8SkUNpVpVAhe4eZ53
 ```
 
@@ -231,7 +231,7 @@ it restricts who can use the pool.
 As an example, let's say a pool wants to restrict all SOL withdrawals.
 
 ```console
-$ spl-stake-pool set-funding-authority Zg5YBPAk8RqBR9kaLLSoN5C8Uv7nErBz1WC63HTsCPR sol-withdraw AZ1PgxWSxw4ezX8gvpNgGsr39jJHCwtkaXr1mNMwWWeK
+$ solarti-stake-pool set-funding-authority Zg5YBPAk8RqBR9kaLLSoN5C8Uv7nErBz1WC63HTsCPR sol-withdraw AZ1PgxWSxw4ezX8gvpNgGsr39jJHCwtkaXr1mNMwWWeK
 Signature: 3gx7ckGNSL7gUUyxh4CU3RH3Lyt88hiCvYQ4QRKtnmrZHvAS93ebP6bf39WYGTeKDMVSJUuwBEmk9VFSaWtXsHVV
 ```
 
@@ -242,7 +242,7 @@ After some time, if the manager wishes to enable SOL withdrawals, they can remov
 the restriction:
 
 ```console
-$ spl-stake-pool set-funding-authority Zg5YBPAk8RqBR9kaLLSoN5C8Uv7nErBz1WC63HTsCPR sol-withdraw --unset
+$ solarti-stake-pool set-funding-authority Zg5YBPAk8RqBR9kaLLSoN5C8Uv7nErBz1WC63HTsCPR sol-withdraw --unset
 Signature: 5kWeBqoxyvANMHCP4ydsZRf8QU4hMotLnKkFbTEdvqEVywo4F3MpZtay7D57FbjJZpdp72fc3vrbxJi9qDLfLCnD
 ```
 
@@ -269,7 +269,7 @@ Be sure to use the `deposit-sol` command to move some SOL into the pool.
 With 10 SOL in the pool, let's add some random validators to the stake pool.
 
 ```console
-$ spl-stake-pool add-validator Zg5YBPAk8RqBR9kaLLSoN5C8Uv7nErBz1WC63HTsCPR 38DYMkwYCvsj8TC6cNaEvFHHVDYeWDp1qUgMgyjNqZXk
+$ solarti-stake-pool add-validator Zg5YBPAk8RqBR9kaLLSoN5C8Uv7nErBz1WC63HTsCPR 38DYMkwYCvsj8TC6cNaEvFHHVDYeWDp1qUgMgyjNqZXk
 Adding stake account F8e8Ympp4MkDSPZdvRxdQUZXRkMBDdyqgHa363GShAPt, delegated to 38DYMkwYCvsj8TC6cNaEvFHHVDYeWDp1qUgMgyjNqZXk
 Signature: 5tdpsx64mVcSHBK8vMbBzFDHnEZB6GUmVpqSXXE5hezMAzPYwZbJCBtAHakDAiuWNcrMongGrmwDaeywhVz4i8pi
 ```
@@ -278,10 +278,10 @@ In order to maximize censorship resistance, we want to distribute our SOL to as
 many validators as possible, so let's add a few more.
 
 ```console
-$ spl-stake-pool add-validator Zg5YBPAk8RqBR9kaLLSoN5C8Uv7nErBz1WC63HTsCPR J3xu64PWShcMen99kU3igxtwbke2Nwfo8pkZNRgrq66H
+$ solarti-stake-pool add-validator Zg5YBPAk8RqBR9kaLLSoN5C8Uv7nErBz1WC63HTsCPR J3xu64PWShcMen99kU3igxtwbke2Nwfo8pkZNRgrq66H
 Adding stake account 5AaobwjccyHnXhFCd24uiX6VqPjXE3Ry4o92fJjqqjAr, delegated to J3xu64PWShcMen99kU3igxtwbke2Nwfo8pkZNRgrq66H
 Signature: 4xeve6gWuiffqBLAMcqa8s7dCMvBmSVdKbDu5WQhigLiXHdCjSNEwoZRexTZji786qgEjXg3nrUh4HcTt3RauZV5
-$ spl-stake-pool add-validator Zg5YBPAk8RqBR9kaLLSoN5C8Uv7nErBz1WC63HTsCPR EhRbKi4Vhm1oUCGWHiLEMYZqDrHwEd7Jgzgi26QJKvfQ
+$ solarti-stake-pool add-validator Zg5YBPAk8RqBR9kaLLSoN5C8Uv7nErBz1WC63HTsCPR EhRbKi4Vhm1oUCGWHiLEMYZqDrHwEd7Jgzgi26QJKvfQ
 Adding stake account 3k7Nwu9jUSc6SNG11wzufKYoZXRFgxWamheGLYWp5Rvx, delegated to EhRbKi4Vhm1oUCGWHiLEMYZqDrHwEd7Jgzgi26QJKvfQ
 Signature: 4VJYHpPmWkP99TdgYUTgLYixmhqmqsEkWtg4j7zvGZFjYbnLgryu48aV6ub8bqDyULzKckUhb6tvcmZmMX5AFf5G
 ```
@@ -308,7 +308,7 @@ withdraw authority, program addresses derived from the stake pool's address.
 We can also see the status of the stake pool.
 
 ```console
-$ spl-stake-pool list Zg5YBPAk8RqBR9kaLLSoN5C8Uv7nErBz1WC63HTsCPR
+$ solarti-stake-pool list Zg5YBPAk8RqBR9kaLLSoN5C8Uv7nErBz1WC63HTsCPR
 Stake Pool: Zg5YBPAk8RqBR9kaLLSoN5C8Uv7nErBz1WC63HTsCPR
 Pool Token Mint: BoNneHKDrX9BHjjvSpPfnQyRjsnc9WFH71v8wrgCd7LB
 Epoch Fee: 3/100 of epoch rewards
@@ -346,7 +346,7 @@ Let's assume that the validator stake account delegated to
 7.5 SOL. To reduce that number, the staker can run:
 
 ```console
-$ spl-stake-pool decrease-validator-stake Zg5YBPAk8RqBR9kaLLSoN5C8Uv7nErBz1WC63HTsCPR J3xu64PWShcMen99kU3igxtwbke2Nwfo8pkZNRgrq66H 6.5
+$ solarti-stake-pool decrease-validator-stake Zg5YBPAk8RqBR9kaLLSoN5C8Uv7nErBz1WC63HTsCPR J3xu64PWShcMen99kU3igxtwbke2Nwfo8pkZNRgrq66H 6.5
 Signature: ZpQGwT85rJ8Y9afdkXhKo3TVv4xgTz741mmZj2vW7mihYseAkFsazWxza2y8eNGY4HDJm15c1cStwyiQzaM3RpH
 ```
 
@@ -354,7 +354,7 @@ Now, let's try to remove validator `J3xu64PWShcMen99kU3igxtwbke2Nwfo8pkZNRgrq66H
 stake account `5AaobwjccyHnXhFCd24uiX6VqPjXE3Ry4o92fJjqqjAr`.
 
 ```console
-$ spl-stake-pool remove-validator Zg5YBPAk8RqBR9kaLLSoN5C8Uv7nErBz1WC63HTsCPR J3xu64PWShcMen99kU3igxtwbke2Nwfo8pkZNRgrq66H
+$ solarti-stake-pool remove-validator Zg5YBPAk8RqBR9kaLLSoN5C8Uv7nErBz1WC63HTsCPR J3xu64PWShcMen99kU3igxtwbke2Nwfo8pkZNRgrq66H
 Removing stake account 5AaobwjccyHnXhFCd24uiX6VqPjXE3Ry4o92fJjqqjAr, delegated to J3xu64PWShcMen99kU3igxtwbke2Nwfo8pkZNRgrq66H
 Creating account to receive stake nHEEyey8KkgHuVRAUDzkH5Q4PkA4veSHuTxgG6C8L2G
 Signature: 4XprnR768Ch6LUvqUVLTjMCiqdYvtjNfECh4izErqwbsASTGjUBz7NtLZHAiraTqhs7b9PoSAazetdsgXa6J4wVu
@@ -386,7 +386,7 @@ For example, let's say the staker wants the same delegation to every validator
 in the pool. When they look at the state of the pool, they see:
 
 ```console
-$ spl-stake-pool list Zg5YBPAk8RqBR9kaLLSoN5C8Uv7nErBz1WC63HTsCPR
+$ solarti-stake-pool list Zg5YBPAk8RqBR9kaLLSoN5C8Uv7nErBz1WC63HTsCPR
 Stake Pool: Zg5YBPAk8RqBR9kaLLSoN5C8Uv7nErBz1WC63HTsCPR
 Pool Token Mint: BoNneHKDrX9BHjjvSpPfnQyRjsnc9WFH71v8wrgCd7LB
 Epoch Fee: 3/100 of epoch rewards
@@ -420,7 +420,7 @@ First, they need to decrease the amount on stake account
 They decrease that amount of SOL:
 
 ```sh
-$ spl-stake-pool decrease-validator-stake Zg5YBPAk8RqBR9kaLLSoN5C8Uv7nErBz1WC63HTsCPR EhRbKi4Vhm1oUCGWHiLEMYZqDrHwEd7Jgzgi26QJKvfQ 60
+$ solarti-stake-pool decrease-validator-stake Zg5YBPAk8RqBR9kaLLSoN5C8Uv7nErBz1WC63HTsCPR EhRbKi4Vhm1oUCGWHiLEMYZqDrHwEd7Jgzgi26QJKvfQ 60
 Signature: ZpQGwT85rJ8Y9afdkXhKo3TVv4xgTz741mmZj2vW7mihYseAkFsazWxza2y8eNGY4HDJm15c1cStwyiQzaM3RpH
 ```
 
@@ -442,14 +442,14 @@ can increase the stake on the two other validators,
 They add 30 SOL to `J3xu64PWShcMen99kU3igxtwbke2Nwfo8pkZNRgrq66H`:
 
 ```sh
-$ spl-stake-pool increase-validator-stake Zg5YBPAk8RqBR9kaLLSoN5C8Uv7nErBz1WC63HTsCPR J3xu64PWShcMen99kU3igxtwbke2Nwfo8pkZNRgrq66H 30
+$ solarti-stake-pool increase-validator-stake Zg5YBPAk8RqBR9kaLLSoN5C8Uv7nErBz1WC63HTsCPR J3xu64PWShcMen99kU3igxtwbke2Nwfo8pkZNRgrq66H 30
 Signature: 3GJACzjUGLPjcd9RLUW86AfBLWKapZRkxnEMc2yHT6erYtcKBgCapzyrVH6VN8Utxj7e2mtvzcigwLm6ZafXyTMw
 ```
 
 And they add 30 SOL to `38DYMkwYCvsj8TC6cNaEvFHHVDYeWDp1qUgMgyjNqZXk`:
 
 ```sh
-$ spl-stake-pool increase-validator-stake Zg5YBPAk8RqBR9kaLLSoN5C8Uv7nErBz1WC63HTsCPR 38DYMkwYCvsj8TC6cNaEvFHHVDYeWDp1qUgMgyjNqZXk 30
+$ solarti-stake-pool increase-validator-stake Zg5YBPAk8RqBR9kaLLSoN5C8Uv7nErBz1WC63HTsCPR 38DYMkwYCvsj8TC6cNaEvFHHVDYeWDp1qUgMgyjNqZXk 30
 Signature: 4zaKYu3MQ3as8reLbuHKaXN8FNaHvpHuiZtsJeARo67UKMo6wUUoWE88Fy8N4EYQYicuwULTNffcUD3a9jY88PoU
 ```
 
@@ -462,7 +462,7 @@ automatically merges the transient stakes into the validator stake account, leav
 a fully rebalanced stake pool:
 
 ```console
-$ spl-stake-pool list Zg5YBPAk8RqBR9kaLLSoN5C8Uv7nErBz1WC63HTsCPR
+$ solarti-stake-pool list Zg5YBPAk8RqBR9kaLLSoN5C8Uv7nErBz1WC63HTsCPR
 Stake Pool: Zg5YBPAk8RqBR9kaLLSoN5C8Uv7nErBz1WC63HTsCPR
 Pool Token Mint: BoNneHKDrX9BHjjvSpPfnQyRjsnc9WFH71v8wrgCd7LB
 Preferred Deposit Validator: 38DYMkwYCvsj8TC6cNaEvFHHVDYeWDp1qUgMgyjNqZXk
@@ -504,28 +504,28 @@ stake account, making this attack impossible without a lot of funds.
 Let's set a preferred deposit validator stake account:
 
 ```console
-$ spl-stake-pool set-preferred-validator Zg5YBPAk8RqBR9kaLLSoN5C8Uv7nErBz1WC63HTsCPR deposit --vote-account EhRbKi4Vhm1oUCGWHiLEMYZqDrHwEd7Jgzgi26QJKvfQ
+$ solarti-stake-pool set-preferred-validator Zg5YBPAk8RqBR9kaLLSoN5C8Uv7nErBz1WC63HTsCPR deposit --vote-account EhRbKi4Vhm1oUCGWHiLEMYZqDrHwEd7Jgzgi26QJKvfQ
 Signature: j6fbTqGJ8ehgKnSPns1adaSeFwg5M3wP1a32qYwZsQjymYoSejFUXLNGwvHSouJcFm4C78HUoC8xd7cvb5iActL
 ```
 
 And then let's set the preferred withdraw validator stake account to the same one:
 
 ```console
-$ spl-stake-pool set-preferred-validator Zg5YBPAk8RqBR9kaLLSoN5C8Uv7nErBz1WC63HTsCPR withdraw --vote-account EhRbKi4Vhm1oUCGWHiLEMYZqDrHwEd7Jgzgi26QJKvfQ
+$ solarti-stake-pool set-preferred-validator Zg5YBPAk8RqBR9kaLLSoN5C8Uv7nErBz1WC63HTsCPR withdraw --vote-account EhRbKi4Vhm1oUCGWHiLEMYZqDrHwEd7Jgzgi26QJKvfQ
 Signature: 4MKdYLyFqU6H3311YZDeLtsoeGZMzswBHyBCRjHfkzuN1rB4LXJbPfkgUGLKkdbsxJvPRub7SqB1zNPTqDdwti2w
 ```
 
 At any time, they may also unset the preferred validator:
 
 ```console
-$ spl-stake-pool set-preferred-validator Zg5YBPAk8RqBR9kaLLSoN5C8Uv7nErBz1WC63HTsCPR withdraw --unset
+$ solarti-stake-pool set-preferred-validator Zg5YBPAk8RqBR9kaLLSoN5C8Uv7nErBz1WC63HTsCPR withdraw --unset
 Signature: 5Qh9FA3EXtJ7nKw7UyxmMWXnTMLRKQqcpvfEsEyBtxSPqzPAXp2vFXnPg1Pw8f37JFdvyzYay65CtA8Z1ewzVkvF
 ```
 
 The preferred validators are marked in the `list` command:
 
 ```console
-$ spl-stake-pool list Zg5YBPAk8RqBR9kaLLSoN5C8Uv7nErBz1WC63HTsCPR
+$ solarti-stake-pool list Zg5YBPAk8RqBR9kaLLSoN5C8Uv7nErBz1WC63HTsCPR
 Stake Pool: Zg5YBPAk8RqBR9kaLLSoN5C8Uv7nErBz1WC63HTsCPR
 Pool Token Mint: BoNneHKDrX9BHjjvSpPfnQyRjsnc9WFH71v8wrgCd7LB
 Preferred Deposit Validator: EhRbKi4Vhm1oUCGWHiLEMYZqDrHwEd7Jgzgi26QJKvfQ
@@ -543,7 +543,7 @@ command-line utility has a special instruction for finding out which vote
 accounts are already associated with the stake pool.
 
 ```console
-$ spl-stake-pool list Zg5YBPAk8RqBR9kaLLSoN5C8Uv7nErBz1WC63HTsCPR
+$ solarti-stake-pool list Zg5YBPAk8RqBR9kaLLSoN5C8Uv7nErBz1WC63HTsCPR
 Stake Pool: Zg5YBPAk8RqBR9kaLLSoN5C8Uv7nErBz1WC63HTsCPR
 Pool Token Mint: BoNneHKDrX9BHjjvSpPfnQyRjsnc9WFH71v8wrgCd7LB
 Preferred Deposit Validator: 38DYMkwYCvsj8TC6cNaEvFHHVDYeWDp1qUgMgyjNqZXk
@@ -569,7 +569,7 @@ Stake pools accept SOL deposits directly from a normal SOL wallet account, and
 in exchange mint the appropriate amount of pool tokens.
 
 ```console
-$ spl-stake-pool deposit-sol Zg5YBPAk8RqBR9kaLLSoN5C8Uv7nErBz1WC63HTsCPR 100
+$ solarti-stake-pool deposit-sol Zg5YBPAk8RqBR9kaLLSoN5C8Uv7nErBz1WC63HTsCPR 100
 Using existing associated token account DgyZrAq88bnG1TNRxpgDQzWXpzEurCvfY2ukKFWBvADQ to receive stake pool tokens of mint BoNneHKDrX9BHjjvSpPfnQyRjsnc9WFH71v8wrgCd7LB, owned by 4SnSuUtJGKvk2GYpBwmEsWG53zTurVM8yXGsoiZQyMJn
 Signature: 23CptpZaq33njCpJPAvk8XS53xXwpfqF1sGxChk3VDB5mzz7XPKQqwsreun3iwZ6b51AyHqGBaUyc6tx9fqvF9JK
 ```
@@ -579,7 +579,7 @@ of ownership in the pool.  We can double-check our stake pool account using the
 SPL token command-line utility.
 
 ```console
-$ spl-token balance BoNneHKDrX9BHjjvSpPfnQyRjsnc9WFH71v8wrgCd7LB
+$ solarti-token balance BoNneHKDrX9BHjjvSpPfnQyRjsnc9WFH71v8wrgCd7LB
 100.00000000
 ```
 
@@ -589,7 +589,7 @@ Stake pools allow SOL withdrawals directly from the reserve and into a normal
 SOL wallet account, and in exchange burns the provided pool tokens.
 
 ```console
-$ spl-stake-pool withdraw-sol Zg5YBPAk8RqBR9kaLLSoN5C8Uv7nErBz1WC63HTsCPR 7VXPpSxneL6JLj18Naw2gkukXtjBZfbmPh18cnoUCMD8 2
+$ solarti-stake-pool withdraw-sol Zg5YBPAk8RqBR9kaLLSoN5C8Uv7nErBz1WC63HTsCPR 7VXPpSxneL6JLj18Naw2gkukXtjBZfbmPh18cnoUCMD8 2
 Signature: 4bqZKUUrjVspqTGqGqX4zxnHnJB67WbeukKUZRmxJ2yFmr275CtHPjZNzQJD9Pe7Q6mSxnUpcVv9FUdAbGP9RyBc
 ```
 
@@ -599,7 +599,7 @@ The stake pool has burned 2 pool tokens, and in return, sent SOL to
 You can check that the pool tokens have been burned:
 
 ```console
-$ spl-token balance BoNneHKDrX9BHjjvSpPfnQyRjsnc9WFH71v8wrgCd7LB
+$ solarti-token balance BoNneHKDrX9BHjjvSpPfnQyRjsnc9WFH71v8wrgCd7LB
 98.00000000
 ```
 
@@ -638,7 +638,7 @@ Two epochs later, when the stake is fully active and has received one epoch of
 rewards, we can deposit the stake into the stake pool.
 
 ```console
-$ spl-stake-pool deposit-stake Zg5YBPAk8RqBR9kaLLSoN5C8Uv7nErBz1WC63HTsCPR 97wBBiLVA7fUViEew8yV8R6tTdKithZDVz8LHLfF9sTJ
+$ solarti-stake-pool deposit-stake Zg5YBPAk8RqBR9kaLLSoN5C8Uv7nErBz1WC63HTsCPR 97wBBiLVA7fUViEew8yV8R6tTdKithZDVz8LHLfF9sTJ
 Depositing stake 97wBBiLVA7fUViEew8yV8R6tTdKithZDVz8LHLfF9sTJ into stake pool account F8e8Ympp4MkDSPZdvRxdQUZXRkMBDdyqgHa363GShAPt
 Using existing associated token account DgyZrAq88bnG1TNRxpgDQzWXpzEurCvfY2ukKFWBvADQ to receive stake pool tokens of mint BoNneHKDrX9BHjjvSpPfnQyRjsnc9WFH71v8wrgCd7LB, owned by 4SnSuUtJGKvk2GYpBwmEsWG53zTurVM8yXGsoiZQyMJn
 Signature: 45x2UtA1b49eBPtRHdkvA3k8JneZzfwjptNN1kKQZaPABYiJ4hSA8qwi7qLNN5b3Fr4Z6vXhJprrTCpkk3f8UqgD
@@ -653,7 +653,7 @@ Alternatively, you can create an SPL token account yourself and pass it as the
 stake account using the `withdraw-authority` flag.
 
 ```console
-$ spl-stake-pool deposit-stake Zg5YBPAk8RqBR9kaLLSoN5C8Uv7nErBz1WC63HTsCPR 97wBBiLVA7fUViEew8yV8R6tTdKithZDVz8LHLfF9sTJ --token-receiver 34XMHa3JUPv46ftU4dGHvemZ9oKVjnciRePYMcX3rjEF --withdraw-authority authority.json
+$ solarti-stake-pool deposit-stake Zg5YBPAk8RqBR9kaLLSoN5C8Uv7nErBz1WC63HTsCPR 97wBBiLVA7fUViEew8yV8R6tTdKithZDVz8LHLfF9sTJ --token-receiver 34XMHa3JUPv46ftU4dGHvemZ9oKVjnciRePYMcX3rjEF --withdraw-authority authority.json
 Depositing stake 97wBBiLVA7fUViEew8yV8R6tTdKithZDVz8LHLfF9sTJ into stake pool account F8e8Ympp4MkDSPZdvRxdQUZXRkMBDdyqgHa363GShAPt
 Signature: 4AESGZzqBVfj5xQnMiPWAwzJnAtQDRFK1Ha6jqKKTs46Zm5fw3LqgU1mRAT6CKTywVfFMHZCLm1hcQNScSMwVvjQ
 ```
@@ -663,7 +663,7 @@ of ownership in the pool.  We can double-check our stake pool account using the
 SPL token command-line utility.
 
 ```console
-$ spl-token balance BoNneHKDrX9BHjjvSpPfnQyRjsnc9WFH71v8wrgCd7LB
+$ solarti-token balance BoNneHKDrX9BHjjvSpPfnQyRjsnc9WFH71v8wrgCd7LB
 10.00000000
 ```
 
@@ -691,7 +691,7 @@ In order to calculate the proper value of these stake pool tokens, we must updat
 the total value managed by the stake pool every epoch.
 
 ```console
-$ spl-stake-pool update Zg5YBPAk8RqBR9kaLLSoN5C8Uv7nErBz1WC63HTsCPR
+$ solarti-stake-pool update Zg5YBPAk8RqBR9kaLLSoN5C8Uv7nErBz1WC63HTsCPR
 Signature: 2rtPNGKFSSnXFCb6MKG5wHp34dkB5hJWNhro8EU2oGh1USafAgzu98EgoRnPLi7ojQfmTpvXk4S7DWXYGu5t85Ka
 Signature: 5V2oCNvZCNJfC6QXHmR2UHGxVMip6nfZixYkVjFQBTyTf2Z9s9GJ9BjkxSFGvUsvW6zc2cCRv9Lqucu1cgHMFcVU
 ```
@@ -700,7 +700,7 @@ If another user already updated the stake pool balance for the current epoch, we
 see a different output.
 
 ```sh
-$ spl-stake-pool update Zg5YBPAk8RqBR9kaLLSoN5C8Uv7nErBz1WC63HTsCPR
+$ solarti-stake-pool update Zg5YBPAk8RqBR9kaLLSoN5C8Uv7nErBz1WC63HTsCPR
 Update not required
 ```
 
@@ -714,7 +714,7 @@ not possible, there is the option to only update the stake pool balances without
 performing merges using the `--no-merge` flag.
 
 ```sh
-$ spl-stake-pool update Zg5YBPAk8RqBR9kaLLSoN5C8Uv7nErBz1WC63HTsCPR --no-merge
+$ solarti-stake-pool update Zg5YBPAk8RqBR9kaLLSoN5C8Uv7nErBz1WC63HTsCPR --no-merge
 Signature: 5cjdZG727uzwnEEG3vJ1vskA9WsXibaEHh7imXSb2S1cwEYK4Q3btr2GEeAV8EffK4CEQ2WM6PQxawkJAHoZ4jsQ
 Signature: EBHbSRstJ3HxKwYKak8vEwVMKr1UBxdbqs5KuX3XYt4ppPjhaziGEtvL2TJCm1HLokbrtMeTEv57Ef4xhByJtJP
 ```
@@ -723,7 +723,7 @@ Later on, whenever the transient stakes are ready to be merged, it is possible t
 force another update in the same epoch using the `--force` flag.
 
 ```sh
-$ spl-stake-pool update Zg5YBPAk8RqBR9kaLLSoN5C8Uv7nErBz1WC63HTsCPR --force
+$ solarti-stake-pool update Zg5YBPAk8RqBR9kaLLSoN5C8Uv7nErBz1WC63HTsCPR --force
 Signature: 5RneEBwJkFytBJaJdkvCTHFrG3QzE3SGf9vdBm9gteCcHV4HwaHzj3mjX1hZg4yCREQSgmo3H9bPF6auMmMFTSTo
 Signature: 1215wJUY7vj82TQoGCacQ2VJZ157HnCTvfsUXkYph3nZzJNmeDaGmy1nCD7hkhFfxnQYYxVtec5TkDFGGB4e7EvG
 ```
@@ -736,7 +736,7 @@ pool tokens in exchange for an activated stake account.
 Let's withdraw active staked SOL in exchange for 5 pool tokens.
 
 ```console
-$ spl-stake-pool withdraw-stake Zg5YBPAk8RqBR9kaLLSoN5C8Uv7nErBz1WC63HTsCPR 5
+$ solarti-stake-pool withdraw-stake Zg5YBPAk8RqBR9kaLLSoN5C8Uv7nErBz1WC63HTsCPR 5
 Withdrawing ◎5.000000000, or 5 pool tokens, from stake account 3k7Nwu9jUSc6SNG11wzufKYoZXRFgxWamheGLYWp5Rvx, delegated to EhRbKi4Vhm1oUCGWHiLEMYZqDrHwEd7Jgzgi26QJKvfQ
 Creating account to receive stake 5GuAyPAt6577HoGhSVRNBv6aHohVtjQ8q7q5i3X1p4tB
 Signature: 5fzaKt5MU8bLjJRgNZyEktKsgweSQzFRpubCGKPeuk9shNQb4CtTkbgZ2X5MmC1VRDZ3YcCTPdtL9sFpXYfoqaeV
@@ -766,7 +766,7 @@ Alternatively, the user can specify an existing uninitialized stake account to
 receive their stake using the `--stake-receiver` parameter.
 
 ```console
-$ spl-stake-pool withdraw-stake Zg5YBPAk8RqBR9kaLLSoN5C8Uv7nErBz1WC63HTsCPR  --amount 0.02 --vote-account EhRbKi4Vhm1oUCGWHiLEMYZqDrHwEd7Jgzgi26QJKvfQ --stake-receiver CZF2z3JJoDmJRcVjtsrz1BKUUGNL3VPW5FPFqge1bzmQ
+$ solarti-stake-pool withdraw-stake Zg5YBPAk8RqBR9kaLLSoN5C8Uv7nErBz1WC63HTsCPR  --amount 0.02 --vote-account EhRbKi4Vhm1oUCGWHiLEMYZqDrHwEd7Jgzgi26QJKvfQ --stake-receiver CZF2z3JJoDmJRcVjtsrz1BKUUGNL3VPW5FPFqge1bzmQ
 Withdrawing ◎5.000000000, or 5 pool tokens, from stake account 3k7Nwu9jUSc6SNG11wzufKYoZXRFgxWamheGLYWp5Rvx, delegated to EhRbKi4Vhm1oUCGWHiLEMYZqDrHwEd7Jgzgi26QJKvfQ
 Signature: 2xBPVPJ749AE4hHNCNYdjuHv1EdMvxm9uvvraWfTA7Urrvecwh9w64URCyLLroLQ2RKDGE2QELM2ZHd8qRkjavJM
 ```
@@ -776,7 +776,7 @@ source the pool tokens. It's possible to specify the SPL token account using
 the `--pool-account` flag.
 
 ```console
-$ spl-stake-pool withdraw-stake Zg5YBPAk8RqBR9kaLLSoN5C8Uv7nErBz1WC63HTsCPR 5 --pool-account 34XMHa3JUPv46ftU4dGHvemZ9oKVjnciRePYMcX3rjEF
+$ solarti-stake-pool withdraw-stake Zg5YBPAk8RqBR9kaLLSoN5C8Uv7nErBz1WC63HTsCPR 5 --pool-account 34XMHa3JUPv46ftU4dGHvemZ9oKVjnciRePYMcX3rjEF
 Withdrawing ◎5.000000000, or 5 pool tokens, from stake account 3k7Nwu9jUSc6SNG11wzufKYoZXRFgxWamheGLYWp5Rvx, delegated to EhRbKi4Vhm1oUCGWHiLEMYZqDrHwEd7Jgzgi26QJKvfQ
 Creating account to receive stake CZF2z3JJoDmJRcVjtsrz1BKUUGNL3VPW5FPFqge1bzmQ
 Signature: 2xBPVPJ749AE4hHNCNYdjuHv1EdMvxm9uvvraWfTA7Urrvecwh9w64URCyLLroLQ2RKDGE2QELM2ZHd8qRkjavJM
@@ -787,7 +787,7 @@ accounts in the pool. It's also possible to specify a specific vote account for
 the withdraw using the `--vote-account` flag.
 
 ```console
-$ spl-stake-pool withdraw-stake Zg5YBPAk8RqBR9kaLLSoN5C8Uv7nErBz1WC63HTsCPR  --amount 5 --vote-account EhRbKi4Vhm1oUCGWHiLEMYZqDrHwEd7Jgzgi26QJKvfQ
+$ solarti-stake-pool withdraw-stake Zg5YBPAk8RqBR9kaLLSoN5C8Uv7nErBz1WC63HTsCPR  --amount 5 --vote-account EhRbKi4Vhm1oUCGWHiLEMYZqDrHwEd7Jgzgi26QJKvfQ
 Withdrawing ◎5.000000000, or 5 pool tokens, from stake account 3k7Nwu9jUSc6SNG11wzufKYoZXRFgxWamheGLYWp5Rvx, delegated to EhRbKi4Vhm1oUCGWHiLEMYZqDrHwEd7Jgzgi26QJKvfQ
 Creating account to receive stake CZF2z3JJoDmJRcVjtsrz1BKUUGNL3VPW5FPFqge1bzmQ
 Signature: 2xBPVPJ749AE4hHNCNYdjuHv1EdMvxm9uvvraWfTA7Urrvecwh9w64URCyLLroLQ2RKDGE2QELM2ZHd8qRkjavJM
@@ -808,7 +808,7 @@ reserve, but only if all of the validator stake accounts are at the minimum amou
 `1 SOL + stake account rent exemption`.
 
 ```console
-$ spl-stake-pool withdraw-stake Zg5YBPAk8RqBR9kaLLSoN5C8Uv7nErBz1WC63HTsCPR 5 --use-reserve
+$ solarti-stake-pool withdraw-stake Zg5YBPAk8RqBR9kaLLSoN5C8Uv7nErBz1WC63HTsCPR 5 --use-reserve
 Withdrawing ◎5.000000000, or 5 pool tokens, from stake account J5XB7mWpeaUZxZ6ogXT57qSCobczx27vLZYSgfSbZoBB
 Creating account to receive stake 51XdXiBSsVzeuY79xJwWAGZgeKzzgFKWajkwvWyrRiNE
 Signature: yQH9n7Go6iCMEYXqWef38ZYBPwXDmbwKAJFJ4EHD6TusBpusKsfNuT3TV9TL8FmxR2N9ExZTZwbD9Njc3rMvUcf
@@ -825,7 +825,7 @@ but only if all of the validator stake accounts are at the minimum amount of
 `1 SOL + stake account rent exemption`.
 
 ```console
-$ spl-stake-pool withdraw-stake Zg5YBPAk8RqBR9kaLLSoN5C8Uv7nErBz1WC63HTsCPR 1.00228288 SOL
+$ solarti-stake-pool withdraw-stake Zg5YBPAk8RqBR9kaLLSoN5C8Uv7nErBz1WC63HTsCPR 1.00228288 SOL
 Withdrawing ◎1.00228288 or 1.00228288 pool tokens, from stake account J5XB7mWpeaUZxZ6ogXT57qSCobczx27vLZYSgfSbZoBB
 Creating account to receive stake 51XdXiBSsVzeuY79xJwWAGZgeKzzgFKWajkwvWyrRiNE
 Signature: yQH9n7Go6iCMEYXqWef38ZYBPwXDmbwKAJFJ4EHD6TusBpusKsfNuT3TV9TL8FmxR2N9ExZTZwbD9Njc3rMvUcf

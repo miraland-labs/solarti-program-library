@@ -4,15 +4,15 @@ description = "solarti-token Rust Client"
 edition = "2021"
 license = "Apache-2.0"
 name = "solarti-token-client"
-repository = "https://github.com/solana-labs/solana-program-library"
+repository = "https://github.com/miraland-labs/solarti-program-library"
 version = "0.4.1"
 
 [dependencies]
 async-trait = "0.1"
-miraland-cli-output = {path = "../../../miraland-1.14.17/cli-output", version = "=1.14.17-rc4", optional = true }
-miraland-client = {path = "../../../miraland-1.14.17/client", version = "=1.14.17-rc4"}
-miraland-program-test = {path = "../../../miraland-1.14.17/program-test", version = "1.14.17-rc4"}
-miraland-sdk = "=1.14.17-rc3"
+miraland-cli-output = {version = "=1.14.17-rc4", optional = true }
+miraland-client = {version = "=1.14.17-rc4"}
+miraland-program-test = {version = "=1.14.17-rc4"}
+miraland-sdk = "=1.14.17-rc4"
 # We never want the entrypoint for ATA, but we want the entrypoint for token when
 # testing token
 solarti-associated-token-account = { version = "1.1", path = "../../associated-token-account/program", features = ["no-entrypoint"] }
@@ -25,3 +25,7 @@ thiserror = "1.0"
 default = ["display"]
 display = ["dep:miraland-cli-output"]
 proof-program = []
+
+[lib]
+crate-type = ["cdylib", "lib"]
+name = "spl_token_client"

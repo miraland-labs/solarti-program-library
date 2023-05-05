@@ -1,5 +1,5 @@
 {
-  "name": "@solana/spl-stake-pool",
+  "name": "@solarti/solarti-stake-pool",
   "version": "0.6.5",
   "description": "SPL Stake Pool Program JS API",
   "scripts": {
@@ -46,7 +46,7 @@
   "dependencies": {
     "@project-serum/borsh": "^0.2.2",
     "@solana/buffer-layout": "^4.0.0",
-    "@solana/spl-token": "^0.1.8",
+    "@solana/solarti-token": "^0.1.8",
     "@solana/web3.js": "^1.30.2",
     "bn.js": "^5.2.0",
     "buffer": "^6.0.3"

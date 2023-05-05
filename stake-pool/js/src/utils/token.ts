@@ -5,7 +5,7 @@ import {
   MintInfo,
   Token,
   TOKEN_PROGRAM_ID,
-} from '@solana/spl-token';
+} from '@solana/solarti-token';
 import { AccountLayout } from '../layouts';
 
 const FAILED_TO_FIND_ACCOUNT = 'Failed to find account';

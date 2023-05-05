@@ -1,5 +1,5 @@
 {
-    "name": "@solana/spl-memo",
+    "name": "@solarti/solarti-memo",
     "description": "SPL Memo Program JS API",
     "version": "0.2.2",
     "author": "Solana Labs Maintainers <maintainers@solanalabs.com>",

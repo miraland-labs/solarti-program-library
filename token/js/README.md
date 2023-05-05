@@ -1,4 +1,4 @@
-# `@solana/spl-token`
+# `@solana/solarti-token`
 
 A TypeScript library for interacting with the SPL Token and Token-2022 programs.
 
@@ -25,11 +25,11 @@ Please see [upgrading from 0.1.x](#upgrading-from-0.1.x).
 ## Install
 
 ```shell
-npm install --save @solana/spl-token @solana/web3.js
+npm install --save @solana/solarti-token @solana/web3.js
 ```
 _OR_
 ```shell
-yarn add @solana/spl-token @solana/web3.js
+yarn add @solana/solarti-token @solana/web3.js
 ```
 
 ## Build from Source
@@ -82,21 +82,21 @@ There are no breaking changes from 0.2.0, only new functionality for Token-2022.
 
 ### Upgrading from 0.1.x
 
-When upgrading from spl-token 0.1.x, you may see the following error in your code:
+When upgrading from solarti-token 0.1.x, you may see the following error in your code:
 
 ```
-import {TOKEN_PROGRAM_ID, Token, AccountLayout} from '@solana/spl-token';
+import {TOKEN_PROGRAM_ID, Token, AccountLayout} from '@solana/solarti-token';
                           ^^^^^
-SyntaxError: The requested module '@solana/spl-token' does not provide an export named 'Token'
+SyntaxError: The requested module '@solana/solarti-token' does not provide an export named 'Token'
 ```
 
-The `@solana/spl-token` library as of version 0.2.0 does not have the `Token`
+The `@solana/solarti-token` library as of version 0.2.0 does not have the `Token`
 class. Instead the actions are split up and exported separately.
 
 To use the old version, install it with:
 
 ```
-npm install @solana/spl-token@0.1.8
+npm install @solana/solarti-token@0.1.8
 ```
 
 Otherwise you can find documentation on how to use new versions on the

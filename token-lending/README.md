@@ -30,8 +30,8 @@ This is optional! You can skip these steps and use the [Token Lending CLI](./cli
 
 1. Install the Token and Token Lending CLIs:
    ```shell
-   cargo install spl-token-cli
-   cargo install spl-token-lending-cli
+   cargo install solarti-token-cli
+   cargo install solarti-token-lending-cli
    ```
 
 1. Clone the SPL repo:
@@ -111,7 +111,7 @@ This is optional! You can skip these steps and use the [Token Lending CLI](./cli
 
 1. Wrap some of your SOL as an SPL Token:
    ```shell
-   spl-token wrap \
+   solarti-token wrap \
       --fee-payer owner.json \
       2.0 \
       -- owner.json

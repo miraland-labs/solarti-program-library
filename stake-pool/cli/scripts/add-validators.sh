@@ -16,9 +16,9 @@ add_validator_stakes () {
   done < "$validator_list"
 }
 
-spl_stake_pool=spl-stake-pool
+spl_stake_pool=solarti-stake-pool
 # Uncomment to use a local build
-#spl_stake_pool=../../../target/debug/spl-stake-pool
+#spl_stake_pool=../../../target/debug/solarti-stake-pool
 
 stake_pool_pubkey=$(solana-keygen pubkey "$stake_pool_keyfile")
 echo "Adding validator stake accounts to the pool"

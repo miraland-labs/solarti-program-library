@@ -1,6 +1,6 @@
 [package]
 name = "solarti-memo"
-version = "3.0.3"
+version = "3.0.4"
 description = "Solarti Program Library Memo"
 authors = ["Solana Labs Maintainers <maintainers@solanalabs.com>"]
 repository = "https://github.com/miraland-labs/solarti-program-library"
@@ -12,11 +12,11 @@ no-entrypoint = []
 test-sbf = []
 
 [dependencies]
-miraland-program = "=1.14.17-rc3"
+miraland-program = "=1.14.17-rc4"
 
 [dev-dependencies]
-solana-program-test = "=1.14.17"
-miraland-sdk = "=1.14.17-rc3"
+miraland-program-test = "=1.14.17-rc4"
+miraland-sdk = "=1.14.17-rc4"
 
 [lib]
 crate-type = ["cdylib", "lib"]

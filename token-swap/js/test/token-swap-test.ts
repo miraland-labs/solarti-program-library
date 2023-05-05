@@ -6,7 +6,7 @@ import {
   Transaction,
   sendAndConfirmTransaction
 } from '@solana/web3.js';
-import {AccountLayout, Token, TOKEN_PROGRAM_ID} from '@solana/spl-token';
+import {AccountLayout, Token, TOKEN_PROGRAM_ID} from '@solana/solarti-token';
 
 import {TokenSwap, CurveType, TOKEN_SWAP_PROGRAM_ID} from '../src';
 import {newAccountWithLamports} from '../src/util/new-account-with-lamports';

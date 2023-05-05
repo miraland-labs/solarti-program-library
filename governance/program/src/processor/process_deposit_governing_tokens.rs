@@ -63,7 +63,7 @@ pub fn process_deposit_governing_tokens(
     realm_config_data.assert_can_deposit_governing_token(&realm_data, &governing_token_mint)?;
 
     if is_spl_token_account(governing_token_source_info) {
-        // If the source is spl-token token account then transfer tokens from it
+        // If the source is solarti-token token account then transfer tokens from it
         transfer_spl_tokens(
             governing_token_source_info,
             governing_token_holding_info,

@@ -12,7 +12,7 @@ use {
         crate_description, crate_name, crate_version, value_t, value_t_or_exit, App, AppSettings,
         Arg, ArgGroup, ArgMatches, SubCommand,
     },
-    solana_clap_utils::{
+    miraland_clap_utils::{
         input_parsers::{keypair_of, pubkey_of},
         input_validators::{
             is_amount, is_keypair_or_ask_keyword, is_parsable, is_pubkey, is_url,
@@ -20,8 +20,8 @@ use {
         },
         keypair::{signer_from_path_with_config, SignerFromPathConfig},
     },
-    solana_cli_output::OutputFormat,
-    solana_client::rpc_client::RpcClient,
+    miraland_cli_output::OutputFormat,
+    miraland_client::rpc_client::RpcClient,
     solana_program::{
         borsh::{get_instance_packed_len, get_packed_len},
         instruction::Instruction,
@@ -29,7 +29,7 @@ use {
         pubkey::Pubkey,
         stake,
     },
-    solana_remote_wallet::remote_wallet::RemoteWalletManager,
+    miraland_remote_wallet::remote_wallet::RemoteWalletManager,
     solana_sdk::{
         commitment_config::CommitmentConfig,
         hash::Hash,
@@ -152,7 +152,7 @@ fn get_latest_blockhash(client: &RpcClient) -> Result<Hash, Error> {
 fn send_transaction_no_wait(
     config: &Config,
     transaction: Transaction,
-) -> solana_client::client_error::Result<()> {
+) -> miraland_client::client_error::Result<()> {
     if config.dry_run {
         let result = config.rpc_client.simulate_transaction(&transaction)?;
         println!("Simulate result: {:?}", result);
@@ -166,7 +166,7 @@ fn send_transaction_no_wait(
 fn send_transaction(
     config: &Config,
     transaction: Transaction,
-) -> solana_client::client_error::Result<()> {
+) -> miraland_client::client_error::Result<()> {
     if config.dry_run {
         let result = config.rpc_client.simulate_transaction(&transaction)?;
         println!("Simulate result: {:?}", result);
@@ -1897,7 +1897,7 @@ fn main() {
                 .takes_value(true)
                 .global(true)
                 .help("Configuration file to use");
-            if let Some(ref config_file) = *solana_cli_config::CONFIG_FILE {
+            if let Some(ref config_file) = *miraland_cli_config::CONFIG_FILE {
                 arg.default_value(config_file)
             } else {
                 arg
@@ -2683,9 +2683,9 @@ fn main() {
 
     let mut wallet_manager = None;
     let cli_config = if let Some(config_file) = matches.value_of("config_file") {
-        solana_cli_config::Config::load(config_file).unwrap_or_default()
+        miraland_cli_config::Config::load(config_file).unwrap_or_default()
     } else {
-        solana_cli_config::Config::default()
+        miraland_cli_config::Config::default()
     };
     let config = {
         let json_rpc_url = value_t!(matches, "json_rpc_url", String)

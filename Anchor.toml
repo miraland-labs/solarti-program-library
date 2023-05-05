@@ -1,5 +1,5 @@
 anchor_version = "0.24.2"
-solana_version = "1.14.12"
+miraland_version = "=1.14.17-rc4"
 
 [workspace]
 members = [
@@ -16,7 +16,7 @@ exclude = [
 
 [provider]
 cluster = "mainnet"
-wallet = "~/.config/solana/id.json"
+wallet = "~/.config/miraland/id.json"
 
 [programs.mainnet]
 spl_governance = "GovER5Lthms3bLBqWub97yVrMmEogzX7xNjdXpPPCVZw"

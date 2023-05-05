@@ -1,6 +1,6 @@
 [package]
 name = "solarti-token-2022"
-version = "0.6.3"
+version = "0.6.4"
 description = "Solarti Program Library Token 2022"
 authors = ["Solana Labs Maintainers <maintainers@solanalabs.com>"]
 repository = "https://github.com/miraland-labs/solarti-program-library"
@@ -23,8 +23,8 @@ bytemuck = { version = "1.13.0", features = ["derive"] }
 num-derive = "0.3"
 num-traits = "0.2"
 num_enum = "0.5.9"
-miraland-program = "=1.14.17-rc3"
-miraland-zk-token-sdk = "=1.14.17-rc3"
+miraland-program = "=1.14.17-rc4"
+miraland-zk-token-sdk = "=1.14.17-rc4"
 solarti-memo = { version = "3.0", path = "../../memo/program", features = [ "no-entrypoint" ] }
 solarti-token = { version = "3.5",  path = "../program", features = ["no-entrypoint"] }
 thiserror = "1.0"
@@ -35,8 +35,8 @@ serde_with = { version = "1.14.0", optional = true }
 lazy_static = "1.4.0"
 proptest = "1.0"
 serial_test = "0.5.1"
-solana-program-test = "=1.14.17"
-miraland-sdk = "=1.14.17-rc3"
+miraland-program-test = "=1.14.17-rc4"
+miraland-sdk = "=1.14.17-rc4"
 serde_json = "1.0.81"
 
 [lib]

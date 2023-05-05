@@ -37,14 +37,14 @@ The Account Compression Program is written in rust and also has a typescript sdk
 ### Rust Packages
 | Name                         | Description                                                                        | Program                                                                                                                       |
 | ---------------------------- | ---------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
-| `spl-account-compression`    | SDK for interacting with account compression program                               | [Rust Crate](https://crates.io/crates/spl-account-compression) and [Rust Docs](https://docs.rs/spl-account-compression)       |
-| `spl-noop`                   | SDK for interacting with no op program, primarily for circumventing log truncation | [Rust Crate](https://crates.io/crates/spl-noop) and [Rust Docs](https://docs.rs/spl-noop)                                     |
-| `spl-concurrent-merkle-tree` | SDK for creating SPL ConcurrentMerkleTrees                                         | [Rust Crate](https://crates.io/crates/spl-concurrent-merkle-tree) and [Rust Docs](https://docs.rs/spl-concurrent-merkle-tree) |
+| `solarti-account-compression`    | SDK for interacting with account compression program                               | [Rust Crate](https://crates.io/crates/solarti-account-compression) and [Rust Docs](https://docs.rs/solarti-account-compression)       |
+| `solarti-noop`                   | SDK for interacting with no op program, primarily for circumventing log truncation | [Rust Crate](https://crates.io/crates/solarti-noop) and [Rust Docs](https://docs.rs/solarti-noop)                                     |
+| `solarti-concurrent-merkle-tree` | SDK for creating SPL ConcurrentMerkleTrees                                         | [Rust Crate](https://crates.io/crates/solarti-concurrent-merkle-tree) and [Rust Docs](https://docs.rs/solarti-concurrent-merkle-tree) |
 
 ### TypeScript Packages
 | Name                              | Description                                          | Package                                                              |
 | --------------------------------- | ---------------------------------------------------- | -------------------------------------------------------------------- |
-| `@solana/spl-account-compression` | SDK for interacting with account compression program | [NPM](https://www.npmjs.com/package/@solana/spl-account-compression) |
+| `@solarti/solarti-account-compression` | SDK for interacting with account compression program | [NPM](https://www.npmjs.com/package/@solarti/solarti-account-compression) |
 
 ## Testing and Development
 
@@ -52,6 +52,6 @@ Testing contracts locally requires the SDK to be built.
 
 With a built local SDK, the test suite can be run with:
 
-1. `yarn link @solana/spl-account-compression`
+1. `yarn link @solarti/solarti-account-compression`
 2. `yarn`
 3. `yarn test`

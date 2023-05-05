@@ -26,7 +26,7 @@ The Stake Pool Program's source is available on
 [GitHub](https://github.com/solana-labs/solana-program-library/tree/master/stake-pool).
 
 For information about the types and instructions, the Stake Pool Rust docs are
-available at [docs.rs](https://docs.rs/spl-stake-pool/0.6.3/spl_stake_pool/).
+available at [docs.rs](https://docs.rs/solarti-stake-pool/0.6.3/spl_stake_pool/).
 
 ## Security Audits
 

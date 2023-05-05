@@ -9,7 +9,7 @@ import {
 
 chai.use(chaiAsPromised);
 
-describe('spl-token-2022 instructions', () => {
+describe('solarti-token-2022 instructions', () => {
     it('InitializeMintCloseAuthority', () => {
         const ix = createInitializeMintCloseAuthorityInstruction(
             Keypair.generate().publicKey,

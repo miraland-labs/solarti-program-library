@@ -1,4 +1,4 @@
-import { TOKEN_PROGRAM_ID } from '@solana/spl-token';
+import { TOKEN_PROGRAM_ID } from '@solana/solarti-token';
 import { PublicKey, TransactionInstruction } from '@solana/web3.js';
 import { struct, u8 } from '@solana/buffer-layout';
 import { LENDING_PROGRAM_ID } from '../constants';

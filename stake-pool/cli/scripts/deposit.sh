@@ -49,9 +49,9 @@ deposit_stakes () {
 keys_dir=keys
 stake_pool_pubkey=$(solana-keygen pubkey "$stake_pool_keyfile")
 
-spl_stake_pool=spl-stake-pool
+spl_stake_pool=solarti-stake-pool
 # Uncomment to use a locally build CLI
-#spl_stake_pool=../../../target/debug/spl-stake-pool
+#spl_stake_pool=../../../target/debug/solarti-stake-pool
 
 echo "Setting up keys directory $keys_dir"
 mkdir -p $keys_dir

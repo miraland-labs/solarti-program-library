@@ -46,9 +46,9 @@ withdraw_stakes_to_stake_receiver () {
   done < "$validator_list"
 }
 
-spl_stake_pool=spl-stake-pool
+spl_stake_pool=solarti-stake-pool
 # Uncomment to use a locally build CLI
-# spl_stake_pool=../../../target/debug/spl-stake-pool
+# spl_stake_pool=../../../target/debug/solarti-stake-pool
 
 stake_pool_pubkey=$(solana-keygen pubkey "$stake_pool_keyfile")
 keys_dir=keys

@@ -123,7 +123,7 @@ run the script with the amount of SOL to deposit. We'll use 15 SOL:
 ```bash
 $ ./setup-stake-pool.sh 15
 Creating pool
-+ spl-stake-pool create-pool --epoch-fee-numerator 3 --epoch-fee-denominator 1000 --withdrawal-fee-numerator 3 --withdrawal-fee-denominator 1000 --deposit-fee-numerator 3 --deposit-fee-denominator 1000 --referral-fee 50 --max-validators 2350 --pool-keypair keys/stake-pool.json --validator-list-keypair keys/validator-list.json --mint-keypair keys/mint.json --reserve-keypair keys/reserve.json
++ solarti-stake-pool create-pool --epoch-fee-numerator 3 --epoch-fee-denominator 1000 --withdrawal-fee-numerator 3 --withdrawal-fee-denominator 1000 --deposit-fee-numerator 3 --deposit-fee-denominator 1000 --referral-fee 50 --max-validators 2350 --pool-keypair keys/stake-pool.json --validator-list-keypair keys/validator-list.json --mint-keypair keys/mint.json --reserve-keypair keys/reserve.json
 Creating reserve stake 4tvTkLB4X7ahUYZ2NaTohkG3mud4UBBvu9ZEGD4Wk9mt
 Creating mint BoNneHKDrX9BHjjvSpPfnQyRjsnc9WFH71v8wrgCd7LB
 Creating associated token account DgyZrAq88bnG1TNRxpgDQzWXpzEurCvfY2ukKFWBvADQ to receive stake pool tokens of mint BoNneHKDrX9BHjjvSpPfnQyRjsnc9WFH71v8wrgCd7LB, owned by 4SnSuUtJGKvk2GYpBwmEsWG53zTurVM8yXGsoiZQyMJn
@@ -153,7 +153,7 @@ We already deposited 15 SOL during creation of the pool, but let's deposit
 another 10 SOL into the pool:
 
 ```
-$ spl-stake-pool deposit-sol Zg5YBPAk8RqBR9kaLLSoN5C8Uv7nErBz1WC63HTsCPR 10
+$ solarti-stake-pool deposit-sol Zg5YBPAk8RqBR9kaLLSoN5C8Uv7nErBz1WC63HTsCPR 10
 Using existing associated token account DgyZrAq88bnG1TNRxpgDQzWXpzEurCvfY2ukKFWBvADQ to receive stake pool tokens of mint BoNneHKDrX9BHjjvSpPfnQyRjsnc9WFH71v8wrgCd7LB, owned by 4SnSuUtJGKvk2GYpBwmEsWG53zTurVM8yXGsoiZQyMJn
 Signature: 4AJv6hSznYoMGnaQvjWXSBjKqtjYpjBx2MLezmRRjWRDa8vUaBLQfPNGd3kamZNs1JeWSvnzczwtzsMD5WkgKamA
 ```

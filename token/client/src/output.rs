@@ -1,6 +1,6 @@
 #![cfg(feature = "display")]
 
-use {crate::client::RpcClientResponse, solana_cli_output::display::writeln_transaction, std::fmt};
+use {crate::client::RpcClientResponse, miraland_cli_output::display::writeln_transaction, std::fmt};
 
 impl fmt::Display for RpcClientResponse {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {

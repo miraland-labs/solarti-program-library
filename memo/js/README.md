@@ -1,4 +1,4 @@
-# `@solana/spl-memo`
+# `@solarti/solarti-memo`
 
 A TypeScript library for interacting with the SPL Memo program.
 
@@ -11,11 +11,11 @@ A TypeScript library for interacting with the SPL Memo program.
 ## Install
 
 ```shell
-npm install --save @solana/spl-memo @solana/web3.js
+npm install --save @solarti/solarti-memo @solana/web3.js
 ```
 _OR_
 ```shell
-yarn add @solana/spl-memo @solana/web3.js
+yarn add @solarti/solarti-memo @solana/web3.js
 ```
 
 ## Build from Source

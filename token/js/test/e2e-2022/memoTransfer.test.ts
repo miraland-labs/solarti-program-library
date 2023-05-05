@@ -4,7 +4,7 @@ chai.use(chaiAsPromised);
 
 import type { Connection, PublicKey, Signer } from '@solana/web3.js';
 import { sendAndConfirmTransaction, Keypair, SystemProgram, Transaction } from '@solana/web3.js';
-import { createMemoInstruction } from '@solana/spl-memo';
+import { createMemoInstruction } from '@solarti/solarti-memo';
 import {
     createAccount,
     createMint,

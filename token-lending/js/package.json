@@ -1,5 +1,5 @@
 {
-    "name": "@solana/spl-token-lending",
+    "name": "@solana/solarti-token-lending",
     "version": "0.3.4",
     "description": "SPL Token Lending JavaScript API",
     "license": "MIT",
@@ -35,14 +35,14 @@
         "bignumber.js": "^9.0.1"
     },
     "peerDependencies": {
-        "@solana/spl-token": "^0.1.6",
+        "@solana/solarti-token": "^0.1.6",
         "@solana/web3.js": "^1.20.0"
     },
     "devDependencies": {
         "@rollup/plugin-commonjs": "^21.0.2",
         "@rollup/plugin-node-resolve": "^13.1.3",
         "@rollup/plugin-typescript": "^8.3.1",
-        "@solana/spl-token": "^0.2.0",
+        "@solana/solarti-token": "^0.2.0",
         "@solana/web3.js": "^1.36.0",
         "@types/eslint": "^8.4.1",
         "@types/eslint-plugin-prettier": "^3.1.0",

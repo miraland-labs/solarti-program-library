@@ -12,13 +12,13 @@ A _**rough draft**_ of the whitepaper for SPL ConcurrentMerkleTree's can be foun
 
 ## Rust Packages
 
-* `spl-account-compression`: SDK for interacting with account compression program
-* `spl-noop`: SDK for interacting with no op program, primarily for circumventing log truncation
-* `spl-concurrent-merkle-tree`: SDK for creating SPL ConcurrentMerkleTrees
+* `solarti-account-compression`: SDK for interacting with account compression program
+* `solarti-noop`: SDK for interacting with no op program, primarily for circumventing log truncation
+* `solarti-concurrent-merkle-tree`: SDK for creating SPL ConcurrentMerkleTrees
 
 ## Typescript SDK
 
-`@solana/spl-account-compression` is generated using Metaplex Foundation's [Solita](https://github.com/metaplex-foundation/solita/). 
+`@solarti/solarti-account-compression` is generated using Metaplex Foundation's [Solita](https://github.com/metaplex-foundation/solita/). 
 
 ## Testing and Development
 
@@ -26,7 +26,7 @@ Testing contracts locally requires the SDK to be built.
 
 With a built local SDK, the test suite can be ran with:
 
-1. `yarn link @solana/spl-account-compression`
+1. `yarn link @solarti/solarti-account-compression`
 2. `yarn`
 3. `yarn test`
 

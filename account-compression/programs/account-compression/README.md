@@ -10,4 +10,4 @@ More information about account compression can be found in [the solana-program-l
 
 The [Solana Program Examples repo](https://github.com/solana-developers/program-examples) will eventually include examples of how to use this program.
 
-`spl-account-compression` and this crate's implementation are targeted towards supporting [Metaplex Compressed NFTs](https://github.com/metaplex-foundation/metaplex-program-library/tree/master/bubblegum) and may be subject to change.
+`solarti-account-compression` and this crate's implementation are targeted towards supporting [Metaplex Compressed NFTs](https://github.com/metaplex-foundation/metaplex-program-library/tree/master/bubblegum) and may be subject to change.

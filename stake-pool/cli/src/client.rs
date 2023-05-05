@@ -1,7 +1,7 @@
 use {
     bincode::deserialize,
-    solana_account_decoder::UiAccountEncoding,
-    solana_client::{
+    miraland_account_decoder::UiAccountEncoding,
+    miraland_client::{
         client_error::ClientError,
         rpc_client::RpcClient,
         rpc_config::{RpcAccountInfoConfig, RpcProgramAccountsConfig},
@@ -133,7 +133,7 @@ pub(crate) fn get_all_stake(
                 RpcFilterType::Memcmp(Memcmp::new_base58_encoded(12, authorized_staker.as_ref())),
             ]),
             account_config: RpcAccountInfoConfig {
-                encoding: Some(solana_account_decoder::UiAccountEncoding::Base64),
+                encoding: Some(miraland_account_decoder::UiAccountEncoding::Base64),
                 commitment: Some(rpc_client.commitment()),
                 ..RpcAccountInfoConfig::default()
             },

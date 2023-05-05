@@ -2,7 +2,7 @@ use assert_cmd::cmd::Command;
 
 #[test]
 fn invalid_config_will_cause_commands_to_fail() {
-    let mut cmd = Command::cargo_bin("spl-token").unwrap();
+    let mut cmd = Command::cargo_bin("solarti-token").unwrap();
     let args = &["address", "--config", "~/nonexistent/config.yml"];
     cmd.args(args)
         .assert()

@@ -2,7 +2,7 @@
 
 set -ex
 cd "$(dirname "$0")/.."
-source ./ci/solana-version.sh install
+source ./ci/miraland-version.sh install
 
 cd stake-pool/py
 python3 -m venv venv

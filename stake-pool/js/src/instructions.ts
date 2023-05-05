@@ -9,7 +9,7 @@ import {
   TransactionInstruction,
 } from '@solana/web3.js';
 import * as BufferLayout from '@solana/buffer-layout';
-import { TOKEN_PROGRAM_ID } from '@solana/spl-token';
+import { TOKEN_PROGRAM_ID } from '@solana/solarti-token';
 import { STAKE_POOL_PROGRAM_ID } from './constants';
 import { InstructionType, encodeData, decodeData } from './utils';
 import BN from 'bn.js';

@@ -72,7 +72,7 @@ fn keypair_clone(kp: &Keypair) -> Keypair {
     Keypair::from_bytes(&kp.to_bytes()).expect("failed to copy keypair")
 }
 
-// TODO unignore once spl-token-2022 becomes spl-token, and is included in
+// TODO unignore once solarti-token-2022 becomes solarti-token, and is included in
 // ProgramTest by default
 #[ignore]
 #[tokio::test]
@@ -109,7 +109,7 @@ async fn associated_token_account() {
     );
 }
 
-// TODO unignore once spl-token-2022 becomes spl-token, and is included in
+// TODO unignore once solarti-token-2022 becomes solarti-token, and is included in
 // ProgramTest by default
 #[ignore]
 #[tokio::test]
@@ -135,7 +135,7 @@ async fn get_or_create_associated_token_account() {
     );
 }
 
-// TODO unignore once spl-token-2022 becomes spl-token, and is included in
+// TODO unignore once solarti-token-2022 becomes solarti-token, and is included in
 // ProgramTest by default
 #[ignore]
 #[tokio::test]
@@ -215,7 +215,7 @@ async fn set_authority() {
     );
 }
 
-// TODO unignore once spl-token-2022 becomes spl-token, and is included in
+// TODO unignore once solarti-token-2022 becomes solarti-token, and is included in
 // ProgramTest by default
 #[ignore]
 #[tokio::test]
@@ -256,7 +256,7 @@ async fn mint_to() {
     );
 }
 
-// TODO unignore once spl-token-2022 becomes spl-token, and is included in
+// TODO unignore once solarti-token-2022 becomes solarti-token, and is included in
 // ProgramTest by default
 #[ignore]
 #[tokio::test]

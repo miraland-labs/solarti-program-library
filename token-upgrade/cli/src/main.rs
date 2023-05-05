@@ -9,8 +9,8 @@ use {
             signer_from_path, signer_from_path_with_config, DefaultSigner, SignerFromPathConfig,
         },
     },
-    solana_client::nonblocking::rpc_client::RpcClient,
-    solana_remote_wallet::remote_wallet::RemoteWalletManager,
+    miraland_client::nonblocking::rpc_client::RpcClient,
+    miraland_remote_wallet::remote_wallet::RemoteWalletManager,
     solana_sdk::{
         commitment_config::CommitmentConfig,
         message::Message,
@@ -215,7 +215,7 @@ async fn main() -> Result<(), Box<dyn Error>> {
                 .takes_value(true)
                 .global(true)
                 .help("Configuration file to use");
-            if let Some(ref config_file) = *solana_cli_config::CONFIG_FILE {
+            if let Some(ref config_file) = *miraland_cli_config::CONFIG_FILE {
                 arg.default_value(config_file)
             } else {
                 arg
@@ -348,9 +348,9 @@ async fn main() -> Result<(), Box<dyn Error>> {
 
     let config = {
         let cli_config = if let Some(config_file) = matches.value_of("config_file") {
-            solana_cli_config::Config::load(config_file).unwrap_or_default()
+            miraland_cli_config::Config::load(config_file).unwrap_or_default()
         } else {
-            solana_cli_config::Config::default()
+            miraland_cli_config::Config::default()
         };
 
         let payer = DefaultSigner::new(
@@ -496,7 +496,7 @@ mod test {
     use {
         super::*,
         solana_sdk::{bpf_loader, signer::keypair::Keypair},
-        solana_test_validator::{ProgramInfo, TestValidator, TestValidatorGenesis},
+        miraland_test_validator::{ProgramInfo, TestValidator, TestValidatorGenesis},
         spl_token_client::client::{ProgramClient, SendTransaction},
         std::path::PathBuf,
     };

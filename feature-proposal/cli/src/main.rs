@@ -5,11 +5,11 @@ use {
         crate_description, crate_name, crate_version, value_t_or_exit, App, AppSettings, Arg,
         SubCommand,
     },
-    solana_clap_utils::{
+    miraland_clap_utils::{
         input_parsers::{keypair_of, pubkey_of},
         input_validators::{is_keypair, is_url, is_valid_percentage, is_valid_pubkey},
     },
-    solana_client::rpc_client::RpcClient,
+    miraland_client::rpc_client::RpcClient,
     solana_sdk::{
         clock::UnixTimestamp,
         commitment_config::CommitmentConfig,
@@ -46,7 +46,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
                 .takes_value(true)
                 .global(true)
                 .help("Configuration file to use");
-            if let Some(ref config_file) = *solana_cli_config::CONFIG_FILE {
+            if let Some(ref config_file) = *miraland_cli_config::CONFIG_FILE {
                 arg.default_value(config_file)
             } else {
                 arg
@@ -143,9 +143,9 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     let config = {
         let cli_config = if let Some(config_file) = matches.value_of("config_file") {
-            solana_cli_config::Config::load(config_file).unwrap_or_default()
+            miraland_cli_config::Config::load(config_file).unwrap_or_default()
         } else {
-            solana_cli_config::Config::default()
+            miraland_cli_config::Config::default()
         };
 
         Config {
@@ -337,7 +337,7 @@ fn process_propose(
     println!();
     println!("Distribute the proposal tokens to all validators by running:");
     println!(
-        "    $ solana-tokens distribute-spl-tokens \
+        "    $ solana-tokens distribute-solarti-tokens \
                   --from {} \
                   --input-csv {} \
                   --db-path db.{} \
@@ -348,7 +348,7 @@ fn process_propose(
         &feature_proposal_keypair.pubkey().to_string()[..8]
     );
     println!(
-        "    $ solana-tokens spl-token-balances \
+        "    $ solana-tokens solarti-token-balances \
                  --mint {} --input-csv {}",
         mint_address, distribution_file
     );
@@ -359,12 +359,12 @@ fn process_propose(
         the proposal by first looking up their token account address:"
     );
     println!(
-        "    $ spl-token accounts --owner ~/validator-keypair.json {}",
+        "    $ solarti-token accounts --owner ~/validator-keypair.json {}",
         mint_address
     );
     println!("and then submit their vote by running:");
     println!(
-        "    $ spl-token transfer --owner ~/validator-keypair.json <TOKEN_ACCOUNT_ADDRESS> ALL {}",
+        "    $ solarti-token transfer --owner ~/validator-keypair.json <TOKEN_ACCOUNT_ADDRESS> ALL {}",
         acceptance_token_address
     );
     println!();

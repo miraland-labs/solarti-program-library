@@ -5,8 +5,8 @@ edition = "2021"
 homepage = "https://spl.solana.com/token"
 license = "Apache-2.0"
 name = "solarti-token-cli"
-repository = "https://github.com/solana-labs/solana-program-library"
-version = "2.3.1"
+repository = "https://github.com/miraland-labs/solarti-program-library"
+version = "2.3.0"
 
 [build-dependencies]
 walkdir = "2"
@@ -18,15 +18,15 @@ indicatif = "0.16.2"
 serde = "1.0.130"
 serde_derive = "1.0.103"
 serde_json = "1.0.68"
-miraland-account-decoder = {path = "../../../miraland-1.14.17/account-decoder", version = "=1.14.17-rc4"}
-miraland-clap-utils = {path = "../../../miraland-1.14.17/clap-utils", version = "=1.14.17-rc4"}
-miraland-cli-config = {path = "../../../miraland-1.14.17/cli-config", version = "=1.14.17-rc4"}
-miraland-cli-output = {path = "../../../miraland-1.14.17/cli-output", version = "=1.14.17-rc4"}
-miraland-client = {path = "../../../miraland-1.14.17/client", version = "=1.14.17-rc4"}
-miraland-logger = {path = "../../../miraland-1.14.17/logger", version = "=1.14.17-rc4"}
-miraland-remote-wallet = {path = "../../../miraland-1.14.17/remote-wallet", version = "=1.14.17-rc4"}
-miraland-sdk = "=1.14.17-rc3"
-miraland-transaction-status = {path = "../../../miraland-1.14.17/transaction-status", version = "=1.14.17-rc4"}
+miraland-account-decoder = "=1.14.17-rc4"
+miraland-clap-utils = "=1.14.17-rc4"
+miraland-cli-config = "=1.14.17-rc4"
+miraland-cli-output = "=1.14.17-rc4"
+miraland-client = "=1.14.17-rc4"
+miraland-logger = "=1.14.17-rc4"
+miraland-remote-wallet = "=1.14.17-rc4"
+miraland-sdk = "=1.14.17-rc4"
+miraland-transaction-status = "=1.14.17-rc4"
 solarti-token = { version = "3.5", path="../program", features = [ "no-entrypoint" ] }
 solarti-token-2022 = { version = "0.6", path="../program-2022", features = [ "no-entrypoint" ] }
 solarti-token-client = { version = "0.4", path="../client" }
@@ -37,8 +37,10 @@ strum_macros = "0.24"
 tokio = "1.14"
 
 [dev-dependencies]
-miraland-test-validator = {path = "../../../miraland-1.14.17/test-validator", version = "=1.14.17-rc4"}
-assert_cmd = "2.0.4"
+miraland-test-validator = "=1.14.17-rc4"
+assert_cmd = "=2.0.4"
+predicates-tree = "=1.0.5"
+predicates-core = "=1.0.3"
 serial_test = "0.8.0"
 tempfile = "3.4.0"
 

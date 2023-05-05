@@ -1,6 +1,6 @@
 [package]
-name = "binary-option"
-version = "0.1.0"
+name = "solarti-binary-option"
+version = "0.1.1"
 edition = "2021"
 license = "WTFPL"
 
@@ -9,12 +9,13 @@ no-entrypoint = []
 test-sbf = []
 
 [dependencies]
-solana-program = "1.14.12"
+miraland-program = "=1.14.17-rc4"
 thiserror = "1.0"
-solarti-token = {version = "3.1.1", path = "../../token/program", features = ["no-entrypoint"]}
+solarti-token = {version = "3.1", path = "../../token/program", features = ["no-entrypoint"]}
 arrayref = "0.3.6"
 borsh = "0.9"
 uint = "0.9"
 
 [lib]
 crate-type = ["cdylib", "lib"]
+name = "spl_binary_option"

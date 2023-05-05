@@ -21,7 +21,7 @@ jobs:
         run: |
           source ci/rust-version.sh
           echo "RUST_STABLE=$rust_stable" >> $GITHUB_ENV
-          source ci/solana-version.sh
+          source ci/miraland-version.sh
           echo "SOLANA_VERSION=$solana_version" >> $GITHUB_ENV
 
       - uses: actions-rs/toolchain@v1

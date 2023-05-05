@@ -90,7 +90,7 @@ pub fn try_ui_amount_into_amount(ui_amount: String, decimals: u8) -> Result<u64,
 
 solana_program::declare_id!("Token8N5ecJeFxL83iFa2h7AgJ8AtufM7bbg63LrW89");
 
-/// Checks that the supplied program ID is correct for spl-token-2022
+/// Checks that the supplied program ID is correct for solarti-token-2022
 pub fn check_program_account(spl_token_program_id: &Pubkey) -> ProgramResult {
     if spl_token_program_id != &id() {
         return Err(ProgramError::IncorrectProgramId);
@@ -98,7 +98,7 @@ pub fn check_program_account(spl_token_program_id: &Pubkey) -> ProgramResult {
     Ok(())
 }
 
-/// Checks that the supplied program ID is corect for spl-token or spl-token-2022
+/// Checks that the supplied program ID is corect for solarti-token or solarti-token-2022
 pub fn check_spl_token_program_account(spl_token_program_id: &Pubkey) -> ProgramResult {
     if spl_token_program_id != &id() && spl_token_program_id != &spl_token::id() {
         return Err(ProgramError::IncorrectProgramId);

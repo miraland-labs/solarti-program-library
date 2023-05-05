@@ -1,7 +1,7 @@
 [package]
 name = "solarti-name-service"
 description = "Solarti Program Library Name Service"
-version = "0.2.0"
+version = "0.2.1"
 repository = "https://github.com/miraland-labs/solarti-program-library"
 authors = [
   "lcchy <lucas@bonfida.com>",
@@ -17,15 +17,16 @@ no-entrypoint = []
 test-sbf = []
 
 [dependencies]
-solana-program = "1.14.12"
+miraland-program = "=1.14.17-rc4"
 num-traits = "0.2"
 borsh = "0.9.1"
 num-derive = "0.3.3"
 thiserror = "1.0.29"
 
 [dev-dependencies]
-solana-program-test = "1.14.12"
-solana-sdk = "1.14.12"
+miraland-program-test = "=1.14.17-rc4"
+miraland-sdk = "=1.14.17-rc4"
 
 [lib]
 crate-type = ["cdylib", "lib"]
+name = "spl_name_service"

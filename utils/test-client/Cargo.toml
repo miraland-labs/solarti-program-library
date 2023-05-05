@@ -1,6 +1,6 @@
 [package]
 name = "test-client"
-version = "0.1.0"
+version = "0.1.1"
 authors = ["Solana Labs Maintainers <maintainers@solanalabs.com>"]
 publish = false
 edition = "2021"
@@ -8,7 +8,7 @@ edition = "2021"
 # Used to ensure that SPL programs are buildable by external clients
 
 [dependencies]
-solana-sdk = "1.14.12"
+miraland-sdk = "=1.14.17-rc4"
 solarti-memo = { path = "../../memo/program", features = [ "no-entrypoint" ] }
 solarti-token = { path = "../../token/program", features = [ "no-entrypoint" ] }
 solarti-token-swap = { path = "../../token-swap/program", features = [ "no-entrypoint" ] }

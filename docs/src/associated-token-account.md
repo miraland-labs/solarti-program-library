@@ -43,22 +43,22 @@ The Associated Token Account Program's source is available on
 
 ## Interface
 The Associated Token Account Program is written in Rust and available on
-[crates.io](https://crates.io/crates/spl-associated-token-account) and
-[docs.rs](https://docs.rs/spl-associated-token-account).
+[crates.io](https://crates.io/crates/solarti-associated-token-account) and
+[docs.rs](https://docs.rs/solarti-associated-token-account).
 
 
 ### Finding the Associated Token Account address
 The associated token account for a given wallet address is simply a
 program-derived account consisting of the wallet address itself and the token mint.
 
-The [get_associated_token_address](https://docs.rs/spl-associated-token-account/latest/spl_associated_token_account/fn.get_associated_token_address.html)
+The [get_associated_token_address](https://docs.rs/solarti-associated-token-account/latest/spl_associated_token_account/fn.get_associated_token_address.html)
 Rust function may be used by clients to derive the wallet's associated token address.
 
 
 The associated account address can be derived in TypeScript with:
 ```ts
 import { PublicKey } from '@solana/web3.js';
-import { TOKEN_PROGRAM_ID } from '@solana/spl-token';
+import { TOKEN_PROGRAM_ID } from '@solana/solarti-token';
 
 const SPL_ASSOCIATED_TOKEN_ACCOUNT_PROGRAM_ID: PublicKey = new PublicKey(
   'ATAccPjxdgWfJKKN4PmfJ55FbEDEwD8zJUwVjuL9MuHy',
@@ -84,7 +84,7 @@ function findAssociatedTokenAddress(
 
 If the associated token account for a given wallet address does not yet exist,
 it may be created by *anybody* by issuing a transaction containing the
-instruction returned by [create_associated_token_account](https://docs.rs/spl-associated-token-account/latest/spl_associated_token_account/instruction/fn.create_associated_token_account.html).
+instruction returned by [create_associated_token_account](https://docs.rs/solarti-associated-token-account/latest/spl_associated_token_account/instruction/fn.create_associated_token_account.html).
 
 Regardless of creator the new associated token account will be fully owned by
 the wallet, as if the wallet itself had created it.

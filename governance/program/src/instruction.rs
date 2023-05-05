@@ -75,7 +75,7 @@ pub enum GovernanceInstruction {
     ///
     ///  0. `[]` Realm account
     ///  1. `[writable]` Governing Token Holding account. PDA seeds: ['governance',realm, governing_token_mint]
-    ///  2. `[writable]` Governing Token Source account. It can be either spl-token TokenAccount or MintAccount
+    ///  2. `[writable]` Governing Token Source account. It can be either solarti-token TokenAccount or MintAccount
     ///      Tokens will be transferred or minted to the Holding account
     ///  3. `[signer]` Governing Token Owner account
     ///  4. `[signer]` Governing Token Source account authority

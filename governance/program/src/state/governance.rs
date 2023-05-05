@@ -397,7 +397,7 @@ pub fn get_governance_data(
         get_account_data::<GovernanceV2>(program_id, governance_info)?
     };
 
-    // In previous versions of spl-gov (< 3) we had config.proposal_cool_off_time:u32 which was unused and always 0
+    // In previous versions of solarti-gov (< 3) we had config.proposal_cool_off_time:u32 which was unused and always 0
     // In version 3.0.0 proposal_cool_off_time was replaced with council_vote_threshold:VoteThreshold and council_veto_vote_threshold:VoteThreshold
     // If we read a legacy account then council_vote_threshold == VoteThreshold::YesVotePercentage(0)
     //

@@ -32,7 +32,7 @@ program id.
 
 To safely code the transition, we'll follow a test-driven development approach:
 
-- add a dependency to `spl-token-2022`
+- add a dependency to `solarti-token-2022`
 - change tests to use `spl_token::id()` or `spl_token_2022::id()`, see that all
   tests fail with Token-2022
 - update on-chain program code to always use the instruction and deserializers from
@@ -50,8 +50,8 @@ feel free to follow along and make the changes to your program.
 
 ### Step 1: Update dependencies
 
-In your `Cargo.toml`, add the latest `spl-token-2022` to your `dependencies`.
-Check for the latest version of `spl-token-2022` in [crates.io](https://crates.io), since
+In your `Cargo.toml`, add the latest `solarti-token-2022` to your `dependencies`.
+Check for the latest version of `solarti-token-2022` in [crates.io](https://crates.io), since
 that will typically be the version deployed to mainnet-beta.
 
 ### Step 2: Add test cases for Token and Token-2022

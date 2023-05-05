@@ -108,13 +108,13 @@ Token distribution file: feature-proposal.csv
 JSON RPC URL: http://api.mainnet-beta.solana.com
 
 Distribute the proposal tokens to all validators by running:
-    $ solana-tokens distribute-spl-tokens --from GK55hNft4TGc3Hg4KzbjEmju8VfaNuXK8jQNDTZKcsNF --input-csv feature-proposal.csv --db-path db.8CyUVvio --fee-payer ~/.config/solana/id.json --owner <FEATURE_PROPOSAL_KEYPAIR>
-    $ solana-tokens spl-token-balances --mint ALvA7Lv9jbo8JFhxqnRpjWWuR3aD12uCb5KBJst4uc3d --input-csv feature-proposal.csv
+    $ solana-tokens distribute-solarti-tokens --from GK55hNft4TGc3Hg4KzbjEmju8VfaNuXK8jQNDTZKcsNF --input-csv feature-proposal.csv --db-path db.8CyUVvio --fee-payer ~/.config/solana/id.json --owner <FEATURE_PROPOSAL_KEYPAIR>
+    $ solana-tokens solarti-token-balances --mint ALvA7Lv9jbo8JFhxqnRpjWWuR3aD12uCb5KBJst4uc3d --input-csv feature-proposal.csv
 
 Once the distribution is complete, request validators vote for the proposal. To vote, validators should first look up their token account address:
-    $ spl-token --owner ~/validator-keypair.json accounts ALvA7Lv9jbo8JFhxqnRpjWWuR3aD12uCb5KBJst4uc3d
+    $ solarti-token --owner ~/validator-keypair.json accounts ALvA7Lv9jbo8JFhxqnRpjWWuR3aD12uCb5KBJst4uc3d
 and then submit their vote by running:
-    $ spl-token --owner ~/validator-keypair.json transfer <TOKEN_ACCOUNT_ADDRESS> ALL AdqKm3mSJf8AtTWjfpA5ZbJszWQPcwyLA2XkRyLbf3Di
+    $ solarti-token --owner ~/validator-keypair.json transfer <TOKEN_ACCOUNT_ADDRESS> ALL AdqKm3mSJf8AtTWjfpA5ZbJszWQPcwyLA2XkRyLbf3Di
 
 Periodically the votes must be tallied by running:
   $ solarti-feature-proposal tally 8CyUVvio2oYAP28ZkMBPHq88ikhRgWet6i4NYsCW5Cxa

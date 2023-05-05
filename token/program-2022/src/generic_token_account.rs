@@ -1,5 +1,5 @@
 //! Generic Token Account, copied from spl_token::state
-// Remove all of this and use spl-token's version once token 3.4.0 is released
+// Remove all of this and use solarti-token's version once token 3.4.0 is released
 use {
     crate::state::AccountState,
     solana_program::pubkey::{Pubkey, PUBKEY_BYTES},

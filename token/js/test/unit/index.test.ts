@@ -27,7 +27,7 @@ import {
 
 chai.use(chaiAsPromised);
 
-describe('spl-token instructions', () => {
+describe('solarti-token instructions', () => {
     it('TransferChecked', () => {
         const ix = createTransferCheckedInstruction(
             Keypair.generate().publicKey,
@@ -85,7 +85,7 @@ describe('spl-token instructions', () => {
     });
 });
 
-describe('spl-token-2022 instructions', () => {
+describe('solarti-token-2022 instructions', () => {
     it('TransferChecked', () => {
         const ix = createTransferCheckedInstruction(
             Keypair.generate().publicKey,
@@ -156,7 +156,7 @@ describe('spl-token-2022 instructions', () => {
     });
 });
 
-describe('spl-associated-token-account instructions', () => {
+describe('solarti-associated-token-account instructions', () => {
     it('create', () => {
         const ix = createAssociatedTokenAccountInstruction(
             Keypair.generate().publicKey,

@@ -4,7 +4,7 @@ set -e
 cd "$(dirname "$0")/.."
 
 source ./ci/rust-version.sh stable
-source ./ci/solana-version.sh
+source ./ci/miraland-version.sh
 
 export RUSTFLAGS="-D warnings"
 export RUSTBACKTRACE=1

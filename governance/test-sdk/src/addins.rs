@@ -18,7 +18,7 @@ pub fn ensure_addin_mock_is_built() {
                     "../addin-mock/program/Cargo.toml",
                 ])
                 .status()
-                .expect("Failed to build spl-governance-addin-mock program")
+                .expect("Failed to build solarti-governance-addin-mock program")
                 .success());
         }
     }

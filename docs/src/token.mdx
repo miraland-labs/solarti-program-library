@@ -26,7 +26,7 @@ The Token Program's source is available on
 
 ## Interface
 
-The Token Program is written in Rust and available on [crates.io](https://crates.io/crates/spl-token) and [docs.rs](https://docs.rs/spl-token).
+The Token Program is written in Rust and available on [crates.io](https://crates.io/crates/solarti-token) and [docs.rs](https://docs.rs/solarti-token).
 
 Auto-generated C bindings are also available
 [here](https://github.com/solana-labs/solana-program-library/blob/master/token/program/inc/token.h)
@@ -46,17 +46,17 @@ convention around wallet address to token account mapping and funding.
 <Tabs className="unique-tabs" groupId="language-selection">
   <TabItem value="cli" label="CLI" default>
 
-The `spl-token` command-line utility can be used to experiment with SPL
+The `solarti-token` command-line utility can be used to experiment with SPL
 tokens.  Once you have [Rust installed](https://rustup.rs/), run:
 ```console
-$ cargo install spl-token-cli
+$ cargo install solarti-token-cli
 ```
 
-Run `spl-token --help` for a full description of available commands.
+Run `solarti-token --help` for a full description of available commands.
 
 ### Configuration
 
-The `spl-token` configuration is shared with the `solana` command-line tool.
+The `solarti-token` configuration is shared with the `solana` command-line tool.
 
 #### Current Configuration
 
@@ -95,11 +95,11 @@ $ solana config set --keypair usb://ledger/
 
 #### Yarn
 ```console
-yarn add @solana/spl-token
+yarn add @solana/solarti-token
 ```
 #### npm
 ```console
-npm install @solana/spl-token
+npm install @solana/solarti-token
 ```
 ### Configuration
 You can connect to different clusters using `Connection` in `@solana/web3.js`
@@ -158,7 +158,7 @@ await connection.confirmTransaction(airdropSignature);
   <TabItem value="cli" label="CLI" default>
 
 ```console
-$ spl-token create-token
+$ solarti-token create-token
 Creating token AQoKYV7tYpTrFZN6P5oUufbQKAUr9mNYGe1TTJC9wajM
 Signature: 47hsLFxWRCg8azaZZPSnQR8DNTRsGyPNfUK7jqyzgt7wf9eag3nSnewqoZrVZHKm8zt3B6gzxhr91gdQ5qYrsRG4
 ```
@@ -167,7 +167,7 @@ Signature: 47hsLFxWRCg8azaZZPSnQR8DNTRsGyPNfUK7jqyzgt7wf9eag3nSnewqoZrVZHKm8zt3B
   <TabItem value="jsx" label="JS">
 
 ```jsx
-import { createMint } from '@solana/spl-token';
+import { createMint } from '@solana/solarti-token';
 import { clusterApiUrl, Connection, Keypair, LAMPORTS_PER_SOL } from '@solana/web3.js';
 
 const payer = Keypair.generate();
@@ -196,13 +196,13 @@ console.log(mint.toBase58());
 
 The unique identifier of the token is `AQoKYV7tYpTrFZN6P5oUufbQKAUr9mNYGe1TTJC9wajM`.
 
-Tokens when initially created by `spl-token` have no supply:
+Tokens when initially created by `solarti-token` have no supply:
 
 <Tabs className="unique-tabs" groupId="language-selection">
   <TabItem value="cli" label="CLI" default>
 
 ```console
-$ spl-token supply AQoKYV7tYpTrFZN6P5oUufbQKAUr9mNYGe1TTJC9wajM
+$ solarti-token supply AQoKYV7tYpTrFZN6P5oUufbQKAUr9mNYGe1TTJC9wajM
 0
 ```
 
@@ -229,7 +229,7 @@ Let's mint some.  First create an account to hold a balance of the new
   <TabItem value="cli" label="CLI" default>
 
 ```console
-$ spl-token create-account AQoKYV7tYpTrFZN6P5oUufbQKAUr9mNYGe1TTJC9wajM
+$ solarti-token create-account AQoKYV7tYpTrFZN6P5oUufbQKAUr9mNYGe1TTJC9wajM
 Creating account 7UX2i7SucgLMQcfZ75s3VXmZZY4YRUyJN9X1RgfMoDUi
 Signature: 42Sa5eK9dMEQyvD9GMHuKxXf55WLZ7tfjabUKDhNoZRAxj9MsnN7omriWMEHXLea3aYpjZ862qocRLVikvkHkyfy
 ```
@@ -259,7 +259,7 @@ console.log(tokenAccount.address.toBase58());
   <TabItem value="cli" label="CLI" default>
 
 ```console
-$ spl-token balance AQoKYV7tYpTrFZN6P5oUufbQKAUr9mNYGe1TTJC9wajM
+$ solarti-token balance AQoKYV7tYpTrFZN6P5oUufbQKAUr9mNYGe1TTJC9wajM
 0
 ```
 
@@ -285,7 +285,7 @@ Mint 100 tokens into the account:
   <TabItem value="cli" label="CLI" default>
 
 ```console
-$ spl-token mint AQoKYV7tYpTrFZN6P5oUufbQKAUr9mNYGe1TTJC9wajM 100
+$ solarti-token mint AQoKYV7tYpTrFZN6P5oUufbQKAUr9mNYGe1TTJC9wajM 100
 Minting 100 tokens
   Token: AQoKYV7tYpTrFZN6P5oUufbQKAUr9mNYGe1TTJC9wajM
   Recipient: 7UX2i7SucgLMQcfZ75s3VXmZZY4YRUyJN9X1RgfMoDUi
@@ -315,12 +315,12 @@ The token `supply` and account `balance` now reflect the result of minting:
   <TabItem value="cli" label="CLI" default>
 
 ```console
-$ spl-token supply AQoKYV7tYpTrFZN6P5oUufbQKAUr9mNYGe1TTJC9wajM
+$ solarti-token supply AQoKYV7tYpTrFZN6P5oUufbQKAUr9mNYGe1TTJC9wajM
 100
 ```
 
 ```console
-$ spl-token balance AQoKYV7tYpTrFZN6P5oUufbQKAUr9mNYGe1TTJC9wajM
+$ solarti-token balance AQoKYV7tYpTrFZN6P5oUufbQKAUr9mNYGe1TTJC9wajM
 100
 ```
 
@@ -354,7 +354,7 @@ console.log(tokenAccountInfo.amount);
   <TabItem value="cli" label="CLI" default>
 
 ```console
-$ spl-token accounts
+$ solarti-token accounts
 Token                                         Balance
 ------------------------------------------------------------
 7e2X5oeAAJyUTi4PfSGXFLGhyPw2H8oELm1mx87ZCgwF  84
@@ -367,7 +367,7 @@ AQoKYV7tYpTrFZN6P5oUufbQKAUr9mNYGe1TTJC9wajM  1    (Aux-2*)
   <TabItem value="jsx" label="JS">
 
 ```jsx
-import {AccountLayout, TOKEN_PROGRAM_ID} from "@solana/spl-token";
+import {AccountLayout, TOKEN_PROGRAM_ID} from "@solana/solarti-token";
 import {clusterApiUrl, Connection, PublicKey} from "@solana/web3.js";
 
 (async () => {
@@ -415,7 +415,7 @@ the desired address to send the token account's lamports.
   <TabItem value="cli" label="CLI" default>
 
 ```console
-$ spl-token wrap 1
+$ solarti-token wrap 1
 Wrapping 1 SOL into GJTxcnA5Sydy8YRhqvHxbQ5QNsPyRKvzguodQEaShJje
 Signature: 4f4s5QVMKisLS6ihZcXXPbiBAzjnvkBcp2A7KKER7k9DwJ4qjbVsQBKv2rAyBumXC1gLn8EJQhwWkybE4yJGnw2Y
 ```
@@ -424,7 +424,7 @@ Signature: 4f4s5QVMKisLS6ihZcXXPbiBAzjnvkBcp2A7KKER7k9DwJ4qjbVsQBKv2rAyBumXC1gLn
   <TabItem value="jsx" label="JS">
 
 ```jsx
-import {NATIVE_MINT, createAssociatedTokenAccountInstruction, getAssociatedTokenAddress, createSyncNativeInstruction, getAccount} from "@solana/spl-token";
+import {NATIVE_MINT, createAssociatedTokenAccountInstruction, getAssociatedTokenAddress, createSyncNativeInstruction, getAccount} from "@solana/solarti-token";
 import {clusterApiUrl, Connection, Keypair, LAMPORTS_PER_SOL, SystemProgram, Transaction, sendAndConfirmTransaction} from "@solana/web3.js";
 
 (async () => {
@@ -490,7 +490,7 @@ To unwrap the Token back to SOL:
   <TabItem value="cli" label="CLI" default>
 
 ```console
-$ spl-token unwrap GJTxcnA5Sydy8YRhqvHxbQ5QNsPyRKvzguodQEaShJje
+$ solarti-token unwrap GJTxcnA5Sydy8YRhqvHxbQ5QNsPyRKvzguodQEaShJje
 Unwrapping GJTxcnA5Sydy8YRhqvHxbQ5QNsPyRKvzguodQEaShJje
   Amount: 1 SOL
   Recipient: vines1vzrYbzLMRdu58ou5XTby4qAqVRLmqo36NKPTg
@@ -523,7 +523,7 @@ Balance after unwrapping 1 WSOL: 1999985000
 </Tabs>
 
 ### Example: Transferring tokens to another user
-First the receiver uses `spl-token create-account` to create their associated
+First the receiver uses `solarti-token create-account` to create their associated
 token account for the Token type.  Then the receiver obtains their wallet
 address by running `solana address` and provides it to the sender.
 
@@ -533,7 +533,7 @@ The sender then runs:
   <TabItem value="cli" label="CLI" default>
 
 ```console
-$ spl-token transfer AQoKYV7tYpTrFZN6P5oUufbQKAUr9mNYGe1TTJC9wajM 50 vines1vzrYbzLMRdu58ou5XTby4qAqVRLmqo36NKPTg
+$ solarti-token transfer AQoKYV7tYpTrFZN6P5oUufbQKAUr9mNYGe1TTJC9wajM 50 vines1vzrYbzLMRdu58ou5XTby4qAqVRLmqo36NKPTg
 Transfer 50 tokens
   Sender: 7UX2i7SucgLMQcfZ75s3VXmZZY4YRUyJN9X1RgfMoDUi
   Recipient: vines1vzrYbzLMRdu58ou5XTby4qAqVRLmqo36NKPTg
@@ -547,7 +547,7 @@ Signature: 5a3qbvoJQnTAxGPHCugibZTbSu7xuTgkxvF4EJupRjRXGgZZrnWFmKzfEzcqKF2ogCaF4
 
 ```jsx
 import { clusterApiUrl, Connection, Keypair, LAMPORTS_PER_SOL } from '@solana/web3.js';
-import { createMint, getOrCreateAssociatedTokenAccount, mintTo, transfer } from '@solana/spl-token';
+import { createMint, getOrCreateAssociatedTokenAccount, mintTo, transfer } from '@solana/solarti-token';
 
 (async () => {
     // Connect to cluster
@@ -616,7 +616,7 @@ sender's expense, and then transfers 50 tokens into it:
   <TabItem value="cli" label="CLI" default>
 
 ```console
-$ spl-token transfer --fund-recipient AQoKYV7tYpTrFZN6P5oUufbQKAUr9mNYGe1TTJC9wajM 50 vines1vzrYbzLMRdu58ou5XTby4qAqVRLmqo36NKPTg
+$ solarti-token transfer --fund-recipient AQoKYV7tYpTrFZN6P5oUufbQKAUr9mNYGe1TTJC9wajM 50 vines1vzrYbzLMRdu58ou5XTby4qAqVRLmqo36NKPTg
 Transfer 50 tokens
   Sender: 7UX2i7SucgLMQcfZ75s3VXmZZY4YRUyJN9X1RgfMoDUi
   Recipient: vines1vzrYbzLMRdu58ou5XTby4qAqVRLmqo36NKPTg
@@ -652,13 +652,13 @@ token account must already exist and be of the same Token type.
   <TabItem value="cli" label="CLI" default>
 
 ```console
-$ spl-token create-account AQoKYV7tYpTrFZN6P5oUufbQKAUr9mNYGe1TTJC9wajM /path/to/auxiliary_keypair.json
+$ solarti-token create-account AQoKYV7tYpTrFZN6P5oUufbQKAUr9mNYGe1TTJC9wajM /path/to/auxiliary_keypair.json
 Creating account CqAxDdBRnawzx9q4PYM3wrybLHBhDZ4P6BTV13WsRJYJ
 Signature: 4yPWj22mbyLu5mhfZ5WATNfYzTt5EQ7LGzryxM7Ufu7QCVjTE7czZdEBqdKR7vjKsfAqsBdjU58NJvXrTqCXvfWW
 ```
 
 ```console
-$ spl-token accounts AQoKYV7tYpTrFZN6P5oUufbQKAUr9mNYGe1TTJC9wajM -v
+$ solarti-token accounts AQoKYV7tYpTrFZN6P5oUufbQKAUr9mNYGe1TTJC9wajM -v
 Account                                       Token                                         Balance
 --------------------------------------------------------------------------------------------------------
 7UX2i7SucgLMQcfZ75s3VXmZZY4YRUyJN9X1RgfMoDUi  AQoKYV7tYpTrFZN6P5oUufbQKAUr9mNYGe1TTJC9wajM  100
@@ -666,7 +666,7 @@ CqAxDdBRnawzx9q4PYM3wrybLHBhDZ4P6BTV13WsRJYJ  AQoKYV7tYpTrFZN6P5oUufbQKAUr9mNYGe
 ```
 
 ```console
-$ spl-token transfer AQoKYV7tYpTrFZN6P5oUufbQKAUr9mNYGe1TTJC9wajM 50 CqAxDdBRnawzx9q4PYM3wrybLHBhDZ4P6BTV13WsRJYJ
+$ solarti-token transfer AQoKYV7tYpTrFZN6P5oUufbQKAUr9mNYGe1TTJC9wajM 50 CqAxDdBRnawzx9q4PYM3wrybLHBhDZ4P6BTV13WsRJYJ
 Transfer 50 tokens
   Sender: 7UX2i7SucgLMQcfZ75s3VXmZZY4YRUyJN9X1RgfMoDUi
   Recipient: CqAxDdBRnawzx9q4PYM3wrybLHBhDZ4P6BTV13WsRJYJ
@@ -675,7 +675,7 @@ Signature: 5a3qbvoJQnTAxGPHCugibZTbSu7xuTgkxvF4EJupRjRXGgZZrnWFmKzfEzcqKF2ogCaF4
 ```
 
 ```console
-$ spl-token accounts AQoKYV7tYpTrFZN6P5oUufbQKAUr9mNYGe1TTJC9wajM -v
+$ solarti-token accounts AQoKYV7tYpTrFZN6P5oUufbQKAUr9mNYGe1TTJC9wajM -v
 Account                                       Token                                         Balance
 --------------------------------------------------------------------------------------------------------
 7UX2i7SucgLMQcfZ75s3VXmZZY4YRUyJN9X1RgfMoDUi  AQoKYV7tYpTrFZN6P5oUufbQKAUr9mNYGe1TTJC9wajM  50
@@ -686,7 +686,7 @@ CqAxDdBRnawzx9q4PYM3wrybLHBhDZ4P6BTV13WsRJYJ  AQoKYV7tYpTrFZN6P5oUufbQKAUr9mNYGe
   <TabItem value="jsx" label="JS">
 
 ```jsx
-import {getAccount, createMint, createAccount, mintTo, getOrCreateAssociatedTokenAccount, transfer} from "@solana/spl-token";
+import {getAccount, createMint, createAccount, mintTo, getOrCreateAssociatedTokenAccount, transfer} from "@solana/solarti-token";
 import {clusterApiUrl, Connection, Keypair, LAMPORTS_PER_SOL} from "@solana/web3.js";
 
 (async () => {
@@ -768,7 +768,7 @@ Create the token type with zero decimal place,
   <TabItem value="cli" label="CLI" default>
 
 ```console
-$ spl-token create-token --decimals 0
+$ solarti-token create-token --decimals 0
 Creating token 559u4Tdr9umKwft3yHMsnAxohhzkFnUBPAFtibwuZD9z
 Signature: 4kz82JUey1B9ki1McPW7NYv1NqPKCod6WNptSkYqtuiEsQb9exHaktSAHJJsm4YxuGNW4NugPJMFX9ee6WA2dXts
 ```
@@ -796,7 +796,7 @@ then create an account to hold tokens of this new type:
   <TabItem value="cli" label="CLI" default>
 
 ```console
-$ spl-token create-account 559u4Tdr9umKwft3yHMsnAxohhzkFnUBPAFtibwuZD9z
+$ solarti-token create-account 559u4Tdr9umKwft3yHMsnAxohhzkFnUBPAFtibwuZD9z
 Creating account 7KqpRwzkkeweW5jQoETyLzhvs9rcCj9dVQ1MnzudirsM
 Signature: sjChze6ecaRtvuQVZuwURyg6teYeiH8ZwT6UTuFNKjrdayQQ3KNdPB7d2DtUZ6McafBfEefejHkJ6MWQEfVHLtC
 ```
@@ -822,7 +822,7 @@ Now mint only one token into the account,
   <TabItem value="cli" label="CLI" default>
 
 ```console
-$ spl-token mint 559u4Tdr9umKwft3yHMsnAxohhzkFnUBPAFtibwuZD9z 1 7KqpRwzkkeweW5jQoETyLzhvs9rcCj9dVQ1MnzudirsM
+$ solarti-token mint 559u4Tdr9umKwft3yHMsnAxohhzkFnUBPAFtibwuZD9z 1 7KqpRwzkkeweW5jQoETyLzhvs9rcCj9dVQ1MnzudirsM
 Minting 1 tokens
   Token: 559u4Tdr9umKwft3yHMsnAxohhzkFnUBPAFtibwuZD9z
   Recipient: 7KqpRwzkkeweW5jQoETyLzhvs9rcCj9dVQ1MnzudirsM
@@ -852,7 +852,7 @@ and disable future minting:
   <TabItem value="cli" label="CLI" default>
 
 ```console
-$ spl-token authorize 559u4Tdr9umKwft3yHMsnAxohhzkFnUBPAFtibwuZD9z mint --disable
+$ solarti-token authorize 559u4Tdr9umKwft3yHMsnAxohhzkFnUBPAFtibwuZD9z mint --disable
 Updating 559u4Tdr9umKwft3yHMsnAxohhzkFnUBPAFtibwuZD9z
   Current mint authority: vines1vzrYbzLMRdu58ou5XTby4qAqVRLmqo36NKPTg
   New mint authority: disabled
@@ -885,7 +885,7 @@ one and only `559u4Tdr9umKwft3yHMsnAxohhzkFnUBPAFtibwuZD9z` token:
   <TabItem value="cli" label="CLI" default>
 
 ```console
-$ spl-token account-info 559u4Tdr9umKwft3yHMsnAxohhzkFnUBPAFtibwuZD9z
+$ solarti-token account-info 559u4Tdr9umKwft3yHMsnAxohhzkFnUBPAFtibwuZD9z
 
 Address: 7KqpRwzkkeweW5jQoETyLzhvs9rcCj9dVQ1MnzudirsM
 Balance: 1
@@ -897,7 +897,7 @@ Close authority: (not set)
 ```
 
 ```console
-$ spl-token supply 559u4Tdr9umKwft3yHMsnAxohhzkFnUBPAFtibwuZD9z
+$ solarti-token supply 559u4Tdr9umKwft3yHMsnAxohhzkFnUBPAFtibwuZD9z
 1
 ```
 
@@ -935,7 +935,7 @@ console.log(mintInfo);
 <Tabs className="unique-tabs" groupId="language-selection">
   <TabItem value="cli" label="CLI" default>
 
-The main difference in `spl-token` command line usage when referencing multisig
+The main difference in `solarti-token` command line usage when referencing multisig
 accounts is in specifying the `--owner` argument. Typically the signer specified
 by this argument directly provides a signature granting its authority, but in
 the multisig case it just points to the address of the multisig account.
@@ -946,26 +946,26 @@ Multisig accounts can be used for any authority on an SPL Token mint or token
 account.
 <ul>
   <li>Mint account mint authority:
-    <code>spl-token mint ...</code>,
-    <code>spl-token authorize ... mint ...</code>
+    <code>solarti-token mint ...</code>,
+    <code>solarti-token authorize ... mint ...</code>
   </li>
   <li>Mint account freeze authority:
-    <code>spl-token freeze ...</code>,
-    <code>spl-token thaw ...</code>,
-    <code>spl-token authorize ... freeze ...</code>
+    <code>solarti-token freeze ...</code>,
+    <code>solarti-token thaw ...</code>,
+    <code>solarti-token authorize ... freeze ...</code>
   </li>
   <li>Token account owner authority:
-    <code>spl-token transfer ...</code>,
-    <code>spl-token approve ...</code>,
-    <code>spl-token revoke ...</code>,
-    <code>spl-token burn ...</code>,
-    <code>spl-token wrap ...</code>,
-    <code>spl-token unwrap ...</code>,
-    <code>spl-token authorize ... owner ...</code>
+    <code>solarti-token transfer ...</code>,
+    <code>solarti-token approve ...</code>,
+    <code>solarti-token revoke ...</code>,
+    <code>solarti-token burn ...</code>,
+    <code>solarti-token wrap ...</code>,
+    <code>solarti-token unwrap ...</code>,
+    <code>solarti-token authorize ... owner ...</code>
   </li>
   <li>Token account close authority:
-    <code>spl-token close ...</code>,
-    <code>spl-token authorize ... close ...</code>
+    <code>solarti-token close ...</code>,
+    <code>solarti-token authorize ... close ...</code>
   </li>
 </ul>
 
@@ -1054,7 +1054,7 @@ console.log(signer3.publicKey.toBase58());
   </TabItem>
 </Tabs>
 
-Now the multisig account can be created with the `spl-token create-multisig`
+Now the multisig account can be created with the `solarti-token create-multisig`
 subcommand. Its first positional argument is the minimum number of signers (`M`)
 that must sign a transaction affecting a token/mint account that is controlled
 by this multisig account. The remaining positional arguments are the public keys
@@ -1069,7 +1069,7 @@ NOTE: SPL Token Multisig accounts are limited to a signer-set of eleven signers
   <TabItem value="cli" label="CLI" default>
 
 ```
-$ spl-token create-multisig 2 BzWpkuRrwXHq4SSSFHa8FJf6DRQy4TaeoXnkA89vTgHZ \
+$ solarti-token create-multisig 2 BzWpkuRrwXHq4SSSFHa8FJf6DRQy4TaeoXnkA89vTgHZ \
 DhkUfKgfZ8CF6PAGKwdABRL1VqkeNrTSRx8LZfpPFVNY D7ssXHrZJjfpZXsmDf8RwfPxe1BMMMmP1CtmX3WojPmG
 ```
 ```console
@@ -1107,15 +1107,15 @@ and set the mint account's minting authority to the multisig account
   <TabItem value="cli" label="CLI" default>
 
 ```console
-$ spl-token create-token
+$ solarti-token create-token
 Creating token 4VNVRJetwapjwYU8jf4qPgaCeD76wyz8DuNj8yMCQ62o
 Signature: 3n6zmw3hS5Hyo5duuhnNvwjAbjzC42uzCA3TTsrgr9htUonzDUXdK1d8b8J77XoeSherqWQM8mD8E1TMYCpksS2r
 
-$ spl-token create-account 4VNVRJetwapjwYU8jf4qPgaCeD76wyz8DuNj8yMCQ62o
+$ solarti-token create-account 4VNVRJetwapjwYU8jf4qPgaCeD76wyz8DuNj8yMCQ62o
 Creating account EX8zyi2ZQUuoYtXd4MKmyHYLTjqFdWeuoTHcsTdJcKHC
 Signature: 5mVes7wjE7avuFqzrmSCWneKBQyPAjasCLYZPNSkmqmk2YFosYWAP9hYSiZ7b7NKpV866x5gwyKbbppX3d8PcE9s
 
-$ spl-token authorize 4VNVRJetwapjwYU8jf4qPgaCeD76wyz8DuNj8yMCQ62o mint 46ed77fd4WTN144q62BwjU2B3ogX3Xmmc8PT5Z3Xc2re
+$ solarti-token authorize 4VNVRJetwapjwYU8jf4qPgaCeD76wyz8DuNj8yMCQ62o mint 46ed77fd4WTN144q62BwjU2B3ogX3Xmmc8PT5Z3Xc2re
 Updating 4VNVRJetwapjwYU8jf4qPgaCeD76wyz8DuNj8yMCQ62o
   Current mint authority: 5hbZyJ3KRuFvdy5QBxvE9KwK17hzkAUkQHZTxPbiWffE
   New mint authority: 46ed77fd4WTN144q62BwjU2B3ogX3Xmmc8PT5Z3Xc2re
@@ -1152,7 +1152,7 @@ account, attempting to mint with one multisig signer fails
   <TabItem value="cli" label="CLI" default>
 
 ```
-$ spl-token mint 4VNVRJetwapjwYU8jf4qPgaCeD76wyz8DuNj8yMCQ62o 1 EX8zyi2ZQUuoYtXd4MKmyHYLTjqFdWeuoTHcsTdJcKHC \
+$ solarti-token mint 4VNVRJetwapjwYU8jf4qPgaCeD76wyz8DuNj8yMCQ62o 1 EX8zyi2ZQUuoYtXd4MKmyHYLTjqFdWeuoTHcsTdJcKHC \
 --owner 46ed77fd4WTN144q62BwjU2B3ogX3Xmmc8PT5Z3Xc2re \
 --multisig-signer signer-1.json
 ```
@@ -1191,7 +1191,7 @@ But repeating with a second multisig signer, succeeds
   <TabItem value="cli" label="CLI" default>
 
 ```
-$ spl-token mint 4VNVRJetwapjwYU8jf4qPgaCeD76wyz8DuNj8yMCQ62o 1 EX8zyi2ZQUuoYtXd4MKmyHYLTjqFdWeuoTHcsTdJcKHC \
+$ solarti-token mint 4VNVRJetwapjwYU8jf4qPgaCeD76wyz8DuNj8yMCQ62o 1 EX8zyi2ZQUuoYtXd4MKmyHYLTjqFdWeuoTHcsTdJcKHC \
 --owner 46ed77fd4WTN144q62BwjU2B3ogX3Xmmc8PT5Z3Xc2re \
 --multisig-signer signer-1.json \
 --multisig-signer signer-2.json
@@ -1330,7 +1330,7 @@ NOTE: The argument to the `--blockhash` parameter is the "Nonce blockhash:" fiel
 the designated durable nonce account.
 
 ```
-$ spl-token mint 4VNVRJetwapjwYU8jf4qPgaCeD76wyz8DuNj8yMCQ62o 1 EX8zyi2ZQUuoYtXd4MKmyHYLTjqFdWeuoTHcsTdJcKHC \
+$ solarti-token mint 4VNVRJetwapjwYU8jf4qPgaCeD76wyz8DuNj8yMCQ62o 1 EX8zyi2ZQUuoYtXd4MKmyHYLTjqFdWeuoTHcsTdJcKHC \
 --owner 46ed77fd4WTN144q62BwjU2B3ogX3Xmmc8PT5Z3Xc2re \
 --multisig-signer BzWpkuRrwXHq4SSSFHa8FJf6DRQy4TaeoXnkA89vTgHZ \
 --multisig-signer DhkUfKgfZ8CF6PAGKwdABRL1VqkeNrTSRx8LZfpPFVNY \
@@ -1357,7 +1357,7 @@ Absent Signers (Pubkey):
 Next each offline signer executes the template command, replacing each instance
 of their public key with the corresponding keypair.
 ```
-$ spl-token mint 4VNVRJetwapjwYU8jf4qPgaCeD76wyz8DuNj8yMCQ62o 1 EX8zyi2ZQUuoYtXd4MKmyHYLTjqFdWeuoTHcsTdJcKHC \
+$ solarti-token mint 4VNVRJetwapjwYU8jf4qPgaCeD76wyz8DuNj8yMCQ62o 1 EX8zyi2ZQUuoYtXd4MKmyHYLTjqFdWeuoTHcsTdJcKHC \
 --owner 46ed77fd4WTN144q62BwjU2B3ogX3Xmmc8PT5Z3Xc2re \
 --multisig-signer signer-1.json \
 --multisig-signer DhkUfKgfZ8CF6PAGKwdABRL1VqkeNrTSRx8LZfpPFVNY \
@@ -1382,7 +1382,7 @@ Absent Signers (Pubkey):
 ```
 
 ```
-$ spl-token mint 4VNVRJetwapjwYU8jf4qPgaCeD76wyz8DuNj8yMCQ62o 1 EX8zyi2ZQUuoYtXd4MKmyHYLTjqFdWeuoTHcsTdJcKHC \
+$ solarti-token mint 4VNVRJetwapjwYU8jf4qPgaCeD76wyz8DuNj8yMCQ62o 1 EX8zyi2ZQUuoYtXd4MKmyHYLTjqFdWeuoTHcsTdJcKHC \
 --owner 46ed77fd4WTN144q62BwjU2B3ogX3Xmmc8PT5Z3Xc2re \
 --multisig-signer BzWpkuRrwXHq4SSSFHa8FJf6DRQy4TaeoXnkA89vTgHZ \
 --multisig-signer signer-2.json \
@@ -1416,7 +1416,7 @@ and `--nonce-authority ...` in this example)
 the `--mint-decimals ...` argument as it will be queried from the cluster
 1. Adds the offline signatures to the template command via the `--signer` argument
 ```
-$ spl-token mint 4VNVRJetwapjwYU8jf4qPgaCeD76wyz8DuNj8yMCQ62o 1 EX8zyi2ZQUuoYtXd4MKmyHYLTjqFdWeuoTHcsTdJcKHC \
+$ solarti-token mint 4VNVRJetwapjwYU8jf4qPgaCeD76wyz8DuNj8yMCQ62o 1 EX8zyi2ZQUuoYtXd4MKmyHYLTjqFdWeuoTHcsTdJcKHC \
 --owner 46ed77fd4WTN144q62BwjU2B3ogX3Xmmc8PT5Z3Xc2re \
 --multisig-signer BzWpkuRrwXHq4SSSFHa8FJf6DRQy4TaeoXnkA89vTgHZ \
 --multisig-signer DhkUfKgfZ8CF6PAGKwdABRL1VqkeNrTSRx8LZfpPFVNY \
@@ -1791,7 +1791,7 @@ For each recipient wallet addresses, send a transaction containing:
 ### Ancillary Token Accounts
 At any time ownership of an existing SPL Token account may be assigned to the
 user.  One way to accomplish this is with the
-`spl-token authorize <TOKEN_ADDRESS> owner <USER_ADDRESS>` command.  Wallets
+`solarti-token authorize <TOKEN_ADDRESS> owner <USER_ADDRESS>` command.  Wallets
 should be prepared to gracefully manage token accounts that they themselves did
 not create for the user.
 
@@ -1822,7 +1822,7 @@ hold a balance before allowing the transfer.
 At the moment there exist two solutions for Token Mint registries:
 
 * hard coded addresses in the wallet or dapp
-* [spl-token-registry](https://www.npmjs.com/package/@solana/spl-token-registry)
+* [solarti-token-registry](https://www.npmjs.com/package/@solana/solarti-token-registry)
 package, maintained at [https://github.com/solana-labs/token-list](https://github.com/solana-labs/token-list)
 
 **A decentralized solution is in progress.**
@@ -1851,7 +1851,7 @@ If adding one or more of clean up instructions cause the transaction to exceed
 the maximum allowed transaction size, remove those extra clean up instructions.
 They can be cleaned up during the next send operation.
 
-The `spl-token gc` command provides an example implementation of this cleanup process.
+The `solarti-token gc` command provides an example implementation of this cleanup process.
 
 
 ### Token Vesting
