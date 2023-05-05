@@ -4648,7 +4648,7 @@ dependencies = [
  "serde",
  "serde_derive",
  "serde_json",
- "solarti-associated-token-account 1.1.4 (registry+https://github.com/rust-lang/crates.io-index)",
+ "solarti-associated-token-account 1.1.4",
  "solarti-memo 3.0.2",
  "solarti-token 3.5.1",
  "solarti-token-2022 0.6.2",
@@ -4677,7 +4677,7 @@ dependencies = [
  "serde",
  "serde_derive",
  "serde_json",
- "solarti-associated-token-account 1.1.4 (registry+https://github.com/rust-lang/crates.io-index)",
+ "solarti-associated-token-account 1.1.4",
  "solarti-memo 3.0.2",
  "solarti-token 3.5.1",
  "solarti-token-2022 0.6.2",
@@ -7032,20 +7032,6 @@ dependencies = [
 [[package]]
 name = "solarti-associated-token-account"
 version = "1.1.4"
-dependencies = [
- "assert_matches",
- "borsh",
- "miraland-program 1.14.17-rc4 (registry+https://github.com/rust-lang/crates.io-index)",
- "num-derive",
- "num-traits",
- "solarti-token 3.5.3",
- "solarti-token-2022 0.6.4",
- "thiserror",
-]
-
-[[package]]
-name = "solarti-associated-token-account"
-version = "1.1.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "0a2d302dbe1e86dfa73c7df12b97de4aa1e1a8548bd67f1b1342e6e38164167a"
 dependencies = [
@@ -7060,13 +7046,27 @@ dependencies = [
 ]
 
 [[package]]
+name = "solarti-associated-token-account"
+version = "1.1.5"
+dependencies = [
+ "assert_matches",
+ "borsh",
+ "miraland-program 1.14.17-rc4 (registry+https://github.com/rust-lang/crates.io-index)",
+ "num-derive",
+ "num-traits",
+ "solarti-token 3.5.3",
+ "solarti-token-2022 0.6.4",
+ "thiserror",
+]
+
+[[package]]
 name = "solarti-associated-token-account-test"
 version = "0.0.2"
 dependencies = [
  "miraland-program 1.14.17-rc4 (registry+https://github.com/rust-lang/crates.io-index)",
  "miraland-program-test 1.14.17-rc4 (registry+https://github.com/rust-lang/crates.io-index)",
  "miraland-sdk 1.14.17-rc4 (registry+https://github.com/rust-lang/crates.io-index)",
- "solarti-associated-token-account 1.1.4",
+ "solarti-associated-token-account 1.1.5",
  "solarti-token 3.5.3",
  "solarti-token-2022 0.6.4",
 ]
@@ -7339,7 +7339,7 @@ dependencies = [
  "miraland-program-test 1.14.17-rc4 (registry+https://github.com/rust-lang/crates.io-index)",
  "miraland-sdk 1.14.17-rc4 (registry+https://github.com/rust-lang/crates.io-index)",
  "shank 0.0.5",
- "solarti-associated-token-account 1.1.4",
+ "solarti-associated-token-account 1.1.5",
  "solarti-token 3.5.3",
  "thiserror",
  "tokio",
@@ -7470,7 +7470,7 @@ dependencies = [
  "serde",
  "serde_derive",
  "serde_json",
- "solarti-associated-token-account 1.1.4",
+ "solarti-associated-token-account 1.1.5",
  "solarti-stake-pool",
  "solarti-token 3.5.3",
 ]
@@ -7484,7 +7484,7 @@ dependencies = [
  "miraland-program 1.14.17-rc4 (registry+https://github.com/rust-lang/crates.io-index)",
  "miraland-program-test 1.14.17-rc4 (registry+https://github.com/rust-lang/crates.io-index)",
  "miraland-sdk 1.14.17-rc4 (registry+https://github.com/rust-lang/crates.io-index)",
- "solarti-associated-token-account 1.1.4",
+ "solarti-associated-token-account 1.1.5",
  "solarti-token 3.5.3",
  "thiserror",
 ]
@@ -7574,7 +7574,7 @@ dependencies = [
  "miraland-program 1.14.17-rc4 (registry+https://github.com/rust-lang/crates.io-index)",
  "miraland-program-test 1.14.17-rc4",
  "miraland-sdk 1.14.17-rc4 (registry+https://github.com/rust-lang/crates.io-index)",
- "solarti-associated-token-account 1.1.4",
+ "solarti-associated-token-account 1.1.5",
  "solarti-instruction-padding",
  "solarti-memo 3.0.4",
  "solarti-token-2022 0.6.4",
@@ -7606,7 +7606,7 @@ dependencies = [
  "serde_derive",
  "serde_json",
  "serial_test 0.8.0",
- "solarti-associated-token-account 1.1.4",
+ "solarti-associated-token-account 1.1.5",
  "solarti-memo 3.0.4",
  "solarti-token 3.5.3",
  "solarti-token-2022 0.6.4",
@@ -7627,7 +7627,7 @@ dependencies = [
  "miraland-client 1.14.17-rc4 (registry+https://github.com/rust-lang/crates.io-index)",
  "miraland-program-test 1.14.17-rc4 (registry+https://github.com/rust-lang/crates.io-index)",
  "miraland-sdk 1.14.17-rc4 (registry+https://github.com/rust-lang/crates.io-index)",
- "solarti-associated-token-account 1.1.4",
+ "solarti-associated-token-account 1.1.5",
  "solarti-memo 3.0.4",
  "solarti-token 3.5.3",
  "solarti-token-2022 0.6.4",
@@ -7735,7 +7735,7 @@ dependencies = [
  "miraland-remote-wallet 1.14.17-rc4 (registry+https://github.com/rust-lang/crates.io-index)",
  "miraland-sdk 1.14.17-rc4 (registry+https://github.com/rust-lang/crates.io-index)",
  "miraland-test-validator",
- "solarti-associated-token-account 1.1.4",
+ "solarti-associated-token-account 1.1.5",
  "solarti-token 3.5.3",
  "solarti-token-2022 0.6.4",
  "solarti-token-client",
