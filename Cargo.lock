@@ -144,97 +144,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "bddcadddf5e9015d310179a59bb28c4d4b9920ad0f11e8e14dbadf654890c9a6"
 
 [[package]]
-name = "ark-bn254"
-version = "0.3.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "ea691771ebbb28aea556c044e2e5c5227398d840cee0c34d4d20fa8eb2689e8c"
-dependencies = [
- "ark-ec",
- "ark-ff",
- "ark-std",
-]
-
-[[package]]
-name = "ark-ec"
-version = "0.3.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "dea978406c4b1ca13c2db2373b05cc55429c3575b8b21f1b9ee859aa5b03dd42"
-dependencies = [
- "ark-ff",
- "ark-serialize",
- "ark-std",
- "derivative",
- "num-traits",
- "zeroize",
-]
-
-[[package]]
-name = "ark-ff"
-version = "0.3.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "6b3235cc41ee7a12aaaf2c575a2ad7b46713a8a50bda2fc3b003a04845c05dd6"
-dependencies = [
- "ark-ff-asm",
- "ark-ff-macros",
- "ark-serialize",
- "ark-std",
- "derivative",
- "num-bigint 0.4.3",
- "num-traits",
- "paste",
- "rustc_version 0.3.3",
- "zeroize",
-]
-
-[[package]]
-name = "ark-ff-asm"
-version = "0.3.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "db02d390bf6643fb404d3d22d31aee1c4bc4459600aef9113833d17e786c6e44"
-dependencies = [
- "quote 1.0.26",
- "syn 1.0.109",
-]
-
-[[package]]
-name = "ark-ff-macros"
-version = "0.3.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "db2fd794a08ccb318058009eefdf15bcaaaaf6f8161eb3345f907222bac38b20"
-dependencies = [
- "num-bigint 0.4.3",
- "num-traits",
- "quote 1.0.26",
- "syn 1.0.109",
-]
-
-[[package]]
-name = "ark-serialize"
-version = "0.3.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "1d6c2b318ee6e10f8c2853e73a83adc0ccb88995aa978d8a3408d492ab2ee671"
-dependencies = [
- "ark-std",
- "digest 0.9.0",
-]
-
-[[package]]
-name = "ark-std"
-version = "0.3.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "1df2c09229cbc5a028b1d70e00fdb2acee28b1055dfb5ca73eea49c5a25c4e7c"
-dependencies = [
- "num-traits",
- "rand 0.8.5",
-]
-
-[[package]]
-name = "array-bytes"
-version = "1.4.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "9ad284aeb45c13f2fb4f084de4a420ebf447423bdf9386c0540ce33cb3ef4b8c"
-
-[[package]]
 name = "arrayref"
 version = "0.3.7"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1235,17 +1144,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "6e5c37193a1db1d8ed868c03ec7b152175f26160a5b740e5e484143877e0adf0"
 
 [[package]]
-name = "derivative"
-version = "2.2.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "fcc3dd5e9e9c0b295d6e1e4d811fb6f157d5ffd784b8d202fc62eac8035a770b"
-dependencies = [
- "proc-macro2 1.0.56",
- "quote 1.0.26",
- "syn 1.0.109",
-]
-
-[[package]]
 name = "derive_arbitrary"
 version = "1.0.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1265,7 +1163,7 @@ dependencies = [
  "convert_case",
  "proc-macro2 1.0.56",
  "quote 1.0.26",
- "rustc_version 0.4.0",
+ "rustc_version",
  "syn 1.0.109",
 ]
 
@@ -1481,7 +1379,7 @@ dependencies = [
  "num-traits",
  "proc-macro2 1.0.56",
  "quote 1.0.26",
- "rustc_version 0.4.0",
+ "rustc_version",
  "syn 1.0.109",
 ]
 
@@ -2015,7 +1913,7 @@ dependencies = [
  "arbitrary",
  "lazy_static",
  "memmap2",
- "rustc_version 0.4.0",
+ "rustc_version",
 ]
 
 [[package]]
@@ -2674,36 +2572,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "metaplex-token-metadata"
-version = "0.0.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "abcc939f0afdc6db054b9998a1292d0a016244b382462e61cfc7c570624982cb"
-dependencies = [
- "arrayref",
- "borsh",
- "metaplex-token-vault",
- "num-derive",
- "num-traits",
- "solana-program",
- "spl-token",
- "thiserror",
-]
-
-[[package]]
-name = "metaplex-token-vault"
-version = "0.0.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "a5211991ba3273df89cd5e0f6f558bc8d7453c87c0546f915b4a319e1541df33"
-dependencies = [
- "borsh",
- "num-derive",
- "num-traits",
- "solana-program",
- "spl-token",
- "thiserror",
-]
-
-[[package]]
 name = "mime"
 version = "0.3.17"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -2816,7 +2684,7 @@ dependencies = [
  "miraland-sdk 1.14.17-rc4",
  "num-derive",
  "num-traits",
- "rustc_version 0.4.0",
+ "rustc_version",
  "serde",
  "thiserror",
 ]
@@ -2837,7 +2705,7 @@ dependencies = [
  "miraland-sdk 1.14.17-rc4 (registry+https://github.com/rust-lang/crates.io-index)",
  "num-derive",
  "num-traits",
- "rustc_version 0.4.0",
+ "rustc_version",
  "serde",
  "thiserror",
 ]
@@ -2946,7 +2814,7 @@ dependencies = [
  "miraland-sdk 1.14.17-rc4 (registry+https://github.com/rust-lang/crates.io-index)",
  "rand 0.7.3",
  "rayon",
- "rustc_version 0.4.0",
+ "rustc_version",
  "serde",
  "serde_derive",
 ]
@@ -3118,7 +2986,7 @@ dependencies = [
  "miraland-transaction-status 1.14.17-rc4 (registry+https://github.com/rust-lang/crates.io-index)",
  "miraland-vote-program 1.14.17-rc4 (registry+https://github.com/rust-lang/crates.io-index)",
  "pretty-hex",
- "semver 1.0.17",
+ "semver",
  "serde",
  "serde_json",
  "solarti-memo 3.0.2",
@@ -3163,7 +3031,7 @@ dependencies = [
  "rayon",
  "reqwest",
  "rustls 0.20.8",
- "semver 1.0.17",
+ "semver",
  "serde",
  "serde_derive",
  "serde_json",
@@ -3217,7 +3085,7 @@ dependencies = [
  "rayon",
  "reqwest",
  "rustls 0.20.8",
- "semver 1.0.17",
+ "semver",
  "serde",
  "serde_derive",
  "serde_json",
@@ -3324,7 +3192,7 @@ dependencies = [
  "rand 0.7.3",
  "rand_chacha 0.2.2",
  "rayon",
- "rustc_version 0.4.0",
+ "rustc_version",
  "serde",
  "serde_derive",
  "sys-info",
@@ -3426,7 +3294,7 @@ dependencies = [
  "miraland-frozen-abi-macro 1.14.17-rc4",
  "once_cell",
  "rand_core 0.6.4",
- "rustc_version 0.4.0",
+ "rustc_version",
  "serde",
  "serde_bytes",
  "serde_derive",
@@ -3460,7 +3328,7 @@ dependencies = [
  "miraland-frozen-abi-macro 1.14.17-rc4 (registry+https://github.com/rust-lang/crates.io-index)",
  "once_cell",
  "rand_core 0.6.4",
- "rustc_version 0.4.0",
+ "rustc_version",
  "serde",
  "serde_bytes",
  "serde_derive",
@@ -3476,7 +3344,7 @@ version = "1.14.17-rc4"
 dependencies = [
  "proc-macro2 1.0.56",
  "quote 1.0.26",
- "rustc_version 0.4.0",
+ "rustc_version",
  "syn 1.0.109",
 ]
 
@@ -3488,7 +3356,7 @@ checksum = "9854ef8df1822aded6b37f5ed6fa7051c4cb7e1bc25a1ca269f71795386ee35f"
 dependencies = [
  "proc-macro2 1.0.56",
  "quote 1.0.26",
- "rustc_version 0.4.0",
+ "rustc_version",
  "syn 1.0.109",
 ]
 
@@ -3564,7 +3432,7 @@ dependencies = [
  "rand 0.7.3",
  "rand_chacha 0.2.2",
  "rayon",
- "rustc_version 0.4.0",
+ "rustc_version",
  "serde",
  "serde_bytes",
  "serde_derive",
@@ -3617,7 +3485,7 @@ dependencies = [
  "rayon",
  "reed-solomon-erasure",
  "rocksdb",
- "rustc_version 0.4.0",
+ "rustc_version",
  "serde",
  "serde_bytes",
  "sha2 0.10.6",
@@ -3852,7 +3720,7 @@ dependencies = [
  "parking_lot 0.12.1",
  "rand 0.7.3",
  "rand_chacha 0.2.2",
- "rustc_version 0.4.0",
+ "rustc_version",
  "rustversion",
  "serde",
  "serde_bytes",
@@ -3901,7 +3769,7 @@ dependencies = [
  "parking_lot 0.12.1",
  "rand 0.7.3",
  "rand_chacha 0.2.2",
- "rustc_version 0.4.0",
+ "rustc_version",
  "rustversion",
  "serde",
  "serde_bytes",
@@ -3935,7 +3803,7 @@ dependencies = [
  "num-derive",
  "num-traits",
  "rand 0.7.3",
- "rustc_version 0.4.0",
+ "rustc_version",
  "serde",
  "thiserror",
 ]
@@ -3962,7 +3830,7 @@ dependencies = [
  "num-derive",
  "num-traits",
  "rand 0.7.3",
- "rustc_version 0.4.0",
+ "rustc_version",
  "serde",
  "thiserror",
 ]
@@ -4045,7 +3913,7 @@ dependencies = [
  "num-traits",
  "parking_lot 0.12.1",
  "qstring",
- "semver 1.0.17",
+ "semver",
  "thiserror",
  "uriparse",
 ]
@@ -4065,7 +3933,7 @@ dependencies = [
  "num-traits",
  "parking_lot 0.12.1",
  "qstring",
- "semver 1.0.17",
+ "semver",
  "thiserror",
  "uriparse",
 ]
@@ -4170,7 +4038,7 @@ dependencies = [
  "rand 0.7.3",
  "rayon",
  "regex",
- "rustc_version 0.4.0",
+ "rustc_version",
  "serde",
  "serde_derive",
  "strum",
@@ -4231,7 +4099,7 @@ dependencies = [
  "rand 0.7.3",
  "rayon",
  "regex",
- "rustc_version 0.4.0",
+ "rustc_version",
  "serde",
  "serde_derive",
  "strum",
@@ -4279,7 +4147,7 @@ dependencies = [
  "qstring",
  "rand 0.7.3",
  "rand_chacha 0.2.2",
- "rustc_version 0.4.0",
+ "rustc_version",
  "rustversion",
  "serde",
  "serde_bytes",
@@ -4330,7 +4198,7 @@ dependencies = [
  "qstring",
  "rand 0.7.3",
  "rand_chacha 0.2.2",
- "rustc_version 0.4.0",
+ "rustc_version",
  "rustversion",
  "serde",
  "serde_bytes",
@@ -4410,7 +4278,7 @@ dependencies = [
  "miraland-vote-program 1.14.17-rc4",
  "num-derive",
  "num-traits",
- "rustc_version 0.4.0",
+ "rustc_version",
  "serde",
  "serde_derive",
  "thiserror",
@@ -4433,7 +4301,7 @@ dependencies = [
  "miraland-vote-program 1.14.17-rc4 (registry+https://github.com/rust-lang/crates.io-index)",
  "num-derive",
  "num-traits",
- "rustc_version 0.4.0",
+ "rustc_version",
  "serde",
  "serde_derive",
  "thiserror",
@@ -4657,8 +4525,8 @@ dependencies = [
  "miraland-frozen-abi 1.14.17-rc4",
  "miraland-frozen-abi-macro 1.14.17-rc4",
  "miraland-sdk 1.14.17-rc4",
- "rustc_version 0.4.0",
- "semver 1.0.17",
+ "rustc_version",
+ "semver",
  "serde",
  "serde_derive",
 ]
@@ -4673,8 +4541,8 @@ dependencies = [
  "miraland-frozen-abi 1.14.17-rc4 (registry+https://github.com/rust-lang/crates.io-index)",
  "miraland-frozen-abi-macro 1.14.17-rc4 (registry+https://github.com/rust-lang/crates.io-index)",
  "miraland-sdk 1.14.17-rc4 (registry+https://github.com/rust-lang/crates.io-index)",
- "rustc_version 0.4.0",
- "semver 1.0.17",
+ "rustc_version",
+ "semver",
  "serde",
  "serde_derive",
 ]
@@ -4692,7 +4560,7 @@ dependencies = [
  "miraland-sdk 1.14.17-rc4",
  "num-derive",
  "num-traits",
- "rustc_version 0.4.0",
+ "rustc_version",
  "serde",
  "serde_derive",
  "thiserror",
@@ -4713,7 +4581,7 @@ dependencies = [
  "miraland-sdk 1.14.17-rc4 (registry+https://github.com/rust-lang/crates.io-index)",
  "num-derive",
  "num-traits",
- "rustc_version 0.4.0",
+ "rustc_version",
  "serde",
  "serde_derive",
  "thiserror",
@@ -6121,20 +5989,11 @@ checksum = "08d43f7aa6b08d49f382cde6a7982047c3426db949b1424bc4b7ec9ae12c6ce2"
 
 [[package]]
 name = "rustc_version"
-version = "0.3.3"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "f0dfe2087c51c460008730de8b57e6a320782fbfb312e1f4d520e6c6fae155ee"
-dependencies = [
- "semver 0.11.0",
-]
-
-[[package]]
-name = "rustc_version"
 version = "0.4.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "bfa0f585226d2e68097d4f95d113b15b83a82e819ab25717ec0590d9584ef366"
 dependencies = [
- "semver 1.0.17",
+ "semver",
 ]
 
 [[package]]
@@ -6334,27 +6193,9 @@ dependencies = [
 
 [[package]]
 name = "semver"
-version = "0.11.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "f301af10236f6df4160f7c3f04eec6dbc70ace82d23326abad5edee88801c6b6"
-dependencies = [
- "semver-parser",
-]
-
-[[package]]
-name = "semver"
 version = "1.0.17"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "bebd363326d05ec3e2f532ab7660680f3b02130d780c299bca73469d521bc0ed"
-
-[[package]]
-name = "semver-parser"
-version = "0.10.2"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "00b0bef5b7f9e0df16536d3961cfb6e84331c065b4066afb39768d0e319411f7"
-dependencies = [
- "pest",
-]
 
 [[package]]
 name = "serde"
@@ -6745,119 +6586,6 @@ dependencies = [
  "log",
  "rand 0.8.5",
  "sha-1 0.9.8",
-]
-
-[[package]]
-name = "solana-frozen-abi"
-version = "1.15.2"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "48f7051cccdf891ac2603cdd295eb651529fe2b678b6b3af60b82dec9a9b3b06"
-dependencies = [
- "ahash",
- "blake3",
- "block-buffer 0.9.0",
- "bs58",
- "bv",
- "byteorder",
- "cc",
- "either",
- "generic-array",
- "getrandom 0.1.16",
- "hashbrown 0.12.3",
- "im",
- "lazy_static",
- "log",
- "memmap2",
- "once_cell",
- "rand_core 0.6.4",
- "rustc_version 0.4.0",
- "serde",
- "serde_bytes",
- "serde_derive",
- "serde_json",
- "sha2 0.10.6",
- "solana-frozen-abi-macro",
- "subtle",
- "thiserror",
-]
-
-[[package]]
-name = "solana-frozen-abi-macro"
-version = "1.15.2"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "06395428329810ade1d2518a7e75d8a6f02d01fe548aabb60ff1ba6a2eaebbe5"
-dependencies = [
- "proc-macro2 1.0.56",
- "quote 1.0.26",
- "rustc_version 0.4.0",
- "syn 1.0.109",
-]
-
-[[package]]
-name = "solana-program"
-version = "1.15.2"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "1ae9f0fa7db3a4e90fa0df2723ac8cbc042e579cf109cd0380bc5a8c88bed924"
-dependencies = [
- "ark-bn254",
- "ark-ec",
- "ark-ff",
- "array-bytes",
- "base64 0.13.1",
- "bincode",
- "bitflags",
- "blake3",
- "borsh",
- "borsh-derive",
- "bs58",
- "bv",
- "bytemuck",
- "cc",
- "console_error_panic_hook",
- "console_log",
- "curve25519-dalek",
- "getrandom 0.2.9",
- "itertools",
- "js-sys",
- "lazy_static",
- "libc",
- "libsecp256k1",
- "log",
- "memoffset 0.8.0",
- "num-bigint 0.4.3",
- "num-derive",
- "num-traits",
- "parking_lot 0.12.1",
- "rand 0.7.3",
- "rand_chacha 0.2.2",
- "rustc_version 0.4.0",
- "rustversion",
- "serde",
- "serde_bytes",
- "serde_derive",
- "serde_json",
- "sha2 0.10.6",
- "sha3 0.10.7",
- "solana-frozen-abi",
- "solana-frozen-abi-macro",
- "solana-sdk-macro",
- "thiserror",
- "tiny-bip39",
- "wasm-bindgen",
- "zeroize",
-]
-
-[[package]]
-name = "solana-sdk-macro"
-version = "1.15.2"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "f809319358d5da7c3a0ac08ebf4d87b21170d928dbb7260254e8f3061f7f9e0e"
-dependencies = [
- "bs58",
- "proc-macro2 1.0.56",
- "quote 1.0.26",
- "rustversion",
- "syn 1.0.109",
 ]
 
 [[package]]
@@ -7329,10 +7057,10 @@ name = "solarti-stateless-asks"
 version = "0.1.1"
 dependencies = [
  "borsh",
- "metaplex-token-metadata",
  "miraland-program 1.14.17-rc4 (registry+https://github.com/rust-lang/crates.io-index)",
  "miraland-program-test 1.14.17-rc4 (registry+https://github.com/rust-lang/crates.io-index)",
  "miraland-sdk 1.14.17-rc4 (registry+https://github.com/rust-lang/crates.io-index)",
+ "miraplex-token-metadata",
  "solarti-associated-token-account 1.1.5",
  "solarti-token 3.5.3",
  "thiserror",
@@ -7613,21 +7341,6 @@ checksum = "44d01ac02a6ccf3e07db148d2be087da624fea0221a16152ed01f0496a6b0a27"
 dependencies = [
  "base64ct",
  "der",
-]
-
-[[package]]
-name = "spl-token"
-version = "3.5.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "8e85e168a785e82564160dcb87b2a8e04cee9bfd1f4d488c729d53d6a4bd300d"
-dependencies = [
- "arrayref",
- "bytemuck",
- "num-derive",
- "num-traits",
- "num_enum",
- "solana-program",
- "thiserror",
 ]
 
 [[package]]

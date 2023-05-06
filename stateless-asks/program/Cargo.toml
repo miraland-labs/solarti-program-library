@@ -15,7 +15,7 @@ borsh = "0.9.1"
 miraland-program = "=1.14.17-rc4"
 solarti-token = { version = "3.5", path = "../../token/program", features = ["no-entrypoint"] }
 solarti-associated-token-account = {version = "1.1", path = "../../associated-token-account/program", features = ["no-entrypoint"]}
-metaplex-token-metadata = { version = "0.0.1", features = ["no-entrypoint"] }
+miraplex-token-metadata = { version = "1.7.0-beta", features = ["no-entrypoint"] }
 thiserror = "1.0"
 
 [dev-dependencies]

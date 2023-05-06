@@ -8,4 +8,4 @@ cluster = "devnet"
 wallet = "~/.config/solana/id.json"
 
 [programs.devnet]
-solarti-token-lending = "LendZqTs7gn5CTSJU1jWKhKuVpjJGom45nnwPb2AMTi"
+solarti-token-lending = "Lendom2HkAKTe8bLUMxDxpBd8kCYUbZjECGtx9RFV7c"

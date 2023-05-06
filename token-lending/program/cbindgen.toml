@@ -12,4 +12,4 @@ include = ["LendingInstruction", "State"]
 
 [parse]
 parse_deps = true
-include = ["solana-sdk"]
+include = ["miraland-sdk"]
