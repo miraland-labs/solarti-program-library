@@ -161,7 +161,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
             verbose: matches.is_present("verbose"),
         }
     };
-    solana_logger::setup_with_default("solana=info");
+    miraland_logger::setup_with_default("solana=info,miraland=info");
     let rpc_client =
         RpcClient::new_with_commitment(config.json_rpc_url.clone(), CommitmentConfig::confirmed());
 

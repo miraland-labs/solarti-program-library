@@ -48,7 +48,7 @@ type CommandResult = Result<(), Error>;
 const PYTH_PROGRAM_ID: &str = "gSbePebfvPy7tRqimPoVecS2UsBvYv46ynrzWocc92s";
 
 fn main() {
-    solana_logger::setup_with_default("solana=info");
+    miraland_logger::setup_with_default("solana=info,miraland=info");
 
     let default_lending_program_id: &str = &spl_token_lending::id().to_string();
 
