@@ -1,5 +1,8 @@
 [package]
-authors = ["Solana Labs Maintainers <maintainers@solanalabs.com>"]
+authors = [
+  "Miraland Crafters <crafters@miraland.top>",
+  "Solana Labs Maintainers <maintainers@solanalabs.com>"
+]
 description = "solarti-token Rust Client"
 edition = "2021"
 license = "Apache-2.0"

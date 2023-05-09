@@ -1,7 +1,10 @@
 [package]
 name = "test-client"
 version = "0.1.1"
-authors = ["Solana Labs Maintainers <maintainers@solanalabs.com>"]
+authors = [
+  "Miraland Crafters <crafters@miraland.top>",
+  "Solana Labs Maintainers <maintainers@solanalabs.com>"
+]
 publish = false
 edition = "2021"
 

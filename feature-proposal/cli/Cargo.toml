@@ -2,7 +2,10 @@
 name = "solarti-feature-proposal-cli"
 version = "1.2.1"
 description = "SOLARTI Feature Proposal Command-line Utility"
-authors = ["Solana Labs Maintainers <maintainers@solanalabs.com>"]
+authors = [
+  "Miraland Crafters <crafters@miraland.top>",
+  "Solana Labs Maintainers <maintainers@solanalabs.com>"
+]
 repository = "https://github.com/miraland-labs/solarti-program-library"
 license = "Apache-2.0"
 edition = "2021"

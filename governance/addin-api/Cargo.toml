@@ -2,7 +2,10 @@
 name = "solarti-governance-addin-api"
 version = "0.1.3"
 description = "Solarti Program Library Governance Addin Api"
-authors = ["Solana Labs Maintainers <maintainers@solanalabs.com>"]
+authors = [
+  "Miraland Crafters <crafters@miraland.top>",
+  "Solana Labs Maintainers <maintainers@solanalabs.com>"
+]
 repository = "https://github.com/miraland-labs/solarti-program-library"
 license = "Apache-2.0"
 edition = "2021"

@@ -4,6 +4,7 @@ description = "Solarti Program Library Name Service"
 version = "0.2.1"
 repository = "https://github.com/miraland-labs/solarti-program-library"
 authors = [
+  "Miraland Crafters <crafters@miraland.top>",
   "lcchy <lucas@bonfida.com>",
   "Solana Labs Maintainers <maintainers@solanalabs.com>"
 ]

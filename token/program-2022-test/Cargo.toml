@@ -1,5 +1,8 @@
 [package]
-authors = ["Solana Labs Maintainers <maintainers@solanalabs.com>"]
+authors = [
+  "Miraland Crafters <crafters@miraland.top>",
+  "Solana Labs Maintainers <maintainers@solanalabs.com>"
+]
 description = "solarti-token 2022 Integration Tests"
 edition = "2021"
 license = "Apache-2.0"
@@ -19,7 +22,7 @@ walkdir = "2"
 [dev-dependencies]
 async-trait = "0.1"
 miraland-program = "=1.14.17-rc4"
-miraland-program-test = {path = "../../../miraland-1.14.17/program-test", version = "=1.14.17-rc4"}
+miraland-program-test = "=1.14.17-rc4"
 miraland-sdk = "=1.14.17-rc4"
 solarti-associated-token-account = { version = "1.1", path = "../../associated-token-account/program" }
 solarti-memo = { version = "3.0", path = "../../memo/program", features = ["no-entrypoint"] }
