@@ -1,5 +1,5 @@
-import { u8 } from '@solana/buffer-layout';
-import type { TransactionInstruction } from '@solana/web3.js';
+import { u8 } from '@solarti/buffer-layout';
+import type { TransactionInstruction } from '@solarti/web3.js';
 import { TOKEN_PROGRAM_ID } from '../constants.js';
 import { TokenInvalidInstructionDataError, TokenInvalidInstructionTypeError } from '../errors.js';
 import type { DecodedAmountToUiAmountInstruction } from './amountToUiAmount.js';

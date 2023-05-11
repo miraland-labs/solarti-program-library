@@ -1,6 +1,6 @@
-import { seq, struct, u16, u8 } from '@solana/buffer-layout';
-import type { PublicKey, Signer } from '@solana/web3.js';
-import { SystemProgram, TransactionInstruction } from '@solana/web3.js';
+import { seq, struct, u16, u8 } from '@solarti/buffer-layout';
+import type { PublicKey, Signer } from '@solarti/web3.js';
+import { SystemProgram, TransactionInstruction } from '@solarti/web3.js';
 import { programSupportsExtensions, TOKEN_2022_PROGRAM_ID } from '../constants.js';
 import { TokenUnsupportedInstructionError } from '../errors.js';
 import type { ExtensionType } from '../extensions/extensionType.js';

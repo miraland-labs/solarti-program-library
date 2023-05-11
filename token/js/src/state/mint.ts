@@ -1,7 +1,7 @@
-import { struct, u32, u8 } from '@solana/buffer-layout';
-import { bool, publicKey, u64 } from '@solana/buffer-layout-utils';
-import type { AccountInfo, Commitment, Connection } from '@solana/web3.js';
-import { PublicKey } from '@solana/web3.js';
+import { struct, u32, u8 } from '@solarti/buffer-layout';
+import { bool, publicKey, u64 } from '@solarti/buffer-layout-utils';
+import type { AccountInfo, Commitment, Connection } from '@solarti/web3.js';
+import { PublicKey } from '@solarti/web3.js';
 import { ASSOCIATED_TOKEN_PROGRAM_ID, TOKEN_PROGRAM_ID } from '../constants.js';
 import {
     TokenAccountNotFoundError,

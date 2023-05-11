@@ -1,6 +1,6 @@
-import { struct, u8 } from '@solana/buffer-layout';
-import type { AccountMeta, Signer } from '@solana/web3.js';
-import { PublicKey, SYSVAR_RENT_PUBKEY, TransactionInstruction } from '@solana/web3.js';
+import { struct, u8 } from '@solarti/buffer-layout';
+import type { AccountMeta, Signer } from '@solarti/web3.js';
+import { PublicKey, SYSVAR_RENT_PUBKEY, TransactionInstruction } from '@solarti/web3.js';
 import { TOKEN_PROGRAM_ID } from '../constants.js';
 import {
     TokenInvalidInstructionDataError,

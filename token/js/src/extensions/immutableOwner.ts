@@ -1,4 +1,4 @@
-import { struct } from '@solana/buffer-layout';
+import { struct } from '@solarti/buffer-layout';
 import type { Account } from '../state/account.js';
 import { ExtensionType, getExtensionData } from './extensionType.js';
 

@@ -1,5 +1,5 @@
-import type { ConfirmOptions, Connection, PublicKey, Signer } from '@solana/web3.js';
-import { Keypair, sendAndConfirmTransaction, SystemProgram, Transaction } from '@solana/web3.js';
+import type { ConfirmOptions, Connection, PublicKey, Signer } from '@solarti/web3.js';
+import { Keypair, sendAndConfirmTransaction, SystemProgram, Transaction } from '@solarti/web3.js';
 import { TOKEN_PROGRAM_ID } from '../constants.js';
 import { createInitializeMultisigInstruction } from '../instructions/initializeMultisig.js';
 import { getMinimumBalanceForRentExemptMultisig, MULTISIG_SIZE } from '../state/multisig.js';

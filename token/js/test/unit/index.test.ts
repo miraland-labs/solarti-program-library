@@ -1,4 +1,4 @@
-import { Keypair, PublicKey } from '@solana/web3.js';
+import { Keypair, PublicKey } from '@solarti/web3.js';
 import chai, { expect } from 'chai';
 import chaiAsPromised from 'chai-as-promised';
 import {
@@ -172,62 +172,76 @@ describe('solarti-associated-token-account instructions', () => {
 describe('state', () => {
     it('getAssociatedTokenAddress', async () => {
         const associatedPublicKey = await getAssociatedTokenAddress(
-            new PublicKey('7o36UsWR1JQLpZ9PE2gn9L4SQ69CNNiWAXd4Jt7rqz9Z'),
+            // new PublicKey('7o36UsWR1JQLpZ9PE2gn9L4SQ69CNNiWAXd4Jt7rqz9Z'),
+            new PublicKey('D5Y12f9gB6SfyxUsuxXKGDU4dEyE9vztrRNLo5UPSt5M'),
             new PublicKey('B8UwBUUnKwCyKuGMbFKWaG7exYdDk2ozZrPg72NyVbfj')
         );
         expect(associatedPublicKey.toString()).to.eql(
-            new PublicKey('DShWnroshVbeUp28oopA3Pu7oFPDBtC1DBmPECXXAQ9n').toString()
+            // new PublicKey('DShWnroshVbeUp28oopA3Pu7oFPDBtC1DBmPECXXAQ9n').toString() // under original token prog
+            new PublicKey('2y4ZwugYW8dPSA12ECHr9F8erLiYttENzXj1A2a8SYd7').toString()
         );
         await expect(
             getAssociatedTokenAddress(
-                new PublicKey('7o36UsWR1JQLpZ9PE2gn9L4SQ69CNNiWAXd4Jt7rqz9Z'),
+                // new PublicKey('7o36UsWR1JQLpZ9PE2gn9L4SQ69CNNiWAXd4Jt7rqz9Z'), // under original token prog
+                new PublicKey('4BBi8oSUAeAu8gUbFnoiNQ214ADAszkfUnFakTGnAAvp'),
                 associatedPublicKey
             )
         ).to.be.rejectedWith(TokenOwnerOffCurveError);
 
         const associatedPublicKey2 = await getAssociatedTokenAddress(
-            new PublicKey('7o36UsWR1JQLpZ9PE2gn9L4SQ69CNNiWAXd4Jt7rqz9Z'),
+            // new PublicKey('7o36UsWR1JQLpZ9PE2gn9L4SQ69CNNiWAXd4Jt7rqz9Z'),
+            new PublicKey('4BBi8oSUAeAu8gUbFnoiNQ214ADAszkfUnFakTGnAAvp'),
             associatedPublicKey,
             true
         );
         expect(associatedPublicKey2.toString()).to.eql(
-            new PublicKey('F3DmXZFqkfEWFA7MN2vDPs813GeEWPaT6nLk4PSGuWJd').toString()
+            // new PublicKey('F3DmXZFqkfEWFA7MN2vDPs813GeEWPaT6nLk4PSGuWJd').toString()
+            new PublicKey('3AasMWMKaWZ9sc6D6X2Qa2G8JVKMcf4hB2TQtidPghKg').toString()
         );
     });
 
     it('getAssociatedTokenAddressSync matches getAssociatedTokenAddress', async () => {
         const asyncAssociatedPublicKey = await getAssociatedTokenAddress(
-            new PublicKey('7o36UsWR1JQLpZ9PE2gn9L4SQ69CNNiWAXd4Jt7rqz9Z'),
+            // new PublicKey('7o36UsWR1JQLpZ9PE2gn9L4SQ69CNNiWAXd4Jt7rqz9Z'),
+            // new PublicKey('B8UwBUUnKwCyKuGMbFKWaG7exYdDk2ozZrPg72NyVbfj')
+            new PublicKey('4BBi8oSUAeAu8gUbFnoiNQ214ADAszkfUnFakTGnAAvp'),
             new PublicKey('B8UwBUUnKwCyKuGMbFKWaG7exYdDk2ozZrPg72NyVbfj')
         );
         const associatedPublicKey = getAssociatedTokenAddressSync(
-            new PublicKey('7o36UsWR1JQLpZ9PE2gn9L4SQ69CNNiWAXd4Jt7rqz9Z'),
+            // new PublicKey('7o36UsWR1JQLpZ9PE2gn9L4SQ69CNNiWAXd4Jt7rqz9Z'),
+            // new PublicKey('B8UwBUUnKwCyKuGMbFKWaG7exYdDk2ozZrPg72NyVbfj')
+            new PublicKey('4BBi8oSUAeAu8gUbFnoiNQ214ADAszkfUnFakTGnAAvp'),
             new PublicKey('B8UwBUUnKwCyKuGMbFKWaG7exYdDk2ozZrPg72NyVbfj')
         );
         expect(associatedPublicKey.toString()).to.eql(
-            new PublicKey('DShWnroshVbeUp28oopA3Pu7oFPDBtC1DBmPECXXAQ9n').toString()
+            // new PublicKey('DShWnroshVbeUp28oopA3Pu7oFPDBtC1DBmPECXXAQ9n').toString()
+            new PublicKey('A2PCDfqPVepFrjU1qP8hAadeV8tvwghzkkNH9Avq9y6H').toString()
         );
         expect(asyncAssociatedPublicKey.toString()).to.eql(associatedPublicKey.toString());
 
         expect(function () {
             getAssociatedTokenAddressSync(
-                new PublicKey('7o36UsWR1JQLpZ9PE2gn9L4SQ69CNNiWAXd4Jt7rqz9Z'),
+                // new PublicKey('7o36UsWR1JQLpZ9PE2gn9L4SQ69CNNiWAXd4Jt7rqz9Z'),
+                new PublicKey('4BBi8oSUAeAu8gUbFnoiNQ214ADAszkfUnFakTGnAAvp'),
                 associatedPublicKey
             );
         }).to.throw(TokenOwnerOffCurveError);
 
         const asyncAssociatedPublicKey2 = await getAssociatedTokenAddress(
-            new PublicKey('7o36UsWR1JQLpZ9PE2gn9L4SQ69CNNiWAXd4Jt7rqz9Z'),
+            // new PublicKey('7o36UsWR1JQLpZ9PE2gn9L4SQ69CNNiWAXd4Jt7rqz9Z'),
+            new PublicKey('4BBi8oSUAeAu8gUbFnoiNQ214ADAszkfUnFakTGnAAvp'),
             asyncAssociatedPublicKey,
             true
         );
         const associatedPublicKey2 = getAssociatedTokenAddressSync(
-            new PublicKey('7o36UsWR1JQLpZ9PE2gn9L4SQ69CNNiWAXd4Jt7rqz9Z'),
+            // new PublicKey('7o36UsWR1JQLpZ9PE2gn9L4SQ69CNNiWAXd4Jt7rqz9Z'),
+            new PublicKey('4BBi8oSUAeAu8gUbFnoiNQ214ADAszkfUnFakTGnAAvp'),
             associatedPublicKey,
             true
         );
         expect(associatedPublicKey2.toString()).to.eql(
-            new PublicKey('F3DmXZFqkfEWFA7MN2vDPs813GeEWPaT6nLk4PSGuWJd').toString()
+            // new PublicKey('F3DmXZFqkfEWFA7MN2vDPs813GeEWPaT6nLk4PSGuWJd').toString()
+            new PublicKey('D49Tdt3c2vu1kn4yvPmopoZdogVT6itoYjUCDax6Rq5r').toString()
         );
         expect(asyncAssociatedPublicKey2.toString()).to.eql(associatedPublicKey2.toString());
     });

@@ -1,7 +1,7 @@
 import chai, { expect } from 'chai';
 import chaiAsPromised from 'chai-as-promised';
-import type { Connection, PublicKey, Signer } from '@solana/web3.js';
-import { Keypair } from '@solana/web3.js';
+import type { Connection, PublicKey, Signer } from '@solarti/web3.js';
+import { Keypair } from '@solarti/web3.js';
 import { createMint, amountToUiAmount, uiAmountToAmount } from '../../src';
 import { TEST_PROGRAM_ID, newAccountWithLamports, getConnection } from '../common';
 

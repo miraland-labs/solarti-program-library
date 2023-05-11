@@ -1,6 +1,6 @@
 import { createMemoInstruction, MEMO_PROGRAM_ID } from '../../src';
 import { expect } from 'chai';
-import { Keypair } from '@solana/web3.js';
+import { Keypair } from '@solarti/web3.js';
 
 test('instruction: no signers', () => {
     const ix = createMemoInstruction('this is a test memo', []);

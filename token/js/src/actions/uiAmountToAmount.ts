@@ -1,6 +1,6 @@
-import { u64 } from '@solana/buffer-layout-utils';
-import type { Connection, PublicKey, Signer, TransactionError } from '@solana/web3.js';
-import { Transaction } from '@solana/web3.js';
+import { u64 } from '@solarti/buffer-layout-utils';
+import type { Connection, PublicKey, Signer, TransactionError } from '@solarti/web3.js';
+import { Transaction } from '@solarti/web3.js';
 import { TOKEN_PROGRAM_ID } from '../constants.js';
 import { createUiAmountToAmountInstruction } from '../instructions/uiAmountToAmount.js';
 

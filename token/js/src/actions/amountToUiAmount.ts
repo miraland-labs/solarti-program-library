@@ -1,5 +1,5 @@
-import type { Connection, PublicKey, Signer, TransactionError } from '@solana/web3.js';
-import { Transaction } from '@solana/web3.js';
+import type { Connection, PublicKey, Signer, TransactionError } from '@solarti/web3.js';
+import { Transaction } from '@solarti/web3.js';
 import { TOKEN_PROGRAM_ID } from '../constants.js';
 import { createAmountToUiAmountInstruction } from '../instructions/amountToUiAmount.js';
 

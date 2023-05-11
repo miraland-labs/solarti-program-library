@@ -1,5 +1,5 @@
-import type { ConfirmOptions, Connection, PublicKey, Signer } from '@solana/web3.js';
-import { Keypair, sendAndConfirmTransaction, SystemProgram, Transaction } from '@solana/web3.js';
+import type { ConfirmOptions, Connection, PublicKey, Signer } from '@solarti/web3.js';
+import { Keypair, sendAndConfirmTransaction, SystemProgram, Transaction } from '@solarti/web3.js';
 import { TOKEN_PROGRAM_ID } from '../constants.js';
 import { createInitializeMint2Instruction } from '../instructions/initializeMint2.js';
 import { getMinimumBalanceForRentExemptMint, MINT_SIZE } from '../state/mint.js';

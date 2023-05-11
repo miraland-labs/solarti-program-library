@@ -1883,7 +1883,7 @@ fn command_list_all_pools(config: &Config) -> CommandResult {
 }
 
 fn main() {
-    miraland_logger::setup_with_default("solana=info,miraland=info");
+    solana_logger::setup_with_default("solana=info,miraland=info");
 
     let matches = App::new(crate_name!())
         .about(crate_description!())

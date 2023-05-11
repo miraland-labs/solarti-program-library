@@ -3577,7 +3577,7 @@ async fn main() -> Result<(), Error> {
     )
     .await;
 
-    miraland_logger::setup_with_default("solana=info,miraland=info");
+    solana_logger::setup_with_default("solana=info,miraland=info");
     let result =
         process_command(&sub_command, matches, &config, wallet_manager, bulk_signers).await?;
     println!("{}", result);
@@ -4331,7 +4331,7 @@ mod tests {
     const TEST_DECIMALS: u8 = 0;
 
     async fn new_validator_for_test() -> (TestValidator, Keypair) {
-        miraland_logger::setup();
+        solana_logger::setup();
         let mut test_validator_genesis = TestValidatorGenesis::default();
         test_validator_genesis.add_programs_with_path(&[
             ProgramInfo {

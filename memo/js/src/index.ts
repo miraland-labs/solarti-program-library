@@ -1,7 +1,7 @@
 import { Buffer } from 'buffer';
-import { PublicKey, TransactionInstruction } from '@solana/web3.js';
+import { PublicKey, TransactionInstruction } from '@solarti/web3.js';
 
-export const MEMO_PROGRAM_ID: PublicKey = new PublicKey('MemoSq4gqABAXKb96qnH8TysNcWxMyWCqXgDLGmfcHr');
+export const MEMO_PROGRAM_ID: PublicKey = new PublicKey('MemoE5FsL5zWDjihivRfHTpkR8RdviRbziKsfGS9Ntd');
 
 /**
  * Creates and returns an instruction which validates a string of UTF-8

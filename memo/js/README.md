@@ -11,11 +11,11 @@ A TypeScript library for interacting with the SPL Memo program.
 ## Install
 
 ```shell
-npm install --save @solarti/solarti-memo @solana/web3.js
+npm install --save @solarti/solarti-memo @solarti/web3.js
 ```
 _OR_
 ```shell
-yarn add @solarti/solarti-memo @solana/web3.js
+yarn add @solarti/solarti-memo @solarti/web3.js
 ```
 
 ## Build from Source
@@ -27,12 +27,12 @@ yarn add @solarti/solarti-memo @solana/web3.js
 
 1. Clone the project:
 ```shell
-git clone https://github.com/solana-labs/solana-program-library.git
+git clone https://github.com/miraland-labs/solarti-program-library.git
 ```
 
 2. Navigate to the library:
 ```shell
-cd solana-program-library/memo/js
+cd solarti-program-library/memo/js
 ```
 
 3. Install the dependencies:

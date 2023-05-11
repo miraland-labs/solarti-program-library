@@ -1,5 +1,5 @@
-import type { ConfirmOptions, Connection, PublicKey, Signer } from '@solana/web3.js';
-import { Keypair, sendAndConfirmTransaction, SystemProgram, Transaction } from '@solana/web3.js';
+import type { ConfirmOptions, Connection, PublicKey, Signer } from '@solarti/web3.js';
+import { Keypair, sendAndConfirmTransaction, SystemProgram, Transaction } from '@solarti/web3.js';
 import { getSigners } from '../../actions/internal.js';
 import { TOKEN_2022_PROGRAM_ID } from '../../constants.js';
 import { createInitializeMintInstruction } from '../../instructions/initializeMint.js';

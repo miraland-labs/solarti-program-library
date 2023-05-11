@@ -1,5 +1,5 @@
-import type { ConfirmOptions, Connection, PublicKey, Signer, TransactionSignature } from '@solana/web3.js';
-import { sendAndConfirmTransaction, Transaction } from '@solana/web3.js';
+import type { ConfirmOptions, Connection, PublicKey, Signer, TransactionSignature } from '@solarti/web3.js';
+import { sendAndConfirmTransaction, Transaction } from '@solarti/web3.js';
 import { TOKEN_PROGRAM_ID } from '../constants.js';
 import { createApproveCheckedInstruction } from '../instructions/approveChecked.js';
 import { getSigners } from './internal.js';

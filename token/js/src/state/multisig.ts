@@ -1,6 +1,6 @@
-import { struct, u8 } from '@solana/buffer-layout';
-import { bool, publicKey } from '@solana/buffer-layout-utils';
-import type { AccountInfo, Commitment, Connection, PublicKey } from '@solana/web3.js';
+import { struct, u8 } from '@solarti/buffer-layout';
+import { bool, publicKey } from '@solarti/buffer-layout-utils';
+import type { AccountInfo, Commitment, Connection, PublicKey } from '@solarti/web3.js';
 import { TOKEN_PROGRAM_ID } from '../constants.js';
 import { TokenAccountNotFoundError, TokenInvalidAccountOwnerError, TokenInvalidAccountSizeError } from '../errors.js';
 

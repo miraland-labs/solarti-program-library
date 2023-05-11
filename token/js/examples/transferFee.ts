@@ -5,8 +5,8 @@ import {
     Keypair,
     SystemProgram,
     Transaction,
-    LAMPORTS_PER_SOL,
-} from '@solana/web3.js';
+    LAMPORTS_PER_MLN,
+} from '@solarti/web3.js';
 
 import {
     ExtensionType,
@@ -45,7 +45,7 @@ import {
 
     const connection = new Connection(clusterApiUrl('devnet'), 'confirmed');
 
-    const airdropSignature = await connection.requestAirdrop(payer.publicKey, 2 * LAMPORTS_PER_SOL);
+    const airdropSignature = await connection.requestAirdrop(payer.publicKey, 2 * LAMPORTS_PER_MLN);
     await connection.confirmTransaction({ signature: airdropSignature, ...(await connection.getLatestBlockhash()) });
 
     const mintLamports = await connection.getMinimumBalanceForRentExemption(mintLen);

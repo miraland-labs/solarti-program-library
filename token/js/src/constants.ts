@@ -1,4 +1,4 @@
-import { PublicKey } from '@solana/web3.js';
+import { PublicKey } from '@solarti/web3.js';
 
 /** Address of the SPL Token program */
 export const TOKEN_PROGRAM_ID = new PublicKey('Token4Q2B47VCdUy8u3rSTMMk2bGA1k7eN8qfKSzdiM');

@@ -1,6 +1,6 @@
-import { struct, u8 } from '@solana/buffer-layout';
-import type { PublicKey, Signer } from '@solana/web3.js';
-import { TransactionInstruction } from '@solana/web3.js';
+import { struct, u8 } from '@solarti/buffer-layout';
+import type { PublicKey, Signer } from '@solarti/web3.js';
+import { TransactionInstruction } from '@solarti/web3.js';
 import { programSupportsExtensions, TOKEN_2022_PROGRAM_ID } from '../../constants.js';
 import { TokenUnsupportedInstructionError } from '../../errors.js';
 import { addSigners } from '../../instructions/internal.js';

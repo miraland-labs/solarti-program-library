@@ -1,5 +1,5 @@
-import { clusterApiUrl, Connection, Keypair, LAMPORTS_PER_SOL } from '@solana/web3.js';
-import { createMint, getOrCreateAssociatedTokenAccount, mintTo, transfer } from '../src'; // @FIXME: replace with @solana/solarti-token
+import { clusterApiUrl, Connection, Keypair, LAMPORTS_PER_MLN } from '@solarti/web3.js';
+import { createMint, getOrCreateAssociatedTokenAccount, mintTo, transfer } from '../src'; // @FIXME: replace with @solarti/solarti-token
 
 (async () => {
     // Connect to cluster
@@ -7,7 +7,7 @@ import { createMint, getOrCreateAssociatedTokenAccount, mintTo, transfer } from 
 
     // Generate a new wallet keypair and airdrop SOL
     const fromWallet = Keypair.generate();
-    const fromAirdropSignature = await connection.requestAirdrop(fromWallet.publicKey, LAMPORTS_PER_SOL);
+    const fromAirdropSignature = await connection.requestAirdrop(fromWallet.publicKey, LAMPORTS_PER_MLN);
 
     // Wait for airdrop confirmation
     await connection.confirmTransaction({

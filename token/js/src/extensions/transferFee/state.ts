@@ -1,7 +1,7 @@
-import type { Layout } from '@solana/buffer-layout';
-import { struct, u16 } from '@solana/buffer-layout';
-import { publicKey, u64 } from '@solana/buffer-layout-utils';
-import type { PublicKey } from '@solana/web3.js';
+import type { Layout } from '@solarti/buffer-layout';
+import { struct, u16 } from '@solarti/buffer-layout';
+import { publicKey, u64 } from '@solarti/buffer-layout-utils';
+import type { PublicKey } from '@solarti/web3.js';
 import type { Account } from '../../state/account.js';
 import type { Mint } from '../../state/mint.js';
 import { ExtensionType, getExtensionData } from '../extensionType.js';
