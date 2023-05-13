@@ -8,7 +8,7 @@ use {
     solana_program::{borsh::try_from_slice_unchecked, pubkey::Pubkey, stake},
     solana_program_test::*,
     solana_sdk::{
-        native_token::LAMPORTS_PER_SOL,
+        native_token::LAMPORTS_PER_MLN,
         signature::{Keypair, Signer},
         transaction::Transaction,
     },
@@ -210,7 +210,7 @@ async fn update(max_validators: u32) {
 #[tokio::test]
 async fn remove_validator_from_pool(max_validators: u32) {
     let (mut context, stake_pool_accounts, vote_account_pubkeys, _, _, _, _) =
-        setup(max_validators, max_validators, LAMPORTS_PER_SOL).await;
+        setup(max_validators, max_validators, LAMPORTS_PER_MLN).await;
 
     let first_vote = vote_account_pubkeys[0];
     let (stake_address, _) = find_stake_program_address(
@@ -301,7 +301,7 @@ async fn remove_validator_from_pool(max_validators: u32) {
     assert_eq!(first_element.status, StakeStatus::DeactivatingValidator);
     assert_eq!(
         first_element.active_stake_lamports,
-        LAMPORTS_PER_SOL + STAKE_ACCOUNT_RENT_EXEMPTION
+        LAMPORTS_PER_MLN + STAKE_ACCOUNT_RENT_EXEMPTION
     );
     assert_eq!(first_element.transient_stake_lamports, 0);
 
@@ -309,7 +309,7 @@ async fn remove_validator_from_pool(max_validators: u32) {
     assert_eq!(middle_element.status, StakeStatus::DeactivatingValidator);
     assert_eq!(
         middle_element.active_stake_lamports,
-        LAMPORTS_PER_SOL + STAKE_ACCOUNT_RENT_EXEMPTION
+        LAMPORTS_PER_MLN + STAKE_ACCOUNT_RENT_EXEMPTION
     );
     assert_eq!(middle_element.transient_stake_lamports, 0);
 
@@ -317,7 +317,7 @@ async fn remove_validator_from_pool(max_validators: u32) {
     assert_eq!(last_element.status, StakeStatus::DeactivatingValidator);
     assert_eq!(
         last_element.active_stake_lamports,
-        LAMPORTS_PER_SOL + STAKE_ACCOUNT_RENT_EXEMPTION
+        LAMPORTS_PER_MLN + STAKE_ACCOUNT_RENT_EXEMPTION
     );
     assert_eq!(last_element.transient_stake_lamports, 0);
 
@@ -468,7 +468,7 @@ async fn add_validator_to_pool(max_validators: u32) {
     assert_eq!(last_element.status, StakeStatus::Active);
     assert_eq!(
         last_element.active_stake_lamports,
-        LAMPORTS_PER_SOL + STAKE_ACCOUNT_RENT_EXEMPTION
+        LAMPORTS_PER_MLN + STAKE_ACCOUNT_RENT_EXEMPTION
     );
     assert_eq!(last_element.transient_stake_lamports, 0);
     assert_eq!(last_element.vote_account_address, test_vote_address);
@@ -480,7 +480,7 @@ async fn add_validator_to_pool(max_validators: u32) {
         &stake_pool_pubkey,
         transient_stake_seed,
     );
-    let increase_amount = LAMPORTS_PER_SOL;
+    let increase_amount = LAMPORTS_PER_MLN;
     let error = stake_pool_accounts
         .increase_validator_stake(
             &mut context.banks_client,
@@ -506,7 +506,7 @@ async fn add_validator_to_pool(max_validators: u32) {
     assert_eq!(last_element.status, StakeStatus::Active);
     assert_eq!(
         last_element.active_stake_lamports,
-        LAMPORTS_PER_SOL + STAKE_ACCOUNT_RENT_EXEMPTION
+        LAMPORTS_PER_MLN + STAKE_ACCOUNT_RENT_EXEMPTION
     );
     assert_eq!(
         last_element.transient_stake_lamports,

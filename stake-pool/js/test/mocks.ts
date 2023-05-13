@@ -1,4 +1,4 @@
-import { AccountInfo, LAMPORTS_PER_SOL, PublicKey, StakeProgram } from '@solarti/web3.js';
+import { AccountInfo, LAMPORTS_PER_MLN, PublicKey, StakeProgram } from '@solarti/web3.js';
 import BN from 'bn.js';
 import { ValidatorStakeInfo } from '../src';
 import { AccountLayout, ValidatorListLayout, ValidatorStakeInfoStatus } from '../src/layouts';
@@ -23,8 +23,8 @@ export const stakePoolMock = {
   poolMint: new PublicKey(16),
   managerFeeAccount: new PublicKey(17),
   tokenProgramId: new PublicKey(18),
-  totalLamports: new BN(LAMPORTS_PER_SOL * 999),
-  poolTokenSupply: new BN(LAMPORTS_PER_SOL * 100),
+  totalLamports: new BN(LAMPORTS_PER_MLN * 999),
+  poolTokenSupply: new BN(LAMPORTS_PER_MLN * 100),
   lastUpdateEpoch: new BN('7c', 'hex'),
   lockup: {
     unixTimestamp: new BN(Date.now()),
@@ -94,7 +94,7 @@ export const validatorListMock = {
         new BN('3796d40645ee07e3c64117e3f73430471d4c40465f696ebc9b034c1fc06a9f7d', 'hex'),
       ),
       lastUpdateEpoch: new BN('c3', 'hex'),
-      activeStakeLamports: new BN(LAMPORTS_PER_SOL * 100),
+      activeStakeLamports: new BN(LAMPORTS_PER_MLN * 100),
       transientStakeLamports: new BN(22),
       transientSeedSuffixStart: new BN(0),
       transientSeedSuffixEnd: new BN(0),
@@ -144,7 +144,7 @@ export function mockTokenAccount(amount = 0) {
 export const mockRpc = (data: any): any => {
   const value = {
     owner: StakeProgram.programId,
-    lamports: LAMPORTS_PER_SOL,
+    lamports: LAMPORTS_PER_MLN,
     data: data,
     executable: false,
     rentEpoch: 0,

@@ -1,7 +1,7 @@
 import {
   Connection,
   Keypair,
-  LAMPORTS_PER_SOL,
+  LAMPORTS_PER_MLN,
   PublicKey,
   sendAndConfirmTransaction,
   Transaction,
@@ -33,7 +33,7 @@ describe('Name Service Program', async () => {
   before(async () => {
     const airdropSignature = await connection.requestAirdrop(
       payer.publicKey,
-      LAMPORTS_PER_SOL
+      LAMPORTS_PER_MLN
     );
     await connection.confirmTransaction({
       signature: airdropSignature,

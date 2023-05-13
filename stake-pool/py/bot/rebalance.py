@@ -7,7 +7,7 @@ from solana.publickey import PublicKey
 from solana.rpc.async_api import AsyncClient
 from solana.rpc.commitment import Confirmed
 
-from stake.constants import STAKE_LEN, LAMPORTS_PER_SOL
+from stake.constants import STAKE_LEN, LAMPORTS_PER_MLN
 from stake_pool.actions import decrease_validator_stake, increase_validator_stake, update_stake_pool
 from stake_pool.constants import MINIMUM_ACTIVE_STAKE
 from stake_pool.state import StakePool, ValidatorList
@@ -46,7 +46,7 @@ async def rebalance(endpoint: str, stake_pool_address: PublicKey, staker: Keypai
 
     resp = await async_client.get_minimum_balance_for_rent_exemption(STAKE_LEN)
     stake_rent_exemption = resp['result']
-    retained_reserve_lamports = int(retained_reserve_amount * LAMPORTS_PER_SOL)
+    retained_reserve_lamports = int(retained_reserve_amount * LAMPORTS_PER_MLN)
 
     resp = await async_client.get_account_info(stake_pool.validator_list, commitment=Confirmed)
     data = resp['result']['value']['data']

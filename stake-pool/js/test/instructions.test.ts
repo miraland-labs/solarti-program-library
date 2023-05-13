@@ -4,7 +4,7 @@ import {
   Keypair,
   SystemProgram,
   AccountInfo,
-  LAMPORTS_PER_SOL,
+  LAMPORTS_PER_MLN,
 } from '@solarti/web3.js';
 import { StakePoolLayout } from '../src/layouts';
 import {
@@ -194,7 +194,7 @@ describe('StakePoolProgram', () => {
           return stakePoolAccount;
         }
         if (pubKey.equals(CONSTANTS.poolTokenAccount)) {
-          return mockTokenAccount(LAMPORTS_PER_SOL);
+          return mockTokenAccount(LAMPORTS_PER_MLN);
         }
         return null;
       });
@@ -247,7 +247,7 @@ describe('StakePoolProgram', () => {
           return stakePoolAccount;
         }
         if (pubKey.equals(CONSTANTS.poolTokenAccount)) {
-          return mockTokenAccount(LAMPORTS_PER_SOL * 2);
+          return mockTokenAccount(LAMPORTS_PER_MLN * 2);
         }
         if (pubKey.equals(stakePoolMock.validatorList)) {
           return mockValidatorList();
@@ -270,7 +270,7 @@ describe('StakePoolProgram', () => {
           return stakePoolAccount;
         }
         if (pubKey.equals(CONSTANTS.poolTokenAccount)) {
-          return mockTokenAccount(LAMPORTS_PER_SOL * 2);
+          return mockTokenAccount(LAMPORTS_PER_MLN * 2);
         }
         if (pubKey.equals(stakePoolMock.validatorList)) {
           return mockValidatorList();

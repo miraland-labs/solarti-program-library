@@ -3,7 +3,7 @@ import pytest
 from solana.rpc.commitment import Confirmed
 from spl.token.instructions import get_associated_token_address
 
-from stake.constants import STAKE_LEN, LAMPORTS_PER_SOL
+from stake.constants import STAKE_LEN, LAMPORTS_PER_MLN
 from stake_pool.actions import deposit_sol
 from stake_pool.constants import MINIMUM_ACTIVE_STAKE, MINIMUM_RESERVE_LAMPORTS
 from stake_pool.state import StakePool, ValidatorList
@@ -52,7 +52,7 @@ async def test_rebalance_this_is_very_slow(async_client, validators, payer, stak
     print('Waiting for next epoch')
     await waiter.wait_for_next_epoch(async_client)
     max_in_reserve = total_lamports - minimum_amount * len(validators)
-    await rebalance(ENDPOINT, stake_pool_address, payer, max_in_reserve / LAMPORTS_PER_SOL)
+    await rebalance(ENDPOINT, stake_pool_address, payer, max_in_reserve / LAMPORTS_PER_MLN)
 
     # should still only have minimum left + rent exemptions from increase
     resp = await async_client.get_account_info(stake_pool.reserve_stake, commitment=Confirmed)
@@ -70,7 +70,7 @@ async def test_rebalance_this_is_very_slow(async_client, validators, payer, stak
     # Test case 3: Do nothing
     print('Waiting for next epoch')
     await waiter.wait_for_next_epoch(async_client)
-    await rebalance(ENDPOINT, stake_pool_address, payer, max_in_reserve / LAMPORTS_PER_SOL)
+    await rebalance(ENDPOINT, stake_pool_address, payer, max_in_reserve / LAMPORTS_PER_MLN)
 
     # should still only have minimum left + rent exemptions from increase
     resp = await async_client.get_account_info(stake_pool.reserve_stake, commitment=Confirmed)

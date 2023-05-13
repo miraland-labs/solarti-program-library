@@ -2,7 +2,7 @@ import {
   Keypair,
   Connection,
   PublicKey,
-  LAMPORTS_PER_SOL,
+  LAMPORTS_PER_MLN,
 } from '@solarti/web3.js';
 import { AnchorProvider } from '@project-serum/anchor';
 import NodeWallet from '@project-serum/anchor/dist/cjs/nodewallet';

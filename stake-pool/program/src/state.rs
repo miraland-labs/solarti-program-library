@@ -981,7 +981,7 @@ mod test {
         solana_program::{
             borsh::{get_instance_packed_len, get_packed_len, try_from_slice_unchecked},
             clock::{DEFAULT_SLOTS_PER_EPOCH, DEFAULT_S_PER_SLOT, SECONDS_PER_DAY},
-            native_token::LAMPORTS_PER_SOL,
+            native_token::LAMPORTS_PER_MLN,
         },
     };
 
@@ -1177,12 +1177,12 @@ mod test {
             denominator: 10,
         };
         let mut stake_pool = StakePool {
-            total_lamports: 100 * LAMPORTS_PER_SOL,
-            pool_token_supply: 100 * LAMPORTS_PER_SOL,
+            total_lamports: 100 * LAMPORTS_PER_MLN,
+            pool_token_supply: 100 * LAMPORTS_PER_MLN,
             epoch_fee,
             ..StakePool::default()
         };
-        let reward_lamports = 10 * LAMPORTS_PER_SOL;
+        let reward_lamports = 10 * LAMPORTS_PER_MLN;
         let pool_token_fee = stake_pool.calc_epoch_fee_amount(reward_lamports).unwrap();
 
         stake_pool.total_lamports += reward_lamports;
@@ -1191,7 +1191,7 @@ mod test {
         let fee_lamports = stake_pool
             .calc_lamports_withdraw_amount(pool_token_fee)
             .unwrap();
-        assert_eq!(fee_lamports, LAMPORTS_PER_SOL - 1); // off-by-one due to truncation
+        assert_eq!(fee_lamports, LAMPORTS_PER_MLN - 1); // off-by-one due to truncation
     }
 
     #[test]

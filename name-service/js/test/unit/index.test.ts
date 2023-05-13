@@ -1,6 +1,6 @@
 import {
   Keypair,
-  LAMPORTS_PER_SOL,
+  LAMPORTS_PER_MLN,
   PublicKey,
   SystemProgram,
 } from '@solarti/web3.js';
@@ -38,7 +38,7 @@ describe('SplNameService Instructions', () => {
       nameOwnerKey,
       payerKey,
       name,
-      new Numberu64(LAMPORTS_PER_SOL),
+      new Numberu64(LAMPORTS_PER_MLN),
       new Numberu64(10)
     );
 
@@ -59,7 +59,7 @@ describe('SplNameService Instructions', () => {
       nameOwnerKey,
       payerKey,
       name,
-      new Numberu64(LAMPORTS_PER_SOL),
+      new Numberu64(LAMPORTS_PER_MLN),
       new Numberu64(10),
       nameClassKey,
       nameParent,

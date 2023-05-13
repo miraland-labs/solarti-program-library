@@ -3,7 +3,7 @@ use solana_program_test::*;
 use solana_sdk::{
     commitment_config::CommitmentLevel,
     instruction::Instruction,
-    native_token::LAMPORTS_PER_SOL,
+    native_token::LAMPORTS_PER_MLN,
     pubkey::Pubkey,
     signature::Signature,
     signature::{Keypair, Signer},
@@ -18,7 +18,7 @@ use spl_managed_token::instruction::*;
 use spl_token::state::Account as TokenAccount;
 
 pub fn sol(amount: f64) -> u64 {
-    (amount * LAMPORTS_PER_SOL as f64) as u64
+    (amount * LAMPORTS_PER_MLN as f64) as u64
 }
 
 async fn process_transaction(
