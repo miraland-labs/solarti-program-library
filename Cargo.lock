@@ -5916,7 +5916,7 @@ dependencies = [
 
 [[package]]
 name = "solarti-feature-proposal"
-version = "1.0.1"
+version = "1.0.2"
 dependencies = [
  "borsh",
  "miraland-program",
@@ -5927,7 +5927,7 @@ dependencies = [
 
 [[package]]
 name = "solarti-feature-proposal-cli"
-version = "1.2.1"
+version = "1.2.2"
 dependencies = [
  "chrono",
  "clap 2.34.0",

@@ -1,6 +1,6 @@
 [package]
 name = "solarti-feature-proposal"
-version = "1.0.1"
+version = "1.0.2"
 description = "Solarti Program Library Feature Proposal Program"
 authors = [
   "Miraland Crafters <crafters@miraland.top>",
