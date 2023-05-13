@@ -3873,9 +3873,9 @@ dependencies = [
 
 [[package]]
 name = "miraplex-token-metadata"
-version = "1.7.0-rc5"
+version = "1.7.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "be4fab66bfee732580e4e191f8e10e9220a16e9bc5b0fe98f4df7d84d9bbf2a9"
+checksum = "085218158e26e952c3ff01fc3edb83416c8896b8ddf2633f79ccedbcf4cf5ee0"
 dependencies = [
  "arrayref",
  "borsh",
@@ -3903,9 +3903,9 @@ dependencies = [
 
 [[package]]
 name = "miraplex-utils"
-version = "0.0.7"
+version = "0.0.8"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "47771e120671d9ec282f7945f09e199cb45aa6ebb812d53fcb6d0d7ed8b9edca"
+checksum = "48de5fd3131c19a12188eaff2c18acb701f3ff46d740b01e584ca05cab33e10c"
 dependencies = [
  "arrayref",
  "borsh",
