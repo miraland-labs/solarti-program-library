@@ -13,7 +13,7 @@ import { getMinimumBalanceForRentExemptMultisig, MULTISIG_SIZE } from '../state/
  * @param m              Number of required signatures
  * @param keypair        Optional keypair, defaulting to a new random one
  * @param confirmOptions Options for confirming the transaction
- * @param programId      SPL Token program account
+ * @param programId      Solarti Token program account
  *
  * @return Address of the new multisig
  */

@@ -17,7 +17,7 @@ import { getSigners } from './internal.js';
  * @param decimals       Number of decimals in transfer amount
  * @param multiSigners   Signing accounts if `owner` is a multisig
  * @param confirmOptions Options for confirming the transaction
- * @param programId      SPL Token program account
+ * @param programId      Solarti Token program account
  *
  * @return Signature of the confirmed transaction
  */

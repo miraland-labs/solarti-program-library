@@ -26,8 +26,8 @@ pub enum TokenUpgradeInstruction {
     ///   4. `[]` New token mint
     ///   5. `[]` Transfer authority (owner or delegate) of new token escrow held by PDA, must be:
     ///       `get_token_upgrade_authority_address(original_mint, new_mint, program_id)`
-    ///   6. `[]` SPL Token program for original mint
-    ///   7. `[]` SPL Token program for new mint
+    ///   6. `[]` Solarti Token program for original mint
+    ///   7. `[]` Solarti Token program for new mint
     ///   8. `[]` Original token account transfer authority (owner or delegate)
     ///   9. ..9+M `[signer]` M multisig signer accounts
     ///

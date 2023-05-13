@@ -133,7 +133,7 @@ $ cargo test      # <-- runs host-based tests
 $ cargo test-sbf  # <-- runs BPF program tests
 ```
 
-To run a specific program's tests, such as SPL Token:
+To run a specific program's tests, such as Solarti Token:
 ```bash
 $ cd token/program
 $ cargo test      # <-- runs host-based tests

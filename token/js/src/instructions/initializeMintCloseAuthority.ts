@@ -31,7 +31,7 @@ export const initializeMintCloseAuthorityInstructionData = struct<InitializeMint
  *
  * @param mint            Token mint account
  * @param closeAuthority  Optional authority that can close the mint
- * @param programId       SPL Token program account
+ * @param programId       Solarti Token program account
  *
  * @return Instruction to add to a transaction
  */
@@ -74,7 +74,7 @@ export interface DecodedInitializeMintCloseAuthorityInstruction {
  * Decode an InitializeMintCloseAuthority instruction and validate it
  *
  * @param instruction Transaction instruction to decode
- * @param programId   SPL Token program account
+ * @param programId   Solarti Token program account
  *
  * @return Decoded, valid instruction
  */

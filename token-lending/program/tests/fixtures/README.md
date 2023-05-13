@@ -1,13 +1,13 @@
 # fixtures
 
-### SOL / SRM Aggregator Accounts
+### MLN / SRM Aggregator Accounts
 
 ```shell
 solana config set --url https://api.devnet.solana.com
 
-# Pyth product: SOL/USD
+# Pyth product: MLN/USD
 solana account 3Mnn2fX6rQyUsyELYms1sBJyChWofzSNRoqYzvgMVz5E --output-file 3Mnn2fX6rQyUsyELYms1sBJyChWofzSNRoqYzvgMVz5E.bin
-# Pyth price: SOL/USD
+# Pyth price: MLN/USD
 solana account J83w4HKfqxwcq3BEMMkPFSppX3gqekLyLJBexebFVkix --output-file J83w4HKfqxwcq3BEMMkPFSppX3gqekLyLJBexebFVkix.bin
 # Pyth product: SRM/USD
 solana account 6MEwdxe4g1NeAF9u6KDG14anJpFsVEa2cvr5H6iriFZ8 --output-file 6MEwdxe4g1NeAF9u6KDG14anJpFsVEa2cvr5H6iriFZ8.bin

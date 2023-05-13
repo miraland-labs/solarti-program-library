@@ -1,5 +1,5 @@
 //! # Data Wrapper
-//! We use CPI calls to circumvent the 10kb log limit on Solana transactions.
+//! We use CPI calls to circumvent the 10kb log limit on Miraland transactions.
 //! Instead of logging events to the runtime, we execute a CPI to the `wrapper` program
 //! where the log data is serialized into the instruction data.
 //!

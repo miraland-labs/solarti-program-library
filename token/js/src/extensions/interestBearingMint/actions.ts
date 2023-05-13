@@ -21,7 +21,7 @@ import {
  * @param decimals        Location of the decimal place
  * @param keypair         Optional keypair, defaulting to a new random one
  * @param confirmOptions  Options for confirming the transaction
- * @param programId       SPL Token program account
+ * @param programId       Solarti Token program account
  *
  * @return Public key of the mint
  */
@@ -64,7 +64,7 @@ export async function createInterestBearingMint(
  * @param rate            The initial interest rate
  * @param multiSigners    Signing accounts if `owner` is a multisig
  * @param confirmOptions  Options for confirming the transaction
- * @param programId       SPL Token program account
+ * @param programId       Solarti Token program account
  *
  * @return Signature of the confirmed transaction
  */

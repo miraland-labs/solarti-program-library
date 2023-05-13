@@ -2,7 +2,7 @@
 #![deny(missing_docs)]
 #![cfg_attr(not(test), forbid(unsafe_code))]
 
-//! An ERC20-like Token program for the Solana blockchain
+//! An ERC20-like Token program for the Miraland blockchain
 
 pub mod error;
 pub mod extension;

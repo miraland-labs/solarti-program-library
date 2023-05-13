@@ -12,13 +12,13 @@ This guide requires the Solana CLI tool suite and Stake Pool CLI tool.
 - [Install the Solana Tools](https://docs.solana.com/cli/install-solana-cli-tools)
 - [Install the Stake Pool CLI](cli.md)
 
-You must also have an account with SOL. The guide will assume that you
+You must also have an account with MLN. The guide will assume that you
 are using the default keypair created at the default location using `solana-keygen new`.
 Note that it is possible to override the default keypair with every command if
 needed.
 
 If you are running on localhost using `solana-test-validator`, the default keypair
-will automatically start with 500,000,000 SOL.
+will automatically start with 500,000,000 MLN.
 
 If you are running on devnet or testnet, you can airdrop funds using `solana airdrop 1`.
 
@@ -36,7 +36,7 @@ You'll see the following scripts:
 * `setup-test-validator.sh`: sets up a local test validator with validator vote accounts
 * `setup-stake-pool.sh`: creates a new stake pool with hardcoded parameters
 * `add-validators.sh`: adds validators to the stake pool
-* `deposit.sh`: performs stake and SOL deposits
+* `deposit.sh`: performs stake and MLN deposits
 * `rebalance.sh`: rebalances the stake pool
 * `withdraw.sh`: performs some withdrawals
 
@@ -118,7 +118,7 @@ best practices.
 
 In our example, we will use fees of 0.3%, a referral fee of 50%, opt to *not*
 set a deposit authority, and have the maximum number of validators (2,350).  Next,
-run the script with the amount of SOL to deposit. We'll use 15 SOL:
+run the script with the amount of MLN to deposit. We'll use 15 MLN:
 
 ```bash
 $ ./setup-stake-pool.sh 15
@@ -131,26 +131,26 @@ Creating pool fee collection account DgyZrAq88bnG1TNRxpgDQzWXpzEurCvfY2ukKFWBvAD
 Signature: 51yf2J6dSGAx42KPs2oTMTV4ufEm1ncAHyLPQ6PNf4sbeMHGqno7BGn2tHkUnrd7PRXiWBbGzCWpJNevYjmoLgn2
 Creating stake pool Zg5YBPAk8RqBR9kaLLSoN5C8Uv7nErBz1WC63HTsCPR with validator list 86VZZCuqiz7sDJpFKjQy9c9dZQN9vwDKbYgY8pcwHuaF
 Signature: 47QHcWMEa5Syg13C3SQRA4n88Y8iLx1f39wJXQAStRUxpt2VD5t6pYgAdruNRHUQt1ZBY8QwbvEC1LX9j3nPrAzn
-Depositing SOL into stake pool
+Depositing MLN into stake pool
 Update not required
 Using existing associated token account DgyZrAq88bnG1TNRxpgDQzWXpzEurCvfY2ukKFWBvADQ to receive stake pool tokens of mint BoNneHKDrX9BHjjvSpPfnQyRjsnc9WFH71v8wrgCd7LB, owned by 4SnSuUtJGKvk2GYpBwmEsWG53zTurVM8yXGsoiZQyMJn
 Signature: 4jnS368HcofZ1rUpsGZtmSK9kVxFzJRndSX5VS7eMV3kVgzyg9efA4mcgd2C6BoSNksTmTonRGXTVM1WMywFpiKq
 ```
 
 Your stake pool now exists! For the largest number of validators, the cost for
-this phase is ~2.02 SOL, plus 15 SOL deposited into the pool in exchange for
+this phase is ~2.02 MLN, plus 15 MLN deposited into the pool in exchange for
 pool tokens.
 
-## Step 2: Deposit SOL into the pool
+## Step 2: Deposit MLN into the pool
 
-Now that the pool exists, let's deposit some SOL in exchange for some pool tokens.
+Now that the pool exists, let's deposit some MLN in exchange for some pool tokens.
 
-SOL will likely be the most attractive form of deposit, since it's the easiest
+MLN will likely be the most attractive form of deposit, since it's the easiest
 for everyone to use. Normally, this will likely be done from a DeFi app or
 wallet, but in our example, we'll do it straight from the command line.
 
-We already deposited 15 SOL during creation of the pool, but let's deposit 
-another 10 SOL into the pool:
+We already deposited 15 MLN during creation of the pool, but let's deposit 
+another 10 MLN into the pool:
 
 ```
 $ solarti-stake-pool deposit-sol Zg5YBPAk8RqBR9kaLLSoN5C8Uv7nErBz1WC63HTsCPR 10
@@ -160,7 +160,7 @@ Signature: 4AJv6hSznYoMGnaQvjWXSBjKqtjYpjBx2MLezmRRjWRDa8vUaBLQfPNGd3kamZNs1JeWS
 
 ## Step 3: Add validators to the pool
 
-Now that the pool has some SOL, we need to add validators to it.
+Now that the pool has some MLN, we need to add validators to it.
 
 Using `add-validators.sh`, we'll add each of the validators created during step 0
 to the stake pool. If you are running on another network, you can create your own
@@ -175,14 +175,14 @@ Signature: 3XtmYu9msqnMeKJs9BopYjn5QTc5hENMXXiBwvEw6HYzU5w6z1HUkGwNW24io4Vu9WRKF
 ... (something similar repeated 9 more times)
 ```
 
-This operation moves 1.00228288 SOL from the reserve to a stake account on a given
-validator.  This means you'll need over 1 SOL for each validator that you want to add.
+This operation moves 1.00228288 MLN from the reserve to a stake account on a given
+validator.  This means you'll need over 1 MLN for each validator that you want to add.
 
 ## Step 4: Deposit stakes into the pool
 
 Now that your pool has validators, it can accept stake accounts for you
-to manage. There are two possible sources of deposits: SOL or stake accounts.
-In step 2, we deposited SOL directly, so now we'll deposit stake accounts.
+to manage. There are two possible sources of deposits: MLN or stake accounts.
+In step 2, we deposited MLN directly, so now we'll deposit stake accounts.
 
 This option is particularly attractive for users that already have a stake
 account, and either want stake pool tokens in return, or to diversify their stake more.
@@ -201,7 +201,7 @@ may fail. No problem, you simply need to retry.
 
 ## Step 5: Rebalance stake in the pool
 
-Over time, as people deposit SOL into the reserve, or as validator performance
+Over time, as people deposit MLN into the reserve, or as validator performance
 varies, you will want to move stake around. The best way to do this will be
 through an automated system to collect information about the stake pool and the
 network, and decide how much stake to allocate to each validator.
@@ -224,10 +224,10 @@ $ ./rebalance.sh keys/stake-pool.json local_validators.txt 1
 ## Step 6: Withdraw from the stake pool
 
 Finally, if a user wants to withdraw from the stake pool, they can choose to
-withdraw SOL from the reserve if it has enough SOL, or to withdraw from one of
+withdraw MLN from the reserve if it has enough MLN, or to withdraw from one of
 the stake accounts in the pool.
 
-The `withdraw.sh` script removes stakes and SOL from each of the stake accounts
+The `withdraw.sh` script removes stakes and MLN from each of the stake accounts
 in the pool, given the stake pool, validator file, and amount.
 
 ```bash

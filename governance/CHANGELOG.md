@@ -15,7 +15,7 @@
 
 ## v2.2.2 - 07 Feb 2022
 
-- Native SOL Treasuries
+- Native MLN Treasuries
 - Multi choice and survey style proposals
 - `voter_weight` and `max_voter_weight` addins
 - Multiple instructions per proposal transaction

@@ -68,7 +68,7 @@ export const MINT_SIZE = MintLayout.span;
  * @param connection Connection to use
  * @param address    Mint account
  * @param commitment Desired level of commitment for querying the state
- * @param programId  SPL Token program account
+ * @param programId  Solarti Token program account
  *
  * @return Mint information
  */
@@ -87,7 +87,7 @@ export async function getMint(
  *
  * @param address   Mint account
  * @param info      Mint account data
- * @param programId SPL Token program account
+ * @param programId Solarti Token program account
  *
  * @return Unpacked mint
  */
@@ -154,7 +154,7 @@ export async function getMinimumBalanceForRentExemptMintWithExtensions(
  * @param mint                     Token mint account
  * @param owner                    Owner of the new account
  * @param allowOwnerOffCurve       Allow the owner account to be a PDA (Program Derived Address)
- * @param programId                SPL Token program account
+ * @param programId                Solarti Token program account
  * @param associatedTokenProgramId SPL Associated Token program account
  *
  * @return Promise containing the address of the associated token account
@@ -182,7 +182,7 @@ export async function getAssociatedTokenAddress(
  * @param mint                     Token mint account
  * @param owner                    Owner of the new account
  * @param allowOwnerOffCurve       Allow the owner account to be a PDA (Program Derived Address)
- * @param programId                SPL Token program account
+ * @param programId                Solarti Token program account
  * @param associatedTokenProgramId SPL Associated Token program account
  *
  * @return Address of the associated token account

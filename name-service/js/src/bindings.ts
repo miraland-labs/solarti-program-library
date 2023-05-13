@@ -3,7 +3,7 @@ import {
   PublicKey,
   SystemProgram,
   TransactionInstruction,
-} from '@solana/web3.js';
+} from '@solarti/web3.js';
 
 import {
   createInstruction,

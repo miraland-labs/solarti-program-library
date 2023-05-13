@@ -1,4 +1,4 @@
-import { AccountInfo, PublicKey } from '@solana/web3.js';
+import { AccountInfo, PublicKey } from '@solarti/web3.js';
 import BigNumber from 'bignumber.js';
 import { blob, seq, struct, u8 } from '@solana/buffer-layout';
 import { decimal, publicKey, u64 } from '@solana/buffer-layout-utils';

@@ -45,7 +45,7 @@ pub enum FeatureProposalInstruction {
     /// 4. `[writeable]` Acceptance token account address from `get_acceptance_token_address`
     /// 5. `[writeable]` Feature id account address from `get_feature_id_address`
     /// 6. `[]` System program
-    /// 7. `[]` SPL Token program
+    /// 7. `[]` Solarti Token program
     /// 8. `[]` Rent sysvar
     ///
     Propose {

@@ -16,7 +16,7 @@ import { getSigners } from './internal.js';
  * @param newAuthority     New authority of the account
  * @param multiSigners     Signing accounts if `currentAuthority` is a multisig
  * @param confirmOptions   Options for confirming the transaction
- * @param programId        SPL Token program account
+ * @param programId        Solarti Token program account
  *
  * @return Signature of the confirmed transaction
  */

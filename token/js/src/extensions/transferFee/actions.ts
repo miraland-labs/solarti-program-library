@@ -22,7 +22,7 @@ import {
  * @param decimals       Number of decimals in transfer amount
  * @param multiSigners   Signing accounts if `owner` is a multisig
  * @param confirmOptions Options for confirming the transaction
- * @param programId      SPL Token program account
+ * @param programId      Solarti Token program account
  *
  * @return Signature of the confirmed transaction
  */
@@ -69,7 +69,7 @@ export async function transferCheckedWithFee(
  * @param authority      The mint's withdraw withheld tokens authority
  * @param multiSigners   Signing accounts if `owner` is a multisig
  * @param confirmOptions Options for confirming the transaction
- * @param programId      SPL Token program account
+ * @param programId      Solarti Token program account
  *
  * @return Signature of the confirmed transaction
  */
@@ -103,7 +103,7 @@ export async function withdrawWithheldTokensFromMint(
  * @param multiSigners   Signing accounts if `owner` is a multisig
  * @param sources        Source accounts from which to withdraw withheld fees
  * @param confirmOptions Options for confirming the transaction
- * @param programId      SPL Token program account
+ * @param programId      Solarti Token program account
  *
  * @return Signature of the confirmed transaction
  */
@@ -142,7 +142,7 @@ export async function withdrawWithheldTokensFromAccounts(
  * @param mint           The token mint
  * @param sources        Source accounts from which to withdraw withheld fees
  * @param confirmOptions Options for confirming the transaction
- * @param programId      SPL Token program account
+ * @param programId      Solarti Token program account
  *
  * @return Signature of the confirmed transaction
  */

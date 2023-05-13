@@ -8,7 +8,7 @@ cargo build
 cargo build-sbf
 
 if [[ $1 = -v ]]; then
-  export RUST_LOG=solana=debug
+  export RUST_LOG=solana=debug,miraland=debug
 fi
 
 cargo test

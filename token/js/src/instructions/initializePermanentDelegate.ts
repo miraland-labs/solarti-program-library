@@ -30,7 +30,7 @@ export const initializePermanentDelegateInstructionData = struct<InitializePerma
  *
  * @param mint               Token mint account
  * @param permanentDelegate  Authority that may sign for `Transfer`s and `Burn`s on any account
- * @param programId          SPL Token program account
+ * @param programId          Solarti Token program account
  *
  * @return Instruction to add to a transaction
  */
@@ -72,7 +72,7 @@ export interface DecodedInitializePermanentDelegateInstruction {
  * Decode an InitializePermanentDelegate instruction and validate it
  *
  * @param instruction Transaction instruction to decode
- * @param programId   SPL Token program account
+ * @param programId   Solarti Token program account
  *
  * @return Decoded, valid instruction
  */

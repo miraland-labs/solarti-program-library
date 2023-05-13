@@ -535,7 +535,7 @@ fn command_increase_validator_stake(
     vote_account: &Pubkey,
     amount: f64,
 ) -> CommandResult {
-    let lamports = native_token::sol_to_lamports(amount);
+    let lamports = native_token::mln_to_lamports(amount);
     if !config.no_update {
         command_update(config, stake_pool_address, false, false)?;
     }
@@ -574,7 +574,7 @@ fn command_decrease_validator_stake(
     vote_account: &Pubkey,
     amount: f64,
 ) -> CommandResult {
-    let lamports = native_token::sol_to_lamports(amount);
+    let lamports = native_token::mln_to_lamports(amount);
     if !config.no_update {
         command_update(config, stake_pool_address, false, false)?;
     }
@@ -950,7 +950,7 @@ fn command_deposit_sol(
         command_update(config, stake_pool_address, false, false)?;
     }
 
-    let amount = native_token::sol_to_lamports(amount);
+    let amount = native_token::mln_to_lamports(amount);
 
     // Check withdraw_from balance
     let from_pubkey = from
@@ -959,7 +959,7 @@ fn command_deposit_sol(
     let from_balance = config.rpc_client.get_balance(&from_pubkey)?;
     if from_balance < amount {
         return Err(format!(
-            "Not enough SOL to deposit into pool: {}.\nMaximum deposit amount is {} SOL.",
+            "Not enough MLN to deposit into pool: {}.\nMaximum deposit amount is {} MLN.",
             Sol(amount),
             Sol(from_balance)
         )
@@ -970,7 +970,7 @@ fn command_deposit_sol(
 
     let mut instructions: Vec<Instruction> = vec![];
 
-    // ephemeral SOL account just to do the transfer
+    // ephemeral MLN account just to do the transfer
     let user_sol_transfer = Keypair::new();
     let mut signers = vec![config.fee_payer.as_ref(), &user_sol_transfer];
     if let Some(keypair) = from.as_ref() {
@@ -979,7 +979,7 @@ fn command_deposit_sol(
 
     let mut total_rent_free_balances: u64 = 0;
 
-    // Create the ephemeral SOL account
+    // Create the ephemeral MLN account
     instructions.push(system_instruction::transfer(
         &from_pubkey,
         &user_sol_transfer.pubkey(),
@@ -1003,7 +1003,7 @@ fn command_deposit_sol(
 
     let deposit_instruction = if let Some(deposit_authority) = config.funding_authority.as_ref() {
         let expected_sol_deposit_authority = stake_pool.sol_deposit_authority.ok_or_else(|| {
-            "SOL deposit authority specified in arguments but stake pool has none".to_string()
+            "MLN deposit authority specified in arguments but stake pool has none".to_string()
         })?;
         signers.push(deposit_authority.as_ref());
         if deposit_authority.pubkey() != expected_sol_deposit_authority {
@@ -1685,7 +1685,7 @@ fn command_withdraw_sol(
     let withdraw_instruction = if let Some(withdraw_authority) = config.funding_authority.as_ref() {
         let expected_sol_withdraw_authority =
             stake_pool.sol_withdraw_authority.ok_or_else(|| {
-                "SOL withdraw authority specified in arguments but stake pool has none".to_string()
+                "MLN withdraw authority specified in arguments but stake pool has none".to_string()
             })?;
         signers.push(withdraw_authority.as_ref());
         if withdraw_authority.pubkey() != expected_sol_withdraw_authority {
@@ -1883,7 +1883,7 @@ fn command_list_all_pools(config: &Config) -> CommandResult {
 }
 
 fn main() {
-    solana_logger::setup_with_default("solana=info,miraland=info");
+    miraland_logger::setup_with_default("solana=info,miraland=info");
 
     let matches = App::new(crate_name!())
         .about(crate_description!())
@@ -2173,7 +2173,7 @@ fn main() {
                     .validator(is_amount)
                     .value_name("AMOUNT")
                     .takes_value(true)
-                    .help("Amount in SOL to add to the validator stake account. Must be at least the rent-exempt amount for a stake plus 1 SOL for merging."),
+                    .help("Amount in MLN to add to the validator stake account. Must be at least the rent-exempt amount for a stake plus 1 MLN for merging."),
             )
         )
         .subcommand(SubCommand::with_name("decrease-validator-stake")
@@ -2202,7 +2202,7 @@ fn main() {
                     .validator(is_amount)
                     .value_name("AMOUNT")
                     .takes_value(true)
-                    .help("Amount in SOL to remove from the validator stake account. Must be at least the rent-exempt amount for a stake."),
+                    .help("Amount in MLN to remove from the validator stake account. Must be at least the rent-exempt amount for a stake."),
             )
         )
         .subcommand(SubCommand::with_name("set-preferred-validator")
@@ -2340,7 +2340,7 @@ fn main() {
             )
         )
         .subcommand(SubCommand::with_name("deposit-sol")
-            .about("Deposit SOL into the stake pool in exchange for pool tokens")
+            .about("Deposit MLN into the stake pool in exchange for pool tokens")
             .arg(
                 Arg::with_name("pool")
                     .index(1)
@@ -2355,7 +2355,7 @@ fn main() {
                     .validator(is_amount)
                     .value_name("AMOUNT")
                     .takes_value(true)
-                    .help("Amount in SOL to deposit into the stake pool reserve account."),
+                    .help("Amount in MLN to deposit into the stake pool reserve account."),
             )
             .arg(
                 Arg::with_name("from")
@@ -2478,7 +2478,7 @@ fn main() {
             )
         )
         .subcommand(SubCommand::with_name("withdraw-sol")
-            .about("Withdraw SOL from the stake pool's reserve in exchange for pool tokens")
+            .about("Withdraw MLN from the stake pool's reserve in exchange for pool tokens")
             .arg(
                 Arg::with_name("pool")
                     .index(1)
@@ -2495,7 +2495,7 @@ fn main() {
                     .value_name("SYSTEM_ACCOUNT_ADDRESS_OR_KEYPAIR")
                     .takes_value(true)
                     .required(true)
-                    .help("System account to receive SOL from the stake pool. Defaults to the payer."),
+                    .help("System account to receive MLN from the stake pool. Defaults to the payer."),
             )
             .arg(
                 Arg::with_name("amount")
@@ -2504,7 +2504,7 @@ fn main() {
                     .value_name("AMOUNT")
                     .takes_value(true)
                     .required(true)
-                    .help("Amount of pool tokens to withdraw for SOL."),
+                    .help("Amount of pool tokens to withdraw for MLN."),
             )
             .arg(
                 Arg::with_name("pool_account")

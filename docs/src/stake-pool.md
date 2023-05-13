@@ -2,7 +2,7 @@
 title: Stake Pool Introduction
 ---
 
-A program for pooling together SOL to be staked by an off-chain agent running
+A program for pooling together MLN to be staked by an off-chain agent running
 a Delegation Bot which redistributes the stakes across the network and tries
 to maximize censorship resistance and rewards.
 

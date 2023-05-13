@@ -1,4 +1,4 @@
-import { PublicKey } from '@solana/web3.js'
+import { PublicKey } from '@solarti/web3.js'
 export * from './instructions'
 
 /**

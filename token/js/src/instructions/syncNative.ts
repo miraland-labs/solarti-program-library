@@ -22,7 +22,7 @@ export const syncNativeInstructionData = struct<SyncNativeInstructionData>([u8('
  * Construct a SyncNative instruction
  *
  * @param account   Native account to sync lamports from
- * @param programId SPL Token program account
+ * @param programId Solarti Token program account
  *
  * @return Instruction to add to a transaction
  */
@@ -50,7 +50,7 @@ export interface DecodedSyncNativeInstruction {
  * Decode a SyncNative instruction and validate it
  *
  * @param instruction Transaction instruction to decode
- * @param programId   SPL Token program account
+ * @param programId   Solarti Token program account
  *
  * @return Decoded, valid instruction
  */

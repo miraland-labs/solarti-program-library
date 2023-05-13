@@ -3,7 +3,7 @@ import {
   PublicKey,
   SystemProgram,
   TransactionInstruction,
-} from '@solana/web3.js';
+} from '@solarti/web3.js';
 import { deserialize, deserializeUnchecked, Schema, serialize } from 'borsh';
 
 import { deleteNameRegistry, NAME_PROGRAM_ID } from './bindings';

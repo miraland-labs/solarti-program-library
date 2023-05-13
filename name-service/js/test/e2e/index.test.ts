@@ -5,7 +5,7 @@ import {
   PublicKey,
   sendAndConfirmTransaction,
   Transaction,
-} from '@solana/web3.js';
+} from '@solarti/web3.js';
 import chai, { expect } from 'chai';
 import chaiAsPromised from 'chai-as-promised';
 

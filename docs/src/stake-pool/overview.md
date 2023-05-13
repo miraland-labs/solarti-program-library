@@ -3,14 +3,14 @@ title: Operation
 ---
 
 Stake pools are an alternative method of earning staking rewards. This on-chain
-program pools together SOL to be staked by a staker, allowing SOL holders to
+program pools together MLN to be staked by a staker, allowing MLN holders to
 stake and earn rewards without managing stakes.
 
 ## Staking
 
-SOL token holders can earn rewards and help secure the network by staking tokens
+MLN token holders can earn rewards and help secure the network by staking tokens
 to one or more validators. Rewards for staked tokens are based on the current
-inflation rate, total number of SOL staked on the network, and an individual
+inflation rate, total number of MLN staked on the network, and an individual
 validator’s uptime and commission (fee).
 
 Additional information regarding staking and stake programming is available at:
@@ -32,16 +32,16 @@ This document is intended for the main actors of the stake pool system:
 
 * manager: creates and manages the stake pool, earns fees, can update the fee, staker, and manager
 * staker: adds and removes validators to the pool, rebalances stake among validators
-* user: provides liquid or staked SOL into an existing stake pool
+* user: provides liquid or staked MLN into an existing stake pool
 
-In its current iteration, the stake pool accepts active stakes or SOL, so
-deposits may come from either an active stake or SOL wallet. Withdrawals
+In its current iteration, the stake pool accepts active stakes or MLN, so
+deposits may come from either an active stake or MLN wallet. Withdrawals
 can return a fully active stake account from one of the stake pool's accounts,
-or SOL from the reserve.
+or MLN from the reserve.
 
 This means that stake pool managers and stakers must be comfortable with
 creating and delegating stakes, which are more advanced operations than sending and
-receiving SPL tokens and SOL. Additional information on stake operations are
+receiving SPL tokens and MLN. Additional information on stake operations are
 available at:
 
 - https://docs.solana.com/cli/delegate-stake
@@ -52,15 +52,15 @@ to provide a market for their pool's tokens, through an AMM
 like [Token Swap](../token-swap.md).
 
 Alternatively, stake pool managers can partner with wallet and stake account
-providers for direct SOL deposits.
+providers for direct MLN deposits.
 
 ## Operation
 
 A stake pool manager creates a stake pool. At this point, users can immediately
-participate with SOL deposits with the `deposit-sol` instruction, moving funds
+participate with MLN deposits with the `deposit-sol` instruction, moving funds
 into the reserve in exchange for pool tokens.
 
-Using those SOL deposits, the staker includes validators that will receive
+Using those MLN deposits, the staker includes validators that will receive
 delegations from the pool by adding "validator stake accounts" to the pool
 using the `add-validator` instruction. In this command, the stake pool uses
 reserve funds to create a new stake account and delegate it to the desired validator.
@@ -74,7 +74,7 @@ Once the stake becomes active, which happens at the following epoch boundary
 (maximum 2 days), the user can deposit their stake into the pool using the
 `deposit-stake` instruction.
 
-In exchange for their deposit (SOL or stake), the user receives SPL tokens
+In exchange for their deposit (MLN or stake), the user receives SPL tokens
 representing their fractional ownership in pool. A percentage of the rewards
 earned by the pool goes to the pool manager as an epoch fee.
 
@@ -82,36 +82,36 @@ Over time, as the stakes in the pool accrue rewards, the user's fractional
 ownership will be worth more than their initial deposit.
 
 Whenever they wish to exit the pool, the user may use the `withdraw-sol` instruction
-to receive SOL from the stake pool's reserve in exchange for stake pool tokens.
-Note that this operation will fail if there is not enough SOL in the stake pool's
-reserve, which is normal if the stake pool manager stakes all of the SOL in the pool.
+to receive MLN from the stake pool's reserve in exchange for stake pool tokens.
+Note that this operation will fail if there is not enough MLN in the stake pool's
+reserve, which is normal if the stake pool manager stakes all of the MLN in the pool.
 
 Alternatively, they can use the `withdraw-stake` instruction to withdraw an
 activated stake account in exchange for their SPL pool tokens. The user will get
-back a SOL stake account immediately. The ability to withdraw stake is always
+back a MLN stake account immediately. The ability to withdraw stake is always
 possible, under all circumstances.
 
-Note: when withdrawing stake, if the user wants to withdraw the SOL in the stake
+Note: when withdrawing stake, if the user wants to withdraw the MLN in the stake
 account, they must first deactivate the stake account and wait until the next
 epoch boundary (maximum 2 days).  Once the stake is inactive, they can freely
-withdraw the SOL.
+withdraw the MLN.
 
 The stake pool staker can add and remove validators, or rebalance the pool by
 decreasing the stake on a validator, waiting an epoch to move it into the stake
 pool's reserve account, then increasing the stake on another validator.
 
-The staker operation to add a new validator requires 1.00228288 SOL to create
+The staker operation to add a new validator requires 1.00228288 MLN to create
 the stake account on a validator, so the stake pool reserve needs liquidity.
 
 ### Funding restrictions
 
 To give the manager more control over funds entering the pool, stake pools allow
-deposit and withdrawal restrictions on SOL and stakes through three different
+deposit and withdrawal restrictions on MLN and stakes through three different
 "funding authorities":
 
-* SOL deposit
+* MLN deposit
 * Stake deposit
-* SOL withdrawal
+* MLN withdrawal
 
 If the field is set, that authority must sign the associated instruction.
 
@@ -121,7 +121,7 @@ must sign every stake deposit instruction.
 This can also be useful in a few situations:
 
 * Control who deposits into the stake pool
-* Prohibit a form of deposit. For example, the manager only wishes to have SOL
+* Prohibit a form of deposit. For example, the manager only wishes to have MLN
   deposits, so they set a stake deposit authority, making it only possible to
   deposit a stake account if that authority signs the transaction.
 * Maintenance mode. If the pool needs time to reset fees or otherwise, the
@@ -153,7 +153,7 @@ When processing withdrawals, the order of priority goes:
 * removing validator stake accounts entirely
 
 If there is preferred withdraw validator, and that validator stake account has
-any SOL, a user must withdraw from that account.
+any MLN, a user must withdraw from that account.
 
 If that account is empty, or the preferred withdraw validator stake account is
 not set, then the user must withdraw from any validator stake account.
@@ -200,8 +200,8 @@ The stake pool contains overall information about the pool, including fees,
 pool token mint, amount under management, etc.
 
 The validator list contains specific information about each of the validator
-stake accounts in the pool. This information includes the amount of SOL staked on
-the validator by the pool, and the amount of SOL being activated / deactivated
+stake accounts in the pool. This information includes the amount of MLN staked on
+the validator by the pool, and the amount of MLN being activated / deactivated
 on the validator.
 
 Every stake pool must have its own validator list account, otherwise it will

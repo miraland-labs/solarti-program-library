@@ -12,7 +12,7 @@ use {
     },
     miraland_remote_wallet::remote_wallet::RemoteWalletManager,
     solana_sdk::{
-        message::Message, native_token::Sol, program_pack::Pack, pubkey::Pubkey, signature::Signer,
+        message::Message, native_token::Mln, program_pack::Pack, pubkey::Pubkey, signature::Signer,
         system_instruction,
     },
     spl_associated_token_account::*,
@@ -446,7 +446,7 @@ async fn send_messages(
     println!(
         "Sending {:?} messages for ~{}",
         messages.len(),
-        Sol(lamports_required)
+        Mln(lamports_required)
     );
 
     crate::check_fee_payer_balance(config, lamports_required).await?;

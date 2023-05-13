@@ -15,7 +15,7 @@ import { createAssociatedTokenAccount } from './createAssociatedTokenAccount.js'
  * @param owner          Owner of the new account
  * @param keypair        Optional keypair, defaulting to the associated token account for the `mint` and `owner`
  * @param confirmOptions Options for confirming the transaction
- * @param programId      SPL Token program account
+ * @param programId      Solarti Token program account
  *
  * @return Address of the new token account
  */

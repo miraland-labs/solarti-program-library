@@ -1,6 +1,6 @@
-# SPL Token Lending CLI
+# Solarti Token Lending CLI
 
-A basic command line interface for initializing lending markets and reserves for SPL Token Lending.
+A basic command line interface for initializing lending markets and reserves for Solarti Token Lending.
 
 See https://spl.solana.com/token-lending for more details
 
@@ -71,7 +71,7 @@ solarti-token-lending \
 - `--market-owner` will sign as the lending market owner.
 - `--source-owner` will sign as the source liquidity owner.
 - `--market` is the lending market pubkey.
-- `--source` is the SPL Token account pubkey (owned by `--source-owner`).
+- `--source` is the Solarti Token account pubkey (owned by `--source-owner`).
 - `--amount` is the amount of tokens to deposit.
 - `--pyth-product` and `--pyth-price` are oracle
   accounts [provided by Pyth](https://pyth.network/developers/consumers/accounts).

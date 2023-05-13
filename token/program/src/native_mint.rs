@@ -1,9 +1,9 @@
 //! The Mint that represents the native token
 
-/// There are 10^9 lamports in one SOL
+/// There are 10^9 lamports in one MLN
 pub const DECIMALS: u8 = 9;
 
-// The Mint for native SOL Token accounts
+// The Mint for native MLN Token accounts
 solana_program::declare_id!("MLN1111111111111111111111111111111111111111");
 
 #[cfg(test)]
@@ -14,10 +14,10 @@ mod tests {
     #[test]
     fn test_decimals() {
         assert!(
-            (lamports_to_sol(42) - crate::amount_to_ui_amount(42, DECIMALS)).abs() < f64::EPSILON
+            (lamports_to_mln(42) - crate::amount_to_ui_amount(42, DECIMALS)).abs() < f64::EPSILON
         );
         assert_eq!(
-            sol_to_lamports(42.),
+            mln_to_lamports(42.),
             crate::ui_amount_to_amount(42., DECIMALS)
         );
     }

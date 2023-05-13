@@ -305,8 +305,8 @@ pub(crate) async fn check_fee_payer_balance(
         Err(format!(
             "Fee payer, {}, has insufficient balance: {} required, {} available",
             config.fee_payer()?.pubkey(),
-            lamports_to_sol(required_balance),
-            lamports_to_sol(balance)
+            lamports_to_mln(required_balance),
+            lamports_to_mln(balance)
         )
         .into())
     } else {
@@ -324,8 +324,8 @@ async fn check_wallet_balance(
         Err(format!(
             "Wallet {}, has insufficient balance: {} required, {} available",
             wallet,
-            lamports_to_sol(required_balance),
-            lamports_to_sol(balance)
+            lamports_to_mln(required_balance),
+            lamports_to_mln(balance)
         )
         .into())
     } else {
@@ -770,7 +770,7 @@ async fn command_authorize(
         {
             let previous_authority = match authority_type {
                 AuthorityType::AccountOwner | AuthorityType::CloseAccount => Err(format!(
-                    "Authority type `{}` not supported for SPL Token mints",
+                    "Authority type `{}` not supported for Solarti Token mints",
                     auth_str
                 )),
                 AuthorityType::MintTokens => Ok(mint.base.mint_authority),
@@ -859,7 +859,7 @@ async fn command_authorize(
                 | AuthorityType::InterestRate
                 | AuthorityType::PermanentDelegate
                 | AuthorityType::ConfidentialTransferMint => Err(format!(
-                    "Authority type `{}` not supported for SPL Token accounts",
+                    "Authority type `{}` not supported for Solarti Token accounts",
                     auth_str
                 )),
                 AuthorityType::AccountOwner => {
@@ -1387,13 +1387,13 @@ async fn command_wrap(
     immutable_owner: bool,
     bulk_signers: BulkSigners,
 ) -> CommandResult {
-    let lamports = sol_to_lamports(sol);
+    let lamports = mln_to_lamports(sol);
     let token = native_token_client_from_config(config)?;
 
     let account =
         wrapped_sol_account.unwrap_or_else(|| token.get_associated_token_address(&wallet_address));
 
-    println_display(config, format!("Wrapping {} SOL into {}", sol, account));
+    println_display(config, format!("Wrapping {} MLN into {}", sol, account));
 
     if !config.sign_only {
         if let Some(account_data) = config.program_client.get_account(account).await? {
@@ -1462,15 +1462,15 @@ async fn command_unwrap(
 
         if account_data.lamports == 0 {
             if use_associated_account {
-                return Err("No wrapped SOL in associated account; did you mean to specify an auxiliary address?".to_string().into());
+                return Err("No wrapped MLN in associated account; did you mean to specify an auxiliary address?".to_string().into());
             } else {
-                return Err(format!("No wrapped SOL in {}", account).into());
+                return Err(format!("No wrapped MLN in {}", account).into());
             }
         }
 
         println_display(
             config,
-            format!("  Amount: {} SOL", lamports_to_sol(account_data.lamports)),
+            format!("  Amount: {} MLN", lamports_to_mln(account_data.lamports)),
         );
     }
 
@@ -2402,7 +2402,7 @@ fn app<'a, 'b>(
                 .takes_value(true)
                 .global(true)
                 .validator(is_valid_token_program_id)
-                .help("SPL Token program id"),
+                .help("Solarti Token program id"),
         )
         .arg(
             Arg::with_name("json_rpc_url")
@@ -2413,7 +2413,7 @@ fn app<'a, 'b>(
                 .global(true)
                 .validator(is_url_or_moniker)
                 .help(
-                    "URL for Solana's JSON RPC or moniker (or their first letter): \
+                    "URL for Miraland's JSON RPC or moniker (or their first letter): \
                        [mainnet-beta, testnet, devnet, localhost] \
                     Default from the configuration file."
                 ),
@@ -2952,7 +2952,7 @@ fn app<'a, 'b>(
         )
         .subcommand(
             SubCommand::with_name(CommandName::Wrap.into())
-                .about("Wrap native SOL in a SOL token account")
+                .about("Wrap native MLN in a MLN token account")
                 .arg(
                     Arg::with_name("amount")
                         .validator(is_amount)
@@ -2960,7 +2960,7 @@ fn app<'a, 'b>(
                         .takes_value(true)
                         .index(1)
                         .required(true)
-                        .help("Amount of SOL to wrap"),
+                        .help("Amount of MLN to wrap"),
                 )
                 .arg(
                     Arg::with_name("wallet_keypair")
@@ -2969,8 +2969,8 @@ fn app<'a, 'b>(
                         .validator(is_valid_signer)
                         .takes_value(true)
                         .help(
-                            "Specify the keypair for the wallet which will have its native SOL wrapped. \
-                             This wallet will be assigned as the owner of the wrapped SOL token account. \
+                            "Specify the keypair for the wallet which will have its native MLN wrapped. \
+                             This wallet will be assigned as the owner of the wrapped MLN token account. \
                              This may be a keypair file or the ASK keyword. \
                              Defaults to the client keypair."
                         ),
@@ -2979,7 +2979,7 @@ fn app<'a, 'b>(
                     Arg::with_name("create_aux_account")
                         .takes_value(false)
                         .long("create-aux-account")
-                        .help("Wrap SOL in an auxiliary account instead of associated token account"),
+                        .help("Wrap MLN in an auxiliary account instead of associated token account"),
                 )
                 .arg(
                     Arg::with_name("immutable")
@@ -2994,7 +2994,7 @@ fn app<'a, 'b>(
         )
         .subcommand(
             SubCommand::with_name(CommandName::Unwrap.into())
-                .about("Unwrap a SOL token account")
+                .about("Unwrap a MLN token account")
                 .arg(
                     Arg::with_name("account")
                         .validator(is_valid_pubkey)
@@ -3011,8 +3011,8 @@ fn app<'a, 'b>(
                         .validator(is_valid_signer)
                         .takes_value(true)
                         .help(
-                            "Specify the keypair for the wallet which owns the wrapped SOL. \
-                             This wallet will receive the unwrapped SOL. \
+                            "Specify the keypair for the wallet which owns the wrapped MLN. \
+                             This wallet will receive the unwrapped MLN. \
                              This may be a keypair file or the ASK keyword. \
                              Defaults to the client keypair."
                         ),
@@ -3098,7 +3098,7 @@ fn app<'a, 'b>(
                         .validator(is_valid_pubkey)
                         .value_name("REFUND_ACCOUNT_ADDRESS")
                         .takes_value(true)
-                        .help("The address of the account to receive remaining SOL [default: --owner]"),
+                        .help("The address of the account to receive remaining MLN [default: --owner]"),
                 )
                 .arg(
                     Arg::with_name("close_authority")
@@ -3146,7 +3146,7 @@ fn app<'a, 'b>(
                         .validator(is_valid_pubkey)
                         .value_name("REFUND_ACCOUNT_ADDRESS")
                         .takes_value(true)
-                        .help("The address of the account to receive remaining SOL [default: --owner]"),
+                        .help("The address of the account to receive remaining MLN [default: --owner]"),
                 )
                 .arg(
                     Arg::with_name("close_authority")
@@ -3265,7 +3265,7 @@ fn app<'a, 'b>(
         )
         .subcommand(
             SubCommand::with_name(CommandName::AccountInfo.into())
-                .about("Query details of an SPL Token account by address (DEPRECATED: use `solarti-token display`)")
+                .about("Query details of an Solarti Token account by address (DEPRECATED: use `solarti-token display`)")
                 .setting(AppSettings::Hidden)
                 .arg(
                     Arg::with_name("token")
@@ -3298,7 +3298,7 @@ fn app<'a, 'b>(
         )
         .subcommand(
             SubCommand::with_name(CommandName::MultisigInfo.into())
-                .about("Query details of an SPL Token multisig account by address (DEPRECATED: use `solarti-token display`)")
+                .about("Query details of an Solarti Token multisig account by address (DEPRECATED: use `solarti-token display`)")
                 .setting(AppSettings::Hidden)
                 .arg(
                     Arg::with_name("address")
@@ -3307,12 +3307,12 @@ fn app<'a, 'b>(
                     .takes_value(true)
                     .index(1)
                     .required(true)
-                    .help("The address of the SPL Token multisig account to query"),
+                    .help("The address of the Solarti Token multisig account to query"),
                 ),
         )
         .subcommand(
             SubCommand::with_name(CommandName::Display.into())
-                .about("Query details of an SPL Token mint, account, or multisig by address")
+                .about("Query details of an Solarti Token mint, account, or multisig by address")
                 .arg(
                     Arg::with_name("address")
                     .validator(is_valid_pubkey)
@@ -3320,7 +3320,7 @@ fn app<'a, 'b>(
                     .takes_value(true)
                     .index(1)
                     .required(true)
-                    .help("The address of the SPL Token mint, account, or multisig to query"),
+                    .help("The address of the Solarti Token mint, account, or multisig to query"),
                 ),
         )
         .subcommand(
@@ -3331,12 +3331,12 @@ fn app<'a, 'b>(
                     Arg::with_name("close_empty_associated_accounts")
                     .long("close-empty-associated-accounts")
                     .takes_value(false)
-                    .help("close all empty associated token accounts (to get SOL back)")
+                    .help("close all empty associated token accounts (to get MLN back)")
                 )
         )
         .subcommand(
             SubCommand::with_name(CommandName::SyncNative.into())
-                .about("Sync a native SOL token account to its underlying lamports")
+                .about("Sync a native MLN token account to its underlying lamports")
                 .arg(
                     owner_address_arg()
                         .index(1)
@@ -3577,7 +3577,7 @@ async fn main() -> Result<(), Error> {
     )
     .await;
 
-    solana_logger::setup_with_default("solana=info,miraland=info");
+    miraland_logger::setup_with_default("solana=info,miraland=info");
     let result =
         process_command(&sub_command, matches, &config, wallet_manager, bulk_signers).await?;
     println!("{}", result);
@@ -4331,7 +4331,7 @@ mod tests {
     const TEST_DECIMALS: u8 = 0;
 
     async fn new_validator_for_test() -> (TestValidator, Keypair) {
-        solana_logger::setup();
+        miraland_logger::setup();
         let mut test_validator_genesis = TestValidatorGenesis::default();
         test_validator_genesis.add_programs_with_path(&[
             ProgramInfo {

@@ -10,7 +10,7 @@ The recommendation is to use the generic governance account (`governanceV2`) to 
 
 ### DAO Wallet
 
-Every Governance account (which holds the governance rules) has an associated native SOL treasury (we call it DAO wallet). The relationship is always 1:1. Since the Governance account is a PDA with data it can’t be used as transaction payer and to store SOL in general. **To control programs, the recommended way is to always use the associated SOL address (DAO wallet) for authority over assets**
+Every Governance account (which holds the governance rules) has an associated native MLN treasury (we call it DAO wallet). The relationship is always 1:1. Since the Governance account is a PDA with data it can’t be used as transaction payer and to store MLN in general. **To control programs, the recommended way is to always use the associated MLN address (DAO wallet) for authority over assets**
 
 A DAO wallet is 1) PDA with no data, 2) derived from its governance account and 3) owned by System program. This way it behaves like any other wallet. 
 

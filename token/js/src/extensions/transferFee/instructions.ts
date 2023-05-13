@@ -56,7 +56,7 @@ export const initializeTransferFeeConfigInstructionData = struct<InitializeTrans
  * @param withdrawWithheldAuthority Optional authority that can withdraw fees
  * @param transferFeeBasisPoints Amount of transfer collected as fees, expressed as basis points of the transfer amount
  * @param maximumFee        Maximum fee assessed on transfers
- * @param programId       SPL Token program account
+ * @param programId       Solarti Token program account
  *
  * @return Instruction to add to a transaction
  */
@@ -111,7 +111,7 @@ export interface DecodedInitializeTransferFeeConfigInstruction {
  * Decode an InitializeTransferFeeConfig instruction and validate it
  *
  * @param instruction Transaction instruction to decode
- * @param programId   SPL Token program account
+ * @param programId   Solarti Token program account
  *
  * @return Decoded, valid instruction
  */
@@ -226,7 +226,7 @@ export const transferCheckedWithFeeInstructionData = struct<TransferCheckedWithF
  * @param amount          The amount of tokens to transfer
  * @param decimals        The expected number of base 10 digits to the right of the decimal place
  * @param fee             The expected fee assesed on this transfer, calculated off-chain based on the transferFeeBasisPoints and maximumFee of the mint.
- * @param programId       SPL Token program account
+ * @param programId       Solarti Token program account
  *
  * @return Instruction to add to a transaction
  */
@@ -290,7 +290,7 @@ export interface DecodedTransferCheckedWithFeeInstruction {
  * Decode a TransferCheckedWithFee instruction and validate it
  *
  * @param instruction Transaction instruction to decode
- * @param programId   SPL Token program account
+ * @param programId   Solarti Token program account
  *
  * @return Decoded, valid instruction
  */
@@ -397,7 +397,7 @@ export const withdrawWithheldTokensFromMintInstructionData = struct<WithdrawWith
  * @param destination       The destination account
  * @param authority         The source account's owner/delegate
  * @param signers           The signer account(s)
- * @param programID         SPL Token program account
+ * @param programID         Solarti Token program account
  *
  * @return Instruction to add to a transaction
  */
@@ -449,7 +449,7 @@ export interface DecodedWithdrawWithheldTokensFromMintInstruction {
  * Decode a WithdrawWithheldTokensFromMint instruction and validate it
  *
  * @param instruction Transaction instruction to decode
- * @param programId   SPL Token program account
+ * @param programId   Solarti Token program account
  *
  * @return Decoded, valid instruction
  */
@@ -550,7 +550,7 @@ export const withdrawWithheldTokensFromAccountsInstructionData =
  * @param authority         The source account's owner/delegate
  * @param signers           The signer account(s)
  * @param sources           The source accounts to withdraw from
- * @param programID         SPL Token program account
+ * @param programID         Solarti Token program account
  *
  * @return Instruction to add to a transaction
  */
@@ -609,7 +609,7 @@ export interface DecodedWithdrawWithheldTokensFromAccountsInstruction {
  * Decode a WithdrawWithheldTokensFromAccounts instruction and validate it
  *
  * @param instruction Transaction instruction to decode
- * @param programId   SPL Token program account
+ * @param programId   Solarti Token program account
  *
  * @return Decoded, valid instruction
  */
@@ -717,7 +717,7 @@ export const harvestWithheldTokensToMintInstructionData = struct<HarvestWithheld
  *
  * @param mint              The token mint
  * @param sources           The source accounts to withdraw from
- * @param programID         SPL Token program account
+ * @param programID         Solarti Token program account
  *
  * @return Instruction to add to a transaction
  */
@@ -762,7 +762,7 @@ export interface DecodedHarvestWithheldTokensToMintInstruction {
  * Decode a HarvestWithheldTokensToMint instruction and validate it
  *
  * @param instruction Transaction instruction to decode
- * @param programId   SPL Token program account
+ * @param programId   Solarti Token program account
  *
  * @return Decoded, valid instruction
  */

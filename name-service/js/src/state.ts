@@ -1,4 +1,4 @@
-import { Connection, PublicKey } from '@solana/web3.js';
+import { Connection, PublicKey } from '@solarti/web3.js';
 import { deserializeUnchecked, Schema } from 'borsh';
 
 export class NameRegistryState {

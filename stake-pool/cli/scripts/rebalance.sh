@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# Script to add a certain amount of SOL into a stake pool, given the stake pool
+# Script to add a certain amount of MLN into a stake pool, given the stake pool
 # keyfile and a path to a file containing a list of validator vote accounts
 
 cd "$(dirname "$0")" || exit

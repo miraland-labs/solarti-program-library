@@ -45,7 +45,7 @@ pub enum GovernanceInstruction {
     ///     The account will be created with the Realm PDA as its owner
     /// 4. `[signer]` Payer
     /// 5. `[]` System
-    /// 6. `[]` SPL Token
+    /// 6. `[]` Solarti Token
     /// 7. `[]` Sysvar Rent
 
     /// 8. `[]` Council Token Mint - optional
@@ -83,7 +83,7 @@ pub enum GovernanceInstruction {
     ///  5. `[writable]` TokenOwnerRecord account. PDA seeds: ['governance',realm, governing_token_mint, governing_token_owner]
     ///  6. `[signer]` Payer
     ///  7. `[]` System
-    ///  8. `[]` SPL Token program
+    ///  8. `[]` Solarti Token program
     ///  9. `[]` RealmConfig account. PDA seeds: ['realm-config', realm]
     DepositGoverningTokens {
         /// The amount to deposit into the realm
@@ -100,7 +100,7 @@ pub enum GovernanceInstruction {
     ///  2. `[writable]` Governing Token Destination account. All tokens will be transferred to this account
     ///  3. `[signer]` Governing Token Owner account
     ///  4. `[writable]` TokenOwnerRecord account. PDA seeds: ['governance',realm, governing_token_mint, governing_token_owner]
-    ///  5. `[]` SPL Token program
+    ///  5. `[]` Solarti Token program
     ///  6. `[]` RealmConfig account. PDA seeds: ['realm-config', realm]
     WithdrawGoverningTokens {},
 
@@ -117,7 +117,7 @@ pub enum GovernanceInstruction {
         new_governance_delegate: Option<Pubkey>,
     },
 
-    /// Creates Governance account which can be used to govern any arbitrary Solana account or asset
+    /// Creates Governance account which can be used to govern any arbitrary Miraland account or asset
     ///
     ///   0. `[]` Realm account the created Governance belongs to
     ///   1. `[writable]` Account Governance account. PDA seeds: ['account-governance', realm, governed_account]
@@ -369,7 +369,7 @@ pub enum GovernanceInstruction {
     ///   3. `[signer]` Current Mint authority (MintTokens and optionally FreezeAccount)
     ///   4. `[]` Governing TokenOwnerRecord account (Used only if not signed by RealmAuthority)   
     ///   5. `[signer]` Payer
-    ///   6. `[]` SPL Token program
+    ///   6. `[]` Solarti Token program
     ///   7. `[]` System program
     ///   8. `[]` Sysvar Rent
     ///   8. `[signer]` Governance authority
@@ -395,7 +395,7 @@ pub enum GovernanceInstruction {
     ///   3. `[signer]` Current token account authority (AccountOwner and optionally CloseAccount)
     ///   4. `[]` Governing TokenOwnerRecord account (Used only if not signed by RealmAuthority)       
     ///   5. `[signer]` Payer
-    ///   6. `[]` SPL Token program
+    ///   6. `[]` Solarti Token program
     ///   7. `[]` System program
     ///   8. `[]` Sysvar Rent
     ///   9. `[signer]` Governance authority
@@ -489,8 +489,8 @@ pub enum GovernanceInstruction {
     ///  2. `[]` System
     UpdateProgramMetadata {},
 
-    /// Creates native SOL treasury account for a Governance account
-    /// The account has no data and can be used as a payer for instructions signed by Governance PDAs or as a native SOL treasury
+    /// Creates native MLN treasury account for a Governance account
+    /// The account has no data and can be used as a payer for instructions signed by Governance PDAs or as a native MLN treasury
     ///
     ///  0. `[]` Governance account the treasury account is for
     ///  1. `[writable]` NativeTreasury account. PDA seeds: ['treasury', governance]
@@ -509,7 +509,7 @@ pub enum GovernanceInstruction {
     ///                1) GoverningTokenMint mint_authority to forcefully revoke the membership tokens
     ///                2) GoverningTokenOwner who voluntarily revokes their own membership
     ///  5. `[]` RealmConfig account. PDA seeds: ['realm-config', realm]
-    ///  6. `[]` SPL Token program
+    ///  6. `[]` Solarti Token program
     RevokeGoverningTokens {
         /// The amount to revoke
         #[allow(dead_code)]

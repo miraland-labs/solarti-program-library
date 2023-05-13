@@ -36,7 +36,7 @@ export const approveCheckedInstructionData = struct<ApproveCheckedInstructionDat
  * @param amount       Maximum number of tokens the delegate may transfer
  * @param decimals     Number of decimals in approve amount
  * @param multiSigners Signing accounts if `owner` is a multisig
- * @param programId    SPL Token program account
+ * @param programId    Solarti Token program account
  *
  * @return Instruction to add to a transaction
  */
@@ -94,7 +94,7 @@ export interface DecodedApproveCheckedInstruction {
  * Decode an ApproveChecked instruction and validate it
  *
  * @param instruction Transaction instruction to decode
- * @param programId   SPL Token program account
+ * @param programId   Solarti Token program account
  *
  * @return Decoded, valid instruction
  */

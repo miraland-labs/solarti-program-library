@@ -16,7 +16,7 @@ import {
  * @param mint        Mint to initialize with extension
  * @param state        Account state with which to initialize new accounts
  * @param confirmOptions Options for confirming the transaction
- * @param programId      SPL Token program account
+ * @param programId      Solarti Token program account
  *
  * @return Signature of the confirmed transaction
  */
@@ -43,7 +43,7 @@ export async function initializeDefaultAccountState(
  * @param freezeAuthority          Freeze authority of the mint
  * @param multiSigners   Signing accounts if `freezeAuthority` is a multisig
  * @param confirmOptions Options for confirming the transaction
- * @param programId      SPL Token program account
+ * @param programId      Solarti Token program account
  *
  * @return Signature of the confirmed transaction
  */

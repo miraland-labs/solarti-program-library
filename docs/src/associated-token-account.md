@@ -24,7 +24,7 @@ campaigns difficult and just generally increases the friction of token
 transfers. The Associated Token Account program allows the sender to create the associated token account for
 the receiver, so the token transfer just works.
 
-See the [SPL Token](token.mdx) program for more information about tokens in
+See the [Solarti Token](token.mdx) program for more information about tokens in
 general.
 
 ## Background
@@ -57,7 +57,7 @@ Rust function may be used by clients to derive the wallet's associated token add
 
 The associated account address can be derived in TypeScript with:
 ```ts
-import { PublicKey } from '@solana/web3.js';
+import { PublicKey } from '@solarti/web3.js';
 import { TOKEN_PROGRAM_ID } from '@solana/solarti-token';
 
 const SPL_ASSOCIATED_TOKEN_ACCOUNT_PROGRAM_ID: PublicKey = new PublicKey(

@@ -26,7 +26,7 @@ export const closeAccountInstructionData = struct<CloseAccountInstructionData>([
  * @param destination  Account to receive the remaining balance of the closed account
  * @param authority    Account close authority
  * @param multiSigners Signing accounts if `authority` is a multisig
- * @param programId    SPL Token program account
+ * @param programId    Solarti Token program account
  *
  * @return Instruction to add to a transaction
  */
@@ -70,7 +70,7 @@ export interface DecodedCloseAccountInstruction {
  * Decode a CloseAccount instruction and validate it
  *
  * @param instruction Transaction instruction to decode
- * @param programId   SPL Token program account
+ * @param programId   Solarti Token program account
  *
  * @return Decoded, valid instruction
  */

@@ -29,7 +29,7 @@ export const memoTransferInstructionData = struct<MemoTransferInstructionData>([
  * @param account         Token account to update
  * @param authority       The account's owner/delegate
  * @param signers         The signer account(s)
- * @param programId       SPL Token program account
+ * @param programId       Solarti Token program account
  *
  * @return Instruction to add to a transaction
  */
@@ -48,7 +48,7 @@ export function createEnableRequiredMemoTransfersInstruction(
  * @param account         Token account to update
  * @param authority       The account's owner/delegate
  * @param signers         The signer account(s)
- * @param programId       SPL Token program account
+ * @param programId       Solarti Token program account
  *
  * @return Instruction to add to a transaction
  */

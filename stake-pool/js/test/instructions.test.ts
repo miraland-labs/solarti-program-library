@@ -5,7 +5,7 @@ import {
   SystemProgram,
   AccountInfo,
   LAMPORTS_PER_SOL,
-} from '@solana/web3.js';
+} from '@solarti/web3.js';
 import { StakePoolLayout } from '../src/layouts';
 import {
   STAKE_POOL_INSTRUCTION_LAYOUTS,
@@ -109,7 +109,7 @@ describe('StakePoolProgram', () => {
 
     it.only('should throw an error with invalid balance', async () => {
       await expect(depositSol(connection, stakePoolAddress, from, balance + 1)).rejects.toThrow(
-        Error('Not enough SOL to deposit into pool. Maximum deposit amount is 0.00001 SOL.'),
+        Error('Not enough MLN to deposit into pool. Maximum deposit amount is 0.00001 MLN.'),
       );
     });
 

@@ -7,7 +7,7 @@ import {
   StakeProgram,
   SystemProgram,
   TransactionInstruction,
-} from '@solana/web3.js';
+} from '@solarti/web3.js';
 import * as BufferLayout from '@solana/buffer-layout';
 import { TOKEN_PROGRAM_ID } from '@solana/solarti-token';
 import { STAKE_POOL_PROGRAM_ID } from './constants';
@@ -82,7 +82,7 @@ export const STAKE_POOL_INSTRUCTION_LAYOUTS: {
       BufferLayout.ns64('poolTokens'),
     ]),
   },
-  /// Deposit SOL directly into the pool's reserve account. The output is a "pool" token
+  /// Deposit MLN directly into the pool's reserve account. The output is a "pool" token
   /// representing ownership into the pool. Inputs are converted to the current ratio.
   DepositSol: {
     index: 14,
@@ -91,8 +91,8 @@ export const STAKE_POOL_INSTRUCTION_LAYOUTS: {
       BufferLayout.ns64('lamports'),
     ]),
   },
-  /// Withdraw SOL directly from the pool's reserve account. Fails if the
-  /// reserve does not have enough SOL.
+  /// Withdraw MLN directly from the pool's reserve account. Fails if the
+  /// reserve does not have enough MLN.
   WithdrawSol: {
     index: 16,
     layout: BufferLayout.struct<any>([
@@ -264,7 +264,7 @@ export type WithdrawSolParams = {
 };
 
 /**
- * Deposit SOL directly into the pool's reserve account. The output is a "pool" token
+ * Deposit MLN directly into the pool's reserve account. The output is a "pool" token
  * representing ownership into the pool. Inputs are converted to the current ratio.
  */
 export type DepositSolParams = {
@@ -628,7 +628,7 @@ export class StakePoolInstruction {
   }
 
   /**
-   * Creates a transaction instruction to deposit SOL into a stake pool.
+   * Creates a transaction instruction to deposit MLN into a stake pool.
    */
   static depositSol(params: DepositSolParams): TransactionInstruction {
     const {
@@ -720,7 +720,7 @@ export class StakePoolInstruction {
   }
 
   /**
-   * Creates a transaction instruction to withdraw SOL from a stake pool.
+   * Creates a transaction instruction to withdraw MLN from a stake pool.
    */
   static withdrawSol(params: WithdrawSolParams): TransactionInstruction {
     const {

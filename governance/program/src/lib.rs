@@ -1,6 +1,6 @@
 #![allow(clippy::integer_arithmetic)]
 #![deny(missing_docs)]
-//! A Governance program for the Solana blockchain.
+//! A Governance program for the Miraland blockchain.
 
 pub mod addins;
 pub mod entrypoint;

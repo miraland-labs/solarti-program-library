@@ -1,7 +1,7 @@
 import NodeWallet from '@project-serum/anchor/dist/cjs/nodewallet';
 import { BN } from 'bn.js';
 import { AnchorProvider } from '@project-serum/anchor';
-import { Connection, Keypair, PublicKey } from '@solana/web3.js';
+import { Connection, Keypair, PublicKey } from '@solarti/web3.js';
 import { bs58 } from '@project-serum/anchor/dist/cjs/utils/bytes';
 import { assert } from 'chai';
 import * as crypto from 'crypto';

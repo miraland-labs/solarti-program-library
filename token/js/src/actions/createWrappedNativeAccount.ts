@@ -9,7 +9,7 @@ import { getAssociatedTokenAddress } from '../state/mint.js';
 import { createAccount } from './createAccount.js';
 
 /**
- * Create, initialize, and fund a new wrapped native SOL account
+ * Create, initialize, and fund a new wrapped native MLN account
  *
  * @param connection     Connection to use
  * @param payer          Payer of the transaction and initialization fees
@@ -17,9 +17,9 @@ import { createAccount } from './createAccount.js';
  * @param amount         Number of lamports to wrap
  * @param keypair        Optional keypair, defaulting to the associated token account for the native mint and `owner`
  * @param confirmOptions Options for confirming the transaction
- * @param programId      SPL Token program account
+ * @param programId      Solarti Token program account
  *
- * @return Address of the new wrapped native SOL account
+ * @return Address of the new wrapped native MLN account
  */
 export async function createWrappedNativeAccount(
     connection: Connection,

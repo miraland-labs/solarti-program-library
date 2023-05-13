@@ -22,7 +22,7 @@ import { getAssociatedTokenAddress } from '../state/mint.js';
  * @param allowOwnerOffCurve       Allow the owner account to be a PDA (Program Derived Address)
  * @param commitment               Desired level of commitment for querying the state
  * @param confirmOptions           Options for confirming the transaction
- * @param programId                SPL Token program account
+ * @param programId                Solarti Token program account
  * @param associatedTokenProgramId SPL Associated Token program account
  *
  * @return Address of the new associated token account

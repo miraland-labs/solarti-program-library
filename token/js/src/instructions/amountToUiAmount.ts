@@ -28,7 +28,7 @@ export const amountToUiAmountInstructionData = struct<AmountToUiAmountInstructio
  *
  * @param mint         Public key of the mint
  * @param amount       Amount of tokens to be converted to UiAmount
- * @param programId    SPL Token program account
+ * @param programId    Solarti Token program account
  *
  * @return Instruction to add to a transaction
  */
@@ -67,7 +67,7 @@ export interface DecodedAmountToUiAmountInstruction {
  * Decode a AmountToUiAmount instruction and validate it
  *
  * @param instruction Transaction instruction to decode
- * @param programId   SPL Token program account
+ * @param programId   Solarti Token program account
  *
  * @return Decoded, valid instruction
  */

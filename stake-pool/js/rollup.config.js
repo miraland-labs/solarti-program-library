@@ -69,7 +69,7 @@ function generateConfig(configType, format) {
         '@project-serum/borsh',
         '@solana/buffer-layout',
         '@solana/solarti-token',
-        '@solana/web3.js',
+        '@solarti/web3.js',
         'bn.js',
         'buffer',
       ];
@@ -97,7 +97,7 @@ function generateConfig(configType, format) {
       '@project-serum/borsh',
       '@solana/buffer-layout',
       '@solana/solarti-token',
-      '@solana/web3.js',
+      '@solarti/web3.js',
       'bn.js',
       'buffer',
     ];

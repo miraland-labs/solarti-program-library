@@ -109,7 +109,7 @@ the governed Mint.
 
 ### Token Governance account
 
-A token governance account allows a token account owner to setup governance over an SPL Token account.
+A token governance account allows a token account owner to setup governance over an Solarti Token account.
 The Governance program validates at creation time the current owner signed the transaction to
 create the governance and optionally can transfer the owner to the Governance account.
 Once setup the Token Governance allows participants to create Proposals to execute transfer instructions
@@ -177,7 +177,7 @@ Each Governance Realm that gets created has the option to also have a Council mi
 A council mint is simply a separate mint from the Community mint.
 What this means is that users can submit Proposals that have a different voting population from a different mint
 that can affect the same DAO. A practical application of this policy may be to have a very large population control
-major version bumps of Solana via normal SOL, for instance, but hot fixes be controlled via Council tokens,
+major version bumps of Solana via normal MLN, for instance, but hot fixes be controlled via Council tokens,
 of which there may be only 30, and which may be themselves minted and distributed via proposals by the governing population.
 
 Another important use case is to use the Council for DAO inception. At the beginning of a DAO life

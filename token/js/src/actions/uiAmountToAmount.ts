@@ -11,7 +11,7 @@ import { createUiAmountToAmountInstruction } from '../instructions/uiAmountToAmo
  * @param payer          Payer of the transaction fees
  * @param mint           Mint for the account
  * @param amount         Ui Amount of tokens to be converted to Amount
- * @param programId      SPL Token program account
+ * @param programId      Solarti Token program account
  *
  * @return Ui Amount generated
  */

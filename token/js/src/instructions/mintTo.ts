@@ -29,7 +29,7 @@ export const mintToInstructionData = struct<MintToInstructionData>([u8('instruct
  * @param authority    The mint authority
  * @param amount       Amount to mint
  * @param multiSigners Signing accounts if `authority` is a multisig
- * @param programId    SPL Token program account
+ * @param programId    Solarti Token program account
  *
  * @return Instruction to add to a transaction
  */
@@ -81,7 +81,7 @@ export interface DecodedMintToInstruction {
  * Decode a MintTo instruction and validate it
  *
  * @param instruction Transaction instruction to decode
- * @param programId   SPL Token program account
+ * @param programId   Solarti Token program account
  *
  * @return Decoded, valid instruction
  */

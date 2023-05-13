@@ -31,13 +31,13 @@ pub enum LendingError {
     /// The owner of the account input isn't set to the correct token program id.
     #[error("Input token account is not owned by the correct token program id")]
     InvalidTokenOwner,
-    /// Expected an SPL Token account
+    /// Expected an Solarti Token account
     #[error("Input token account is not valid")]
     InvalidTokenAccount,
-    /// Expected an SPL Token mint
+    /// Expected an Solarti Token mint
     #[error("Input token mint account is not valid")]
     InvalidTokenMint,
-    /// Expected a different SPL Token program
+    /// Expected a different Solarti Token program
     #[error("Input token program account is not valid")]
     InvalidTokenProgram,
 

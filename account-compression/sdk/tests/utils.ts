@@ -5,7 +5,7 @@ import {
     TransactionInstruction,
     Keypair,
     Signer,
-} from '@solana/web3.js';
+} from '@solarti/web3.js';
 import { AnchorProvider } from '@project-serum/anchor';
 import * as crypto from 'crypto';
 

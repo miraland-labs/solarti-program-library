@@ -89,7 +89,7 @@ export const ACCOUNT_SIZE = AccountLayout.span;
  * @param connection Connection to use
  * @param address    Token account
  * @param commitment Desired level of commitment for querying the state
- * @param programId  SPL Token program account
+ * @param programId  Solarti Token program account
  *
  * @return Token account information
  */
@@ -109,7 +109,7 @@ export async function getAccount(
  * @param connection Connection to use
  * @param addresses  Token accounts
  * @param commitment Desired level of commitment for querying the state
- * @param programId  SPL Token program account
+ * @param programId  Solarti Token program account
  *
  * @return Token account information
  */
@@ -158,7 +158,7 @@ export async function getMinimumBalanceForRentExemptAccountWithExtensions(
  *
  * @param address   Token account
  * @param info      Token account data
- * @param programId SPL Token program account
+ * @param programId Solarti Token program account
  *
  * @return Unpacked token account
  */

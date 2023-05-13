@@ -1,5 +1,5 @@
 import * as beet from '@metaplex-foundation/beet';
-import { PublicKey } from '@solana/web3.js';
+import { PublicKey } from '@solarti/web3.js';
 import * as beetSolana from '@metaplex-foundation/beet-solana';
 
 import { Path, pathBeetFactory } from './Path';

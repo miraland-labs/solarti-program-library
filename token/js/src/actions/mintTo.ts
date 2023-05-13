@@ -15,7 +15,7 @@ import { getSigners } from './internal.js';
  * @param amount         Amount to mint
  * @param multiSigners   Signing accounts if `authority` is a multisig
  * @param confirmOptions Options for confirming the transaction
- * @param programId      SPL Token program account
+ * @param programId      Solarti Token program account
  *
  * @return Signature of the confirmed transaction
  */

@@ -19,7 +19,7 @@ export const createNativeMintInstructionData = struct<CreateNativeMintInstructio
  * @param account   New token account
  * @param mint      Mint account
  * @param owner     Owner of the new account
- * @param programId SPL Token program account
+ * @param programId Solarti Token program account
  *
  * @return Instruction to add to a transaction
  */

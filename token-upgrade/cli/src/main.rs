@@ -381,7 +381,7 @@ async fn main() -> Result<(), Box<dyn Error>> {
             verbose: matches.is_present("verbose"),
         }
     };
-    solana_logger::setup_with_default("solana=info,miraland=info");
+    miraland_logger::setup_with_default("solana=info,miraland=info");
 
     if config.verbose {
         println!("JSON RPC URL: {}", config.json_rpc_url);
@@ -502,7 +502,7 @@ mod test {
     };
 
     async fn new_validator_for_test() -> (TestValidator, Keypair) {
-        solana_logger::setup();
+        miraland_logger::setup();
         let mut test_validator_genesis = TestValidatorGenesis::default();
         test_validator_genesis.add_programs_with_path(&[
             ProgramInfo {

@@ -1,6 +1,6 @@
 # `@solarti/solarti-token`
 
-A TypeScript library for interacting with the SPL Token and Token-2022 programs.
+A TypeScript library for interacting with the Solarti Token and Token-2022 programs.
 
 ## Links
 

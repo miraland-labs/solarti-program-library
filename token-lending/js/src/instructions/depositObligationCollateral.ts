@@ -1,5 +1,5 @@
 import { TOKEN_PROGRAM_ID } from '@solana/solarti-token';
-import { PublicKey, SYSVAR_CLOCK_PUBKEY, TransactionInstruction } from '@solana/web3.js';
+import { PublicKey, SYSVAR_CLOCK_PUBKEY, TransactionInstruction } from '@solarti/web3.js';
 import { struct, u8 } from '@solana/buffer-layout';
 import { LENDING_PROGRAM_ID } from '../constants';
 import { u64 } from '@solana/buffer-layout-utils';

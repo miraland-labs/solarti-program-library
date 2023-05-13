@@ -3,7 +3,7 @@ import type {
   Connection,
   Commitment,
   GetAccountInfoConfig,
-} from '@solana/web3.js';
+} from '@solarti/web3.js';
 import { BN } from 'bn.js';
 
 import {

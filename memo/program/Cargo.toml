@@ -1,6 +1,6 @@
 [package]
 name = "solarti-memo"
-version = "3.0.4"
+version = "3.0.5"
 description = "Solarti Program Library Memo"
 authors = [
   "Miraland Crafters <crafters@miraland.top>",
@@ -15,11 +15,11 @@ no-entrypoint = []
 test-sbf = []
 
 [dependencies]
-miraland-program = "=1.14.17-rc4"
+miraland-program = "=1.14.17-rc5"
 
 [dev-dependencies]
-miraland-program-test = "=1.14.17-rc4"
-miraland-sdk = "=1.14.17-rc4"
+miraland-program-test = "=1.14.17-rc5"
+miraland-sdk = "=1.14.17-rc5"
 
 [lib]
 crate-type = ["cdylib", "lib"]

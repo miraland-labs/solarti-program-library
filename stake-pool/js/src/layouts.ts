@@ -1,5 +1,5 @@
 import { publicKey, struct, u32, u64, u8, option, vec } from '@project-serum/borsh';
-import { Lockup, PublicKey } from '@solana/web3.js';
+import { Lockup, PublicKey } from '@solarti/web3.js';
 import { AccountInfo } from '@solana/solarti-token';
 import BN from 'bn.js';
 import {

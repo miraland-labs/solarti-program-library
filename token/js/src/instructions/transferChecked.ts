@@ -36,7 +36,7 @@ export const transferCheckedInstructionData = struct<TransferCheckedInstructionD
  * @param amount       Number of tokens to transfer
  * @param decimals     Number of decimals in transfer amount
  * @param multiSigners Signing accounts if `owner` is a multisig
- * @param programId    SPL Token program account
+ * @param programId    Solarti Token program account
  *
  * @return Instruction to add to a transaction
  */
@@ -94,7 +94,7 @@ export interface DecodedTransferCheckedInstruction {
  * Decode a TransferChecked instruction and validate it
  *
  * @param instruction Transaction instruction to decode
- * @param programId   SPL Token program account
+ * @param programId   Solarti Token program account
  *
  * @return Decoded, valid instruction
  */

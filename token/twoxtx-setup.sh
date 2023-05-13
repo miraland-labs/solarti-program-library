@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 #
 # Patch in a Solana v1.12 monorepo that supports 2x transactions for testing the
-# SPL Token 2022 Confidential Transfer extension
+# Solarti Token 2022 Confidential Transfer extension
 #
 
 set -e

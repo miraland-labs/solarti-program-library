@@ -3,7 +3,7 @@ import {
   LAMPORTS_PER_SOL,
   PublicKey,
   SystemProgram,
-} from '@solana/web3.js';
+} from '@solarti/web3.js';
 import chai, { expect } from 'chai';
 import chaiAsPromised from 'chai-as-promised';
 

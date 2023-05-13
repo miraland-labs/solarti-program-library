@@ -6,7 +6,7 @@ import type {
   ConfirmOptions,
   Connection,
   TransactionSignature,
-} from '@solana/web3.js';
+} from '@solarti/web3.js';
 import {
   Account,
   PublicKey,
@@ -14,7 +14,7 @@ import {
   Transaction,
   TransactionInstruction,
   sendAndConfirmTransaction,
-} from '@solana/web3.js';
+} from '@solarti/web3.js';
 
 import * as Layout from './layout';
 import {loadAccount} from './util/account';

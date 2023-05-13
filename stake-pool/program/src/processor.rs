@@ -3436,7 +3436,7 @@ impl Processor {
         if let stake::state::StakeState::Initialized(meta) = stake_state {
             let minimum_reserve_lamports = minimum_reserve_lamports(&meta);
             if new_reserve_lamports < minimum_reserve_lamports {
-                msg!("Attempting to withdraw {} lamports, maximum possible SOL withdrawal is {} lamports",
+                msg!("Attempting to withdraw {} lamports, maximum possible MLN withdrawal is {} lamports",
                     withdraw_lamports,
                     reserve_stake_info.lamports().saturating_sub(minimum_reserve_lamports)
                 );
@@ -4037,7 +4037,7 @@ impl PrintProgramError for StakePoolError {
             StakePoolError::InvalidPreferredValidator => msg!("Error: Provided preferred validator is invalid"),
             StakePoolError::TransientAccountInUse => msg!("Error: Provided validator stake account already has a transient stake account in use"),
             StakePoolError::InvalidSolWithdrawAuthority => msg!("Error: Provided sol withdraw authority does not match the program's"),
-            StakePoolError::SolWithdrawalTooLarge => msg!("Error: Too much SOL withdrawn from the stake pool's reserve account"),
+            StakePoolError::SolWithdrawalTooLarge => msg!("Error: Too much MLN withdrawn from the stake pool's reserve account"),
             StakePoolError::InvalidMetadataAccount => msg!("Error: Metadata account derived from pool mint account does not match the one passed to program"),
             StakePoolError::UnsupportedMintExtension => msg!("Error: mint has an unsupported extension"),
             StakePoolError::UnsupportedFeeAccountExtension => msg!("Error: fee account has an unsupported extension"),

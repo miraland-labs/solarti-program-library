@@ -58,7 +58,7 @@ export const MULTISIG_SIZE = MultisigLayout.span;
  * @param connection Connection to use
  * @param address    Multisig account
  * @param commitment Desired level of commitment for querying the state
- * @param programId  SPL Token program account
+ * @param programId  Solarti Token program account
  *
  * @return Multisig information
  */
@@ -77,7 +77,7 @@ export async function getMultisig(
  *
  * @param address   Multisig account
  * @param info      Multisig account data
- * @param programId SPL Token program account
+ * @param programId Solarti Token program account
  *
  * @return Unpacked multisig
  */

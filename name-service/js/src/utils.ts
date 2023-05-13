@@ -8,7 +8,7 @@ import {
   PublicKey,
   Transaction,
   TransactionInstruction,
-} from '@solana/web3.js';
+} from '@solarti/web3.js';
 import BN from 'bn.js';
 
 import { HASH_PREFIX, NAME_PROGRAM_ID } from './bindings';

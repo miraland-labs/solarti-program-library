@@ -9,7 +9,7 @@ import { createCreateNativeMintInstruction } from '../instructions/createNativeM
  * @param connection               Connection to use
  * @param payer                    Payer of the transaction and initialization fees
  * @param confirmOptions           Options for confirming the transaction
- * @param programId                SPL Token program account
+ * @param programId                Solarti Token program account
  * @param nativeMint               Native mint id associated with program
  */
 export async function createNativeMint(

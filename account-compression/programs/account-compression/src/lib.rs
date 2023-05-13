@@ -4,7 +4,7 @@
 //! This is accomplished by fast-forwarding out-of-date (or possibly invalid) proofs based on information stored in the changelogs.
 //! See a copy of the whitepaper [here](https://drive.google.com/file/d/1BOpa5OFmara50fTvL0VIVYjtg-qzHCVc/view)
 //!
-//! To circumvent proof size restrictions stemming from Solana transaction size restrictions,
+//! To circumvent proof size restrictions stemming from Miraland transaction size restrictions,
 //! SPL Account Compression also provides the ability to cache the upper most leaves of the
 //! concurrent merkle tree. This is called the "canopy", and is stored at the end of the
 //! ConcurrentMerkleTreeAccount. More information can be found in the initialization instruction
@@ -19,7 +19,7 @@
 //!
 //! Operationally, SPL ConcurrentMerkleTrees **must** be supplemented by off-chain indexers to cache information
 //! about leafs and to power an API that can supply up-to-date proofs to allow updates to the tree.
-//! All modifications to SPL ConcurrentMerkleTrees are settled on the Solana ledger via instructions against the SPL Compression contract.
+//! All modifications to SPL ConcurrentMerkleTrees are settled on the Miraland ledger via instructions against the SPL Compression contract.
 //! A production-ready indexer (Plerkle) can be found in the [Metaplex program library](https://github.com/metaplex-foundation/digital-asset-validator-plugin)
 
 use anchor_lang::{

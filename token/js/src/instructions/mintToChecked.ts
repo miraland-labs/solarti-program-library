@@ -35,7 +35,7 @@ export const mintToCheckedInstructionData = struct<MintToCheckedInstructionData>
  * @param amount       Amount to mint
  * @param decimals     Number of decimals in amount to mint
  * @param multiSigners Signing accounts if `authority` is a multisig
- * @param programId    SPL Token program account
+ * @param programId    Solarti Token program account
  *
  * @return Instruction to add to a transaction
  */
@@ -90,7 +90,7 @@ export interface DecodedMintToCheckedInstruction {
  * Decode a MintToChecked instruction and validate it
  *
  * @param instruction Transaction instruction to decode
- * @param programId   SPL Token program account
+ * @param programId   Solarti Token program account
  *
  * @return Decoded, valid instruction
  */

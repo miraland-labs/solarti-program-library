@@ -17,7 +17,7 @@ pub struct LendingMarket {
     /// Owner authority which can add new reserves
     pub owner: Pubkey,
     /// Currency market prices are quoted in
-    /// e.g. "USD" null padded (`*b"USD\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0"`) or a SPL token mint pubkey
+    /// e.g. "USD" null padded (`*b"USD\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0"`) or a Solarti token mint pubkey
     pub quote_currency: [u8; 32],
     /// Token program id
     pub token_program_id: Pubkey,
@@ -51,7 +51,7 @@ pub struct InitLendingMarketParams {
     /// Owner authority which can add new reserves
     pub owner: Pubkey,
     /// Currency market prices are quoted in
-    /// e.g. "USD" null padded (`*b"USD\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0"`) or a SPL token mint pubkey
+    /// e.g. "USD" null padded (`*b"USD\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0"`) or a Solarti token mint pubkey
     pub quote_currency: [u8; 32],
     /// Token program id
     pub token_program_id: Pubkey,

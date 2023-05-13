@@ -36,6 +36,8 @@ describe('native', () => {
     });
     beforeEach(async () => {
         owner = Keypair.generate();
+        expect(TEST_PROGRAM_ID).to.eql(TOKEN_PROGRAM_ID); // MI added
+        expect(nativeMint).to.eql(NATIVE_MINT); // MI added
         account = await createWrappedNativeAccount(
             connection,
             payer,

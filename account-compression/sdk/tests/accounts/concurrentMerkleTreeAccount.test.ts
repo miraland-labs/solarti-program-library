@@ -3,7 +3,7 @@ import {
   Connection,
   PublicKey,
   LAMPORTS_PER_SOL,
-} from '@solana/web3.js';
+} from '@solarti/web3.js';
 import { AnchorProvider } from '@project-serum/anchor';
 import NodeWallet from '@project-serum/anchor/dist/cjs/nodewallet';
 import { assert } from 'chai';
@@ -108,7 +108,7 @@ describe('ConcurrentMerkleTreeAccount tests', () => {
   describe('Test deserialization for available depth-size pairs', () => {
     it('Test all pairs', async () => {
       for (const depthSizePair of ALL_DEPTH_SIZE_PAIRS) {
-        // Airdrop enough SOL to cover tree creation
+        // Airdrop enough MLN to cover tree creation
         const size = getConcurrentMerkleTreeAccountSize(
           depthSizePair.maxDepth,
           depthSizePair.maxBufferSize
@@ -153,7 +153,7 @@ describe('ConcurrentMerkleTreeAccount tests', () => {
       const maxBufferSize = 2048;
 
       for (let canopyDepth = 1; canopyDepth <= 14; canopyDepth++) {
-        // Airdrop enough SOL to cover tree creation
+        // Airdrop enough MLN to cover tree creation
         const size = getConcurrentMerkleTreeAccountSize(
           maxDepth,
           maxBufferSize,

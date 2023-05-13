@@ -35,7 +35,7 @@ export const burnCheckedInstructionData = struct<BurnCheckedInstructionData>([
  * @param amount       Number of tokens to burn
  * @param decimals     Number of decimals in burn amount
  * @param multiSigners Signing accounts if `owner` is a multisig
- * @param programId    SPL Token program account
+ * @param programId    Solarti Token program account
  *
  * @return Instruction to add to a transaction
  */
@@ -90,7 +90,7 @@ export interface DecodedBurnCheckedInstruction {
  * Decode a BurnChecked instruction and validate it
  *
  * @param instruction Transaction instruction to decode
- * @param programId   SPL Token program account
+ * @param programId   Solarti Token program account
  *
  * @return Decoded, valid instruction
  */

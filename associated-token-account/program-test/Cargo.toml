@@ -14,9 +14,9 @@ version = "0.0.2"
 test-sbf = []
 
 [dev-dependencies]
-miraland-program = "=1.14.17-rc4"
-miraland-program-test = "=1.14.17-rc4"
-miraland-sdk = "=1.14.17-rc4"
+miraland-program = "=1.14.17-rc5"
+miraland-program-test = "=1.14.17-rc5"
+miraland-sdk = "=1.14.17-rc5"
 solarti-associated-token-account = { version = "1.1", path = "../program", features = ["no-entrypoint"] }
 solarti-token = { version = "3.5", path = "../../token/program", features = ["no-entrypoint"] }
 solarti-token-2022 = { version = "0.6", path = "../../token/program-2022", features = ["no-entrypoint"] }

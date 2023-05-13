@@ -19,14 +19,14 @@ borsh = "0.9"
 borsh-derive = "0.9.0"
 num-derive = "0.3"
 num-traits = "0.2"
-miraland-program = "=1.14.17-rc4"
+miraland-program = "=1.14.17-rc5"
 thiserror = "1.0"
 uint = "0.9"
 
 [dev-dependencies]
 proptest = "1.0.0"
-miraland-program-test = "=1.14.17-rc4"
-miraland-sdk = "=1.14.17-rc4"
+miraland-program-test = "=1.14.17-rc5"
+miraland-sdk = "=1.14.17-rc5"
 libm = "0.2.2"
 
 [lib]

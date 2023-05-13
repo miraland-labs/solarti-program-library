@@ -13,7 +13,7 @@ import { getAssociatedTokenAddress } from '../state/mint.js';
  * @param mint                     Mint for the account
  * @param owner                    Owner of the new account
  * @param confirmOptions           Options for confirming the transaction
- * @param programId                SPL Token program account
+ * @param programId                Solarti Token program account
  * @param associatedTokenProgramId SPL Associated Token program account
  *
  * @return Address of the new or existing associated token account

@@ -85,7 +85,7 @@ Signature: 5z6uH3EuPcujeWGpAjBtciSUR3TxtMBgWYU4ULagUso4QGzE9JenhYHwYthJ4b3rS57By
 
 The unique stake pool identifier is `Zg5YBPAk8RqBR9kaLLSoN5C8Uv7nErBz1WC63HTsCPR`.
 
-The identifier for the stake pool's SPL token mint is
+The identifier for the stake pool's Solarti token mint is
 `BoNneHKDrX9BHjjvSpPfnQyRjsnc9WFH71v8wrgCd7LB`. The stake pool has full control
 over the mint.
 
@@ -99,7 +99,7 @@ The reserve stake account identifier is `J5XB7mWpeaUZxZ6ogXT57qSCobczx27vLZYSgfS
 This account holds onto additional stake used when rebalancing between validators.
 
 For a stake pool with 1000 validators, the cost to create a stake pool is less
-than 0.5 SOL.
+than 0.5 MLN.
 
 The `create-pool` command allows setting all of the accounts and keypairs to
 pre-generated values, including:
@@ -115,7 +115,7 @@ You can always check out the available options by running `solarti-stake-pool cr
 
 ### Create a restricted stake pool
 
-If a manager would like to restrict deposits (stake and SOL) to one key in
+If a manager would like to restrict deposits (stake and MLN) to one key in
 particular, they can set a deposit authority at creation:
 
 ```console
@@ -133,7 +133,7 @@ Signature: 5z6uH3EuPcujeWGpAjBtciSUR3TxtMBgWYU4ULagUso4QGzE9JenhYHwYthJ4b3rS57By
 As the output says, the `set-funding-authority` can be used to modify or remove
 the deposit authority.
 
-As long as the deposit authority is set, SOL and stake deposits must be signed
+As long as the deposit authority is set, MLN and stake deposits must be signed
 by `4SnSuUtJGKvk2GYpBwmEsWG53zTurVM8yXGsoiZQyMJn`, so no one else can participate
 in the pool. As mentioned earlier, this feature does not prohibit withdrawals,
 so anyone with pool tokens will still be able to withdraw from the pool.
@@ -147,8 +147,8 @@ $ solarti-stake-pool set-manager Zg5YBPAk8RqBR9kaLLSoN5C8Uv7nErBz1WC63HTsCPR --n
 Signature: 39N5gkaqXuWm6JPEUWfenKXeG4nSa71p7iHb9zurvdZcsWmbjdmSXwLVYfhAVHWucTY77sJ8SkUNpVpVAhe4eZ53
 ```
 
-At the same time, they may also change the SPL token account that receives fees
-every epoch. The mint for the provided token account must be the SPL token mint,
+At the same time, they may also change the Solarti token account that receives fees
+every epoch. The mint for the provided token account must be the Solarti token mint,
 `BoNneHKDrX9BHjjvSpPfnQyRjsnc9WFH71v8wrgCd7LB` in our example.
 
 ```console
@@ -224,11 +224,11 @@ authority.
 ### Set Funding Authority
 
 To restrict who can interact with the pool, the stake pool manager may require
-a particular signature on stake deposits, SOL deposits, or SOL withdrawals. This
+a particular signature on stake deposits, MLN deposits, or MLN withdrawals. This
 does not make the pool private, since all information is available on-chain, but
 it restricts who can use the pool.
 
-As an example, let's say a pool wants to restrict all SOL withdrawals.
+As an example, let's say a pool wants to restrict all MLN withdrawals.
 
 ```console
 $ solarti-stake-pool set-funding-authority Zg5YBPAk8RqBR9kaLLSoN5C8Uv7nErBz1WC63HTsCPR sol-withdraw AZ1PgxWSxw4ezX8gvpNgGsr39jJHCwtkaXr1mNMwWWeK
@@ -236,9 +236,9 @@ Signature: 3gx7ckGNSL7gUUyxh4CU3RH3Lyt88hiCvYQ4QRKtnmrZHvAS93ebP6bf39WYGTeKDMVSJ
 ```
 
 After running this command, `AZ1PgxWSxw4ezX8gvpNgGsr39jJHCwtkaXr1mNMwWWeK` must
-sign all SOL withdrawals, otherwise the operation fails.
+sign all MLN withdrawals, otherwise the operation fails.
 
-After some time, if the manager wishes to enable SOL withdrawals, they can remove
+After some time, if the manager wishes to enable MLN withdrawals, they can remove
 the restriction:
 
 ```console
@@ -246,7 +246,7 @@ $ solarti-stake-pool set-funding-authority Zg5YBPAk8RqBR9kaLLSoN5C8Uv7nErBz1WC63
 Signature: 5kWeBqoxyvANMHCP4ydsZRf8QU4hMotLnKkFbTEdvqEVywo4F3MpZtay7D57FbjJZpdp72fc3vrbxJi9qDLfLCnD
 ```
 
-Now, anyone can withdraw SOL from the stake pool, provided there is enough SOL left
+Now, anyone can withdraw MLN from the stake pool, provided there is enough MLN left
 in the reserve.
 
 The options for funding authorities are `sol-withdraw`, `sol-deposit`, and `stake-deposit`.
@@ -262,11 +262,11 @@ In order to accommodate large numbers of user deposits into the stake pool, the
 stake pool only manages one stake account per validator. To add a new validator
 to the stake pool, the staker must use the `add-validator` command.
 
-The SOL used to add validators to the pool comes from the stake pool's reserve
-account. If there is insufficient SOL in the reserve, the command will fail.
-Be sure to use the `deposit-sol` command to move some SOL into the pool.
+The MLN used to add validators to the pool comes from the stake pool's reserve
+account. If there is insufficient MLN in the reserve, the command will fail.
+Be sure to use the `deposit-sol` command to move some MLN into the pool.
 
-With 10 SOL in the pool, let's add some random validators to the stake pool.
+With 10 MLN in the pool, let's add some random validators to the stake pool.
 
 ```console
 $ solarti-stake-pool add-validator Zg5YBPAk8RqBR9kaLLSoN5C8Uv7nErBz1WC63HTsCPR 38DYMkwYCvsj8TC6cNaEvFHHVDYeWDp1qUgMgyjNqZXk
@@ -274,7 +274,7 @@ Adding stake account F8e8Ympp4MkDSPZdvRxdQUZXRkMBDdyqgHa363GShAPt, delegated to 
 Signature: 5tdpsx64mVcSHBK8vMbBzFDHnEZB6GUmVpqSXXE5hezMAzPYwZbJCBtAHakDAiuWNcrMongGrmwDaeywhVz4i8pi
 ```
 
-In order to maximize censorship resistance, we want to distribute our SOL to as
+In order to maximize censorship resistance, we want to distribute our MLN to as
 many validators as possible, so let's add a few more.
 
 ```console
@@ -290,18 +290,18 @@ We can see the status of a stake account using the Solana command-line utility.
 
 ```console
 $ solana stake-account 5AaobwjccyHnXhFCd24uiX6VqPjXE3Ry4o92fJjqqjAr
-Balance: 1.00228288 SOL
-Rent Exempt Reserve: 0.00228288 SOL
-Delegated Stake: 1 SOL
-Active Stake: 0 SOL
-Activating Stake: 1 SOL
+Balance: 1.00228288 MLN
+Rent Exempt Reserve: 0.00228288 MLN
+Delegated Stake: 1 MLN
+Active Stake: 0 MLN
+Activating Stake: 1 MLN
 Stake activates starting from epoch: 5
 Delegated Vote Account Address: J3xu64PWShcMen99kU3igxtwbke2Nwfo8pkZNRgrq66H
 Stake Authority: DS3AyFN9dF1ruNBcSeo8XXQR8UyVMhcCPcnjU5GnY18S
 Withdraw Authority: DS3AyFN9dF1ruNBcSeo8XXQR8UyVMhcCPcnjU5GnY18S
 ```
 
-The stake pool creates these special staking accounts with 1 SOL as the required
+The stake pool creates these special staking accounts with 1 MLN as the required
 minimum delegation amount. The stake and withdraw authorities are the stake pool
 withdraw authority, program addresses derived from the stake pool's address.
 
@@ -314,8 +314,8 @@ Pool Token Mint: BoNneHKDrX9BHjjvSpPfnQyRjsnc9WFH71v8wrgCd7LB
 Epoch Fee: 3/100 of epoch rewards
 Withdrawal Fee: none
 Stake Deposit Fee: none
-SOL Deposit Fee: none
-SOL Deposit Referral Fee: none
+MLN Deposit Fee: none
+MLN Deposit Referral Fee: none
 Stake Deposit Referral Fee: none
 Reserve Account: EN4px2h4gFkYtsQUi4yeCYBrdRM4DoRxCVJyavMXEAm5   Available Balance: ◎6.99315136
 Vote Account: EhRbKi4Vhm1oUCGWHiLEMYZqDrHwEd7Jgzgi26QJKvfQ      Balance: ◎1.002282880 Last Update Epoch: 4
@@ -329,7 +329,7 @@ Max Number of Validators: 1000
 
 To make reading easier, the tool will not show balances that cannot be touched by
 the stake pool. The reserve stake account `EN4px2h4gFkYtsQUi4yeCYBrdRM4DoRxCVJyavMXEAm5`
-actually has an additional balance of 0.002282881 SOL, but since this is the minimum
+actually has an additional balance of 0.002282881 MLN, but since this is the minimum
 required amount, it is not shown by the CLI.
 
 ### Remove validator stake account
@@ -338,12 +338,12 @@ If the stake pool staker wants to stop delegating to a vote account, they can
 totally remove the validator stake account from the stake pool.
 
 As with adding a validator, the validator stake account must have exactly
-1.00228288 SOL (1 SOL delegated, 0.00228288 SOL for rent exemption) to be removed.
+1.00228288 MLN (1 MLN delegated, 0.00228288 MLN for rent exemption) to be removed.
 
 If that is not the case, the staker must first decrease the stake to that minimum amount.
 Let's assume that the validator stake account delegated to 
 `J3xu64PWShcMen99kU3igxtwbke2Nwfo8pkZNRgrq66H` has a total delegated amount of
-7.5 SOL. To reduce that number, the staker can run:
+7.5 MLN. To reduce that number, the staker can run:
 
 ```console
 $ solarti-stake-pool decrease-validator-stake Zg5YBPAk8RqBR9kaLLSoN5C8Uv7nErBz1WC63HTsCPR J3xu64PWShcMen99kU3igxtwbke2Nwfo8pkZNRgrq66H 6.5
@@ -367,10 +367,10 @@ We can check the deactivating stake account:
 
 ```console
 $ solana stake-account nHEEyey8KkgHuVRAUDzkH5Q4PkA4veSHuTxgG6C8L2G
-Balance: 1.002282880 SOL
-Rent Exempt Reserve: 0.00228288 SOL
-Delegated Stake: 1.000000000 SOL
-Active Stake: 1.000000000 SOL
+Balance: 1.002282880 MLN
+Rent Exempt Reserve: 0.00228288 MLN
+Delegated Stake: 1.000000000 MLN
+Active Stake: 1.000000000 MLN
 Stake deactivates starting from epoch: 10
 Delegated Vote Account Address: J3xu64PWShcMen99kU3igxtwbke2Nwfo8pkZNRgrq66H
 Stake Authority: 4SnSuUtJGKvk2GYpBwmEsWG53zTurVM8yXGsoiZQyMJn
@@ -392,8 +392,8 @@ Pool Token Mint: BoNneHKDrX9BHjjvSpPfnQyRjsnc9WFH71v8wrgCd7LB
 Epoch Fee: 3/100 of epoch rewards
 Withdrawal Fee: none
 Stake Deposit Fee: none
-SOL Deposit Fee: none
-SOL Deposit Referral Fee: none
+MLN Deposit Fee: none
+MLN Deposit Referral Fee: none
 Stake Deposit Referral Fee: none
 Reserve Account: EN4px2h4gFkYtsQUi4yeCYBrdRM4DoRxCVJyavMXEAm5   Available Balance: ◎10.006848640
 Vote Account: EhRbKi4Vhm1oUCGWHiLEMYZqDrHwEd7Jgzgi26QJKvfQ      Balance: ◎100.000000000 Last Update Epoch: 4
@@ -407,7 +407,7 @@ Max Number of Validators: 1000
 
 This isn't great! The first stake account, `EhRbKi4Vhm1oUCGWHiLEMYZqDrHwEd7Jgzgi26QJKvfQ`
 has too much allocated. For their strategy, the staker wants the `100`
-SOL to be distributed evenly, meaning `40` in each account. They need
+MLN to be distributed evenly, meaning `40` in each account. They need
 to move `30` to `J3xu64PWShcMen99kU3igxtwbke2Nwfo8pkZNRgrq66H` and
 `38DYMkwYCvsj8TC6cNaEvFHHVDYeWDp1qUgMgyjNqZXk`.
 
@@ -415,16 +415,16 @@ to move `30` to `J3xu64PWShcMen99kU3igxtwbke2Nwfo8pkZNRgrq66H` and
 
 First, they need to decrease the amount on stake account
 `3k7Nwu9jUSc6SNG11wzufKYoZXRFgxWamheGLYWp5Rvx`, delegated to
-`EhRbKi4Vhm1oUCGWHiLEMYZqDrHwEd7Jgzgi26QJKvfQ`, by a total of `60` SOL.
+`EhRbKi4Vhm1oUCGWHiLEMYZqDrHwEd7Jgzgi26QJKvfQ`, by a total of `60` MLN.
 
-They decrease that amount of SOL:
+They decrease that amount of MLN:
 
 ```sh
 $ solarti-stake-pool decrease-validator-stake Zg5YBPAk8RqBR9kaLLSoN5C8Uv7nErBz1WC63HTsCPR EhRbKi4Vhm1oUCGWHiLEMYZqDrHwEd7Jgzgi26QJKvfQ 60
 Signature: ZpQGwT85rJ8Y9afdkXhKo3TVv4xgTz741mmZj2vW7mihYseAkFsazWxza2y8eNGY4HDJm15c1cStwyiQzaM3RpH
 ```
 
-Internally, this instruction splits and deactivates 60 SOL from the
+Internally, this instruction splits and deactivates 60 MLN from the
 validator stake account `3k7Nwu9jUSc6SNG11wzufKYoZXRFgxWamheGLYWp5Rvx` into a
 transient stake account, owned and managed entirely by the stake pool.
 
@@ -439,14 +439,14 @@ can increase the stake on the two other validators,
 `J3xu64PWShcMen99kU3igxtwbke2Nwfo8pkZNRgrq66H` and
 `38DYMkwYCvsj8TC6cNaEvFHHVDYeWDp1qUgMgyjNqZXk`.
 
-They add 30 SOL to `J3xu64PWShcMen99kU3igxtwbke2Nwfo8pkZNRgrq66H`:
+They add 30 MLN to `J3xu64PWShcMen99kU3igxtwbke2Nwfo8pkZNRgrq66H`:
 
 ```sh
 $ solarti-stake-pool increase-validator-stake Zg5YBPAk8RqBR9kaLLSoN5C8Uv7nErBz1WC63HTsCPR J3xu64PWShcMen99kU3igxtwbke2Nwfo8pkZNRgrq66H 30
 Signature: 3GJACzjUGLPjcd9RLUW86AfBLWKapZRkxnEMc2yHT6erYtcKBgCapzyrVH6VN8Utxj7e2mtvzcigwLm6ZafXyTMw
 ```
 
-And they add 30 SOL to `38DYMkwYCvsj8TC6cNaEvFHHVDYeWDp1qUgMgyjNqZXk`:
+And they add 30 MLN to `38DYMkwYCvsj8TC6cNaEvFHHVDYeWDp1qUgMgyjNqZXk`:
 
 ```sh
 $ solarti-stake-pool increase-validator-stake Zg5YBPAk8RqBR9kaLLSoN5C8Uv7nErBz1WC63HTsCPR 38DYMkwYCvsj8TC6cNaEvFHHVDYeWDp1qUgMgyjNqZXk 30
@@ -469,8 +469,8 @@ Preferred Deposit Validator: 38DYMkwYCvsj8TC6cNaEvFHHVDYeWDp1qUgMgyjNqZXk
 Epoch Fee: 3/100 of epoch rewards
 Withdrawal Fee: none
 Stake Deposit Fee: none
-SOL Deposit Fee: none
-SOL Deposit Referral Fee: none
+MLN Deposit Fee: none
+MLN Deposit Referral Fee: none
 Stake Deposit Referral Fee: none
 Reserve Account: EN4px2h4gFkYtsQUi4yeCYBrdRM4DoRxCVJyavMXEAm5   Available Balance: ◎10.006848640
 Vote Account: EhRbKi4Vhm1oUCGWHiLEMYZqDrHwEd7Jgzgi26QJKvfQ      Balance: ◎40.000000000  Last Update Epoch: 8
@@ -550,8 +550,8 @@ Preferred Deposit Validator: 38DYMkwYCvsj8TC6cNaEvFHHVDYeWDp1qUgMgyjNqZXk
 Epoch Fee: 3/100 of epoch rewards
 Withdrawal Fee: none
 Stake Deposit Fee: none
-SOL Deposit Fee: none
-SOL Deposit Referral Fee: none
+MLN Deposit Fee: none
+MLN Deposit Referral Fee: none
 Stake Deposit Referral Fee: none
 Reserve Account: EN4px2h4gFkYtsQUi4yeCYBrdRM4DoRxCVJyavMXEAm5   Available Balance: ◎10.006848640
 Vote Account: EhRbKi4Vhm1oUCGWHiLEMYZqDrHwEd7Jgzgi26QJKvfQ      Balance: ◎35.000000000  Last Update Epoch: 8
@@ -563,9 +563,9 @@ Current Number of Validators: 3
 Max Number of Validators: 1000
 ```
 
-### Deposit SOL
+### Deposit MLN
 
-Stake pools accept SOL deposits directly from a normal SOL wallet account, and
+Stake pools accept MLN deposits directly from a normal MLN wallet account, and
 in exchange mint the appropriate amount of pool tokens.
 
 ```console
@@ -576,24 +576,24 @@ Signature: 23CptpZaq33njCpJPAvk8XS53xXwpfqF1sGxChk3VDB5mzz7XPKQqwsreun3iwZ6b51Ay
 
 In return, the stake pool has minted us new pool tokens, representing our share
 of ownership in the pool.  We can double-check our stake pool account using the
-SPL token command-line utility.
+Solarti token command-line utility.
 
 ```console
 $ solarti-token balance BoNneHKDrX9BHjjvSpPfnQyRjsnc9WFH71v8wrgCd7LB
 100.00000000
 ```
 
-### Withdraw SOL
+### Withdraw MLN
 
-Stake pools allow SOL withdrawals directly from the reserve and into a normal
-SOL wallet account, and in exchange burns the provided pool tokens.
+Stake pools allow MLN withdrawals directly from the reserve and into a normal
+MLN wallet account, and in exchange burns the provided pool tokens.
 
 ```console
 $ solarti-stake-pool withdraw-sol Zg5YBPAk8RqBR9kaLLSoN5C8Uv7nErBz1WC63HTsCPR 7VXPpSxneL6JLj18Naw2gkukXtjBZfbmPh18cnoUCMD8 2
 Signature: 4bqZKUUrjVspqTGqGqX4zxnHnJB67WbeukKUZRmxJ2yFmr275CtHPjZNzQJD9Pe7Q6mSxnUpcVv9FUdAbGP9RyBc
 ```
 
-The stake pool has burned 2 pool tokens, and in return, sent SOL to
+The stake pool has burned 2 pool tokens, and in return, sent MLN to
 `7VXPpSxneL6JLj18Naw2gkukXtjBZfbmPh18cnoUCMD8`.
 
 You can check that the pool tokens have been burned:
@@ -607,7 +607,7 @@ And you can check that the recipient has been credited:
 
 ```console
 $ solana balance 7VXPpSxneL6JLj18Naw2gkukXtjBZfbmPh18cnoUCMD8
-2 SOL
+2 MLN
 ```
 
 ### Deposit stake
@@ -648,7 +648,7 @@ The CLI will default to using the fee payer's
 [Associated Token Account](associated-token-account.md) for stake pool tokens
 and the withdraw authority on the deposited stake account.
 
-Alternatively, you can create an SPL token account yourself and pass it as the
+Alternatively, you can create an Solarti token account yourself and pass it as the
 `token-receiver` for the command, and specify the withdraw authority on the
 stake account using the `withdraw-authority` flag.
 
@@ -660,7 +660,7 @@ Signature: 4AESGZzqBVfj5xQnMiPWAwzJnAtQDRFK1Ha6jqKKTs46Zm5fw3LqgU1mRAT6CKTywVfFM
 
 In return, the stake pool has minted us new pool tokens, representing our share
 of ownership in the pool.  We can double-check our stake pool account using the
-SPL token command-line utility.
+Solarti token command-line utility.
 
 ```console
 $ solarti-token balance BoNneHKDrX9BHjjvSpPfnQyRjsnc9WFH71v8wrgCd7LB
@@ -669,12 +669,12 @@ $ solarti-token balance BoNneHKDrX9BHjjvSpPfnQyRjsnc9WFH71v8wrgCd7LB
 
 #### Note on stake deposit fee
 
-Stake pools have separate fees for stake and SOL, so the total fee from depositing
-a stake account is calculated from the rent-exempt reserve as SOL, and the delegation
+Stake pools have separate fees for stake and MLN, so the total fee from depositing
+a stake account is calculated from the rent-exempt reserve as MLN, and the delegation
 as stake.
 
-For example, if a stake pool has a stake deposit fee of 1%, and a SOL deposit fee
-of 5%, and you deposit a stake account with 10 SOL in stake, and .00228288 SOL
+For example, if a stake pool has a stake deposit fee of 1%, and a MLN deposit fee
+of 5%, and you deposit a stake account with 10 MLN in stake, and .00228288 MLN
 in rent-exemption, the total fee charged is:
 
 ```
@@ -730,10 +730,10 @@ Signature: 1215wJUY7vj82TQoGCacQ2VJZ157HnCTvfsUXkYph3nZzJNmeDaGmy1nCD7hkhFfxnQYY
 
 ### Withdraw stake
 
-Whenever the user wants to recover their SOL plus accrued rewards, they can provide their
+Whenever the user wants to recover their MLN plus accrued rewards, they can provide their
 pool tokens in exchange for an activated stake account.
 
-Let's withdraw active staked SOL in exchange for 5 pool tokens.
+Let's withdraw active staked MLN in exchange for 5 pool tokens.
 
 ```console
 $ solarti-stake-pool withdraw-stake Zg5YBPAk8RqBR9kaLLSoN5C8Uv7nErBz1WC63HTsCPR 5
@@ -748,10 +748,10 @@ Let's double-check the status of the stake account:
 
 ```console
 $ solana stake-account 5GuAyPAt6577HoGhSVRNBv6aHohVtjQ8q7q5i3X1p4tB
-Balance: 5.00228288 SOL
-Rent Exempt Reserve: 0.00228288 SOL
-Delegated Stake: 5 SOL
-Active Stake: 5 SOL
+Balance: 5.00228288 MLN
+Rent Exempt Reserve: 0.00228288 MLN
+Delegated Stake: 5 MLN
+Active Stake: 5 MLN
 Delegated Vote Account Address: EhRbKi4Vhm1oUCGWHiLEMYZqDrHwEd7Jgzgi26QJKvfQ
 Stake Authority: 4SnSuUtJGKvk2GYpBwmEsWG53zTurVM8yXGsoiZQyMJn
 Withdraw Authority: 4SnSuUtJGKvk2GYpBwmEsWG53zTurVM8yXGsoiZQyMJn
@@ -772,7 +772,7 @@ Signature: 2xBPVPJ749AE4hHNCNYdjuHv1EdMvxm9uvvraWfTA7Urrvecwh9w64URCyLLroLQ2RKDG
 ```
 
 By default, the withdraw command uses the `token-owner`'s associated token account to
-source the pool tokens. It's possible to specify the SPL token account using
+source the pool tokens. It's possible to specify the Solarti token account using
 the `--pool-account` flag.
 
 ```console
@@ -805,7 +805,7 @@ be able to withdraw their funds.
 
 To get around this case, it is also possible to withdraw from the stake pool's
 reserve, but only if all of the validator stake accounts are at the minimum amount of
-`1 SOL + stake account rent exemption`.
+`1 MLN + stake account rent exemption`.
 
 ```console
 $ solarti-stake-pool withdraw-stake Zg5YBPAk8RqBR9kaLLSoN5C8Uv7nErBz1WC63HTsCPR 5 --use-reserve
@@ -818,14 +818,14 @@ Signature: yQH9n7Go6iCMEYXqWef38ZYBPwXDmbwKAJFJ4EHD6TusBpusKsfNuT3TV9TL8FmxR2N9E
 
 Since the funds used to add validators to the pool come from outside deposits,
 it's possible for a delinquent or malicious staker to make it impossible for
-users to reclaim their SOL by keeping everything at the minimum amount.
+users to reclaim their MLN by keeping everything at the minimum amount.
 
 To get around this case, it is also possible to remove a validator from the stake pool
 but only if all of the validator stake accounts are at the minimum amount of
-`1 SOL + stake account rent exemption`.
+`1 MLN + stake account rent exemption`.
 
 ```console
-$ solarti-stake-pool withdraw-stake Zg5YBPAk8RqBR9kaLLSoN5C8Uv7nErBz1WC63HTsCPR 1.00228288 SOL
+$ solarti-stake-pool withdraw-stake Zg5YBPAk8RqBR9kaLLSoN5C8Uv7nErBz1WC63HTsCPR 1.00228288 MLN
 Withdrawing ◎1.00228288 or 1.00228288 pool tokens, from stake account J5XB7mWpeaUZxZ6ogXT57qSCobczx27vLZYSgfSbZoBB
 Creating account to receive stake 51XdXiBSsVzeuY79xJwWAGZgeKzzgFKWajkwvWyrRiNE
 Signature: yQH9n7Go6iCMEYXqWef38ZYBPwXDmbwKAJFJ4EHD6TusBpusKsfNuT3TV9TL8FmxR2N9ExZTZwbD9Njc3rMvUcf

@@ -1,4 +1,4 @@
-//! Solana program utilities for Plain Old Data types
+//! Miraland program utilities for Plain Old Data types
 use {
     bytemuck::{Pod, Zeroable},
     solana_program::{program_error::ProgramError, program_option::COption, pubkey::Pubkey},

@@ -1,4 +1,4 @@
-//! General purpose SPL token utility functions
+//! General purpose Solarti token utility functions
 
 use arrayref::array_ref;
 use solana_program::{
@@ -20,7 +20,7 @@ use spl_token::{
 
 use crate::{error::GovernanceError, tools::pack::unpack_coption_pubkey};
 
-/// Creates and initializes SPL token account with PDA using the provided PDA seeds
+/// Creates and initializes Solarti token account with PDA using the provided PDA seeds
 #[allow(clippy::too_many_arguments)]
 pub fn create_spl_token_account_signed<'a>(
     payer_info: &AccountInfo<'a>,
@@ -47,7 +47,7 @@ pub fn create_spl_token_account_signed<'a>(
 
     if account_address != *token_account_info.key {
         msg!(
-            "Create SPL Token Account with PDA: {:?} was requested while PDA: {:?} was expected",
+            "Create Solarti Token Account with PDA: {:?} was requested while PDA: {:?} was expected",
             token_account_info.key,
             account_address
         );
@@ -166,7 +166,7 @@ pub fn transfer_spl_tokens_signed<'a>(
 
     if authority_address != *authority_info.key {
         msg!(
-                "Transfer SPL Token with Authority PDA: {:?} was requested while PDA: {:?} was expected",
+                "Transfer Solarti Token with Authority PDA: {:?} was requested while PDA: {:?} was expected",
                 authority_info.key,
                 authority_address
             );
@@ -215,7 +215,7 @@ pub fn burn_spl_tokens_signed<'a>(
 
     if authority_address != *authority_info.key {
         msg!(
-            "Burn SPL Token with Authority PDA: {:?} was requested while PDA: {:?} was expected",
+            "Burn Solarti Token with Authority PDA: {:?} was requested while PDA: {:?} was expected",
             authority_info.key,
             authority_address
         );
@@ -250,7 +250,7 @@ pub fn burn_spl_tokens_signed<'a>(
     Ok(())
 }
 
-/// Asserts the given account_info represents a valid SPL Token account which is initialized and belongs to spl_token program
+/// Asserts the given account_info represents a valid Solarti Token account which is initialized and belongs to spl_token program
 pub fn assert_is_valid_spl_token_account(account_info: &AccountInfo) -> Result<(), ProgramError> {
     if account_info.data_is_empty() {
         return Err(GovernanceError::SplTokenAccountDoesNotExist.into());
@@ -280,7 +280,7 @@ pub fn is_spl_token_account(account_info: &AccountInfo) -> bool {
     assert_is_valid_spl_token_account(account_info).is_ok()
 }
 
-/// Asserts the given mint_info represents a valid SPL Token Mint account  which is initialized and belongs to spl_token program
+/// Asserts the given mint_info represents a valid Solarti Token Mint account  which is initialized and belongs to spl_token program
 pub fn assert_is_valid_spl_token_mint(mint_info: &AccountInfo) -> Result<(), ProgramError> {
     if mint_info.data_is_empty() {
         return Err(GovernanceError::SplTokenMintDoesNotExist.into());

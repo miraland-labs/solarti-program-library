@@ -29,7 +29,7 @@ pub enum PoolInstruction {
     ///   0. `[w]` Pool account.
     ///   1. `[]` Authority
     ///   2. `[]` Decider authority
-    ///   3. `[]` Deposit currency SPL Token mint. Must be initialized.
+    ///   3. `[]` Deposit currency Solarti Token mint. Must be initialized.
     ///   4. `[w]` Deposit token account. Should not be initialized
     ///   5. `[w]` Token Pass mint. Should not be initialized
     ///   6. `[w]` Token Fail mint. Should not be initialized

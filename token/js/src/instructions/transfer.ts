@@ -29,7 +29,7 @@ export const transferInstructionData = struct<TransferInstructionData>([u8('inst
  * @param owner        Owner of the source account
  * @param amount       Number of tokens to transfer
  * @param multiSigners Signing accounts if `owner` is a multisig
- * @param programId    SPL Token program account
+ * @param programId    Solarti Token program account
  *
  * @return Instruction to add to a transaction
  */
@@ -81,7 +81,7 @@ export interface DecodedTransferInstruction {
  * Decode a Transfer instruction and validate it
  *
  * @param instruction Transaction instruction to decode
- * @param programId   SPL Token program account
+ * @param programId   Solarti Token program account
  *
  * @return Decoded, valid instruction
  */

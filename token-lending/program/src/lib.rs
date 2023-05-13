@@ -1,7 +1,7 @@
 #![allow(clippy::integer_arithmetic)]
 #![deny(missing_docs)]
 
-//! A lending program for the Solana blockchain.
+//! A lending program for the Miraland blockchain.
 
 pub mod entrypoint;
 pub mod error;

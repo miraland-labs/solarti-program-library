@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# Script to withdraw stakes and SOL from a stake pool, given the stake pool public key
+# Script to withdraw stakes and MLN from a stake pool, given the stake pool public key
 # and a path to a file containing a list of validator vote accounts
 
 cd "$(dirname "$0")" || exit
@@ -71,5 +71,5 @@ withdraw_stakes "$stake_pool_pubkey" "$validator_list" "$withdraw_sol_amount"
 echo "Withdrawing stakes from stake pool to recieve it in stake receiver account"
 withdraw_stakes_to_stake_receiver "$stake_pool_pubkey" "$validator_list" "$withdraw_sol_amount"
 
-echo "Withdrawing SOL from stake pool to authority"
+echo "Withdrawing MLN from stake pool to authority"
 $spl_stake_pool withdraw-sol "$stake_pool_pubkey" $authority "$withdraw_sol_amount"

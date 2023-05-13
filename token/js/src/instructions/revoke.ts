@@ -25,7 +25,7 @@ export const revokeInstructionData = struct<RevokeInstructionData>([u8('instruct
  * @param account      Address of the token account
  * @param owner        Owner of the account
  * @param multiSigners Signing accounts if `owner` is a multisig
- * @param programId    SPL Token program account
+ * @param programId    Solarti Token program account
  *
  * @return Instruction to add to a transaction
  */
@@ -60,7 +60,7 @@ export interface DecodedRevokeInstruction {
  * Decode a Revoke instruction and validate it
  *
  * @param instruction Transaction instruction to decode
- * @param programId   SPL Token program account
+ * @param programId   Solarti Token program account
  *
  * @return Decoded, valid instruction
  */

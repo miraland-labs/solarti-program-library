@@ -11,7 +11,7 @@ use {
         keypair::signer_from_path,
     },
     miraland_client::rpc_client::RpcClient,
-    solana_program::{native_token::lamports_to_sol, program_pack::Pack, pubkey::Pubkey},
+    solana_program::{native_token::lamports_to_mln, program_pack::Pack, pubkey::Pubkey},
     solana_sdk::{
         commitment_config::CommitmentConfig,
         message::Message,
@@ -48,7 +48,7 @@ type CommandResult = Result<(), Error>;
 const PYTH_PROGRAM_ID: &str = "gSbePebfvPy7tRqimPoVecS2UsBvYv46ynrzWocc92s";
 
 fn main() {
-    solana_logger::setup_with_default("solana=info,miraland=info");
+    miraland_logger::setup_with_default("solana=info,miraland=info");
 
     let default_lending_program_id: &str = &spl_token_lending::id().to_string();
 
@@ -161,7 +161,7 @@ fn main() {
                         .value_name("KEYPAIR")
                         .takes_value(true)
                         .required(true)
-                        .help("Owner of the SPL Token account to deposit initial liquidity from"),
+                        .help("Owner of the Solarti Token account to deposit initial liquidity from"),
                 )
                 .arg(
                     Arg::with_name("lending_market")
@@ -179,7 +179,7 @@ fn main() {
                         .value_name("PUBKEY")
                         .takes_value(true)
                         .required(true)
-                        .help("SPL Token account to deposit initial liquidity from"),
+                        .help("Solarti Token account to deposit initial liquidity from"),
                 )
                 // @TODO: use is_amount_or_all
                 .arg(
@@ -699,8 +699,8 @@ fn check_fee_payer_balance(config: &Config, required_balance: u64) -> Result<(),
         Err(format!(
             "Fee payer, {}, has insufficient balance: {} required, {} available",
             config.fee_payer.pubkey(),
-            lamports_to_sol(required_balance),
-            lamports_to_sol(balance)
+            lamports_to_mln(required_balance),
+            lamports_to_mln(balance)
         )
         .into())
     } else {

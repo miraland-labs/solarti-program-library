@@ -1,13 +1,13 @@
 #![allow(clippy::integer_arithmetic)]
 //! # Concurrent Merkle Tree
 //!
-//! This crate is a Solana-optimized implementation of the
+//! This crate is a Miraland-optimized implementation of the
 //! concurrent merkle tree data structure introduced in [this
 //! whitepaper](https://drive.google.com/file/d/1BOpa5OFmara50fTvL0VIVYjtg-qzHCVc/view)
 //!
 //! The core implementation of CMT can be found in [concurrent_merkle_tree]
 
-/// Private macros to enable logging in the Solana runtime
+/// Private macros to enable logging in the Miraland runtime
 #[macro_use]
 mod log;
 /// Changelog implementation to keep track of information necessary to fast forward proofs

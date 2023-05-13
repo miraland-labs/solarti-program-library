@@ -31,7 +31,7 @@ export const defaultAccountStateInstructionData = struct<DefaultAccountStateInst
  *
  * @param mint         Mint to initialize
  * @param accountState Default account state to set on all new accounts
- * @param programId    SPL Token program account
+ * @param programId    Solarti Token program account
  *
  * @return Instruction to add to a transaction
  */
@@ -64,7 +64,7 @@ export function createInitializeDefaultAccountStateInstruction(
  * @param accountState    Default account state to set on all accounts
  * @param freezeAuthority       The mint's freeze authority
  * @param signers         The signer account(s) for a multisig
- * @param programId       SPL Token program account
+ * @param programId       Solarti Token program account
  *
  * @return Instruction to add to a transaction
  */

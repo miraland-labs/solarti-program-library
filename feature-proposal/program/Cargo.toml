@@ -16,12 +16,12 @@ test-sbf = []
 
 [dependencies]
 borsh = "0.9"
-miraland-program = "=1.14.17-rc4"
+miraland-program = "=1.14.17-rc5"
 solarti-token = { version = "3.5", path = "../../token/program", features = ["no-entrypoint"] }
 
 [dev-dependencies]
-miraland-program-test = "=1.14.17-rc4"
-miraland-sdk = "=1.14.17-rc4"
+miraland-program-test = "=1.14.17-rc5"
+miraland-sdk = "=1.14.17-rc5"
 
 [lib]
 crate-type = ["cdylib", "lib"]

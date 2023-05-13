@@ -26,7 +26,7 @@ export const cpiGuardInstructionData = struct<CpiGuardInstructionData>([u8('inst
  * @param account         Token account to update
  * @param authority       The account's owner/delegate
  * @param signers         The signer account(s)
- * @param programId       SPL Token program account
+ * @param programId       Solarti Token program account
  *
  * @return Instruction to add to a transaction
  */
@@ -45,7 +45,7 @@ export function createEnableCpiGuardInstruction(
  * @param account         Token account to update
  * @param authority       The account's owner/delegate
  * @param signers         The signer account(s)
- * @param programId       SPL Token program account
+ * @param programId       Solarti Token program account
  *
  * @return Instruction to add to a transaction
  */

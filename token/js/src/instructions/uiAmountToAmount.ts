@@ -23,7 +23,7 @@ export interface UiAmountToAmountInstructionData {
  *
  * @param mint         Public key of the mint
  * @param amount       UiAmount of tokens to be converted to Amount
- * @param programId    SPL Token program account
+ * @param programId    Solarti Token program account
  *
  * @return Instruction to add to a transaction
  */
@@ -67,7 +67,7 @@ export interface DecodedUiAmountToAmountInstruction {
  * Decode a UiAmountToAmount instruction and validate it
  *
  * @param instruction Transaction instruction to decode
- * @param programId   SPL Token program account
+ * @param programId   Solarti Token program account
  *
  * @return Decoded, valid instruction
  */

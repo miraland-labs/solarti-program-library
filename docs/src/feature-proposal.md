@@ -129,9 +129,9 @@ continue, and then follow the remaining steps in the output to distribute the
 vote tokens to all the validators.
 
 **COST:** As a part of token distribution, the *feature proposer* will be
-financing the creation of SPL Token accounts for each of the validators.  A SPL
-Token account requires 0.00203928 SOL at creation, so the cost for initiating a
-feature proposal on a network with 500 validators is approximately 1 SOL.
+financing the creation of Solarti Token accounts for each of the validators.  A SPL
+Token account requires 0.00203928 MLN at creation, so the cost for initiating a
+feature proposal on a network with 500 validators is approximately 1 MLN.
 
 ### Tally the Votes
 

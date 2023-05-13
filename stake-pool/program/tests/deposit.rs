@@ -239,7 +239,7 @@ async fn success(token_program_id: Pubkey) {
         pre_validator_stake_item.stake_lamports().unwrap() + stake_lamports - stake_rent,
     );
 
-    // Check validator stake account actual SOL balance
+    // Check validator stake account actual MLN balance
     let validator_stake_account = get_account(
         &mut context.banks_client,
         &validator_stake_account.stake_account,
@@ -433,7 +433,7 @@ async fn success_with_extra_stake_lamports() {
         pre_validator_stake_item.stake_lamports().unwrap() + stake_lamports - stake_rent,
     );
 
-    // Check validator stake account actual SOL balance
+    // Check validator stake account actual MLN balance
     let validator_stake_account = get_account(
         &mut context.banks_client,
         &validator_stake_account.stake_account,

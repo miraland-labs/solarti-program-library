@@ -44,7 +44,7 @@ export const interestBearingMintUpdateRateInstructionData = struct<InterestBeari
  * @param mint           Mint to initialize
  * @param rateAuthority  The public key for the account that can update the rate
  * @param rate           The initial interest rate
- * @param programId      SPL Token program account
+ * @param programId      Solarti Token program account
  *
  * @return Instruction to add to a transaction
  */
@@ -75,7 +75,7 @@ export function createInitializeInterestBearingMintInstruction(
  * @param rateAuthority  The public key for the account that can update the rate
  * @param rate           The updated interest rate
  * @param multiSigners   Signing accounts if `rateAuthority` is a multisig
- * @param programId      SPL Token program account
+ * @param programId      Solarti Token program account
  *
  * @return Instruction to add to a transaction
  */

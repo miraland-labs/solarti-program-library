@@ -325,7 +325,7 @@ fn process_deposit(
         return Err(TokenError::MintMismatch.into());
     }
 
-    // Wrapped SOL deposits are not supported because lamports cannot be vanished.
+    // Wrapped MLN deposits are not supported because lamports cannot be vanished.
     assert!(!token_account.base.is_native());
 
     token_account.base.amount = token_account
@@ -422,7 +422,7 @@ fn process_withdraw(
         return Err(TokenError::MintMismatch.into());
     }
 
-    // Wrapped SOL withdrawals are not supported because lamports cannot be apparated.
+    // Wrapped MLN withdrawals are not supported because lamports cannot be apparated.
     assert!(!token_account.base.is_native());
 
     let mut confidential_transfer_account =

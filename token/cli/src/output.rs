@@ -168,7 +168,7 @@ impl fmt::Display for CliMultisig {
         let n = self.multisig.num_valid_signers;
 
         writeln!(f)?;
-        writeln!(f, "{}", style("SPL Token Multisig").bold())?;
+        writeln!(f, "{}", style("Solarti Token Multisig").bold())?;
         writeln_name_value(f, "  Address:", &self.address)?;
         writeln_name_value(f, "  Program:", &self.program_id)?;
         writeln_name_value(f, "  M/N:", &format!("{}/{}", m, n))?;
@@ -201,7 +201,7 @@ impl VerboseDisplay for CliTokenAccount {}
 impl fmt::Display for CliTokenAccount {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         writeln!(f)?;
-        writeln!(f, "{}", style("SPL Token Account").bold())?;
+        writeln!(f, "{}", style("Solarti Token Account").bold())?;
         if self.is_associated {
             writeln_name_value(f, "  Address:", &self.address)?;
         } else {
@@ -296,7 +296,7 @@ impl VerboseDisplay for CliMint {}
 impl fmt::Display for CliMint {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         writeln!(f)?;
-        writeln!(f, "{}", style("SPL Token Mint").bold())?;
+        writeln!(f, "{}", style("Solarti Token Mint").bold())?;
 
         writeln_name_value(f, "  Address:", &self.address)?;
         writeln_name_value(f, "  Program:", &self.program_id)?;

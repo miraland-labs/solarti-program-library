@@ -1,6 +1,6 @@
-# SPL Token Lending client library
+# Solarti Token Lending client library
 
-This is a JavaScript + TypeScript library for interacting with the [SPL Token Lending](https://github.com/solana-labs/solana-program-library/tree/master/token-lending) program.
+This is a JavaScript + TypeScript library for interacting with the [Solarti Token Lending](https://github.com/solana-labs/solana-program-library/tree/master/token-lending) program.
 
 ## Install
 
@@ -8,12 +8,12 @@ Install the library and its peer dependencies in your app:
 
 ### Yarn
 ```shell
-yarn add @solana/solarti-token-lending @solana/solarti-token @solana/web3.js
+yarn add @solana/solarti-token-lending @solana/solarti-token @solarti/web3.js
 ```
 
 ### NPM
 ```shell
-npm install @solana/solarti-token-lending @solana/solarti-token @solana/web3.js
+npm install @solana/solarti-token-lending @solana/solarti-token @solarti/web3.js
 ```
 
 ## Documentation

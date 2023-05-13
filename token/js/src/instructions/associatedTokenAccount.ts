@@ -9,7 +9,7 @@ import { ASSOCIATED_TOKEN_PROGRAM_ID, TOKEN_PROGRAM_ID } from '../constants.js';
  * @param associatedToken          New associated token account
  * @param owner                    Owner of the new account
  * @param mint                     Token mint account
- * @param programId                SPL Token program account
+ * @param programId                Solarti Token program account
  * @param associatedTokenProgramId SPL Associated Token program account
  *
  * @return Instruction to add to a transaction
@@ -40,7 +40,7 @@ export function createAssociatedTokenAccountInstruction(
  * @param associatedToken          New associated token account
  * @param owner                    Owner of the new account
  * @param mint                     Token mint account
- * @param programId                SPL Token program account
+ * @param programId                Solarti Token program account
  * @param associatedTokenProgramId SPL Associated Token program account
  *
  * @return Instruction to add to a transaction

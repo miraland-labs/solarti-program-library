@@ -44,7 +44,7 @@ export const setAuthorityInstructionData = struct<SetAuthorityInstructionData>([
  * @param authorityType    Type of authority to set
  * @param newAuthority     New authority of the account
  * @param multiSigners     Signing accounts if `currentAuthority` is a multisig
- * @param programId        SPL Token program account
+ * @param programId        Solarti Token program account
  *
  * @return Instruction to add to a transaction
  */
@@ -91,7 +91,7 @@ export interface DecodedSetAuthorityInstruction {
  * Decode a SetAuthority instruction and validate it
  *
  * @param instruction Transaction instruction to decode
- * @param programId   SPL Token program account
+ * @param programId   Solarti Token program account
  *
  * @return Decoded, valid instruction
  */

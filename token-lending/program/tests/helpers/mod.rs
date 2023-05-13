@@ -1073,7 +1073,7 @@ pub fn add_sol_oracle(test: &mut ProgramTest) -> TestOracle {
         test,
         Pubkey::from_str(SOL_PYTH_PRODUCT).unwrap(),
         Pubkey::from_str(SOL_PYTH_PRICE).unwrap(),
-        // Set SOL price to $20
+        // Set MLN price to $20
         Decimal::from(20u64),
     )
 }

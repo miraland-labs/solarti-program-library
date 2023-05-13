@@ -163,7 +163,7 @@ pub enum VoteThreshold {
     Disabled,
     //
     // Absolute vote threshold expressed in the voting mint units
-    // It can be implemented once Solana runtime supports accounts resizing to accommodate u64 size extension
+    // It can be implemented once Miraland runtime supports accounts resizing to accommodate u64 size extension
     // Alternatively we could use the reserved space if it becomes a priority
     // Absolute(u64)
     //

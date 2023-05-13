@@ -32,9 +32,9 @@ class FundingType(IntEnum):
     STAKE_DEPOSIT = 0
     """Sets the stake deposit authority."""
     SOL_DEPOSIT = 1
-    """Sets the SOL deposit authority."""
+    """Sets the MLN deposit authority."""
     SOL_WITHDRAW = 2
-    """Sets the SOL withdraw authority."""
+    """Sets the MLN withdraw authority."""
 
 
 class InitializeParams(NamedTuple):
@@ -60,7 +60,7 @@ class InitializeParams(NamedTuple):
     manager_fee_account: PublicKey
     """[w] Manager's fee account"""
     token_program_id: PublicKey
-    """[] SPL Token program id."""
+    """[] Solarti Token program id."""
 
     # Params
     epoch_fee: Fee
@@ -368,7 +368,7 @@ class SetStakerParams(NamedTuple):
 
 
 class DepositSolParams(NamedTuple):
-    """Deposit SOL directly into the pool's reserve account. The output is a "pool" token
+    """Deposit MLN directly into the pool's reserve account. The output is a "pool" token
     representing ownership into the pool. Inputs are converted to the current ratio."""
 
     # Accounts
@@ -397,7 +397,7 @@ class DepositSolParams(NamedTuple):
 
     # Params
     amount: int
-    """Amount of SOL to deposit"""
+    """Amount of MLN to deposit"""
 
     # Optional
     deposit_authority: Optional[PublicKey] = None
@@ -409,7 +409,7 @@ class SetFundingAuthorityParams(NamedTuple):
 
 
 class WithdrawSolParams(NamedTuple):
-    """Withdraw SOL directly from the pool's reserve account."""
+    """Withdraw MLN directly from the pool's reserve account."""
 
     # Accounts
     program_id: PublicKey
@@ -734,7 +734,7 @@ def withdraw_stake(params: WithdrawStakeParams) -> TransactionInstruction:
 
 
 def deposit_sol(params: DepositSolParams) -> TransactionInstruction:
-    """Creates a transaction instruction to deposit SOL into a stake pool."""
+    """Creates a transaction instruction to deposit MLN into a stake pool."""
     keys = [
         AccountMeta(pubkey=params.stake_pool, is_signer=False, is_writable=True),
         AccountMeta(pubkey=params.withdraw_authority, is_signer=False, is_writable=False),
@@ -762,7 +762,7 @@ def deposit_sol(params: DepositSolParams) -> TransactionInstruction:
 
 
 def withdraw_sol(params: WithdrawSolParams) -> TransactionInstruction:
-    """Creates a transaction instruction to withdraw SOL from a stake pool."""
+    """Creates a transaction instruction to withdraw MLN from a stake pool."""
     keys = [
         AccountMeta(pubkey=params.stake_pool, is_signer=False, is_writable=True),
         AccountMeta(pubkey=params.withdraw_authority, is_signer=False, is_writable=False),

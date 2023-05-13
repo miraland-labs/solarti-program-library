@@ -8,7 +8,7 @@ import {
   StakeProgram,
   SystemProgram,
   TransactionInstruction,
-} from '@solana/web3.js';
+} from '@solarti/web3.js';
 import { ASSOCIATED_TOKEN_PROGRAM_ID, TOKEN_PROGRAM_ID, Token } from '@solana/solarti-token';
 import {
   ValidatorAccount,
@@ -273,23 +273,23 @@ export async function depositSol(
   const fromBalance = await connection.getBalance(from, 'confirmed');
   if (fromBalance < lamports) {
     throw new Error(
-      `Not enough SOL to deposit into pool. Maximum deposit amount is ${lamportsToSol(
+      `Not enough MLN to deposit into pool. Maximum deposit amount is ${lamportsToSol(
         fromBalance,
-      )} SOL.`,
+      )} MLN.`,
     );
   }
 
   const stakePoolAccount = await getStakePoolAccount(connection, stakePoolAddress);
   const stakePool = stakePoolAccount.account.data;
 
-  // Ephemeral SOL account just to do the transfer
+  // Ephemeral MLN account just to do the transfer
   const userSolTransfer = new Keypair();
   const signers: Signer[] = [userSolTransfer];
   const instructions: TransactionInstruction[] = [];
 
   let rentFee = 0;
 
-  // Create the ephemeral SOL account
+  // Create the ephemeral MLN account
   instructions.push(
     SystemProgram.transfer({
       fromPubkey: from,
@@ -582,7 +582,7 @@ export async function withdrawStake(
 }
 
 /**
- * Creates instructions required to withdraw SOL directly from a stake pool.
+ * Creates instructions required to withdraw MLN directly from a stake pool.
  */
 export async function withdrawSol(
   connection: Connection,
@@ -643,7 +643,7 @@ export async function withdrawSol(
   if (solWithdrawAuthority) {
     const expectedSolWithdrawAuthority = stakePool.account.data.solWithdrawAuthority;
     if (!expectedSolWithdrawAuthority) {
-      throw new Error('SOL withdraw authority specified in arguments but stake pool has none');
+      throw new Error('MLN withdraw authority specified in arguments but stake pool has none');
     }
     if (solWithdrawAuthority.toBase58() != expectedSolWithdrawAuthority.toBase58()) {
       throw new Error(

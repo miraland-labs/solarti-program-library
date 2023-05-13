@@ -16,11 +16,11 @@ sol_amount=$1
 command_args+=( --epoch-fee-numerator 1 )
 command_args+=( --epoch-fee-denominator 100 )
 
-# Withdrawal fee for SOL and stake accounts, represented as `numerator / denominator`
+# Withdrawal fee for MLN and stake accounts, represented as `numerator / denominator`
 command_args+=( --withdrawal-fee-numerator 2 )
 command_args+=( --withdrawal-fee-denominator 100 )
 
-# Deposit fee for SOL and stake accounts, represented as `numerator / denominator`
+# Deposit fee for MLN and stake accounts, represented as `numerator / denominator`
 command_args+=( --deposit-fee-numerator 3 )
 command_args+=( --deposit-fee-denominator 100 )
 
@@ -71,7 +71,7 @@ $spl_stake_pool \
   --reserve-keypair "$reserve_keyfile"
 
 set +ex
-echo "Depositing SOL into stake pool"
+echo "Depositing MLN into stake pool"
 stake_pool_pubkey=$(solana-keygen pubkey "$stake_pool_keyfile")
 set -ex
 $spl_stake_pool deposit-sol "$stake_pool_pubkey" "$sol_amount"

@@ -1,4 +1,4 @@
-import { AccountInfo, LAMPORTS_PER_SOL, PublicKey, StakeProgram } from '@solana/web3.js';
+import { AccountInfo, LAMPORTS_PER_SOL, PublicKey, StakeProgram } from '@solarti/web3.js';
 import BN from 'bn.js';
 import { ValidatorStakeInfo } from '../src';
 import { AccountLayout, ValidatorListLayout, ValidatorStakeInfoStatus } from '../src/layouts';

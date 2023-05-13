@@ -89,7 +89,7 @@ impl VerboseDisplay for CliStakePool {
         writeln!(w, "Depositor: {}", &self.stake_deposit_authority)?;
         writeln!(
             w,
-            "SOL Deposit Authority: {}",
+            "MLN Deposit Authority: {}",
             &self
                 .sol_deposit_authority
                 .as_ref()
@@ -97,7 +97,7 @@ impl VerboseDisplay for CliStakePool {
         )?;
         writeln!(
             w,
-            "SOL Withdraw Authority: {}",
+            "MLN Withdraw Authority: {}",
             &self
                 .sol_withdraw_authority
                 .as_ref()
@@ -136,13 +136,13 @@ impl VerboseDisplay for CliStakePool {
         }
         writeln!(
             w,
-            "SOL Withdrawal Fee: {} of withdrawal amount",
+            "MLN Withdrawal Fee: {} of withdrawal amount",
             &self.sol_withdrawal_fee
         )?;
         if let Some(next_sol_withdrawal_fee) = &self.next_sol_withdrawal_fee {
             writeln!(
                 w,
-                "Next SOL Withdrawal Fee: {} of withdrawal amount",
+                "Next MLN Withdrawal Fee: {} of withdrawal amount",
                 next_sol_withdrawal_fee
             )?;
         }
@@ -153,7 +153,7 @@ impl VerboseDisplay for CliStakePool {
         )?;
         writeln!(
             w,
-            "SOL Deposit Fee: {} of deposit amount",
+            "MLN Deposit Fee: {} of deposit amount",
             &self.sol_deposit_fee
         )?;
         writeln!(
@@ -163,7 +163,7 @@ impl VerboseDisplay for CliStakePool {
         )?;
         writeln!(
             w,
-            "SOL Deposit Referral Fee: {}% of SOL Deposit Fee",
+            "MLN Deposit Referral Fee: {}% of MLN Deposit Fee",
             &self.sol_referral_fee
         )?;
         writeln!(w)?;
@@ -207,7 +207,7 @@ impl Display for CliStakePool {
         )?;
         writeln!(
             f,
-            "SOL Withdrawal Fee: {} of withdrawal amount",
+            "MLN Withdrawal Fee: {} of withdrawal amount",
             &self.sol_withdrawal_fee
         )?;
         writeln!(
@@ -217,7 +217,7 @@ impl Display for CliStakePool {
         )?;
         writeln!(
             f,
-            "SOL Deposit Fee: {} of deposit amount",
+            "MLN Deposit Fee: {} of deposit amount",
             &self.sol_deposit_fee
         )?;
         writeln!(
@@ -227,7 +227,7 @@ impl Display for CliStakePool {
         )?;
         writeln!(
             f,
-            "SOL Deposit Referral Fee: {}% of SOL Deposit Fee",
+            "MLN Deposit Referral Fee: {}% of MLN Deposit Fee",
             &self.sol_referral_fee
         )?;
         Ok(())

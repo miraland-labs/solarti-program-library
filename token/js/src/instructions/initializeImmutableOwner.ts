@@ -23,7 +23,7 @@ export const initializeImmutableOwnerInstructionData = struct<InitializeImmutabl
  * Construct an InitializeImmutableOwner instruction
  *
  * @param account           Immutable Owner Account
- * @param programId         SPL Token program account
+ * @param programId         Solarti Token program account
  *
  * @return Instruction to add to a transaction
  */
@@ -59,7 +59,7 @@ export interface DecodedInitializeImmutableOwnerInstruction {
  * Decode an InitializeImmutableOwner instruction and validate it
  *
  * @param instruction InitializeImmutableOwner instruction to decode
- * @param programId   SPL Token program account
+ * @param programId   Solarti Token program account
  *
  * @return Decoded, valid instruction
  */

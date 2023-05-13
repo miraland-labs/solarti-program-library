@@ -5,13 +5,13 @@ A TypeScript library for interacting with SPL Account Compression and SPL NoOp. 
 ## Install
 
 ```shell
-npm install --save @solarti/solarti-account-compression @solana/web3.js
+npm install --save @solarti/solarti-account-compression @solarti/web3.js
 ```
 
 __OR__
 
 ```shell
-yarn add @solarti/solarti-account-compression @solana/web3.js
+yarn add @solarti/solarti-account-compression @solarti/web3.js
 ```
 
 ## Information

@@ -27,13 +27,13 @@ async fn test_success() {
     // limit to track compute unit increase
     test.set_compute_max_units(68_000);
 
-    // 100 SOL collateral
+    // 100 MLN collateral
     const SOL_DEPOSIT_AMOUNT_LAMPORTS: u64 = 100 * LAMPORTS_TO_SOL * INITIAL_COLLATERAL_RATIO;
-    // 100 SOL * 80% LTV -> 80 SOL * 20 USDC -> 1600 USDC borrow
+    // 100 MLN * 80% LTV -> 80 MLN * 20 USDC -> 1600 USDC borrow
     const USDC_BORROW_AMOUNT_FRACTIONAL: u64 = 1_600 * FRACTIONAL_TO_USDC;
     // 1600 USDC * 50% -> 800 USDC liquidation
     const USDC_LIQUIDATION_AMOUNT_FRACTIONAL: u64 = USDC_BORROW_AMOUNT_FRACTIONAL / 2;
-    // 800 USDC / 20 USDC per SOL -> 40 SOL + 10% bonus -> 44 SOL
+    // 800 USDC / 20 USDC per MLN -> 40 MLN + 10% bonus -> 44 MLN
     const SOL_LIQUIDATION_AMOUNT_LAMPORTS: u64 = 44 * LAMPORTS_TO_SOL * INITIAL_COLLATERAL_RATIO;
 
     const SOL_RESERVE_COLLATERAL_LAMPORTS: u64 = 2 * SOL_DEPOSIT_AMOUNT_LAMPORTS;

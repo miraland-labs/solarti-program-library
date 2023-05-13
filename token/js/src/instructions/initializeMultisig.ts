@@ -29,7 +29,7 @@ export const initializeMultisigInstructionData = struct<InitializeMultisigInstru
  * @param account   Multisig account
  * @param signers   Full set of signers
  * @param m         Number of required signatures
- * @param programId SPL Token program account
+ * @param programId Solarti Token program account
  *
  * @return Instruction to add to a transaction
  */
@@ -81,7 +81,7 @@ export interface DecodedInitializeMultisigInstruction {
  * Decode an InitializeMultisig instruction and validate it
  *
  * @param instruction Transaction instruction to decode
- * @param programId   SPL Token program account
+ * @param programId   Solarti Token program account
  *
  * @return Decoded, valid instruction
  */

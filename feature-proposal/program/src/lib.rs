@@ -42,18 +42,18 @@ pub(crate) fn get_feature_id_address_with_seed(feature_proposal_address: &Pubkey
     )
 }
 
-/// Derive the SPL Token mint address associated with a feature proposal
+/// Derive the Solarti Token mint address associated with a feature proposal
 pub fn get_mint_address(feature_proposal_address: &Pubkey) -> Pubkey {
     get_mint_address_with_seed(feature_proposal_address).0
 }
 
-/// Derive the SPL Token token address associated with a feature proposal that receives the initial
+/// Derive the Solarti Token token address associated with a feature proposal that receives the initial
 /// minted tokens
 pub fn get_distributor_token_address(feature_proposal_address: &Pubkey) -> Pubkey {
     get_distributor_token_address_with_seed(feature_proposal_address).0
 }
 
-/// Derive the SPL Token token address associated with a feature proposal that users send their
+/// Derive the Solarti Token token address associated with a feature proposal that users send their
 /// tokens to accept the proposal
 pub fn get_acceptance_token_address(feature_proposal_address: &Pubkey) -> Pubkey {
     get_acceptance_token_address_with_seed(feature_proposal_address).0

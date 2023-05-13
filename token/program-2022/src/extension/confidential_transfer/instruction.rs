@@ -37,7 +37,7 @@ pub enum ConfidentialTransferInstruction {
     ///
     /// Accounts expected by this instruction:
     ///
-    ///   0. `[writable]` The SPL Token mint.
+    ///   0. `[writable]` The Solarti Token mint.
     ///
     /// Data expected by this instruction:
     ///   `InitializeMintData`
@@ -53,7 +53,7 @@ pub enum ConfidentialTransferInstruction {
     ///
     /// Accounts expected by this instruction:
     ///
-    ///   0. `[writable]` The SPL Token mint.
+    ///   0. `[writable]` The Solarti Token mint.
     ///   1. `[signer]` Confidential transfer mint authority.
     ///
     /// Data expected by this instruction:
@@ -78,17 +78,17 @@ pub enum ConfidentialTransferInstruction {
     /// Accounts expected by this instruction:
     ///
     ///   * Single owner/delegate
-    ///   0. `[writeable]` The SPL Token account.
-    ///   1. `[]` The corresponding SPL Token mint.
+    ///   0. `[writeable]` The Solarti Token account.
+    ///   1. `[]` The corresponding Solarti Token mint.
     ///   2. `[]` Instructions sysvar.
     ///   3. `[signer]` The single source account owner.
     ///
     ///   * Multisignature owner/delegate
-    ///   0. `[writeable]` The SPL Token account.
-    ///   1. `[]` The corresponding SPL Token mint.
+    ///   0. `[writeable]` The Solarti Token account.
+    ///   1. `[]` The corresponding Solarti Token mint.
     ///   2. `[]` The multisig source account owner.
     ///   3. `[]` Instructions sysvar.
-    ///   4.. `[signer]` Required M signer accounts for the SPL Token Multisig account.
+    ///   4.. `[signer]` Required M signer accounts for the Solarti Token Multisig account.
     ///
     /// Data expected by this instruction:
     ///   `ConfigureAccountInstructionData`
@@ -98,14 +98,14 @@ pub enum ConfidentialTransferInstruction {
     /// Approves a token account for confidential transfers.
     ///
     /// Approval is only required when the `ConfidentialTransferMint::approve_new_accounts`
-    /// field is set in the SPL Token mint.  This instruction must be executed after the account
+    /// field is set in the Solarti Token mint.  This instruction must be executed after the account
     /// owner configures their account for confidential transfers with
     /// `ConfidentialTransferInstruction::ConfigureAccount`.
     ///
     /// Accounts expected by this instruction:
     ///
-    ///   0. `[writable]` The SPL Token account to approve.
-    ///   1. `[]` The SPL Token mint.
+    ///   0. `[writable]` The Solarti Token account to approve.
+    ///   1. `[]` The Solarti Token mint.
     ///   2. `[signer]` Confidential transfer auditor authority.
     ///
     /// Data expected by this instruction:
@@ -126,15 +126,15 @@ pub enum ConfidentialTransferInstruction {
     /// `VerifyCloseAccount` instruction of the `zk_token_proof` program in the same transaction.
     ///
     ///   * Single owner/delegate
-    ///   0. `[writable]` The SPL Token account.
+    ///   0. `[writable]` The Solarti Token account.
     ///   1. `[]` Instructions sysvar.
     ///   2. `[signer]` The single account owner.
     ///
     ///   * Multisignature owner/delegate
-    ///   0. `[writable]` The SPL Token account.
+    ///   0. `[writable]` The Solarti Token account.
     ///   1. `[]` Instructions sysvar.
     ///   2. `[]` The multisig account owner.
-    ///   3.. `[signer]` Required M signer accounts for the SPL Token Multisig account.
+    ///   3.. `[signer]` Required M signer accounts for the Solarti Token Multisig account.
     ///
     /// Data expected by this instruction:
     ///   `EmptyAccountInstructionData`
@@ -152,15 +152,15 @@ pub enum ConfidentialTransferInstruction {
     /// Accounts expected by this instruction:
     ///
     ///   * Single owner/delegate
-    ///   0. `[writable]` The SPL Token account.
+    ///   0. `[writable]` The Solarti Token account.
     ///   1. `[]` The token mint.
     ///   2. `[signer]` The single account owner or delegate.
     ///
     ///   * Multisignature owner/delegate
-    ///   0. `[writable]` The SPL Token account.
+    ///   0. `[writable]` The Solarti Token account.
     ///   1. `[]` The token mint.
     ///   2. `[]` The multisig account owner or delegate.
-    ///   3.. `[signer]` Required M signer accounts for the SPL Token Multisig account.
+    ///   3.. `[signer]` Required M signer accounts for the Solarti Token Multisig account.
     ///
     /// Data expected by this instruction:
     ///   `DepositInstructionData`
@@ -178,17 +178,17 @@ pub enum ConfidentialTransferInstruction {
     /// Accounts expected by this instruction:
     ///
     ///   * Single owner/delegate
-    ///   0. `[writable]` The SPL Token account.
+    ///   0. `[writable]` The Solarti Token account.
     ///   1. `[]` The token mint.
     ///   2. `[]` Instructions sysvar.
     ///   3. `[signer]` The single source account owner.
     ///
     ///   * Multisignature owner/delegate
-    ///   0. `[writable]` The SPL Token account.
+    ///   0. `[writable]` The Solarti Token account.
     ///   1. `[]` The token mint.
     ///   2. `[]` Instructions sysvar.
     ///   3. `[]` The multisig  source account owner.
-    ///   4.. `[signer]` Required M signer accounts for the SPL Token Multisig account.
+    ///   4.. `[signer]` Required M signer accounts for the Solarti Token Multisig account.
     ///
     /// Data expected by this instruction:
     ///   `WithdrawInstructionData`
@@ -204,19 +204,19 @@ pub enum ConfidentialTransferInstruction {
     /// Fails if the associated mint is extended as `NonTransferable`.
     ///
     ///   * Single owner/delegate
-    ///   1. `[writable]` The source SPL Token account.
-    ///   2. `[writable]` The destination SPL Token account.
+    ///   1. `[writable]` The source Solarti Token account.
+    ///   2. `[writable]` The destination Solarti Token account.
     ///   3. `[]` The token mint.
     ///   4. `[]` Instructions sysvar.
     ///   5. `[signer]` The single source account owner.
     ///
     ///   * Multisignature owner/delegate
-    ///   1. `[writable]` The source SPL Token account.
-    ///   2. `[writable]` The destination SPL Token account.
+    ///   1. `[writable]` The source Solarti Token account.
+    ///   2. `[writable]` The destination Solarti Token account.
     ///   3. `[]` The token mint.
     ///   4. `[]` Instructions sysvar.
     ///   5. `[]` The multisig  source account owner.
-    ///   6.. `[signer]` Required M signer accounts for the SPL Token Multisig account.
+    ///   6.. `[signer]` Required M signer accounts for the Solarti Token Multisig account.
     ///
     /// Data expected by this instruction:
     ///   `TransferInstructionData`
@@ -236,13 +236,13 @@ pub enum ConfidentialTransferInstruction {
     /// Account expected by this instruction:
     ///
     ///   * Single owner/delegate
-    ///   0. `[writable]` The SPL Token account.
+    ///   0. `[writable]` The Solarti Token account.
     ///   1. `[signer]` The single account owner.
     ///
     ///   * Multisignature owner/delegate
-    ///   0. `[writable]` The SPL Token account.
+    ///   0. `[writable]` The Solarti Token account.
     ///   1. `[]` The multisig account owner.
-    ///   2.. `[signer]` Required M signer accounts for the SPL Token Multisig account.
+    ///   2.. `[signer]` Required M signer accounts for the Solarti Token Multisig account.
     ///
     /// Data expected by this instruction:
     ///   `ApplyPendingBalanceData`
@@ -254,13 +254,13 @@ pub enum ConfidentialTransferInstruction {
     /// Accounts expected by this instruction:
     ///
     ///   * Single owner/delegate
-    ///   0. `[writable]` The SPL Token account.
+    ///   0. `[writable]` The Solarti Token account.
     ///   1. `[signer]` Single authority.
     ///
     ///   * Multisignature owner/delegate
-    ///   0. `[writable]` The SPL Token account.
+    ///   0. `[writable]` The Solarti Token account.
     ///   1. `[]` Multisig authority.
-    ///   2.. `[signer]` Required M signer accounts for the SPL Token Multisig account.
+    ///   2.. `[signer]` Required M signer accounts for the Solarti Token Multisig account.
     ///
     /// Data expected by this instruction:
     ///   None
@@ -278,13 +278,13 @@ pub enum ConfidentialTransferInstruction {
     /// Accounts expected by this instruction:
     ///
     ///   * Single owner/delegate
-    ///   0. `[writable]` The SPL Token account.
+    ///   0. `[writable]` The Solarti Token account.
     ///   1. `[signer]` The single account owner.
     ///
     ///   * Multisignature owner/delegate
-    ///   0. `[writable]` The SPL Token account.
+    ///   0. `[writable]` The Solarti Token account.
     ///   1. `[]` The multisig account owner.
-    ///   2.. `[signer]` Required M signer accounts for the SPL Token Multisig account.
+    ///   2.. `[signer]` Required M signer accounts for the Solarti Token Multisig account.
     ///
     /// Data expected by this instruction:
     ///   None
@@ -297,13 +297,13 @@ pub enum ConfidentialTransferInstruction {
     /// Accounts expected by this instruction:
     ///
     ///   * Single owner/delegate
-    ///   0. `[writable]` The SPL Token account.
+    ///   0. `[writable]` The Solarti Token account.
     ///   1. `[signer]` The single account owner.
     ///
     ///   * Multisignature owner/delegate
-    ///   0. `[writable]` The SPL Token account.
+    ///   0. `[writable]` The Solarti Token account.
     ///   1. `[]` The multisig account owner.
-    ///   2.. `[signer]` Required M signer accounts for the SPL Token Multisig account.
+    ///   2.. `[signer]` Required M signer accounts for the Solarti Token Multisig account.
     ///
     /// Data expected by this instruction:
     ///   None
@@ -319,13 +319,13 @@ pub enum ConfidentialTransferInstruction {
     /// Accounts expected by this instruction:
     ///
     ///   * Single owner/delegate
-    ///   0. `[writable]` The SPL Token account.
+    ///   0. `[writable]` The Solarti Token account.
     ///   1. `[signer]` The single account owner.
     ///
     ///   * Multisignature owner/delegate
-    ///   0. `[writable]` The SPL Token account.
+    ///   0. `[writable]` The Solarti Token account.
     ///   1. `[]` The multisig account owner.
-    ///   2.. `[signer]` Required M signer accounts for the SPL Token Multisig account.
+    ///   2.. `[signer]` Required M signer accounts for the Solarti Token Multisig account.
     ///
     /// Data expected by this instruction:
     ///   None

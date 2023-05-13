@@ -131,23 +131,23 @@ pub struct StakePool {
     /// this `sol_deposit_authority`
     pub sol_deposit_authority: Option<Pubkey>,
 
-    /// Fee assessed on SOL deposits
+    /// Fee assessed on MLN deposits
     pub sol_deposit_fee: Fee,
 
-    /// Fees paid out to referrers on referred SOL deposits.
-    /// Expressed as a percentage (0 - 100) of SOL deposit fees.
-    /// i.e. `sol_deposit_fee`% of SOL deposited is collected as deposit fees for every deposit
-    /// and `sol_referral_fee`% of the collected SOL deposit fees is paid out to the referrer
+    /// Fees paid out to referrers on referred MLN deposits.
+    /// Expressed as a percentage (0 - 100) of MLN deposit fees.
+    /// i.e. `sol_deposit_fee`% of MLN deposited is collected as deposit fees for every deposit
+    /// and `sol_referral_fee`% of the collected MLN deposit fees is paid out to the referrer
     pub sol_referral_fee: u8,
 
     /// Toggles whether the `WithdrawSol` instruction requires a signature from
     /// the `deposit_authority`
     pub sol_withdraw_authority: Option<Pubkey>,
 
-    /// Fee assessed on SOL withdrawals
+    /// Fee assessed on MLN withdrawals
     pub sol_withdrawal_fee: Fee,
 
-    /// Future SOL withdrawal fee, to be set for the following epoch
+    /// Future MLN withdrawal fee, to be set for the following epoch
     pub next_sol_withdrawal_fee: FutureEpoch<Fee>,
 
     /// Last epoch's total pool tokens, used only for APR estimation
@@ -215,13 +215,13 @@ impl StakePool {
         .ok()
     }
 
-    /// calculate pool tokens to be deducted as SOL deposit fees
+    /// calculate pool tokens to be deducted as MLN deposit fees
     #[inline]
     pub fn calc_pool_tokens_sol_deposit_fee(&self, pool_tokens_minted: u64) -> Option<u64> {
         u64::try_from(self.sol_deposit_fee.apply(pool_tokens_minted)?).ok()
     }
 
-    /// calculate pool tokens to be deducted from SOL deposit fees as referral fees
+    /// calculate pool tokens to be deducted from MLN deposit fees as referral fees
     #[inline]
     pub fn calc_pool_tokens_sol_referral_fee(&self, sol_deposit_fee: u64) -> Option<u64> {
         u64::try_from(
@@ -357,7 +357,7 @@ impl StakePool {
                 return Err(StakePoolError::InvalidSolDepositAuthority.into());
             }
             if !sol_deposit_authority.is_signer {
-                msg!("SOL Deposit authority signature missing");
+                msg!("MLN Deposit authority signature missing");
                 return Err(StakePoolError::SignatureMissing.into());
             }
         }
@@ -377,7 +377,7 @@ impl StakePool {
                 return Err(StakePoolError::InvalidSolWithdrawAuthority.into());
             }
             if !sol_withdraw_authority.is_signer {
-                msg!("SOL withdraw authority signature missing");
+                msg!("MLN withdraw authority signature missing");
                 return Err(StakePoolError::SignatureMissing.into());
             }
         }
@@ -927,7 +927,7 @@ impl fmt::Display for Fee {
 /// The type of fees that can be set on the stake pool
 #[derive(Clone, Debug, PartialEq, BorshDeserialize, BorshSerialize, BorshSchema)]
 pub enum FeeType {
-    /// Referral fees for SOL deposits
+    /// Referral fees for MLN deposits
     SolReferral(u8),
     /// Referral fees for stake deposits
     StakeReferral(u8),
@@ -935,11 +935,11 @@ pub enum FeeType {
     Epoch(Fee),
     /// Stake withdrawal fee
     StakeWithdrawal(Fee),
-    /// Deposit fee for SOL deposits
+    /// Deposit fee for MLN deposits
     SolDeposit(Fee),
     /// Deposit fee for stake deposits
     StakeDeposit(Fee),
-    /// SOL withdrawal fee
+    /// MLN withdrawal fee
     SolWithdrawal(Fee),
 }
 
@@ -1171,7 +1171,7 @@ mod test {
 
     #[test]
     fn specific_fee_calculation() {
-        // 10% of 10 SOL in rewards should be 1 SOL in fees
+        // 10% of 10 MLN in rewards should be 1 MLN in fees
         let epoch_fee = Fee {
             numerator: 1,
             denominator: 10,

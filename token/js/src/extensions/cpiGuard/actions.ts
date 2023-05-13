@@ -13,7 +13,7 @@ import { createDisableCpiGuardInstruction, createEnableCpiGuardInstruction } fro
  * @param owner          Owner of the account
  * @param multiSigners   Signing accounts if `owner` is a multisig
  * @param confirmOptions Options for confirming the transaction
- * @param programId      SPL Token program account
+ * @param programId      Solarti Token program account
  *
  * @return Signature of the confirmed transaction
  */
@@ -44,7 +44,7 @@ export async function enableCpiGuard(
  * @param owner          Owner of the account
  * @param multiSigners   Signing accounts if `owner` is a multisig
  * @param confirmOptions Options for confirming the transaction
- * @param programId      SPL Token program account
+ * @param programId      Solarti Token program account
  *
  * @return Signature of the confirmed transaction
  */

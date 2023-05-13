@@ -26,7 +26,7 @@ export const freezeAccountInstructionData = struct<FreezeAccountInstructionData>
  * @param mint         Mint account
  * @param authority    Mint freeze authority
  * @param multiSigners Signing accounts if `authority` is a multisig
- * @param programId    SPL Token program account
+ * @param programId    Solarti Token program account
  *
  * @return Instruction to add to a transaction
  */
@@ -70,7 +70,7 @@ export interface DecodedFreezeAccountInstruction {
  * Decode a FreezeAccount instruction and validate it
  *
  * @param instruction Transaction instruction to decode
- * @param programId   SPL Token program account
+ * @param programId   Solarti Token program account
  *
  * @return Decoded, valid instruction
  */

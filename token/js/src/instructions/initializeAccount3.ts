@@ -27,7 +27,7 @@ export const initializeAccount3InstructionData = struct<InitializeAccount3Instru
  * @param account   New token account
  * @param mint      Mint account
  * @param owner     New account's owner/multisignature
- * @param programId SPL Token program account
+ * @param programId Solarti Token program account
  *
  * @return Instruction to add to a transaction
  */
@@ -63,7 +63,7 @@ export interface DecodedInitializeAccount3Instruction {
  * Decode an InitializeAccount3 instruction and validate it
  *
  * @param instruction Transaction instruction to decode
- * @param programId   SPL Token program account
+ * @param programId   Solarti Token program account
  *
  * @return Decoded, valid instruction
  */

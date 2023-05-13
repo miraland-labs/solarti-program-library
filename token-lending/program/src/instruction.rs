@@ -29,7 +29,7 @@ pub enum LendingInstruction {
         /// Owner authority which can add new reserves
         owner: Pubkey,
         /// Currency market prices are quoted in
-        /// e.g. "USD" null padded (`*b"USD\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0"`) or SPL token mint pubkey
+        /// e.g. "USD" null padded (`*b"USD\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0"`) or Solarti token mint pubkey
         quote_currency: [u8; 32],
     },
 
@@ -54,10 +54,10 @@ pub enum LendingInstruction {
     ///                     $authority can transfer $liquidity_amount.
     ///   1. `[writable]` Destination collateral token account - uninitialized.
     ///   2. `[writable]` Reserve account - uninitialized.
-    ///   3. `[]` Reserve liquidity SPL Token mint.
-    ///   4. `[writable]` Reserve liquidity supply SPL Token account - uninitialized.
+    ///   3. `[]` Reserve liquidity Solarti Token mint.
+    ///   4. `[writable]` Reserve liquidity supply Solarti Token account - uninitialized.
     ///   5. `[writable]` Reserve liquidity fee receiver - uninitialized.
-    ///   6. `[writable]` Reserve collateral SPL Token mint - uninitialized.
+    ///   6. `[writable]` Reserve collateral Solarti Token mint - uninitialized.
     ///   7. `[writable]` Reserve collateral token supply - uninitialized.
     ///   8. `[]` Pyth product account.
     ///   9. `[]` Pyth price account.
@@ -97,8 +97,8 @@ pub enum LendingInstruction {
     ///                     $authority can transfer $liquidity_amount.
     ///   1. `[writable]` Destination collateral token account.
     ///   2. `[writable]` Reserve account.
-    ///   3. `[writable]` Reserve liquidity supply SPL Token account.
-    ///   4. `[writable]` Reserve collateral SPL Token mint.
+    ///   3. `[writable]` Reserve liquidity supply Solarti Token account.
+    ///   4. `[writable]` Reserve collateral Solarti Token mint.
     ///   5. `[]` Lending market account.
     ///   6. `[]` Derived lending market authority.
     ///   7. `[signer]` User transfer authority ($authority).
@@ -118,8 +118,8 @@ pub enum LendingInstruction {
     ///                     $authority can transfer $collateral_amount.
     ///   1. `[writable]` Destination liquidity token account.
     ///   2. `[writable]` Reserve account.
-    ///   3. `[writable]` Reserve collateral SPL Token mint.
-    ///   4. `[writable]` Reserve liquidity supply SPL Token account.
+    ///   3. `[writable]` Reserve collateral Solarti Token mint.
+    ///   4. `[writable]` Reserve liquidity supply Solarti Token account.
     ///   5. `[]` Lending market account.
     ///   6. `[]` Derived lending market authority.
     ///   7. `[signer]` User transfer authority ($authority).
@@ -164,7 +164,7 @@ pub enum LendingInstruction {
     ///   0. `[writable]` Source collateral token account.
     ///                     Minted by deposit reserve collateral mint.
     ///                     $authority can transfer $collateral_amount.
-    ///   1. `[writable]` Destination deposit reserve collateral supply SPL Token account.
+    ///   1. `[writable]` Destination deposit reserve collateral supply Solarti Token account.
     ///   2. `[]` Deposit reserve account - refreshed.
     ///   3. `[writable]` Obligation account.
     ///   4. `[]` Lending market account.
@@ -182,7 +182,7 @@ pub enum LendingInstruction {
     ///
     /// Accounts expected by this instruction:
     ///
-    ///   0. `[writable]` Source withdraw reserve collateral supply SPL Token account.
+    ///   0. `[writable]` Source withdraw reserve collateral supply Solarti Token account.
     ///   1. `[writable]` Destination collateral token account.
     ///                     Minted by withdraw reserve collateral mint.
     ///   2. `[]` Withdraw reserve account - refreshed.
@@ -203,7 +203,7 @@ pub enum LendingInstruction {
     ///
     /// Accounts expected by this instruction:
     ///
-    ///   0. `[writable]` Source borrow reserve liquidity supply SPL Token account.
+    ///   0. `[writable]` Source borrow reserve liquidity supply Solarti Token account.
     ///   1. `[writable]` Destination liquidity token account.
     ///                     Minted by borrow reserve liquidity mint.
     ///   2. `[writable]` Borrow reserve account - refreshed.
@@ -231,7 +231,7 @@ pub enum LendingInstruction {
     ///   0. `[writable]` Source liquidity token account.
     ///                     Minted by repay reserve liquidity mint.
     ///                     $authority can transfer $liquidity_amount.
-    ///   1. `[writable]` Destination repay reserve liquidity supply SPL Token account.
+    ///   1. `[writable]` Destination repay reserve liquidity supply Solarti Token account.
     ///   2. `[writable]` Repay reserve account - refreshed.
     ///   3. `[writable]` Obligation account - refreshed.
     ///   4. `[]` Lending market account.
@@ -255,9 +255,9 @@ pub enum LendingInstruction {
     ///   1. `[writable]` Destination collateral token account.
     ///                     Minted by withdraw reserve collateral mint.
     ///   2. `[writable]` Repay reserve account - refreshed.
-    ///   3. `[writable]` Repay reserve liquidity supply SPL Token account.
+    ///   3. `[writable]` Repay reserve liquidity supply Solarti Token account.
     ///   4. `[]` Withdraw reserve account - refreshed.
-    ///   5. `[writable]` Withdraw reserve collateral supply SPL Token account.
+    ///   5. `[writable]` Withdraw reserve collateral supply Solarti Token account.
     ///   6. `[writable]` Obligation account - refreshed.
     ///   7. `[]` Lending market account.
     ///   8. `[]` Derived lending market authority.

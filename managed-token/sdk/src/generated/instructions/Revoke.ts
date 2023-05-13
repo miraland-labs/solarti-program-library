@@ -7,7 +7,7 @@
 
 import * as splToken from '@solana/solarti-token'
 import * as beet from '@metaplex-foundation/beet'
-import * as web3 from '@solana/web3.js'
+import * as web3 from '@solarti/web3.js'
 
 /**
  * @category Instructions

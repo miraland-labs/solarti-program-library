@@ -406,7 +406,7 @@ async fn fail_without_sol_deposit_authority_signature() {
                 error::StakePoolError::InvalidSolDepositAuthority as u32
             );
         }
-        _ => panic!("Wrong error occurs while trying to make a deposit without SOL deposit authority signature"),
+        _ => panic!("Wrong error occurs while trying to make a deposit without MLN deposit authority signature"),
     }
 }
 

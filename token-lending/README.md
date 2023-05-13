@@ -89,7 +89,7 @@ This is optional! You can skip these steps and use the [Token Lending CLI](./cli
    solana config set --url https://api.devnet.solana.com
    ```
 
-1. Score yourself some sweet SOL:
+1. Score yourself some sweet MLN:
    ```shell
    solana airdrop -k owner.json 2
    solana airdrop -k owner.json 2
@@ -109,15 +109,15 @@ This is optional! You can skip these steps and use the [Token Lending CLI](./cli
    ```
    If the deployment doesn't succeed, follow [this guide](https://docs.solana.com/cli/deploy-a-program#resuming-a-failed-deploy) to resume it.
 
-1. Wrap some of your SOL as an SPL Token:
+1. Wrap some of your MLN as an Solarti Token:
    ```shell
    solarti-token wrap \
       --fee-payer owner.json \
       2.0 \
       -- owner.json
 
-   # Wrapping 2 SOL into AJ2sgpgj6ZeQazPPiDyTYqN9vbj58QMaZQykB9Sr6XY
+   # Wrapping 2 MLN into AJ2sgpgj6ZeQazPPiDyTYqN9vbj58QMaZQykB9Sr6XY
    ```
-   You'll use this for initial reserve liquidity. Note the SPL Token account pubkey (e.g. `AJ2sgpgj6ZeQazPPiDyTYqN9vbj58QMaZQykB9Sr6XY`).
+   You'll use this for initial reserve liquidity. Note the Solarti Token account pubkey (e.g. `AJ2sgpgj6ZeQazPPiDyTYqN9vbj58QMaZQykB9Sr6XY`).
 
 1. Use the [Token Lending CLI](./cli/README.md) to create a lending market and add reserves to it.

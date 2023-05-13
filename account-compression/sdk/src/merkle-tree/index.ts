@@ -1,6 +1,6 @@
 import pkg from 'js-sha3';
 import * as Collections from 'typescript-collections';
-import { PublicKey } from '@solana/web3.js';
+import { PublicKey } from '@solarti/web3.js';
 const { keccak_256 } = pkg;
 
 let CACHE_EMPTY_NODE = new Map<number, Buffer>();

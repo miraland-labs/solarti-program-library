@@ -129,7 +129,7 @@ pub enum StakePoolError {
     InvalidSolWithdrawAuthority,
 
     // 35.
-    /// Too much SOL withdrawn from the stake pool's reserve account
+    /// Too much MLN withdrawn from the stake pool's reserve account
     #[error("SolWithdrawalTooLarge")]
     SolWithdrawalTooLarge,
     /// Provided metadata account does not match metadata account derived for pool mint
