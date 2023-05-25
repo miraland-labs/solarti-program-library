@@ -8,12 +8,12 @@ Install the library and its peer dependencies in your app:
 
 ### Yarn
 ```shell
-yarn add @solana/solarti-token-lending @solana/solarti-token @solarti/web3.js
+yarn add @solarti/solarti-token-lending @solarti/solarti-token @solarti/web3.js
 ```
 
 ### NPM
 ```shell
-npm install @solana/solarti-token-lending @solana/solarti-token @solarti/web3.js
+npm install @solarti/solarti-token-lending @solarti/solarti-token @solarti/web3.js
 ```
 
 ## Documentation

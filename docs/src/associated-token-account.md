@@ -58,7 +58,7 @@ Rust function may be used by clients to derive the wallet's associated token add
 The associated account address can be derived in TypeScript with:
 ```ts
 import { PublicKey } from '@solarti/web3.js';
-import { TOKEN_PROGRAM_ID } from '@solana/solarti-token';
+import { TOKEN_PROGRAM_ID } from '@solarti/solarti-token';
 
 const SPL_ASSOCIATED_TOKEN_ACCOUNT_PROGRAM_ID: PublicKey = new PublicKey(
   'ATAccPjxdgWfJKKN4PmfJ55FbEDEwD8zJUwVjuL9MuHy',

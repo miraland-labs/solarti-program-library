@@ -1,6 +1,6 @@
 import { publicKey, struct, u32, u64, u8, option, vec } from '@project-serum/borsh';
 import { Lockup, PublicKey } from '@solarti/web3.js';
-import { AccountInfo } from '@solana/solarti-token';
+import { AccountInfo } from '@solarti/solarti-token';
 import BN from 'bn.js';
 import {
   Infer,
@@ -22,7 +22,7 @@ export interface Fee {
 const feeFields = [u64('denominator'), u64('numerator')];
 
 /**
- * AccountLayout.encode from "@solana/solarti-token" doesn't work
+ * AccountLayout.encode from "@solarti/solarti-token" doesn't work
  */
 export const AccountLayout = struct<AccountInfo>([
   publicKey('mint'),

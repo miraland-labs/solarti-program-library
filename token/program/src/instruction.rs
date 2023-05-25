@@ -466,7 +466,7 @@ pub enum TokenInstruction<'a> {
     },
     // Any new variants also need to be added to program-2022 `TokenInstruction`, so that the
     // latter remains a superset of this instruction set. New variants also need to be added to
-    // token/js/src/instructions/types.ts to maintain @solana/solarti-token compatibility
+    // token/js/src/instructions/types.ts to maintain @solarti/solarti-token compatibility
 }
 impl<'a> TokenInstruction<'a> {
     /// Unpacks a byte buffer into a [TokenInstruction](enum.TokenInstruction.html).

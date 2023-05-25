@@ -53,7 +53,7 @@ import {
     getMintLen,
     ExtensionType,
     TOKEN_2022_PROGRAM_ID,
-} from '@solana/solarti-token';
+} from '@solarti/solarti-token';
 import {
     clusterApiUrl,
     sendAndConfirmTransaction,
@@ -195,7 +195,7 @@ import {
     createAccount,
     getMintLen,
     TOKEN_2022_PROGRAM_ID,
-} from '@solana/solarti-token';
+} from '@solarti/solarti-token';
 
 import {
     createInitializeTransferFeeConfigInstruction,
@@ -203,7 +203,7 @@ import {
     transferCheckedWithFee,
     withdrawWithheldTokensFromAccounts,
     withdrawWithheldTokensFromMint,
-} from '@solana/solarti-token';
+} from '@solarti/solarti-token';
 
 (async () => {
     const payer = Keypair.generate();
@@ -558,7 +558,7 @@ import {
     updateDefaultAccountState,
     ExtensionType,
     TOKEN_2022_PROGRAM_ID,
-} from '@solana/solarti-token';
+} from '@solarti/solarti-token';
 
 (async () => {
     const payer = Keypair.generate();
@@ -694,7 +694,7 @@ import {
     getAccountLen,
     ExtensionType,
     TOKEN_2022_PROGRAM_ID,
-} from '@solana/solarti-token';
+} from '@solarti/solarti-token';
 
 (async () => {
     const connection = new Connection(clusterApiUrl('devnet'), 'confirmed');
@@ -828,7 +828,7 @@ import {
     getMintLen,
     ExtensionType,
     TOKEN_2022_PROGRAM_ID,
-} from '@solana/solarti-token';
+} from '@solarti/solarti-token';
 
 (async () => {
     const connection = new Connection(clusterApiUrl('devnet'), 'confirmed');
@@ -918,7 +918,7 @@ import {
     getAccountLen,
     ExtensionType,
     TOKEN_2022_PROGRAM_ID,
-} from '@solana/solarti-token';
+} from '@solarti/solarti-token';
 
 (async () => {
     const connection = new Connection(clusterApiUrl('devnet'), 'confirmed');
@@ -1044,7 +1044,7 @@ import {
     createReallocateInstruction,
     ExtensionType,
     TOKEN_2022_PROGRAM_ID,
-} from '@solana/solarti-token';
+} from '@solarti/solarti-token';
 
 (async () => {
     const connection = new Connection(clusterApiUrl('devnet'), 'confirmed');
@@ -1136,7 +1136,7 @@ Signature: 5dSW5QUacEsaKYb3MwYp4ycqq4jpNJ1rpLhS5rotoe3CWv9XhhjrncUFpk14R1fRamS1x
 
 ```jsx
 import { clusterApiUrl, Connection, Keypair, LAMPORTS_PER_MLN } from '@solarti/web3.js';
-import { createInterestBearingMint, updateRateInterestBearingMint, TOKEN_2022_PROGRAM_ID } from '@solana/solarti-token';
+import { createInterestBearingMint, updateRateInterestBearingMint, TOKEN_2022_PROGRAM_ID } from '@solarti/solarti-token';
 
 (async () => {
     const connection = new Connection(clusterApiUrl('devnet'), 'confirmed');

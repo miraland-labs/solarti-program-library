@@ -4,13 +4,20 @@
   "description": "SPL Name Service JavaScript API",
   "license": "MIT",
   "author": "Solana Labs Maintainers <maintainers@solanalabs.com>",
-  "homepage": "https://solana.com/",
+  "contributors": [
+    {
+      "name": "Miraland Crafters",
+      "email": "crafters@miraland.top",
+      "url": "https://miraland.top/"
+    }
+  ],
+  "homepage": "https://miraland.top/",
   "repository": {
     "type": "git",
-    "url": "https://github.com/solana-labs/solana-program-library"
+    "url": "https://github.com/miraland-labs/solarti-program-library"
   },
   "bugs": {
-    "url": "https://github.com/solana-labs/solana-program-library/issues"
+    "url": "https://github.com/miraland-labs/solarti-program-library/issues"
   },
   "publishConfig": {
     "access": "public"
@@ -28,7 +35,7 @@
     "doc": "yarn typedoc src/index.ts",
     "test": "yarn test:unit && yarn test:e2e",
     "test:unit": "mocha test/unit",
-    "test:e2e": "start-server-and-test 'solana-test-validator --bpf-program NamSVdu81GY7ntoqY5Ts4ojoch1JZoetQXb8cuS8gbx ../../target/deploy/spl_name_service.so --reset --quiet' http://localhost:8899/health 'mocha test/e2e'"
+    "test:e2e": "start-server-and-test 'miraland-test-validator --bpf-program NamSVdu81GY7ntoqY5Ts4ojoch1JZoetQXb8cuS8gbx ../../target/deploy/spl_name_service.so --reset --quiet' http://localhost:8899/health 'mocha test/e2e'"
   },
   "prettier": {
     "singleQuote": true
@@ -57,8 +64,8 @@
     "typescript": "^4.1.3"
   },
   "dependencies": {
-    "@solana/solarti-token": "0.1.4",
-    "@solarti/web3.js": "^1.11.0",
+    "@solarti/solarti-token": "0.3.7",
+    "@solarti/web3.js": "^1.73.2",
     "bn.js": "^5.1.3",
     "borsh": "^0.4.0"
   },

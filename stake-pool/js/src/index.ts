@@ -9,7 +9,7 @@ import {
   SystemProgram,
   TransactionInstruction,
 } from '@solarti/web3.js';
-import { ASSOCIATED_TOKEN_PROGRAM_ID, TOKEN_PROGRAM_ID, Token } from '@solana/solarti-token';
+import { ASSOCIATED_TOKEN_PROGRAM_ID, TOKEN_PROGRAM_ID, Token } from '@solarti/solarti-token';
 import {
   ValidatorAccount,
   addAssociatedTokenAccount,

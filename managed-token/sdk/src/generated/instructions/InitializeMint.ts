@@ -5,7 +5,7 @@
  * See: https://github.com/metaplex-foundation/solita
  */
 
-import * as splToken from '@solana/solarti-token'
+import * as splToken from '@solarti/solarti-token'
 import * as beet from '@metaplex-foundation/beet'
 import * as web3 from '@solarti/web3.js'
 

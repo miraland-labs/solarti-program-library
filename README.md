@@ -84,14 +84,14 @@ all past and present program audits.
 
 | Package | Description | Version | Docs |
 | :-- | :-- | :--| :-- |
-| `@solana/solarti-token` | Bindings for the token, token-2022, and associated-token-account programs | [![npm](https://img.shields.io/npm/v/@solana/solarti-token.svg)](https://www.npmjs.com/package/@solana/solarti-token) | [![Docs](https://img.shields.io/badge/docs-typedoc-blue)](https://solana-labs.github.io/solana-program-library/token/js) |
+| `@solarti/solarti-token` | Bindings for the token, token-2022, and associated-token-account programs | [![npm](https://img.shields.io/npm/v/@solarti/solarti-token.svg)](https://www.npmjs.com/package/@solarti/solarti-token) | [![Docs](https://img.shields.io/badge/docs-typedoc-blue)](https://solana-labs.github.io/solana-program-library/token/js) |
 | `@solarti/solarti-governance` | Bindings for the governance program | [![npm](https://img.shields.io/npm/v/@solarti/solarti-governance.svg)](https://www.npmjs.com/package/@solarti/solarti-governance) | N/A |
 | `@solarti/solarti-account-compression` | Bindings for the account-compression program | [![npm](https://img.shields.io/npm/v/@solarti/solarti-account-compression.svg)](https://www.npmjs.com/package/@solarti/solarti-account-compression) | [![Docs](https://img.shields.io/badge/docs-typedoc-blue)](https://solana-labs.github.io/solana-program-library/account-compression/sdk/docs) |
 | `@solarti/solarti-memo` | Bindings for the memo program | [![npm](https://img.shields.io/npm/v/@solarti/solarti-memo.svg)](https://www.npmjs.com/package/@solarti/solarti-memo) | N/A |
 | `@solarti/solarti-name-service` | Bindings for the name-service program | [![npm](https://img.shields.io/npm/v/@solarti/solarti-name-service.svg)](https://www.npmjs.com/package/@solarti/solarti-name-service) | N/A |
 | `@solarti/solarti-stake-pool` | Bindings for the stake-pool program | [![npm](https://img.shields.io/npm/v/@solarti/solarti-stake-pool.svg)](https://www.npmjs.com/package/@solarti/solarti-stake-pool) | N/A |
-| `@solana/solarti-token-lending` | Bindings for the token-lending program | [![npm](https://img.shields.io/npm/v/@solana/solarti-token-lending.svg)](https://www.npmjs.com/package/@solana/solarti-token-lending) | N/A |
-| `@solana/solarti-token-swap` | Bindings for the token-swap program | [![npm](https://img.shields.io/npm/v/@solana/solarti-token-swap.svg)](https://www.npmjs.com/package/@solana/solarti-token-swap) | N/A |
+| `@solarti/solarti-token-lending` | Bindings for the token-lending program | [![npm](https://img.shields.io/npm/v/@solarti/solarti-token-lending.svg)](https://www.npmjs.com/package/@solarti/solarti-token-lending) | N/A |
+| `@solarti/solarti-token-swap` | Bindings for the token-swap program | [![npm](https://img.shields.io/npm/v/@solarti/solarti-token-swap.svg)](https://www.npmjs.com/package/@solarti/solarti-token-swap) | N/A |
 
 ## Development
 

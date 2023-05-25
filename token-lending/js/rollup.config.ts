@@ -9,7 +9,7 @@ export default {
         { file: pkg.main, format: 'cjs', sourcemap: true },
         { file: pkg.module, format: 'es', sourcemap: true },
     ],
-    external: ['@solana/solarti-token', '@solarti/web3.js', 'assert', 'buffer', 'fs', 'path'],
+    external: ['@solarti/solarti-token', '@solarti/web3.js', 'assert', 'buffer', 'fs', 'path'],
     watch: {
         include: 'src/**',
     },

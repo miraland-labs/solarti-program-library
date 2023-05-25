@@ -68,7 +68,7 @@ function generateConfig(configType, format) {
       config.external = [
         '@project-serum/borsh',
         '@solana/buffer-layout',
-        '@solana/solarti-token',
+        '@solarti/solarti-token',
         '@solarti/web3.js',
         'bn.js',
         'buffer',
@@ -96,7 +96,7 @@ function generateConfig(configType, format) {
     config.external = [
       '@project-serum/borsh',
       '@solana/buffer-layout',
-      '@solana/solarti-token',
+      '@solarti/solarti-token',
       '@solarti/web3.js',
       'bn.js',
       'buffer',

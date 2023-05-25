@@ -7,6 +7,6 @@
   "dependencies": {
     "@metaplex-foundation/rustbin": "^0.3.1",
     "@metaplex-foundation/solita": "^0.12.2",
-    "@solana/solarti-token": "0.1.8"
+    "@solarti/solarti-token": "0.1.8"
   }
 }
