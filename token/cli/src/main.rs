@@ -2860,7 +2860,7 @@ fn app<'a, 'b>(
                         .conflicts_with("recipient_owner")
                         .index(3)
                         .help("The token account address of recipient \
-                            [default: associated token account for --mint-authority]"),
+                            [default: associated token account for default signer which usually is client keypair]"),  // MI, vanilla mistake: [default: associated token account for --mint-authority]
                 )
                 .arg(
                     Arg::with_name("recipient_owner")
@@ -3851,7 +3851,7 @@ async fn process_command<'a>(
             {
                 get_associated_token_address_with_program_id(&address, &token, &config.program_id)
             } else {
-                let owner = config.default_signer()?.pubkey();
+                let owner = config.default_signer()?.pubkey(); // MI: not mint authority, so the help tip is misleading
                 config.associated_token_address_for_token_and_program(
                     &mint_info.address,
                     &owner,
