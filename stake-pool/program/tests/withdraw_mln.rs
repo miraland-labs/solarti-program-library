@@ -56,7 +56,7 @@ async fn setup(
     .unwrap();
 
     let error = stake_pool_accounts
-        .deposit_sol(
+        .deposit_mln(
             &mut context.banks_client,
             &context.payer,
             &context.last_blockhash,
@@ -104,7 +104,7 @@ async fn success(token_program_id: Pubkey) {
     .lamports;
 
     let error = stake_pool_accounts
-        .withdraw_sol(
+        .withdraw_mln(
             &mut context.banks_client,
             &context.payer,
             &context.last_blockhash,
@@ -161,7 +161,7 @@ async fn fail_with_wrong_withdraw_authority() {
     stake_pool_accounts.withdraw_authority = Pubkey::new_unique();
 
     let error = stake_pool_accounts
-        .withdraw_sol(
+        .withdraw_mln(
             &mut context.banks_client,
             &context.payer,
             &context.last_blockhash,
@@ -216,7 +216,7 @@ async fn fail_overdraw_reserve() {
 
     // try to withdraw one lamport, will overdraw
     let error = stake_pool_accounts
-        .withdraw_sol(
+        .withdraw_mln(
             &mut context.banks_client,
             &context.payer,
             &context.last_blockhash,
@@ -233,24 +233,24 @@ async fn fail_overdraw_reserve() {
         error,
         TransactionError::InstructionError(
             0,
-            InstructionError::Custom(StakePoolError::SolWithdrawalTooLarge as u32)
+            InstructionError::Custom(StakePoolError::MlnWithdrawalTooLarge as u32)
         )
     );
 }
 
 #[tokio::test]
-async fn success_with_sol_withdraw_authority() {
+async fn success_with_mln_withdraw_authority() {
     let (mut context, stake_pool_accounts, user, pool_token_account, pool_tokens) =
         setup(spl_token::id()).await;
-    let sol_withdraw_authority = Keypair::new();
+    let mln_withdraw_authority = Keypair::new();
 
     let transaction = Transaction::new_signed_with_payer(
         &[instruction::set_funding_authority(
             &id(),
             &stake_pool_accounts.stake_pool.pubkey(),
             &stake_pool_accounts.manager.pubkey(),
-            Some(&sol_withdraw_authority.pubkey()),
-            FundingType::SolWithdraw,
+            Some(&mln_withdraw_authority.pubkey()),
+            FundingType::MlnWithdraw,
         )],
         Some(&context.payer.pubkey()),
         &[&context.payer, &stake_pool_accounts.manager],
@@ -263,32 +263,32 @@ async fn success_with_sol_withdraw_authority() {
         .unwrap();
 
     let error = stake_pool_accounts
-        .withdraw_sol(
+        .withdraw_mln(
             &mut context.banks_client,
             &context.payer,
             &context.last_blockhash,
             &user,
             &pool_token_account,
             pool_tokens,
-            Some(&sol_withdraw_authority),
+            Some(&mln_withdraw_authority),
         )
         .await;
     assert!(error.is_none());
 }
 
 #[tokio::test]
-async fn fail_without_sol_withdraw_authority_signature() {
+async fn fail_without_mln_withdraw_authority_signature() {
     let (mut context, stake_pool_accounts, user, pool_token_account, pool_tokens) =
         setup(spl_token::id()).await;
-    let sol_withdraw_authority = Keypair::new();
+    let mln_withdraw_authority = Keypair::new();
 
     let transaction = Transaction::new_signed_with_payer(
         &[instruction::set_funding_authority(
             &id(),
             &stake_pool_accounts.stake_pool.pubkey(),
             &stake_pool_accounts.manager.pubkey(),
-            Some(&sol_withdraw_authority.pubkey()),
-            FundingType::SolWithdraw,
+            Some(&mln_withdraw_authority.pubkey()),
+            FundingType::MlnWithdraw,
         )],
         Some(&context.payer.pubkey()),
         &[&context.payer, &stake_pool_accounts.manager],
@@ -302,7 +302,7 @@ async fn fail_without_sol_withdraw_authority_signature() {
 
     let wrong_withdrawer = Keypair::new();
     let error = stake_pool_accounts
-        .withdraw_sol(
+        .withdraw_mln(
             &mut context.banks_client,
             &context.payer,
             &context.last_blockhash,
@@ -319,7 +319,7 @@ async fn fail_without_sol_withdraw_authority_signature() {
         error,
         TransactionError::InstructionError(
             0,
-            InstructionError::Custom(StakePoolError::InvalidSolWithdrawAuthority as u32)
+            InstructionError::Custom(StakePoolError::InvalidMlnWithdrawAuthority as u32)
         )
     );
 }
@@ -342,7 +342,7 @@ async fn success_with_slippage(token_program_id: Pubkey) {
     .lamports;
 
     let error = stake_pool_accounts
-        .withdraw_sol_with_slippage(
+        .withdraw_mln_with_slippage(
             &mut context.banks_client,
             &context.payer,
             &context.last_blockhash,
@@ -363,7 +363,7 @@ async fn success_with_slippage(token_program_id: Pubkey) {
     );
 
     let error = stake_pool_accounts
-        .withdraw_sol_with_slippage(
+        .withdraw_mln_with_slippage(
             &mut context.banks_client,
             &context.payer,
             &context.last_blockhash,

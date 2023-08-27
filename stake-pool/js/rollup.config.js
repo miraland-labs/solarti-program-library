@@ -66,9 +66,9 @@ function generateConfig(configType, format) {
 
       // Prevent dependencies from being bundled
       config.external = [
-        '@project-serum/borsh',
-        '@solana/buffer-layout',
-        '@solarti/solarti-token',
+        '@solarti/borsh',
+        '@solarti/buffer-layout',
+        '@solarti/spl-token',
         '@solarti/web3.js',
         'bn.js',
         'buffer',
@@ -94,9 +94,9 @@ function generateConfig(configType, format) {
 
     // Prevent dependencies from being bundled
     config.external = [
-      '@project-serum/borsh',
-      '@solana/buffer-layout',
-      '@solarti/solarti-token',
+      '@solarti/borsh',
+      '@solarti/buffer-layout',
+      '@solarti/spl-token',
       '@solarti/web3.js',
       'bn.js',
       'buffer',

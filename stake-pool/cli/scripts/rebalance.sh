@@ -6,7 +6,7 @@
 cd "$(dirname "$0")" || exit
 stake_pool_keyfile=$1
 validator_list=$2
-sol_amount=$3
+mln_amount=$3
 
 spl_stake_pool=solarti-stake-pool
 # Uncomment to use a locally build CLI
@@ -15,13 +15,13 @@ spl_stake_pool=solarti-stake-pool
 increase_stakes () {
   stake_pool_pubkey=$1
   validator_list=$2
-  sol_amount=$3
+  mln_amount=$3
   while read -r validator
   do
-    $spl_stake_pool increase-validator-stake "$stake_pool_pubkey" "$validator" "$sol_amount"
+    $spl_stake_pool increase-validator-stake "$stake_pool_pubkey" "$validator" "$mln_amount"
   done < "$validator_list"
 }
 
-stake_pool_pubkey=$(solana-keygen pubkey "$stake_pool_keyfile")
+stake_pool_pubkey=$(miraland-keygen pubkey "$stake_pool_keyfile")
 echo "Increasing amount delegated to each validator in stake pool"
-increase_stakes "$stake_pool_pubkey" "$validator_list" "$sol_amount"
+increase_stakes "$stake_pool_pubkey" "$validator_list" "$mln_amount"

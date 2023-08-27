@@ -39,9 +39,9 @@ pub enum FundingType {
     /// Sets the stake deposit authority
     StakeDeposit,
     /// Sets the MLN deposit authority
-    SolDeposit,
+    MlnDeposit,
     /// Sets the MLN withdraw authority
-    SolWithdraw,
+    MlnWithdraw,
 }
 
 /// Instructions supported by the StakePool program.
@@ -339,8 +339,8 @@ pub enum StakePoolInstruction {
     ///   7. `[w]` Pool token mint account
     ///   8. `[]` System program account
     ///   9. `[]` Token program id
-    ///  10. `[s]` (Optional) Stake pool sol deposit authority.
-    DepositSol(u64),
+    ///  10. `[s]` (Optional) Stake pool mln deposit authority.
+    DepositMln(u64),
 
     ///  (Manager only) Update MLN deposit, stake deposit, or MLN withdrawal authority.
     ///
@@ -364,8 +364,8 @@ pub enum StakePoolInstruction {
     ///   9. '[]' Stake history sysvar
     ///  10. `[]` Stake program account
     ///  11. `[]` Token program id
-    ///  12. `[s]` (Optional) Stake pool sol withdraw authority
-    WithdrawSol(u64),
+    ///  12. `[s]` (Optional) Stake pool mln withdraw authority
+    WithdrawMln(u64),
 
     /// Create token metadata for the stake-pool token in the
     /// metaplex-token program
@@ -599,8 +599,8 @@ pub enum StakePoolInstruction {
     ///   7. `[w]` Pool token mint account
     ///   8. `[]` System program account
     ///   9. `[]` Token program id
-    ///  10. `[s]` (Optional) Stake pool sol deposit authority.
-    DepositSolWithSlippage {
+    ///  10. `[s]` (Optional) Stake pool mln deposit authority.
+    DepositMlnWithSlippage {
         /// Amount of lamports to deposit into the reserve
         lamports_in: u64,
         /// Minimum amount of pool tokens that must be received
@@ -623,8 +623,8 @@ pub enum StakePoolInstruction {
     ///   9. '[]' Stake history sysvar
     ///  10. `[]` Stake program account
     ///  11. `[]` Token program id
-    ///  12. `[s]` (Optional) Stake pool sol withdraw authority
-    WithdrawSolWithSlippage {
+    ///  12. `[s]` (Optional) Stake pool mln withdraw authority
+    WithdrawMlnWithSlippage {
         /// Pool tokens to burn in exchange for lamports
         pool_tokens_in: u64,
         /// Minimum amount of lamports that must be received
@@ -1634,7 +1634,7 @@ pub fn deposit_stake_with_authority_and_slippage(
 }
 
 /// Creates instructions required to deposit MLN directly into a stake pool.
-fn deposit_sol_internal(
+fn deposit_mln_internal(
     program_id: &Pubkey,
     stake_pool: &Pubkey,
     stake_pool_withdraw_authority: &Pubkey,
@@ -1645,7 +1645,7 @@ fn deposit_sol_internal(
     referrer_pool_tokens_account: &Pubkey,
     pool_mint: &Pubkey,
     token_program_id: &Pubkey,
-    sol_deposit_authority: Option<&Pubkey>,
+    mln_deposit_authority: Option<&Pubkey>,
     lamports_in: u64,
     minimum_pool_tokens_out: Option<u64>,
 ) -> Instruction {
@@ -1661,14 +1661,14 @@ fn deposit_sol_internal(
         AccountMeta::new_readonly(system_program::id(), false),
         AccountMeta::new_readonly(*token_program_id, false),
     ];
-    if let Some(sol_deposit_authority) = sol_deposit_authority {
-        accounts.push(AccountMeta::new_readonly(*sol_deposit_authority, true));
+    if let Some(mln_deposit_authority) = mln_deposit_authority {
+        accounts.push(AccountMeta::new_readonly(*mln_deposit_authority, true));
     }
     if let Some(minimum_pool_tokens_out) = minimum_pool_tokens_out {
         Instruction {
             program_id: *program_id,
             accounts,
-            data: StakePoolInstruction::DepositSolWithSlippage {
+            data: StakePoolInstruction::DepositMlnWithSlippage {
                 lamports_in,
                 minimum_pool_tokens_out,
             }
@@ -1679,7 +1679,7 @@ fn deposit_sol_internal(
         Instruction {
             program_id: *program_id,
             accounts,
-            data: StakePoolInstruction::DepositSol(lamports_in)
+            data: StakePoolInstruction::DepositMln(lamports_in)
                 .try_to_vec()
                 .unwrap(),
         }
@@ -1687,7 +1687,7 @@ fn deposit_sol_internal(
 }
 
 /// Creates instruction to deposit MLN directly into a stake pool.
-pub fn deposit_sol(
+pub fn deposit_mln(
     program_id: &Pubkey,
     stake_pool: &Pubkey,
     stake_pool_withdraw_authority: &Pubkey,
@@ -1700,7 +1700,7 @@ pub fn deposit_sol(
     token_program_id: &Pubkey,
     lamports_in: u64,
 ) -> Instruction {
-    deposit_sol_internal(
+    deposit_mln_internal(
         program_id,
         stake_pool,
         stake_pool_withdraw_authority,
@@ -1718,7 +1718,7 @@ pub fn deposit_sol(
 }
 
 /// Creates instruction to deposit MLN directly into a stake pool with slippage constraint.
-pub fn deposit_sol_with_slippage(
+pub fn deposit_mln_with_slippage(
     program_id: &Pubkey,
     stake_pool: &Pubkey,
     stake_pool_withdraw_authority: &Pubkey,
@@ -1732,7 +1732,7 @@ pub fn deposit_sol_with_slippage(
     lamports_in: u64,
     minimum_pool_tokens_out: u64,
 ) -> Instruction {
-    deposit_sol_internal(
+    deposit_mln_internal(
         program_id,
         stake_pool,
         stake_pool_withdraw_authority,
@@ -1750,12 +1750,12 @@ pub fn deposit_sol_with_slippage(
 }
 
 /// Creates instruction required to deposit MLN directly into a stake pool.
-/// The difference with `deposit_sol()` is that a deposit
+/// The difference with `deposit_mln()` is that a deposit
 /// authority must sign this instruction.
-pub fn deposit_sol_with_authority(
+pub fn deposit_mln_with_authority(
     program_id: &Pubkey,
     stake_pool: &Pubkey,
-    sol_deposit_authority: &Pubkey,
+    mln_deposit_authority: &Pubkey,
     stake_pool_withdraw_authority: &Pubkey,
     reserve_stake_account: &Pubkey,
     lamports_from: &Pubkey,
@@ -1766,7 +1766,7 @@ pub fn deposit_sol_with_authority(
     token_program_id: &Pubkey,
     lamports_in: u64,
 ) -> Instruction {
-    deposit_sol_internal(
+    deposit_mln_internal(
         program_id,
         stake_pool,
         stake_pool_withdraw_authority,
@@ -1777,17 +1777,17 @@ pub fn deposit_sol_with_authority(
         referrer_pool_tokens_account,
         pool_mint,
         token_program_id,
-        Some(sol_deposit_authority),
+        Some(mln_deposit_authority),
         lamports_in,
         None,
     )
 }
 
 /// Creates instruction to deposit MLN directly into a stake pool with slippage constraint.
-pub fn deposit_sol_with_authority_and_slippage(
+pub fn deposit_mln_with_authority_and_slippage(
     program_id: &Pubkey,
     stake_pool: &Pubkey,
-    sol_deposit_authority: &Pubkey,
+    mln_deposit_authority: &Pubkey,
     stake_pool_withdraw_authority: &Pubkey,
     reserve_stake_account: &Pubkey,
     lamports_from: &Pubkey,
@@ -1799,7 +1799,7 @@ pub fn deposit_sol_with_authority_and_slippage(
     lamports_in: u64,
     minimum_pool_tokens_out: u64,
 ) -> Instruction {
-    deposit_sol_internal(
+    deposit_mln_internal(
         program_id,
         stake_pool,
         stake_pool_withdraw_authority,
@@ -1810,7 +1810,7 @@ pub fn deposit_sol_with_authority_and_slippage(
         referrer_pool_tokens_account,
         pool_mint,
         token_program_id,
-        Some(sol_deposit_authority),
+        Some(mln_deposit_authority),
         lamports_in,
         Some(minimum_pool_tokens_out),
     )
@@ -1938,7 +1938,7 @@ pub fn withdraw_stake_with_slippage(
     )
 }
 
-fn withdraw_sol_internal(
+fn withdraw_mln_internal(
     program_id: &Pubkey,
     stake_pool: &Pubkey,
     stake_pool_withdraw_authority: &Pubkey,
@@ -1949,7 +1949,7 @@ fn withdraw_sol_internal(
     manager_fee_account: &Pubkey,
     pool_mint: &Pubkey,
     token_program_id: &Pubkey,
-    sol_withdraw_authority: Option<&Pubkey>,
+    mln_withdraw_authority: Option<&Pubkey>,
     pool_tokens_in: u64,
     minimum_lamports_out: Option<u64>,
 ) -> Instruction {
@@ -1967,14 +1967,14 @@ fn withdraw_sol_internal(
         AccountMeta::new_readonly(stake::program::id(), false),
         AccountMeta::new_readonly(*token_program_id, false),
     ];
-    if let Some(sol_withdraw_authority) = sol_withdraw_authority {
-        accounts.push(AccountMeta::new_readonly(*sol_withdraw_authority, true));
+    if let Some(mln_withdraw_authority) = mln_withdraw_authority {
+        accounts.push(AccountMeta::new_readonly(*mln_withdraw_authority, true));
     }
     if let Some(minimum_lamports_out) = minimum_lamports_out {
         Instruction {
             program_id: *program_id,
             accounts,
-            data: StakePoolInstruction::WithdrawSolWithSlippage {
+            data: StakePoolInstruction::WithdrawMlnWithSlippage {
                 pool_tokens_in,
                 minimum_lamports_out,
             }
@@ -1985,7 +1985,7 @@ fn withdraw_sol_internal(
         Instruction {
             program_id: *program_id,
             accounts,
-            data: StakePoolInstruction::WithdrawSol(pool_tokens_in)
+            data: StakePoolInstruction::WithdrawMln(pool_tokens_in)
                 .try_to_vec()
                 .unwrap(),
         }
@@ -1993,7 +1993,7 @@ fn withdraw_sol_internal(
 }
 
 /// Creates instruction required to withdraw MLN directly from a stake pool.
-pub fn withdraw_sol(
+pub fn withdraw_mln(
     program_id: &Pubkey,
     stake_pool: &Pubkey,
     stake_pool_withdraw_authority: &Pubkey,
@@ -2006,7 +2006,7 @@ pub fn withdraw_sol(
     token_program_id: &Pubkey,
     pool_tokens_in: u64,
 ) -> Instruction {
-    withdraw_sol_internal(
+    withdraw_mln_internal(
         program_id,
         stake_pool,
         stake_pool_withdraw_authority,
@@ -2025,7 +2025,7 @@ pub fn withdraw_sol(
 
 /// Creates instruction required to withdraw MLN directly from a stake pool with
 /// slippage constraints.
-pub fn withdraw_sol_with_slippage(
+pub fn withdraw_mln_with_slippage(
     program_id: &Pubkey,
     stake_pool: &Pubkey,
     stake_pool_withdraw_authority: &Pubkey,
@@ -2039,7 +2039,7 @@ pub fn withdraw_sol_with_slippage(
     pool_tokens_in: u64,
     minimum_lamports_out: u64,
 ) -> Instruction {
-    withdraw_sol_internal(
+    withdraw_mln_internal(
         program_id,
         stake_pool,
         stake_pool_withdraw_authority,
@@ -2057,12 +2057,12 @@ pub fn withdraw_sol_with_slippage(
 }
 
 /// Creates instruction required to withdraw MLN directly from a stake pool.
-/// The difference with `withdraw_sol()` is that the sol withdraw authority
+/// The difference with `withdraw_mln()` is that the mln withdraw authority
 /// must sign this instruction.
-pub fn withdraw_sol_with_authority(
+pub fn withdraw_mln_with_authority(
     program_id: &Pubkey,
     stake_pool: &Pubkey,
-    sol_withdraw_authority: &Pubkey,
+    mln_withdraw_authority: &Pubkey,
     stake_pool_withdraw_authority: &Pubkey,
     user_transfer_authority: &Pubkey,
     pool_tokens_from: &Pubkey,
@@ -2073,7 +2073,7 @@ pub fn withdraw_sol_with_authority(
     token_program_id: &Pubkey,
     pool_tokens_in: u64,
 ) -> Instruction {
-    withdraw_sol_internal(
+    withdraw_mln_internal(
         program_id,
         stake_pool,
         stake_pool_withdraw_authority,
@@ -2084,7 +2084,7 @@ pub fn withdraw_sol_with_authority(
         manager_fee_account,
         pool_mint,
         token_program_id,
-        Some(sol_withdraw_authority),
+        Some(mln_withdraw_authority),
         pool_tokens_in,
         None,
     )
@@ -2092,12 +2092,12 @@ pub fn withdraw_sol_with_authority(
 
 /// Creates instruction required to withdraw MLN directly from a stake pool with
 /// a slippage constraint.
-/// The difference with `withdraw_sol()` is that the sol withdraw authority
+/// The difference with `withdraw_mln()` is that the mln withdraw authority
 /// must sign this instruction.
-pub fn withdraw_sol_with_authority_and_slippage(
+pub fn withdraw_mln_with_authority_and_slippage(
     program_id: &Pubkey,
     stake_pool: &Pubkey,
-    sol_withdraw_authority: &Pubkey,
+    mln_withdraw_authority: &Pubkey,
     stake_pool_withdraw_authority: &Pubkey,
     user_transfer_authority: &Pubkey,
     pool_tokens_from: &Pubkey,
@@ -2109,7 +2109,7 @@ pub fn withdraw_sol_with_authority_and_slippage(
     pool_tokens_in: u64,
     minimum_lamports_out: u64,
 ) -> Instruction {
-    withdraw_sol_internal(
+    withdraw_mln_internal(
         program_id,
         stake_pool,
         stake_pool_withdraw_authority,
@@ -2120,7 +2120,7 @@ pub fn withdraw_sol_with_authority_and_slippage(
         manager_fee_account,
         pool_mint,
         token_program_id,
-        Some(sol_withdraw_authority),
+        Some(mln_withdraw_authority),
         pool_tokens_in,
         Some(minimum_lamports_out),
     )
@@ -2189,14 +2189,14 @@ pub fn set_funding_authority(
     program_id: &Pubkey,
     stake_pool: &Pubkey,
     manager: &Pubkey,
-    new_sol_deposit_authority: Option<&Pubkey>,
+    new_mln_deposit_authority: Option<&Pubkey>,
     funding_type: FundingType,
 ) -> Instruction {
     let mut accounts = vec![
         AccountMeta::new(*stake_pool, false),
         AccountMeta::new_readonly(*manager, true),
     ];
-    if let Some(auth) = new_sol_deposit_authority {
+    if let Some(auth) = new_mln_deposit_authority {
         accounts.push(AccountMeta::new_readonly(*auth, false))
     }
     Instruction {

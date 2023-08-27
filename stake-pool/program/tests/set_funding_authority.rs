@@ -172,8 +172,8 @@ async fn fail_without_signature() {
 }
 
 #[tokio::test]
-async fn success_set_sol_deposit_authority() {
-    let (mut banks_client, payer, recent_blockhash, stake_pool_accounts, new_sol_deposit_authority) =
+async fn success_set_mln_deposit_authority() {
+    let (mut banks_client, payer, recent_blockhash, stake_pool_accounts, new_mln_deposit_authority) =
         setup().await;
 
     let mut transaction = Transaction::new_with_payer(
@@ -181,8 +181,8 @@ async fn success_set_sol_deposit_authority() {
             &id(),
             &stake_pool_accounts.stake_pool.pubkey(),
             &stake_pool_accounts.manager.pubkey(),
-            Some(&new_sol_deposit_authority.pubkey()),
-            FundingType::SolDeposit,
+            Some(&new_mln_deposit_authority.pubkey()),
+            FundingType::MlnDeposit,
         )],
         Some(&payer.pubkey()),
     );
@@ -194,8 +194,8 @@ async fn success_set_sol_deposit_authority() {
         try_from_slice_unchecked::<state::StakePool>(stake_pool.data.as_slice()).unwrap();
 
     assert_eq!(
-        stake_pool.sol_deposit_authority,
-        Some(new_sol_deposit_authority.pubkey())
+        stake_pool.mln_deposit_authority,
+        Some(new_mln_deposit_authority.pubkey())
     );
 
     let mut transaction = Transaction::new_with_payer(
@@ -204,7 +204,7 @@ async fn success_set_sol_deposit_authority() {
             &stake_pool_accounts.stake_pool.pubkey(),
             &stake_pool_accounts.manager.pubkey(),
             None,
-            FundingType::SolDeposit,
+            FundingType::MlnDeposit,
         )],
         Some(&payer.pubkey()),
     );
@@ -215,7 +215,7 @@ async fn success_set_sol_deposit_authority() {
     let stake_pool =
         try_from_slice_unchecked::<state::StakePool>(stake_pool.data.as_slice()).unwrap();
 
-    assert_eq!(stake_pool.sol_deposit_authority, None);
+    assert_eq!(stake_pool.mln_deposit_authority, None);
 }
 
 #[tokio::test]
@@ -229,7 +229,7 @@ async fn success_set_withdraw_authority() {
             &stake_pool_accounts.stake_pool.pubkey(),
             &stake_pool_accounts.manager.pubkey(),
             Some(&new_authority.pubkey()),
-            FundingType::SolWithdraw,
+            FundingType::MlnWithdraw,
         )],
         Some(&payer.pubkey()),
     );
@@ -241,7 +241,7 @@ async fn success_set_withdraw_authority() {
         try_from_slice_unchecked::<state::StakePool>(stake_pool.data.as_slice()).unwrap();
 
     assert_eq!(
-        stake_pool.sol_withdraw_authority,
+        stake_pool.mln_withdraw_authority,
         Some(new_authority.pubkey())
     );
 
@@ -251,7 +251,7 @@ async fn success_set_withdraw_authority() {
             &stake_pool_accounts.stake_pool.pubkey(),
             &stake_pool_accounts.manager.pubkey(),
             None,
-            FundingType::SolWithdraw,
+            FundingType::MlnWithdraw,
         )],
         Some(&payer.pubkey()),
     );
@@ -262,5 +262,5 @@ async fn success_set_withdraw_authority() {
     let stake_pool =
         try_from_slice_unchecked::<state::StakePool>(stake_pool.data.as_slice()).unwrap();
 
-    assert_eq!(stake_pool.sol_withdraw_authority, None);
+    assert_eq!(stake_pool.mln_withdraw_authority, None);
 }

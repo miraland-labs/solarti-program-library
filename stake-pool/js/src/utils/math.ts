@@ -1,12 +1,12 @@
 import BN from 'bn.js';
 import { LAMPORTS_PER_MLN } from '@solarti/web3.js';
 
-export function solToLamports(amount: number): number {
+export function mlnToLamports(amount: number): number {
   if (isNaN(amount)) return Number(0);
   return Number(amount * LAMPORTS_PER_MLN);
 }
 
-export function lamportsToSol(lamports: number | BN): number {
+export function lamportsToMln(lamports: number | BN): number {
   if (typeof lamports === 'number') {
     return Math.abs(lamports) / LAMPORTS_PER_MLN;
   }

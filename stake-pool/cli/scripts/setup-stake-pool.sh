@@ -5,7 +5,7 @@
 
 cd "$(dirname "$0")" || exit
 command_args=()
-sol_amount=$1
+mln_amount=$1
 
 ###################################################
 ### MODIFY PARAMETERS BELOW THIS LINE FOR YOUR POOL
@@ -47,7 +47,7 @@ mkdir -p $keys_dir
 create_keypair () {
   if test ! -f "$1"
   then
-    solana-keygen new --no-passphrase -s -o "$1"
+    miraland-keygen new --no-passphrase -s -o "$1"
   fi
 }
 
@@ -72,6 +72,6 @@ $spl_stake_pool \
 
 set +ex
 echo "Depositing MLN into stake pool"
-stake_pool_pubkey=$(solana-keygen pubkey "$stake_pool_keyfile")
+stake_pool_pubkey=$(miraland-keygen pubkey "$stake_pool_keyfile")
 set -ex
-$spl_stake_pool deposit-sol "$stake_pool_pubkey" "$sol_amount"
+$spl_stake_pool deposit-mln "$stake_pool_pubkey" "$mln_amount"

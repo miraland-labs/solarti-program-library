@@ -395,8 +395,8 @@ async fn fail_with_wrong_mint_authority() {
         &stake_pool_accounts.withdrawal_fee,
         &stake_pool_accounts.deposit_fee,
         stake_pool_accounts.referral_fee,
-        &stake_pool_accounts.sol_deposit_fee,
-        stake_pool_accounts.sol_referral_fee,
+        &stake_pool_accounts.mln_deposit_fee,
+        stake_pool_accounts.mln_referral_fee,
         stake_pool_accounts.max_validators,
     )
     .await
@@ -490,8 +490,8 @@ async fn fail_with_freeze_authority() {
         &stake_pool_accounts.withdrawal_fee,
         &stake_pool_accounts.deposit_fee,
         stake_pool_accounts.referral_fee,
-        &stake_pool_accounts.sol_deposit_fee,
-        stake_pool_accounts.sol_referral_fee,
+        &stake_pool_accounts.mln_deposit_fee,
+        stake_pool_accounts.mln_referral_fee,
         stake_pool_accounts.max_validators,
     )
     .await
@@ -558,8 +558,8 @@ async fn success_with_supported_extensions() {
         &stake_pool_accounts.withdrawal_fee,
         &stake_pool_accounts.deposit_fee,
         stake_pool_accounts.referral_fee,
-        &stake_pool_accounts.sol_deposit_fee,
-        stake_pool_accounts.sol_referral_fee,
+        &stake_pool_accounts.mln_deposit_fee,
+        stake_pool_accounts.mln_referral_fee,
         stake_pool_accounts.max_validators,
     )
     .await
@@ -614,8 +614,8 @@ async fn fail_with_unsupported_mint_extension() {
         &stake_pool_accounts.withdrawal_fee,
         &stake_pool_accounts.deposit_fee,
         stake_pool_accounts.referral_fee,
-        &stake_pool_accounts.sol_deposit_fee,
-        stake_pool_accounts.sol_referral_fee,
+        &stake_pool_accounts.mln_deposit_fee,
+        stake_pool_accounts.mln_referral_fee,
         stake_pool_accounts.max_validators,
     )
     .await
@@ -679,8 +679,8 @@ async fn fail_with_unsupported_account_extension() {
         &stake_pool_accounts.withdrawal_fee,
         &stake_pool_accounts.deposit_fee,
         stake_pool_accounts.referral_fee,
-        &stake_pool_accounts.sol_deposit_fee,
-        stake_pool_accounts.sol_referral_fee,
+        &stake_pool_accounts.mln_deposit_fee,
+        stake_pool_accounts.mln_referral_fee,
         stake_pool_accounts.max_validators,
     )
     .await
@@ -962,8 +962,8 @@ async fn fail_with_wrong_fee_account() {
         &stake_pool_accounts.withdrawal_fee,
         &stake_pool_accounts.deposit_fee,
         stake_pool_accounts.referral_fee,
-        &stake_pool_accounts.sol_deposit_fee,
-        stake_pool_accounts.sol_referral_fee,
+        &stake_pool_accounts.mln_deposit_fee,
+        stake_pool_accounts.mln_referral_fee,
         stake_pool_accounts.max_validators,
     )
     .await
@@ -1330,8 +1330,8 @@ async fn fail_with_pre_minted_pool_tokens() {
         &stake_pool_accounts.withdrawal_fee,
         &stake_pool_accounts.deposit_fee,
         stake_pool_accounts.referral_fee,
-        &stake_pool_accounts.sol_deposit_fee,
-        stake_pool_accounts.sol_referral_fee,
+        &stake_pool_accounts.mln_deposit_fee,
+        stake_pool_accounts.mln_referral_fee,
         stake_pool_accounts.max_validators,
     )
     .await
@@ -1399,8 +1399,8 @@ async fn fail_with_bad_reserve() {
             &stake_pool_accounts.withdrawal_fee,
             &stake_pool_accounts.deposit_fee,
             stake_pool_accounts.referral_fee,
-            &stake_pool_accounts.sol_deposit_fee,
-            stake_pool_accounts.sol_referral_fee,
+            &stake_pool_accounts.mln_deposit_fee,
+            stake_pool_accounts.mln_referral_fee,
             stake_pool_accounts.max_validators,
         )
         .await
@@ -1451,8 +1451,8 @@ async fn fail_with_bad_reserve() {
             &stake_pool_accounts.withdrawal_fee,
             &stake_pool_accounts.deposit_fee,
             stake_pool_accounts.referral_fee,
-            &stake_pool_accounts.sol_deposit_fee,
-            stake_pool_accounts.sol_referral_fee,
+            &stake_pool_accounts.mln_deposit_fee,
+            stake_pool_accounts.mln_referral_fee,
             stake_pool_accounts.max_validators,
         )
         .await
@@ -1506,8 +1506,8 @@ async fn fail_with_bad_reserve() {
             &stake_pool_accounts.withdrawal_fee,
             &stake_pool_accounts.deposit_fee,
             stake_pool_accounts.referral_fee,
-            &stake_pool_accounts.sol_deposit_fee,
-            stake_pool_accounts.sol_referral_fee,
+            &stake_pool_accounts.mln_deposit_fee,
+            stake_pool_accounts.mln_referral_fee,
             stake_pool_accounts.max_validators,
         )
         .await
@@ -1562,8 +1562,8 @@ async fn fail_with_bad_reserve() {
             &stake_pool_accounts.withdrawal_fee,
             &stake_pool_accounts.deposit_fee,
             stake_pool_accounts.referral_fee,
-            &stake_pool_accounts.sol_deposit_fee,
-            stake_pool_accounts.sol_referral_fee,
+            &stake_pool_accounts.mln_deposit_fee,
+            stake_pool_accounts.mln_referral_fee,
             stake_pool_accounts.max_validators,
         )
         .await

@@ -703,7 +703,7 @@ impl Processor {
         invoke(&ix, &[source, mint, destination, authority, token_program])
     }
 
-    fn sol_transfer<'a>(
+    fn mln_transfer<'a>(
         source: AccountInfo<'a>,
         destination: AccountInfo<'a>,
         system_program: AccountInfo<'a>,
@@ -807,7 +807,7 @@ impl Processor {
         stake_pool.token_program_id = *token_program_info.key;
         stake_pool.pool_mint = *pool_mint_info.key;
 
-        let (stake_deposit_authority, sol_deposit_authority) =
+        let (stake_deposit_authority, mln_deposit_authority) =
             match next_account_info(account_info_iter) {
                 Ok(deposit_authority_info) => (
                     *deposit_authority_info.key,
@@ -933,12 +933,12 @@ impl Processor {
         stake_pool.stake_withdrawal_fee = withdrawal_fee;
         stake_pool.next_stake_withdrawal_fee = FutureEpoch::None;
         stake_pool.stake_referral_fee = referral_fee;
-        stake_pool.sol_deposit_authority = sol_deposit_authority;
-        stake_pool.sol_deposit_fee = deposit_fee;
-        stake_pool.sol_referral_fee = referral_fee;
-        stake_pool.sol_withdraw_authority = None;
-        stake_pool.sol_withdrawal_fee = withdrawal_fee;
-        stake_pool.next_sol_withdrawal_fee = FutureEpoch::None;
+        stake_pool.mln_deposit_authority = mln_deposit_authority;
+        stake_pool.mln_deposit_fee = deposit_fee;
+        stake_pool.mln_referral_fee = referral_fee;
+        stake_pool.mln_withdraw_authority = None;
+        stake_pool.mln_withdrawal_fee = withdrawal_fee;
+        stake_pool.next_mln_withdrawal_fee = FutureEpoch::None;
         stake_pool.last_epoch_pool_token_supply = 0;
         stake_pool.last_epoch_total_lamports = 0;
 
@@ -2565,10 +2565,10 @@ impl Processor {
             }
             stake_pool.next_stake_withdrawal_fee.update_epoch();
 
-            if let Some(fee) = stake_pool.next_sol_withdrawal_fee.get() {
-                stake_pool.sol_withdrawal_fee = *fee;
+            if let Some(fee) = stake_pool.next_mln_withdrawal_fee.get() {
+                stake_pool.mln_withdrawal_fee = *fee;
             }
-            stake_pool.next_sol_withdrawal_fee.update_epoch();
+            stake_pool.next_mln_withdrawal_fee.update_epoch();
 
             stake_pool.last_update_epoch = clock.epoch;
             stake_pool.last_epoch_total_lamports = previous_lamports;
@@ -2762,7 +2762,7 @@ impl Processor {
             .stake
             .checked_sub(validator_stake.delegation.stake)
             .ok_or(StakePoolError::CalculationFailure)?;
-        let sol_deposit_lamports = total_deposit_lamports
+        let mln_deposit_lamports = total_deposit_lamports
             .checked_sub(stake_deposit_lamports)
             .ok_or(StakePoolError::CalculationFailure)?;
 
@@ -2772,19 +2772,19 @@ impl Processor {
         let new_pool_tokens_from_stake = stake_pool
             .calc_pool_tokens_for_deposit(stake_deposit_lamports)
             .ok_or(StakePoolError::CalculationFailure)?;
-        let new_pool_tokens_from_sol = new_pool_tokens
+        let new_pool_tokens_from_mln = new_pool_tokens
             .checked_sub(new_pool_tokens_from_stake)
             .ok_or(StakePoolError::CalculationFailure)?;
 
         let stake_deposit_fee = stake_pool
             .calc_pool_tokens_stake_deposit_fee(new_pool_tokens_from_stake)
             .ok_or(StakePoolError::CalculationFailure)?;
-        let sol_deposit_fee = stake_pool
-            .calc_pool_tokens_sol_deposit_fee(new_pool_tokens_from_sol)
+        let mln_deposit_fee = stake_pool
+            .calc_pool_tokens_mln_deposit_fee(new_pool_tokens_from_mln)
             .ok_or(StakePoolError::CalculationFailure)?;
 
         let total_fee = stake_deposit_fee
-            .checked_add(sol_deposit_fee)
+            .checked_add(mln_deposit_fee)
             .ok_or(StakePoolError::CalculationFailure)?;
         let pool_tokens_user = new_pool_tokens
             .checked_sub(total_fee)
@@ -2852,7 +2852,7 @@ impl Processor {
         }
 
         // withdraw additional lamports to the reserve
-        if sol_deposit_lamports > 0 {
+        if mln_deposit_lamports > 0 {
             Self::stake_withdraw(
                 stake_pool_info.key,
                 validator_stake_account_info.clone(),
@@ -2863,7 +2863,7 @@ impl Processor {
                 clock_info.clone(),
                 stake_history_info.clone(),
                 stake_program_info.clone(),
-                sol_deposit_lamports,
+                mln_deposit_lamports,
             )?;
         }
 
@@ -2884,9 +2884,9 @@ impl Processor {
         Ok(())
     }
 
-    /// Processes [DepositSol](enum.Instruction.html).
+    /// Processes [DepositMln](enum.Instruction.html).
     #[inline(never)] // needed to avoid stack size violation
-    fn process_deposit_sol(
+    fn process_deposit_mln(
         program_id: &Pubkey,
         accounts: &[AccountInfo],
         deposit_lamports: u64,
@@ -2903,7 +2903,7 @@ impl Processor {
         let pool_mint_info = next_account_info(account_info_iter)?;
         let system_program_info = next_account_info(account_info_iter)?;
         let token_program_info = next_account_info(account_info_iter)?;
-        let sol_deposit_authority_info = next_account_info(account_info_iter);
+        let mln_deposit_authority_info = next_account_info(account_info_iter);
 
         let clock = Clock::get()?;
 
@@ -2918,7 +2918,7 @@ impl Processor {
             program_id,
             stake_pool_info.key,
         )?;
-        stake_pool.check_sol_deposit_authority(sol_deposit_authority_info)?;
+        stake_pool.check_mln_deposit_authority(mln_deposit_authority_info)?;
         stake_pool.check_mint(pool_mint_info)?;
         stake_pool.check_reserve_stake(reserve_stake_account_info)?;
 
@@ -2934,7 +2934,7 @@ impl Processor {
         // don't hold user funds hostage, so if the fee account is invalid, users
         // cannot deposit in the pool.  Let it fail here!
 
-        // We want this to hold to ensure that deposit_sol mints pool tokens
+        // We want this to hold to ensure that deposit_mln mints pool tokens
         // at the right price
         if stake_pool.last_update_epoch < clock.epoch {
             return Err(StakePoolError::StakeListAndPoolOutOfDate.into());
@@ -2944,17 +2944,17 @@ impl Processor {
             .calc_pool_tokens_for_deposit(deposit_lamports)
             .ok_or(StakePoolError::CalculationFailure)?;
 
-        let pool_tokens_sol_deposit_fee = stake_pool
-            .calc_pool_tokens_sol_deposit_fee(new_pool_tokens)
+        let pool_tokens_mln_deposit_fee = stake_pool
+            .calc_pool_tokens_mln_deposit_fee(new_pool_tokens)
             .ok_or(StakePoolError::CalculationFailure)?;
         let pool_tokens_user = new_pool_tokens
-            .checked_sub(pool_tokens_sol_deposit_fee)
+            .checked_sub(pool_tokens_mln_deposit_fee)
             .ok_or(StakePoolError::CalculationFailure)?;
 
         let pool_tokens_referral_fee = stake_pool
-            .calc_pool_tokens_sol_referral_fee(pool_tokens_sol_deposit_fee)
+            .calc_pool_tokens_mln_referral_fee(pool_tokens_mln_deposit_fee)
             .ok_or(StakePoolError::CalculationFailure)?;
-        let pool_tokens_manager_deposit_fee = pool_tokens_sol_deposit_fee
+        let pool_tokens_manager_deposit_fee = pool_tokens_mln_deposit_fee
             .checked_sub(pool_tokens_referral_fee)
             .ok_or(StakePoolError::CalculationFailure)?;
 
@@ -2976,7 +2976,7 @@ impl Processor {
             }
         }
 
-        Self::sol_transfer(
+        Self::mln_transfer(
             from_user_lamports_info.clone(),
             reserve_stake_account_info.clone(),
             system_program_info.clone(),
@@ -3345,9 +3345,9 @@ impl Processor {
         Ok(())
     }
 
-    /// Processes [WithdrawSol](enum.Instruction.html).
+    /// Processes [WithdrawMln](enum.Instruction.html).
     #[inline(never)] // needed to avoid stack size violation
-    fn process_withdraw_sol(
+    fn process_withdraw_mln(
         program_id: &Pubkey,
         accounts: &[AccountInfo],
         pool_tokens: u64,
@@ -3366,7 +3366,7 @@ impl Processor {
         let stake_history_info = next_account_info(account_info_iter)?;
         let stake_program_info = next_account_info(account_info_iter)?;
         let token_program_info = next_account_info(account_info_iter)?;
-        let sol_withdraw_authority_info = next_account_info(account_info_iter);
+        let mln_withdraw_authority_info = next_account_info(account_info_iter);
 
         check_account_owner(stake_pool_info, program_id)?;
         let mut stake_pool = try_from_slice_unchecked::<StakePool>(&stake_pool_info.data.borrow())?;
@@ -3379,7 +3379,7 @@ impl Processor {
             program_id,
             stake_pool_info.key,
         )?;
-        stake_pool.check_sol_withdraw_authority(sol_withdraw_authority_info)?;
+        stake_pool.check_mln_withdraw_authority(mln_withdraw_authority_info)?;
         let decimals = stake_pool.check_mint(pool_mint_info)?;
         stake_pool.check_reserve_stake(reserve_stake_info)?;
 
@@ -3392,7 +3392,7 @@ impl Processor {
             return Err(StakePoolError::InvalidFeeAccount.into());
         }
 
-        // We want this to hold to ensure that withdraw_sol burns pool tokens
+        // We want this to hold to ensure that withdraw_mln burns pool tokens
         // at the right price
         if stake_pool.last_update_epoch < Clock::get()?.epoch {
             return Err(StakePoolError::StakeListAndPoolOutOfDate.into());
@@ -3406,7 +3406,7 @@ impl Processor {
             0
         } else {
             stake_pool
-                .calc_pool_tokens_sol_withdrawal_fee(pool_tokens)
+                .calc_pool_tokens_mln_withdrawal_fee(pool_tokens)
                 .ok_or(StakePoolError::CalculationFailure)?
         };
         let pool_tokens_burnt = pool_tokens
@@ -3440,7 +3440,7 @@ impl Processor {
                     withdraw_lamports,
                     reserve_stake_info.lamports().saturating_sub(minimum_reserve_lamports)
                 );
-                return Err(StakePoolError::SolWithdrawalTooLarge.into());
+                return Err(StakePoolError::MlnWithdrawalTooLarge.into());
             }
         } else {
             msg!("Reserve stake account not in intialized state");
@@ -3769,8 +3769,8 @@ impl Processor {
                     find_deposit_authority_program_address(program_id, stake_pool_info.key).0,
                 );
             }
-            FundingType::SolDeposit => stake_pool.sol_deposit_authority = new_authority,
-            FundingType::SolWithdraw => stake_pool.sol_withdraw_authority = new_authority,
+            FundingType::MlnDeposit => stake_pool.mln_deposit_authority = new_authority,
+            FundingType::MlnWithdraw => stake_pool.mln_withdraw_authority = new_authority,
         }
         stake_pool.serialize(&mut *stake_pool_info.data.borrow_mut())?;
         Ok(())
@@ -3916,13 +3916,13 @@ impl Processor {
                 msg!("Instruction: SetFundingAuthority");
                 Self::process_set_funding_authority(program_id, accounts, funding_type)
             }
-            StakePoolInstruction::DepositSol(lamports) => {
-                msg!("Instruction: DepositSol");
-                Self::process_deposit_sol(program_id, accounts, lamports, None)
+            StakePoolInstruction::DepositMln(lamports) => {
+                msg!("Instruction: DepositMln");
+                Self::process_deposit_mln(program_id, accounts, lamports, None)
             }
-            StakePoolInstruction::WithdrawSol(pool_tokens) => {
-                msg!("Instruction: WithdrawSol");
-                Self::process_withdraw_sol(program_id, accounts, pool_tokens, None)
+            StakePoolInstruction::WithdrawMln(pool_tokens) => {
+                msg!("Instruction: WithdrawMln");
+                Self::process_withdraw_mln(program_id, accounts, pool_tokens, None)
             }
             StakePoolInstruction::CreateTokenMetadata { name, symbol, uri } => {
                 msg!("Instruction: CreateTokenMetadata");
@@ -3966,24 +3966,24 @@ impl Processor {
                     Some(minimum_lamports_out),
                 )
             }
-            StakePoolInstruction::DepositSolWithSlippage {
+            StakePoolInstruction::DepositMlnWithSlippage {
                 lamports_in,
                 minimum_pool_tokens_out,
             } => {
-                msg!("Instruction: DepositSolWithSlippage");
-                Self::process_deposit_sol(
+                msg!("Instruction: DepositMlnWithSlippage");
+                Self::process_deposit_mln(
                     program_id,
                     accounts,
                     lamports_in,
                     Some(minimum_pool_tokens_out),
                 )
             }
-            StakePoolInstruction::WithdrawSolWithSlippage {
+            StakePoolInstruction::WithdrawMlnWithSlippage {
                 pool_tokens_in,
                 minimum_lamports_out,
             } => {
-                msg!("Instruction: WithdrawSolWithSlippage");
-                Self::process_withdraw_sol(
+                msg!("Instruction: WithdrawMlnWithSlippage");
+                Self::process_withdraw_mln(
                     program_id,
                     accounts,
                     pool_tokens_in,
@@ -4033,11 +4033,11 @@ impl PrintProgramError for StakePoolError {
             StakePoolError::WithdrawalTooSmall => msg!("Error: Not enough pool tokens provided to withdraw 1-lamport stake"),
             StakePoolError::DepositTooSmall => msg!("Error: Not enough lamports provided for deposit to result in one pool token"),
             StakePoolError::InvalidStakeDepositAuthority => msg!("Error: Provided stake deposit authority does not match the program's"),
-            StakePoolError::InvalidSolDepositAuthority => msg!("Error: Provided sol deposit authority does not match the program's"),
+            StakePoolError::InvalidMlnDepositAuthority => msg!("Error: Provided mln deposit authority does not match the program's"),
             StakePoolError::InvalidPreferredValidator => msg!("Error: Provided preferred validator is invalid"),
             StakePoolError::TransientAccountInUse => msg!("Error: Provided validator stake account already has a transient stake account in use"),
-            StakePoolError::InvalidSolWithdrawAuthority => msg!("Error: Provided sol withdraw authority does not match the program's"),
-            StakePoolError::SolWithdrawalTooLarge => msg!("Error: Too much MLN withdrawn from the stake pool's reserve account"),
+            StakePoolError::InvalidMlnWithdrawAuthority => msg!("Error: Provided mln withdraw authority does not match the program's"),
+            StakePoolError::MlnWithdrawalTooLarge => msg!("Error: Too much MLN withdrawn from the stake pool's reserve account"),
             StakePoolError::InvalidMetadataAccount => msg!("Error: Metadata account derived from pool mint account does not match the one passed to program"),
             StakePoolError::UnsupportedMintExtension => msg!("Error: mint has an unsupported extension"),
             StakePoolError::UnsupportedFeeAccountExtension => msg!("Error: fee account has an unsupported extension"),

@@ -185,7 +185,7 @@ async def deposit_sol(
     txn = Transaction()
     txn.add(
         sp.deposit_sol(
-            sp.DepositSolParams(
+            sp.DepositMlnParams(
                 program_id=STAKE_POOL_PROGRAM_ID,
                 stake_pool=stake_pool_address,
                 withdraw_authority=withdraw_authority,
@@ -219,7 +219,7 @@ async def withdraw_sol(
     txn = Transaction()
     txn.add(
         sp.withdraw_sol(
-            sp.WithdrawSolParams(
+            sp.WithdrawMlnParams(
                 program_id=STAKE_POOL_PROGRAM_ID,
                 stake_pool=stake_pool_address,
                 withdraw_authority=withdraw_authority,

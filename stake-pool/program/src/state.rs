@@ -127,28 +127,28 @@ pub struct StakePool {
     /// and `stake_referral_fee`% of the collected stake deposit fees is paid out to the referrer
     pub stake_referral_fee: u8,
 
-    /// Toggles whether the `DepositSol` instruction requires a signature from
-    /// this `sol_deposit_authority`
-    pub sol_deposit_authority: Option<Pubkey>,
+    /// Toggles whether the `DepositMln` instruction requires a signature from
+    /// this `mln_deposit_authority`
+    pub mln_deposit_authority: Option<Pubkey>,
 
     /// Fee assessed on MLN deposits
-    pub sol_deposit_fee: Fee,
+    pub mln_deposit_fee: Fee,
 
     /// Fees paid out to referrers on referred MLN deposits.
     /// Expressed as a percentage (0 - 100) of MLN deposit fees.
-    /// i.e. `sol_deposit_fee`% of MLN deposited is collected as deposit fees for every deposit
-    /// and `sol_referral_fee`% of the collected MLN deposit fees is paid out to the referrer
-    pub sol_referral_fee: u8,
+    /// i.e. `mln_deposit_fee`% of MLN deposited is collected as deposit fees for every deposit
+    /// and `mln_referral_fee`% of the collected MLN deposit fees is paid out to the referrer
+    pub mln_referral_fee: u8,
 
-    /// Toggles whether the `WithdrawSol` instruction requires a signature from
+    /// Toggles whether the `WithdrawMln` instruction requires a signature from
     /// the `deposit_authority`
-    pub sol_withdraw_authority: Option<Pubkey>,
+    pub mln_withdraw_authority: Option<Pubkey>,
 
     /// Fee assessed on MLN withdrawals
-    pub sol_withdrawal_fee: Fee,
+    pub mln_withdrawal_fee: Fee,
 
     /// Future MLN withdrawal fee, to be set for the following epoch
-    pub next_sol_withdrawal_fee: FutureEpoch<Fee>,
+    pub next_mln_withdrawal_fee: FutureEpoch<Fee>,
 
     /// Last epoch's total pool tokens, used only for APR estimation
     pub last_epoch_pool_token_supply: u64,
@@ -194,8 +194,8 @@ impl StakePool {
 
     /// calculate pool tokens to be deducted as withdrawal fees
     #[inline]
-    pub fn calc_pool_tokens_sol_withdrawal_fee(&self, pool_tokens: u64) -> Option<u64> {
-        u64::try_from(self.sol_withdrawal_fee.apply(pool_tokens)?).ok()
+    pub fn calc_pool_tokens_mln_withdrawal_fee(&self, pool_tokens: u64) -> Option<u64> {
+        u64::try_from(self.mln_withdrawal_fee.apply(pool_tokens)?).ok()
     }
 
     /// calculate pool tokens to be deducted as stake deposit fees
@@ -217,16 +217,16 @@ impl StakePool {
 
     /// calculate pool tokens to be deducted as MLN deposit fees
     #[inline]
-    pub fn calc_pool_tokens_sol_deposit_fee(&self, pool_tokens_minted: u64) -> Option<u64> {
-        u64::try_from(self.sol_deposit_fee.apply(pool_tokens_minted)?).ok()
+    pub fn calc_pool_tokens_mln_deposit_fee(&self, pool_tokens_minted: u64) -> Option<u64> {
+        u64::try_from(self.mln_deposit_fee.apply(pool_tokens_minted)?).ok()
     }
 
     /// calculate pool tokens to be deducted from MLN deposit fees as referral fees
     #[inline]
-    pub fn calc_pool_tokens_sol_referral_fee(&self, sol_deposit_fee: u64) -> Option<u64> {
+    pub fn calc_pool_tokens_mln_referral_fee(&self, mln_deposit_fee: u64) -> Option<u64> {
         u64::try_from(
-            (sol_deposit_fee as u128)
-                .checked_mul(self.sol_referral_fee as u128)?
+            (mln_deposit_fee as u128)
+                .checked_mul(self.mln_referral_fee as u128)?
                 .checked_div(100u128)?,
         )
         .ok()
@@ -344,19 +344,19 @@ impl StakePool {
     }
 
     /// Checks that the deposit authority is valid
-    /// Does nothing if `sol_deposit_authority` is currently not set
+    /// Does nothing if `mln_deposit_authority` is currently not set
     #[inline]
-    pub(crate) fn check_sol_deposit_authority(
+    pub(crate) fn check_mln_deposit_authority(
         &self,
-        maybe_sol_deposit_authority: Result<&AccountInfo, ProgramError>,
+        maybe_mln_deposit_authority: Result<&AccountInfo, ProgramError>,
     ) -> Result<(), ProgramError> {
-        if let Some(auth) = self.sol_deposit_authority {
-            let sol_deposit_authority = maybe_sol_deposit_authority?;
-            if auth != *sol_deposit_authority.key {
-                msg!("Expected {}, received {}", auth, sol_deposit_authority.key);
-                return Err(StakePoolError::InvalidSolDepositAuthority.into());
+        if let Some(auth) = self.mln_deposit_authority {
+            let mln_deposit_authority = maybe_mln_deposit_authority?;
+            if auth != *mln_deposit_authority.key {
+                msg!("Expected {}, received {}", auth, mln_deposit_authority.key);
+                return Err(StakePoolError::InvalidMlnDepositAuthority.into());
             }
-            if !sol_deposit_authority.is_signer {
+            if !mln_deposit_authority.is_signer {
                 msg!("MLN Deposit authority signature missing");
                 return Err(StakePoolError::SignatureMissing.into());
             }
@@ -364,19 +364,19 @@ impl StakePool {
         Ok(())
     }
 
-    /// Checks that the sol withdraw authority is valid
-    /// Does nothing if `sol_withdraw_authority` is currently not set
+    /// Checks that the mln withdraw authority is valid
+    /// Does nothing if `mln_withdraw_authority` is currently not set
     #[inline]
-    pub(crate) fn check_sol_withdraw_authority(
+    pub(crate) fn check_mln_withdraw_authority(
         &self,
-        maybe_sol_withdraw_authority: Result<&AccountInfo, ProgramError>,
+        maybe_mln_withdraw_authority: Result<&AccountInfo, ProgramError>,
     ) -> Result<(), ProgramError> {
-        if let Some(auth) = self.sol_withdraw_authority {
-            let sol_withdraw_authority = maybe_sol_withdraw_authority?;
-            if auth != *sol_withdraw_authority.key {
-                return Err(StakePoolError::InvalidSolWithdrawAuthority.into());
+        if let Some(auth) = self.mln_withdraw_authority {
+            let mln_withdraw_authority = maybe_mln_withdraw_authority?;
+            if auth != *mln_withdraw_authority.key {
+                return Err(StakePoolError::InvalidMlnWithdrawAuthority.into());
             }
-            if !sol_withdraw_authority.is_signer {
+            if !mln_withdraw_authority.is_signer {
                 msg!("MLN withdraw authority signature missing");
                 return Err(StakePoolError::SignatureMissing.into());
             }
@@ -477,18 +477,18 @@ impl StakePool {
     /// Updates one of the StakePool's fees.
     pub fn update_fee(&mut self, fee: &FeeType) -> Result<(), StakePoolError> {
         match fee {
-            FeeType::SolReferral(new_fee) => self.sol_referral_fee = *new_fee,
+            FeeType::MlnReferral(new_fee) => self.mln_referral_fee = *new_fee,
             FeeType::StakeReferral(new_fee) => self.stake_referral_fee = *new_fee,
             FeeType::Epoch(new_fee) => self.next_epoch_fee = FutureEpoch::new(*new_fee),
             FeeType::StakeWithdrawal(new_fee) => {
                 new_fee.check_withdrawal(&self.stake_withdrawal_fee)?;
                 self.next_stake_withdrawal_fee = FutureEpoch::new(*new_fee)
             }
-            FeeType::SolWithdrawal(new_fee) => {
-                new_fee.check_withdrawal(&self.sol_withdrawal_fee)?;
-                self.next_sol_withdrawal_fee = FutureEpoch::new(*new_fee)
+            FeeType::MlnWithdrawal(new_fee) => {
+                new_fee.check_withdrawal(&self.mln_withdrawal_fee)?;
+                self.next_mln_withdrawal_fee = FutureEpoch::new(*new_fee)
             }
-            FeeType::SolDeposit(new_fee) => self.sol_deposit_fee = *new_fee,
+            FeeType::MlnDeposit(new_fee) => self.mln_deposit_fee = *new_fee,
             FeeType::StakeDeposit(new_fee) => self.stake_deposit_fee = *new_fee,
         };
         Ok(())
@@ -928,7 +928,7 @@ impl fmt::Display for Fee {
 #[derive(Clone, Debug, PartialEq, BorshDeserialize, BorshSerialize, BorshSchema)]
 pub enum FeeType {
     /// Referral fees for MLN deposits
-    SolReferral(u8),
+    MlnReferral(u8),
     /// Referral fees for stake deposits
     StakeReferral(u8),
     /// Management fee paid per epoch
@@ -936,23 +936,23 @@ pub enum FeeType {
     /// Stake withdrawal fee
     StakeWithdrawal(Fee),
     /// Deposit fee for MLN deposits
-    SolDeposit(Fee),
+    MlnDeposit(Fee),
     /// Deposit fee for stake deposits
     StakeDeposit(Fee),
     /// MLN withdrawal fee
-    SolWithdrawal(Fee),
+    MlnWithdrawal(Fee),
 }
 
 impl FeeType {
     /// Checks if the provided fee is too high, returning an error if so
     pub fn check_too_high(&self) -> Result<(), StakePoolError> {
         let too_high = match self {
-            Self::SolReferral(pct) => *pct > 100u8,
+            Self::MlnReferral(pct) => *pct > 100u8,
             Self::StakeReferral(pct) => *pct > 100u8,
             Self::Epoch(fee) => fee.numerator > fee.denominator,
             Self::StakeWithdrawal(fee) => fee.numerator > fee.denominator,
-            Self::SolWithdrawal(fee) => fee.numerator > fee.denominator,
-            Self::SolDeposit(fee) => fee.numerator > fee.denominator,
+            Self::MlnWithdrawal(fee) => fee.numerator > fee.denominator,
+            Self::MlnDeposit(fee) => fee.numerator > fee.denominator,
             Self::StakeDeposit(fee) => fee.numerator > fee.denominator,
         };
         if too_high {
@@ -967,7 +967,7 @@ impl FeeType {
     pub fn can_only_change_next_epoch(&self) -> bool {
         matches!(
             self,
-            Self::StakeWithdrawal(_) | Self::SolWithdrawal(_) | Self::Epoch(_)
+            Self::StakeWithdrawal(_) | Self::MlnWithdrawal(_) | Self::Epoch(_)
         )
     }
 }

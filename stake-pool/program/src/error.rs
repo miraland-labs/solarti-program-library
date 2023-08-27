@@ -115,23 +115,23 @@ pub enum StakePoolError {
     /// Provided stake deposit authority does not match the program's
     #[error("InvalidStakeDepositAuthority")]
     InvalidStakeDepositAuthority,
-    /// Provided sol deposit authority does not match the program's
-    #[error("InvalidSolDepositAuthority")]
-    InvalidSolDepositAuthority,
+    /// Provided mln deposit authority does not match the program's
+    #[error("InvalidMlnDepositAuthority")]
+    InvalidMlnDepositAuthority,
     /// Provided preferred validator is invalid
     #[error("InvalidPreferredValidator")]
     InvalidPreferredValidator,
     /// Provided validator stake account already has a transient stake account in use
     #[error("TransientAccountInUse")]
     TransientAccountInUse,
-    /// Provided sol withdraw authority does not match the program's
-    #[error("InvalidSolWithdrawAuthority")]
-    InvalidSolWithdrawAuthority,
+    /// Provided mln withdraw authority does not match the program's
+    #[error("InvalidMlnWithdrawAuthority")]
+    InvalidMlnWithdrawAuthority,
 
     // 35.
     /// Too much MLN withdrawn from the stake pool's reserve account
-    #[error("SolWithdrawalTooLarge")]
-    SolWithdrawalTooLarge,
+    #[error("MlnWithdrawalTooLarge")]
+    MlnWithdrawalTooLarge,
     /// Provided metadata account does not match metadata account derived for pool mint
     #[error("InvalidMetadataAccount")]
     InvalidMetadataAccount,

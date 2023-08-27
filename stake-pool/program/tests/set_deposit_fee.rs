@@ -180,7 +180,7 @@ async fn fail_stake_high_deposit_fee() {
 }
 
 #[tokio::test]
-async fn success_sol() {
+async fn success_mln() {
     let (mut context, stake_pool_accounts, new_deposit_fee) = setup(None).await;
 
     let transaction = Transaction::new_signed_with_payer(
@@ -188,7 +188,7 @@ async fn success_sol() {
             &id(),
             &stake_pool_accounts.stake_pool.pubkey(),
             &stake_pool_accounts.manager.pubkey(),
-            FeeType::SolDeposit(new_deposit_fee),
+            FeeType::MlnDeposit(new_deposit_fee),
         )],
         Some(&context.payer.pubkey()),
         &[&context.payer, &stake_pool_accounts.manager],
@@ -206,11 +206,11 @@ async fn success_sol() {
     )
     .await;
     let stake_pool = try_from_slice_unchecked::<StakePool>(stake_pool.data.as_slice()).unwrap();
-    assert_eq!(stake_pool.sol_deposit_fee, new_deposit_fee);
+    assert_eq!(stake_pool.mln_deposit_fee, new_deposit_fee);
 }
 
 #[tokio::test]
-async fn fail_sol_wrong_manager() {
+async fn fail_mln_wrong_manager() {
     let (mut context, stake_pool_accounts, new_deposit_fee) = setup(None).await;
 
     let wrong_manager = Keypair::new();
@@ -219,7 +219,7 @@ async fn fail_sol_wrong_manager() {
             &id(),
             &stake_pool_accounts.stake_pool.pubkey(),
             &wrong_manager.pubkey(),
-            FeeType::SolDeposit(new_deposit_fee),
+            FeeType::MlnDeposit(new_deposit_fee),
         )],
         Some(&context.payer.pubkey()),
         &[&context.payer, &wrong_manager],
@@ -243,7 +243,7 @@ async fn fail_sol_wrong_manager() {
 }
 
 #[tokio::test]
-async fn fail_sol_high_deposit_fee() {
+async fn fail_mln_high_deposit_fee() {
     let (mut context, stake_pool_accounts, _new_deposit_fee) = setup(None).await;
 
     let new_deposit_fee = Fee {
@@ -255,7 +255,7 @@ async fn fail_sol_high_deposit_fee() {
             &id(),
             &stake_pool_accounts.stake_pool.pubkey(),
             &stake_pool_accounts.manager.pubkey(),
-            FeeType::SolDeposit(new_deposit_fee),
+            FeeType::MlnDeposit(new_deposit_fee),
         )],
         Some(&context.payer.pubkey()),
         &[&context.payer, &stake_pool_accounts.manager],

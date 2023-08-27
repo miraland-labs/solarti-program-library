@@ -31,7 +31,7 @@ Keypair Path: ${HOME}/.config/solana/id.json
 
 ### Cluster RPC URL
 
-See [Solana clusters](https://docs.solana.com/clusters) for cluster-specific RPC URLs
+See [Miraland clusters](https://docs.solana.com/clusters) for cluster-specific RPC URLs
 ```console
 $ solana config set --url https://api.devnet.solana.com
 ```
@@ -286,7 +286,7 @@ Adding stake account 3k7Nwu9jUSc6SNG11wzufKYoZXRFgxWamheGLYWp5Rvx, delegated to 
 Signature: 4VJYHpPmWkP99TdgYUTgLYixmhqmqsEkWtg4j7zvGZFjYbnLgryu48aV6ub8bqDyULzKckUhb6tvcmZmMX5AFf5G
 ```
 
-We can see the status of a stake account using the Solana command-line utility.
+We can see the status of a stake account using the Miraland command-line utility.
 
 ```console
 $ solana stake-account 5AaobwjccyHnXhFCd24uiX6VqPjXE3Ry4o92fJjqqjAr

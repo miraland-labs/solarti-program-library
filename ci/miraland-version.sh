@@ -14,7 +14,7 @@
 if [[ -n $MIRALAND_VERSION ]]; then
   miraland_version="$MIRALAND_VERSION"
 else
-  miraland_version=v1.14.17-rc5
+  miraland_version=v1.14.17-rc7
 fi
 
 export miraland_version="$miraland_version"

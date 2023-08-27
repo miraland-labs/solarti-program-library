@@ -7,9 +7,9 @@ right away.
 
 ## Prerequisites
 
-This guide requires the Solana CLI tool suite and Stake Pool CLI tool.
+This guide requires the Miraland CLI tool suite and Stake Pool CLI tool.
 
-- [Install the Solana Tools](https://docs.solana.com/cli/install-solana-cli-tools)
+- [Install the Miraland Tools](https://docs.solana.com/cli/install-solana-cli-tools)
 - [Install the Stake Pool CLI](cli.md)
 
 You must also have an account with MLN. The guide will assume that you
@@ -206,7 +206,7 @@ varies, you will want to move stake around. The best way to do this will be
 through an automated system to collect information about the stake pool and the
 network, and decide how much stake to allocate to each validator.
 
-The Solana Foundation maintains an open-source bot for its delegation program,
+The Miraland Foundation maintains an open-source bot for its delegation program,
 which can be adapated for your stake pool. The source code is part of the
 [stake-o-matic GitHub repo](https://github.com/solana-labs/stake-o-matic/tree/master/bot).
 

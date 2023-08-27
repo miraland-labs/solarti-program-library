@@ -6,23 +6,23 @@
 cd "$(dirname "$0")" || exit
 stake_pool_keyfile=$1
 validator_list=$2
-sol_amount=$3
+mln_amount=$3
 
 create_keypair () {
   if test ! -f "$1"
   then
-    solana-keygen new --no-passphrase -s -o "$1"
+    miraland-keygen new --no-passphrase -s -o "$1"
   fi
 }
 
 create_user_stakes () {
   validator_list=$1
-  sol_amount=$2
+  mln_amount=$2
   authority=$3
   while read -r validator
   do
     create_keypair "$keys_dir/stake_$validator".json
-    solana create-stake-account "$keys_dir/stake_$validator.json" "$sol_amount" --withdraw-authority "$authority" --stake-authority "$authority"
+    miraland create-stake-account "$keys_dir/stake_$validator.json" "$mln_amount" --withdraw-authority "$authority" --stake-authority "$authority"
   done < "$validator_list"
 }
 
@@ -31,7 +31,7 @@ delegate_user_stakes () {
   authority=$2
   while read -r validator
   do
-    solana delegate-stake --force "$keys_dir/stake_$validator.json" "$validator" --stake-authority "$authority"
+    miraland delegate-stake --force "$keys_dir/stake_$validator.json" "$validator" --stake-authority "$authority"
   done < "$validator_list"
 }
 
@@ -41,13 +41,13 @@ deposit_stakes () {
   authority=$3
   while read -r validator
   do
-    stake=$(solana-keygen pubkey "$keys_dir/stake_$validator.json")
+    stake=$(miraland-keygen pubkey "$keys_dir/stake_$validator.json")
     $spl_stake_pool deposit-stake "$stake_pool_pubkey" "$stake" --withdraw-authority "$authority"
   done < "$validator_list"
 }
 
 keys_dir=keys
-stake_pool_pubkey=$(solana-keygen pubkey "$stake_pool_keyfile")
+stake_pool_pubkey=$(miraland-keygen pubkey "$stake_pool_keyfile")
 
 spl_stake_pool=solarti-stake-pool
 # Uncomment to use a locally build CLI
@@ -60,7 +60,7 @@ echo "Setting up authority for deposited stake accounts at $authority"
 create_keypair $authority
 
 echo "Creating user stake accounts to deposit into the pool"
-create_user_stakes "$validator_list" "$sol_amount" $authority
+create_user_stakes "$validator_list" "$mln_amount" $authority
 echo "Delegating user stakes so that deposit will work"
 delegate_user_stakes "$validator_list" $authority
 

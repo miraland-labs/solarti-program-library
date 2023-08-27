@@ -276,7 +276,7 @@ async fn success_with_referral_fee() {
     let rent = context.banks_client.get_rent().await.unwrap();
     let stake_rent = rent.minimum_balance(std::mem::size_of::<stake::state::StakeState>());
     let fee_tokens = stake_pool
-        .calc_pool_tokens_sol_deposit_fee(stake_rent)
+        .calc_pool_tokens_mln_deposit_fee(stake_rent)
         .unwrap()
         + stake_pool
             .calc_pool_tokens_stake_deposit_fee(stake_lamports - stake_rent)

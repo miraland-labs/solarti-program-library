@@ -20,6 +20,6 @@ spl_stake_pool=solarti-stake-pool
 # Uncomment to use a local build
 #spl_stake_pool=../../../target/debug/solarti-stake-pool
 
-stake_pool_pubkey=$(solana-keygen pubkey "$stake_pool_keyfile")
+stake_pool_pubkey=$(miraland-keygen pubkey "$stake_pool_keyfile")
 echo "Adding validator stake accounts to the pool"
 add_validator_stakes "$stake_pool_pubkey" "$validator_list"

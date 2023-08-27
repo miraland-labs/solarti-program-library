@@ -20,7 +20,7 @@ Additional information regarding staking and stake programming is available at:
 
 ## Background
 
-Solana's programming model and the definitions of the Solana terms used in this
+Miraland's programming model and the definitions of the Miraland terms used in this
 document are available at:
 
 - https://docs.solana.com/apps
@@ -209,7 +209,7 @@ fail on initialization.
 
 ### Transaction sizes
 
-The Solana transaction processor has two important limitations:
+The Miraland transaction processor has two important limitations:
 
 * size of the overall transaction, limited to roughly 1 MTU / packet
 * computation budget per instruction

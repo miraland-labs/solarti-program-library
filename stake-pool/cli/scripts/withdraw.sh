@@ -6,12 +6,12 @@
 cd "$(dirname "$0")" || exit
 stake_pool_keyfile=$1
 validator_list=$2
-withdraw_sol_amount=$3
+withdraw_mln_amount=$3
 
 create_keypair () {
   if test ! -f "$1"
   then
-    solana-keygen new --no-passphrase -s -o "$1"
+    miraland-keygen new --no-passphrase -s -o "$1"
   fi
 }
 
@@ -19,9 +19,9 @@ create_stake_account () {
   authority=$1
   while read -r validator
   do
-    solana-keygen new --no-passphrase -o "$keys_dir/stake_account_$validator.json"
-    solana create-stake-account "$keys_dir/stake_account_$validator.json" 2 
-    solana delegate-stake --force "$keys_dir/stake_account_$validator.json"  "$validator" 
+    miraland-keygen new --no-passphrase -o "$keys_dir/stake_account_$validator.json"
+    miraland create-stake-account "$keys_dir/stake_account_$validator.json" 2 
+    miraland delegate-stake --force "$keys_dir/stake_account_$validator.json"  "$validator" 
   done < "$validator_list"
 }
 
@@ -41,7 +41,7 @@ withdraw_stakes_to_stake_receiver () {
   pool_amount=$3
   while read -r validator
   do
-    stake_receiver=$(solana-keygen pubkey "$keys_dir/stake_account_$validator.json")
+    stake_receiver=$(miraland-keygen pubkey "$keys_dir/stake_account_$validator.json")
     $spl_stake_pool withdraw-stake "$stake_pool_pubkey" "$pool_amount" --vote-account "$validator" --stake-receiver "$stake_receiver"
   done < "$validator_list"
 }
@@ -50,7 +50,7 @@ spl_stake_pool=solarti-stake-pool
 # Uncomment to use a locally build CLI
 # spl_stake_pool=../../../target/debug/solarti-stake-pool
 
-stake_pool_pubkey=$(solana-keygen pubkey "$stake_pool_keyfile")
+stake_pool_pubkey=$(miraland-keygen pubkey "$stake_pool_keyfile")
 keys_dir=keys
 
 echo "Setting up keys directory $keys_dir"
@@ -66,10 +66,10 @@ echo "Setting up authority for withdrawn stake accounts at $authority"
 create_keypair $authority
 
 echo "Withdrawing stakes from stake pool"
-withdraw_stakes "$stake_pool_pubkey" "$validator_list" "$withdraw_sol_amount"
+withdraw_stakes "$stake_pool_pubkey" "$validator_list" "$withdraw_mln_amount"
 
 echo "Withdrawing stakes from stake pool to recieve it in stake receiver account"
-withdraw_stakes_to_stake_receiver "$stake_pool_pubkey" "$validator_list" "$withdraw_sol_amount"
+withdraw_stakes_to_stake_receiver "$stake_pool_pubkey" "$validator_list" "$withdraw_mln_amount"
 
 echo "Withdrawing MLN from stake pool to authority"
-$spl_stake_pool withdraw-sol "$stake_pool_pubkey" $authority "$withdraw_sol_amount"
+$spl_stake_pool withdraw-mln "$stake_pool_pubkey" $authority "$withdraw_mln_amount"

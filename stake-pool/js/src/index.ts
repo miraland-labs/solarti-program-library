@@ -9,7 +9,7 @@ import {
   SystemProgram,
   TransactionInstruction,
 } from '@solarti/web3.js';
-import { ASSOCIATED_TOKEN_PROGRAM_ID, TOKEN_PROGRAM_ID, Token } from '@solarti/solarti-token';
+import { ASSOCIATED_TOKEN_PROGRAM_ID, TOKEN_PROGRAM_ID, Token } from '@solarti/spl-token';
 import {
   ValidatorAccount,
   addAssociatedTokenAccount,
@@ -22,8 +22,8 @@ import {
   getValidatorListAccount,
   newStakeAccount,
   prepareWithdrawAccounts,
-  lamportsToSol,
-  solToLamports,
+  lamportsToMln,
+  mlnToLamports,
   findEphemeralStakeProgramAddress,
 } from './utils';
 import { StakePoolInstruction } from './instructions';
@@ -261,7 +261,7 @@ export async function depositStake(
 /**
  * Creates instructions required to deposit sol to stake pool.
  */
-export async function depositSol(
+export async function depositMln(
   connection: Connection,
   stakePoolAddress: PublicKey,
   from: PublicKey,
@@ -273,7 +273,7 @@ export async function depositSol(
   const fromBalance = await connection.getBalance(from, 'confirmed');
   if (fromBalance < lamports) {
     throw new Error(
-      `Not enough MLN to deposit into pool. Maximum deposit amount is ${lamportsToSol(
+      `Not enough MLN to deposit into pool. Maximum deposit amount is ${lamportsToMln(
         fromBalance,
       )} MLN.`,
     );
@@ -283,8 +283,8 @@ export async function depositSol(
   const stakePool = stakePoolAccount.account.data;
 
   // Ephemeral MLN account just to do the transfer
-  const userSolTransfer = new Keypair();
-  const signers: Signer[] = [userSolTransfer];
+  const userMlnTransfer = new Keypair();
+  const signers: Signer[] = [userMlnTransfer];
   const instructions: TransactionInstruction[] = [];
 
   let rentFee = 0;
@@ -293,7 +293,7 @@ export async function depositSol(
   instructions.push(
     SystemProgram.transfer({
       fromPubkey: from,
-      toPubkey: userSolTransfer.publicKey,
+      toPubkey: userMlnTransfer.publicKey,
       lamports,
     }),
   );
@@ -316,10 +316,10 @@ export async function depositSol(
   );
 
   instructions.push(
-    StakePoolInstruction.depositSol({
+    StakePoolInstruction.depositMln({
       stakePool: stakePoolAddress,
       reserveStake: stakePool.reserveStake,
-      fundingAccount: userSolTransfer.publicKey,
+      fundingAccount: userMlnTransfer.publicKey,
       destinationPoolAccount: destinationTokenAccount,
       managerFeeAccount: stakePool.managerFeeAccount,
       referralPoolAccount: referrerTokenAccount ?? destinationTokenAccount,
@@ -352,7 +352,7 @@ export async function withdrawStake(
   validatorComparator?: (_a: ValidatorAccount, _b: ValidatorAccount) => number,
 ) {
   const stakePool = await getStakePoolAccount(connection, stakePoolAddress);
-  const poolAmount = solToLamports(amount);
+  const poolAmount = mlnToLamports(amount);
 
   if (!poolTokenAccount) {
     poolTokenAccount = await Token.getAssociatedTokenAddress(
@@ -376,8 +376,8 @@ export async function withdrawStake(
   // Check withdrawFrom balance
   if (tokenAccount.amount.toNumber() < poolAmount) {
     throw new Error(
-      `Not enough token balance to withdraw ${lamportsToSol(poolAmount)} pool tokens.
-        Maximum withdraw amount is ${lamportsToSol(tokenAccount.amount.toNumber())} pool tokens.`,
+      `Not enough token balance to withdraw ${lamportsToMln(poolAmount)} pool tokens.
+        Maximum withdraw amount is ${lamportsToMln(tokenAccount.amount.toNumber())} pool tokens.`,
     );
   }
 
@@ -584,7 +584,7 @@ export async function withdrawStake(
 /**
  * Creates instructions required to withdraw MLN directly from a stake pool.
  */
-export async function withdrawSol(
+export async function withdrawMln(
   connection: Connection,
   stakePoolAddress: PublicKey,
   tokenOwner: PublicKey,
@@ -593,7 +593,7 @@ export async function withdrawSol(
   solWithdrawAuthority?: PublicKey,
 ) {
   const stakePool = await getStakePoolAccount(connection, stakePoolAddress);
-  const poolAmount = solToLamports(amount);
+  const poolAmount = mlnToLamports(amount);
 
   const poolTokenAccount = await Token.getAssociatedTokenAddress(
     ASSOCIATED_TOKEN_PROGRAM_ID,
@@ -614,8 +614,8 @@ export async function withdrawSol(
   // Check withdrawFrom balance
   if (tokenAccount.amount.toNumber() < poolAmount) {
     throw new Error(
-      `Not enough token balance to withdraw ${lamportsToSol(poolAmount)} pool tokens.
-          Maximum withdraw amount is ${lamportsToSol(tokenAccount.amount.toNumber())} pool tokens.`,
+      `Not enough token balance to withdraw ${lamportsToMln(poolAmount)} pool tokens.
+          Maximum withdraw amount is ${lamportsToMln(tokenAccount.amount.toNumber())} pool tokens.`,
     );
   }
 
@@ -641,18 +641,18 @@ export async function withdrawSol(
   );
 
   if (solWithdrawAuthority) {
-    const expectedSolWithdrawAuthority = stakePool.account.data.solWithdrawAuthority;
-    if (!expectedSolWithdrawAuthority) {
+    const expectedMlnWithdrawAuthority = stakePool.account.data.solWithdrawAuthority;
+    if (!expectedMlnWithdrawAuthority) {
       throw new Error('MLN withdraw authority specified in arguments but stake pool has none');
     }
-    if (solWithdrawAuthority.toBase58() != expectedSolWithdrawAuthority.toBase58()) {
+    if (solWithdrawAuthority.toBase58() != expectedMlnWithdrawAuthority.toBase58()) {
       throw new Error(
-        `Invalid deposit withdraw specified, expected ${expectedSolWithdrawAuthority.toBase58()}, received ${solWithdrawAuthority.toBase58()}`,
+        `Invalid deposit withdraw specified, expected ${expectedMlnWithdrawAuthority.toBase58()}, received ${solWithdrawAuthority.toBase58()}`,
       );
     }
   }
 
-  const withdrawTransaction = StakePoolInstruction.withdrawSol({
+  const withdrawTransaction = StakePoolInstruction.withdrawMln({
     stakePool: stakePoolAddress,
     withdrawAuthority: poolWithdrawAuthority,
     reserveStake: stakePool.account.data.reserveStake,
@@ -991,7 +991,7 @@ export async function stakePoolInfo(connection: Connection, stakePoolAddress: Pu
     }),
   );
 
-  const totalPoolTokens = lamportsToSol(stakePool.account.data.poolTokenSupply);
+  const totalPoolTokens = lamportsToMln(stakePool.account.data.poolTokenSupply);
   const updateRequired = !lastUpdateEpoch.eqn(epochInfo.epoch);
 
   return {
@@ -1038,7 +1038,7 @@ export async function stakePoolInfo(connection: Connection, stakePoolAddress: Pu
     solReferralFee: stakePool.account.data.solReferralFee,
     solWithdrawAuthority: stakePool.account.data.solWithdrawAuthority?.toBase58(),
     solWithdrawalFee: stakePool.account.data.solWithdrawalFee,
-    nextSolWithdrawalFee: stakePool.account.data.nextSolWithdrawalFee,
+    nextMlnWithdrawalFee: stakePool.account.data.nextMlnWithdrawalFee,
     lastEpochPoolTokenSupply: stakePool.account.data.lastEpochPoolTokenSupply.toString(),
     lastEpochTotalLamports: stakePool.account.data.lastEpochTotalLamports.toString(),
     details: {

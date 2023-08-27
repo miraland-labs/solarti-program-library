@@ -8,8 +8,8 @@ import {
   SystemProgram,
   TransactionInstruction,
 } from '@solarti/web3.js';
-import * as BufferLayout from '@solana/buffer-layout';
-import { TOKEN_PROGRAM_ID } from '@solarti/solarti-token';
+import * as BufferLayout from '@solarti/buffer-layout';
+import { TOKEN_PROGRAM_ID } from '@solarti/spl-token';
 import { STAKE_POOL_PROGRAM_ID } from './constants';
 import { InstructionType, encodeData, decodeData } from './utils';
 import BN from 'bn.js';
@@ -24,9 +24,9 @@ export type StakePoolInstructionType =
   | 'UpdateStakePoolBalance'
   | 'CleanupRemovedValidatorEntries'
   | 'DepositStake'
-  | 'DepositSol'
+  | 'DepositMln'
   | 'WithdrawStake'
-  | 'WithdrawSol'
+  | 'WithdrawMln'
   | 'IncreaseAdditionalValidatorStake'
   | 'DecreaseAdditionalValidatorStake'
   | 'Redelegate';
@@ -84,7 +84,7 @@ export const STAKE_POOL_INSTRUCTION_LAYOUTS: {
   },
   /// Deposit MLN directly into the pool's reserve account. The output is a "pool" token
   /// representing ownership into the pool. Inputs are converted to the current ratio.
-  DepositSol: {
+  DepositMln: {
     index: 14,
     layout: BufferLayout.struct<any>([
       BufferLayout.u8('instruction'),
@@ -93,7 +93,7 @@ export const STAKE_POOL_INSTRUCTION_LAYOUTS: {
   },
   /// Withdraw MLN directly from the pool's reserve account. Fails if the
   /// reserve does not have enough MLN.
-  WithdrawSol: {
+  WithdrawMln: {
     index: 16,
     layout: BufferLayout.struct<any>([
       BufferLayout.u8('instruction'),
@@ -250,7 +250,7 @@ export type WithdrawStakeParams = {
 /**
  * Withdraw sol instruction params
  */
-export type WithdrawSolParams = {
+export type WithdrawMlnParams = {
   stakePool: PublicKey;
   sourcePoolAccount: PublicKey;
   withdrawAuthority: PublicKey;
@@ -267,7 +267,7 @@ export type WithdrawSolParams = {
  * Deposit MLN directly into the pool's reserve account. The output is a "pool" token
  * representing ownership into the pool. Inputs are converted to the current ratio.
  */
-export type DepositSolParams = {
+export type DepositMlnParams = {
   stakePool: PublicKey;
   depositAuthority?: PublicKey | undefined;
   withdrawAuthority: PublicKey;
@@ -630,7 +630,7 @@ export class StakePoolInstruction {
   /**
    * Creates a transaction instruction to deposit MLN into a stake pool.
    */
-  static depositSol(params: DepositSolParams): TransactionInstruction {
+  static depositMln(params: DepositMlnParams): TransactionInstruction {
     const {
       stakePool,
       withdrawAuthority,
@@ -644,7 +644,7 @@ export class StakePoolInstruction {
       lamports,
     } = params;
 
-    const type = STAKE_POOL_INSTRUCTION_LAYOUTS.DepositSol;
+    const type = STAKE_POOL_INSTRUCTION_LAYOUTS.DepositMln;
     const data = encodeData(type, { lamports });
 
     const keys = [
@@ -722,7 +722,7 @@ export class StakePoolInstruction {
   /**
    * Creates a transaction instruction to withdraw MLN from a stake pool.
    */
-  static withdrawSol(params: WithdrawSolParams): TransactionInstruction {
+  static withdrawMln(params: WithdrawMlnParams): TransactionInstruction {
     const {
       stakePool,
       withdrawAuthority,
@@ -736,7 +736,7 @@ export class StakePoolInstruction {
       poolTokens,
     } = params;
 
-    const type = STAKE_POOL_INSTRUCTION_LAYOUTS.WithdrawSol;
+    const type = STAKE_POOL_INSTRUCTION_LAYOUTS.WithdrawMln;
     const data = encodeData(type, { poolTokens });
 
     const keys = [
@@ -850,11 +850,11 @@ export class StakePoolInstruction {
   /**
    * Decode a deposit sol instruction and retrieve the instruction params.
    */
-  static decodeDepositSol(instruction: TransactionInstruction): DepositSolParams {
+  static decodeDepositMln(instruction: TransactionInstruction): DepositMlnParams {
     this.checkProgramId(instruction.programId);
     this.checkKeyLength(instruction.keys, 9);
 
-    const { amount } = decodeData(STAKE_POOL_INSTRUCTION_LAYOUTS.DepositSol, instruction.data);
+    const { amount } = decodeData(STAKE_POOL_INSTRUCTION_LAYOUTS.DepositMln, instruction.data);
 
     return {
       stakePool: instruction.keys[0].pubkey,

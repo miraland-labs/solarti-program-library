@@ -1,7 +1,7 @@
 use {
     serde::{Deserialize, Serialize},
     miraland_cli_output::{QuietDisplay, VerboseDisplay},
-    solana_sdk::native_token::Sol,
+    solana_sdk::native_token::Mln,
     solana_sdk::{pubkey::Pubkey, stake::state::Lockup},
     spl_stake_pool::state::{Fee, StakePool, StakeStatus, ValidatorList, ValidatorStakeInfo},
     std::fmt::{Display, Formatter, Result, Write},
@@ -62,12 +62,12 @@ pub(crate) struct CliStakePool {
     pub stake_withdrawal_fee: CliStakePoolFee,
     pub next_stake_withdrawal_fee: Option<CliStakePoolFee>,
     pub stake_referral_fee: u8,
-    pub sol_deposit_authority: Option<String>,
-    pub sol_deposit_fee: CliStakePoolFee,
-    pub sol_referral_fee: u8,
-    pub sol_withdraw_authority: Option<String>,
-    pub sol_withdrawal_fee: CliStakePoolFee,
-    pub next_sol_withdrawal_fee: Option<CliStakePoolFee>,
+    pub mln_deposit_authority: Option<String>,
+    pub mln_deposit_fee: CliStakePoolFee,
+    pub mln_referral_fee: u8,
+    pub mln_withdraw_authority: Option<String>,
+    pub mln_withdrawal_fee: CliStakePoolFee,
+    pub next_mln_withdrawal_fee: Option<CliStakePoolFee>,
     pub last_epoch_pool_token_supply: u64,
     pub last_epoch_total_lamports: u64,
     pub details: Option<CliStakePoolDetails>,
@@ -91,7 +91,7 @@ impl VerboseDisplay for CliStakePool {
             w,
             "MLN Deposit Authority: {}",
             &self
-                .sol_deposit_authority
+                .mln_deposit_authority
                 .as_ref()
                 .unwrap_or(&"None".to_string())
         )?;
@@ -99,7 +99,7 @@ impl VerboseDisplay for CliStakePool {
             w,
             "MLN Withdraw Authority: {}",
             &self
-                .sol_withdraw_authority
+                .mln_withdraw_authority
                 .as_ref()
                 .unwrap_or(&"None".to_string())
         )?;
@@ -137,13 +137,13 @@ impl VerboseDisplay for CliStakePool {
         writeln!(
             w,
             "MLN Withdrawal Fee: {} of withdrawal amount",
-            &self.sol_withdrawal_fee
+            &self.mln_withdrawal_fee
         )?;
-        if let Some(next_sol_withdrawal_fee) = &self.next_sol_withdrawal_fee {
+        if let Some(next_mln_withdrawal_fee) = &self.next_mln_withdrawal_fee {
             writeln!(
                 w,
                 "Next MLN Withdrawal Fee: {} of withdrawal amount",
-                next_sol_withdrawal_fee
+                next_mln_withdrawal_fee
             )?;
         }
         writeln!(
@@ -154,7 +154,7 @@ impl VerboseDisplay for CliStakePool {
         writeln!(
             w,
             "MLN Deposit Fee: {} of deposit amount",
-            &self.sol_deposit_fee
+            &self.mln_deposit_fee
         )?;
         writeln!(
             w,
@@ -164,7 +164,7 @@ impl VerboseDisplay for CliStakePool {
         writeln!(
             w,
             "MLN Deposit Referral Fee: {}% of MLN Deposit Fee",
-            &self.sol_referral_fee
+            &self.mln_referral_fee
         )?;
         writeln!(w)?;
 
@@ -208,7 +208,7 @@ impl Display for CliStakePool {
         writeln!(
             f,
             "MLN Withdrawal Fee: {} of withdrawal amount",
-            &self.sol_withdrawal_fee
+            &self.mln_withdrawal_fee
         )?;
         writeln!(
             f,
@@ -218,7 +218,7 @@ impl Display for CliStakePool {
         writeln!(
             f,
             "MLN Deposit Fee: {} of deposit amount",
-            &self.sol_deposit_fee
+            &self.mln_deposit_fee
         )?;
         writeln!(
             f,
@@ -228,7 +228,7 @@ impl Display for CliStakePool {
         writeln!(
             f,
             "MLN Deposit Referral Fee: {}% of MLN Deposit Fee",
-            &self.sol_referral_fee
+            &self.mln_referral_fee
         )?;
         Ok(())
     }
@@ -254,21 +254,21 @@ impl Display for CliStakePoolDetails {
             f,
             "Reserve Account: {}\tAvailable Balance: {}",
             &self.reserve_stake_account_address,
-            Sol(self.reserve_stake_lamports - self.minimum_reserve_stake_balance),
+            Mln(self.reserve_stake_lamports - self.minimum_reserve_stake_balance),
         )?;
         for stake_account in &self.stake_accounts {
             writeln!(
                 f,
                 "Vote Account: {}\tBalance: {}\tLast Update Epoch: {}",
                 stake_account.vote_account_address,
-                Sol(stake_account.validator_lamports),
+                Mln(stake_account.validator_lamports),
                 stake_account.validator_last_update_epoch,
             )?;
         }
         writeln!(
             f,
             "Total Pool Stake: {} {}",
-            Sol(self.total_lamports),
+            Mln(self.total_lamports),
             if self.update_required {
                 " [UPDATE REQUIRED]"
             } else {
@@ -299,7 +299,7 @@ impl VerboseDisplay for CliStakePoolDetails {
             w,
             "Reserve Account: {}\tAvailable Balance: {}",
             &self.reserve_stake_account_address,
-            Sol(self.reserve_stake_lamports - self.minimum_reserve_stake_balance),
+            Mln(self.reserve_stake_lamports - self.minimum_reserve_stake_balance),
         )?;
         for stake_account in &self.stake_accounts {
             writeln!(
@@ -307,9 +307,9 @@ impl VerboseDisplay for CliStakePoolDetails {
                 "Vote Account: {}\tStake Account: {}\tActive Balance: {}\tTransient Stake Account: {}\tTransient Balance: {}\tLast Update Epoch: {}{}",
                 stake_account.vote_account_address,
                 stake_account.stake_account_address,
-                Sol(stake_account.validator_active_stake_lamports),
+                Mln(stake_account.validator_active_stake_lamports),
                 stake_account.validator_transient_stake_account_address,
-                Sol(stake_account.validator_transient_stake_lamports),
+                Mln(stake_account.validator_transient_stake_lamports),
                 stake_account.validator_last_update_epoch,
                 if stake_account.update_required {
                     " [UPDATE REQUIRED]"
@@ -321,7 +321,7 @@ impl VerboseDisplay for CliStakePoolDetails {
         writeln!(
             w,
             "Total Pool Stake: {} {}",
-            Sol(self.total_lamports),
+            Mln(self.total_lamports),
             if self.update_required {
                 " [UPDATE REQUIRED]"
             } else {
@@ -488,12 +488,12 @@ impl From<(Pubkey, StakePool, ValidatorList, Pubkey)> for CliStakePool {
             next_stake_withdrawal_fee: Option::<Fee>::from(stake_pool.next_stake_withdrawal_fee)
                 .map(CliStakePoolFee::from),
             stake_referral_fee: stake_pool.stake_referral_fee,
-            sol_deposit_authority: stake_pool.sol_deposit_authority.map(|x| x.to_string()),
-            sol_deposit_fee: CliStakePoolFee::from(stake_pool.sol_deposit_fee),
-            sol_referral_fee: stake_pool.sol_referral_fee,
-            sol_withdraw_authority: stake_pool.sol_withdraw_authority.map(|x| x.to_string()),
-            sol_withdrawal_fee: CliStakePoolFee::from(stake_pool.sol_withdrawal_fee),
-            next_sol_withdrawal_fee: Option::<Fee>::from(stake_pool.next_sol_withdrawal_fee)
+            mln_deposit_authority: stake_pool.mln_deposit_authority.map(|x| x.to_string()),
+            mln_deposit_fee: CliStakePoolFee::from(stake_pool.mln_deposit_fee),
+            mln_referral_fee: stake_pool.mln_referral_fee,
+            mln_withdraw_authority: stake_pool.mln_withdraw_authority.map(|x| x.to_string()),
+            mln_withdrawal_fee: CliStakePoolFee::from(stake_pool.mln_withdrawal_fee),
+            next_mln_withdrawal_fee: Option::<Fee>::from(stake_pool.next_mln_withdrawal_fee)
                 .map(CliStakePoolFee::from),
             last_epoch_pool_token_supply: stake_pool.last_epoch_pool_token_supply,
             last_epoch_total_lamports: stake_pool.last_epoch_total_lamports,

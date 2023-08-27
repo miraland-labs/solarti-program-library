@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# Script to setup a local solana-test-validator with the stake pool program
+# Script to setup a local miraland-test-validator with the stake pool program
 # given a maximum number of validators and a file path to store the list of
 # test validator vote accounts.
 
@@ -11,18 +11,18 @@ validator_file=$2
 create_keypair () {
   if test ! -f "$1"
   then
-    solana-keygen new --no-passphrase -s -o "$1"
+    miraland-keygen new --no-passphrase -s -o "$1"
   fi
 }
 
 setup_test_validator() {
-  solana-test-validator -c spooqgqqDxZgVc3pR6EvuVFZJ1kj7ABM4Hccz1gwAN1 -c EmiU8AQkB2sswTxVB6aCmsAJftoowZGGDXuytm6X65R3 --url devnet --slots-per-epoch 32 --quiet --reset &
+  miraland-test-validator -c spooqgqqDxZgVc3pR6EvuVFZJ1kj7ABM4Hccz1gwAN1 -c EmiU8AQkB2sswTxVB6aCmsAJftoowZGGDXuytm6X65R3 --url devnet --slots-per-epoch 32 --quiet --reset &
   # Uncomment to use a locally built stake program
-  #solana-test-validator --bpf-program spooqgqqDxZgVc3pR6EvuVFZJ1kj7ABM4Hccz1gwAN1 ../../../target/deploy/spl_stake_pool.so --slots-per-epoch 32 --quiet --reset &
+  #miraland-test-validator --bpf-program spooqgqqDxZgVc3pR6EvuVFZJ1kj7ABM4Hccz1gwAN1 ../../../target/deploy/spl_stake_pool.so --slots-per-epoch 32 --quiet --reset &
   pid=$!
-  solana config set --url http://127.0.0.1:8899
-  solana config set --commitment confirmed
-  echo "waiting for solana-test-validator, pid: $pid"
+  miraland config set --url http://127.0.0.1:8899
+  miraland config set --commitment confirmed
+  echo "waiting for miraland-test-validator, pid: $pid"
   sleep 5
 }
 
@@ -34,8 +34,8 @@ create_vote_accounts () {
     create_keypair "$keys_dir/identity_$number.json"
     create_keypair "$keys_dir/vote_$number.json"
     create_keypair "$keys_dir/withdrawer_$number.json"
-    solana create-vote-account "$keys_dir/vote_$number.json" "$keys_dir/identity_$number.json" "$keys_dir/withdrawer_$number.json" --commission 1
-    vote_pubkey=$(solana-keygen pubkey "$keys_dir/vote_$number.json")
+    miraland create-vote-account "$keys_dir/vote_$number.json" "$keys_dir/identity_$number.json" "$keys_dir/withdrawer_$number.json" --commission 1
+    vote_pubkey=$(miraland-keygen pubkey "$keys_dir/vote_$number.json")
     echo "$vote_pubkey" >> "$validator_file"
   done
 }

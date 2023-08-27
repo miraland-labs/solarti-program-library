@@ -10,10 +10,10 @@ import { StakePoolLayout } from '../src/layouts';
 import {
   STAKE_POOL_INSTRUCTION_LAYOUTS,
   STAKE_POOL_PROGRAM_ID,
-  DepositSolParams,
+  DepositMlnParams,
   StakePoolInstruction,
-  depositSol,
-  withdrawSol,
+  depositMln,
+  withdrawMln,
   withdrawStake,
   redelegate,
   getStakeAccount,
@@ -49,8 +49,8 @@ describe('StakePoolProgram', () => {
     data,
   };
 
-  it('StakePoolInstruction.depositSol', () => {
-    const payload: DepositSolParams = {
+  it('StakePoolInstruction.depositMln', () => {
+    const payload: DepositMlnParams = {
       stakePool: stakePoolAddress,
       withdrawAuthority: Keypair.generate().publicKey,
       reserveStake: Keypair.generate().publicKey,
@@ -62,7 +62,7 @@ describe('StakePoolProgram', () => {
       lamports: 99999,
     };
 
-    const instruction = StakePoolInstruction.depositSol(payload);
+    const instruction = StakePoolInstruction.depositMln(payload);
 
     expect(instruction.keys).toHaveLength(10);
     expect(instruction.keys[0].pubkey.toBase58()).toEqual(payload.stakePool.toBase58());
@@ -76,20 +76,20 @@ describe('StakePoolProgram', () => {
     expect(instruction.keys[8].pubkey.toBase58()).toEqual(SystemProgram.programId.toBase58());
     expect(instruction.keys[9].pubkey.toBase58()).toEqual(STAKE_POOL_PROGRAM_ID.toBase58());
 
-    const decodedData = decodeData(STAKE_POOL_INSTRUCTION_LAYOUTS.DepositSol, instruction.data);
+    const decodedData = decodeData(STAKE_POOL_INSTRUCTION_LAYOUTS.DepositMln, instruction.data);
 
-    expect(decodedData.instruction).toEqual(STAKE_POOL_INSTRUCTION_LAYOUTS.DepositSol.index);
+    expect(decodedData.instruction).toEqual(STAKE_POOL_INSTRUCTION_LAYOUTS.DepositMln.index);
     expect(decodedData.lamports).toEqual(payload.lamports);
 
     payload.depositAuthority = Keypair.generate().publicKey;
 
-    const instruction2 = StakePoolInstruction.depositSol(payload);
+    const instruction2 = StakePoolInstruction.depositMln(payload);
 
     expect(instruction2.keys).toHaveLength(11);
     expect(instruction2.keys[10].pubkey.toBase58()).toEqual(payload.depositAuthority.toBase58());
   });
 
-  describe('depositSol', () => {
+  describe('depositMln', () => {
     const from = Keypair.generate().publicKey;
     const balance = 10000;
 
@@ -108,14 +108,14 @@ describe('StakePoolProgram', () => {
     });
 
     it.only('should throw an error with invalid balance', async () => {
-      await expect(depositSol(connection, stakePoolAddress, from, balance + 1)).rejects.toThrow(
+      await expect(depositMln(connection, stakePoolAddress, from, balance + 1)).rejects.toThrow(
         Error('Not enough MLN to deposit into pool. Maximum deposit amount is 0.00001 MLN.'),
       );
     });
 
     it.only('should throw an error with invalid account', async () => {
       connection.getAccountInfo = jest.fn(async () => null);
-      await expect(depositSol(connection, stakePoolAddress, from, balance)).rejects.toThrow(
+      await expect(depositMln(connection, stakePoolAddress, from, balance)).rejects.toThrow(
         Error('Invalid stake pool account'),
       );
     });
@@ -133,7 +133,7 @@ describe('StakePoolProgram', () => {
         };
       });
 
-      const res = await depositSol(connection, stakePoolAddress, from, balance);
+      const res = await depositMln(connection, stakePoolAddress, from, balance);
 
       expect((connection.getAccountInfo as jest.Mock).mock.calls.length).toBe(2);
       expect(res.instructions).toHaveLength(2);
@@ -141,14 +141,14 @@ describe('StakePoolProgram', () => {
     });
   });
 
-  describe('withdrawSol', () => {
+  describe('withdrawMln', () => {
     const tokenOwner = new PublicKey(0);
     const solReceiver = new PublicKey(1);
 
     it.only('should throw an error with invalid stake pool account', async () => {
       connection.getAccountInfo = jest.fn(async () => null);
       await expect(
-        withdrawSol(connection, stakePoolAddress, tokenOwner, solReceiver, 1),
+        withdrawMln(connection, stakePoolAddress, tokenOwner, solReceiver, 1),
       ).rejects.toThrowError('Invalid stake pool account');
     });
 
@@ -164,7 +164,7 @@ describe('StakePoolProgram', () => {
       });
 
       await expect(
-        withdrawSol(connection, stakePoolAddress, tokenOwner, solReceiver, 1),
+        withdrawMln(connection, stakePoolAddress, tokenOwner, solReceiver, 1),
       ).rejects.toThrow(Error('Invalid token account'));
     });
 
@@ -180,7 +180,7 @@ describe('StakePoolProgram', () => {
       });
 
       await expect(
-        withdrawSol(connection, stakePoolAddress, tokenOwner, solReceiver, 1),
+        withdrawMln(connection, stakePoolAddress, tokenOwner, solReceiver, 1),
       ).rejects.toThrow(
         Error(
           'Not enough token balance to withdraw 1 pool tokens.\n          Maximum withdraw amount is 0 pool tokens.',
@@ -198,7 +198,7 @@ describe('StakePoolProgram', () => {
         }
         return null;
       });
-      const res = await withdrawSol(connection, stakePoolAddress, tokenOwner, solReceiver, 1);
+      const res = await withdrawMln(connection, stakePoolAddress, tokenOwner, solReceiver, 1);
 
       expect((connection.getAccountInfo as jest.Mock).mock.calls.length).toBe(2);
       expect(res.instructions).toHaveLength(2);

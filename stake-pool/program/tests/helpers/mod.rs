@@ -14,7 +14,7 @@ use {
     },
     solana_program_test::{processor, BanksClient, ProgramTest, ProgramTestContext},
     solana_sdk::{
-        account::{Account as SolanaAccount, WritableAccount},
+        account::{Account as MiralandAccount, WritableAccount},
         clock::{Clock, Epoch},
         compute_budget::ComputeBudgetInstruction,
         signature::{Keypair, Signer},
@@ -72,7 +72,7 @@ pub fn program_test_with_metadata_program() -> ProgramTest {
     program_test
 }
 
-pub async fn get_account(banks_client: &mut BanksClient, pubkey: &Pubkey) -> SolanaAccount {
+pub async fn get_account(banks_client: &mut BanksClient, pubkey: &Pubkey) -> MiralandAccount {
     banks_client
         .get_account(*pubkey)
         .await
@@ -513,8 +513,8 @@ pub async fn create_stake_pool(
     withdrawal_fee: &state::Fee,
     deposit_fee: &state::Fee,
     referral_fee: u8,
-    sol_deposit_fee: &state::Fee,
-    sol_referral_fee: u8,
+    mln_deposit_fee: &state::Fee,
+    mln_referral_fee: u8,
     max_validators: u32,
 ) -> Result<(), TransportError> {
     let rent = banks_client.get_rent().await.unwrap();
@@ -561,13 +561,13 @@ pub async fn create_stake_pool(
                 &id(),
                 &stake_pool.pubkey(),
                 &manager.pubkey(),
-                FeeType::SolDeposit(*sol_deposit_fee),
+                FeeType::SolDeposit(*mln_deposit_fee),
             ),
             instruction::set_fee(
                 &id(),
                 &stake_pool.pubkey(),
                 &manager.pubkey(),
-                FeeType::SolReferral(sol_referral_fee),
+                FeeType::SolReferral(mln_referral_fee),
             ),
         ],
         Some(&payer.pubkey()),
@@ -854,8 +854,8 @@ pub struct StakePoolAccounts {
     pub withdrawal_fee: state::Fee,
     pub deposit_fee: state::Fee,
     pub referral_fee: u8,
-    pub sol_deposit_fee: state::Fee,
-    pub sol_referral_fee: u8,
+    pub mln_deposit_fee: state::Fee,
+    pub mln_referral_fee: u8,
     pub max_validators: u32,
     pub compute_unit_limit: Option<u32>,
 }
@@ -893,12 +893,12 @@ impl StakePoolAccounts {
         deposit_fee_collected * self.referral_fee as u64 / 100
     }
 
-    pub fn calculate_sol_deposit_fee(&self, pool_tokens: u64) -> u64 {
-        pool_tokens * self.sol_deposit_fee.numerator / self.sol_deposit_fee.denominator
+    pub fn calculate_mln_deposit_fee(&self, pool_tokens: u64) -> u64 {
+        pool_tokens * self.mln_deposit_fee.numerator / self.mln_deposit_fee.denominator
     }
 
-    pub fn calculate_sol_referral_fee(&self, deposit_fee_collected: u64) -> u64 {
-        deposit_fee_collected * self.sol_referral_fee as u64 / 100
+    pub fn calculate_mln_referral_fee(&self, deposit_fee_collected: u64) -> u64 {
+        deposit_fee_collected * self.mln_referral_fee as u64 / 100
     }
 
     pub async fn initialize_stake_pool(
@@ -961,8 +961,8 @@ impl StakePoolAccounts {
             &self.withdrawal_fee,
             &self.deposit_fee,
             self.referral_fee,
-            &self.sol_deposit_fee,
-            self.sol_referral_fee,
+            &self.mln_deposit_fee,
+            self.mln_referral_fee,
             self.max_validators,
         )
         .await?;
@@ -1100,22 +1100,22 @@ impl StakePoolAccounts {
     }
 
     #[allow(clippy::too_many_arguments)]
-    pub async fn deposit_sol(
+    pub async fn deposit_mln(
         &self,
         banks_client: &mut BanksClient,
         payer: &Keypair,
         recent_blockhash: &Hash,
         pool_account: &Pubkey,
         amount: u64,
-        sol_deposit_authority: Option<&Keypair>,
+        mln_deposit_authority: Option<&Keypair>,
     ) -> Option<TransportError> {
         let mut signers = vec![payer];
-        let instruction = if let Some(sol_deposit_authority) = sol_deposit_authority {
-            signers.push(sol_deposit_authority);
-            instruction::deposit_sol_with_authority(
+        let instruction = if let Some(mln_deposit_authority) = mln_deposit_authority {
+            signers.push(mln_deposit_authority);
+            instruction::deposit_mln_with_authority(
                 &id(),
                 &self.stake_pool.pubkey(),
-                &sol_deposit_authority.pubkey(),
+                &mln_deposit_authority.pubkey(),
                 &self.withdraw_authority,
                 &self.reserve_stake.pubkey(),
                 &payer.pubkey(),
@@ -1127,7 +1127,7 @@ impl StakePoolAccounts {
                 amount,
             )
         } else {
-            instruction::deposit_sol(
+            instruction::deposit_mln(
                 &id(),
                 &self.stake_pool.pubkey(),
                 &self.withdraw_authority,
@@ -1157,7 +1157,7 @@ impl StakePoolAccounts {
     }
 
     #[allow(clippy::too_many_arguments)]
-    pub async fn deposit_sol_with_slippage(
+    pub async fn deposit_mln_with_slippage(
         &self,
         banks_client: &mut BanksClient,
         payer: &Keypair,
@@ -1166,7 +1166,7 @@ impl StakePoolAccounts {
         lamports_in: u64,
         minimum_pool_tokens_out: u64,
     ) -> Option<TransportError> {
-        let mut instructions = vec![instruction::deposit_sol_with_slippage(
+        let mut instructions = vec![instruction::deposit_mln_with_slippage(
             &id(),
             &self.stake_pool.pubkey(),
             &self.withdraw_authority,
@@ -1281,7 +1281,7 @@ impl StakePoolAccounts {
     }
 
     #[allow(clippy::too_many_arguments)]
-    pub async fn withdraw_sol_with_slippage(
+    pub async fn withdraw_mln_with_slippage(
         &self,
         banks_client: &mut BanksClient,
         payer: &Keypair,
@@ -1291,7 +1291,7 @@ impl StakePoolAccounts {
         amount_in: u64,
         minimum_lamports_out: u64,
     ) -> Option<TransportError> {
-        let mut instructions = vec![instruction::withdraw_sol_with_slippage(
+        let mut instructions = vec![instruction::withdraw_mln_with_slippage(
             &id(),
             &self.stake_pool.pubkey(),
             &self.withdraw_authority,
@@ -1320,7 +1320,7 @@ impl StakePoolAccounts {
     }
 
     #[allow(clippy::too_many_arguments)]
-    pub async fn withdraw_sol(
+    pub async fn withdraw_mln(
         &self,
         banks_client: &mut BanksClient,
         payer: &Keypair,
@@ -1328,15 +1328,15 @@ impl StakePoolAccounts {
         user: &Keypair,
         pool_account: &Pubkey,
         amount: u64,
-        sol_withdraw_authority: Option<&Keypair>,
+        mln_withdraw_authority: Option<&Keypair>,
     ) -> Option<TransportError> {
         let mut signers = vec![payer, user];
-        let instruction = if let Some(sol_withdraw_authority) = sol_withdraw_authority {
-            signers.push(sol_withdraw_authority);
-            instruction::withdraw_sol_with_authority(
+        let instruction = if let Some(mln_withdraw_authority) = mln_withdraw_authority {
+            signers.push(mln_withdraw_authority);
+            instruction::withdraw_mln_with_authority(
                 &id(),
                 &self.stake_pool.pubkey(),
-                &sol_withdraw_authority.pubkey(),
+                &mln_withdraw_authority.pubkey(),
                 &self.withdraw_authority,
                 &user.pubkey(),
                 pool_account,
@@ -1348,7 +1348,7 @@ impl StakePoolAccounts {
                 amount,
             )
         } else {
-            instruction::withdraw_sol(
+            instruction::withdraw_mln(
                 &id(),
                 &self.stake_pool.pubkey(),
                 &self.withdraw_authority,
@@ -1946,15 +1946,15 @@ impl StakePoolAccounts {
             preferred_deposit_validator_vote_address: None,
             preferred_withdraw_validator_vote_address: None,
             stake_deposit_fee: state::Fee::default(),
-            sol_deposit_fee: state::Fee::default(),
+            mln_deposit_fee: state::Fee::default(),
             stake_withdrawal_fee: state::Fee::default(),
             next_stake_withdrawal_fee: FutureEpoch::None,
             stake_referral_fee: 0,
-            sol_referral_fee: 0,
-            sol_deposit_authority: None,
-            sol_withdraw_authority: None,
-            sol_withdrawal_fee: state::Fee::default(),
-            next_sol_withdrawal_fee: FutureEpoch::None,
+            mln_referral_fee: 0,
+            mln_deposit_authority: None,
+            mln_withdraw_authority: None,
+            mln_withdrawal_fee: state::Fee::default(),
+            next_mln_withdrawal_fee: FutureEpoch::None,
             last_epoch_pool_token_supply: 0,
             last_epoch_total_lamports: 0,
         };
@@ -2013,11 +2013,11 @@ impl Default for StakePoolAccounts {
                 denominator: 1000,
             },
             referral_fee: 25,
-            sol_deposit_fee: state::Fee {
+            mln_deposit_fee: state::Fee {
                 numerator: 3,
                 denominator: 100,
             },
-            sol_referral_fee: 50,
+            mln_referral_fee: 50,
             max_validators: MAX_TEST_VALIDATORS,
             compute_unit_limit: None,
         }
@@ -2029,7 +2029,7 @@ pub async fn simple_add_validator_to_pool(
     payer: &Keypair,
     recent_blockhash: &Hash,
     stake_pool_accounts: &StakePoolAccounts,
-    sol_deposit_authority: Option<&Keypair>,
+    mln_deposit_authority: Option<&Keypair>,
 ) -> ValidatorStakeAccount {
     let validator_stake = ValidatorStakeAccount::new(
         &stake_pool_accounts.stake_pool.pubkey(),
@@ -2056,13 +2056,13 @@ pub async fn simple_add_validator_to_pool(
     .await
     .unwrap();
     let error = stake_pool_accounts
-        .deposit_sol(
+        .deposit_mln(
             banks_client,
             payer,
             recent_blockhash,
             &pool_token_account.pubkey(),
             stake_rent + current_minimum_delegation,
-            sol_deposit_authority,
+            mln_deposit_authority,
         )
         .await;
     assert!(error.is_none());
@@ -2317,7 +2317,7 @@ pub fn add_vote_account(program_test: &mut ProgramTest) -> Pubkey {
         },
         &Clock::default(),
     ));
-    let vote_account = SolanaAccount::create(
+    let vote_account = MiralandAccount::create(
         ACCOUNT_RENT_EXEMPTION,
         bincode::serialize::<VoteStateVersions>(&vote_state).unwrap(),
         solana_vote_program::id(),
@@ -2360,7 +2360,7 @@ pub fn add_validator_stake_account(
         credits_observed: 0,
     };
 
-    let stake_account = SolanaAccount::create(
+    let stake_account = MiralandAccount::create(
         stake_amount + STAKE_ACCOUNT_RENT_EXEMPTION,
         bincode::serialize::<stake::state::StakeState>(&stake::state::StakeState::Stake(
             meta, stake,
@@ -2412,7 +2412,7 @@ pub fn add_reserve_stake_account(
         },
         lockup: stake::state::Lockup::default(),
     };
-    let reserve_stake_account = SolanaAccount::create(
+    let reserve_stake_account = MiralandAccount::create(
         stake_amount + STAKE_ACCOUNT_RENT_EXEMPTION,
         bincode::serialize::<stake::state::StakeState>(&stake::state::StakeState::Initialized(
             meta,
@@ -2434,7 +2434,7 @@ pub fn add_stake_pool_account(
     // more room for optionals
     stake_pool_bytes.extend_from_slice(Pubkey::default().as_ref());
     stake_pool_bytes.extend_from_slice(Pubkey::default().as_ref());
-    let stake_pool_account = SolanaAccount::create(
+    let stake_pool_account = MiralandAccount::create(
         ACCOUNT_RENT_EXEMPTION,
         stake_pool_bytes,
         id(),
@@ -2456,7 +2456,7 @@ pub fn add_validator_list_account(
         validator_list_bytes
             .append(&mut state::ValidatorStakeInfo::default().try_to_vec().unwrap());
     }
-    let validator_list_account = SolanaAccount::create(
+    let validator_list_account = MiralandAccount::create(
         ACCOUNT_RENT_EXEMPTION,
         validator_list_bytes,
         id(),
@@ -2482,7 +2482,7 @@ pub fn add_mint_account(
         freeze_authority: COption::None,
     };
     Pack::pack(mint, &mut mint_vec).unwrap();
-    let stake_pool_mint = SolanaAccount::create(
+    let stake_pool_mint = MiralandAccount::create(
         ACCOUNT_RENT_EXEMPTION,
         mint_vec,
         *program_id,
@@ -2511,7 +2511,7 @@ pub fn add_token_account(
         close_authority: COption::None,
     };
     Pack::pack(fee_account_data, &mut fee_account_vec).unwrap();
-    let fee_account = SolanaAccount::create(
+    let fee_account = MiralandAccount::create(
         ACCOUNT_RENT_EXEMPTION,
         fee_account_vec,
         *program_id,

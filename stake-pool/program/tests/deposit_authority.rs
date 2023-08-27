@@ -37,7 +37,7 @@ async fn success_initialize() {
     let stake_pool =
         try_from_slice_unchecked::<StakePool>(stake_pool_account.data.as_slice()).unwrap();
     assert_eq!(stake_pool.stake_deposit_authority, deposit_authority);
-    assert_eq!(stake_pool.sol_deposit_authority.unwrap(), deposit_authority);
+    assert_eq!(stake_pool.mln_deposit_authority.unwrap(), deposit_authority);
 }
 
 #[tokio::test]

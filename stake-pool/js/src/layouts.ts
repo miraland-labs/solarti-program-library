@@ -1,6 +1,6 @@
-import { publicKey, struct, u32, u64, u8, option, vec } from '@project-serum/borsh';
+import { publicKey, struct, u32, u64, u8, option, vec } from '@solarti/borsh';
 import { Lockup, PublicKey } from '@solarti/web3.js';
-import { AccountInfo } from '@solarti/solarti-token';
+import { AccountInfo } from '@solarti/spl-token';
 import BN from 'bn.js';
 import {
   Infer,
@@ -22,7 +22,7 @@ export interface Fee {
 const feeFields = [u64('denominator'), u64('numerator')];
 
 /**
- * AccountLayout.encode from "@solarti/solarti-token" doesn't work
+ * AccountLayout.encode from "@solarti/spl-token" doesn't work
  */
 export const AccountLayout = struct<AccountInfo>([
   publicKey('mint'),
@@ -123,7 +123,7 @@ export interface StakePool {
   solReferralFee: number;
   solWithdrawAuthority?: PublicKey | undefined;
   solWithdrawalFee: Fee;
-  nextSolWithdrawalFee?: Fee | undefined;
+  nextMlnWithdrawalFee?: Fee | undefined;
   lastEpochPoolTokenSupply: BN;
   lastEpochTotalLamports: BN;
 }
@@ -156,7 +156,7 @@ export const StakePoolLayout = struct<StakePool>([
   u8('solReferralFee'),
   option(publicKey(), 'solWithdrawAuthority'),
   struct(feeFields, 'solWithdrawalFee'),
-  option(struct(feeFields), 'nextSolWithdrawalFee'),
+  option(struct(feeFields), 'nextMlnWithdrawalFee'),
   u64('lastEpochPoolTokenSupply'),
   u64('lastEpochTotalLamports'),
 ]);

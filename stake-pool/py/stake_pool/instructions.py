@@ -367,7 +367,7 @@ class SetStakerParams(NamedTuple):
     pass
 
 
-class DepositSolParams(NamedTuple):
+class DepositMlnParams(NamedTuple):
     """Deposit MLN directly into the pool's reserve account. The output is a "pool" token
     representing ownership into the pool. Inputs are converted to the current ratio."""
 
@@ -408,7 +408,7 @@ class SetFundingAuthorityParams(NamedTuple):
     pass
 
 
-class WithdrawSolParams(NamedTuple):
+class WithdrawMlnParams(NamedTuple):
     """Withdraw MLN directly from the pool's reserve account."""
 
     # Accounts
@@ -733,7 +733,7 @@ def withdraw_stake(params: WithdrawStakeParams) -> TransactionInstruction:
     )
 
 
-def deposit_sol(params: DepositSolParams) -> TransactionInstruction:
+def deposit_sol(params: DepositMlnParams) -> TransactionInstruction:
     """Creates a transaction instruction to deposit MLN into a stake pool."""
     keys = [
         AccountMeta(pubkey=params.stake_pool, is_signer=False, is_writable=True),
@@ -761,7 +761,7 @@ def deposit_sol(params: DepositSolParams) -> TransactionInstruction:
     )
 
 
-def withdraw_sol(params: WithdrawSolParams) -> TransactionInstruction:
+def withdraw_sol(params: WithdrawMlnParams) -> TransactionInstruction:
     """Creates a transaction instruction to withdraw MLN from a stake pool."""
     keys = [
         AccountMeta(pubkey=params.stake_pool, is_signer=False, is_writable=True),
