@@ -13,11 +13,11 @@ edition = "2021"
 [dependencies]
 chrono = "0.4.22"
 clap = "2.33.3"
-miraland-clap-utils = "=1.14.17-rc5"
-miraland-cli-config = "=1.14.17-rc5"
-miraland-client = "=1.14.17-rc5"
-miraland-logger = "=1.14.17-rc5"
-miraland-sdk = "=1.14.17-rc5"
+miraland-clap-utils = "=1.14.17-rc6"
+miraland-cli-config = "=1.14.17-rc6"
+miraland-client = "=1.14.17-rc6"
+miraland-logger = "=1.14.17-rc6"
+miraland-sdk = "=1.14.17-rc6"
 solarti-feature-proposal = { version = "1.0", path = "../program", features = ["no-entrypoint"] }
 
 [[bin]]

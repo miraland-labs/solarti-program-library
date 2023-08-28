@@ -19,9 +19,9 @@ num-derive = "0.3"
 num-traits = "0.2"
 serde = "1.0.127"
 serde_derive = "1.0.103"
-miraland-program = "=1.14.17-rc5"
-miraland-program-test = "=1.14.17-rc5"
-miraland-sdk = "=1.14.17-rc5"
+miraland-program = "=1.14.17-rc6"
+miraland-program-test = "=1.14.17-rc6"
+miraland-sdk = "=1.14.17-rc6"
 solarti-token = { version = "3.5", path = "../../token/program", features = [ "no-entrypoint" ] }
 thiserror = "1.0"
 
