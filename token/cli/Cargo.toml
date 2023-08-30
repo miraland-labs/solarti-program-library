@@ -45,7 +45,15 @@ assert_cmd = "=2.0.4"
 predicates-tree = "=1.0.5"
 predicates-core = "=1.0.3"
 serial_test = "0.8.0"
-tempfile = "3.4.0"
+tempfile = "=3.6.0" # MI, 3.4.0 => =3.6.0
+tonic = "=0.8.0" # MI, added
+petgraph = "=0.6.3" # MI, added
+# axum = "=0.6.18" # MI, added
+axum = "=0.5.17" # MI, added
+h2 = "=0.3.20" # MI, added
+memchr = "=2.5.0" # MI, added
+cc = "=1.0.79" # MI, added
+flate2 = "=1.0.26" #MI, added
 
 [[bin]]
 name = "solarti-token"
