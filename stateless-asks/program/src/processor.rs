@@ -1,6 +1,6 @@
 //! Program state processor
 
-use mpl_token_metadata::state::Metadata;
+use mpl_token_metadata::state::{Metadata, TokenMetadataAccount};
 use solana_program::program_option::COption;
 use std::slice::Iter;
 
