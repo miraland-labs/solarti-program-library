@@ -11,7 +11,7 @@ license = "Apache-2.0"
 edition = "2021"
 
 [dependencies]
-miraland-program = "=1.14.17-rc6"
+miraland-program = "1.14.17"
 thiserror = "1.0.30"
 
 [lib]

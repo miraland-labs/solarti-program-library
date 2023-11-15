@@ -9,11 +9,11 @@ no-entrypoint = []
 test-sbf = []
 
 [dependencies]
-miraland-program = "=1.14.17-rc6"
+miraland-program = "1.14.17"
 thiserror = "1.0"
 solarti-token = {version = "3.1", path = "../../token/program", features = ["no-entrypoint"]}
 arrayref = "0.3.6"
-borsh = "0.9"
+borsh = "0.9.3"
 uint = "0.9"
 
 [lib]

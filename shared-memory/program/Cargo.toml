@@ -15,11 +15,11 @@ test-sbf = []
 
 [dependencies]
 arrayref = "0.3.6"
-miraland-program = "=1.14.17-rc6"
+miraland-program = "1.14.17"
 
 [dev-dependencies]
-miraland-program-test = "=1.14.17-rc6"
-miraland-sdk = "=1.14.17-rc6"
+miraland-program-test = "1.14.17"
+miraland-sdk = "1.14.17"
 
 [lib]
 crate-type = ["cdylib", "lib"]

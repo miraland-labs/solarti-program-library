@@ -15,16 +15,16 @@ no-entrypoint = []
 test-sbf = []
 
 [dependencies]
-borsh = "0.9.1"
-borsh-derive = "0.9.0"
+borsh = "0.9.3"
+borsh-derive = "0.9.3"
 num-derive = "0.3"
 num-traits = "0.2"
-miraland-program = "=1.14.17-rc6"
+miraland-program = "1.14.17"
 thiserror = "1.0"
 
 [dev-dependencies]
-miraland-program-test = "=1.14.17-rc6"
-miraland-sdk = "=1.14.17-rc6"
+miraland-program-test = "1.14.17"
+miraland-sdk = "1.14.17"
 
 [lib]
 crate-type = ["cdylib", "lib"]

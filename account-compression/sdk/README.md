@@ -164,7 +164,7 @@ await sendAndConfirmTransaction(connection, tx, [payer]);
 
 Here are some examples using account compression in the wild:
 
-* Solana Program Library [tests](https://github.com/solana-labs/solana-program-library/tree/master/account-compression/sdk/tests)
+* Solarti Program Library [tests](https://github.com/solana-labs/solana-program-library/tree/master/account-compression/sdk/tests)
 
 * Metaplex Program Library Compressed NFT [tests](https://github.com/metaplex-foundation/metaplex-program-library/tree/master/bubblegum/js/tests)
 

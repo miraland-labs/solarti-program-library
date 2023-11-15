@@ -11,9 +11,9 @@ license = "Apache-2.0"
 edition = "2021"
 
 [dependencies]
-borsh = "0.9.1"
+borsh = "0.9"
 solarti-governance-tools= { version = "0.1", path ="../tools"}
-miraland-program = "=1.14.17-rc6"
+miraland-program = "1.14.17"
 
 [lib]
 crate-type = ["cdylib", "lib"]

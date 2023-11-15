@@ -13,12 +13,12 @@ version = "0.2.0"
 
 [dependencies]
 clap = "2.33.3"
-miraland-clap-utils = "=1.14.17-rc6"
-miraland-cli-config = "=1.14.17-rc6"
-miraland-client = "=1.14.17-rc6"
-miraland-logger = "=1.14.17-rc6"
-miraland-sdk = "=1.14.17-rc6"
-miraland-program = "=1.14.17-rc6"
+miraland-clap-utils = "1.14.17"
+miraland-cli-config = "1.14.17"
+miraland-client = "1.14.17"
+miraland-logger = "1.14.17"
+miraland-sdk = "1.14.17"
+miraland-program = "1.14.17"
 solarti-token-lending = { version = "0.2", path="../program", features = [ "no-entrypoint" ] }
 solarti-token = { version = "3.5", path="../../token/program", features = [ "no-entrypoint" ]  }
 

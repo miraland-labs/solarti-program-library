@@ -1,6 +1,6 @@
-# Solana Program Library
+# Solarti Program Library
 
-The Solana Program Library (SPL) is a collection of on-chain programs targeting
+The Solarti Program Library (SPL) is a collection of on-chain programs targeting
 the [Sealevel parallel
 runtime](https://medium.com/solana-labs/sealevel-parallel-processing-thousands-of-smart-contracts-d814b378192).
 These programs are tested against Solana's implementation of Sealevel,
@@ -12,7 +12,7 @@ For more information see the [SPL documentation](https://spl.solana.com) and the
 
 ## Audits
 
-Only a subset of programs within the Solana Program Library repo are deployed to
+Only a subset of programs within the Solarti Program Library repo are deployed to
 the Solana Mainnet Beta. Currently, this includes:
 
 | Program | Last Audit Date | Version |

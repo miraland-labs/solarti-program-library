@@ -1,5 +1,5 @@
 module.exports = {
-  title: "Solana Program Library Docs",
+  title: "Solarti Program Library Docs",
   tagline:
     "Solana is an open source project implementing a new, high-performance, permissionless blockchain.",
   url: "https://spl.solana.com",

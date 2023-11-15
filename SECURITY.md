@@ -6,7 +6,7 @@
 1. [Incident Response Process](#process)
 
 <a name="reporting"></a>
-## Reporting security problems in the Solana Program Library
+## Reporting security problems in the Solarti Program Library
 
 **DO NOT CREATE A GITHUB ISSUE** to report a security problem.
 
@@ -41,7 +41,7 @@ for details on classes of bugs and payment amounts.
 <a name="scope"></a>
 ## Scope
 
-Only a subset of programs within the Solana Program Library repo are deployed to
+Only a subset of programs within the Solarti Program Library repo are deployed to
 the Solana Mainnet Beta. Currently, this includes:
 
 * [associated-token-account](https://github.com/solana-labs/solana-program-library/tree/master/associated-token-account/program)
