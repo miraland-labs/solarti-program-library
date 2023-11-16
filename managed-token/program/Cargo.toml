@@ -25,15 +25,15 @@ default = []
 test = []
 
 [dependencies]
-miraland-program = "1.14.17"
+miraland-program = "=1.14.17"
 shank = "^0.0.5"
 solarti-token = { version = "3.5", path = "../../token/program", features = ["no-entrypoint"] }
 solarti-associated-token-account = { version = "1.1", path = "../../associated-token-account/program", features = ["no-entrypoint"] }
 thiserror = "^1.0.24"
-borsh = "0.9.3"
+borsh = "0.10.3"
 
 [dev-dependencies]
-miraland-program-test = "1.14.17"
-miraland-sdk = "1.14.17"
+miraland-program-test = "=1.14.17"
+miraland-sdk = "=1.14.17"
 tokio = { version = "1.8.4", features = ["full"] }
 anyhow = "1.0.52"

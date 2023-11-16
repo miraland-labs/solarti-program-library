@@ -66,6 +66,18 @@ dependencies = [
 ]
 
 [[package]]
+name = "ahash"
+version = "0.8.6"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "91429305e9f0a25f6205c5b8e0d2db09e0708a7a6df0f42212bb56c32c8ac97a"
+dependencies = [
+ "cfg-if 1.0.0",
+ "once_cell",
+ "version_check",
+ "zerocopy",
+]
+
+[[package]]
 name = "aho-corasick"
 version = "1.1.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -494,8 +506,18 @@ version = "0.9.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "15bf3650200d8bffa99015595e10f1fbd17de07abbc25bb067da79e769939bfa"
 dependencies = [
- "borsh-derive",
+ "borsh-derive 0.9.3",
  "hashbrown 0.11.2",
+]
+
+[[package]]
+name = "borsh"
+version = "0.10.3"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "4114279215a005bc675e386011e594e1d9b800918cea18fcadadcce864a2046b"
+dependencies = [
+ "borsh-derive 0.10.3",
+ "hashbrown 0.13.2",
 ]
 
 [[package]]
@@ -504,8 +526,21 @@ version = "0.9.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "6441c552f230375d18e3cc377677914d2ca2b0d36e52129fe15450a2dce46775"
 dependencies = [
- "borsh-derive-internal",
- "borsh-schema-derive-internal",
+ "borsh-derive-internal 0.9.3",
+ "borsh-schema-derive-internal 0.9.3",
+ "proc-macro-crate 0.1.5",
+ "proc-macro2 1.0.69",
+ "syn 1.0.109",
+]
+
+[[package]]
+name = "borsh-derive"
+version = "0.10.3"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "0754613691538d51f329cce9af41d7b7ca150bc973056f1156611489475f54f7"
+dependencies = [
+ "borsh-derive-internal 0.10.3",
+ "borsh-schema-derive-internal 0.10.3",
  "proc-macro-crate 0.1.5",
  "proc-macro2 1.0.69",
  "syn 1.0.109",
@@ -523,10 +558,32 @@ dependencies = [
 ]
 
 [[package]]
+name = "borsh-derive-internal"
+version = "0.10.3"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "afb438156919598d2c7bad7e1c0adf3d26ed3840dbc010db1a882a65583ca2fb"
+dependencies = [
+ "proc-macro2 1.0.69",
+ "quote 1.0.33",
+ "syn 1.0.109",
+]
+
+[[package]]
 name = "borsh-schema-derive-internal"
 version = "0.9.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "cdbd5696d8bfa21d53d9fe39a714a18538bad11492a42d066dbbc395fb1951c0"
+dependencies = [
+ "proc-macro2 1.0.69",
+ "quote 1.0.33",
+ "syn 1.0.109",
+]
+
+[[package]]
+name = "borsh-schema-derive-internal"
+version = "0.10.3"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "634205cc43f74a1b9046ef87c4540ebda95696ec0f315024860cad7c5b0f5ccd"
 dependencies = [
  "proc-macro2 1.0.69",
  "quote 1.0.33",
@@ -1726,7 +1783,7 @@ version = "0.11.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "ab5ef0d4909ef3724cc8cce6ccc8572c5c817592e9285f5464f8e86f8bd3726e"
 dependencies = [
- "ahash",
+ "ahash 0.7.7",
 ]
 
 [[package]]
@@ -1735,7 +1792,16 @@ version = "0.12.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "8a9ee70c43aaf417c914396645a0fa852624801b24ebb7ae78fe8272889ac888"
 dependencies = [
- "ahash",
+ "ahash 0.7.7",
+]
+
+[[package]]
+name = "hashbrown"
+version = "0.13.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "43a3c133739dddd0d2990f9a4bdf8eb4b21ef50e4851ca85ab661199821d510e"
+dependencies = [
+ "ahash 0.8.6",
 ]
 
 [[package]]
@@ -2641,7 +2707,7 @@ version = "1.14.17"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "6f0d8a6dac126df912ff46f1db2bca881749b2396ba1f13a89fef5b575330f7b"
 dependencies = [
- "borsh",
+ "borsh 0.9.3",
  "futures 0.3.29",
  "miraland-banks-interface",
  "miraland-program",
@@ -2900,7 +2966,7 @@ version = "1.14.17"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "d5db87ea823dd34d82249cc7a91663df38beed34ff7d82396c1599af378fd42d"
 dependencies = [
- "ahash",
+ "ahash 0.7.7",
  "base64 0.13.1",
  "bincode",
  "bs58",
@@ -3008,7 +3074,7 @@ version = "1.14.17"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "5173804915d555dfca5e53f77174bf755a905e464b94edb2911180cb71f29423"
 dependencies = [
- "ahash",
+ "ahash 0.7.7",
  "blake3",
  "block-buffer 0.9.0",
  "bs58",
@@ -3262,7 +3328,7 @@ version = "1.14.17"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "f27bde603531bd10902883d3cf66568e21d79713b073ed63974cbad352672c96"
 dependencies = [
- "ahash",
+ "ahash 0.7.7",
  "bincode",
  "bv",
  "caps",
@@ -3312,8 +3378,8 @@ dependencies = [
  "bincode",
  "bitflags 1.3.2",
  "blake3",
- "borsh",
- "borsh-derive",
+ "borsh 0.9.3",
+ "borsh-derive 0.9.3",
  "bs58",
  "bv",
  "bytemuck",
@@ -3557,7 +3623,7 @@ dependencies = [
  "base64 0.13.1",
  "bincode",
  "bitflags 1.3.2",
- "borsh",
+ "borsh 0.9.3",
  "bs58",
  "bytemuck",
  "byteorder",
@@ -3787,7 +3853,7 @@ dependencies = [
  "Inflector",
  "base64 0.13.1",
  "bincode",
- "borsh",
+ "borsh 0.9.3",
  "bs58",
  "lazy_static",
  "log",
@@ -3896,7 +3962,7 @@ version = "1.3.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "e252d15662bdafbdd2900d0cedaf2fdc1554c6f6a102a347d995f38aafddb73c"
 dependencies = [
- "borsh",
+ "borsh 0.9.3",
  "bytemuck",
  "miraland-program",
  "miraland-zk-token-sdk",
@@ -3917,7 +3983,7 @@ checksum = "1ad6e57f5706d681fd4a56b7d0336632db8fbbb187915b898c34c388108bcd84"
 dependencies = [
  "arrayref",
  "blake3",
- "borsh",
+ "borsh 0.9.3",
  "miraland-program",
  "miraplex-token-auth-rules",
  "miraplex-token-metadata-context-derive",
@@ -3948,7 +4014,7 @@ checksum = "422a7caa9e1476d9a11dab00cc44f20f06948ec7a97149ff92f695b2614cc704"
 dependencies = [
  "arrayref",
  "blake3",
- "borsh",
+ "borsh 0.9.3",
  "miraland-program",
  "solarti-token 3.5.1",
  "toml_datetime",
@@ -5956,7 +6022,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "0a2d302dbe1e86dfa73c7df12b97de4aa1e1a8548bd67f1b1342e6e38164167a"
 dependencies = [
  "assert_matches",
- "borsh",
+ "borsh 0.9.3",
  "miraland-program",
  "num-derive 0.3.3",
  "num-traits",
@@ -5970,7 +6036,7 @@ name = "solarti-associated-token-account"
 version = "1.1.6"
 dependencies = [
  "assert_matches",
- "borsh",
+ "borsh 0.10.3",
  "miraland-program",
  "num-derive 0.3.3",
  "num-traits",
@@ -5996,7 +6062,7 @@ name = "solarti-binary-option"
 version = "0.1.1"
 dependencies = [
  "arrayref",
- "borsh",
+ "borsh 0.10.3",
  "miraland-program",
  "solarti-token 3.5.4",
  "thiserror",
@@ -6007,7 +6073,7 @@ dependencies = [
 name = "solarti-binary-oracle-pair"
 version = "0.1.1"
 dependencies = [
- "borsh",
+ "borsh 0.10.3",
  "miraland-program",
  "miraland-program-test",
  "miraland-sdk",
@@ -6033,9 +6099,9 @@ dependencies = [
 
 [[package]]
 name = "solarti-discriminator"
-version = "0.1.0"
+version = "0.1.2"
 dependencies = [
- "borsh",
+ "borsh 0.10.3",
  "bytemuck",
  "miraland-program",
  "solarti-discriminator-derive",
@@ -6043,7 +6109,7 @@ dependencies = [
 
 [[package]]
 name = "solarti-discriminator-derive"
-version = "0.1.1"
+version = "0.1.2"
 dependencies = [
  "quote 1.0.33",
  "solarti-discriminator-syn",
@@ -6052,7 +6118,7 @@ dependencies = [
 
 [[package]]
 name = "solarti-discriminator-syn"
-version = "0.1.1"
+version = "0.1.2"
 dependencies = [
  "proc-macro2 1.0.69",
  "quote 1.0.33",
@@ -6120,7 +6186,7 @@ dependencies = [
 name = "solarti-feature-proposal"
 version = "1.0.2"
 dependencies = [
- "borsh",
+ "borsh 0.10.3",
  "miraland-program",
  "miraland-program-test",
  "miraland-sdk",
@@ -6158,7 +6224,7 @@ dependencies = [
  "assert_matches",
  "base64 0.13.1",
  "bincode",
- "borsh",
+ "borsh 0.10.3",
  "miraland-program",
  "miraland-program-test",
  "miraland-sdk",
@@ -6179,7 +6245,7 @@ dependencies = [
 name = "solarti-governance-addin-api"
 version = "0.1.3"
 dependencies = [
- "borsh",
+ "borsh 0.10.3",
  "miraland-program",
  "solarti-governance-tools",
 ]
@@ -6192,7 +6258,7 @@ dependencies = [
  "assert_matches",
  "base64 0.13.1",
  "bincode",
- "borsh",
+ "borsh 0.10.3",
  "miraland-program",
  "miraland-program-test",
  "miraland-sdk",
@@ -6216,7 +6282,7 @@ dependencies = [
  "assert_matches",
  "base64 0.13.1",
  "bincode",
- "borsh",
+ "borsh 0.10.3",
  "miraland-program",
  "miraland-program-test",
  "miraland-sdk",
@@ -6240,7 +6306,7 @@ version = "0.1.3"
 dependencies = [
  "arrayref",
  "bincode",
- "borsh",
+ "borsh 0.10.3",
  "lazy_static",
  "miraland-program",
  "miraland-program-test",
@@ -6259,7 +6325,7 @@ version = "0.1.3"
 dependencies = [
  "arrayref",
  "bincode",
- "borsh",
+ "borsh 0.10.3",
  "miraland-program",
  "num-derive 0.3.3",
  "num-traits",
@@ -6284,7 +6350,7 @@ name = "solarti-managed-token"
 version = "0.1.1"
 dependencies = [
  "anyhow",
- "borsh",
+ "borsh 0.10.3",
  "miraland-program",
  "miraland-program-test",
  "miraland-sdk",
@@ -6299,8 +6365,8 @@ dependencies = [
 name = "solarti-math"
 version = "0.1.1"
 dependencies = [
- "borsh",
- "borsh-derive",
+ "borsh 0.10.3",
+ "borsh-derive 0.10.3",
  "libm",
  "miraland-program",
  "miraland-program-test",
@@ -6342,7 +6408,7 @@ dependencies = [
 name = "solarti-name-service"
 version = "0.2.1"
 dependencies = [
- "borsh",
+ "borsh 0.10.3",
  "miraland-program",
  "miraland-program-test",
  "miraland-sdk",
@@ -6353,10 +6419,10 @@ dependencies = [
 
 [[package]]
 name = "solarti-pod"
-version = "0.1.0"
+version = "0.1.1"
 dependencies = [
  "base64 0.21.5",
- "borsh",
+ "borsh 0.10.3",
  "bytemuck",
  "miraland-program",
  "miraland-zk-token-sdk",
@@ -6367,7 +6433,7 @@ dependencies = [
 
 [[package]]
 name = "solarti-program-error"
-version = "0.3.0"
+version = "0.3.2"
 dependencies = [
  "lazy_static",
  "miraland-program",
@@ -6381,7 +6447,7 @@ dependencies = [
 
 [[package]]
 name = "solarti-program-error-derive"
-version = "0.3.1"
+version = "0.3.2"
 dependencies = [
  "proc-macro2 1.0.69",
  "quote 1.0.33",
@@ -6393,8 +6459,8 @@ dependencies = [
 name = "solarti-record"
 version = "0.1.1"
 dependencies = [
- "borsh",
- "borsh-derive",
+ "borsh 0.10.3",
+ "borsh-derive 0.10.3",
  "miraland-program",
  "miraland-program-test",
  "miraland-sdk",
@@ -6419,7 +6485,7 @@ version = "0.7.2"
 dependencies = [
  "arrayref",
  "bincode",
- "borsh",
+ "borsh 0.10.3",
  "miraland-program",
  "miraland-program-test",
  "miraland-sdk",
@@ -6443,7 +6509,7 @@ name = "solarti-stake-pool-cli"
 version = "0.7.2"
 dependencies = [
  "bincode",
- "borsh",
+ "borsh 0.10.3",
  "bs58",
  "clap 2.34.0",
  "miraland-account-decoder",
@@ -6467,7 +6533,7 @@ dependencies = [
 name = "solarti-stateless-asks"
 version = "0.1.1"
 dependencies = [
- "borsh",
+ "borsh 0.10.3",
  "miraland-program",
  "miraland-program-test",
  "miraland-sdk",
@@ -6677,7 +6743,7 @@ dependencies = [
 
 [[package]]
 name = "solarti-token-metadata-example"
-version = "0.2.0"
+version = "0.2.1"
 dependencies = [
  "miraland-program",
  "miraland-program-test",
@@ -6692,9 +6758,9 @@ dependencies = [
 
 [[package]]
 name = "solarti-token-metadata-interface"
-version = "0.2.0"
+version = "0.2.1"
 dependencies = [
- "borsh",
+ "borsh 0.10.3",
  "miraland-program",
  "serde",
  "serde_json",
@@ -6779,7 +6845,7 @@ dependencies = [
 
 [[package]]
 name = "solarti-type-length-value"
-version = "0.3.0"
+version = "0.3.1"
 dependencies = [
  "bytemuck",
  "miraland-program",
@@ -6791,7 +6857,7 @@ dependencies = [
 
 [[package]]
 name = "solarti-type-length-value-derive"
-version = "0.1.0"
+version = "0.3.1"
 dependencies = [
  "proc-macro2 1.0.69",
  "quote 1.0.33",
@@ -6800,9 +6866,9 @@ dependencies = [
 
 [[package]]
 name = "solarti-type-length-value-derive-test"
-version = "0.1.0"
+version = "0.1.1"
 dependencies = [
- "borsh",
+ "borsh 0.10.3",
  "miraland-program",
  "solarti-discriminator",
  "solarti-type-length-value",
@@ -8242,6 +8308,26 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "e17bb3549cc1321ae1296b9cdc2698e2b6cb1992adfa19a8c72e5b7a738f44cd"
 dependencies = [
  "time 0.3.9",
+]
+
+[[package]]
+name = "zerocopy"
+version = "0.7.26"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "e97e415490559a91254a2979b4829267a57d2fcd741a98eee8b722fb57289aa0"
+dependencies = [
+ "zerocopy-derive",
+]
+
+[[package]]
+name = "zerocopy-derive"
+version = "0.7.26"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "dd7e48ccf166952882ca8bd778a43502c64f33bf94c12ebe2a7f08e5a0f6689f"
+dependencies = [
+ "proc-macro2 1.0.69",
+ "quote 1.0.33",
+ "syn 2.0.39",
 ]
 
 [[package]]

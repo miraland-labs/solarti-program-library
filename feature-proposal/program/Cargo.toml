@@ -15,13 +15,13 @@ no-entrypoint = []
 test-sbf = []
 
 [dependencies]
-borsh = "0.9.3"
-miraland-program = "1.14.17"
+borsh = "0.10.3"
+miraland-program = "=1.14.17"
 solarti-token = { version = "3.5", path = "../../token/program", features = ["no-entrypoint"] }
 
 [dev-dependencies]
-miraland-program-test = "1.14.17"
-miraland-sdk = "1.14.17"
+miraland-program-test = "=1.14.17"
+miraland-sdk = "=1.14.17"
 
 [lib]
 crate-type = ["cdylib", "lib"]

@@ -16,10 +16,10 @@ test-sbf = []
 
 [dependencies]
 assert_matches = "1.5.0"
-borsh = "0.9.3"
+borsh = "0.10.3"
 num-derive = "0.3"
 num-traits = "0.2"
-miraland-program = "1.14.17"
+miraland-program = "=1.14.17"
 solarti-token = { version = "3.5", path = "../../token/program", features = ["no-entrypoint"] }
 solarti-token-2022 = { version = "0.6", path = "../../token/program-2022", features = ["no-entrypoint"] }
 thiserror = "1.0"

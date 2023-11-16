@@ -1,6 +1,6 @@
 [package]
 name = "solarti-program-error-derive"
-version = "0.3.1"
+version = "0.3.2"
 description = "Proc-Macro Library for Solarti Program error attributes and derive macro"
 authors = [
   "Miraland Crafters <crafters@miraland.top>",

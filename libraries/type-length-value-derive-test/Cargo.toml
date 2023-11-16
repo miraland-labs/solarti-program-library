@@ -1,6 +1,6 @@
 [package]
 name = "solarti-type-length-value-derive-test"
-version = "0.1.0"
+version = "0.1.1"
 description = "Testing Derive Macro Library for SPL Type Length Value traits"
 authors = [
   "Miraland Crafters <crafters@miraland.top>",
@@ -11,7 +11,7 @@ license = "Apache-2.0"
 edition = "2021"
 
 [dev-dependencies]
-borsh = "0.9.3"
-miraland-program = "1.14.17"
+borsh = "0.10.3"
+miraland-program = "=1.14.17"
 solarti-discriminator = { version = "0.1.0", path = "../discriminator" }
 solarti-type-length-value = { version = "0.3.0", path = "../type-length-value", features = ["derive"] }
