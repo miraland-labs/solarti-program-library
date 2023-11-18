@@ -1,6 +1,6 @@
 [package]
 name = "solarti-token-lending"
-version = "0.2.0"
+version = "0.2.1"
 description = "Solarti Program Library Token Lending"
 authors = [
   "Miraland Crafters <crafters@miraland.top>",
@@ -19,7 +19,7 @@ arrayref = "0.3.6"
 bytemuck = "1.13.0"
 num-derive = "0.3"
 num-traits = "0.2"
-miraland-program = "=1.14.17"
+miraland-program = "=1.14.18"
 solarti-token = { version = "3.5", path = "../../token/program", features = [ "no-entrypoint" ] }
 thiserror = "1.0"
 uint = "0.9"
@@ -29,8 +29,8 @@ assert_matches = "1.5.0"
 base64 = "0.13"
 log = "0.4.14"
 proptest = "1.0"
-miraland-program-test = "=1.14.17"
-miraland-sdk = "=1.14.17"
+miraland-program-test = "=1.14.18"
+miraland-sdk = "=1.14.18"
 serde = "1.0"
 serde_yaml = "0.8"
 

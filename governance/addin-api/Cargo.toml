@@ -1,6 +1,6 @@
 [package]
 name = "solarti-governance-addin-api"
-version = "0.1.3"
+version = "0.1.4"
 description = "Solarti Program Library Governance Addin Api"
 authors = [
   "Miraland Crafters <crafters@miraland.top>",
@@ -13,7 +13,7 @@ edition = "2021"
 [dependencies]
 borsh = "0.10.3"
 solarti-governance-tools= { version = "0.1", path ="../tools"}
-miraland-program = "=1.14.17"
+miraland-program = "=1.14.18"
 
 [lib]
 crate-type = ["cdylib", "lib"]

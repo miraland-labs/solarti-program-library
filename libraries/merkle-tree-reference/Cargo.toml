@@ -1,6 +1,6 @@
 [package]
 name = "solarti-merkle-tree-reference"
-version = "0.1.1"
+version = "0.1.2"
 description = "Reference implementation of a merkle tree"
 authors = [
   "Miraland Crafters <crafters@miraland.top>",
@@ -11,7 +11,7 @@ license = "Apache-2.0"
 edition = "2021"
 
 [dependencies]
-miraland-program = "=1.14.17"
+miraland-program = "=1.14.18"
 thiserror = "1.0.30"
 
 [lib]

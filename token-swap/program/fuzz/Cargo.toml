@@ -15,7 +15,7 @@ publish = false
 honggfuzz = { version = "0.5.55" }
 arbitrary = { version = "=1.0.3", features = ["derive"] }
 derive_arbitrary = "=1.0.2"
-miraland-program = "=1.14.17"
+miraland-program = "=1.14.18"
 solarti-math = { version = "0.1", path = "../../../libraries/math", features = [ "no-entrypoint" ] }
 solarti-token = { version = "3.5", path = "../../../token/program", features = [ "no-entrypoint" ] }
 solarti-token-swap = { path = "..", features = ["fuzz", "no-entrypoint"] }

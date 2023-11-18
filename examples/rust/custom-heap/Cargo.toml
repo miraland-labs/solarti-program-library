@@ -18,11 +18,11 @@ no-entrypoint = []
 test-sbf = []
 
 [dependencies]
-miraland-program = "=1.14.17"
+miraland-program = "=1.14.18"
 
 [dev-dependencies]
-miraland-program-test = "=1.14.17"
-miraland-sdk = "=1.14.17"
+miraland-program-test = "=1.14.18"
+miraland-sdk = "=1.14.18"
 
 [lib]
 crate-type = ["cdylib", "lib"]

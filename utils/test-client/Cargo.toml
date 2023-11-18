@@ -11,7 +11,7 @@ edition = "2021"
 # Used to ensure that SPL programs are buildable by external clients
 
 [dependencies]
-miraland-sdk = "=1.14.17"
+miraland-sdk = "=1.14.18"
 solarti-memo = { path = "../../memo/program", features = [ "no-entrypoint" ] }
 solarti-token = { path = "../../token/program", features = [ "no-entrypoint" ] }
 solarti-token-swap = { path = "../../token-swap/program", features = [ "no-entrypoint" ] }

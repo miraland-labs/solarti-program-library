@@ -1,6 +1,6 @@
 [package]
 name = "solarti-shared-memory"
-version = "2.0.7"
+version = "2.0.8"
 description = "Solarti Program Library Shared-memory"
 authors = [
   "Miraland Crafters <crafters@miraland.top>",
@@ -15,11 +15,11 @@ test-sbf = []
 
 [dependencies]
 arrayref = "0.3.6"
-miraland-program = "=1.14.17"
+miraland-program = "=1.14.18"
 
 [dev-dependencies]
-miraland-program-test = "=1.14.17"
-miraland-sdk = "=1.14.17"
+miraland-program-test = "=1.14.18"
+miraland-sdk = "=1.14.18"
 
 [lib]
 crate-type = ["cdylib", "lib"]

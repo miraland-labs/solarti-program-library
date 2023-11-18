@@ -15,7 +15,7 @@ test-sbf = []
 
 [dependencies]
 bytemuck = { version = "1.14.0", features = ["derive"] }
-miraland-program = "=1.14.17"
+miraland-program = "=1.14.18"
 solarti-discriminator = { version = "0.1", path = "../discriminator" }
 solarti-program-error = { version = "0.3", path = "../program-error" }
 solarti-type-length-value = { version = "0.3", path = "../type-length-value" }
@@ -24,9 +24,9 @@ solarti-pod = { version = "0.1", path = "../pod" }
 [dev-dependencies]
 futures = "0.3.29"
 futures-util = "0.3"
-miraland-client = "=1.14.17"
-miraland-program-test = "=1.14.17"
-miraland-sdk = "=1.14.17"
+miraland-client = "=1.14.18"
+miraland-program-test = "=1.14.18"
+miraland-sdk = "=1.14.18"
 solarti-discriminator = { version = "0.1", path = "../discriminator" }
 
 [lib]

@@ -1,6 +1,6 @@
 [package]
 name = "solarti-instruction-padding"
-version = "0.1.1"
+version = "0.1.2"
 description = "Solarti Program Library Instruction Padding Program"
 authors = [
   "Miraland Crafters <crafters@miraland.top>",
@@ -8,7 +8,7 @@ authors = [
 ]
 repository = "https://github.com/miraland-labs/solarti-program-library"
 license = "Apache-2.0"
-homepage = "https://solana.com/"
+homepage = "https://miraland.top/"
 edition = "2021"
 
 [features]
@@ -17,11 +17,11 @@ test-sbf = []
 
 [dependencies]
 num_enum = "0.5.9"
-miraland-program = "=1.14.17"
+miraland-program = "=1.14.18"
 
 [dev-dependencies]
-miraland-program-test = "=1.14.17"
-miraland-sdk = "=1.14.17"
+miraland-program-test = "=1.14.18"
+miraland-sdk = "=1.14.18"
 
 [lib]
 crate-type = ["cdylib", "lib"]

@@ -1,6 +1,6 @@
 [package]
 name = "solarti-governance-test-sdk"
-version = "0.1.3"
+version = "0.1.4"
 description = "Solarti Program Library Governance Program Test SDK"
 authors = [
   "Miraland Crafters <crafters@miraland.top>",
@@ -19,9 +19,9 @@ num-derive = "0.3"
 num-traits = "0.2"
 serde = "1.0.127"
 serde_derive = "1.0.103"
-miraland-program = "=1.14.17"
-miraland-program-test = "=1.14.17"
-miraland-sdk = "=1.14.17"
+miraland-program = "=1.14.18"
+miraland-program-test = "=1.14.18"
+miraland-sdk = "=1.14.18"
 solarti-token = { version = "3.5", path = "../../token/program", features = [ "no-entrypoint" ] }
 thiserror = "1.0"
 

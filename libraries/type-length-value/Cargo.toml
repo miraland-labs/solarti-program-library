@@ -1,6 +1,6 @@
 [package]
 name = "solarti-type-length-value"
-version = "0.3.1"
+version = "0.3.2"
 description = "Solarti Program Library Type-Length-Value Management"
 authors = [
   "Miraland Crafters <crafters@miraland.top>",
@@ -16,7 +16,7 @@ derive = ["dep:solarti-type-length-value-derive"]
 
 [dependencies]
 bytemuck = { version = "1.14.0", features = ["derive"] }
-miraland-program = "=1.14.17"
+miraland-program = "=1.14.18"
 solarti-discriminator = { version = "0.1", path = "../discriminator" }
 solarti-program-error = { version = "0.3", path = "../program-error" }
 solarti-type-length-value-derive = { version = "0.3", path = "./derive", optional = true }
