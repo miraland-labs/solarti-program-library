@@ -5,7 +5,7 @@ edition = "2021"
 
 [dependencies]
 arrayref = "0.3.6"
-miraland-program = "=1.14.18"
+miraland-program = "1.14.18"
 solarti-token = { version = "3.5", path = "../../token/program", features=["no-entrypoint"] }
 
 [lib]

@@ -1,6 +1,6 @@
 [package]
 name = "solarti-feature-proposal-cli"
-version = "1.2.3"
+version = "1.2.4"
 description = "SOLARTI Feature Proposal Command-line Utility"
 authors = [
   "Miraland Crafters <crafters@miraland.top>",
@@ -13,11 +13,11 @@ edition = "2021"
 [dependencies]
 chrono = "0.4.22"
 clap = "2.33.3"
-miraland-clap-utils = "=1.14.18"
-miraland-cli-config = "=1.14.18"
-miraland-client = "=1.14.18"
-miraland-logger = "=1.14.18"
-miraland-sdk = "=1.14.18"
+miraland-clap-utils = "1.14.18"
+miraland-cli-config = "1.14.18"
+miraland-client = "1.14.18"
+miraland-logger = "1.14.18"
+miraland-sdk = "1.14.18"
 solarti-feature-proposal = { version = "1.0", path = "../program", features = ["no-entrypoint"] }
 
 [[bin]]

@@ -1,6 +1,6 @@
 [package]
 name = "solarti-token-metadata-example"
-version = "0.2.1"
+version = "0.2.2"
 description = "Solarti Program Library Token Metadata Example Program"
 authors = [
   "Miraland Crafters <crafters@miraland.top>",
@@ -15,15 +15,15 @@ no-entrypoint = []
 test-sbf = []
 
 [dependencies]
-miraland-program = "=1.14.18"
+miraland-program = "1.14.18"
 solarti-token-2022 = { version = "0.6", path = "../../token/program-2022", features = ["no-entrypoint"] }
 solarti-token-metadata-interface = { version = "0.2.0", path = "../interface" }
 solarti-type-length-value = { version = "0.3.0" , path = "../../libraries/type-length-value" }
 solarti-pod = { version = "0.1.0", path = "../../libraries/pod" }
 
 [dev-dependencies]
-miraland-program-test = "=1.14.18"
-miraland-sdk = "=1.14.18"
+miraland-program-test = "1.14.18"
+miraland-sdk = "1.14.18"
 solarti-token-client = { version = "0.4.3", path = "../../token/client" }
 test-case = "3.2"
 

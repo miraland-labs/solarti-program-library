@@ -22,7 +22,7 @@ num-derive = "0.3"
 num-traits = "0.2"
 serde = "1.0.130"
 serde_derive = "1.0.103"
-miraland-program = "=1.14.18"
+miraland-program = "1.14.18"
 solarti-token = { version = "3.5", path = "../../token/program", features = [ "no-entrypoint" ] }
 solarti-governance-tools= { version = "0.1", path ="../tools"}
 solarti-governance-addin-api= { version = "0.1", path ="../addin-api"}
@@ -32,8 +32,8 @@ thiserror = "1.0"
 assert_matches = "1.5.0"
 base64 = "0.13"
 proptest = "1.0"
-miraland-program-test = "=1.14.18"
-miraland-sdk = "=1.14.18"
+miraland-program-test = "1.14.18"
+miraland-sdk = "1.14.18"
 solarti-governance-test-sdk = { version = "0.1", path ="../test-sdk"}
 solarti-governance-addin-mock = { version = "0.1", path ="../addin-mock/program"}
 
