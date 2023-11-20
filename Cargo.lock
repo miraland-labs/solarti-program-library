@@ -6076,7 +6076,7 @@ dependencies = [
 
 [[package]]
 name = "solarti-associated-token-account"
-version = "1.1.7"
+version = "1.1.8"
 dependencies = [
  "assert_matches",
  "borsh 0.10.3",
@@ -6095,7 +6095,7 @@ dependencies = [
  "miraland-program",
  "miraland-program-test",
  "miraland-sdk",
- "solarti-associated-token-account 1.1.7",
+ "solarti-associated-token-account 1.1.8",
  "solarti-token 3.5.6",
  "solarti-token-2022 0.6.7",
 ]
@@ -6398,7 +6398,7 @@ dependencies = [
  "miraland-program-test",
  "miraland-sdk",
  "shank 0.0.5",
- "solarti-associated-token-account 1.1.7",
+ "solarti-associated-token-account 1.1.8",
  "solarti-token 3.5.6",
  "thiserror",
  "tokio",
@@ -6567,7 +6567,7 @@ dependencies = [
  "serde",
  "serde_derive",
  "serde_json",
- "solarti-associated-token-account 1.1.7",
+ "solarti-associated-token-account 1.1.8",
  "solarti-stake-pool",
  "solarti-token 3.5.6",
 ]
@@ -6581,7 +6581,7 @@ dependencies = [
  "miraland-program-test",
  "miraland-sdk",
  "miraplex-token-metadata",
- "solarti-associated-token-account 1.1.7",
+ "solarti-associated-token-account 1.1.8",
  "solarti-token 3.5.6",
  "thiserror",
 ]
@@ -6688,7 +6688,7 @@ dependencies = [
  "miraland-program",
  "miraland-program-test",
  "miraland-sdk",
- "solarti-associated-token-account 1.1.7",
+ "solarti-associated-token-account 1.1.8",
  "solarti-instruction-padding",
  "solarti-memo 3.0.7",
  "solarti-token-2022 0.6.7",
@@ -6720,7 +6720,7 @@ dependencies = [
  "serde_derive",
  "serde_json",
  "serial_test 0.8.0",
- "solarti-associated-token-account 1.1.7",
+ "solarti-associated-token-account 1.1.8",
  "solarti-memo 3.0.7",
  "solarti-token 3.5.6",
  "solarti-token-2022 0.6.7",
@@ -6741,7 +6741,7 @@ dependencies = [
  "miraland-client",
  "miraland-program-test",
  "miraland-sdk",
- "solarti-associated-token-account 1.1.7",
+ "solarti-associated-token-account 1.1.8",
  "solarti-memo 3.0.7",
  "solarti-token 3.5.6",
  "solarti-token-2022 0.6.7",
@@ -6878,7 +6878,7 @@ dependencies = [
  "miraland-remote-wallet",
  "miraland-sdk",
  "miraland-test-validator",
- "solarti-associated-token-account 1.1.7",
+ "solarti-associated-token-account 1.1.8",
  "solarti-token 3.5.6",
  "solarti-token-2022 0.6.7",
  "solarti-token-client",
