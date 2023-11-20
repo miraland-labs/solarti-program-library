@@ -5820,15 +5820,6 @@ dependencies = [
 
 [[package]]
 name = "shank"
-version = "0.0.5"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "7a9986b297e6f42bcbe41f95ca2a881e7a75bd091549e95ecf495fa8178c0c1b"
-dependencies = [
- "shank_macro 0.0.5",
-]
-
-[[package]]
-name = "shank"
 version = "0.0.11"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "b63e565b5e95ad88ab38f312e89444c749360641c509ef2de0093b49f55974a5"
@@ -5843,18 +5834,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "439c00542aa8b4c777750b3130ce36fcff86ba215d54006d47d67359513b70be"
 dependencies = [
  "shank_macro 0.0.12",
-]
-
-[[package]]
-name = "shank_macro"
-version = "0.0.5"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "5dd835154aa943dfc958f5a208f2e82b7d2a2c52b024229168c211ecc2d2bfd1"
-dependencies = [
- "proc-macro2 1.0.69",
- "quote 1.0.33",
- "shank_macro_impl 0.0.5",
- "syn 1.0.109",
 ]
 
 [[package]]
@@ -5879,19 +5858,6 @@ dependencies = [
  "quote 1.0.33",
  "shank_macro_impl 0.0.12",
  "shank_render",
- "syn 1.0.109",
-]
-
-[[package]]
-name = "shank_macro_impl"
-version = "0.0.5"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "d99ad9d5137704e86e2e4a54a121b9c443c37b60ce6638a7723ab700dbd2232a"
-dependencies = [
- "anyhow",
- "proc-macro2 1.0.69",
- "quote 1.0.33",
- "serde",
  "syn 1.0.109",
 ]
 
@@ -6397,7 +6363,7 @@ dependencies = [
  "miraland-program",
  "miraland-program-test",
  "miraland-sdk",
- "shank 0.0.5",
+ "shank 0.0.12",
  "solarti-associated-token-account 1.1.8",
  "solarti-token 3.5.6",
  "thiserror",
