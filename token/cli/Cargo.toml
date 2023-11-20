@@ -41,7 +41,7 @@ tokio = "1.14"
 
 [dev-dependencies]
 miraland-test-validator = "1.14.18"
-assert_cmd = "=2.0.4"
+assert_cmd = "=2.0.8"
 predicates-tree = "=1.0.5"
 predicates-core = "=1.0.3"
 serial_test = "0.8.0"
