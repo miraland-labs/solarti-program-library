@@ -43,7 +43,7 @@ tokio = "1.14"
 miraland-test-validator = "1.14.18"
 assert_cmd = "=2.0.4"
 predicates-tree = "=1.0.5"
-predicates-core = "=1.0.3"
+predicates-core = "=1.0.6"
 serial_test = "0.8.0"
 tempfile = "=3.6.0" # MI, 3.4.0 => =3.6.0
 # tonic = "=0.8.0" # MI, added
