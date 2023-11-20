@@ -27,11 +27,11 @@ solarti-token-2022 = { version = "0.6", path = "../../token/program-2022", featu
 thiserror = "1.0"
 arbitrary = { version = "=1.0.3", features = ["derive"], optional = true }
 derive_arbitrary = "=1.0.2"
-roots = { version = "0.0.7", optional = true }
+roots = { version = "0.0.8", optional = true }
 
 [dev-dependencies]
 proptest = "1.0"
-roots = "0.0.7"
+roots = "0.0.8"
 miraland-sdk = "1.14.18"
 test-case = "2.2"
 
