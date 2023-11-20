@@ -6241,7 +6241,7 @@ name = "solarti-feature-proposal-cli"
 version = "1.2.4"
 dependencies = [
  "chrono",
- "clap 2.34.0",
+ "clap 3.2.25",
  "miraland-clap-utils",
  "miraland-cli-config",
  "miraland-client",
@@ -6554,7 +6554,7 @@ dependencies = [
  "bincode",
  "borsh 0.10.3",
  "bs58",
- "clap 2.34.0",
+ "clap 3.2.25",
  "miraland-account-decoder",
  "miraland-clap-utils",
  "miraland-cli-config",
@@ -6701,7 +6701,7 @@ name = "solarti-token-cli"
 version = "2.3.3"
 dependencies = [
  "assert_cmd",
- "clap 2.34.0",
+ "clap 3.2.25",
  "console",
  "indicatif",
  "miraland-account-decoder",
@@ -6774,7 +6774,7 @@ dependencies = [
 name = "solarti-token-lending-cli"
 version = "0.2.1"
 dependencies = [
- "clap 2.34.0",
+ "clap 3.2.25",
  "miraland-clap-utils",
  "miraland-cli-config",
  "miraland-client",

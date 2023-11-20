@@ -12,7 +12,7 @@ edition = "2021"
 
 [dependencies]
 chrono = "0.4.22"
-clap = "2.33.3"
+clap = "3.2.25"
 miraland-clap-utils = "1.14.18"
 miraland-cli-config = "1.14.18"
 miraland-client = "1.14.18"
