@@ -49,7 +49,7 @@
     "@solarti/solarti-token": "0.1.8",
     "@types/bn.js": "^5.1.0",
     "eslint": "^8.31.0",
-    "eslint-plugin-import": "^2.22.0",
+    "eslint-plugin-import": "^2.29.0",
     "prettier": "^2.1.2",
     "start-server-and-test": "^1.11.6",
     "ts-node": "^10.0.0",
