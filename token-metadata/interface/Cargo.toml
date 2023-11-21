@@ -15,7 +15,7 @@ serde-traits = ["dep:serde", "solarti-pod/serde-traits"]
 
 [dependencies]
 borsh = "0.10.3"
-serde = { version = "1.0.192", optional = true }
+serde = { version = "1.0.193", optional = true }
 miraland-program = "1.14.18"
 solarti-discriminator = { version = "0.1" , path = "../../libraries/discriminator" }
 solarti-program-error = { version = "0.3" , path = "../../libraries/program-error" }
