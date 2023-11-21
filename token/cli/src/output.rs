@@ -1,15 +1,21 @@
-use crate::{config::Config, sort::UnsupportedAccount};
-use console::{style, Emoji};
-use serde::{Deserialize, Serialize, Serializer};
-use miraland_account_decoder::{
-    parse_token::{UiAccountState, UiMint, UiMultisig, UiTokenAccount, UiTokenAmount},
-    parse_token_extension::{
-        UiCpiGuard, UiDefaultAccountState, UiExtension, UiInterestBearingConfig, UiMemoTransfer,
-        UiMintCloseAuthority, UiPermanentDelegate, UiTransferFeeAmount, UiTransferFeeConfig,
+#![allow(clippy::arithmetic_side_effects)]
+use {
+    crate::{config::Config, sort::UnsupportedAccount},
+    console::{style, Emoji},
+    serde::{Deserialize, Serialize, Serializer},
+    miraland_account_decoder::{
+        parse_token::{UiAccountState, UiMint, UiMultisig, UiTokenAccount, UiTokenAmount},
+        parse_token_extension::{
+            UiConfidentialTransferAccount, UiConfidentialTransferFeeAmount,
+            UiConfidentialTransferFeeConfig, UiConfidentialTransferMint, UiCpiGuard,
+            UiDefaultAccountState, UiExtension, UiInterestBearingConfig, UiMemoTransfer,
+            UiMetadataPointer, UiMintCloseAuthority, UiPermanentDelegate, UiTokenMetadata,
+            UiTransferFeeAmount, UiTransferFeeConfig, UiTransferHook, UiTransferHookAccount,
+        },
     },
+    miraland_cli_output::{display::writeln_name_value, OutputFormat, QuietDisplay, VerboseDisplay},
+    std::fmt::{self, Display},
 };
-use miraland_cli_output::{display::writeln_name_value, OutputFormat, QuietDisplay, VerboseDisplay};
-use std::fmt::{self, Display};
 
 pub(crate) trait Output: Serialize + fmt::Display + QuietDisplay + VerboseDisplay {}
 
@@ -423,11 +429,8 @@ impl VerboseDisplay for CliTokenAccounts {
                     .map(|d| d.amount)
                     .unwrap_or_else(|| "".to_string());
 
-                let maybe_close_authority = account
-                    .account
-                    .close_authority
-                    .clone()
-                    .unwrap_or_else(|| "".to_string());
+                let maybe_close_authority =
+                    account.account.close_authority.clone().unwrap_or_default();
 
                 if self.explicit_token {
                     writeln!(
@@ -561,7 +564,7 @@ fn display_ui_extension(
         }) => {
             writeln!(f, "  {}", style("Transfer fees:").bold())?;
 
-            if newer_transfer_fee.epoch >= epoch {
+            if epoch >= newer_transfer_fee.epoch {
                 writeln!(
                     f,
                     "    {} {}bps",
@@ -631,8 +634,6 @@ fn display_ui_extension(
                 Ok(())
             }
         }
-        UiExtension::ConfidentialTransferMint(_) => unimplemented!(),
-        UiExtension::ConfidentialTransferAccount(_) => unimplemented!(),
         UiExtension::DefaultAccountState(UiDefaultAccountState { account_state }) => {
             writeln_name_value(f, "  Default state:", &format!("{:?}", account_state))
         }
@@ -648,7 +649,9 @@ fn display_ui_extension(
                 "Not required"
             },
         ),
-        UiExtension::NonTransferable => writeln!(f, "  {}", style("Non-transferable").bold()),
+        UiExtension::NonTransferable | UiExtension::NonTransferableAccount => {
+            writeln!(f, "  {}", style("Non-transferable").bold())
+        }
         UiExtension::InterestBearingConfig(UiInterestBearingConfig {
             rate_authority,
             pre_update_average_rate,
@@ -686,11 +689,229 @@ fn display_ui_extension(
                 Ok(())
             }
         }
-        // ExtensionType::Uninitialized is a hack to ensure a mint/account is never the same length as a multisig
+        UiExtension::ConfidentialTransferAccount(UiConfidentialTransferAccount {
+            approved,
+            elgamal_pubkey,
+            pending_balance_lo,
+            pending_balance_hi,
+            available_balance,
+            decryptable_available_balance,
+            allow_confidential_credits,
+            allow_non_confidential_credits,
+            pending_balance_credit_counter,
+            maximum_pending_balance_credit_counter,
+            expected_pending_balance_credit_counter,
+            actual_pending_balance_credit_counter,
+        }) => {
+            writeln!(f, "  {}", style("Confidential transfer:").bold())?;
+            writeln_name_value(f, "    Approved:", &format!("{approved}"))?;
+            writeln_name_value(f, "    Encryption key:", elgamal_pubkey)?;
+            writeln_name_value(f, "    Pending Balance Low:", pending_balance_lo)?;
+            writeln_name_value(f, "    Pending Balance High:", pending_balance_hi)?;
+            writeln_name_value(f, "    Available Balance:", available_balance)?;
+            writeln_name_value(
+                f,
+                "    Decryptable Available Balance:",
+                decryptable_available_balance,
+            )?;
+            writeln_name_value(
+                f,
+                "    Confidential Credits:",
+                if *allow_confidential_credits {
+                    "Enabled"
+                } else {
+                    "Disabled"
+                },
+            )?;
+            writeln_name_value(
+                f,
+                "    Non-Confidential Credits:",
+                if *allow_non_confidential_credits {
+                    "Enabled"
+                } else {
+                    "Disabled"
+                },
+            )?;
+            writeln_name_value(
+                f,
+                "    Pending Balance Credit Counter:",
+                &format!("{pending_balance_credit_counter}"),
+            )?;
+            writeln_name_value(
+                f,
+                "    Maximum Pending Balance Credit Counter:",
+                &format!("{maximum_pending_balance_credit_counter}"),
+            )?;
+            writeln_name_value(
+                f,
+                "    Expected Pending Balance Credit Counter:",
+                &format!("{expected_pending_balance_credit_counter}"),
+            )?;
+            writeln_name_value(
+                f,
+                "    Actual Pending Balance Credit Counter:",
+                &format!("{actual_pending_balance_credit_counter}"),
+            )
+        }
+        UiExtension::ConfidentialTransferMint(UiConfidentialTransferMint {
+            authority,
+            auto_approve_new_accounts,
+            auditor_elgamal_pubkey,
+        }) => {
+            writeln!(f, "  {}", style("Confidential transfer:").bold())?;
+            writeln!(
+                f,
+                "    {}: {}",
+                style("Authority").bold(),
+                if let Some(authority) = authority.as_ref() {
+                    authority
+                } else {
+                    "authority disabled"
+                }
+            )?;
+            writeln!(
+                f,
+                "    {}: {}",
+                style("Account approve policy").bold(),
+                if *auto_approve_new_accounts {
+                    "auto"
+                } else {
+                    "manual"
+                },
+            )?;
+            writeln!(
+                f,
+                "    {}: {}",
+                style("Audit key").bold(),
+                if let Some(auditor_pubkey) = auditor_elgamal_pubkey.as_ref() {
+                    auditor_pubkey
+                } else {
+                    "audits are disabled"
+                }
+            )
+        }
+        UiExtension::ConfidentialTransferFeeConfig(UiConfidentialTransferFeeConfig {
+            authority,
+            withdraw_withheld_authority_elgamal_pubkey,
+            harvest_to_mint_enabled,
+            withheld_amount,
+        }) => {
+            writeln!(f, "  {}", style("Confidential transfer fee:").bold())?;
+            writeln_name_value(
+                f,
+                "    Authority:",
+                if let Some(pubkey) = authority {
+                    pubkey
+                } else {
+                    "Disabled"
+                },
+            )?;
+            writeln_name_value(
+                f,
+                "    Withdraw Withheld Encryption key:",
+                if let Some(pubkey) = withdraw_withheld_authority_elgamal_pubkey {
+                    pubkey
+                } else {
+                    "Disabled"
+                },
+            )?;
+            writeln_name_value(
+                f,
+                "    Harvest to mint:",
+                if *harvest_to_mint_enabled {
+                    "Enabled"
+                } else {
+                    "Disabled"
+                },
+            )?;
+            writeln_name_value(f, "    Withheld Amount:", withheld_amount)
+        }
+        UiExtension::ConfidentialTransferFeeAmount(UiConfidentialTransferFeeAmount {
+            withheld_amount,
+        }) => writeln_name_value(f, "  Confidential Transfer Fee Amount:", withheld_amount),
+        UiExtension::TransferHook(UiTransferHook {
+            authority,
+            program_id,
+        }) => {
+            writeln!(f, "  {}", style("Transfer Hook:").bold())?;
+            writeln_name_value(
+                f,
+                "    Authority:",
+                if let Some(pubkey) = authority {
+                    pubkey
+                } else {
+                    "Disabled"
+                },
+            )?;
+            writeln_name_value(
+                f,
+                "    Program Id:",
+                if let Some(pubkey) = program_id {
+                    pubkey
+                } else {
+                    "Disabled"
+                },
+            )
+        }
+        // don't display the "transferring" flag, since it's just for internal use
+        UiExtension::TransferHookAccount(UiTransferHookAccount { .. }) => Ok(()),
+        UiExtension::MetadataPointer(UiMetadataPointer {
+            authority,
+            metadata_address,
+        }) => {
+            writeln!(f, "  {}", style("Metadata Pointer:").bold())?;
+            writeln_name_value(
+                f,
+                "    Authority:",
+                if let Some(pubkey) = authority {
+                    pubkey
+                } else {
+                    "Disabled"
+                },
+            )?;
+            writeln_name_value(
+                f,
+                "    Metadata address:",
+                if let Some(pubkey) = metadata_address {
+                    pubkey
+                } else {
+                    "Disabled"
+                },
+            )
+        }
+        UiExtension::TokenMetadata(UiTokenMetadata {
+            update_authority,
+            mint,
+            name,
+            symbol,
+            uri,
+            additional_metadata,
+        }) => {
+            writeln!(f, "  {}", style("Metadata:").bold())?;
+            writeln_name_value(
+                f,
+                "    Update Authority:",
+                if let Some(pubkey) = update_authority {
+                    pubkey
+                } else {
+                    "Disabled"
+                },
+            )?;
+            writeln_name_value(f, "    Mint:", mint)?;
+            writeln_name_value(f, "    Name:", name)?;
+            writeln_name_value(f, "    Symbol:", symbol)?;
+            writeln_name_value(f, "    URI:", uri)?;
+            for (key, value) in additional_metadata {
+                writeln_name_value(f, &format!("    {key}:"), value)?;
+            }
+            Ok(())
+        }
+        // ExtensionType::Uninitialized is a hack to ensure a mint/account is never the same length
+        // as a multisig
         UiExtension::Uninitialized => Ok(()),
-        _ => writeln_name_value(
+        UiExtension::UnparseableExtension => writeln_name_value(
             f,
-            "    Unparseable extension:",
+            "  Unparseable extension:",
             "Consider upgrading to a newer version of solarti-token",
         ),
     }

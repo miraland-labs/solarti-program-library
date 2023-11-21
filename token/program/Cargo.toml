@@ -1,6 +1,6 @@
 [package]
 name = "solarti-token"
-version = "3.5.6"
+version = "4.0.0"
 description = "Solarti Program Library Token"
 authors = [
   "Miraland Crafters <crafters@miraland.top>",
@@ -16,19 +16,18 @@ no-entrypoint = []
 test-sbf = []
 
 [dependencies]
-arrayref = "0.3.6"
-bytemuck = "1.13.0"
-num-derive = "0.3"
+arrayref = "0.3.7"
+bytemuck = "1.14.0"
+num-derive = "0.4"
 num-traits = "0.2"
-num_enum = "0.5.9"
+num_enum = "0.7.1"
 miraland-program = "1.14.18"
 thiserror = "1.0"
-winnow = "=0.4.1"
 
 [dev-dependencies]
 lazy_static = "1.4.0"
-proptest = "1.0"
-serial_test = "0.5.1"
+proptest = "1.4"
+serial_test = "2.0.0"
 miraland-program-test = "1.14.18"
 miraland-sdk = "1.14.18"
 

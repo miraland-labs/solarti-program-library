@@ -9,52 +9,58 @@ homepage = "https://spl.miraland.top/token"
 license = "Apache-2.0"
 name = "solarti-token-cli"
 repository = "https://github.com/miraland-labs/solarti-program-library"
-version = "2.3.3"
+version = "3.3.0"
 
 [build-dependencies]
 walkdir = "2"
 
 [dependencies]
+base64 = "0.21.5"
 clap = "2.33.3"
-console = "0.15.0"
-indicatif = "0.16.2"
-serde = "1.0.130"
+console = "0.15.7"
+futures = "0.3"
+serde = "1.0.192"
 serde_derive = "1.0.103"
-serde_json = "1.0.68"
-miraland-account-decoder = "1.14.18"
-miraland-clap-utils = "1.14.18"
-miraland-cli-config = "1.14.18"
-miraland-cli-output = "1.14.18"
-miraland-client = "1.14.18"
-miraland-logger = "1.14.18"
-miraland-remote-wallet = "1.14.18"
-miraland-sdk = "1.14.18"
-miraland-transaction-status = "1.14.18"
-solarti-token = { version = "3.5", path="../program", features = [ "no-entrypoint" ] }
-solarti-token-2022 = { version = "0.6", path="../program-2022", features = [ "no-entrypoint" ] }
-solarti-token-client = { version = "0.4", path="../client" }
-solarti-associated-token-account = { version = "1.1", path="../../associated-token-account/program", features = [ "no-entrypoint" ] }
-solarti-memo = { version = "3.0", path="../../memo/program", features = ["no-entrypoint"] }
-strum = "0.24"
-strum_macros = "0.24"
-tokio = "1.14"
+serde_json = "1.0.108"
+miraland-account-decoder = "=1.14.18"
+miraland-clap-utils = "=1.14.18"
+miraland-cli-config = "=1.14.18"
+miraland-cli-output = "=1.14.18"
+miraland-client = "=1.14.18"
+miraland-logger = "=1.14.18"
+miraland-remote-wallet = "=1.14.18"
+miraland-sdk = "=1.14.18"
+miraland-transaction-status = "=1.14.18"
+solarti-token = { version = "4.0", path = "../program", features = [
+  "no-entrypoint",
+] }
+solarti-token-2022 = { version = "0.9", path = "../program-2022", features = [
+  "no-entrypoint",
+] }
+solarti-token-client = { version = "0.8", path = "../client" }
+solarti-token-metadata-interface = { version = "0.2", path = "../../token-metadata/interface" }
+solarti-associated-token-account = { version = "2.0", path = "../../associated-token-account/program", features = [
+  "no-entrypoint",
+] }
+solarti-memo = { version = "4.0.0", path = "../../memo/program", features = [
+  "no-entrypoint",
+] }
+strum = "0.25"
+strum_macros = "0.25"
+tokio = "1.34"
 
 [dev-dependencies]
-miraland-test-validator = "1.14.18"
-assert_cmd = "=2.0.4"
-predicates-tree = "=1.0.5"
-predicates-core = "=1.0.3"
-serial_test = "0.8.0"
-tempfile = "=3.6.0" # MI, 3.4.0 => =3.6.0
-# tonic = "=0.8.0" # MI, added
-# petgraph = "=0.6.3" # MI, added
-# # axum = "=0.6.18" # MI, added
-# axum = "=0.5.17" # MI, added
-# h2 = "=0.3.20" # MI, added
-# memchr = "=2.5.0" # MI, added
-# cc = "=1.0.79" # MI, added
-# flate2 = "=1.0.26" #MI, added
+miraland-test-validator = "=1.14.18"
+assert_cmd = "2.0.12"
+libtest-mimic = "0.6"
+serial_test = "2.0.0"
+tempfile = "3.8.1"
 
 [[bin]]
 name = "solarti-token"
 path = "src/main.rs"
+
+[[test]]
+name = "command"
+path = "tests/command.rs"
+harness = false

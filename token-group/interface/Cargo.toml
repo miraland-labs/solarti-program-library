@@ -1,0 +1,28 @@
+[package]
+name = "solarti-token-group-interface"
+version = "0.1.0"
+description = "Solarti Program Library Token Group Interface"
+authors = [
+  "Miraland Crafters <crafters@miraland.top>",
+  "Solana Labs Maintainers <maintainers@solanalabs.com>"
+]
+repository = "https://github.com/miraland-labs/solarti-program-library"
+license = "Apache-2.0"
+edition = "2021"
+
+[dependencies]
+bytemuck = "1.14.0"
+miraland-program = "1.14.18"
+solarti-discriminator = { version = "0.1.0" , path = "../../libraries/discriminator" }
+solarti-pod = { version = "0.1.0" , path = "../../libraries/pod", features = ["borsh"] }
+solarti-program-error = { version = "0.3.0" , path = "../../libraries/program-error" }
+
+[dev-dependencies]
+solarti-type-length-value = { version = "0.3.0", path = "../../libraries/type-length-value", features = ["derive"] }
+
+[lib]
+crate-type = ["cdylib", "lib"]
+name = "spl_token_group_interface"
+
+[package.metadata.docs.rs]
+targets = ["x86_64-unknown-linux-gnu"]

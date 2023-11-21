@@ -1,15 +1,18 @@
-use crate::{
-    output::{CliTokenAccount, CliTokenAccounts},
-    Error,
-};
-use serde::{Deserialize, Serialize};
-use miraland_account_decoder::{parse_token::TokenAccountType, UiAccountData};
-use miraland_client::rpc_response::RpcKeyedAccount;
-use solana_sdk::pubkey::Pubkey;
-use spl_associated_token_account::get_associated_token_address_with_program_id;
-use std::{
-    collections::{btree_map::Entry, BTreeMap},
-    str::FromStr,
+#![allow(clippy::arithmetic_side_effects)]
+use {
+    crate::{
+        clap_app::Error,
+        output::{CliTokenAccount, CliTokenAccounts},
+    },
+    serde::{Deserialize, Serialize},
+    miraland_account_decoder::{parse_token::TokenAccountType, UiAccountData},
+    miraland_client::rpc_response::RpcKeyedAccount,
+    solana_sdk::pubkey::Pubkey,
+    spl_associated_token_account::get_associated_token_address_with_program_id,
+    std::{
+        collections::{btree_map::Entry, BTreeMap},
+        str::FromStr,
+    },
 };
 
 #[derive(Serialize, Deserialize)]
@@ -108,10 +111,7 @@ pub(crate) fn sort_and_parse_token_accounts(
     }
 
     Ok(CliTokenAccounts {
-        accounts: cli_accounts
-            .into_iter()
-            .map(|(_key, accounts_list)| accounts_list)
-            .collect(),
+        accounts: cli_accounts.into_values().collect(),
         unsupported_accounts,
         max_len_balance,
         aux_len: if aux_count > 0 {

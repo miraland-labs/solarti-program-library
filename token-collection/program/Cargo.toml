@@ -1,0 +1,38 @@
+[package]
+name = "solarti-token-collection"
+version = "0.1.0"
+description = "Solarti Program Library Token Collection"
+authors = [
+  "Miraland Crafters <crafters@miraland.top>",
+  "Solana Labs Maintainers <maintainers@solanalabs.com>"
+]
+repository = "https://github.com/miraland-labs/solarti-program-library"
+license = "Apache-2.0"
+edition = "2021"
+
+[features]
+no-entrypoint = []
+test-sbf = []
+
+[dependencies]
+miraland-program = "1.14.18"
+solarti-pod = { version = "0.1.0", path = "../../libraries/pod" }
+solarti-program-error = { version = "0.3.0" , path = "../../libraries/program-error" }
+solarti-token-2022 = { version = "0.9.0", path = "../../token/program-2022", features = ["no-entrypoint"] }
+solarti-token-group-example = { version = "0.1.0", path = "../../token-group/example", features = ["no-entrypoint"] }
+solarti-token-group-interface = { version = "0.1.0", path = "../../token-group/interface" }
+solarti-token-metadata-interface = { version = "0.2", path = "../../token-metadata/interface" }
+solarti-type-length-value = { version = "0.3.0", path = "../../libraries/type-length-value" }
+
+[dev-dependencies]
+miraland-program-test = "1.14.18"
+miraland-sdk = "1.14.18"
+solarti-discriminator = { version = "0.1.0", path = "../../libraries/discriminator" }
+solarti-token-client = { version = "0.8", path = "../../token/client" }
+
+[lib]
+crate-type = ["cdylib", "lib"]
+name = "spl_token_collection"
+
+[package.metadata.docs.rs]
+targets = ["x86_64-unknown-linux-gnu"]

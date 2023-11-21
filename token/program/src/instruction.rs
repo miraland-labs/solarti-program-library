@@ -1,15 +1,16 @@
 //! Instruction types
 
-use crate::{check_program_account, error::TokenError};
-use solana_program::{
-    instruction::{AccountMeta, Instruction},
-    program_error::ProgramError,
-    program_option::COption,
-    pubkey::Pubkey,
-    sysvar,
+use {
+    crate::{check_program_account, error::TokenError},
+    solana_program::{
+        instruction::{AccountMeta, Instruction},
+        program_error::ProgramError,
+        program_option::COption,
+        pubkey::Pubkey,
+        sysvar,
+    },
+    std::{convert::TryInto, mem::size_of},
 };
-use std::convert::TryInto;
-use std::mem::size_of;
 
 /// Minimum number of multisignature signers (min N)
 pub const MIN_SIGNERS: usize = 1;
@@ -35,7 +36,6 @@ pub enum TokenInstruction<'a> {
     ///
     ///   0. `[writable]` The mint to initialize.
     ///   1. `[]` Rent sysvar
-    ///
     InitializeMint {
         /// Number of base 10 digits to the right of the decimal place.
         decimals: u8,
@@ -351,10 +351,10 @@ pub enum TokenInstruction<'a> {
         /// Expected number of base 10 digits to the right of the decimal place.
         decimals: u8,
     },
-    /// Like InitializeAccount, but the owner pubkey is passed via instruction data
-    /// rather than the accounts list. This variant may be preferable when using
-    /// Cross Program Invocation from an instruction that does not need the owner's
-    /// `AccountInfo` otherwise.
+    /// Like InitializeAccount, but the owner pubkey is passed via instruction
+    /// data rather than the accounts list. This variant may be preferable
+    /// when using Cross Program Invocation from an instruction that does
+    /// not need the owner's `AccountInfo` otherwise.
     ///
     /// Accounts expected by this instruction:
     ///
@@ -367,15 +367,17 @@ pub enum TokenInstruction<'a> {
     },
     /// Given a wrapped / native token account (a token account containing MLN)
     /// updates its amount field based on the account's underlying `lamports`.
-    /// This is useful if a non-wrapped MLN account uses `system_instruction::transfer`
-    /// to move lamports to a wrapped token account, and needs to have its token
-    /// `amount` field updated.
+    /// This is useful if a non-wrapped MLN account uses
+    /// `system_instruction::transfer` to move lamports to a wrapped token
+    /// account, and needs to have its token `amount` field updated.
     ///
     /// Accounts expected by this instruction:
     ///
-    ///   0. `[writable]`  The native token account to sync with its underlying lamports.
+    ///   0. `[writable]`  The native token account to sync with its underlying
+    ///      lamports.
     SyncNative,
-    /// Like InitializeAccount2, but does not require the Rent sysvar to be provided
+    /// Like InitializeAccount2, but does not require the Rent sysvar to be
+    /// provided
     ///
     /// Accounts expected by this instruction:
     ///
@@ -385,7 +387,8 @@ pub enum TokenInstruction<'a> {
         /// The new account's owner/multisignature.
         owner: Pubkey,
     },
-    /// Like InitializeMultisig, but does not require the Rent sysvar to be provided
+    /// Like InitializeMultisig, but does not require the Rent sysvar to be
+    /// provided
     ///
     /// Accounts expected by this instruction:
     ///
@@ -397,12 +400,12 @@ pub enum TokenInstruction<'a> {
         /// account.
         m: u8,
     },
-    /// Like InitializeMint, but does not require the Rent sysvar to be provided
+    /// Like [`InitializeMint`], but does not require the Rent sysvar to be
+    /// provided
     ///
     /// Accounts expected by this instruction:
     ///
     ///   0. `[writable]` The mint to initialize.
-    ///
     InitializeMint2 {
         /// Number of base 10 digits to the right of the decimal place.
         decimals: u8,
@@ -411,8 +414,8 @@ pub enum TokenInstruction<'a> {
         /// The freeze authority/multisignature of the mint.
         freeze_authority: COption<Pubkey>,
     },
-    /// Gets the required size of an account for the given mint as a little-endian
-    /// `u64`.
+    /// Gets the required size of an account for the given mint as a
+    /// little-endian `u64`.
     ///
     /// Return data can be fetched using `sol_get_return_data` and deserializing
     /// the return data as a little-endian `u64`.
@@ -423,8 +426,8 @@ pub enum TokenInstruction<'a> {
     GetAccountDataSize, // typically, there's also data, but this program ignores it
     /// Initialize the Immutable Owner extension for the given token account
     ///
-    /// Fails if the account has already been initialized, so must be called before
-    /// `InitializeAccount`.
+    /// Fails if the account has already been initialized, so must be called
+    /// before `InitializeAccount`.
     ///
     /// No-ops in this version of the program, but is included for compatibility
     /// with the Associated Token Account program.
@@ -436,13 +439,14 @@ pub enum TokenInstruction<'a> {
     /// Data expected by this instruction:
     ///   None
     InitializeImmutableOwner,
-    /// Convert an Amount of tokens to a UiAmount `string`, using the given mint.
-    /// In this version of the program, the mint can only specify the number of decimals.
+    /// Convert an Amount of tokens to a UiAmount `string`, using the given
+    /// mint. In this version of the program, the mint can only specify the
+    /// number of decimals.
     ///
     /// Fails on an invalid mint.
     ///
-    /// Return data can be fetched using `sol_get_return_data` and deserialized with
-    /// `String::from_utf8`.
+    /// Return data can be fetched using `sol_get_return_data` and deserialized
+    /// with `String::from_utf8`.
     ///
     /// Accounts expected by this instruction:
     ///
@@ -451,8 +455,9 @@ pub enum TokenInstruction<'a> {
         /// The amount of tokens to reformat.
         amount: u64,
     },
-    /// Convert a UiAmount of tokens to a little-endian `u64` raw Amount, using the given mint.
-    /// In this version of the program, the mint can only specify the number of decimals.
+    /// Convert a UiAmount of tokens to a little-endian `u64` raw Amount, using
+    /// the given mint. In this version of the program, the mint can only
+    /// specify the number of decimals.
     ///
     /// Return data can be fetched using `sol_get_return_data` and deserializing
     /// the return data as a little-endian `u64`.
@@ -469,7 +474,8 @@ pub enum TokenInstruction<'a> {
     // token/js/src/instructions/types.ts to maintain @solarti/solarti-token compatibility
 }
 impl<'a> TokenInstruction<'a> {
-    /// Unpacks a byte buffer into a [TokenInstruction](enum.TokenInstruction.html).
+    /// Unpacks a byte buffer into a
+    /// [TokenInstruction](enum.TokenInstruction.html).
     pub fn unpack(input: &'a [u8]) -> Result<Self, ProgramError> {
         use TokenError::InvalidInstruction;
 
@@ -487,7 +493,7 @@ impl<'a> TokenInstruction<'a> {
             }
             1 => Self::InitializeAccount,
             2 => {
-                let &m = rest.get(0).ok_or(InvalidInstruction)?;
+                let &m = rest.first().ok_or(InvalidInstruction)?;
                 Self::InitializeMultisig { m }
             }
             3 | 4 | 7 | 8 => {
@@ -546,7 +552,7 @@ impl<'a> TokenInstruction<'a> {
                 Self::InitializeAccount3 { owner }
             }
             19 => {
-                let &m = rest.get(0).ok_or(InvalidInstruction)?;
+                let &m = rest.first().ok_or(InvalidInstruction)?;
                 Self::InitializeMultisig2 { m }
             }
             20 => {
@@ -573,7 +579,8 @@ impl<'a> TokenInstruction<'a> {
         })
     }
 
-    /// Packs a [TokenInstruction](enum.TokenInstruction.html) into a byte buffer.
+    /// Packs a [TokenInstruction](enum.TokenInstruction.html) into a byte
+    /// buffer.
     pub fn pack(&self) -> Vec<u8> {
         let mut buf = Vec::with_capacity(size_of::<Self>());
         match self {
@@ -686,8 +693,8 @@ impl<'a> TokenInstruction<'a> {
     fn unpack_pubkey(input: &[u8]) -> Result<(Pubkey, &[u8]), ProgramError> {
         if input.len() >= 32 {
             let (key, rest) = input.split_at(32);
-            // let pk = Pubkey::new(key);
-            let pk = Pubkey::try_from(key).expect("Slice must be the same length as a Pubkey"); // MI
+            // let pk = Pubkey::try_from(key).expect("Slice must be the same length as a Pubkey"); // MI
+            let pk = Pubkey::try_from(key).map_err(|_| TokenError::InvalidInstruction)?;
             Ok((pk, rest))
         } else {
             Err(TokenError::InvalidInstruction.into())
@@ -699,8 +706,8 @@ impl<'a> TokenInstruction<'a> {
             Option::Some((&0, rest)) => Ok((COption::None, rest)),
             Option::Some((&1, rest)) if rest.len() >= 32 => {
                 let (key, rest) = rest.split_at(32);
-                // let pk = Pubkey::new(key);
-                let pk = Pubkey::try_from(key).expect("Slice must be the same length as a Pubkey"); // MI
+                // let pk = Pubkey::try_from(key).expect("Slice must be the same length as a Pubkey"); // MI
+                let pk = Pubkey::try_from(key).map_err(|_| TokenError::InvalidInstruction)?;
                 Ok((COption::Some(pk), rest))
             }
             _ => Err(TokenError::InvalidInstruction.into()),
@@ -1439,7 +1446,8 @@ mod test {
     fn test_instruction_packing() {
         let check = TokenInstruction::InitializeMint {
             decimals: 2,
-            mint_authority: Pubkey::from([1u8; 32]),
+            // mint_authority: Pubkey::from([1u8; 32]), // MI
+            mint_authority: Pubkey::new_from_array([1u8; 32]),
             freeze_authority: COption::None,
         };
         let packed = check.pack();
@@ -1452,8 +1460,10 @@ mod test {
 
         let check = TokenInstruction::InitializeMint {
             decimals: 2,
-            mint_authority: Pubkey::from([2u8; 32]),
-            freeze_authority: COption::Some(Pubkey::from([3u8; 32])),
+            // mint_authority: Pubkey::from([2u8; 32]),
+            // freeze_authority: COption::Some(Pubkey::from([3u8; 32])),
+            mint_authority: Pubkey::new_from_array([2u8; 32]),
+            freeze_authority: COption::Some(Pubkey::new_from_array([3u8; 32])),
         };
         let packed = check.pack();
         let mut expect = vec![0u8, 2];
@@ -1501,7 +1511,8 @@ mod test {
 
         let check = TokenInstruction::SetAuthority {
             authority_type: AuthorityType::FreezeAccount,
-            new_authority: COption::Some(Pubkey::from([4u8; 32])),
+            // new_authority: COption::Some(Pubkey::from([4u8; 32])),
+            new_authority: COption::Some(Pubkey::new_from_array([4u8; 32])),
         };
         let packed = check.pack();
         let mut expect = Vec::from([6u8, 1]);
@@ -1587,7 +1598,8 @@ mod test {
         assert_eq!(unpacked, check);
 
         let check = TokenInstruction::InitializeAccount2 {
-            owner: Pubkey::from([2u8; 32]),
+            // owner: Pubkey::from([2u8; 32]),
+            owner: Pubkey::new_from_array([2u8; 32]),
         };
         let packed = check.pack();
         let mut expect = vec![16u8];
@@ -1604,7 +1616,8 @@ mod test {
         assert_eq!(unpacked, check);
 
         let check = TokenInstruction::InitializeAccount3 {
-            owner: Pubkey::from([2u8; 32]),
+            // owner: Pubkey::from([2u8; 32]),
+            owner: Pubkey::new_from_array([2u8; 32]),
         };
         let packed = check.pack();
         let mut expect = vec![18u8];
@@ -1622,7 +1635,8 @@ mod test {
 
         let check = TokenInstruction::InitializeMint2 {
             decimals: 2,
-            mint_authority: Pubkey::from([1u8; 32]),
+            // mint_authority: Pubkey::from([1u8; 32]),
+            mint_authority: Pubkey::new_from_array([1u8; 32]),
             freeze_authority: COption::None,
         };
         let packed = check.pack();
@@ -1635,8 +1649,10 @@ mod test {
 
         let check = TokenInstruction::InitializeMint2 {
             decimals: 2,
-            mint_authority: Pubkey::from([2u8; 32]),
-            freeze_authority: COption::Some(Pubkey::from([3u8; 32])),
+            // mint_authority: Pubkey::from([2u8; 32]),
+            // freeze_authority: COption::Some(Pubkey::from([3u8; 32])),
+            mint_authority: Pubkey::new_from_array([2u8; 32]),
+            freeze_authority: COption::Some(Pubkey::new_from_array([3u8; 32])),
         };
         let packed = check.pack();
         let mut expect = vec![20u8, 2];

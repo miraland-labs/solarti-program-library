@@ -12,16 +12,25 @@ version = "0.4.5"
 
 [dependencies]
 async-trait = "0.1"
+curve25519-dalek = "3.2.1"
+futures = "0.3.29"
+futures-util = "0.3"
+miraland-banks-interface = "1.14.18"
 miraland-cli-output = {version = "1.14.18", optional = true }
 miraland-client = {version = "1.14.18"}
 miraland-program-test = {version = "1.14.18"}
+# miraland-rpc-client = "1.17.2"
+# miraland-rpc-client-api = "1.17.2"
 miraland-sdk = "1.14.18"
 # We never want the entrypoint for ATA, but we want the entrypoint for token when
 # testing token
-solarti-associated-token-account = { version = "1.1", path = "../../associated-token-account/program", features = ["no-entrypoint"] }
-solarti-memo = { version = "3.0", path = "../../memo/program", features = ["no-entrypoint"] }
-solarti-token = { version = "3.5", path="../program", features = [ "no-entrypoint" ] }
-solarti-token-2022 = { version = "0.6", path="../program-2022" }
+solarti-associated-token-account = { version = "2.0", path = "../../associated-token-account/program", features = ["no-entrypoint"] }
+solarti-memo = { version = "4.0.0", path = "../../memo/program", features = ["no-entrypoint"] }
+solarti-token = { version = "4.0", path="../program", features = [ "no-entrypoint" ] }
+solarti-token-2022 = { version = "0.9", path="../program-2022" }
+solarti-token-group-interface = { version = "0.1", path="../../token-group/interface" }
+solarti-token-metadata-interface = { version = "0.2", path="../../token-metadata/interface" }
+solarti-transfer-hook-interface = { version = "0.3", path="../transfer-hook/interface" }
 thiserror = "1.0"
 
 [features]
