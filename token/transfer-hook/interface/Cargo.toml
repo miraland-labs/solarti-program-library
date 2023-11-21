@@ -1,9 +1,12 @@
 [package]
 name = "solarti-transfer-hook-interface"
 version = "0.3.0"
-description = "Solana Program Library Transfer Hook Interface"
-authors = ["Solana Labs Maintainers <maintainers@solanalabs.com>"]
-repository = "https://github.com/solana-labs/solana-program-library"
+description = "Solarti Program Library Transfer Hook Interface"
+authors = [
+  "Miraland Crafters <crafters@miraland.top>",
+  "Solana Labs Maintainers <maintainers@solanalabs.com>"
+]
+repository = "https://github.com/miraland-labs/solarti-program-library"
 license = "Apache-2.0"
 edition = "2021"
 
