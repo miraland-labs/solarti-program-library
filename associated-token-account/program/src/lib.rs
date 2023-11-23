@@ -8,7 +8,8 @@ pub mod instruction;
 pub mod processor;
 pub mod tools;
 
-// Export current SDK types for downstream users building with a different SDK version
+// Export current SDK types for downstream users building with a different SDK
+// version
 pub use solana_program;
 use solana_program::{
     instruction::{AccountMeta, Instruction},
@@ -32,7 +33,8 @@ pub(crate) fn get_associated_token_address_and_bump_seed(
     )
 }
 
-/// Derives the associated token account address for the given wallet address and token mint
+/// Derives the associated token account address for the given wallet address
+/// and token mint
 pub fn get_associated_token_address(
     wallet_address: &Pubkey,
     token_mint_address: &Pubkey,
@@ -44,7 +46,8 @@ pub fn get_associated_token_address(
     )
 }
 
-/// Derives the associated token account address for the given wallet address, token mint and token program id
+/// Derives the associated token account address for the given wallet address,
+/// token mint and token program id
 pub fn get_associated_token_address_with_program_id(
     wallet_address: &Pubkey,
     token_mint_address: &Pubkey,
@@ -75,7 +78,8 @@ fn get_associated_token_address_and_bump_seed_internal(
     )
 }
 
-/// Create an associated token account for the given wallet address and token mint
+/// Create an associated token account for the given wallet address and token
+/// mint
 ///
 /// Accounts expected by this instruction:
 ///

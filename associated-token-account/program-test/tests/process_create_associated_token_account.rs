@@ -1,4 +1,5 @@
-// Mark this test as BPF-only due to current `ProgramTest` limitations when CPIing into the system program
+// Mark this test as BPF-only due to current `ProgramTest` limitations when
+// CPIing into the system program
 #![cfg(feature = "test-sbf")]
 
 mod program_test;
@@ -32,7 +33,8 @@ async fn test_associated_token_address() {
     let rent = banks_client.get_rent().await.unwrap();
 
     let expected_token_account_len =
-        ExtensionType::get_account_len::<Account>(&[ExtensionType::ImmutableOwner]);
+        ExtensionType::try_calculate_account_len::<Account>(&[ExtensionType::ImmutableOwner])
+            .unwrap();
     let expected_token_account_balance = rent.minimum_balance(expected_token_account_len);
 
     // Associated account does not exist
@@ -81,11 +83,12 @@ async fn test_create_with_fewer_lamports() {
         program_test_2022(token_mint_address, true).start().await;
     let rent = banks_client.get_rent().await.unwrap();
     let expected_token_account_len =
-        ExtensionType::get_account_len::<Account>(&[ExtensionType::ImmutableOwner]);
+        ExtensionType::try_calculate_account_len::<Account>(&[ExtensionType::ImmutableOwner])
+            .unwrap();
     let expected_token_account_balance = rent.minimum_balance(expected_token_account_len);
 
-    // Transfer lamports into `associated_token_address` before creating it - enough to be
-    // rent-exempt for 0 data, but not for an initialized token account
+    // Transfer lamports into `associated_token_address` before creating it - enough
+    // to be rent-exempt for 0 data, but not for an initialized token account
     let mut transaction = Transaction::new_with_payer(
         &[system_instruction::transfer(
             &payer.pubkey(),
@@ -142,7 +145,8 @@ async fn test_create_with_excess_lamports() {
     let rent = banks_client.get_rent().await.unwrap();
 
     let expected_token_account_len =
-        ExtensionType::get_account_len::<Account>(&[ExtensionType::ImmutableOwner]);
+        ExtensionType::try_calculate_account_len::<Account>(&[ExtensionType::ImmutableOwner])
+            .unwrap();
     let expected_token_account_balance = rent.minimum_balance(expected_token_account_len);
 
     // Transfer 1 lamport into `associated_token_address` before creating it
@@ -272,7 +276,8 @@ async fn test_create_associated_token_account_using_legacy_implicit_instruction(
         program_test_2022(token_mint_address, true).start().await;
     let rent = banks_client.get_rent().await.unwrap();
     let expected_token_account_len =
-        ExtensionType::get_account_len::<Account>(&[ExtensionType::ImmutableOwner]);
+        ExtensionType::try_calculate_account_len::<Account>(&[ExtensionType::ImmutableOwner])
+            .unwrap();
     let expected_token_account_balance = rent.minimum_balance(expected_token_account_len);
 
     // Associated account does not exist

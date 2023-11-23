@@ -13,6 +13,7 @@ pub fn program_test(token_mint_address: Pubkey, use_latest_spl_token: bool) -> P
     );
 
     if use_latest_spl_token {
+        pc.prefer_bpf(false);
         // TODO: Remove when solarti-token is available by default in program-test
         pc.add_program(
             "spl_token",
@@ -34,8 +35,9 @@ pub fn program_test(token_mint_address: Pubkey, use_latest_spl_token: bool) -> P
         "token-mint-data.bin",
     );
 
-    // Dial down the BPF compute budget to detect if the program gets bloated in the future
-    pc.set_compute_max_units(50_000);
+    // Dial down the BPF compute budget to detect if the program gets bloated in the
+    // future
+    pc.set_compute_max_units(60_000);
 
     pc
 }
@@ -52,6 +54,7 @@ pub fn program_test_2022(
     );
 
     if use_latest_spl_token_2022 {
+        pc.prefer_bpf(false);
         // TODO: Remove when solarti-token-2022 is available by default in program-test
         pc.add_program(
             "spl_token_2022",
@@ -73,7 +76,8 @@ pub fn program_test_2022(
         "token-mint-data.bin",
     );
 
-    // Dial down the BPF compute budget to detect if the program gets bloated in the future
+    // Dial down the BPF compute budget to detect if the program gets bloated in the
+    // future
     pc.set_compute_max_units(50_000);
 
     pc

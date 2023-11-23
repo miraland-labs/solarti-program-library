@@ -8,7 +8,7 @@ edition = "2021"
 license = "Apache-2.0"
 name = "solarti-token-client"
 repository = "https://github.com/miraland-labs/solarti-program-library"
-version = "0.4.5"
+version = "0.4.6"
 
 [dependencies]
 async-trait = "0.1"
