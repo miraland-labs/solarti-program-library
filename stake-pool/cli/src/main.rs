@@ -127,7 +127,7 @@ fn get_signer(
     matches: &ArgMatches<'_>,
     keypair_name: &str,
     keypair_path: &str,
-    wallet_manager: &mut Option<Arc<RemoteWalletManager>>,
+    wallet_manager: &mut Option<Rc<RemoteWalletManager>>,
     signer_from_path_config: SignerFromPathConfig,
 ) -> Box<dyn Signer> {
     signer_from_path_with_config(
