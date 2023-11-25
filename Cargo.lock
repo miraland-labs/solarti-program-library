@@ -5975,6 +5975,31 @@ dependencies = [
 ]
 
 [[package]]
+name = "solarti-feature-proposal"
+version = "1.0.4"
+dependencies = [
+ "borsh",
+ "miraland-program",
+ "miraland-program-test",
+ "miraland-sdk",
+ "solarti-token 4.0.0",
+]
+
+[[package]]
+name = "solarti-feature-proposal-cli"
+version = "1.2.4"
+dependencies = [
+ "chrono",
+ "clap 2.34.0",
+ "miraland-clap-utils",
+ "miraland-cli-config",
+ "miraland-client",
+ "miraland-logger",
+ "miraland-sdk",
+ "solarti-feature-proposal",
+]
+
+[[package]]
 name = "solarti-instruction-padding"
 version = "0.1.3"
 dependencies = [

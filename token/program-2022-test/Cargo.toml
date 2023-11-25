@@ -31,7 +31,7 @@ solarti-memo = { version = "4.0.0", path = "../../memo/program", features = ["no
 solarti-pod = { version = "0.1.0", path = "../../libraries/pod" }
 solarti-token-2022 = { version = "0.9", path="../program-2022", features = ["no-entrypoint"] }
 solarti-instruction-padding = { version = "0.1.0", path="../../instruction-padding/program", features = ["no-entrypoint"] }
-solarti-token-client = { version = "0.8", path = "../client" }
+solarti-token-client = { version = "0.4", path = "../client" }
 solarti-token-group-interface = { version = "0.1", path = "../../token-group/interface" }
 solarti-token-metadata-interface = { version = "0.2", path = "../../token-metadata/interface" }
 solarti-transfer-hook-example = { version = "0.3", path="../transfer-hook/example", features = ["no-entrypoint"] }
