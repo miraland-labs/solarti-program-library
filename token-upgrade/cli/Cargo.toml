@@ -15,7 +15,7 @@ walkdir = "2"
 
 [dependencies]
 clap = { version = "3", features = ["cargo"] }
-futures-util = "0.3.19"
+futures-util = "0.3.28"
 miraland-clap-v3-utils = "1.14.18"
 miraland-cli-config = "1.14.18"
 miraland-client = "1.14.18"

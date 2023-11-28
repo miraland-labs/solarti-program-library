@@ -1,6 +1,6 @@
 use {
     clap::{crate_description, crate_name, crate_version, Arg, Command},
-    miraland_clap_v3_utils::{
+    solana_clap_v3_utils::{
         input_parsers::pubkey_of,
         input_validators::{
             is_url_or_moniker, is_valid_pubkey, is_valid_signer, normalize_to_url_if_moniker,
@@ -9,8 +9,8 @@ use {
             signer_from_path, signer_from_path_with_config, DefaultSigner, SignerFromPathConfig,
         },
     },
-    miraland_client::nonblocking::rpc_client::RpcClient,
-    miraland_remote_wallet::remote_wallet::RemoteWalletManager,
+    solana_client::nonblocking::rpc_client::RpcClient,
+    solana_remote_wallet::remote_wallet::RemoteWalletManager,
     solana_sdk::{
         commitment_config::CommitmentConfig,
         message::Message,
@@ -215,7 +215,7 @@ async fn main() -> Result<(), Box<dyn Error>> {
                 .takes_value(true)
                 .global(true)
                 .help("Configuration file to use");
-            if let Some(ref config_file) = *miraland_cli_config::CONFIG_FILE {
+            if let Some(ref config_file) = *solana_cli_config::CONFIG_FILE {
                 arg.default_value(config_file)
             } else {
                 arg
@@ -344,13 +344,13 @@ async fn main() -> Result<(), Box<dyn Error>> {
         .get_matches();
 
     let (command, matches) = app_matches.subcommand().unwrap();
-    let mut wallet_manager: Option<Rc<RemoteWalletManager>> = None;
+    let mut wallet_manager: Option<Arc<RemoteWalletManager>> = None;
 
     let config = {
         let cli_config = if let Some(config_file) = matches.value_of("config_file") {
-            miraland_cli_config::Config::load(config_file).unwrap_or_default()
+            solana_cli_config::Config::load(config_file).unwrap_or_default()
         } else {
-            miraland_cli_config::Config::default()
+            solana_cli_config::Config::default()
         };
 
         let payer = DefaultSigner::new(
@@ -381,7 +381,7 @@ async fn main() -> Result<(), Box<dyn Error>> {
             verbose: matches.is_present("verbose"),
         }
     };
-    miraland_logger::setup_with_default("solana=info,miraland=info");
+    solana_logger::setup_with_default("solana=info");
 
     if config.verbose {
         println!("JSON RPC URL: {}", config.json_rpc_url);
@@ -495,41 +495,25 @@ async fn main() -> Result<(), Box<dyn Error>> {
 mod test {
     use {
         super::*,
-        solana_sdk::{bpf_loader, signer::keypair::Keypair},
-        miraland_test_validator::{ProgramInfo, TestValidator, TestValidatorGenesis},
-        spl_token_client::client::{ProgramClient, SendTransaction},
+        solana_sdk::{bpf_loader_upgradeable, signer::keypair::Keypair},
+        solana_test_validator::{TestValidator, TestValidatorGenesis, UpgradeableProgramInfo},
+        spl_token_client::client::{ProgramClient, SendTransaction, SimulateTransaction},
         std::path::PathBuf,
     };
 
     async fn new_validator_for_test() -> (TestValidator, Keypair) {
-        miraland_logger::setup();
+        solana_logger::setup();
         let mut test_validator_genesis = TestValidatorGenesis::default();
-        test_validator_genesis.add_programs_with_path(&[
-            ProgramInfo {
-                program_id: spl_token::id(),
-                loader: bpf_loader::id(),
-                program_path: PathBuf::from("../../target/deploy/spl_token.so"),
-            },
-            ProgramInfo {
-                program_id: spl_associated_token_account::id(),
-                loader: bpf_loader::id(),
-                program_path: PathBuf::from("../../target/deploy/spl_associated_token_account.so"),
-            },
-            ProgramInfo {
-                program_id: spl_token_2022::id(),
-                loader: bpf_loader::id(),
-                program_path: PathBuf::from("../../target/deploy/spl_token_2022.so"),
-            },
-            ProgramInfo {
-                program_id: spl_token_upgrade::id(),
-                loader: bpf_loader::id(),
-                program_path: PathBuf::from("../../target/deploy/spl_token_upgrade.so"),
-            },
-        ]);
+        test_validator_genesis.add_upgradeable_programs_with_path(&[UpgradeableProgramInfo {
+            program_id: spl_token_upgrade::id(),
+            loader: bpf_loader_upgradeable::id(),
+            program_path: PathBuf::from("../../target/deploy/spl_token_upgrade.so"),
+            upgrade_authority: Pubkey::new_unique(),
+        }]);
         test_validator_genesis.start_async().await
     }
 
-    async fn setup_mint<T: SendTransaction>(
+    async fn setup_mint<T: SendTransaction + SimulateTransaction>(
         program_id: &Pubkey,
         mint_authority: &Pubkey,
         decimals: u8,

@@ -1,12 +1,12 @@
 use {
     clap::{crate_description, crate_name, crate_version, Arg, Command},
-    solana_clap_v3_utils::{
+    miraland_clap_v3_utils::{
         input_parsers::{parse_url_or_moniker, pubkey_of_signer},
         input_validators::{is_valid_pubkey, is_valid_signer, normalize_to_url_if_moniker},
         keypair::DefaultSigner,
     },
-    solana_client::nonblocking::rpc_client::RpcClient,
-    solana_remote_wallet::remote_wallet::RemoteWalletManager,
+    miraland_client::nonblocking::rpc_client::RpcClient,
+    miraland_remote_wallet::remote_wallet::RemoteWalletManager,
     solana_sdk::{
         commitment_config::CommitmentConfig,
         instruction::AccountMeta,
@@ -142,7 +142,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
                 .takes_value(true)
                 .global(true)
                 .help("Configuration file to use");
-            if let Some(ref config_file) = *solana_cli_config::CONFIG_FILE {
+            if let Some(ref config_file) = *miraland_cli_config::CONFIG_FILE {
                 arg.default_value(config_file)
             } else {
                 arg
@@ -223,9 +223,9 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let mut wallet_manager: Option<Rc<RemoteWalletManager>> = None;
 
     let cli_config = if let Some(config_file) = matches.value_of("config_file") {
-        solana_cli_config::Config::load(config_file).unwrap_or_default()
+        miraland_cli_config::Config::load(config_file).unwrap_or_default()
     } else {
-        solana_cli_config::Config::default()
+        miraland_cli_config::Config::default()
     };
 
     let config = {
@@ -255,7 +255,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
             verbose: matches.is_present("verbose"),
         }
     };
-    solana_logger::setup_with_default("solana=info");
+    miraland_logger::setup_with_default("solana=info,miraland=info");
 
     if config.verbose {
         println!("JSON RPC URL: {}", config.json_rpc_url);
@@ -326,7 +326,7 @@ mod test {
     };
 
     async fn new_validator_for_test(program_id: Pubkey) -> (TestValidator, Keypair) {
-        solana_logger::setup();
+        miraland_logger::setup();
         let mut test_validator_genesis = TestValidatorGenesis::default();
         test_validator_genesis.add_upgradeable_programs_with_path(&[UpgradeableProgramInfo {
             program_id,
