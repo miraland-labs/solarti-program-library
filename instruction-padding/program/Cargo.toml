@@ -16,7 +16,7 @@ no-entrypoint = []
 test-sbf = []
 
 [dependencies]
-num_enum = "0.5.9"
+num_enum = "0.7.1"
 miraland-program = "1.14.18"
 
 [dev-dependencies]

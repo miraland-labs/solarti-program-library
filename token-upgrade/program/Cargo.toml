@@ -17,7 +17,7 @@ test-sbf = []
 [dependencies]
 num-derive = "0.4"
 num-traits = "0.2"
-num_enum = "0.7.0"
+num_enum = "0.7.1"
 miraland-program = "1.14.18"
 solarti-token-2022 = { version = "0.9", path = "../../token/program-2022", features = ["no-entrypoint"] }
 thiserror = "1.0"
