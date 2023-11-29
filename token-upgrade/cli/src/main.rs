@@ -1,10 +1,8 @@
 use {
     clap::{crate_description, crate_name, crate_version, Arg, Command},
     miraland_clap_v3_utils::{
-        input_parsers::pubkey_of,
-        input_validators::{
-            is_url_or_moniker, is_valid_pubkey, is_valid_signer, normalize_to_url_if_moniker,
-        },
+        input_parsers::{parse_url_or_moniker, pubkey_of},
+        input_validators::{is_valid_pubkey, is_valid_signer, normalize_to_url_if_moniker},
         keypair::{
             signer_from_path, signer_from_path_with_config, DefaultSigner, SignerFromPathConfig,
         },
@@ -29,7 +27,7 @@ use {
         token::Token,
     },
     spl_token_upgrade::{get_token_upgrade_authority_address, instruction::exchange},
-    std::{error::Error, process::exit, sync::Arc},
+    std::{error::Error, process::exit, rc::Rc, sync::Arc},
 };
 
 struct Config {
@@ -245,7 +243,7 @@ async fn main() -> Result<(), Box<dyn Error>> {
                 .value_name("URL")
                 .takes_value(true)
                 .global(true)
-                .validator(|s| is_url_or_moniker(s))
+                .value_parser(parse_url_or_moniker)
                 .help("JSON RPC URL for the cluster [default: value from configuration file]"),
         )
         .subcommand(
@@ -363,7 +361,7 @@ async fn main() -> Result<(), Box<dyn Error>> {
 
         let json_rpc_url = normalize_to_url_if_moniker(
             matches
-                .value_of("json_rpc_url")
+                .get_one::<String>("json_rpc_url")
                 .unwrap_or(&cli_config.json_rpc_url),
         );
 
@@ -495,41 +493,25 @@ async fn main() -> Result<(), Box<dyn Error>> {
 mod test {
     use {
         super::*,
-        solana_sdk::{bpf_loader, signer::keypair::Keypair},
-        miraland_test_validator::{ProgramInfo, TestValidator, TestValidatorGenesis},
-        spl_token_client::client::{ProgramClient, SendTransaction},
+        solana_sdk::{bpf_loader_upgradeable, signer::keypair::Keypair},
+        miraland_test_validator::{TestValidator, TestValidatorGenesis, UpgradeableProgramInfo},
+        spl_token_client::client::{ProgramClient, SendTransaction, SimulateTransaction},
         std::path::PathBuf,
     };
 
     async fn new_validator_for_test() -> (TestValidator, Keypair) {
         miraland_logger::setup();
         let mut test_validator_genesis = TestValidatorGenesis::default();
-        test_validator_genesis.add_programs_with_path(&[
-            ProgramInfo {
-                program_id: spl_token::id(),
-                loader: bpf_loader::id(),
-                program_path: PathBuf::from("../../target/deploy/spl_token.so"),
-            },
-            ProgramInfo {
-                program_id: spl_associated_token_account::id(),
-                loader: bpf_loader::id(),
-                program_path: PathBuf::from("../../target/deploy/spl_associated_token_account.so"),
-            },
-            ProgramInfo {
-                program_id: spl_token_2022::id(),
-                loader: bpf_loader::id(),
-                program_path: PathBuf::from("../../target/deploy/spl_token_2022.so"),
-            },
-            ProgramInfo {
-                program_id: spl_token_upgrade::id(),
-                loader: bpf_loader::id(),
-                program_path: PathBuf::from("../../target/deploy/spl_token_upgrade.so"),
-            },
-        ]);
+        test_validator_genesis.add_upgradeable_programs_with_path(&[UpgradeableProgramInfo {
+            program_id: spl_token_upgrade::id(),
+            loader: bpf_loader_upgradeable::id(),
+            program_path: PathBuf::from("../../target/deploy/spl_token_upgrade.so"),
+            upgrade_authority: Pubkey::new_unique(),
+        }]);
         test_validator_genesis.start_async().await
     }
 
-    async fn setup_mint<T: SendTransaction>(
+    async fn setup_mint<T: SendTransaction + SimulateTransaction>(
         program_id: &Pubkey,
         mint_authority: &Pubkey,
         decimals: u8,
@@ -582,17 +564,15 @@ mod test {
         .await;
 
         let account_keypair = Keypair::new();
-        assert!(matches!(
-            process_create_escrow_account(
-                &rpc_client,
-                &payer,
-                original_token.get_address(),
-                new_token.get_address(),
-                Some(&account_keypair)
-            )
-            .await,
-            Ok(_)
-        ));
+        assert!(process_create_escrow_account(
+            &rpc_client,
+            &payer,
+            original_token.get_address(),
+            new_token.get_address(),
+            Some(&account_keypair)
+        )
+        .await
+        .is_ok());
         let escrow_authority = get_token_upgrade_authority_address(
             original_token.get_address(),
             new_token.get_address(),
@@ -605,17 +585,15 @@ mod test {
         assert_eq!(escrow.base.owner, escrow_authority);
         assert_eq!(&escrow.base.mint, new_token.get_address());
 
-        assert!(matches!(
-            process_create_escrow_account(
-                &rpc_client,
-                &payer,
-                original_token.get_address(),
-                new_token.get_address(),
-                None
-            )
-            .await,
-            Ok(_)
-        ));
+        assert!(process_create_escrow_account(
+            &rpc_client,
+            &payer,
+            original_token.get_address(),
+            new_token.get_address(),
+            None
+        )
+        .await
+        .is_ok());
         let escrow = new_token
             .get_account_info(&new_token.get_associated_token_address(&escrow_authority))
             .await

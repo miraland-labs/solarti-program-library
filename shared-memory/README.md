@@ -1,11 +1,11 @@
 # Shared memory program
 
-A shared-memory program on the Solana blockchain, usable for sharing data
+A shared-memory program on the Miraland blockchain, usable for sharing data
 between programs or within cross-program invocations.
 
-Full documentation is available at https://spl.solana.com/shared-memory
+Full documentation is available at https://spl.miraland.top/shared-memory
 
 ## Audit
 
-The repository [README](https://github.com/solana-labs/solana-program-library#audits)
+The repository [README](https://github.com/miraland-labs/solarti-program-library#audits)
 contains information about program audits.

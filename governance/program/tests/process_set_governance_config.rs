@@ -2,15 +2,16 @@
 
 mod program_test;
 
-use program_test::*;
-use solana_program_test::tokio;
-use solana_sdk::{signature::Keypair, signer::Signer};
-use spl_governance::{
-    error::GovernanceError, instruction::set_governance_config, state::enums::VoteThreshold,
+use {
+    program_test::*,
+    solana_program_test::tokio,
+    solana_sdk::{signature::Keypair, signer::Signer},
+    spl_governance::{
+        error::GovernanceError, instruction::set_governance_config, state::enums::VoteThreshold,
+    },
+    spl_governance_test_sdk::tools::ProgramInstructionError,
+    spl_governance_tools::error::GovernanceToolsError,
 };
-use spl_governance_test_sdk::tools::ProgramInstructionError;
-
-use spl_governance_tools::error::GovernanceToolsError;
 
 #[tokio::test]
 async fn test_set_governance_config() {
@@ -40,7 +41,11 @@ async fn test_set_governance_config() {
         .unwrap();
 
     let signatory_record_cookie = governance_test
-        .with_signatory(&proposal_cookie, &token_owner_record_cookie)
+        .with_signatory(
+            &proposal_cookie,
+            &governance_cookie,
+            &token_owner_record_cookie,
+        )
         .await
         .unwrap();
 
@@ -132,7 +137,8 @@ async fn test_set_governance_config_with_fake_governance_signer_error() {
         new_governance_config.clone(),
     );
 
-    // Set Governance signer to fake account we have authority over and can use to sign the transaction
+    // Set Governance signer to fake account we have authority over and can use to
+    // sign the transaction
     let governance_signer = Keypair::new();
     set_governance_config_ix.accounts[0].pubkey = governance_signer.pubkey();
 
@@ -176,11 +182,16 @@ async fn test_set_governance_config_with_invalid_governance_authority_error() {
         .unwrap();
 
     let signatory_record_cookie = governance_test
-        .with_signatory(&proposal_cookie, &token_owner_record_cookie)
+        .with_signatory(
+            &proposal_cookie,
+            &governance_cookie,
+            &token_owner_record_cookie,
+        )
         .await
         .unwrap();
 
-    // Try to maliciously use a different governance account to change the given governance config
+    // Try to maliciously use a different governance account to change the given
+    // governance config
     let governed_account_cookie2 = governance_test.with_governed_account().await;
 
     let governance_cookie2 = governance_test

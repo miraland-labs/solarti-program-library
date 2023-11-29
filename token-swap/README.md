@@ -1,20 +1,20 @@
 # Token Swap Program
 
-A Uniswap-like exchange for the Token program on the Solana blockchain.
+A Uniswap-like exchange for the Token program on the Miraland blockchain.
 
-Full documentation is available at https://spl.solana.com/token-swap
+Full documentation is available at https://spl.miraland.top/token-swap
 
 JavaScript bindings are available in the `./js` directory.
 
 ## Audit
 
-The repository [README](https://github.com/solana-labs/solana-program-library#audits)
+The repository [README](https://github.com/miraland-labs/solarti-program-library#audits)
 contains information about program audits.
 
 ## Building master
 
 To build a development version of the Token Swap program, you can use the normal
-build command for Solana programs:
+build command for Miraland programs:
 
 ```sh
 cargo build-sbf
@@ -58,8 +58,8 @@ exact problem.
 ### Integration tests
 
 You can test the JavaScript bindings and on-chain interactions using
-`solana-test-validator`, included in the Solana Tool Suite.  See the
-[CLI installation instructions](https://docs.solana.com/cli/install-solana-cli-tools).
+`miraland-test-validator`, included in the Miraland Tool Suite.  See the
+[CLI installation instructions](https://docs.miraland.top/cli/install-miraland-cli-tools).
 
 From `./js`, install the required modules:
 

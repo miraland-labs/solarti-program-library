@@ -1857,7 +1857,7 @@ where
         .await
     }
 
-    /// Deposit SPL Tokens into the pending balance of a confidential token
+    /// Deposit Solarti Tokens into the pending balance of a confidential token
     /// account
     pub async fn confidential_transfer_deposit<S: Signers>(
         &self,
@@ -1885,7 +1885,7 @@ where
         .await
     }
 
-    /// Withdraw SPL Tokens from the available balance of a confidential token
+    /// Withdraw Solarti Tokens from the available balance of a confidential token
     /// account
     #[allow(clippy::too_many_arguments)]
     pub async fn confidential_transfer_withdraw<S: Signers>(

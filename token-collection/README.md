@@ -1,6 +1,6 @@
-# SPL Token Collection
+# Solarti Token Collection
 
-This program serves as a reference implementation for using the SPL Token Group
+This program serves as a reference implementation for using the Solarti Token Group
 interface to create an on-chain program for managing token collections - such
 as NFT Collections.
 
@@ -15,7 +15,7 @@ following:
 
 - Group tokens must be NFTs (0 decimals, 1 supply)
 - Group tokens must have metadata
-- Member tokens can be any SPL token, but must have metadata
+- Member tokens can be any Solarti token, but must have metadata
 - Member tokens can be part of multiple collections
 
 ## Demonstration

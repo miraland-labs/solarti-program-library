@@ -1,21 +1,20 @@
 #![cfg(feature = "test-sbf")]
-use std::str::FromStr;
-
-use solana_program::{instruction::Instruction, program_pack::Pack, pubkey::Pubkey};
-use solana_program_test::{
-    processor, tokio, ProgramTest, ProgramTestBanksClientExt, ProgramTestContext,
-};
-
-use solana_program::hash::hashv;
-use solana_sdk::{
-    signature::{Keypair, Signer},
-    transaction::Transaction,
-    transport::TransportError,
-};
-use spl_name_service::{
-    instruction::{create, delete, realloc, transfer, update, NameRegistryInstruction},
-    processor::Processor,
-    state::{get_seeds_and_key, NameRecordHeader, HASH_PREFIX},
+use {
+    solana_program::{hash::hashv, instruction::Instruction, program_pack::Pack, pubkey::Pubkey},
+    solana_program_test::{
+        processor, tokio, ProgramTest, ProgramTestBanksClientExt, ProgramTestContext,
+    },
+    solana_sdk::{
+        signature::{Keypair, Signer},
+        transaction::Transaction,
+        transport::TransportError,
+    },
+    spl_name_service::{
+        instruction::{create, delete, realloc, transfer, update, NameRegistryInstruction},
+        processor::Processor,
+        state::{get_seeds_and_key, NameRecordHeader, HASH_PREFIX},
+    },
+    std::str::FromStr,
 };
 
 #[tokio::test]
@@ -31,7 +30,7 @@ async fn test_name_service() {
 
     let mut ctx = program_test.start_with_context().await;
 
-    let root_name = ".sol";
+    let root_name = ".mln";
     let tld_class = Keypair::new();
     let owner = Keypair::new();
 
@@ -78,7 +77,7 @@ async fn test_name_service() {
     println!("Name Record Header: {:?}", name_record_header);
 
     let name = "bonfida";
-    let sol_subdomains_class = Keypair::new();
+    let mln_subdomains_class = Keypair::new();
 
     let hashed_name: Vec<u8> = hashv(&[(HASH_PREFIX.to_owned() + name).as_bytes()])
         .as_ref()
@@ -86,7 +85,7 @@ async fn test_name_service() {
     let (name_account_key, _) = get_seeds_and_key(
         &program_id,
         hashed_name.clone(),
-        Some(&sol_subdomains_class.pubkey()),
+        Some(&mln_subdomains_class.pubkey()),
         Some(&root_name_account_key),
     );
 
@@ -100,7 +99,7 @@ async fn test_name_service() {
         name_account_key,
         ctx.payer.pubkey(),
         owner.pubkey(),
-        Some(sol_subdomains_class.pubkey()),
+        Some(mln_subdomains_class.pubkey()),
         Some(root_name_account_key),
         Some(owner.pubkey()),
     )
@@ -108,7 +107,7 @@ async fn test_name_service() {
     sign_send_instruction(
         &mut ctx,
         create_name_instruction,
-        vec![&sol_subdomains_class, &owner],
+        vec![&mln_subdomains_class, &owner],
     )
     .await
     .unwrap();
@@ -123,7 +122,7 @@ async fn test_name_service() {
     )
     .unwrap();
     println!("Name Record Header: {:?}", name_record_header);
-    println!("SOl class {:?}", sol_subdomains_class.pubkey());
+    println!("Mln class {:?}", mln_subdomains_class.pubkey());
 
     let data = "@Dudl".as_bytes().to_vec();
     let update_instruction = update(
@@ -131,11 +130,11 @@ async fn test_name_service() {
         0,
         data,
         name_account_key,
-        sol_subdomains_class.pubkey(),
+        mln_subdomains_class.pubkey(),
         Some(name_record_header.parent_name),
     )
     .unwrap();
-    sign_send_instruction(&mut ctx, update_instruction, vec![&sol_subdomains_class])
+    sign_send_instruction(&mut ctx, update_instruction, vec![&mln_subdomains_class])
         .await
         .unwrap();
 
@@ -155,13 +154,13 @@ async fn test_name_service() {
         ctx.payer.pubkey(),
         name_account_key,
         owner.pubkey(),
-        Some(sol_subdomains_class.pubkey()),
+        Some(mln_subdomains_class.pubkey()),
     )
     .unwrap();
     sign_send_instruction(
         &mut ctx,
         transfer_instruction,
-        vec![&owner, &sol_subdomains_class],
+        vec![&owner, &mln_subdomains_class],
     )
     .await
     .unwrap();
@@ -183,7 +182,7 @@ async fn test_name_service() {
         space as u32,
         data,
         name_account_key,
-        sol_subdomains_class.pubkey(),
+        mln_subdomains_class.pubkey(),
         Some(name_record_header.parent_name),
     )
     .unwrap();
@@ -191,7 +190,7 @@ async fn test_name_service() {
     sign_send_instruction(
         &mut ctx,
         update_instruction.clone(),
-        vec![&sol_subdomains_class],
+        vec![&mln_subdomains_class],
     )
     .await
     .unwrap_err();
@@ -221,7 +220,7 @@ async fn test_name_service() {
         .unwrap();
 
     // resend update ix. Should succeed this time.
-    sign_send_instruction(&mut ctx, update_instruction, vec![&sol_subdomains_class])
+    sign_send_instruction(&mut ctx, update_instruction, vec![&mln_subdomains_class])
         .await
         .unwrap();
 

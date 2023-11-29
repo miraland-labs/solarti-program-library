@@ -1,23 +1,26 @@
-use super::*;
-use crate::{
-    error::LendingError,
-    math::{Decimal, Rate, TryAdd, TryDiv, TryMul, TrySub},
-};
-use arrayref::{array_mut_ref, array_ref, array_refs, mut_array_refs};
-use solana_program::{
-    clock::Slot,
-    entrypoint::ProgramResult,
-    msg,
-    program_error::ProgramError,
-    program_pack::{IsInitialized, Pack, Sealed},
-    pubkey::{Pubkey, PUBKEY_BYTES},
-};
-use std::{
-    cmp::Ordering,
-    convert::{TryFrom, TryInto},
+use {
+    super::*,
+    crate::{
+        error::LendingError,
+        math::{Decimal, Rate, TryAdd, TryDiv, TryMul, TrySub},
+    },
+    arrayref::{array_mut_ref, array_ref, array_refs, mut_array_refs},
+    solana_program::{
+        clock::Slot,
+        entrypoint::ProgramResult,
+        msg,
+        program_error::ProgramError,
+        program_pack::{IsInitialized, Pack, Sealed},
+        pubkey::{Pubkey, PUBKEY_BYTES},
+    },
+    std::{
+        cmp::Ordering,
+        convert::{TryFrom, TryInto},
+    },
 };
 
-/// Max number of collateral and liquidity reserve accounts combined for an obligation
+/// Max number of collateral and liquidity reserve accounts combined for an
+/// obligation
 pub const MAX_OBLIGATION_RESERVES: usize = 10;
 
 /// Lending market obligation state
@@ -31,7 +34,8 @@ pub struct Obligation {
     pub lending_market: Pubkey,
     /// Owner authority which can borrow liquidity
     pub owner: Pubkey,
-    /// Deposited collateral for the obligation, unique by deposit reserve address
+    /// Deposited collateral for the obligation, unique by deposit reserve
+    /// address
     pub deposits: Vec<ObligationCollateral>,
     /// Borrowed liquidity for the obligation, unique by borrow reserve address
     pub borrows: Vec<ObligationLiquidity>,
@@ -215,7 +219,8 @@ pub struct InitObligationParams {
     pub lending_market: Pubkey,
     /// Owner authority which can borrow liquidity
     pub owner: Pubkey,
-    /// Deposited collateral for the obligation, unique by deposit reserve address
+    /// Deposited collateral for the obligation, unique by deposit reserve
+    /// address
     pub deposits: Vec<ObligationCollateral>,
     /// Borrowed liquidity for the obligation, unique by borrow reserve address
     pub borrows: Vec<ObligationLiquidity>,
@@ -411,7 +416,8 @@ impl Pack for Obligation {
         }
     }
 
-    /// Unpacks a byte buffer into an [ObligationInfo](struct.ObligationInfo.html).
+    /// Unpacks a byte buffer into an
+    /// [ObligationInfo](struct.ObligationInfo.html).
     fn unpack_from_slice(src: &[u8]) -> Result<Self, ProgramError> {
         let input = array_ref![src, 0, OBLIGATION_LEN];
         #[allow(clippy::ptr_offset_with_cast)]
@@ -462,7 +468,7 @@ impl Pack for Obligation {
             let (deposit_reserve, deposited_amount, market_value) =
                 array_refs![deposits_flat, PUBKEY_BYTES, 8, 16];
             deposits.push(ObligationCollateral {
-                deposit_reserve: Pubkey::new(deposit_reserve),
+                deposit_reserve: Pubkey::new_from_array(*deposit_reserve),
                 deposited_amount: u64::from_le_bytes(*deposited_amount),
                 market_value: unpack_decimal(market_value),
             });
@@ -474,7 +480,7 @@ impl Pack for Obligation {
             let (borrow_reserve, cumulative_borrow_rate_wads, borrowed_amount_wads, market_value) =
                 array_refs![borrows_flat, PUBKEY_BYTES, 16, 16, 16];
             borrows.push(ObligationLiquidity {
-                borrow_reserve: Pubkey::new(borrow_reserve),
+                borrow_reserve: Pubkey::new_from_array(*borrow_reserve),
                 cumulative_borrow_rate_wads: unpack_decimal(cumulative_borrow_rate_wads),
                 borrowed_amount_wads: unpack_decimal(borrowed_amount_wads),
                 market_value: unpack_decimal(market_value),
@@ -502,9 +508,7 @@ impl Pack for Obligation {
 
 #[cfg(test)]
 mod test {
-    use super::*;
-    use crate::math::TryAdd;
-    use proptest::prelude::*;
+    use {super::*, crate::math::TryAdd, proptest::prelude::*};
 
     const MAX_COMPOUNDED_INTEREST: u64 = 100; // 10,000%
 

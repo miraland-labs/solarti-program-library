@@ -1,20 +1,22 @@
-#![allow(clippy::integer_arithmetic)]
+#![allow(clippy::arithmetic_side_effects)]
 #![cfg(feature = "test-sbf")]
 
 mod helpers;
 
-use helpers::*;
-use solana_program_test::*;
-use solana_sdk::{
-    instruction::InstructionError,
-    signature::{Keypair, Signer},
-    transaction::{Transaction, TransactionError},
-};
-use spl_token_lending::{
-    error::LendingError,
-    instruction::init_reserve,
-    processor::process_instruction,
-    state::{ReserveFees, INITIAL_COLLATERAL_RATIO},
+use {
+    helpers::*,
+    solana_program_test::*,
+    solana_sdk::{
+        instruction::InstructionError,
+        signature::{Keypair, Signer},
+        transaction::{Transaction, TransactionError},
+    },
+    spl_token_lending::{
+        error::LendingError,
+        instruction::init_reserve,
+        processor::process_instruction,
+        state::{ReserveFees, INITIAL_COLLATERAL_RATIO},
+    },
 };
 
 #[tokio::test]
@@ -30,13 +32,13 @@ async fn test_success() {
 
     let user_accounts_owner = Keypair::new();
     let lending_market = add_lending_market(&mut test);
-    let sol_oracle = add_sol_oracle(&mut test);
+    let mln_oracle = add_mln_oracle(&mut test);
 
     let (mut banks_client, payer, _recent_blockhash) = test.start().await;
 
     const RESERVE_AMOUNT: u64 = 42;
 
-    let sol_user_liquidity_account = create_and_mint_to_token_account(
+    let mln_user_liquidity_account = create_and_mint_to_token_account(
         &mut banks_client,
         spl_token::native_mint::id(),
         None,
@@ -46,33 +48,33 @@ async fn test_success() {
     )
     .await;
 
-    let sol_reserve = TestReserve::init(
-        "sol".to_owned(),
+    let mln_reserve = TestReserve::init(
+        "mln".to_owned(),
         &mut banks_client,
         &lending_market,
-        &sol_oracle,
+        &mln_oracle,
         RESERVE_AMOUNT,
         TEST_RESERVE_CONFIG,
         spl_token::native_mint::id(),
-        sol_user_liquidity_account,
+        mln_user_liquidity_account,
         &payer,
         &user_accounts_owner,
     )
     .await
     .unwrap();
 
-    sol_reserve.validate_state(&mut banks_client).await;
+    mln_reserve.validate_state(&mut banks_client).await;
 
-    let sol_liquidity_supply =
-        get_token_balance(&mut banks_client, sol_reserve.liquidity_supply_pubkey).await;
-    assert_eq!(sol_liquidity_supply, RESERVE_AMOUNT);
-    let user_sol_balance =
-        get_token_balance(&mut banks_client, sol_reserve.user_liquidity_pubkey).await;
-    assert_eq!(user_sol_balance, 0);
-    let user_sol_collateral_balance =
-        get_token_balance(&mut banks_client, sol_reserve.user_collateral_pubkey).await;
+    let mln_liquidity_supply =
+        get_token_balance(&mut banks_client, mln_reserve.liquidity_supply_pubkey).await;
+    assert_eq!(mln_liquidity_supply, RESERVE_AMOUNT);
+    let user_mln_balance =
+        get_token_balance(&mut banks_client, mln_reserve.user_liquidity_pubkey).await;
+    assert_eq!(user_mln_balance, 0);
+    let user_mln_collateral_balance =
+        get_token_balance(&mut banks_client, mln_reserve.user_collateral_pubkey).await;
     assert_eq!(
-        user_sol_collateral_balance,
+        user_mln_collateral_balance,
         RESERVE_AMOUNT * INITIAL_COLLATERAL_RATIO
     );
 }
@@ -155,13 +157,13 @@ async fn test_invalid_fees() {
 
     let user_accounts_owner = Keypair::new();
     let lending_market = add_lending_market(&mut test);
-    let sol_oracle = add_sol_oracle(&mut test);
+    let mln_oracle = add_mln_oracle(&mut test);
 
     let (mut banks_client, payer, _recent_blockhash) = test.start().await;
 
     const RESERVE_AMOUNT: u64 = 42;
 
-    let sol_user_liquidity_account = create_and_mint_to_token_account(
+    let mln_user_liquidity_account = create_and_mint_to_token_account(
         &mut banks_client,
         spl_token::native_mint::id(),
         None,
@@ -182,14 +184,14 @@ async fn test_invalid_fees() {
 
         assert_eq!(
             TestReserve::init(
-                "sol".to_owned(),
+                "mln".to_owned(),
                 &mut banks_client,
                 &lending_market,
-                &sol_oracle,
+                &mln_oracle,
                 RESERVE_AMOUNT,
                 config,
                 spl_token::native_mint::id(),
-                sol_user_liquidity_account,
+                mln_user_liquidity_account,
                 &payer,
                 &user_accounts_owner,
             )
@@ -213,14 +215,14 @@ async fn test_invalid_fees() {
 
         assert_eq!(
             TestReserve::init(
-                "sol".to_owned(),
+                "mln".to_owned(),
                 &mut banks_client,
                 &lending_market,
-                &sol_oracle,
+                &mln_oracle,
                 RESERVE_AMOUNT,
                 config,
                 spl_token::native_mint::id(),
-                sol_user_liquidity_account,
+                mln_user_liquidity_account,
                 &payer,
                 &user_accounts_owner,
             )

@@ -6,7 +6,7 @@ on:
     - 'docs/**'
     - '.github/workflows/pull-request-docs.yml'
   push:
-    branches: [master]
+    branches: [main]
     paths:
     - 'docs/**'
     - '.github/workflows/pull-request-docs.yml'

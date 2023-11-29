@@ -17,7 +17,7 @@ borsh = ["dep:borsh"]
 borsh = { version = "0.10.3", optional = true }
 bytemuck = { version = "1.14.0", features = ["derive"] }
 miraland-program = "1.14.18"
-solarti-discriminator-derive = { version = "0.1.0", path = "./derive" }
+solarti-discriminator-derive = { version = "0.1.4", path = "./derive" }
 
 [lib]
 crate-type = ["cdylib", "lib"]

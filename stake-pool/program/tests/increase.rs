@@ -1,4 +1,5 @@
-#![allow(clippy::integer_arithmetic)]
+#![allow(clippy::arithmetic_side_effects)]
+#![allow(clippy::items_after_test_module)]
 #![cfg(feature = "test-sbf")]
 
 mod helpers;
@@ -55,7 +56,7 @@ async fn setup() -> (
     )
     .await;
     let rent = context.banks_client.get_rent().await.unwrap();
-    let stake_rent = rent.minimum_balance(std::mem::size_of::<stake::state::StakeState>());
+    let stake_rent = rent.minimum_balance(std::mem::size_of::<stake::state::StakeStateV2>());
 
     let _deposit_info = simple_deposit_stake(
         &mut context.banks_client,
@@ -98,7 +99,7 @@ async fn success(use_additional_instruction: bool) {
     assert!(transient_account.is_none());
 
     let rent = context.banks_client.get_rent().await.unwrap();
-    let stake_rent = rent.minimum_balance(std::mem::size_of::<stake::state::StakeState>());
+    let stake_rent = rent.minimum_balance(std::mem::size_of::<stake::state::StakeStateV2>());
     let increase_amount = reserve_lamports - stake_rent - MINIMUM_RESERVE_LAMPORTS;
     let error = stake_pool_accounts
         .increase_validator_stake_either(
@@ -113,7 +114,7 @@ async fn success(use_additional_instruction: bool) {
             use_additional_instruction,
         )
         .await;
-    assert!(error.is_none());
+    assert!(error.is_none(), "{:?}", error);
 
     // Check reserve stake account balance
     let reserve_stake_account = get_account(
@@ -122,7 +123,7 @@ async fn success(use_additional_instruction: bool) {
     )
     .await;
     let reserve_stake_state =
-        deserialize::<stake::state::StakeState>(&reserve_stake_account.data).unwrap();
+        deserialize::<stake::state::StakeStateV2>(&reserve_stake_account.data).unwrap();
     assert_eq!(
         pre_reserve_stake_account.lamports - increase_amount - stake_rent,
         reserve_stake_account.lamports
@@ -136,7 +137,7 @@ async fn success(use_additional_instruction: bool) {
     )
     .await;
     let transient_stake_state =
-        deserialize::<stake::state::StakeState>(&transient_stake_account.data).unwrap();
+        deserialize::<stake::state::StakeStateV2>(&transient_stake_account.data).unwrap();
     assert_eq!(
         transient_stake_account.lamports,
         increase_amount + stake_rent
@@ -298,7 +299,7 @@ async fn fail_twice_diff_seed(use_additional_instruction: bool) {
             use_additional_instruction,
         )
         .await;
-    assert!(error.is_none());
+    assert!(error.is_none(), "{:?}", error);
 
     let transient_stake_seed = validator_stake.transient_stake_seed * 100;
     let transient_stake_address = find_transient_stake_program_address(
@@ -370,7 +371,7 @@ async fn twice(success: bool, use_additional_first_time: bool, use_additional_se
             use_additional_first_time,
         )
         .await;
-    assert!(error.is_none());
+    assert!(error.is_none(), "{:?}", error);
 
     let error = stake_pool_accounts
         .increase_validator_stake_either(
@@ -387,9 +388,9 @@ async fn twice(success: bool, use_additional_first_time: bool, use_additional_se
         .await;
 
     if success {
-        assert!(error.is_none());
+        assert!(error.is_none(), "{:?}", error);
         let rent = context.banks_client.get_rent().await.unwrap();
-        let stake_rent = rent.minimum_balance(std::mem::size_of::<stake::state::StakeState>());
+        let stake_rent = rent.minimum_balance(std::mem::size_of::<stake::state::StakeStateV2>());
         // no ephemeral account
         let ephemeral_stake = find_ephemeral_stake_program_address(
             &id(),
@@ -410,7 +411,7 @@ async fn twice(success: bool, use_additional_first_time: bool, use_additional_se
         )
         .await;
         let reserve_stake_state =
-            deserialize::<stake::state::StakeState>(&reserve_stake_account.data).unwrap();
+            deserialize::<stake::state::StakeStateV2>(&reserve_stake_account.data).unwrap();
         assert_eq!(
             pre_reserve_stake_account.lamports - total_increase - stake_rent * 2,
             reserve_stake_account.lamports
@@ -424,7 +425,7 @@ async fn twice(success: bool, use_additional_first_time: bool, use_additional_se
         )
         .await;
         let transient_stake_state =
-            deserialize::<stake::state::StakeState>(&transient_stake_account.data).unwrap();
+            deserialize::<stake::state::StakeStateV2>(&transient_stake_account.data).unwrap();
         assert_eq!(
             transient_stake_account.lamports,
             total_increase + stake_rent * 2
@@ -440,7 +441,7 @@ async fn twice(success: bool, use_additional_first_time: bool, use_additional_se
             .await;
         let entry = validator_list.find(&validator_stake.vote.pubkey()).unwrap();
         assert_eq!(
-            entry.transient_stake_lamports,
+            u64::from(entry.transient_stake_lamports),
             total_increase + stake_rent * 2
         );
     } else {
@@ -532,11 +533,11 @@ async fn fail_additional_with_decreasing() {
     )
     .await;
     let rent = context.banks_client.get_rent().await.unwrap();
-    let stake_rent = rent.minimum_balance(std::mem::size_of::<stake::state::StakeState>());
+    let stake_rent = rent.minimum_balance(std::mem::size_of::<stake::state::StakeStateV2>());
 
     // warp forward to activation
     let first_normal_slot = context.genesis_config().epoch_schedule.first_normal_slot;
-    context.warp_to_slot(first_normal_slot).unwrap();
+    context.warp_to_slot(first_normal_slot + 1).unwrap();
     let last_blockhash = context
         .banks_client
         .get_new_latest_blockhash(&context.last_blockhash)
@@ -553,7 +554,7 @@ async fn fail_additional_with_decreasing() {
         .await;
 
     let error = stake_pool_accounts
-        .decrease_validator_stake(
+        .decrease_validator_stake_either(
             &mut context.banks_client,
             &context.payer,
             &last_blockhash,
@@ -561,9 +562,10 @@ async fn fail_additional_with_decreasing() {
             &validator_stake.transient_stake_account,
             current_minimum_delegation + stake_rent,
             validator_stake.transient_stake_seed,
+            DecreaseInstruction::Reserve,
         )
         .await;
-    assert!(error.is_none());
+    assert!(error.is_none(), "{:?}", error);
 
     let error = stake_pool_accounts
         .increase_validator_stake_either(
@@ -585,7 +587,7 @@ async fn fail_additional_with_decreasing() {
         error,
         TransactionError::InstructionError(
             0,
-            InstructionError::Custom(StakePoolError::WrongStakeState as u32)
+            InstructionError::Custom(StakePoolError::WrongStakeStake as u32)
         )
     );
 }

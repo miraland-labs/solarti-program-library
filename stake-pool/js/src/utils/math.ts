@@ -1,14 +1,17 @@
 import BN from 'bn.js';
-import { LAMPORTS_PER_MLN } from '@solarti/web3.js';
+import { LAMPORTS_PER_MLN } from '@solana/web3.js';
 
-export function mlnToLamports(amount: number): number {
+export function solToLamports(amount: number): number {
   if (isNaN(amount)) return Number(0);
   return Number(amount * LAMPORTS_PER_MLN);
 }
 
-export function lamportsToMln(lamports: number | BN): number {
+export function lamportsToSol(lamports: number | BN | bigint): number {
   if (typeof lamports === 'number') {
     return Math.abs(lamports) / LAMPORTS_PER_MLN;
+  }
+  if (typeof lamports === 'bigint') {
+    return Math.abs(Number(lamports)) / LAMPORTS_PER_MLN;
   }
 
   let signMultiplier = 1;

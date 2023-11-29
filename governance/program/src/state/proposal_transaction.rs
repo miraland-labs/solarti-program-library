@@ -1,29 +1,29 @@
 //! ProposalTransaction Account
 
-use core::panic;
-
-use borsh::maybestd::io::Write;
-
-use crate::{
-    error::GovernanceError,
-    state::{
-        enums::{GovernanceAccountType, TransactionExecutionStatus},
-        legacy::ProposalInstructionV1,
+use {
+    crate::{
+        error::GovernanceError,
+        state::{
+            enums::{GovernanceAccountType, TransactionExecutionStatus},
+            legacy::ProposalInstructionV1,
+        },
+        PROGRAM_AUTHORITY_SEED,
     },
-    PROGRAM_AUTHORITY_SEED,
+    borsh::{maybestd::io::Write, BorshDeserialize, BorshSchema, BorshSerialize},
+    core::panic,
+    solana_program::{
+        account_info::AccountInfo,
+        clock::UnixTimestamp,
+        instruction::{AccountMeta, Instruction},
+        program_error::ProgramError,
+        program_pack::IsInitialized,
+        pubkey::Pubkey,
+    },
+    spl_governance_tools::account::{get_account_data, get_account_type, AccountMaxSize},
 };
-use borsh::{BorshDeserialize, BorshSchema, BorshSerialize};
-use solana_program::{
-    account_info::AccountInfo,
-    clock::UnixTimestamp,
-    instruction::{AccountMeta, Instruction},
-    program_error::ProgramError,
-    program_pack::IsInitialized,
-    pubkey::Pubkey,
-};
-use spl_governance_tools::account::{get_account_data, get_account_type, AccountMaxSize};
 
-/// InstructionData wrapper. It can be removed once Borsh serialization for Instruction is supported in the SDK
+/// InstructionData wrapper. It can be removed once Borsh serialization for
+/// Instruction is supported in the SDK
 #[derive(Clone, Debug, PartialEq, Eq, BorshDeserialize, BorshSerialize, BorshSchema)]
 pub struct InstructionData {
     /// Pubkey of the instruction processor that executes this instruction
@@ -39,7 +39,8 @@ pub struct InstructionData {
 pub struct AccountMetaData {
     /// An account's public key
     pub pubkey: Pubkey,
-    /// True if an Instruction requires a Transaction signature matching `pubkey`.
+    /// True if an Instruction requires a Transaction signature matching
+    /// `pubkey`.
     pub is_signer: bool,
     /// True if the `pubkey` can be loaded as a read-write account.
     pub is_writable: bool,
@@ -96,13 +97,15 @@ pub struct ProposalTransactionV2 {
     /// Unique transaction index within it's parent Proposal
     pub transaction_index: u16,
 
-    /// Minimum waiting time in seconds for the  instruction to be executed once proposal is voted on
+    /// Minimum waiting time in seconds for the  instruction to be executed once
+    /// proposal is voted on
     pub hold_up_time: u32,
 
     /// Instructions to execute
-    /// The instructions will be signed by Governance PDA the Proposal belongs to
-    // For example for ProgramGovernance the instruction to upgrade program will be signed by ProgramGovernance PDA
-    // All instructions will be executed within a single transaction
+    /// The instructions will be signed by Governance PDA the Proposal belongs
+    /// to
+    // For example for ProgramGovernance the instruction to upgrade program will be signed by
+    // ProgramGovernance PDA All instructions will be executed within a single transaction
     pub instructions: Vec<InstructionData>,
 
     /// Executed at flag
@@ -136,17 +139,19 @@ impl IsInitialized for ProposalTransactionV2 {
 
 impl ProposalTransactionV2 {
     /// Serializes account into the target buffer
-    pub fn serialize<W: Write>(self, writer: &mut W) -> Result<(), ProgramError> {
+    pub fn serialize<W: Write>(self, writer: W) -> Result<(), ProgramError> {
         if self.account_type == GovernanceAccountType::ProposalTransactionV2 {
-            BorshSerialize::serialize(&self, writer)?
+            borsh::to_writer(writer, &self)?
         } else if self.account_type == GovernanceAccountType::ProposalInstructionV1 {
             if self.instructions.len() != 1 {
                 panic!("Multiple instructions are not supported by ProposalInstructionV1")
             };
 
-            // V1 account can't be resized and we have to translate it back to the original format
+            // V1 account can't be resized and we have to translate it back to the original
+            // format
 
-            // If reserved_v2 is used it must be individually asses for v1 backward compatibility impact
+            // If reserved_v2 is used it must be individually asses for v1 backward
+            // compatibility impact
             if self.reserved_v2 != [0; 8] {
                 panic!("Extended data not supported by ProposalInstructionV1")
             }
@@ -161,7 +166,7 @@ impl ProposalTransactionV2 {
                 execution_status: self.execution_status,
             };
 
-            BorshSerialize::serialize(&proposal_transaction_data_v1, writer)?;
+            borsh::to_writer(writer, &proposal_transaction_data_v1)?
         }
 
         Ok(())
@@ -229,7 +234,8 @@ pub fn get_proposal_transaction_data(
     get_account_data::<ProposalTransactionV2>(program_id, proposal_transaction_info)
 }
 
-///  Deserializes and returns ProposalTransaction account and checks it belongs to the given Proposal
+///  Deserializes and returns ProposalTransaction account and checks it belongs
+/// to the given Proposal
 pub fn get_proposal_transaction_data_for_proposal(
     program_id: &Pubkey,
     proposal_transaction_info: &AccountInfo,
@@ -248,11 +254,12 @@ pub fn get_proposal_transaction_data_for_proposal(
 #[cfg(test)]
 mod test {
 
-    use std::str::FromStr;
-
-    use solana_program::{bpf_loader_upgradeable, clock::Epoch};
-
-    use super::*;
+    use {
+        super::*,
+        base64::{engine::general_purpose, Engine as _},
+        solana_program::{bpf_loader_upgradeable, clock::Epoch},
+        std::str::FromStr,
+    };
 
     fn create_test_account_meta_data() -> AccountMetaData {
         AccountMetaData {
@@ -341,7 +348,7 @@ mod test {
         instruction_data.serialize(&mut instruction_bytes).unwrap();
 
         // base64 encoded message is accepted as the input in the UI
-        let base64 = base64::encode(instruction_bytes.clone());
+        let encoded = general_purpose::STANDARD_NO_PAD.encode(&instruction_bytes);
 
         // Assert
         let instruction =
@@ -349,7 +356,7 @@ mod test {
 
         assert_eq!(upgrade_instruction, instruction);
 
-        assert_eq!(base64,"Aqj2kU6IobDiEBU+92OuKwDCuT0WwSTSwFN6EASAAAAHAAAAchkHXTU9jF+rKpILT6dzsVyNI9NsQy9cab+GGvdwNn0AAfh2HVruy2YibpgcQUmJf5att5YdPXSv1k2pRAKAfpSWAAFDVQuXWos2urmegSPblI813GlTm7CJ/8rv+9yzNE3yfwAB3Gw+apCyfrRNqJ6f1160Htkx+uYZT6FIILQ3WzNA4KwAAQan1RcZLFxRIYzJTD1K8X9Y2u4Im6H9ROPb2YoAAAAAAAAGp9UXGMd0yShWY5hpHV62i164o5tLbVxzVVshAAAAAAAA3Gw+apCyfrRNqJ6f1160Htkx+uYZT6FIILQ3WzNA4KwBAAQAAAADAAAA");
+        assert_eq!(encoded,"Aqj2kU6IobDiEBU+92OuKwDCuT0WwSTSwFN6EASAAAAHAAAAchkHXTU9jF+rKpILT6dzsVyNI9NsQy9cab+GGvdwNn0AAfh2HVruy2YibpgcQUmJf5att5YdPXSv1k2pRAKAfpSWAAFDVQuXWos2urmegSPblI813GlTm7CJ/8rv+9yzNE3yfwAB3Gw+apCyfrRNqJ6f1160Htkx+uYZT6FIILQ3WzNA4KwAAQan1RcZLFxRIYzJTD1K8X9Y2u4Im6H9ROPb2YoAAAAAAAAGp9UXGMd0yShWY5hpHV62i164o5tLbVxzVVshAAAAAAAA3Gw+apCyfrRNqJ6f1160Htkx+uYZT6FIILQ3WzNA4KwBAAQAAAADAAAA");
     }
 
     #[test]
@@ -393,7 +400,7 @@ mod test {
             get_proposal_transaction_data(&program_id, &account_info).unwrap();
 
         proposal_transaction_v2
-            .serialize(&mut &mut **account_info.data.borrow_mut())
+            .serialize(&mut account_info.data.borrow_mut()[..])
             .unwrap();
 
         // Assert

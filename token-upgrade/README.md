@@ -5,5 +5,5 @@ tokens from one mint to another.
 
 ## Audit
 
-The repository [README](https://github.com/solana-labs/solana-program-library#audits)
+The repository [README](https://github.com/miraland-labs/solarti-program-library#audits)
 contains information about program audits.

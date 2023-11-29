@@ -1,11 +1,8 @@
 use {
     async_trait::async_trait,
     miraland_banks_interface::BanksTransactionResultWithSimulation,
-    // MI: In next version, next 2 lines will be replaced with miraland_rpc_client:: equivalents
-    miraland_client::nonblocking::rpc_client::RpcClient,
-    miraland_client::rpc_response::RpcSimulateTransactionResult,
-    // miraland_rpc_client::nonblocking::rpc_client::RpcClient,
-    // miraland_rpc_client_api::response::RpcSimulateTransactionResult,
+    miraland_rpc_client::nonblocking::rpc_client::RpcClient,
+    miraland_rpc_client_api::response::RpcSimulateTransactionResult,
     solana_program_test::{tokio::sync::Mutex, BanksClient, ProgramTestContext},
     solana_sdk::{
         account::Account, hash::Hash, pubkey::Pubkey, signature::Signature,
@@ -193,7 +190,7 @@ enum ProgramBanksClientContext {
     Context(Arc<Mutex<ProgramTestContext>>),
 }
 
-/// Program client for `BanksClient` from crate `solana-program-test`.
+/// Program client for `BanksClient` from crate `miraland-program-test`.
 pub struct ProgramBanksClient<ST> {
     context: ProgramBanksClientContext,
     send: ST,
@@ -287,7 +284,7 @@ where
     }
 }
 
-/// Program client for `RpcClient` from crate `solana-client`.
+/// Program client for `RpcClient` from crate `miraland-client`.
 pub struct ProgramRpcClient<ST> {
     client: Arc<RpcClient>,
     send: ST,

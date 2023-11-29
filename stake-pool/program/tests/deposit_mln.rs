@@ -1,4 +1,4 @@
-#![allow(clippy::integer_arithmetic)]
+#![allow(clippy::arithmetic_side_effects)]
 #![cfg(feature = "test-sbf")]
 
 mod helpers;
@@ -6,7 +6,7 @@ mod helpers;
 use {
     helpers::*,
     solana_program::{
-        borsh::try_from_slice_unchecked, instruction::InstructionError, pubkey::Pubkey,
+        borsh0_10::try_from_slice_unchecked, instruction::InstructionError, pubkey::Pubkey,
     },
     solana_program_test::*,
     solana_sdk::{
@@ -98,7 +98,7 @@ async fn success(token_program_id: Pubkey) {
             None,
         )
         .await;
-    assert!(error.is_none());
+    assert!(error.is_none(), "{:?}", error);
 
     let tokens_issued = TEST_STAKE_AMOUNT; // For now tokens are 1:1 to stake
 
@@ -309,7 +309,7 @@ async fn success_with_mln_deposit_authority() {
             None,
         )
         .await;
-    assert!(error.is_none());
+    assert!(error.is_none(), "{:?}", error);
 
     let mln_deposit_authority = Keypair::new();
 
@@ -336,7 +336,7 @@ async fn success_with_mln_deposit_authority() {
             Some(&mln_deposit_authority),
         )
         .await;
-    assert!(error.is_none());
+    assert!(error.is_none(), "{:?}", error);
 }
 
 #[tokio::test]
@@ -569,7 +569,7 @@ async fn success_with_slippage(token_program_id: Pubkey) {
             tokens_issued,
         )
         .await;
-    assert!(error.is_none());
+    assert!(error.is_none(), "{:?}", error);
 
     // Stake pool should add its balance to the pool balance
     let post_stake_pool = get_account(

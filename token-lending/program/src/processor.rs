@@ -1,33 +1,37 @@
 //! Program state processor
 
-use crate::{
-    error::LendingError,
-    instruction::LendingInstruction,
-    math::{Decimal, Rate, TryAdd, TryDiv, TryMul},
-    pyth,
-    state::{
-        CalculateBorrowResult, CalculateLiquidationResult, CalculateRepayResult,
-        InitLendingMarketParams, InitObligationParams, InitReserveParams, LendingMarket,
-        NewReserveCollateralParams, NewReserveLiquidityParams, Obligation, Reserve,
-        ReserveCollateral, ReserveConfig, ReserveLiquidity,
+use {
+    crate::{
+        error::LendingError,
+        instruction::LendingInstruction,
+        math::{Decimal, Rate, TryAdd, TryDiv, TryMul},
+        pyth,
+        state::{
+            CalculateBorrowResult, CalculateLiquidationResult, CalculateRepayResult,
+            InitLendingMarketParams, InitObligationParams, InitReserveParams, LendingMarket,
+            NewReserveCollateralParams, NewReserveLiquidityParams, Obligation, Reserve,
+            ReserveCollateral, ReserveConfig, ReserveLiquidity,
+        },
     },
+    num_traits::FromPrimitive,
+    solana_program::{
+        account_info::{next_account_info, AccountInfo},
+        decode_error::DecodeError,
+        entrypoint::ProgramResult,
+        instruction::Instruction,
+        msg,
+        program::{invoke, invoke_signed},
+        program_error::{PrintProgramError, ProgramError},
+        program_pack::{IsInitialized, Pack},
+        pubkey::Pubkey,
+        sysvar::{clock::Clock, rent::Rent, Sysvar},
+    },
+    spl_token::{
+        solana_program::instruction::AccountMeta,
+        state::{Account, Mint},
+    },
+    std::convert::TryInto,
 };
-use num_traits::FromPrimitive;
-use solana_program::{
-    account_info::{next_account_info, AccountInfo},
-    decode_error::DecodeError,
-    entrypoint::ProgramResult,
-    instruction::Instruction,
-    msg,
-    program::{invoke, invoke_signed},
-    program_error::{PrintProgramError, ProgramError},
-    program_pack::{IsInitialized, Pack},
-    pubkey::Pubkey,
-    sysvar::{clock::Clock, rent::Rent, Sysvar},
-};
-use spl_token::solana_program::instruction::AccountMeta;
-use spl_token::state::{Account, Mint};
-use std::convert::TryInto;
 
 /// Processes an instruction
 pub fn process_instruction(
@@ -1568,7 +1572,8 @@ fn process_flash_loan(
         return Err(LendingError::InvalidAccountInput.into());
     }
 
-    // @FIXME: if u64::MAX is flash loaned, fees should be inclusive as with ordinary borrows
+    // @FIXME: if u64::MAX is flash loaned, fees should be inclusive as with
+    // ordinary borrows
     let flash_loan_amount = if liquidity_amount == u64::MAX {
         reserve.liquidity.available_amount
     } else {
@@ -1713,8 +1718,9 @@ fn process_modify_reserve_config(
 
     let mut reserve = Reserve::unpack(&reserve_info.data.borrow_mut())?;
     // Validate that the reserve account corresponds to the correct lending market,
-    // after validating above that the lending market and lending market owner correspond,
-    // to prevent one compromised lending market owner from changing configs on other lending markets
+    // after validating above that the lending market and lending market owner
+    // correspond, to prevent one compromised lending market owner from changing
+    // configs on other lending markets
     if reserve.lending_market != *lending_market_info.key {
         msg!("Reserve account does not match the lending market");
         return Err(LendingError::InvalidAccountInput.into());

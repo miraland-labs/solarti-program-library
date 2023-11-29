@@ -573,7 +573,7 @@ pub fn app<'a, 'b>(
                 .takes_value(true)
                 .global(true)
                 .validator(is_valid_token_program_id)
-                .help("SPL Token program id"),
+                .help("Solarti Token program id"),
         )
         .arg(
             Arg::with_name("json_rpc_url")
@@ -1649,7 +1649,7 @@ pub fn app<'a, 'b>(
         )
         .subcommand(
             SubCommand::with_name(CommandName::AccountInfo.into())
-                .about("Query details of an SPL Token account by address (DEPRECATED: use `spl-token display`)")
+                .about("Query details of an Solarti Token account by address (DEPRECATED: use `spl-token display`)")
                 .setting(AppSettings::Hidden)
                 .arg(
                     Arg::with_name("token")
@@ -1686,7 +1686,7 @@ pub fn app<'a, 'b>(
         )
         .subcommand(
             SubCommand::with_name(CommandName::MultisigInfo.into())
-                .about("Query details of an SPL Token multisig account by address (DEPRECATED: use `spl-token display`)")
+                .about("Query details of an Solarti Token multisig account by address (DEPRECATED: use `spl-token display`)")
                 .setting(AppSettings::Hidden)
                 .arg(
                     Arg::with_name("address")
@@ -1695,12 +1695,12 @@ pub fn app<'a, 'b>(
                     .takes_value(true)
                     .index(1)
                     .required(true)
-                    .help("The address of the SPL Token multisig account to query"),
+                    .help("The address of the Solarti Token multisig account to query"),
                 ),
         )
         .subcommand(
             SubCommand::with_name(CommandName::Display.into())
-                .about("Query details of an SPL Token mint, account, or multisig by address")
+                .about("Query details of an Solarti Token mint, account, or multisig by address")
                 .arg(
                     Arg::with_name("address")
                     .validator(is_valid_pubkey)
@@ -1708,7 +1708,7 @@ pub fn app<'a, 'b>(
                     .takes_value(true)
                     .index(1)
                     .required(true)
-                    .help("The address of the SPL Token mint, account, or multisig to query"),
+                    .help("The address of the Solarti Token mint, account, or multisig to query"),
                 ),
         )
         .subcommand(

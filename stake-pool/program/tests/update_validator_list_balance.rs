@@ -1,13 +1,13 @@
-#![allow(clippy::integer_arithmetic)]
+#![allow(clippy::arithmetic_side_effects)]
 #![cfg(feature = "test-sbf")]
 
 mod helpers;
 
 use {
     helpers::*,
-    solana_program::{borsh::try_from_slice_unchecked, program_pack::Pack, pubkey::Pubkey},
+    solana_program::{borsh0_10::try_from_slice_unchecked, program_pack::Pack, pubkey::Pubkey},
     solana_program_test::*,
-    solana_sdk::{hash::Hash, signature::Signer, stake::state::StakeState},
+    solana_sdk::{hash::Hash, signature::Signer, stake::state::StakeStateV2},
     spl_stake_pool::{
         state::{StakePool, StakeStatus, ValidatorList},
         MAX_VALIDATORS_TO_UPDATE, MINIMUM_RESERVE_LAMPORTS,
@@ -31,7 +31,7 @@ async fn setup(
     let mut context = program_test().start_with_context().await;
     let first_normal_slot = context.genesis_config().epoch_schedule.first_normal_slot;
     let slots_per_epoch = context.genesis_config().epoch_schedule.slots_per_epoch;
-    let mut slot = first_normal_slot;
+    let mut slot = first_normal_slot + 1;
     context.warp_to_slot(slot).unwrap();
 
     let reserve_stake_amount = TEST_STAKE_AMOUNT * 2 * num_validators as u64;
@@ -74,7 +74,7 @@ async fn setup(
                 stake_account.validator_stake_seed,
             )
             .await;
-        assert!(error.is_none());
+        assert!(error.is_none(), "{:?}", error);
 
         let deposit_account = DepositStakeAccount::new_with_vote(
             stake_account.vote.pubkey(),
@@ -183,7 +183,7 @@ async fn success_with_normal() {
 
     // Check current balance in the list
     let rent = context.banks_client.get_rent().await.unwrap();
-    let stake_rent = rent.minimum_balance(std::mem::size_of::<StakeState>());
+    let stake_rent = rent.minimum_balance(std::mem::size_of::<StakeStateV2>());
     let stake_pool_info = get_account(
         &mut context.banks_client,
         &stake_pool_accounts.stake_pool.pubkey(),
@@ -279,7 +279,7 @@ async fn merge_into_reserve() {
     println!("Decrease from all validators");
     for stake_account in &stake_accounts {
         let error = stake_pool_accounts
-            .decrease_validator_stake(
+            .decrease_validator_stake_either(
                 &mut context.banks_client,
                 &context.payer,
                 &last_blockhash,
@@ -287,9 +287,10 @@ async fn merge_into_reserve() {
                 &stake_account.transient_stake_account,
                 lamports,
                 stake_account.transient_stake_seed,
+                DecreaseInstruction::Reserve,
             )
             .await;
-        assert!(error.is_none());
+        assert!(error.is_none(), "{:?}", error);
     }
 
     println!("Update, should not change, no merges yet");
@@ -394,7 +395,7 @@ async fn merge_into_validator_stake() {
     .await;
 
     // Increase stake to all validators
-    let stake_rent = rent.minimum_balance(std::mem::size_of::<StakeState>());
+    let stake_rent = rent.minimum_balance(std::mem::size_of::<StakeStateV2>());
     let current_minimum_delegation = stake_pool_get_minimum_delegation(
         &mut context.banks_client,
         &context.payer,
@@ -417,7 +418,7 @@ async fn merge_into_validator_stake() {
                 stake_account.transient_stake_seed,
             )
             .await;
-        assert!(error.is_none());
+        assert!(error.is_none(), "{:?}", error);
     }
 
     // Warp just a little bit to get a new blockhash and update again
@@ -442,7 +443,7 @@ async fn merge_into_validator_stake() {
             false,
         )
         .await;
-    assert!(error.is_none());
+    assert!(error.is_none(), "{:?}", error);
 
     let expected_lamports = get_validator_list_sum(
         &mut context.banks_client,
@@ -482,7 +483,7 @@ async fn merge_into_validator_stake() {
             false,
         )
         .await;
-    assert!(error.is_none());
+    assert!(error.is_none(), "{:?}", error);
     let current_lamports = get_validator_list_sum(
         &mut context.banks_client,
         &stake_pool_accounts.reserve_stake.pubkey(),
@@ -508,7 +509,8 @@ async fn merge_into_validator_stake() {
     }
 
     // Check validator stake accounts have the expected balance now:
-    // validator stake account minimum + deposited lamports + rents + increased lamports
+    // validator stake account minimum + deposited lamports + rents + increased
+    // lamports
     let expected_lamports = current_minimum_delegation + lamports + increase_amount + stake_rent;
     for stake_account in &stake_accounts {
         let validator_stake =
@@ -543,7 +545,7 @@ async fn merge_transient_stake_after_remove() {
     ) = setup(1).await;
 
     let rent = context.banks_client.get_rent().await.unwrap();
-    let stake_rent = rent.minimum_balance(std::mem::size_of::<StakeState>());
+    let stake_rent = rent.minimum_balance(std::mem::size_of::<StakeStateV2>());
     let current_minimum_delegation = stake_pool_get_minimum_delegation(
         &mut context.banks_client,
         &context.payer,
@@ -554,7 +556,7 @@ async fn merge_transient_stake_after_remove() {
     // Decrease and remove all validators
     for stake_account in &stake_accounts {
         let error = stake_pool_accounts
-            .decrease_validator_stake(
+            .decrease_validator_stake_either(
                 &mut context.banks_client,
                 &context.payer,
                 &last_blockhash,
@@ -562,9 +564,10 @@ async fn merge_transient_stake_after_remove() {
                 &stake_account.transient_stake_account,
                 deactivated_lamports,
                 stake_account.transient_stake_seed,
+                DecreaseInstruction::Reserve,
             )
             .await;
-        assert!(error.is_none());
+        assert!(error.is_none(), "{:?}", error);
         let error = stake_pool_accounts
             .remove_validator_from_pool(
                 &mut context.banks_client,
@@ -574,7 +577,7 @@ async fn merge_transient_stake_after_remove() {
                 &stake_account.transient_stake_account,
             )
             .await;
-        assert!(error.is_none());
+        assert!(error.is_none(), "{:?}", error);
     }
 
     // Warp forward to merge time
@@ -596,7 +599,7 @@ async fn merge_transient_stake_after_remove() {
             true,
         )
         .await;
-    assert!(error.is_none());
+    assert!(error.is_none(), "{:?}", error);
 
     let validator_list = get_account(
         &mut context.banks_client,
@@ -608,15 +611,15 @@ async fn merge_transient_stake_after_remove() {
     assert_eq!(validator_list.validators.len(), 1);
     assert_eq!(
         validator_list.validators[0].status,
-        StakeStatus::DeactivatingAll
+        StakeStatus::DeactivatingAll.into()
     );
     assert_eq!(
-        validator_list.validators[0].active_stake_lamports,
+        u64::from(validator_list.validators[0].active_stake_lamports),
         stake_rent + current_minimum_delegation
     );
     assert_eq!(
-        validator_list.validators[0].transient_stake_lamports,
-        deactivated_lamports
+        u64::from(validator_list.validators[0].transient_stake_lamports),
+        deactivated_lamports + stake_rent
     );
 
     // Update with merge, status should be ReadyForRemoval and no lamports
@@ -633,7 +636,7 @@ async fn merge_transient_stake_after_remove() {
             false,
         )
         .await;
-    assert!(error.is_none());
+    assert!(error.is_none(), "{:?}", error);
 
     // stake accounts were merged in, none exist anymore
     for stake_account in &stake_accounts {
@@ -660,7 +663,7 @@ async fn merge_transient_stake_after_remove() {
     assert_eq!(validator_list.validators.len(), 1);
     assert_eq!(
         validator_list.validators[0].status,
-        StakeStatus::ReadyForRemoval
+        StakeStatus::ReadyForRemoval.into()
     );
     assert_eq!(validator_list.validators[0].stake_lamports().unwrap(), 0);
 
@@ -679,7 +682,7 @@ async fn merge_transient_stake_after_remove() {
     let error = stake_pool_accounts
         .update_stake_pool_balance(&mut context.banks_client, &context.payer, &last_blockhash)
         .await;
-    assert!(error.is_none());
+    assert!(error.is_none(), "{:?}", error);
 
     let error = stake_pool_accounts
         .cleanup_removed_validator_entries(
@@ -688,7 +691,7 @@ async fn merge_transient_stake_after_remove() {
             &last_blockhash,
         )
         .await;
-    assert!(error.is_none());
+    assert!(error.is_none(), "{:?}", error);
 
     let validator_list = get_account(
         &mut context.banks_client,

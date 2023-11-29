@@ -1,30 +1,33 @@
 //! Program state processor
 
-use crate::{
-    state::{
-        enums::GovernanceAccountType,
-        governance::{
-            assert_valid_create_governance_args, get_mint_governance_address_seeds,
-            GovernanceConfig, GovernanceV2,
+use {
+    crate::{
+        state::{
+            enums::GovernanceAccountType,
+            governance::{
+                assert_valid_create_governance_args, get_mint_governance_address_seeds,
+                GovernanceConfig, GovernanceV2,
+            },
+            realm::get_realm_data,
         },
-        realm::get_realm_data,
+        tools::{
+            spl_token::{
+                assert_spl_token_mint_authority_is_signer, set_spl_token_account_authority,
+            },
+            structs::Reserved119,
+        },
     },
-    tools::{
-        spl_token::{assert_spl_token_mint_authority_is_signer, set_spl_token_account_authority},
-        structs::Reserved120,
+    solana_program::{
+        account_info::{next_account_info, AccountInfo},
+        entrypoint::ProgramResult,
+        program_pack::Pack,
+        pubkey::Pubkey,
+        rent::Rent,
+        sysvar::Sysvar,
     },
+    spl_governance_tools::account::create_and_serialize_account_signed,
+    spl_token::{instruction::AuthorityType, state::Mint},
 };
-use solana_program::{
-    account_info::{next_account_info, AccountInfo},
-    entrypoint::ProgramResult,
-    program_pack::Pack,
-    pubkey::Pubkey,
-    rent::Rent,
-    sysvar::Sysvar,
-};
-
-use spl_governance_tools::account::create_and_serialize_account_signed;
-use spl_token::{instruction::AuthorityType, state::Mint};
 
 /// Processes CreateMintGovernance instruction
 pub fn process_create_mint_governance(
@@ -70,7 +73,8 @@ pub fn process_create_mint_governance(
         governed_account: *governed_mint_info.key,
         config,
         reserved1: 0,
-        reserved_v2: Reserved120::default(),
+        reserved_v2: Reserved119::default(),
+        required_signatories_count: 0,
         active_proposal_count: 0,
     };
 
@@ -97,7 +101,8 @@ pub fn process_create_mint_governance(
         // If the mint has freeze_authority then transfer it as well
         let mint_data = Mint::unpack(&governed_mint_info.data.borrow())?;
         // Note: The code assumes mint_authority==freeze_authority
-        //       If this is not the case then the caller should set freeze_authority accordingly before making the transfer
+        // If this is not the case then the caller should set freeze_authority
+        // accordingly before making the transfer
         if mint_data.freeze_authority.is_some() {
             set_spl_token_account_authority(
                 governed_mint_info,

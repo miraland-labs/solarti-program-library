@@ -1,35 +1,37 @@
-use solana_program::{
-    account_info::AccountInfo, entrypoint, entrypoint::ProgramResult, msg, pubkey::Pubkey,
-};
-
-use crate::helpers::flash_loan_receiver::FlashLoanReceiverError::InvalidInstruction;
-use spl_token::{
-    solana_program::{
-        account_info::next_account_info, program::invoke_signed, program_error::ProgramError,
-        program_pack::Pack,
+use {
+    crate::helpers::flash_loan_receiver::FlashLoanReceiverError::InvalidInstruction,
+    solana_program::{account_info::AccountInfo, entrypoint::ProgramResult, msg, pubkey::Pubkey},
+    spl_token::{
+        solana_program::{
+            account_info::next_account_info, program::invoke_signed, program_error::ProgramError,
+            program_pack::Pack,
+        },
+        state::Account,
     },
-    state::Account,
+    std::{cmp::min, convert::TryInto},
+    thiserror::Error,
 };
-use std::cmp::min;
-use std::convert::TryInto;
-use thiserror::Error;
 
 pub enum FlashLoanReceiverInstruction {
-    /// Receive a flash loan and perform user-defined operation and finally return the fund back.
+    /// Receive a flash loan and perform user-defined operation and finally
+    /// return the fund back.
     ///
     /// Accounts expected:
     ///
-    ///   0. `[writable]` Source liquidity (matching the destination from above).
-    ///   1. `[writable]` Destination liquidity (matching the source from above).
+    ///   0. `[writable]` Source liquidity (matching the destination from
+    ///      above).
+    ///   1. `[writable]` Destination liquidity (matching the source from
+    ///      above).
     ///   2. `[]` Token program id
-    ///   .. `[any]` Additional accounts provided to the lending program's `FlashLoan` instruction above.
+    ///   .. `[any]` Additional accounts provided to the lending program's
+    /// `FlashLoan` instruction above.
     ReceiveFlashLoan {
         /// The amount that is loaned
         amount: u64,
     },
 }
 
-entrypoint!(process_instruction);
+solana_program::entrypoint!(process_instruction);
 pub fn process_instruction(
     program_id: &Pubkey,
     accounts: &[AccountInfo],

@@ -12,7 +12,7 @@ STAKE_LEN: int = 200
 """Size of stake account."""
 
 LAMPORTS_PER_MLN: int = 1_000_000_000
-"""Number of lamports per MLN"""
+"""Number of lamports per SOL"""
 
 MINIMUM_DELEGATION: int = LAMPORTS_PER_MLN
 """Minimum delegation allowed by the stake program"""

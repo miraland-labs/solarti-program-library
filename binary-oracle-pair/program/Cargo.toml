@@ -14,10 +14,10 @@ edition = "2021"
 test-sbf = []
 
 [dependencies]
-num-derive = "0.3"
+num-derive = "0.4"
 num-traits = "0.2"
 miraland-program = "1.14.18"
-solarti-token = { version = "3.5", path = "../../token/program", features = [ "no-entrypoint" ] }
+solarti-token = { version = "4.0", path = "../../token/program", features = [ "no-entrypoint" ] }
 thiserror = "1.0"
 uint = "0.9"
 borsh = "0.10.3"

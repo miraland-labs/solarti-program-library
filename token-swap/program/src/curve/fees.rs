@@ -1,12 +1,14 @@
 //! All fee information, to be used for validation currently
 
-use crate::error::SwapError;
-use arrayref::{array_mut_ref, array_ref, array_refs, mut_array_refs};
-use solana_program::{
-    program_error::ProgramError,
-    program_pack::{IsInitialized, Pack, Sealed},
+use {
+    crate::error::SwapError,
+    arrayref::{array_mut_ref, array_ref, array_refs, mut_array_refs},
+    solana_program::{
+        program_error::ProgramError,
+        program_pack::{IsInitialized, Pack, Sealed},
+    },
+    std::convert::TryFrom,
 };
-use std::convert::TryFrom;
 
 /// Encapsulates all fee information and calculations for swap operations
 #[derive(Clone, Debug, Default, PartialEq)]
@@ -18,9 +20,9 @@ pub struct Fees {
     /// Trade fee denominator
     pub trade_fee_denominator: u64,
 
-    /// Owner trading fees are extra token amounts that are held inside the token
-    /// accounts during a trade, with the equivalent in pool tokens minted to
-    /// the owner of the program.
+    /// Owner trading fees are extra token amounts that are held inside the
+    /// token accounts during a trade, with the equivalent in pool tokens
+    /// minted to the owner of the program.
     /// Owner trade fee numerator
     pub owner_trade_fee_numerator: u64,
     /// Owner trade fee denominator
@@ -122,8 +124,8 @@ impl Fees {
         )
     }
 
-    /// Calculate the inverse trading amount, how much input is needed to give the
-    /// provided output
+    /// Calculate the inverse trading amount, how much input is needed to give
+    /// the provided output
     pub fn pre_trading_fee_amount(&self, post_fee_amount: u128) -> Option<u128> {
         if self.trade_fee_numerator == 0 || self.trade_fee_denominator == 0 {
             pre_fee_amount(

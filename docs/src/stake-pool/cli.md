@@ -68,7 +68,7 @@ $ solana config set --url http://127.0.0.1:8899
 ### Create a stake pool
 
 The stake pool manager controls the stake pool from a high level, and in exchange
-receives a fee in the form of SPL tokens. The manager
+receives a fee in the form of Solarti tokens. The manager
 sets the fee on creation. Let's create a pool with a 3% fee and a maximum of 1000
 validator stake accounts:
 

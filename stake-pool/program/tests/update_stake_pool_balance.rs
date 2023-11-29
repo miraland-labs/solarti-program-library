@@ -1,4 +1,4 @@
-#![allow(clippy::integer_arithmetic)]
+#![allow(clippy::arithmetic_side_effects)]
 #![cfg(feature = "test-sbf")]
 
 mod helpers;
@@ -6,7 +6,7 @@ mod helpers;
 use {
     helpers::*,
     solana_program::{
-        borsh::try_from_slice_unchecked, instruction::InstructionError, pubkey::Pubkey,
+        borsh0_10::try_from_slice_unchecked, instruction::InstructionError, pubkey::Pubkey,
     },
     solana_program_test::*,
     solana_sdk::{
@@ -42,7 +42,7 @@ async fn setup(
         .unwrap();
 
     let rent = context.banks_client.get_rent().await.unwrap();
-    let stake_rent = rent.minimum_balance(std::mem::size_of::<stake::state::StakeState>());
+    let stake_rent = rent.minimum_balance(std::mem::size_of::<stake::state::StakeStateV2>());
     let current_minimum_delegation = stake_pool_get_minimum_delegation(
         &mut context.banks_client,
         &context.payer,
@@ -60,7 +60,7 @@ async fn setup(
             None,
         )
         .await;
-    assert!(error.is_none());
+    assert!(error.is_none(), "{:?}", error);
 
     let mut last_blockhash = context
         .banks_client
@@ -95,7 +95,7 @@ async fn setup(
                 stake_account.validator_stake_seed,
             )
             .await;
-        assert!(error.is_none());
+        assert!(error.is_none(), "{:?}", error);
 
         let mut deposit_account = DepositStakeAccount::new_with_vote(
             stake_account.vote.pubkey(),
@@ -165,7 +165,7 @@ async fn success() {
     }
 
     // Update epoch
-    let slot = context.genesis_config().epoch_schedule.first_normal_slot;
+    let slot = context.genesis_config().epoch_schedule.first_normal_slot + 1;
     context.warp_to_slot(slot).unwrap();
 
     let last_blockhash = context
@@ -188,7 +188,7 @@ async fn success() {
             false,
         )
         .await;
-    assert!(error.is_none());
+    assert!(error.is_none(), "{:?}", error);
 
     // Check fee
     let post_balance = get_validator_list_sum(
@@ -279,7 +279,7 @@ async fn success_absorbing_extra_lamports() {
     let expected_fee = stake_pool.calc_epoch_fee_amount(extra_lamports).unwrap();
 
     // Update epoch
-    let slot = context.genesis_config().epoch_schedule.first_normal_slot;
+    let slot = context.genesis_config().epoch_schedule.first_normal_slot + 1;
     context.warp_to_slot(slot).unwrap();
     let last_blockhash = context
         .banks_client
@@ -301,7 +301,7 @@ async fn success_absorbing_extra_lamports() {
             false,
         )
         .await;
-    assert!(error.is_none());
+    assert!(error.is_none(), "{:?}", error);
 
     // Check extra lamports are absorbed and fee'd as rewards
     let post_balance = get_validator_list_sum(

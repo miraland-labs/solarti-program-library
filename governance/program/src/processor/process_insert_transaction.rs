@@ -1,27 +1,27 @@
 //! Program state processor
 
-use std::cmp::Ordering;
-
-use solana_program::{
-    account_info::{next_account_info, AccountInfo},
-    entrypoint::ProgramResult,
-    pubkey::Pubkey,
-    rent::Rent,
-    sysvar::Sysvar,
-};
-use spl_governance_tools::account::create_and_serialize_account_signed;
-
-use crate::{
-    error::GovernanceError,
-    state::{
-        enums::{GovernanceAccountType, TransactionExecutionStatus},
-        governance::get_governance_data,
-        proposal::get_proposal_data_for_governance,
-        proposal_transaction::{
-            get_proposal_transaction_address_seeds, InstructionData, ProposalTransactionV2,
+use {
+    crate::{
+        error::GovernanceError,
+        state::{
+            enums::{GovernanceAccountType, TransactionExecutionStatus},
+            governance::get_governance_data,
+            proposal::get_proposal_data_for_governance,
+            proposal_transaction::{
+                get_proposal_transaction_address_seeds, InstructionData, ProposalTransactionV2,
+            },
+            token_owner_record::get_token_owner_record_data_for_proposal_owner,
         },
-        token_owner_record::get_token_owner_record_data_for_proposal_owner,
     },
+    solana_program::{
+        account_info::{next_account_info, AccountInfo},
+        entrypoint::ProgramResult,
+        pubkey::Pubkey,
+        rent::Rent,
+        sysvar::Sysvar,
+    },
+    spl_governance_tools::account::create_and_serialize_account_signed,
+    std::cmp::Ordering,
 };
 
 /// Processes InsertTransaction instruction
@@ -75,7 +75,8 @@ pub fn process_insert_transaction(
     match instruction_index.cmp(&option.transactions_next_index) {
         Ordering::Greater => return Err(GovernanceError::InvalidTransactionIndex.into()),
         // If the index is the same as instructions_next_index then we are adding a new instruction
-        // If the index is below instructions_next_index then we are inserting into an existing empty space
+        // If the index is below instructions_next_index then we are inserting into an existing
+        // empty space
         Ordering::Equal => {
             option.transactions_next_index = option.transactions_next_index.checked_add(1).unwrap();
         }
@@ -83,7 +84,7 @@ pub fn process_insert_transaction(
     }
 
     option.transactions_count = option.transactions_count.checked_add(1).unwrap();
-    proposal_data.serialize(&mut *proposal_info.data.borrow_mut())?;
+    proposal_data.serialize(&mut proposal_info.data.borrow_mut()[..])?;
 
     let proposal_transaction_data = ProposalTransactionV2 {
         account_type: GovernanceAccountType::ProposalTransactionV2,

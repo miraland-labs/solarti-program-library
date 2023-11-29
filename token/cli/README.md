@@ -1,6 +1,6 @@
 # Solarti Token program command-line utility
 
-A basic command-line for creating and using SPL Tokens.  See https://spl.solana.com/token for more details
+A basic command-line for creating and using Solarti Tokens.  See https://spl.miraland.top/token for more details
 
 ## Build
 

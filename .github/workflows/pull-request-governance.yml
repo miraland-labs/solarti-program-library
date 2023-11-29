@@ -7,7 +7,7 @@ on:
       - "token/**"
       - "ci/*-version.sh"
   push:
-    branches: [master]
+    branches: [main]
     paths:
       - "governance/**"
       - "token/**"
@@ -34,7 +34,7 @@ jobs:
           source ci/rust-version.sh
           echo "RUST_STABLE=$rust_stable" >> $GITHUB_ENV
           source ci/miraland-version.sh
-          echo "SOLANA_VERSION=$solana_version" >> $GITHUB_ENV
+          echo "MIRALAND_VERSION=$miraland_version" >> $GITHUB_ENV
 
       - uses: actions-rs/toolchain@v1
         with:
@@ -57,14 +57,14 @@ jobs:
 
       - uses: actions/cache@v2
         with:
-          path: ~/.cache/solana
-          key: solana-${{ env.SOLANA_VERSION }}
+          path: ~/.cache/miraland
+          key: miraland-${{ env.MIRALAND_VERSION }}
 
       - name: Install dependencies
         run: |
           ./ci/install-build-deps.sh
           ./ci/install-program-deps.sh
-          echo "$HOME/.local/share/solana/install/active_release/bin" >> $GITHUB_PATH
+          echo "$HOME/.local/share/miraland/install/active_release/bin" >> $GITHUB_PATH
 
       - name: Build and test
         timeout-minutes: 60

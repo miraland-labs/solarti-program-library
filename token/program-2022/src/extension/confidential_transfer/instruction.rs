@@ -167,7 +167,7 @@ pub enum ConfidentialTransferInstruction {
     ///   `EmptyAccountInstructionData`
     EmptyAccount,
 
-    /// Deposit SPL Tokens into the pending balance of a confidential token
+    /// Deposit Solarti Tokens into the pending balance of a confidential token
     /// account.
     ///
     /// The account owner can then invoke the `ApplyPendingBalance` instruction
@@ -195,7 +195,7 @@ pub enum ConfidentialTransferInstruction {
     ///   `DepositInstructionData`
     Deposit,
 
-    /// Withdraw SPL Tokens from the available balance of a confidential token
+    /// Withdraw Solarti Tokens from the available balance of a confidential token
     /// account.
     ///
     /// Fails if the source or destination accounts are frozen.

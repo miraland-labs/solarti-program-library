@@ -1,8 +1,8 @@
 //! Helper functions to generate split zero-knowledge proofs for confidential
 //! transfers in the Confidential Transfer Extension.
 //!
-//! The logic in this submodule should belong to the `solana-zk-token-sdk` and
-//! will be removed with an upgrade to the Solana program.
+//! The logic in this submodule should belong to the `miraland-zk-token-sdk` and
+//! will be removed with an upgrade to the Miraland program.
 
 use {
     curve25519_dalek::scalar::Scalar,

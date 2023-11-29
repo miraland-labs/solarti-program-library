@@ -1,6 +1,6 @@
 [package]
 name = "solarti-token-metadata-interface"
-version = "0.2.2"
+version = "0.2.3"
 description = "Solarti Program Library Token Metadata Interface"
 authors = [
   "Miraland Crafters <crafters@miraland.top>",
@@ -14,8 +14,8 @@ edition = "2021"
 serde-traits = ["dep:serde", "solarti-pod/serde-traits"]
 
 [dependencies]
-borsh = "0.10.3"
-serde = { version = "1.0.192", optional = true }
+borsh = "0.10"
+serde = { version = "1.0.193", optional = true }
 miraland-program = "1.14.18"
 solarti-discriminator = { version = "0.1" , path = "../../libraries/discriminator" }
 solarti-program-error = { version = "0.3" , path = "../../libraries/program-error" }

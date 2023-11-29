@@ -1,18 +1,20 @@
-#![allow(clippy::integer_arithmetic)]
+#![allow(clippy::arithmetic_side_effects)]
 #![cfg(feature = "test-sbf")]
 
 mod helpers;
 
-use helpers::*;
-use solana_program_test::*;
-use solana_sdk::{
-    signature::{Keypair, Signer},
-    transaction::Transaction,
-};
-use spl_token::instruction::approve;
-use spl_token_lending::{
-    instruction::deposit_obligation_collateral, processor::process_instruction,
-    state::INITIAL_COLLATERAL_RATIO,
+use {
+    helpers::*,
+    solana_program_test::*,
+    solana_sdk::{
+        signature::{Keypair, Signer},
+        transaction::Transaction,
+    },
+    spl_token::instruction::approve,
+    spl_token_lending::{
+        instruction::deposit_obligation_collateral, processor::process_instruction,
+        state::INITIAL_COLLATERAL_RATIO,
+    },
 };
 
 #[tokio::test]
@@ -26,8 +28,8 @@ async fn test_success() {
     // limit to track compute unit increase
     test.set_compute_max_units(38_000);
 
-    const SOL_DEPOSIT_AMOUNT_LAMPORTS: u64 = 10 * LAMPORTS_TO_SOL * INITIAL_COLLATERAL_RATIO;
-    const SOL_RESERVE_COLLATERAL_LAMPORTS: u64 = 2 * SOL_DEPOSIT_AMOUNT_LAMPORTS;
+    const MLN_DEPOSIT_AMOUNT_LAMPORTS: u64 = 10 * LAMPORTS_TO_MLN * INITIAL_COLLATERAL_RATIO;
+    const MLN_RESERVE_COLLATERAL_LAMPORTS: u64 = 2 * MLN_DEPOSIT_AMOUNT_LAMPORTS;
 
     let user_accounts_owner = Keypair::new();
     let user_transfer_authority = Keypair::new();
@@ -41,8 +43,8 @@ async fn test_success() {
         &sol_oracle,
         &user_accounts_owner,
         AddReserveArgs {
-            user_liquidity_amount: SOL_RESERVE_COLLATERAL_LAMPORTS,
-            liquidity_amount: SOL_RESERVE_COLLATERAL_LAMPORTS,
+            user_liquidity_amount: MLN_RESERVE_COLLATERAL_LAMPORTS,
+            liquidity_amount: MLN_RESERVE_COLLATERAL_LAMPORTS,
             liquidity_mint_decimals: 9,
             liquidity_mint_pubkey: spl_token::native_mint::id(),
             config: TEST_RESERVE_CONFIG,
@@ -75,12 +77,12 @@ async fn test_success() {
                 &user_transfer_authority.pubkey(),
                 &user_accounts_owner.pubkey(),
                 &[],
-                SOL_DEPOSIT_AMOUNT_LAMPORTS,
+                MLN_DEPOSIT_AMOUNT_LAMPORTS,
             )
             .unwrap(),
             deposit_obligation_collateral(
                 spl_token_lending::id(),
-                SOL_DEPOSIT_AMOUNT_LAMPORTS,
+                MLN_DEPOSIT_AMOUNT_LAMPORTS,
                 sol_test_reserve.user_collateral_pubkey,
                 sol_test_reserve.collateral_supply_pubkey,
                 sol_test_reserve.pubkey,
@@ -104,12 +106,12 @@ async fn test_success() {
         get_token_balance(&mut banks_client, sol_test_reserve.collateral_supply_pubkey).await;
     assert_eq!(
         collateral_supply_balance,
-        initial_collateral_supply_balance + SOL_DEPOSIT_AMOUNT_LAMPORTS
+        initial_collateral_supply_balance + MLN_DEPOSIT_AMOUNT_LAMPORTS
     );
     let user_collateral_balance =
         get_token_balance(&mut banks_client, sol_test_reserve.user_collateral_pubkey).await;
     assert_eq!(
         user_collateral_balance,
-        initial_user_collateral_balance - SOL_DEPOSIT_AMOUNT_LAMPORTS
+        initial_user_collateral_balance - MLN_DEPOSIT_AMOUNT_LAMPORTS
     );
 }

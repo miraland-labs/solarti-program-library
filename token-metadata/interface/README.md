@@ -1,7 +1,7 @@
 ## Token-Metadata Interface
 
 An interface describing the instructions required for a program to implement
-to be considered a "token-metadata" program for SPL token mints. The interface
+to be considered a "token-metadata" program for Solarti token mints. The interface
 can be implemented by any program.
 
 With a common interface, any wallet, dapp, or on-chain program can read the metadata,
@@ -44,7 +44,7 @@ here.
 Initializes the token-metadata TLV entry in an account with an update authority,
 name, symbol, and URI.
 
-Must provide an SPL token mint and be signed by the mint authority.
+Must provide an Solarti token mint and be signed by the mint authority.
 
 #### Update Field
 
@@ -104,4 +104,4 @@ interface in their program can freely add any other data fields in a different
 TLV entry.
 
 You can find more information about TLV / type-length-value structures at the
-[spl-type-length-value repo](https://github.com/solana-labs/solana-program-library/tree/master/libraries/type-length-value).
+[spl-type-length-value repo](https://github.com/miraland-labs/solarti-program-library/tree/master/libraries/type-length-value).

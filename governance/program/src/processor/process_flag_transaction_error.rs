@@ -1,18 +1,19 @@
 //! Program state processor
 
-use solana_program::{
-    account_info::{next_account_info, AccountInfo},
-    clock::Clock,
-    entrypoint::ProgramResult,
-    pubkey::Pubkey,
-    sysvar::Sysvar,
-};
-
-use crate::state::{
-    enums::{ProposalState, TransactionExecutionStatus},
-    proposal::get_proposal_data,
-    proposal_transaction::get_proposal_transaction_data_for_proposal,
-    token_owner_record::get_token_owner_record_data_for_proposal_owner,
+use {
+    crate::state::{
+        enums::{ProposalState, TransactionExecutionStatus},
+        proposal::get_proposal_data,
+        proposal_transaction::get_proposal_transaction_data_for_proposal,
+        token_owner_record::get_token_owner_record_data_for_proposal_owner,
+    },
+    solana_program::{
+        account_info::{next_account_info, AccountInfo},
+        clock::Clock,
+        entrypoint::ProgramResult,
+        pubkey::Pubkey,
+        sysvar::Sysvar,
+    },
 };
 
 /// Processes FlagTransactionError instruction
@@ -49,17 +50,18 @@ pub fn process_flag_transaction_error(
 
     token_owner_record_data.assert_token_owner_or_delegate_is_signer(governance_authority_info)?;
 
-    // If this is the first instruction to be executed then set executing_at timestamp
-    // It indicates when we started executing instructions for the Proposal and the fact we only flag it as error is irrelevant here
+    // If this is the first instruction to be executed then set executing_at
+    // timestamp It indicates when we started executing instructions for the
+    // Proposal and the fact we only flag it as error is irrelevant here
     if proposal_data.state == ProposalState::Succeeded {
         proposal_data.executing_at = Some(clock.unix_timestamp);
     }
 
     proposal_data.state = ProposalState::ExecutingWithErrors;
-    proposal_data.serialize(&mut *proposal_info.data.borrow_mut())?;
+    proposal_data.serialize(&mut proposal_info.data.borrow_mut()[..])?;
 
     proposal_transaction_data.execution_status = TransactionExecutionStatus::Error;
-    proposal_transaction_data.serialize(&mut *proposal_transaction_info.data.borrow_mut())?;
+    proposal_transaction_data.serialize(&mut proposal_transaction_info.data.borrow_mut()[..])?;
 
     Ok(())
 }

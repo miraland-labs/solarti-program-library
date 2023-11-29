@@ -14,7 +14,7 @@ edition = "2021"
 test-sbf = []
 
 [dependencies]
-arrayref = "0.3.6"
+arrayref = "0.3.7"
 miraland-program = "1.14.18"
 
 [dev-dependencies]

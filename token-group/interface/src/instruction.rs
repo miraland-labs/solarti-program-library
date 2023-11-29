@@ -50,7 +50,7 @@ pub struct UpdateGroupAuthority {
 #[discriminator_hash_input("spl_token_group_interface:initialize_member")]
 pub struct InitializeMember;
 
-/// All instructions that must be implemented in the SPL Token Group Interface
+/// All instructions that must be implemented in the Solarti Token Group Interface
 #[derive(Clone, Debug, PartialEq)]
 pub enum TokenGroupInstruction {
     /// Initialize a new `Group`

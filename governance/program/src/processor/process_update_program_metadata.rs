@@ -1,20 +1,22 @@
 //! Program state processor
 
-use borsh::BorshSerialize;
-use solana_program::{
-    account_info::{next_account_info, AccountInfo},
-    clock::Clock,
-    entrypoint::ProgramResult,
-    msg,
-    pubkey::Pubkey,
-    rent::Rent,
-    sysvar::Sysvar,
-};
-use spl_governance_tools::account::create_and_serialize_account_signed;
-
-use crate::state::{
-    enums::GovernanceAccountType,
-    program_metadata::{get_program_metadata_data, get_program_metadata_seeds, ProgramMetadata},
+use {
+    crate::state::{
+        enums::GovernanceAccountType,
+        program_metadata::{
+            get_program_metadata_data, get_program_metadata_seeds, ProgramMetadata,
+        },
+    },
+    solana_program::{
+        account_info::{next_account_info, AccountInfo},
+        clock::Clock,
+        entrypoint::ProgramResult,
+        msg,
+        pubkey::Pubkey,
+        rent::Rent,
+        sysvar::Sysvar,
+    },
+    spl_governance_tools::account::create_and_serialize_account_signed,
 };
 
 /// Processes UpdateProgramMetadata instruction
@@ -33,7 +35,8 @@ pub fn process_update_program_metadata(
 
     const VERSION: &str = env!("CARGO_PKG_VERSION");
 
-    // Put the metadata info into the logs to make it possible to extract it using Tx simulation
+    // Put the metadata info into the logs to make it possible to extract it using
+    // Tx simulation
     msg!("PROGRAM-VERSION:{:?}", VERSION);
 
     if program_metadata_info.data_is_empty() {
@@ -61,7 +64,10 @@ pub fn process_update_program_metadata(
         program_metadata_data.version = VERSION.to_string();
         program_metadata_data.updated_at = updated_at;
 
-        program_metadata_data.serialize(&mut *program_metadata_info.data.borrow_mut())?;
+        borsh::to_writer(
+            &mut program_metadata_info.data.borrow_mut()[..],
+            &program_metadata_data,
+        )?;
     }
 
     Ok(())

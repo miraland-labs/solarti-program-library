@@ -1,8 +1,10 @@
 //! Program processor
 
+mod process_add_required_signatory;
 mod process_add_signatory;
 mod process_cancel_proposal;
 mod process_cast_vote;
+mod process_complete_proposal;
 mod process_create_governance;
 mod process_create_mint_governance;
 mod process_create_native_treasury;
@@ -18,7 +20,7 @@ mod process_flag_transaction_error;
 mod process_insert_transaction;
 mod process_refund_proposal_deposit;
 mod process_relinquish_vote;
-mod process_remove_signatory;
+mod process_remove_required_signatory;
 mod process_remove_transaction;
 mod process_revoke_governing_tokens;
 mod process_set_governance_config;
@@ -29,40 +31,42 @@ mod process_sign_off_proposal;
 mod process_update_program_metadata;
 mod process_withdraw_governing_tokens;
 
-use crate::instruction::GovernanceInstruction;
-
-use process_add_signatory::*;
-use process_cancel_proposal::*;
-use process_cast_vote::*;
-use process_create_governance::*;
-use process_create_mint_governance::*;
-use process_create_native_treasury::*;
-use process_create_program_governance::*;
-use process_create_proposal::*;
-use process_create_realm::*;
-use process_create_token_governance::*;
-use process_create_token_owner_record::*;
-use process_deposit_governing_tokens::*;
-use process_execute_transaction::*;
-use process_finalize_vote::*;
-use process_flag_transaction_error::*;
-use process_insert_transaction::*;
-use process_refund_proposal_deposit::*;
-use process_relinquish_vote::*;
-use process_remove_signatory::*;
-use process_remove_transaction::*;
-use process_revoke_governing_tokens::*;
-use process_set_governance_config::*;
-use process_set_governance_delegate::*;
-use process_set_realm_authority::*;
-use process_set_realm_config::*;
-use process_sign_off_proposal::*;
-use process_update_program_metadata::*;
-use process_withdraw_governing_tokens::*;
-
-use solana_program::{
-    account_info::AccountInfo, borsh::try_from_slice_unchecked, entrypoint::ProgramResult, msg,
-    program_error::ProgramError, pubkey::Pubkey,
+use {
+    crate::{error::GovernanceError, instruction::GovernanceInstruction},
+    process_add_required_signatory::*,
+    process_add_signatory::*,
+    process_cancel_proposal::*,
+    process_cast_vote::*,
+    process_complete_proposal::*,
+    process_create_governance::*,
+    process_create_mint_governance::*,
+    process_create_native_treasury::*,
+    process_create_program_governance::*,
+    process_create_proposal::*,
+    process_create_realm::*,
+    process_create_token_governance::*,
+    process_create_token_owner_record::*,
+    process_deposit_governing_tokens::*,
+    process_execute_transaction::*,
+    process_finalize_vote::*,
+    process_flag_transaction_error::*,
+    process_insert_transaction::*,
+    process_refund_proposal_deposit::*,
+    process_relinquish_vote::*,
+    process_remove_required_signatory::*,
+    process_remove_transaction::*,
+    process_revoke_governing_tokens::*,
+    process_set_governance_config::*,
+    process_set_governance_delegate::*,
+    process_set_realm_authority::*,
+    process_set_realm_config::*,
+    process_sign_off_proposal::*,
+    process_update_program_metadata::*,
+    process_withdraw_governing_tokens::*,
+    solana_program::{
+        account_info::AccountInfo, borsh0_10::try_from_slice_unchecked, entrypoint::ProgramResult,
+        msg, program_error::ProgramError, pubkey::Pubkey,
+    },
 };
 
 /// Processes an instruction
@@ -72,7 +76,8 @@ pub fn process_instruction(
     input: &[u8],
 ) -> ProgramResult {
     msg!("VERSION:{:?}", env!("CARGO_PKG_VERSION"));
-    // Use try_from_slice_unchecked to support forward compatibility of newer UI with older program
+    // Use try_from_slice_unchecked to support forward compatibility of newer UI
+    // with older program
     let instruction: GovernanceInstruction =
         try_from_slice_unchecked(input).map_err(|_| ProgramError::InvalidInstructionData)?;
 
@@ -162,8 +167,8 @@ pub fn process_instruction(
         GovernanceInstruction::AddSignatory { signatory } => {
             process_add_signatory(program_id, accounts, signatory)
         }
-        GovernanceInstruction::RemoveSignatory { signatory } => {
-            process_remove_signatory(program_id, accounts, signatory)
+        GovernanceInstruction::Legacy1 => {
+            Err(GovernanceError::InstructionDeprecated.into()) // No-op
         }
         GovernanceInstruction::SignOffProposal {} => {
             process_sign_off_proposal(program_id, accounts)
@@ -226,6 +231,17 @@ pub fn process_instruction(
 
         GovernanceInstruction::RefundProposalDeposit {} => {
             process_refund_proposal_deposit(program_id, accounts)
+        }
+
+        GovernanceInstruction::CompleteProposal {} => {
+            process_complete_proposal(program_id, accounts)
+        }
+
+        GovernanceInstruction::AddRequiredSignatory { signatory } => {
+            process_add_required_signatory(program_id, accounts, signatory)
+        }
+        GovernanceInstruction::RemoveRequiredSignatory => {
+            process_remove_required_signatory(program_id, accounts)
         }
     }
 }

@@ -69,7 +69,7 @@ fn de_escalate_account_meta(account_meta: &mut AccountMeta, account_metas: &[Acc
 /// ```rust
 /// use {
 ///     futures_util::TryFutureExt,
-///     solana_client::nonblocking::rpc_client::RpcClient,
+///     miraland_client::nonblocking::rpc_client::RpcClient,
 ///     solana_program::{
 ///         account_info::AccountInfo, instruction::{AccountMeta, Instruction},
 ///         pubkey::Pubkey

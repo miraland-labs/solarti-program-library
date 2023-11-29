@@ -1,31 +1,32 @@
 //! Program state processor
 
-use solana_program::{
-    account_info::{next_account_info, AccountInfo},
-    clock::Clock,
-    entrypoint::ProgramResult,
-    pubkey::Pubkey,
-    rent::Rent,
-    sysvar::Sysvar,
-};
-use spl_governance_addin_api::voter_weight::VoterWeightAction;
-use spl_governance_tools::account::create_and_serialize_account_signed;
-
-use crate::{
-    error::GovernanceError,
-    state::{
-        enums::{GovernanceAccountType, InstructionExecutionFlags, ProposalState},
-        governance::get_governance_data_for_realm,
-        proposal::{
-            assert_valid_proposal_options, get_proposal_address_seeds, OptionVoteResult,
-            ProposalOption, ProposalV2, VoteType,
+use {
+    crate::{
+        error::GovernanceError,
+        state::{
+            enums::{GovernanceAccountType, InstructionExecutionFlags, ProposalState},
+            governance::get_governance_data_for_realm,
+            proposal::{
+                assert_valid_proposal_options, get_proposal_address_seeds, OptionVoteResult,
+                ProposalOption, ProposalV2, VoteType,
+            },
+            proposal_deposit::{get_proposal_deposit_address_seeds, ProposalDeposit},
+            realm::get_realm_data_for_governing_token_mint,
+            realm_config::get_realm_config_data_for_realm,
+            token_owner_record::get_token_owner_record_data_for_realm,
+            vote_record::VoteKind,
         },
-        proposal_deposit::{get_proposal_deposit_address_seeds, ProposalDeposit},
-        realm::get_realm_data_for_governing_token_mint,
-        realm_config::get_realm_config_data_for_realm,
-        token_owner_record::get_token_owner_record_data_for_realm,
-        vote_record::VoteKind,
     },
+    solana_program::{
+        account_info::{next_account_info, AccountInfo},
+        clock::Clock,
+        entrypoint::ProgramResult,
+        pubkey::Pubkey,
+        rent::Rent,
+        sysvar::Sysvar,
+    },
+    spl_governance_addin_api::voter_weight::VoterWeightAction,
+    spl_governance_tools::account::create_and_serialize_account_signed,
 };
 
 /// Processes CreateProposal instruction
@@ -81,7 +82,8 @@ pub fn process_create_proposal(
         realm_info.key,
     )?;
 
-    // Proposal owner (TokenOwner) or its governance_delegate must sign this transaction
+    // Proposal owner (TokenOwner) or its governance_delegate must sign this
+    // transaction
     proposal_owner_record_data
         .assert_token_owner_or_delegate_is_signer(governance_authority_info)?;
 
@@ -97,7 +99,8 @@ pub fn process_create_proposal(
         governance_info.key,
     )?;
 
-    // Ensure proposal owner (TokenOwner) has enough tokens to create proposal and no outstanding proposals
+    // Ensure proposal owner (TokenOwner) has enough tokens to create proposal and
+    // no outstanding proposals
     proposal_owner_record_data.assert_can_create_proposal(
         &realm_data,
         &governance_data.config,
@@ -108,7 +111,7 @@ pub fn process_create_proposal(
         .outstanding_proposal_count
         .checked_add(1)
         .unwrap();
-    proposal_owner_record_data.serialize(&mut *proposal_owner_record_info.data.borrow_mut())?;
+    proposal_owner_record_data.serialize(&mut proposal_owner_record_info.data.borrow_mut()[..])?;
 
     assert_valid_proposal_options(&options, &vote_type)?;
 

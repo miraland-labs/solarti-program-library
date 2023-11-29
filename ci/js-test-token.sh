@@ -5,9 +5,10 @@ cd "$(dirname "$0")/.."
 source ./ci/miraland-version.sh install
 
 set -x
-cd token/js
+pnpm install
+pnpm build
 
-npm install
-npm run lint
-npm run build
-npm test
+cd token/js
+pnpm build:program
+pnpm lint
+pnpm test

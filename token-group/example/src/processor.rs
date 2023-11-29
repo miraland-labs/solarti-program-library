@@ -57,7 +57,7 @@ pub fn process_initialize_group(
 
     {
         // IMPORTANT: this example program is designed to work with any
-        // program that implements the SPL token interface, so there is no
+        // program that implements the Solarti token interface, so there is no
         // ownership check on the mint account.
         let mint_data = mint_info.try_borrow_data()?;
         let mint = StateWithExtensions::<Mint>::unpack(&mint_data)?;
@@ -164,7 +164,7 @@ pub fn process_initialize_member(_program_id: &Pubkey, accounts: &[AccountInfo])
     // Mint checks on the member
     {
         // IMPORTANT: this example program is designed to work with any
-        // program that implements the SPL token interface, so there is no
+        // program that implements the Solarti token interface, so there is no
         // ownership check on the mint account.
         let member_mint_data = member_mint_info.try_borrow_data()?;
         let member_mint = StateWithExtensions::<Mint>::unpack(&member_mint_data)?;

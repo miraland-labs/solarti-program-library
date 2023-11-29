@@ -1,16 +1,17 @@
 //! Program state processor
 
-use solana_program::{
-    account_info::{next_account_info, AccountInfo},
-    entrypoint::ProgramResult,
-    pubkey::Pubkey,
-};
-
-use crate::{
-    error::GovernanceError,
-    state::{
-        governance::assert_governance_for_realm,
-        realm::{get_realm_data_for_authority, SetRealmAuthorityAction},
+use {
+    crate::{
+        error::GovernanceError,
+        state::{
+            governance::assert_governance_for_realm,
+            realm::{get_realm_data_for_authority, SetRealmAuthorityAction},
+        },
+    },
+    solana_program::{
+        account_info::{next_account_info, AccountInfo},
+        entrypoint::ProgramResult,
+        pubkey::Pubkey,
     },
 };
 
@@ -48,7 +49,7 @@ pub fn process_set_realm_authority(
 
     realm_data.authority = new_realm_authority;
 
-    realm_data.serialize(&mut *realm_info.data.borrow_mut())?;
+    realm_data.serialize(&mut realm_info.data.borrow_mut()[..])?;
 
     Ok(())
 }

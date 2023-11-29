@@ -2,13 +2,14 @@
 
 #![cfg(not(feature = "no-entrypoint"))]
 
-use solana_program::{
-    account_info::AccountInfo,
-    entrypoint,
-    entrypoint::{ProgramResult, HEAP_LENGTH, HEAP_START_ADDRESS},
-    pubkey::Pubkey,
+use {
+    solana_program::{
+        account_info::AccountInfo,
+        entrypoint::{ProgramResult, HEAP_LENGTH, HEAP_START_ADDRESS},
+        pubkey::Pubkey,
+    },
+    std::{alloc::Layout, mem::size_of, ptr::null_mut, usize},
 };
-use std::{alloc::Layout, mem::size_of, ptr::null_mut, usize};
 
 /// Developers can implement their own heap by defining their own
 /// `#[global_allocator]`.  The following implements a dummy for test purposes
@@ -44,7 +45,7 @@ unsafe impl std::alloc::GlobalAlloc for BumpAllocator {
 #[global_allocator]
 static A: BumpAllocator = BumpAllocator;
 
-entrypoint!(process_instruction);
+solana_program::entrypoint!(process_instruction);
 fn process_instruction(
     program_id: &Pubkey,
     accounts: &[AccountInfo],

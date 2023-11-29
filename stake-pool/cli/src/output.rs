@@ -1,9 +1,10 @@
 use {
     serde::{Deserialize, Serialize},
     miraland_cli_output::{QuietDisplay, VerboseDisplay},
-    solana_sdk::native_token::Mln,
-    solana_sdk::{pubkey::Pubkey, stake::state::Lockup},
-    spl_stake_pool::state::{Fee, StakePool, StakeStatus, ValidatorList, ValidatorStakeInfo},
+    solana_sdk::{native_token::Mln, pubkey::Pubkey, stake::state::Lockup},
+    spl_stake_pool::state::{
+        Fee, PodStakeStatus, StakePool, StakeStatus, ValidatorList, ValidatorStakeInfo,
+    },
     std::fmt::{Display, Formatter, Result, Write},
 };
 
@@ -372,20 +373,21 @@ pub(crate) struct CliStakePoolValidator {
 impl From<ValidatorStakeInfo> for CliStakePoolValidator {
     fn from(v: ValidatorStakeInfo) -> Self {
         Self {
-            active_stake_lamports: v.active_stake_lamports,
-            transient_stake_lamports: v.transient_stake_lamports,
-            last_update_epoch: v.last_update_epoch,
-            transient_seed_suffix: v.transient_seed_suffix,
-            unused: v.unused,
-            validator_seed_suffix: v.validator_seed_suffix,
+            active_stake_lamports: v.active_stake_lamports.into(),
+            transient_stake_lamports: v.transient_stake_lamports.into(),
+            last_update_epoch: v.last_update_epoch.into(),
+            transient_seed_suffix: v.transient_seed_suffix.into(),
+            unused: v.unused.into(),
+            validator_seed_suffix: v.validator_seed_suffix.into(),
             status: CliStakePoolValidatorStakeStatus::from(v.status),
             vote_account_address: v.vote_account_address.to_string(),
         }
     }
 }
 
-impl From<StakeStatus> for CliStakePoolValidatorStakeStatus {
-    fn from(s: StakeStatus) -> CliStakePoolValidatorStakeStatus {
+impl From<PodStakeStatus> for CliStakePoolValidatorStakeStatus {
+    fn from(s: PodStakeStatus) -> CliStakePoolValidatorStakeStatus {
+        let s = StakeStatus::try_from(s).unwrap();
         match s {
             StakeStatus::Active => CliStakePoolValidatorStakeStatus::Active,
             StakeStatus::DeactivatingTransient => {

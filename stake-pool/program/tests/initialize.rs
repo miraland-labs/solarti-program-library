@@ -1,4 +1,5 @@
-#![allow(clippy::integer_arithmetic)]
+#![allow(clippy::arithmetic_side_effects)]
+#![allow(clippy::items_after_test_module)]
 #![cfg(feature = "test-sbf")]
 
 mod helpers;
@@ -7,7 +8,7 @@ use {
     borsh::BorshSerialize,
     helpers::*,
     solana_program::{
-        borsh::{get_instance_packed_len, get_packed_len, try_from_slice_unchecked},
+        borsh0_10::{get_instance_packed_len, get_packed_len, try_from_slice_unchecked},
         hash::Hash,
         instruction::{AccountMeta, Instruction},
         program_pack::Pack,
@@ -448,7 +449,7 @@ async fn fail_with_freeze_authority() {
                 &wrong_mint.pubkey(),
                 &stake_pool_accounts.withdraw_authority,
                 Some(&stake_pool_accounts.withdraw_authority),
-                0,
+                stake_pool_accounts.pool_decimals,
             )
             .unwrap(),
         ],
@@ -1412,7 +1413,7 @@ async fn fail_with_bad_reserve() {
             error,
             TransactionError::InstructionError(
                 2,
-                InstructionError::Custom(error::StakePoolError::WrongStakeState as u32),
+                InstructionError::Custom(error::StakePoolError::WrongStakeStake as u32),
             )
         );
     }
@@ -1464,7 +1465,7 @@ async fn fail_with_bad_reserve() {
             error,
             TransactionError::InstructionError(
                 2,
-                InstructionError::Custom(error::StakePoolError::WrongStakeState as u32),
+                InstructionError::Custom(error::StakePoolError::WrongStakeStake as u32),
             )
         );
     }
@@ -1519,7 +1520,7 @@ async fn fail_with_bad_reserve() {
             error,
             TransactionError::InstructionError(
                 2,
-                InstructionError::Custom(error::StakePoolError::WrongStakeState as u32),
+                InstructionError::Custom(error::StakePoolError::WrongStakeStake as u32),
             )
         );
     }
@@ -1527,7 +1528,7 @@ async fn fail_with_bad_reserve() {
     {
         let bad_stake = Keypair::new();
         let rent = banks_client.get_rent().await.unwrap();
-        let lamports = rent.minimum_balance(std::mem::size_of::<stake::state::StakeState>())
+        let lamports = rent.minimum_balance(std::mem::size_of::<stake::state::StakeStateV2>())
             + MINIMUM_RESERVE_LAMPORTS;
 
         let transaction = Transaction::new_signed_with_payer(
@@ -1535,7 +1536,7 @@ async fn fail_with_bad_reserve() {
                 &payer.pubkey(),
                 &bad_stake.pubkey(),
                 lamports,
-                std::mem::size_of::<stake::state::StakeState>() as u64,
+                std::mem::size_of::<stake::state::StakeStateV2>() as u64,
                 &stake::program::id(),
             )],
             Some(&payer.pubkey()),
@@ -1575,7 +1576,7 @@ async fn fail_with_bad_reserve() {
             error,
             TransactionError::InstructionError(
                 2,
-                InstructionError::Custom(error::StakePoolError::WrongStakeState as u32),
+                InstructionError::Custom(error::StakePoolError::WrongStakeStake as u32),
             )
         );
     }
@@ -1602,4 +1603,31 @@ async fn success_with_extra_reserve_lamports() {
     )
     .await;
     assert_eq!(init_pool_tokens, init_lamports);
+}
+
+#[tokio::test]
+async fn fail_with_incorrect_mint_decimals() {
+    let (mut banks_client, payer, recent_blockhash) = program_test().start().await;
+    let stake_pool_accounts = StakePoolAccounts {
+        pool_decimals: 8,
+        ..Default::default()
+    };
+    let error = stake_pool_accounts
+        .initialize_stake_pool(
+            &mut banks_client,
+            &payer,
+            &recent_blockhash,
+            MINIMUM_RESERVE_LAMPORTS,
+        )
+        .await
+        .unwrap_err()
+        .unwrap();
+
+    assert_eq!(
+        error,
+        TransactionError::InstructionError(
+            2,
+            InstructionError::Custom(error::StakePoolError::IncorrectMintDecimals as u32),
+        )
+    );
 }

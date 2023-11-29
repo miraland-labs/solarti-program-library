@@ -1,23 +1,23 @@
-use solana_program::program_option::COption;
-use solana_program_test::*;
-use solana_sdk::{
-    commitment_config::CommitmentLevel,
-    instruction::Instruction,
-    native_token::LAMPORTS_PER_MLN,
-    pubkey::Pubkey,
-    signature::Signature,
-    signature::{Keypair, Signer},
-    system_instruction,
-    transaction::Transaction,
+use {
+    solana_program::program_option::COption,
+    solana_program_test::*,
+    solana_sdk::{
+        commitment_config::CommitmentLevel,
+        instruction::Instruction,
+        native_token::LAMPORTS_PER_MLN,
+        pubkey::Pubkey,
+        signature::{Keypair, Signature, Signer},
+        system_instruction,
+        transaction::Transaction,
+    },
+    spl_associated_token_account::{
+        get_associated_token_address, instruction::create_associated_token_account,
+    },
+    spl_managed_token::instruction::*,
+    spl_token::state::Account as TokenAccount,
 };
 
-use spl_associated_token_account::{
-    get_associated_token_address, instruction::create_associated_token_account,
-};
-use spl_managed_token::instruction::*;
-use spl_token::state::Account as TokenAccount;
-
-pub fn sol(amount: f64) -> u64 {
+pub fn mln(amount: f64) -> u64 {
     (amount * LAMPORTS_PER_MLN as f64) as u64
 }
 
@@ -25,7 +25,7 @@ async fn process_transaction(
     client: &mut BanksClient,
     instructions: Vec<Instruction>,
     signers: Vec<&Keypair>,
-) -> anyhow::Result<Signature> {
+) -> Result<Signature, BanksClientError> {
     let mut tx = Transaction::new_with_payer(&instructions, Some(&signers[0].pubkey()));
     tx.partial_sign(&signers, client.get_latest_blockhash().await?);
     let sig = tx.signatures[0];
@@ -40,7 +40,7 @@ async fn transfer(
     payer: &Keypair,
     receiver: &Pubkey,
     amount: u64,
-) -> anyhow::Result<Signature> {
+) -> Result<Signature, BanksClientError> {
     let ixs = vec![system_instruction::transfer(
         &payer.pubkey(),
         receiver,
@@ -62,7 +62,7 @@ async fn test_spl_managed_token_basic() {
     let mut context = spl_managed_token_test().start_with_context().await;
     let lwc = &mut context.banks_client;
     let authority = Keypair::new();
-    transfer(lwc, &context.payer, &authority.pubkey(), sol(10.0))
+    transfer(lwc, &context.payer, &authority.pubkey(), mln(10.0))
         .await
         .unwrap();
     let mint = Keypair::new();
@@ -82,7 +82,7 @@ async fn test_spl_managed_token_basic() {
     let eve_key = eve.pubkey();
 
     for k in [&alice_key, &bob_key] {
-        transfer(lwc, &context.payer, k, sol(1.0)).await.unwrap();
+        transfer(lwc, &context.payer, k, mln(1.0)).await.unwrap();
         let create_ata = create_initialize_account_instruction(
             &mint_key,
             k,
@@ -149,7 +149,7 @@ async fn test_spl_managed_token_with_approve_and_revoke() {
     let mut context = spl_managed_token_test().start_with_context().await;
     let lwc = &mut context.banks_client;
     let authority = Keypair::new();
-    transfer(lwc, &context.payer, &authority.pubkey(), sol(10.0))
+    transfer(lwc, &context.payer, &authority.pubkey(), mln(10.0))
         .await
         .unwrap();
     let mint = Keypair::new();
@@ -166,10 +166,10 @@ async fn test_spl_managed_token_with_approve_and_revoke() {
     let bob = Keypair::new();
     let bob_key = bob.pubkey();
 
-    transfer(lwc, &context.payer, &alice_key, sol(1.0))
+    transfer(lwc, &context.payer, &alice_key, mln(1.0))
         .await
         .unwrap();
-    transfer(lwc, &context.payer, &bob_key, sol(1.0))
+    transfer(lwc, &context.payer, &bob_key, mln(1.0))
         .await
         .unwrap();
 
@@ -222,7 +222,7 @@ async fn test_spl_managed_token_with_delegate_transfer() {
     let mut context = spl_managed_token_test().start_with_context().await;
     let lwc = &mut context.banks_client;
     let authority = Keypair::new();
-    transfer(lwc, &context.payer, &authority.pubkey(), sol(10.0))
+    transfer(lwc, &context.payer, &authority.pubkey(), mln(10.0))
         .await
         .unwrap();
     let mint = Keypair::new();
@@ -241,10 +241,10 @@ async fn test_spl_managed_token_with_delegate_transfer() {
     let eve = Keypair::new();
     let eve_key = eve.pubkey();
 
-    transfer(lwc, &context.payer, &alice_key, sol(1.0))
+    transfer(lwc, &context.payer, &alice_key, mln(1.0))
         .await
         .unwrap();
-    transfer(lwc, &context.payer, &bob_key, sol(1.0))
+    transfer(lwc, &context.payer, &bob_key, mln(1.0))
         .await
         .unwrap();
 

@@ -1,3 +1,12 @@
+// Very important! We need to do this polyfill before any of the imports because
+// some web3.js dependencies store `crypto` elsewhere.
+import { randomBytes } from 'crypto';
+Object.defineProperty(globalThis, 'crypto', {
+  value: {
+    getRandomValues: (arr: any) => randomBytes(arr.length),
+  },
+});
+
 import {
   PublicKey,
   Connection,
@@ -5,18 +14,21 @@ import {
   SystemProgram,
   AccountInfo,
   LAMPORTS_PER_MLN,
-} from '@solarti/web3.js';
+} from '@solana/web3.js';
+import { TOKEN_PROGRAM_ID, TokenAccountNotFoundError } from '@solana/spl-token';
 import { StakePoolLayout } from '../src/layouts';
 import {
   STAKE_POOL_INSTRUCTION_LAYOUTS,
-  STAKE_POOL_PROGRAM_ID,
-  DepositMlnParams,
+  DepositSolParams,
   StakePoolInstruction,
-  depositMln,
-  withdrawMln,
+  depositSol,
+  withdrawSol,
   withdrawStake,
   redelegate,
   getStakeAccount,
+  createPoolTokenMetadata,
+  updatePoolTokenMetadata,
+  tokenMetadataLayout,
 } from '../src';
 
 import { decodeData } from '../src/utils';
@@ -37,7 +49,7 @@ describe('StakePoolProgram', () => {
 
   connection.getMinimumBalanceForRentExemption = jest.fn(async () => 10000);
 
-  const stakePoolAddress = new PublicKey('spooqgqqDxZgVc3pR6EvuVFZJ1kj7ABM4Hccz1gwAN1');
+  const stakePoolAddress = new PublicKey('SPoo1Ku8WFXoNDMHPsrGSTSG1Y47rzgn41SLUNakuHy');
 
   const data = Buffer.alloc(1024);
   StakePoolLayout.encode(stakePoolMock, data);
@@ -49,8 +61,8 @@ describe('StakePoolProgram', () => {
     data,
   };
 
-  it('StakePoolInstruction.depositMln', () => {
-    const payload: DepositMlnParams = {
+  it('StakePoolInstruction.depositSol', () => {
+    const payload: DepositSolParams = {
       stakePool: stakePoolAddress,
       withdrawAuthority: Keypair.generate().publicKey,
       reserveStake: Keypair.generate().publicKey,
@@ -62,34 +74,32 @@ describe('StakePoolProgram', () => {
       lamports: 99999,
     };
 
-    const instruction = StakePoolInstruction.depositMln(payload);
+    const instruction = StakePoolInstruction.depositSol(payload);
 
     expect(instruction.keys).toHaveLength(10);
-    expect(instruction.keys[0].pubkey.toBase58()).toEqual(payload.stakePool.toBase58());
-    expect(instruction.keys[1].pubkey.toBase58()).toEqual(payload.withdrawAuthority.toBase58());
-    expect(instruction.keys[3].pubkey.toBase58()).toEqual(payload.fundingAccount.toBase58());
-    expect(instruction.keys[4].pubkey.toBase58()).toEqual(
-      payload.destinationPoolAccount.toBase58(),
-    );
-    expect(instruction.keys[5].pubkey.toBase58()).toEqual(payload.managerFeeAccount.toBase58());
-    expect(instruction.keys[6].pubkey.toBase58()).toEqual(payload.referralPoolAccount.toBase58());
-    expect(instruction.keys[8].pubkey.toBase58()).toEqual(SystemProgram.programId.toBase58());
-    expect(instruction.keys[9].pubkey.toBase58()).toEqual(STAKE_POOL_PROGRAM_ID.toBase58());
+    expect(instruction.keys[0].pubkey).toEqual(payload.stakePool);
+    expect(instruction.keys[1].pubkey).toEqual(payload.withdrawAuthority);
+    expect(instruction.keys[3].pubkey).toEqual(payload.fundingAccount);
+    expect(instruction.keys[4].pubkey).toEqual(payload.destinationPoolAccount);
+    expect(instruction.keys[5].pubkey).toEqual(payload.managerFeeAccount);
+    expect(instruction.keys[6].pubkey).toEqual(payload.referralPoolAccount);
+    expect(instruction.keys[8].pubkey).toEqual(SystemProgram.programId);
+    expect(instruction.keys[9].pubkey).toEqual(TOKEN_PROGRAM_ID);
 
-    const decodedData = decodeData(STAKE_POOL_INSTRUCTION_LAYOUTS.DepositMln, instruction.data);
+    const decodedData = decodeData(STAKE_POOL_INSTRUCTION_LAYOUTS.DepositSol, instruction.data);
 
-    expect(decodedData.instruction).toEqual(STAKE_POOL_INSTRUCTION_LAYOUTS.DepositMln.index);
+    expect(decodedData.instruction).toEqual(STAKE_POOL_INSTRUCTION_LAYOUTS.DepositSol.index);
     expect(decodedData.lamports).toEqual(payload.lamports);
 
     payload.depositAuthority = Keypair.generate().publicKey;
 
-    const instruction2 = StakePoolInstruction.depositMln(payload);
+    const instruction2 = StakePoolInstruction.depositSol(payload);
 
     expect(instruction2.keys).toHaveLength(11);
-    expect(instruction2.keys[10].pubkey.toBase58()).toEqual(payload.depositAuthority.toBase58());
+    expect(instruction2.keys[10].pubkey).toEqual(payload.depositAuthority);
   });
 
-  describe('depositMln', () => {
+  describe('depositSol', () => {
     const from = Keypair.generate().publicKey;
     const balance = 10000;
 
@@ -107,22 +117,22 @@ describe('StakePoolProgram', () => {
       };
     });
 
-    it.only('should throw an error with invalid balance', async () => {
-      await expect(depositMln(connection, stakePoolAddress, from, balance + 1)).rejects.toThrow(
-        Error('Not enough MLN to deposit into pool. Maximum deposit amount is 0.00001 MLN.'),
+    it('should throw an error with invalid balance', async () => {
+      await expect(depositSol(connection, stakePoolAddress, from, balance + 1)).rejects.toThrow(
+        Error('Not enough SOL to deposit into pool. Maximum deposit amount is 0.00001 SOL.'),
       );
     });
 
-    it.only('should throw an error with invalid account', async () => {
+    it('should throw an error with invalid account', async () => {
       connection.getAccountInfo = jest.fn(async () => null);
-      await expect(depositMln(connection, stakePoolAddress, from, balance)).rejects.toThrow(
+      await expect(depositSol(connection, stakePoolAddress, from, balance)).rejects.toThrow(
         Error('Invalid stake pool account'),
       );
     });
 
-    it.only('should call successfully', async () => {
+    it('should call successfully', async () => {
       connection.getAccountInfo = jest.fn(async (pubKey) => {
-        if (pubKey == stakePoolAddress) {
+        if (pubKey === stakePoolAddress) {
           return stakePoolAccount;
         }
         return <AccountInfo<any>>{
@@ -133,26 +143,26 @@ describe('StakePoolProgram', () => {
         };
       });
 
-      const res = await depositMln(connection, stakePoolAddress, from, balance);
+      const res = await depositSol(connection, stakePoolAddress, from, balance);
 
-      expect((connection.getAccountInfo as jest.Mock).mock.calls.length).toBe(2);
-      expect(res.instructions).toHaveLength(2);
+      expect((connection.getAccountInfo as jest.Mock).mock.calls.length).toBe(1);
+      expect(res.instructions).toHaveLength(3);
       expect(res.signers).toHaveLength(1);
     });
   });
 
-  describe('withdrawMln', () => {
+  describe('withdrawSol', () => {
     const tokenOwner = new PublicKey(0);
     const solReceiver = new PublicKey(1);
 
-    it.only('should throw an error with invalid stake pool account', async () => {
+    it('should throw an error with invalid stake pool account', async () => {
       connection.getAccountInfo = jest.fn(async () => null);
       await expect(
-        withdrawMln(connection, stakePoolAddress, tokenOwner, solReceiver, 1),
+        withdrawSol(connection, stakePoolAddress, tokenOwner, solReceiver, 1),
       ).rejects.toThrowError('Invalid stake pool account');
     });
 
-    it.only('should throw an error with invalid token account', async () => {
+    it('should throw an error with invalid token account', async () => {
       connection.getAccountInfo = jest.fn(async (pubKey: PublicKey) => {
         if (pubKey == stakePoolAddress) {
           return stakePoolAccount;
@@ -164,13 +174,13 @@ describe('StakePoolProgram', () => {
       });
 
       await expect(
-        withdrawMln(connection, stakePoolAddress, tokenOwner, solReceiver, 1),
-      ).rejects.toThrow(Error('Invalid token account'));
+        withdrawSol(connection, stakePoolAddress, tokenOwner, solReceiver, 1),
+      ).rejects.toThrow(TokenAccountNotFoundError);
     });
 
-    it.only('should throw an error with invalid token account balance', async () => {
+    it('should throw an error with invalid token account balance', async () => {
       connection.getAccountInfo = jest.fn(async (pubKey: PublicKey) => {
-        if (pubKey == stakePoolAddress) {
+        if (pubKey === stakePoolAddress) {
           return stakePoolAccount;
         }
         if (pubKey.equals(CONSTANTS.poolTokenAccount)) {
@@ -180,7 +190,7 @@ describe('StakePoolProgram', () => {
       });
 
       await expect(
-        withdrawMln(connection, stakePoolAddress, tokenOwner, solReceiver, 1),
+        withdrawSol(connection, stakePoolAddress, tokenOwner, solReceiver, 1),
       ).rejects.toThrow(
         Error(
           'Not enough token balance to withdraw 1 pool tokens.\n          Maximum withdraw amount is 0 pool tokens.',
@@ -188,7 +198,7 @@ describe('StakePoolProgram', () => {
       );
     });
 
-    it.only('should call successfully', async () => {
+    it('should call successfully', async () => {
       connection.getAccountInfo = jest.fn(async (pubKey: PublicKey) => {
         if (pubKey == stakePoolAddress) {
           return stakePoolAccount;
@@ -198,7 +208,7 @@ describe('StakePoolProgram', () => {
         }
         return null;
       });
-      const res = await withdrawMln(connection, stakePoolAddress, tokenOwner, solReceiver, 1);
+      const res = await withdrawSol(connection, stakePoolAddress, tokenOwner, solReceiver, 1);
 
       expect((connection.getAccountInfo as jest.Mock).mock.calls.length).toBe(2);
       expect(res.instructions).toHaveLength(2);
@@ -209,7 +219,7 @@ describe('StakePoolProgram', () => {
   describe('withdrawStake', () => {
     const tokenOwner = new PublicKey(0);
 
-    it.only('should throw an error with invalid token account', async () => {
+    it('should throw an error with invalid token account', async () => {
       connection.getAccountInfo = jest.fn(async (pubKey: PublicKey) => {
         if (pubKey == stakePoolAddress) {
           return stakePoolAccount;
@@ -218,11 +228,11 @@ describe('StakePoolProgram', () => {
       });
 
       await expect(withdrawStake(connection, stakePoolAddress, tokenOwner, 1)).rejects.toThrow(
-        Error('Invalid token account'),
+        TokenAccountNotFoundError,
       );
     });
 
-    it.only('should throw an error with invalid token account balance', async () => {
+    it('should throw an error with invalid token account balance', async () => {
       connection.getAccountInfo = jest.fn(async (pubKey: PublicKey) => {
         if (pubKey == stakePoolAddress) {
           return stakePoolAccount;
@@ -241,7 +251,7 @@ describe('StakePoolProgram', () => {
       );
     });
 
-    it.only('should call successfully', async () => {
+    it('should call successfully', async () => {
       connection.getAccountInfo = jest.fn(async (pubKey: PublicKey) => {
         if (pubKey == stakePoolAddress) {
           return stakePoolAccount;
@@ -263,7 +273,7 @@ describe('StakePoolProgram', () => {
       expect(res.totalRentFreeBalances).toEqual(10000);
     });
 
-    it.only('withdraw to a stake account provided', async () => {
+    it('withdraw to a stake account provided', async () => {
       const stakeReceiver = new PublicKey(20);
       connection.getAccountInfo = jest.fn(async (pubKey: PublicKey) => {
         if (pubKey == stakePoolAddress) {
@@ -305,7 +315,7 @@ describe('StakePoolProgram', () => {
     });
   });
   describe('getStakeAccount', () => {
-    it.only('returns an uninitialized parsed stake account', async () => {
+    it('returns an uninitialized parsed stake account', async () => {
       const stakeAccount = new PublicKey(20);
       connection.getParsedAccountInfo = jest.fn(async (pubKey: PublicKey) => {
         if (pubKey.equals(stakeAccount)) {
@@ -320,7 +330,7 @@ describe('StakePoolProgram', () => {
   });
 
   describe('redelegation', () => {
-    it.only('should call successfully', async () => {
+    it('should call successfully', async () => {
       const data = {
         connection,
         stakePoolAddress,
@@ -337,11 +347,52 @@ describe('StakePoolProgram', () => {
         res.instructions[0].data,
       );
 
-      expect(decodedData.instruction).toBe(21);
+      expect(decodedData.instruction).toBe(22);
       expect(decodedData.lamports).toBe(data.lamports);
       expect(decodedData.sourceTransientStakeSeed).toBe(data.sourceTransientStakeSeed);
       expect(decodedData.destinationTransientStakeSeed).toBe(data.destinationTransientStakeSeed);
       expect(decodedData.ephemeralStakeSeed).toBe(data.ephemeralStakeSeed);
+    });
+  });
+  describe('createPoolTokenMetadata', () => {
+    it('should create pool token metadata', async () => {
+      connection.getAccountInfo = jest.fn(async (pubKey: PublicKey) => {
+        if (pubKey == stakePoolAddress) {
+          return stakePoolAccount;
+        }
+        return null;
+      });
+      const name = 'test';
+      const symbol = 'TEST';
+      const uri = 'https://example.com';
+
+      const payer = new PublicKey(0);
+      const res = await createPoolTokenMetadata(
+        connection,
+        stakePoolAddress,
+        payer,
+        name,
+        symbol,
+        uri,
+      );
+
+      const type = tokenMetadataLayout(17, name.length, symbol.length, uri.length);
+      const data = decodeData(type, res.instructions[0].data);
+      expect(Buffer.from(data.name).toString()).toBe(name);
+      expect(Buffer.from(data.symbol).toString()).toBe(symbol);
+      expect(Buffer.from(data.uri).toString()).toBe(uri);
+    });
+
+    it('should update pool token metadata', async () => {
+      const name = 'test';
+      const symbol = 'TEST';
+      const uri = 'https://example.com';
+      const res = await updatePoolTokenMetadata(connection, stakePoolAddress, name, symbol, uri);
+      const type = tokenMetadataLayout(18, name.length, symbol.length, uri.length);
+      const data = decodeData(type, res.instructions[0].data);
+      expect(Buffer.from(data.name).toString()).toBe(name);
+      expect(Buffer.from(data.symbol).toString()).toBe(symbol);
+      expect(Buffer.from(data.uri).toString()).toBe(uri);
     });
   });
 });

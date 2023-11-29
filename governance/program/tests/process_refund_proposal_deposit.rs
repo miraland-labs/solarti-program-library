@@ -1,12 +1,10 @@
 #![cfg(feature = "test-sbf")]
 
-use solana_program::program_error::ProgramError;
-use solana_program_test::*;
+use {solana_program::program_error::ProgramError, solana_program_test::*};
 
 mod program_test;
 
-use program_test::*;
-use spl_governance::error::GovernanceError;
+use {program_test::*, spl_governance::error::GovernanceError};
 
 #[tokio::test]
 async fn test_refund_proposal_deposit() {
@@ -182,7 +180,8 @@ async fn test_refund_proposal_deposit_with_invalid_proposal_deposit_payer_error(
         .await
         .unwrap();
 
-    // Try to refund the deposit to account which is different than Proposal deposit payer
+    // Try to refund the deposit to account which is different than Proposal deposit
+    // payer
     let deposit_payer2 = governance_test.bench.with_wallet().await;
 
     // Act
@@ -311,7 +310,8 @@ async fn test_refund_proposal_deposit_with_invalid_proposal_deposit_account_erro
         .refund_proposal_deposit_using_instruction(
             &proposal_cookie,
             |i| {
-                i.accounts[1].pubkey = proposal_cookie.address; // Try to drain the Proposal account
+                // Try to drain the Proposal account
+                i.accounts[1].pubkey = proposal_cookie.address;
             },
             None,
         )

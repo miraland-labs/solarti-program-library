@@ -2,12 +2,10 @@
 
 set -e
 cd "$(dirname "$0")/.."
-source ./ci/miraland-version.sh install
-
-npm install --global yarn
 
 set -x
+pnpm install
+pnpm build
+
 cd token-lending/js
-yarn install --pure-lockfile
-yarn run lint
-yarn run build
+pnpm lint

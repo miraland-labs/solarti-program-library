@@ -118,7 +118,7 @@ if __name__ == "__main__":
     parser.add_argument('staker', metavar='STAKER_KEYPAIR', type=str,
                         help='Staker for the stake pool, given by a keypair file, e.g. staker.json')
     parser.add_argument('reserve_amount', metavar='RESERVE_AMOUNT', type=float,
-                        help='Amount of MLN to keep in the reserve, e.g. 10.5')
+                        help='Amount of SOL to keep in the reserve, e.g. 10.5')
     parser.add_argument('--endpoint', metavar='ENDPOINT_URL', type=str,
                         default='https://api.mainnet-beta.solana.com',
                         help='RPC endpoint to use, e.g. https://api.mainnet-beta.solana.com')
@@ -128,5 +128,5 @@ if __name__ == "__main__":
     staker = keypair_from_file(args.staker)
     print(f'Rebalancing stake pool {stake_pool}')
     print(f'Staker public key: {staker.public_key}')
-    print(f'Amount to leave in the reserve: {args.reserve_amount} MLN')
+    print(f'Amount to leave in the reserve: {args.reserve_amount} SOL')
     asyncio.run(rebalance(args.endpoint, stake_pool, staker, args.reserve_amount))

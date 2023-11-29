@@ -733,7 +733,7 @@ async fn command_authorize(
         {
             let previous_authority = match authority_type {
                 CliAuthorityType::Owner | CliAuthorityType::Close => Err(format!(
-                    "Authority type `{}` not supported for SPL Token mints",
+                    "Authority type `{}` not supported for Solarti Token mints",
                     auth_str
                 )),
                 CliAuthorityType::Mint => Ok(Option::<Pubkey>::from(mint.base.mint_authority)),
@@ -876,7 +876,7 @@ async fn command_authorize(
                 | CliAuthorityType::ConfidentialTransferFee
                 | CliAuthorityType::MetadataPointer
                 | CliAuthorityType::Metadata => Err(format!(
-                    "Authority type `{auth_str}` not supported for SPL Token accounts",
+                    "Authority type `{auth_str}` not supported for Solarti Token accounts",
                 )),
                 CliAuthorityType::Owner => {
                     check_associated_token_account()?;

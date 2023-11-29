@@ -7,7 +7,9 @@ use {
         rpc_config::{RpcAccountInfoConfig, RpcProgramAccountsConfig},
         rpc_filter::{Memcmp, RpcFilterType},
     },
-    solana_program::{borsh::try_from_slice_unchecked, program_pack::Pack, pubkey::Pubkey, stake},
+    solana_program::{
+        borsh0_10::try_from_slice_unchecked, program_pack::Pack, pubkey::Pubkey, stake,
+    },
     spl_stake_pool::{
         find_withdraw_authority_program_address,
         state::{StakePool, ValidatorList},
@@ -71,7 +73,7 @@ pub fn get_token_mint(
 pub(crate) fn get_stake_state(
     rpc_client: &RpcClient,
     stake_address: &Pubkey,
-) -> Result<stake::state::StakeState, Error> {
+) -> Result<stake::state::StakeStateV2, Error> {
     let account_data = rpc_client.get_account_data(stake_address)?;
     let stake_state = deserialize(account_data.as_slice())
         .map_err(|err| format!("Invalid stake account {}: {}", stake_address, err))?;

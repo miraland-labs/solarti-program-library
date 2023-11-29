@@ -1,7 +1,10 @@
-#![allow(clippy::integer_arithmetic)]
+#![allow(clippy::arithmetic_side_effects)]
 mod client;
 mod output;
 
+// use instruction::create_associated_token_account once ATA 1.0.5 is released
+#[allow(deprecated)]
+use spl_associated_token_account::create_associated_token_account;
 use {
     crate::{
         client::*,
@@ -23,7 +26,7 @@ use {
     miraland_cli_output::OutputFormat,
     miraland_client::rpc_client::RpcClient,
     solana_program::{
-        borsh::{get_instance_packed_len, get_packed_len},
+        borsh0_10::{get_instance_packed_len, get_packed_len},
         instruction::Instruction,
         program_pack::Pack,
         pubkey::Pubkey,
@@ -41,21 +44,16 @@ use {
         transaction::Transaction,
     },
     spl_associated_token_account::get_associated_token_address,
-    spl_stake_pool::state::ValidatorStakeInfo,
     spl_stake_pool::{
         self, find_stake_program_address, find_transient_stake_program_address,
         find_withdraw_authority_program_address,
         instruction::{FundingType, PreferredValidatorType},
         minimum_delegation,
-        state::{Fee, FeeType, StakePool, ValidatorList},
+        state::{Fee, FeeType, StakePool, ValidatorList, ValidatorStakeInfo},
         MINIMUM_RESERVE_LAMPORTS,
     },
-    std::cmp::Ordering,
-    std::{num::NonZeroU32, process::exit, sync::Arc},
+    std::{cmp::Ordering, num::NonZeroU32, process::exit, rc::Rc},
 };
-// use instruction::create_associated_token_account once ATA 1.0.5 is released
-#[allow(deprecated)]
-use spl_associated_token_account::create_associated_token_account;
 
 pub(crate) struct Config {
     rpc_client: RpcClient,
@@ -98,7 +96,7 @@ fn check_fee_payer_balance(config: &Config, required_balance: u64) -> Result<(),
 }
 
 const FEES_REFERENCE: &str = "Consider setting a minimal fee. \
-                              See https://spl.solana.com/stake-pool/fees for more \
+                              See https://spl.miraland.top/stake-pool/fees for more \
                               information about fees and best practices. If you are \
                               aware of the possible risks of a stake pool with no fees, \
                               you may force pool creation with the --unsafe-fees flag.";
@@ -499,7 +497,7 @@ fn command_vsa_remove(
         .find(vote_account)
         .ok_or("Vote account not found in validator list")?;
 
-    let validator_seed = NonZeroU32::new(validator_stake_info.validator_seed_suffix);
+    let validator_seed = NonZeroU32::new(validator_stake_info.validator_seed_suffix.into());
     let (stake_account_address, _) = find_stake_program_address(
         &spl_stake_pool::id(),
         vote_account,
@@ -520,7 +518,7 @@ fn command_vsa_remove(
             stake_pool_address,
             vote_account,
             validator_seed,
-            validator_stake_info.transient_seed_suffix,
+            validator_stake_info.transient_seed_suffix.into(),
         ),
     ];
     unique_signers!(signers);
@@ -545,7 +543,7 @@ fn command_increase_validator_stake(
     let validator_stake_info = validator_list
         .find(vote_account)
         .ok_or("Vote account not found in validator list")?;
-    let validator_seed = NonZeroU32::new(validator_stake_info.validator_seed_suffix);
+    let validator_seed = NonZeroU32::new(validator_stake_info.validator_seed_suffix.into());
 
     let mut signers = vec![config.fee_payer.as_ref(), config.staker.as_ref()];
     unique_signers!(signers);
@@ -559,7 +557,7 @@ fn command_increase_validator_stake(
                 vote_account,
                 lamports,
                 validator_seed,
-                validator_stake_info.transient_seed_suffix,
+                validator_stake_info.transient_seed_suffix.into(),
             ),
         ],
         &signers,
@@ -584,7 +582,7 @@ fn command_decrease_validator_stake(
     let validator_stake_info = validator_list
         .find(vote_account)
         .ok_or("Vote account not found in validator list")?;
-    let validator_seed = NonZeroU32::new(validator_stake_info.validator_seed_suffix);
+    let validator_seed = NonZeroU32::new(validator_stake_info.validator_seed_suffix.into());
 
     let mut signers = vec![config.fee_payer.as_ref(), config.staker.as_ref()];
     unique_signers!(signers);
@@ -598,7 +596,7 @@ fn command_decrease_validator_stake(
                 vote_account,
                 lamports,
                 validator_seed,
-                validator_stake_info.transient_seed_suffix,
+                validator_stake_info.transient_seed_suffix.into(),
             ),
         ],
         &signers,
@@ -683,7 +681,7 @@ fn command_deposit_stake(
         println!("Depositing stake account {:?}", stake_state);
     }
     let vote_account = match stake_state {
-        stake::state::StakeState::Stake(_, stake) => Ok(stake.delegation.voter_pubkey),
+        stake::state::StakeStateV2::Stake(_, stake, _) => Ok(stake.delegation.voter_pubkey),
         _ => Err("Wrong stake account state, must be delegated to validator"),
     }?;
 
@@ -692,7 +690,7 @@ fn command_deposit_stake(
     let validator_stake_info = validator_list
         .find(&vote_account)
         .ok_or("Vote account not found in the stake pool")?;
-    let validator_seed = NonZeroU32::new(validator_stake_info.validator_seed_suffix);
+    let validator_seed = NonZeroU32::new(validator_stake_info.validator_seed_suffix.into());
 
     // Calculate validator stake account address linked to the pool
     let (validator_stake_account, _) = find_stake_program_address(
@@ -865,14 +863,14 @@ fn command_deposit_all_stake(
         let stake_state = get_stake_state(&config.rpc_client, &stake_address)?;
 
         let vote_account = match stake_state {
-            stake::state::StakeState::Stake(_, stake) => Ok(stake.delegation.voter_pubkey),
+            stake::state::StakeStateV2::Stake(_, stake, _) => Ok(stake.delegation.voter_pubkey),
             _ => Err("Wrong stake account state, must be delegated to validator"),
         }?;
 
         let validator_stake_info = validator_list
             .find(&vote_account)
             .ok_or("Vote account not found in the stake pool")?;
-        let validator_seed = NonZeroU32::new(validator_stake_info.validator_seed_suffix);
+        let validator_seed = NonZeroU32::new(validator_stake_info.validator_seed_suffix.into());
 
         // Calculate validator stake account address linked to the pool
         let (validator_stake_account, _) = find_stake_program_address(
@@ -1084,7 +1082,7 @@ fn command_list(config: &Config, stake_pool_address: &Pubkey) -> CommandResult {
         .validators
         .iter()
         .map(|validator| {
-            let validator_seed = NonZeroU32::new(validator.validator_seed_suffix);
+            let validator_seed = NonZeroU32::new(validator.validator_seed_suffix.into());
             let (stake_account_address, _) = find_stake_program_address(
                 &spl_stake_pool::id(),
                 &validator.vote_account_address,
@@ -1095,18 +1093,18 @@ fn command_list(config: &Config, stake_pool_address: &Pubkey) -> CommandResult {
                 &spl_stake_pool::id(),
                 &validator.vote_account_address,
                 stake_pool_address,
-                validator.transient_seed_suffix,
+                validator.transient_seed_suffix.into(),
             );
-            let update_required = validator.last_update_epoch != epoch_info.epoch;
+            let update_required = u64::from(validator.last_update_epoch) != epoch_info.epoch;
             CliStakePoolStakeAccountInfo {
                 vote_account_address: validator.vote_account_address.to_string(),
                 stake_account_address: stake_account_address.to_string(),
-                validator_active_stake_lamports: validator.active_stake_lamports,
-                validator_last_update_epoch: validator.last_update_epoch,
+                validator_active_stake_lamports: validator.active_stake_lamports.into(),
+                validator_last_update_epoch: validator.last_update_epoch.into(),
                 validator_lamports: validator.stake_lamports().unwrap(),
                 validator_transient_stake_account_address: transient_stake_account_address
                     .to_string(),
-                validator_transient_stake_lamports: validator.transient_stake_lamports,
+                validator_transient_stake_lamports: validator.transient_stake_lamports.into(),
                 update_required,
             }
         })
@@ -1255,7 +1253,7 @@ fn prepare_withdraw_accounts(
         &validator_list,
         stake_pool,
         |validator| {
-            let validator_seed = NonZeroU32::new(validator.validator_seed_suffix);
+            let validator_seed = NonZeroU32::new(validator.validator_seed_suffix.into());
             let (stake_account_address, _) = find_stake_program_address(
                 &spl_stake_pool::id(),
                 &validator.vote_account_address,
@@ -1265,7 +1263,7 @@ fn prepare_withdraw_accounts(
 
             (
                 stake_account_address,
-                validator.active_stake_lamports,
+                validator.active_stake_lamports.into(),
                 Some(validator.vote_account_address),
             )
         },
@@ -1279,14 +1277,12 @@ fn prepare_withdraw_accounts(
                 &spl_stake_pool::id(),
                 &validator.vote_account_address,
                 stake_pool_address,
-                validator.transient_seed_suffix,
+                validator.transient_seed_suffix.into(),
             );
 
             (
                 transient_stake_account_address,
-                validator
-                    .transient_stake_lamports
-                    .saturating_sub(min_balance),
+                u64::from(validator.transient_stake_lamports).saturating_sub(min_balance),
                 Some(validator.vote_account_address),
             )
         },
@@ -1401,9 +1397,12 @@ fn command_withdraw_stake(
     let maybe_stake_receiver_state = stake_receiver_param
         .map(|stake_receiver_pubkey| {
             let stake_account = config.rpc_client.get_account(&stake_receiver_pubkey).ok()?;
-            let stake_state: stake::state::StakeState = deserialize(stake_account.data.as_slice())
-                .map_err(|err| format!("Invalid stake account {}: {}", stake_receiver_pubkey, err))
-                .ok()?;
+            let stake_state: stake::state::StakeStateV2 =
+                deserialize(stake_account.data.as_slice())
+                    .map_err(|err| {
+                        format!("Invalid stake account {}: {}", stake_receiver_pubkey, err)
+                    })
+                    .ok()?;
             if stake_state.delegation().is_some() && stake_account.owner == stake::program::id() {
                 Some(stake_state)
             } else {
@@ -1438,7 +1437,7 @@ fn command_withdraw_stake(
         let validator_stake_info = validator_list
             .find(&vote_account)
             .ok_or(format!("Provided stake account is delegated to a vote account {} which does not exist in the stake pool", vote_account))?;
-        let validator_seed = NonZeroU32::new(validator_stake_info.validator_seed_suffix);
+        let validator_seed = NonZeroU32::new(validator_stake_info.validator_seed_suffix.into());
         let (stake_account_address, _) = find_stake_program_address(
             &spl_stake_pool::id(),
             &vote_account,
@@ -1474,7 +1473,7 @@ fn command_withdraw_stake(
             "Provided vote account address {} does not exist in the stake pool",
             vote_account_address
         ))?;
-        let validator_seed = NonZeroU32::new(validator_stake_info.validator_seed_suffix);
+        let validator_seed = NonZeroU32::new(validator_stake_info.validator_seed_suffix.into());
         let (stake_account_address, _) = find_stake_program_address(
             &spl_stake_pool::id(),
             vote_account_address,
@@ -1762,7 +1761,8 @@ fn command_set_manager(
     let new_fee_receiver = match new_fee_receiver {
         None => stake_pool.manager_fee_account,
         Some(value) => {
-            // Check for fee receiver being a valid token account and have to same mint as the stake pool
+            // Check for fee receiver being a valid token account and have to same mint as
+            // the stake pool
             let token_account =
                 get_token_account(&config.rpc_client, value, &stake_pool.pool_mint)?;
             if token_account.mint != stake_pool.pool_mint {
@@ -1940,6 +1940,7 @@ fn main() {
                 .value_name("URL")
                 .takes_value(true)
                 .validator(is_url)
+                .global(true)
                 .help("JSON RPC URL for the cluster.  Default from the configuration file."),
         )
         .arg(
@@ -1948,6 +1949,7 @@ fn main() {
                 .value_name("KEYPAIR")
                 .validator(is_valid_signer)
                 .takes_value(true)
+                .global(true)
                 .help("Stake pool staker. [default: cli config keypair]"),
         )
         .arg(
@@ -1956,6 +1958,7 @@ fn main() {
                 .value_name("KEYPAIR")
                 .validator(is_valid_signer)
                 .takes_value(true)
+                .global(true)
                 .help("Stake pool manager. [default: cli config keypair]"),
         )
         .arg(
@@ -1964,6 +1967,7 @@ fn main() {
                 .value_name("KEYPAIR")
                 .validator(is_valid_signer)
                 .takes_value(true)
+                .global(true)
                 .help("Stake pool funding authority for deposits or withdrawals. [default: cli config keypair]"),
         )
         .arg(
@@ -1972,6 +1976,7 @@ fn main() {
                 .value_name("KEYPAIR")
                 .validator(is_valid_signer)
                 .takes_value(true)
+                .global(true)
                 .help("Owner of pool token account [default: cli config keypair]"),
         )
         .arg(
@@ -1980,6 +1985,7 @@ fn main() {
                 .value_name("KEYPAIR")
                 .validator(is_valid_signer)
                 .takes_value(true)
+                .global(true)
                 .help("Transaction fee payer account [default: cli config keypair]"),
         )
         .subcommand(SubCommand::with_name("create-pool")

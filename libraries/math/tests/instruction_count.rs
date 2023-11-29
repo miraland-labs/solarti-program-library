@@ -1,4 +1,5 @@
-// Mark this test as BPF-only due to current `ProgramTest` limitations when CPIing into the system program
+// Mark this test as BPF-only due to current `ProgramTest` limitations when
+// CPIing into the system program
 #![cfg(feature = "test-sbf")]
 
 use {
@@ -45,7 +46,8 @@ async fn test_precise_sqrt_u32_max() {
 async fn test_sqrt_u64() {
     let mut pc = ProgramTest::new("spl_math", id(), processor!(process_instruction));
 
-    // Dial down the BPF compute budget to detect if the operation gets bloated in the future
+    // Dial down the BPF compute budget to detect if the operation gets bloated in
+    // the future
     pc.set_compute_max_units(2_500);
 
     let (mut banks_client, payer, recent_blockhash) = pc.start().await;
@@ -60,7 +62,8 @@ async fn test_sqrt_u64() {
 async fn test_sqrt_u128() {
     let mut pc = ProgramTest::new("spl_math", id(), processor!(process_instruction));
 
-    // Dial down the BPF compute budget to detect if the operation gets bloated in the future
+    // Dial down the BPF compute budget to detect if the operation gets bloated in
+    // the future
     pc.set_compute_max_units(4_100);
 
     let (mut banks_client, payer, recent_blockhash) = pc.start().await;
@@ -183,13 +186,30 @@ async fn test_f32_natural_log() {
 async fn test_f32_normal_cdf() {
     let mut pc = ProgramTest::new("spl_math", id(), processor!(process_instruction));
 
-    // Dial down the BPF compute budget to detect if the operation gets bloated in the future
+    // Dial down the BPF compute budget to detect if the operation gets bloated in
+    // the future
     pc.set_compute_max_units(3_100);
 
     let (mut banks_client, payer, recent_blockhash) = pc.start().await;
 
     let mut transaction =
         Transaction::new_with_payer(&[instruction::f32_normal_cdf(0_f32)], Some(&payer.pubkey()));
+    transaction.sign(&[&payer], recent_blockhash);
+    banks_client.process_transaction(transaction).await.unwrap();
+}
+
+#[tokio::test]
+async fn test_f64_pow() {
+    let mut pc = ProgramTest::new("spl_math", id(), processor!(process_instruction));
+
+    pc.set_compute_max_units(30_000);
+
+    let (mut banks_client, payer, recent_blockhash) = pc.start().await;
+
+    let mut transaction = Transaction::new_with_payer(
+        &[instruction::f64_pow(50_f64, 10.5_f64)],
+        Some(&payer.pubkey()),
+    );
     transaction.sign(&[&payer], recent_blockhash);
     banks_client.process_transaction(transaction).await.unwrap();
 }

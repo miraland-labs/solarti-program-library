@@ -181,7 +181,7 @@ Account {
 Another problem with encrypting account balances and transfer amounts is that
 the token program cannot check the validity of a transfer amount. For example, a
 user with an account balance of 50 tokens should not be able to transfer 70
-tokens to another account. For regular SPL tokens, the token program can easily
+tokens to another account. For regular Solarti tokens, the token program can easily
 detect that there are not enough funds in a user's account. However, if account
 balances and transfer amounts are encrypted, then these values are hidden to the
 token program itself, preventing it from verifying the validity of a

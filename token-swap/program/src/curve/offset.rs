@@ -34,7 +34,8 @@ impl CurveCalculator for OffsetCurve {
     /// Constant product swap ensures token a * (token b + offset) = constant
     /// This is guaranteed to work for all values such that:
     ///  - 1 <= source_amount <= u64::MAX
-    ///  - 1 <= (swap_source_amount * (swap_destination_amount + token_b_offset)) <= u128::MAX
+    ///  - 1 <= (swap_source_amount * (swap_destination_amount +
+    ///    token_b_offset)) <= u128::MAX
     /// If the offset and token B are both close to u64::MAX, there can be
     /// overflow errors with the invariant.
     fn swap_without_fees(
@@ -141,8 +142,8 @@ impl CurveCalculator for OffsetCurve {
         false
     }
 
-    /// The normalized value of the offset curve simply needs to add the offset to
-    /// the token B side before calculating
+    /// The normalized value of the offset curve simply needs to add the offset
+    /// to the token B side before calculating
     fn normalized_value(
         &self,
         swap_token_a_amount: u128,
@@ -186,17 +187,19 @@ impl DynPack for OffsetCurve {
 
 #[cfg(test)]
 mod tests {
-    use super::*;
-    use crate::curve::calculator::{
-        test::{
-            check_curve_value_from_swap, check_deposit_token_conversion,
-            check_pool_value_from_deposit, check_pool_value_from_withdraw,
-            check_withdraw_token_conversion, total_and_intermediate,
-            CONVERSION_BASIS_POINTS_GUARANTEE,
+    use {
+        super::*,
+        crate::curve::calculator::{
+            test::{
+                check_curve_value_from_swap, check_deposit_token_conversion,
+                check_pool_value_from_deposit, check_pool_value_from_withdraw,
+                check_withdraw_token_conversion, total_and_intermediate,
+                CONVERSION_BASIS_POINTS_GUARANTEE,
+            },
+            INITIAL_SWAP_POOL_AMOUNT,
         },
-        INITIAL_SWAP_POOL_AMOUNT,
+        proptest::prelude::*,
     };
-    use proptest::prelude::*;
 
     #[test]
     fn pack_curve() {
@@ -474,9 +477,9 @@ mod tests {
                 (swap_source_amount * swap_destination_amount));
             check_curve_value_from_swap(
                 &curve,
-                source_token_amount as u128,
-                swap_source_amount as u128,
-                swap_destination_amount as u128,
+                source_token_amount,
+                swap_source_amount,
+                swap_destination_amount,
                 TradeDirection::AtoB
             );
         }
@@ -502,9 +505,9 @@ mod tests {
             prop_assume!(!(swap_source_amount + token_b_offset).overflowing_mul(swap_destination_amount).1);
             check_curve_value_from_swap(
                 &curve,
-                source_token_amount as u128,
-                swap_source_amount as u128,
-                swap_destination_amount as u128,
+                source_token_amount,
+                swap_source_amount,
+                swap_destination_amount,
                 TradeDirection::BtoA
             );
         }

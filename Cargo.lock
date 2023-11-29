@@ -196,6 +196,15 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "a4668cab20f66d8d020e1fbc0ebe47217433c1b6c8f2040faf858554e394ace6"
 
 [[package]]
+name = "approx"
+version = "0.5.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "cab112f0a86d568ea0e627cc1d6be74a1e9cd55214684db5561995f6dad897c6"
+dependencies = [
+ "num-traits",
+]
+
+[[package]]
 name = "aquamarine"
 version = "0.3.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -207,6 +216,15 @@ dependencies = [
  "proc-macro2",
  "quote",
  "syn 1.0.109",
+]
+
+[[package]]
+name = "arbitrary"
+version = "1.3.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "7d5a26814d8dcb93b0e5a0ff3c6d80a8843bafb21b39e8e18a6f05471870e110"
+dependencies = [
+ "derive_arbitrary",
 ]
 
 [[package]]
@@ -917,6 +935,25 @@ dependencies = [
 ]
 
 [[package]]
+name = "cbindgen"
+version = "0.16.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "9344318b9c787667b95cd2c5124f5eaf2bde35e959dd01ea04fc5b234c542c11"
+dependencies = [
+ "clap 2.34.0",
+ "heck 0.3.3",
+ "indexmap 1.9.3",
+ "log",
+ "proc-macro2",
+ "quote",
+ "serde",
+ "serde_json",
+ "syn 1.0.109",
+ "tempfile",
+ "toml",
+]
+
+[[package]]
 name = "cc"
 version = "1.0.83"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -946,6 +983,13 @@ name = "cfg-if"
 version = "1.0.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "baf1de4339761588bc0619e3cbc0120ee582ebb74b53b4efbf79117bd2da40fd"
+
+[[package]]
+name = "cgen"
+version = "0.1.0"
+dependencies = [
+ "cbindgen",
+]
 
 [[package]]
 name = "chrono"
@@ -1014,6 +1058,7 @@ checksum = "4ea181bf566f71cb9a5d17a59e1871af638180a18fb0035c92ae62b705207123"
 dependencies = [
  "atty",
  "bitflags 1.3.2",
+ "clap_derive 3.2.25",
  "clap_lex 0.2.4",
  "indexmap 1.9.3",
  "once_cell",
@@ -1029,7 +1074,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "41fffed7514f420abec6d183b1d3acfd9099c79c3a10a06ade4f8203f1411272"
 dependencies = [
  "clap_builder",
- "clap_derive",
+ "clap_derive 4.4.7",
 ]
 
 [[package]]
@@ -1046,11 +1091,24 @@ dependencies = [
 
 [[package]]
 name = "clap_derive"
+version = "3.2.25"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "ae6371b8bdc8b7d3959e9cf7b22d4435ef3e79e138688421ec654acf8c81b008"
+dependencies = [
+ "heck 0.4.1",
+ "proc-macro-error",
+ "proc-macro2",
+ "quote",
+ "syn 1.0.109",
+]
+
+[[package]]
+name = "clap_derive"
 version = "4.4.7"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "cf9804afaaf59a91e75b022a30fb7229a7901f60c755489cc61c9b423b836442"
 dependencies = [
- "heck",
+ "heck 0.4.1",
  "proc-macro2",
  "quote",
  "syn 2.0.39",
@@ -1394,6 +1452,17 @@ dependencies = [
 ]
 
 [[package]]
+name = "derive_arbitrary"
+version = "1.3.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "67e77553c4162a157adbf834ebae5b415acbecbeafc7a74b0e886657506a7611"
+dependencies = [
+ "proc-macro2",
+ "quote",
+ "syn 2.0.39",
+]
+
+[[package]]
 name = "derive_more"
 version = "0.99.17"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1622,6 +1691,18 @@ checksum = "1bf1fa3f06bbff1ea5b1a9c7b14aa992a39657db60a2759457328d7e058f49ee"
 dependencies = [
  "num-bigint 0.4.4",
  "num-traits",
+ "proc-macro2",
+ "quote",
+ "syn 2.0.39",
+]
+
+[[package]]
+name = "enum_dispatch"
+version = "0.3.12"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "8f33313078bb8d4d05a2733a94ac4c2d8a0df9a2b84424ebf4f33bfc224a890e"
+dependencies = [
+ "once_cell",
  "proc-macro2",
  "quote",
  "syn 2.0.39",
@@ -2073,6 +2154,15 @@ dependencies = [
 
 [[package]]
 name = "heck"
+version = "0.3.3"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "6d621efb26863f0e9924c6ac577e8275e5e6b77455db64ffa6c65c904e9e132c"
+dependencies = [
+ "unicode-segmentation",
+]
+
+[[package]]
+name = "heck"
 version = "0.4.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "95505c38b4572b2d910cecb0281560f54b440a19336cbbcb27bf6ce6adc6f5a8"
@@ -2153,6 +2243,18 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "5444c27eef6923071f7ebcc33e3444508466a76f7a2b93da00ed6e19f30c1ddb"
 dependencies = [
  "windows-sys 0.48.0",
+]
+
+[[package]]
+name = "honggfuzz"
+version = "0.5.55"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "848e9c511092e0daa0a35a63e8e6e475a3e8f870741448b9f6028d69b142f18e"
+dependencies = [
+ "arbitrary",
+ "lazy_static",
+ "memmap2",
+ "rustc_version",
 ]
 
 [[package]]
@@ -2905,7 +3007,7 @@ dependencies = [
  "serde_json",
  "solarti-token 4.0.0 (registry+https://github.com/rust-lang/crates.io-index)",
  "solarti-token-2022 0.9.0 (registry+https://github.com/rust-lang/crates.io-index)",
- "solarti-token-metadata-interface 0.2.2 (registry+https://github.com/rust-lang/crates.io-index)",
+ "solarti-token-metadata-interface 0.2.2",
  "thiserror",
  "zstd",
 ]
@@ -2949,10 +3051,10 @@ dependencies = [
  "miraland-system-program",
  "miraland-vote-program",
  "modular-bitfield",
- "num-derive 0.4.1",
+ "num-derive",
  "num-traits",
  "num_cpus",
- "num_enum 0.7.1",
+ "num_enum",
  "ouroboros",
  "percentage",
  "qualifier_attr",
@@ -2986,7 +3088,7 @@ dependencies = [
  "miraland-program",
  "miraland-program-runtime",
  "miraland-sdk",
- "num-derive 0.4.1",
+ "num-derive",
  "num-traits",
  "rustc_version",
  "serde",
@@ -3092,7 +3194,7 @@ dependencies = [
  "miraland-measure",
  "miraland-sdk",
  "modular-bitfield",
- "num_enum 0.7.1",
+ "num_enum",
  "rand 0.8.5",
  "tempfile",
 ]
@@ -3306,7 +3408,7 @@ dependencies = [
  "miraland-vote",
  "miraland-vote-program",
  "miraland-wen-restart",
- "num_enum 0.7.1",
+ "num_enum",
  "prio-graph",
  "quinn",
  "rand 0.8.5",
@@ -3568,7 +3670,7 @@ dependencies = [
  "miraland-vote-program",
  "mockall",
  "num_cpus",
- "num_enum 0.7.1",
+ "num_enum",
  "prost",
  "rand 0.8.5",
  "rand_chacha 0.3.1",
@@ -3762,7 +3864,7 @@ dependencies = [
  "miraland-frozen-abi-macro",
  "miraland-sdk-macro",
  "num-bigint 0.4.4",
- "num-derive 0.4.1",
+ "num-derive",
  "num-traits",
  "parking_lot 0.12.1",
  "rand 0.8.5",
@@ -3798,7 +3900,7 @@ dependencies = [
  "miraland-measure",
  "miraland-metrics",
  "miraland-sdk",
- "num-derive 0.4.1",
+ "num-derive",
  "num-traits",
  "percentage",
  "rand 0.8.5",
@@ -3911,7 +4013,7 @@ dependencies = [
  "hidapi",
  "log",
  "miraland-sdk",
- "num-derive 0.4.1",
+ "num-derive",
  "num-traits",
  "parking_lot 0.12.1",
  "qstring",
@@ -4093,10 +4195,10 @@ dependencies = [
  "miraland-zk-token-sdk",
  "mockall",
  "modular-bitfield",
- "num-derive 0.4.1",
+ "num-derive",
  "num-traits",
  "num_cpus",
- "num_enum 0.7.1",
+ "num_enum",
  "ouroboros",
  "percentage",
  "qualifier_attr",
@@ -4150,9 +4252,9 @@ dependencies = [
  "miraland-logger",
  "miraland-program",
  "miraland-sdk-macro",
- "num-derive 0.4.1",
+ "num-derive",
  "num-traits",
- "num_enum 0.7.1",
+ "num_enum",
  "pbkdf2 0.11.0",
  "qstring",
  "qualifier_attr",
@@ -4402,7 +4504,7 @@ dependencies = [
  "serde",
  "serde_derive",
  "serde_json",
- "solarti-associated-token-account 2.0.0 (registry+https://github.com/rust-lang/crates.io-index)",
+ "solarti-associated-token-account 2.0.0",
  "solarti-memo 4.0.0 (registry+https://github.com/rust-lang/crates.io-index)",
  "solarti-token 4.0.0 (registry+https://github.com/rust-lang/crates.io-index)",
  "solarti-token-2022 0.9.0 (registry+https://github.com/rust-lang/crates.io-index)",
@@ -4510,7 +4612,7 @@ dependencies = [
  "miraland-program",
  "miraland-program-runtime",
  "miraland-sdk",
- "num-derive 0.4.1",
+ "num-derive",
  "num-traits",
  "rustc_version",
  "serde",
@@ -4549,7 +4651,7 @@ dependencies = [
  "miraland-program-runtime",
  "miraland-sdk",
  "miraland-zk-token-sdk",
- "num-derive 0.4.1",
+ "num-derive",
  "num-traits",
 ]
 
@@ -4571,7 +4673,7 @@ dependencies = [
  "merlin",
  "miraland-program",
  "miraland-sdk",
- "num-derive 0.4.1",
+ "num-derive",
  "num-traits",
  "rand 0.7.3",
  "serde",
@@ -4742,17 +4844,6 @@ dependencies = [
 
 [[package]]
 name = "num-derive"
-version = "0.3.3"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "876a53fff98e03a936a674b29568b0e605f06b29372c2489ff4de23f1949743d"
-dependencies = [
- "proc-macro2",
- "quote",
- "syn 1.0.109",
-]
-
-[[package]]
-name = "num-derive"
 version = "0.4.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "cfb77679af88f8b125209d354a202862602672222e7f2313fdd6dc349bad4712"
@@ -4817,32 +4908,11 @@ dependencies = [
 
 [[package]]
 name = "num_enum"
-version = "0.5.11"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "1f646caf906c20226733ed5b1374287eb97e3c2a5c227ce668c1f2ce20ae57c9"
-dependencies = [
- "num_enum_derive 0.5.11",
-]
-
-[[package]]
-name = "num_enum"
 version = "0.7.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "683751d591e6d81200c39fb0d1032608b77724f34114db54f571ff1317b337c0"
 dependencies = [
- "num_enum_derive 0.7.1",
-]
-
-[[package]]
-name = "num_enum_derive"
-version = "0.5.11"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "dcbff9bc912032c62bf65ef1d5aea88983b420f4f839db1e9b0c281a25c9c799"
-dependencies = [
- "proc-macro-crate 1.3.1",
- "proc-macro2",
- "quote",
- "syn 1.0.109",
+ "num_enum_derive",
 ]
 
 [[package]]
@@ -5328,21 +5398,11 @@ dependencies = [
 
 [[package]]
 name = "proc-macro-crate"
-version = "1.3.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "7f4c021e1093a56626774e81216a4ce732a735e5bad4868a03f3ed65ca0c3919"
-dependencies = [
- "once_cell",
- "toml_edit 0.19.15",
-]
-
-[[package]]
-name = "proc-macro-crate"
 version = "2.0.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "7e8366a6159044a37876a2b9817124296703c586a5c92e2c53751fa06d8d43e8"
 dependencies = [
- "toml_edit 0.20.7",
+ "toml_edit",
 ]
 
 [[package]]
@@ -5415,7 +5475,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "119533552c9a7ffacc21e099c24a0ac8bb19c2a2a3f363de84cd9b844feab270"
 dependencies = [
  "bytes",
- "heck",
+ "heck 0.4.1",
  "itertools 0.10.5",
  "lazy_static",
  "log",
@@ -5819,9 +5879,9 @@ dependencies = [
 
 [[package]]
 name = "ring"
-version = "0.17.5"
+version = "0.17.6"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "fb0205304757e5d899b9c2e448b867ffd03ae7f988002e47cd24954391394d0b"
+checksum = "684d5e6e18f669ccebf64a92236bb7db9a34f07be010e3627368182027180866"
 dependencies = [
  "cc",
  "getrandom 0.2.11",
@@ -5849,6 +5909,12 @@ checksum = "8395b4f860856b740f20a296ea2cd4d823e81a2658cf05ef61be22916026a906"
 dependencies = [
  "chrono",
 ]
+
+[[package]]
+name = "roots"
+version = "0.0.8"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "082f11ffa03bbef6c2c6ea6bea1acafaade2fd9050ae0234ab44a2153742b058"
 
 [[package]]
 name = "rpassword"
@@ -5921,7 +5987,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "629648aced5775d558af50b2b4c7b02983a04b312126d45eeead26e7caa498b9"
 dependencies = [
  "log",
- "ring 0.17.5",
+ "ring 0.17.6",
  "rustls-webpki",
  "sct",
 ]
@@ -5953,7 +6019,7 @@ version = "0.101.7"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "8b6275d1ee7a1cd780b64aca7726599a1dbc893b1e64144529e55c3c2f745765"
 dependencies = [
- "ring 0.17.5",
+ "ring 0.17.6",
  "untrusted 0.9.0",
 ]
 
@@ -6031,7 +6097,7 @@ version = "0.7.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "da046153aa2352493d6cb7da4b6e5c0c057d8a1d0a9aa8560baffdd945acd414"
 dependencies = [
- "ring 0.17.5",
+ "ring 0.17.6",
  "untrusted 0.9.0",
 ]
 
@@ -6285,6 +6351,52 @@ dependencies = [
 ]
 
 [[package]]
+name = "shank"
+version = "0.2.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "4bc647510fc0d94a936f7367a9e3e30edbefd410068747ce4d4084b19b5fdbab"
+dependencies = [
+ "shank_macro",
+]
+
+[[package]]
+name = "shank_macro"
+version = "0.2.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "aa9ec31d18dcca23f2270ccf69766a99156792da3aed050dc5713af0e778b4f2"
+dependencies = [
+ "proc-macro2",
+ "quote",
+ "shank_macro_impl",
+ "shank_render",
+ "syn 1.0.109",
+]
+
+[[package]]
+name = "shank_macro_impl"
+version = "0.2.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "ccaeb1359cf545507b5d18a637cc5cf192c7dcc8c737dff466013ca2d9e792c7"
+dependencies = [
+ "anyhow",
+ "proc-macro2",
+ "quote",
+ "serde",
+ "syn 1.0.109",
+]
+
+[[package]]
+name = "shank_render"
+version = "0.2.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "e63f0b763c4c767dfb462a884d5f5b9b99fdd0a214c910d95792eb02a13b3d69"
+dependencies = [
+ "proc-macro2",
+ "quote",
+ "shank_macro_impl",
+]
+
+[[package]]
 name = "sharded-slab"
 version = "0.1.7"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -6430,30 +6542,30 @@ dependencies = [
 [[package]]
 name = "solarti-associated-token-account"
 version = "2.0.0"
-dependencies = [
- "assert_matches",
- "borsh 0.10.3",
- "miraland-program",
- "num-derive 0.4.1",
- "num-traits",
- "solarti-token 4.0.0",
- "solarti-token-2022 0.9.0",
- "thiserror",
-]
-
-[[package]]
-name = "solarti-associated-token-account"
-version = "2.0.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "64af7d473f0759d729bf20db6348674cf83f36b12a6a1d2c0b2200c4c788ff3a"
 dependencies = [
  "assert_matches",
  "borsh 0.10.3",
  "miraland-program",
- "num-derive 0.4.1",
+ "num-derive",
  "num-traits",
  "solarti-token 4.0.0 (registry+https://github.com/rust-lang/crates.io-index)",
  "solarti-token-2022 0.9.0 (registry+https://github.com/rust-lang/crates.io-index)",
+ "thiserror",
+]
+
+[[package]]
+name = "solarti-associated-token-account"
+version = "2.0.1"
+dependencies = [
+ "assert_matches",
+ "borsh 0.10.3",
+ "miraland-program",
+ "num-derive",
+ "num-traits",
+ "solarti-token 4.0.0",
+ "solarti-token-2022 0.9.0",
  "thiserror",
 ]
 
@@ -6464,9 +6576,36 @@ dependencies = [
  "miraland-program",
  "miraland-program-test",
  "miraland-sdk",
- "solarti-associated-token-account 2.0.0",
+ "solarti-associated-token-account 2.0.1",
  "solarti-token 4.0.0",
  "solarti-token-2022 0.9.0",
+]
+
+[[package]]
+name = "solarti-binary-option"
+version = "0.1.2"
+dependencies = [
+ "arrayref",
+ "borsh 0.10.3",
+ "miraland-program",
+ "solarti-token 4.0.0",
+ "thiserror",
+ "uint",
+]
+
+[[package]]
+name = "solarti-binary-oracle-pair"
+version = "0.1.2"
+dependencies = [
+ "borsh 0.10.3",
+ "miraland-program",
+ "miraland-program-test",
+ "miraland-sdk",
+ "num-derive",
+ "num-traits",
+ "solarti-token 4.0.0",
+ "thiserror",
+ "uint",
 ]
 
 [[package]]
@@ -6548,6 +6687,72 @@ dependencies = [
 ]
 
 [[package]]
+name = "solarti-example-cross-program-invocation"
+version = "1.0.0"
+dependencies = [
+ "miraland-program",
+ "miraland-program-test",
+ "miraland-sdk",
+]
+
+[[package]]
+name = "solarti-example-custom-heap"
+version = "1.0.0"
+dependencies = [
+ "miraland-program",
+ "miraland-program-test",
+ "miraland-sdk",
+]
+
+[[package]]
+name = "solarti-example-logging"
+version = "1.0.0"
+dependencies = [
+ "miraland-program",
+ "miraland-program-test",
+ "miraland-sdk",
+]
+
+[[package]]
+name = "solarti-example-sysvar"
+version = "1.0.0"
+dependencies = [
+ "miraland-program",
+ "miraland-program-test",
+ "miraland-sdk",
+]
+
+[[package]]
+name = "solarti-example-transfer-lamports"
+version = "1.0.0"
+dependencies = [
+ "miraland-program",
+ "miraland-program-test",
+ "miraland-sdk",
+]
+
+[[package]]
+name = "solarti-example-transfer-tokens"
+version = "1.0.0"
+dependencies = [
+ "miraland-program",
+ "miraland-program-test",
+ "miraland-sdk",
+ "solarti-token 4.0.0",
+]
+
+[[package]]
+name = "solarti-feature-gate"
+version = "0.1.0"
+dependencies = [
+ "miraland-program",
+ "miraland-program-test",
+ "miraland-sdk",
+ "num_enum",
+ "solarti-program-error 0.3.4",
+]
+
+[[package]]
 name = "solarti-feature-proposal"
 version = "1.0.4"
 dependencies = [
@@ -6573,26 +6778,165 @@ dependencies = [
 ]
 
 [[package]]
+name = "solarti-flash-loan-receiver"
+version = "1.0.0"
+dependencies = [
+ "arrayref",
+ "miraland-program",
+ "solarti-token 4.0.0",
+]
+
+[[package]]
+name = "solarti-governance"
+version = "3.1.1"
+dependencies = [
+ "arrayref",
+ "assert_matches",
+ "base64 0.21.5",
+ "bincode",
+ "borsh 0.10.3",
+ "miraland-program",
+ "miraland-program-test",
+ "miraland-sdk",
+ "num-derive",
+ "num-traits",
+ "proptest",
+ "serde",
+ "serde_derive",
+ "solarti-governance-addin-api",
+ "solarti-governance-addin-mock",
+ "solarti-governance-test-sdk",
+ "solarti-governance-tools",
+ "solarti-token 4.0.0",
+ "thiserror",
+]
+
+[[package]]
+name = "solarti-governance-addin-api"
+version = "0.1.4"
+dependencies = [
+ "borsh 0.10.3",
+ "miraland-program",
+ "solarti-governance-tools",
+]
+
+[[package]]
+name = "solarti-governance-addin-mock"
+version = "0.1.4"
+dependencies = [
+ "arrayref",
+ "assert_matches",
+ "bincode",
+ "borsh 0.10.3",
+ "miraland-program",
+ "miraland-program-test",
+ "miraland-sdk",
+ "num-derive",
+ "num-traits",
+ "proptest",
+ "serde",
+ "serde_derive",
+ "solarti-governance-addin-api",
+ "solarti-governance-test-sdk",
+ "solarti-governance-tools",
+ "solarti-token 4.0.0",
+ "thiserror",
+]
+
+[[package]]
+name = "solarti-governance-chat"
+version = "0.2.8"
+dependencies = [
+ "arrayref",
+ "assert_matches",
+ "bincode",
+ "borsh 0.10.3",
+ "miraland-program",
+ "miraland-program-test",
+ "miraland-sdk",
+ "num-derive",
+ "num-traits",
+ "proptest",
+ "serde",
+ "serde_derive",
+ "solarti-governance",
+ "solarti-governance-addin-api",
+ "solarti-governance-addin-mock",
+ "solarti-governance-test-sdk",
+ "solarti-governance-tools",
+ "solarti-token 4.0.0",
+ "thiserror",
+]
+
+[[package]]
+name = "solarti-governance-test-sdk"
+version = "0.1.4"
+dependencies = [
+ "arrayref",
+ "bincode",
+ "borsh 0.10.3",
+ "lazy_static",
+ "miraland-program",
+ "miraland-program-test",
+ "miraland-sdk",
+ "num-derive",
+ "num-traits",
+ "serde",
+ "serde_derive",
+ "solarti-token 4.0.0",
+ "thiserror",
+]
+
+[[package]]
+name = "solarti-governance-tools"
+version = "0.1.4"
+dependencies = [
+ "arrayref",
+ "bincode",
+ "borsh 0.10.3",
+ "miraland-program",
+ "num-derive",
+ "num-traits",
+ "serde",
+ "serde_derive",
+ "solarti-token 4.0.0",
+ "thiserror",
+]
+
+[[package]]
 name = "solarti-instruction-padding"
-version = "0.1.3"
+version = "0.1.4"
 dependencies = [
  "miraland-program",
  "miraland-program-test",
  "miraland-sdk",
- "num_enum 0.5.11",
+ "num_enum",
+]
+
+[[package]]
+name = "solarti-managed-token"
+version = "0.1.2"
+dependencies = [
+ "borsh 0.10.3",
+ "miraland-program",
+ "miraland-program-test",
+ "miraland-sdk",
+ "shank",
+ "solarti-associated-token-account 2.0.1",
+ "solarti-token 4.0.0",
+ "thiserror",
 ]
 
 [[package]]
 name = "solarti-math"
-version = "0.1.3"
+version = "0.2.0"
 dependencies = [
  "borsh 0.10.3",
- "borsh-derive 0.10.3",
  "libm",
  "miraland-program",
  "miraland-program-test",
  "miraland-sdk",
- "num-derive 0.3.3",
+ "num-derive",
  "num-traits",
  "proptest",
  "thiserror",
@@ -6622,6 +6966,19 @@ name = "solarti-merkle-tree-reference"
 version = "0.1.3"
 dependencies = [
  "miraland-program",
+ "thiserror",
+]
+
+[[package]]
+name = "solarti-name-service"
+version = "0.3.0"
+dependencies = [
+ "borsh 0.10.3",
+ "miraland-program",
+ "miraland-program-test",
+ "miraland-sdk",
+ "num-derive",
+ "num-traits",
  "thiserror",
 ]
 
@@ -6659,7 +7016,7 @@ dependencies = [
  "lazy_static",
  "miraland-program",
  "miraland-sdk",
- "num-derive 0.4.1",
+ "num-derive",
  "num-traits",
  "serial_test",
  "solarti-program-error-derive 0.3.4",
@@ -6673,7 +7030,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "3a6c1925cde09e6b346706b44fda57e571276913e4fb2cf4fdcac72c52887b43"
 dependencies = [
  "miraland-program",
- "num-derive 0.4.1",
+ "num-derive",
  "num-traits",
  "solarti-program-error-derive 0.3.4 (registry+https://github.com/rust-lang/crates.io-index)",
  "thiserror",
@@ -6699,6 +7056,150 @@ dependencies = [
  "quote",
  "sha2 0.10.8",
  "syn 2.0.39",
+]
+
+[[package]]
+name = "solarti-record"
+version = "0.1.2"
+dependencies = [
+ "borsh 0.10.3",
+ "borsh-derive 0.10.3",
+ "miraland-program",
+ "miraland-program-test",
+ "miraland-sdk",
+ "num-derive",
+ "num-traits",
+ "thiserror",
+]
+
+[[package]]
+name = "solarti-shared-memory"
+version = "2.0.8"
+dependencies = [
+ "arrayref",
+ "miraland-program",
+ "miraland-program-test",
+ "miraland-sdk",
+]
+
+[[package]]
+name = "solarti-single-pool"
+version = "1.0.0"
+dependencies = [
+ "approx",
+ "arrayref",
+ "bincode",
+ "borsh 0.10.3",
+ "miraland-program",
+ "miraland-program-test",
+ "miraland-sdk",
+ "miraland-vote-program",
+ "num-derive",
+ "num-traits",
+ "num_enum",
+ "rand 0.8.5",
+ "solarti-associated-token-account 2.0.1",
+ "solarti-token 4.0.0",
+ "test-case",
+ "thiserror",
+]
+
+[[package]]
+name = "solarti-single-pool-cli"
+version = "1.0.0"
+dependencies = [
+ "bincode",
+ "borsh 0.10.3",
+ "clap 3.2.25",
+ "console",
+ "miraland-account-decoder",
+ "miraland-clap-v3-utils",
+ "miraland-cli-config",
+ "miraland-cli-output",
+ "miraland-client",
+ "miraland-logger",
+ "miraland-remote-wallet",
+ "miraland-sdk",
+ "miraland-test-validator",
+ "miraland-transaction-status",
+ "miraland-vote-program",
+ "serde",
+ "serde_derive",
+ "serde_json",
+ "serde_with 3.4.0",
+ "serial_test",
+ "solarti-associated-token-account 2.0.1",
+ "solarti-single-pool",
+ "solarti-token 4.0.0",
+ "solarti-token-client",
+ "tempfile",
+ "test-case",
+ "tokio",
+]
+
+[[package]]
+name = "solarti-stake-pool"
+version = "0.7.2"
+dependencies = [
+ "arrayref",
+ "assert_matches",
+ "bincode",
+ "borsh 0.10.3",
+ "bytemuck",
+ "miraland-program",
+ "miraland-program-test",
+ "miraland-sdk",
+ "miraland-vote-program",
+ "num-derive",
+ "num-traits",
+ "num_enum",
+ "proptest",
+ "serde",
+ "serde_derive",
+ "solarti-math",
+ "solarti-pod 0.1.3",
+ "solarti-token 4.0.0",
+ "solarti-token-2022 0.9.0",
+ "test-case",
+ "thiserror",
+]
+
+[[package]]
+name = "solarti-stake-pool-cli"
+version = "0.7.2"
+dependencies = [
+ "bincode",
+ "borsh 0.10.3",
+ "bs58",
+ "clap 2.34.0",
+ "miraland-account-decoder",
+ "miraland-clap-utils",
+ "miraland-cli-config",
+ "miraland-cli-output",
+ "miraland-client",
+ "miraland-logger",
+ "miraland-program",
+ "miraland-remote-wallet",
+ "miraland-sdk",
+ "serde",
+ "serde_derive",
+ "serde_json",
+ "solarti-associated-token-account 2.0.1",
+ "solarti-stake-pool",
+ "solarti-token 4.0.0",
+]
+
+[[package]]
+name = "solarti-stateless-asks"
+version = "0.1.1"
+dependencies = [
+ "borsh 0.10.3",
+ "miraland-program",
+ "miraland-program-test",
+ "miraland-sdk",
+ "solarti-associated-token-account 2.0.1",
+ "solarti-token 4.0.0",
+ "thiserror",
 ]
 
 [[package]]
@@ -6742,9 +7243,9 @@ dependencies = [
  "miraland-program",
  "miraland-program-test",
  "miraland-sdk",
- "num-derive 0.4.1",
+ "num-derive",
  "num-traits",
- "num_enum 0.7.1",
+ "num_enum",
  "proptest",
  "serial_test",
  "thiserror",
@@ -6759,9 +7260,9 @@ dependencies = [
  "arrayref",
  "bytemuck",
  "miraland-program",
- "num-derive 0.4.1",
+ "num-derive",
  "num-traits",
- "num_enum 0.7.1",
+ "num_enum",
  "thiserror",
 ]
 
@@ -6777,9 +7278,9 @@ dependencies = [
  "miraland-program-test",
  "miraland-sdk",
  "miraland-zk-token-sdk",
- "num-derive 0.4.1",
+ "num-derive",
  "num-traits",
- "num_enum 0.7.1",
+ "num_enum",
  "proptest",
  "serde",
  "serde_json",
@@ -6789,7 +7290,7 @@ dependencies = [
  "solarti-pod 0.1.3",
  "solarti-token 4.0.0",
  "solarti-token-group-interface 0.1.0",
- "solarti-token-metadata-interface 0.2.2",
+ "solarti-token-metadata-interface 0.2.3",
  "solarti-transfer-hook-interface 0.3.0",
  "solarti-type-length-value 0.3.3",
  "thiserror",
@@ -6805,14 +7306,14 @@ dependencies = [
  "bytemuck",
  "miraland-program",
  "miraland-zk-token-sdk",
- "num-derive 0.4.1",
+ "num-derive",
  "num-traits",
- "num_enum 0.7.1",
+ "num_enum",
  "solarti-memo 4.0.0 (registry+https://github.com/rust-lang/crates.io-index)",
  "solarti-pod 0.1.3 (registry+https://github.com/rust-lang/crates.io-index)",
  "solarti-token 4.0.0 (registry+https://github.com/rust-lang/crates.io-index)",
  "solarti-token-group-interface 0.1.0 (registry+https://github.com/rust-lang/crates.io-index)",
- "solarti-token-metadata-interface 0.2.2 (registry+https://github.com/rust-lang/crates.io-index)",
+ "solarti-token-metadata-interface 0.2.2",
  "solarti-transfer-hook-interface 0.3.0 (registry+https://github.com/rust-lang/crates.io-index)",
  "solarti-type-length-value 0.3.3 (registry+https://github.com/rust-lang/crates.io-index)",
  "thiserror",
@@ -6828,14 +7329,14 @@ dependencies = [
  "miraland-program",
  "miraland-program-test",
  "miraland-sdk",
- "solarti-associated-token-account 2.0.0",
+ "solarti-associated-token-account 2.0.1",
  "solarti-instruction-padding",
  "solarti-memo 4.0.0",
  "solarti-pod 0.1.3",
  "solarti-token-2022 0.9.0",
  "solarti-token-client",
  "solarti-token-group-interface 0.1.0",
- "solarti-token-metadata-interface 0.2.2",
+ "solarti-token-metadata-interface 0.2.3",
  "solarti-transfer-hook-example",
  "solarti-transfer-hook-interface 0.3.0",
  "test-case",
@@ -6844,7 +7345,7 @@ dependencies = [
 
 [[package]]
 name = "solarti-token-cli"
-version = "3.0.0"
+version = "3.1.0"
 dependencies = [
  "assert_cmd",
  "base64 0.21.5",
@@ -6866,12 +7367,12 @@ dependencies = [
  "serde_derive",
  "serde_json",
  "serial_test",
- "solarti-associated-token-account 2.0.0",
+ "solarti-associated-token-account 2.0.1",
  "solarti-memo 4.0.0",
  "solarti-token 4.0.0",
  "solarti-token-2022 0.9.0",
  "solarti-token-client",
- "solarti-token-metadata-interface 0.2.2",
+ "solarti-token-metadata-interface 0.2.3",
  "strum 0.25.0",
  "strum_macros 0.25.3",
  "tempfile",
@@ -6889,17 +7390,52 @@ dependencies = [
  "futures-util",
  "miraland-banks-interface",
  "miraland-cli-output",
- "miraland-client",
  "miraland-program-test",
+ "miraland-rpc-client",
+ "miraland-rpc-client-api",
  "miraland-sdk",
- "solarti-associated-token-account 2.0.0",
+ "solarti-associated-token-account 2.0.1",
  "solarti-memo 4.0.0",
  "solarti-token 4.0.0",
  "solarti-token-2022 0.9.0",
  "solarti-token-group-interface 0.1.0",
- "solarti-token-metadata-interface 0.2.2",
+ "solarti-token-metadata-interface 0.2.3",
  "solarti-transfer-hook-interface 0.3.0",
  "thiserror",
+]
+
+[[package]]
+name = "solarti-token-collection"
+version = "0.1.0"
+dependencies = [
+ "miraland-program",
+ "miraland-program-test",
+ "miraland-sdk",
+ "solarti-discriminator 0.1.4",
+ "solarti-pod 0.1.3",
+ "solarti-program-error 0.3.4",
+ "solarti-token-2022 0.9.0",
+ "solarti-token-client",
+ "solarti-token-group-example",
+ "solarti-token-group-interface 0.1.0",
+ "solarti-token-metadata-interface 0.2.3",
+ "solarti-type-length-value 0.3.3",
+]
+
+[[package]]
+name = "solarti-token-group-example"
+version = "0.1.0"
+dependencies = [
+ "miraland-program",
+ "miraland-program-test",
+ "miraland-sdk",
+ "solarti-discriminator 0.1.4",
+ "solarti-pod 0.1.3",
+ "solarti-token-2022 0.9.0",
+ "solarti-token-client",
+ "solarti-token-group-interface 0.1.0",
+ "solarti-token-metadata-interface 0.2.3",
+ "solarti-type-length-value 0.3.3",
 ]
 
 [[package]]
@@ -6928,17 +7464,51 @@ dependencies = [
 ]
 
 [[package]]
-name = "solarti-token-metadata-interface"
-version = "0.2.2"
+name = "solarti-token-lending"
+version = "0.2.1"
 dependencies = [
- "borsh 0.10.3",
+ "arrayref",
+ "assert_matches",
+ "bytemuck",
  "miraland-program",
- "serde",
- "serde_json",
- "solarti-discriminator 0.1.4",
+ "miraland-program-test",
+ "miraland-sdk",
+ "num-derive",
+ "num-traits",
+ "proptest",
+ "solarti-token 4.0.0",
+ "thiserror",
+ "uint",
+]
+
+[[package]]
+name = "solarti-token-lending-cli"
+version = "0.2.1"
+dependencies = [
+ "clap 2.34.0",
+ "miraland-clap-utils",
+ "miraland-cli-config",
+ "miraland-client",
+ "miraland-logger",
+ "miraland-program",
+ "miraland-sdk",
+ "solarti-token 4.0.0",
+ "solarti-token-lending",
+]
+
+[[package]]
+name = "solarti-token-metadata-example"
+version = "0.2.3"
+dependencies = [
+ "miraland-program",
+ "miraland-program-test",
+ "miraland-sdk",
  "solarti-pod 0.1.3",
- "solarti-program-error 0.3.4",
+ "solarti-token-2022 0.9.0",
+ "solarti-token-client",
+ "solarti-token-metadata-interface 0.2.3",
  "solarti-type-length-value 0.3.3",
+ "test-case",
 ]
 
 [[package]]
@@ -6956,15 +7526,61 @@ dependencies = [
 ]
 
 [[package]]
+name = "solarti-token-metadata-interface"
+version = "0.2.3"
+dependencies = [
+ "borsh 0.10.3",
+ "miraland-program",
+ "serde",
+ "serde_json",
+ "solarti-discriminator 0.1.4",
+ "solarti-pod 0.1.3",
+ "solarti-program-error 0.3.4",
+ "solarti-type-length-value 0.3.3",
+]
+
+[[package]]
+name = "solarti-token-swap"
+version = "3.0.2"
+dependencies = [
+ "arbitrary",
+ "arrayref",
+ "enum_dispatch",
+ "miraland-program",
+ "miraland-sdk",
+ "num-derive",
+ "num-traits",
+ "proptest",
+ "roots",
+ "solarti-math",
+ "solarti-token 4.0.0",
+ "solarti-token-2022 0.9.0",
+ "test-case",
+ "thiserror",
+]
+
+[[package]]
+name = "solarti-token-swap-fuzz"
+version = "0.0.1"
+dependencies = [
+ "arbitrary",
+ "honggfuzz",
+ "miraland-program",
+ "solarti-math",
+ "solarti-token 4.0.0",
+ "solarti-token-swap",
+]
+
+[[package]]
 name = "solarti-token-upgrade"
 version = "0.1.3"
 dependencies = [
  "miraland-program",
  "miraland-program-test",
  "miraland-sdk",
- "num-derive 0.4.1",
+ "num-derive",
  "num-traits",
- "num_enum 0.7.1",
+ "num_enum",
  "solarti-token 4.0.0",
  "solarti-token-2022 0.9.0",
  "solarti-token-client",
@@ -6985,13 +7601,26 @@ dependencies = [
  "miraland-remote-wallet",
  "miraland-sdk",
  "miraland-test-validator",
- "solarti-associated-token-account 2.0.0",
+ "solarti-associated-token-account 2.0.1",
  "solarti-token 4.0.0",
  "solarti-token-2022 0.9.0",
  "solarti-token-client",
  "solarti-token-upgrade",
  "tokio",
  "walkdir",
+]
+
+[[package]]
+name = "solarti-token-wrap"
+version = "0.1.0"
+dependencies = [
+ "bytemuck",
+ "miraland-program",
+ "num_enum",
+ "solarti-associated-token-account 2.0.1",
+ "solarti-token 4.0.0",
+ "solarti-token-2022 0.9.0",
+ "thiserror",
 ]
 
 [[package]]
@@ -7095,6 +7724,16 @@ dependencies = [
 ]
 
 [[package]]
+name = "solarti-type-length-value-derive-test"
+version = "0.1.0"
+dependencies = [
+ "borsh 0.10.3",
+ "miraland-program",
+ "solarti-discriminator 0.1.4",
+ "solarti-type-length-value 0.3.3",
+]
+
+[[package]]
 name = "spin"
 version = "0.5.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -7166,7 +7805,7 @@ version = "0.24.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "1e385be0d24f186b4ce2f9982191e7101bb737312ad61c1f2f984f34bcf85d59"
 dependencies = [
- "heck",
+ "heck 0.4.1",
  "proc-macro2",
  "quote",
  "rustversion",
@@ -7179,7 +7818,7 @@ version = "0.25.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "23dc1fa9ac9c169a78ba62f0b841814b7abae11bdd047b9c58f893439e309ea0"
 dependencies = [
- "heck",
+ "heck 0.4.1",
  "proc-macro2",
  "quote",
  "rustversion",
@@ -7387,6 +8026,16 @@ dependencies = [
  "quote",
  "syn 2.0.39",
  "test-case-core",
+]
+
+[[package]]
+name = "test-client"
+version = "0.1.1"
+dependencies = [
+ "miraland-sdk",
+ "solarti-memo 4.0.0",
+ "solarti-token 4.0.0",
+ "solarti-token-swap",
 ]
 
 [[package]]
@@ -7655,17 +8304,6 @@ checksum = "3550f4e9685620ac18a50ed434eb3aec30db8ba93b0287467bca5826ea25baf1"
 
 [[package]]
 name = "toml_edit"
-version = "0.19.15"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "1b5bb770da30e5cbfde35a2d7b9b8a2c4b8ef89548a7a6aeab5c9a576e3e7421"
-dependencies = [
- "indexmap 2.1.0",
- "toml_datetime",
- "winnow",
-]
-
-[[package]]
-name = "toml_edit"
 version = "0.20.7"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "70f427fce4d84c72b5b732388bf4a9f4531b53f74e2887e3ecb2481f68f66d81"
@@ -7902,6 +8540,12 @@ dependencies = [
 ]
 
 [[package]]
+name = "unicode-segmentation"
+version = "1.10.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "1dd624098567895118886609431a7c3b8f516e41d30e0643f03d94592a147e36"
+
+[[package]]
 name = "unicode-width"
 version = "0.1.11"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -8132,9 +8776,9 @@ checksum = "7ab9b36309365056cd639da3134bf87fa8f3d86008abf99e612384a6eecd459f"
 
 [[package]]
 name = "web-sys"
-version = "0.3.65"
+version = "0.3.66"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "5db499c5f66323272151db0e666cd34f78617522fb0c1604d31a27c50c206a85"
+checksum = "50c24a44ec86bb68fbecd1b3efed7e85ea5621b39b35ef2766b66cd984f8010f"
 dependencies = [
  "js-sys",
  "wasm-bindgen",

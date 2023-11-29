@@ -1,31 +1,34 @@
 //! Base curve implementation
 
-use solana_program::{
-    program_error::ProgramError,
-    program_pack::{Pack, Sealed},
-};
-
-use crate::curve::{
-    calculator::{CurveCalculator, RoundDirection, SwapWithoutFeesResult, TradeDirection},
-    constant_price::ConstantPriceCurve,
-    constant_product::ConstantProductCurve,
-    fees::Fees,
-    offset::OffsetCurve,
-};
-use arrayref::{array_mut_ref, array_ref, array_refs, mut_array_refs};
-use std::convert::{TryFrom, TryInto};
-use std::fmt::Debug;
-use std::sync::Arc;
-
 #[cfg(feature = "fuzz")]
 use arbitrary::Arbitrary;
+use {
+    crate::curve::{
+        calculator::{CurveCalculator, RoundDirection, SwapWithoutFeesResult, TradeDirection},
+        constant_price::ConstantPriceCurve,
+        constant_product::ConstantProductCurve,
+        fees::Fees,
+        offset::OffsetCurve,
+    },
+    arrayref::{array_mut_ref, array_ref, array_refs, mut_array_refs},
+    solana_program::{
+        program_error::ProgramError,
+        program_pack::{Pack, Sealed},
+    },
+    std::{
+        convert::{TryFrom, TryInto},
+        fmt::Debug,
+        sync::Arc,
+    },
+};
 
 /// Curve types supported by the token-swap program.
 #[cfg_attr(feature = "fuzz", derive(Arbitrary))]
 #[repr(C)]
 #[derive(Clone, Copy, Debug, PartialEq)]
 pub enum CurveType {
-    /// Uniswap-style constant product curve, invariant = token_a_amount * token_b_amount
+    /// Uniswap-style constant product curve, invariant = token_a_amount *
+    /// token_b_amount
     ConstantProduct,
     /// Flat line, always providing 1:1 from one token to another
     ConstantPrice,
@@ -204,8 +207,8 @@ impl PartialEq for SwapCurve {
 
 impl Sealed for SwapCurve {}
 impl Pack for SwapCurve {
-    /// Size of encoding of all curve parameters, which include fees and any other
-    /// constants used to calculate swaps, deposits, and withdrawals.
+    /// Size of encoding of all curve parameters, which include fees and any
+    /// other constants used to calculate swaps, deposits, and withdrawals.
     /// This includes 1 byte for the type, and 72 for the calculator to use as
     /// it needs.  Some calculators may be smaller than 72 bytes.
     const LEN: usize = 33;
@@ -262,9 +265,7 @@ impl TryFrom<u8> for CurveType {
 
 #[cfg(test)]
 mod test {
-    use super::*;
-    use crate::curve::calculator::test::total_and_intermediate;
-    use proptest::prelude::*;
+    use {super::*, crate::curve::calculator::test::total_and_intermediate, proptest::prelude::*};
 
     #[test]
     fn pack_swap_curve() {
@@ -382,7 +383,7 @@ mod test {
         let swap_source_amount: u128 = 1_000;
         let swap_destination_amount: u128 = 50_000;
         let source_amount: u128 = 100;
-        let curve = ConstantProductCurve::default();
+        let curve = ConstantProductCurve;
         let fees = Fees::default();
         let swap_curve = SwapCurve {
             curve_type: CurveType::ConstantProduct,
@@ -409,7 +410,7 @@ mod test {
         pool_supply: u128,
         fees: Fees,
     ) -> (u128, u128) {
-        let curve = ConstantProductCurve::default();
+        let curve = ConstantProductCurve;
         let swap_curve = SwapCurve {
             curve_type: CurveType::ConstantProduct,
             calculator: Arc::new(curve),

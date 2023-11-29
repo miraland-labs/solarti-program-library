@@ -1,15 +1,17 @@
 //! Program state processor
 
-use solana_program::{
-    account_info::{next_account_info, AccountInfo},
-    entrypoint::ProgramResult,
-    pubkey::Pubkey,
-};
-use spl_governance_tools::account::dispose_account;
-
-use crate::state::{
-    proposal::get_proposal_data, proposal_transaction::get_proposal_transaction_data_for_proposal,
-    token_owner_record::get_token_owner_record_data_for_proposal_owner,
+use {
+    crate::state::{
+        proposal::get_proposal_data,
+        proposal_transaction::get_proposal_transaction_data_for_proposal,
+        token_owner_record::get_token_owner_record_data_for_proposal_owner,
+    },
+    solana_program::{
+        account_info::{next_account_info, AccountInfo},
+        entrypoint::ProgramResult,
+        pubkey::Pubkey,
+    },
+    spl_governance_tools::account::dispose_account,
 };
 
 /// Processes RemoveTransaction instruction
@@ -42,10 +44,10 @@ pub fn process_remove_transaction(program_id: &Pubkey, accounts: &[AccountInfo])
 
     dispose_account(proposal_transaction_info, beneficiary_info)?;
 
-    let mut option = &mut proposal_data.options[proposal_transaction_data.option_index as usize];
+    let option = &mut proposal_data.options[proposal_transaction_data.option_index as usize];
     option.transactions_count = option.transactions_count.checked_sub(1).unwrap();
 
-    proposal_data.serialize(&mut *proposal_info.data.borrow_mut())?;
+    proposal_data.serialize(&mut proposal_info.data.borrow_mut()[..])?;
 
     Ok(())
 }

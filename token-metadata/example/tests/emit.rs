@@ -5,7 +5,7 @@ use {
     program_test::{setup, setup_metadata, setup_mint},
     solana_program_test::tokio,
     solana_sdk::{
-        borsh::try_from_slice_unchecked, program::MAX_RETURN_DATA, pubkey::Pubkey,
+        borsh0_10::try_from_slice_unchecked, program::MAX_RETURN_DATA, pubkey::Pubkey,
         signature::Signer, signer::keypair::Keypair, transaction::Transaction,
     },
     spl_token_metadata_interface::{
@@ -91,7 +91,8 @@ async fn success(start: Option<u64>, end: Option<u64>) {
                 .copy_from_slice(&simulation_return_data.data);
 
             assert_eq!(*check_buffer, return_data[..check_buffer.len()]);
-            // we're sure that we're getting the full data, so also compare the deserialized type
+            // we're sure that we're getting the full data, so also compare the deserialized
+            // type
             if start.is_none() && end.is_none() {
                 let emitted_token_metadata =
                     try_from_slice_unchecked::<TokenMetadata>(&return_data).unwrap();

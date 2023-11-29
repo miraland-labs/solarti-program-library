@@ -1,4 +1,4 @@
-#![allow(clippy::integer_arithmetic)]
+#![allow(clippy::arithmetic_side_effects)]
 #![cfg(feature = "test-sbf")]
 
 mod helpers;
@@ -6,7 +6,7 @@ mod helpers;
 use {
     helpers::*,
     solana_program::{
-        borsh::try_from_slice_unchecked, instruction::InstructionError, pubkey::Pubkey, stake,
+        borsh0_10::try_from_slice_unchecked, instruction::InstructionError, pubkey::Pubkey, stake,
     },
     solana_program_test::*,
     solana_sdk::{
@@ -81,7 +81,7 @@ async fn setup(
     .await;
 
     let first_normal_slot = context.genesis_config().epoch_schedule.first_normal_slot;
-    context.warp_to_slot(first_normal_slot).unwrap();
+    context.warp_to_slot(first_normal_slot + 1).unwrap();
     stake_pool_accounts
         .update_all(
             &mut context.banks_client,
@@ -151,7 +151,7 @@ async fn success_with_preferred_deposit() {
             &user,
         )
         .await;
-    assert!(error.is_none());
+    assert!(error.is_none(), "{:?}", error);
 }
 
 #[tokio::test]
@@ -274,7 +274,7 @@ async fn success_with_referral_fee() {
     let stake_pool =
         try_from_slice_unchecked::<state::StakePool>(stake_pool.data.as_slice()).unwrap();
     let rent = context.banks_client.get_rent().await.unwrap();
-    let stake_rent = rent.minimum_balance(std::mem::size_of::<stake::state::StakeState>());
+    let stake_rent = rent.minimum_balance(std::mem::size_of::<stake::state::StakeStateV2>());
     let fee_tokens = stake_pool
         .calc_pool_tokens_mln_deposit_fee(stake_rent)
         .unwrap()

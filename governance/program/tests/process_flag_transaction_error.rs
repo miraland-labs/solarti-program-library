@@ -2,12 +2,13 @@
 
 mod program_test;
 
-use solana_program_test::tokio;
-
-use program_test::*;
-use spl_governance::{
-    error::GovernanceError,
-    state::enums::{ProposalState, TransactionExecutionStatus},
+use {
+    program_test::*,
+    solana_program_test::tokio,
+    spl_governance::{
+        error::GovernanceError,
+        state::enums::{ProposalState, TransactionExecutionStatus},
+    },
 };
 
 #[tokio::test]
@@ -38,7 +39,11 @@ async fn test_execute_flag_transaction_error() {
         .unwrap();
 
     let signatory_record_cookie = governance_test
-        .with_signatory(&proposal_cookie, &token_owner_record_cookie)
+        .with_signatory(
+            &proposal_cookie,
+            &governance_cookie,
+            &token_owner_record_cookie,
+        )
         .await
         .unwrap();
 
@@ -127,7 +132,11 @@ async fn test_execute_proposal_transaction_after_flagged_with_error() {
         .unwrap();
 
     let signatory_record_cookie = governance_test
-        .with_signatory(&proposal_cookie, &token_owner_record_cookie)
+        .with_signatory(
+            &proposal_cookie,
+            &mint_governance_cookie,
+            &token_owner_record_cookie,
+        )
         .await
         .unwrap();
 
@@ -219,7 +228,11 @@ async fn test_execute_second_transaction_after_first_transaction_flagged_with_er
         .unwrap();
 
     let signatory_record_cookie = governance_test
-        .with_signatory(&proposal_cookie, &token_owner_record_cookie)
+        .with_signatory(
+            &proposal_cookie,
+            &mint_governance_cookie,
+            &token_owner_record_cookie,
+        )
         .await
         .unwrap();
 
@@ -307,7 +320,11 @@ async fn test_flag_transaction_error_with_proposal_transaction_already_executed_
         .unwrap();
 
     let signatory_record_cookie = governance_test
-        .with_signatory(&proposal_cookie, &token_owner_record_cookie)
+        .with_signatory(
+            &proposal_cookie,
+            &mint_governance_cookie,
+            &token_owner_record_cookie,
+        )
         .await
         .unwrap();
 
@@ -323,7 +340,8 @@ async fn test_flag_transaction_error_with_proposal_transaction_already_executed_
         .await
         .unwrap();
 
-    // Add another transaction to prevent Proposal from transitioning to Competed state
+    // Add another transaction to prevent Proposal from transitioning to Competed
+    // state
     governance_test
         .with_nop_transaction(&mut proposal_cookie, &token_owner_record_cookie, 0, None)
         .await
@@ -394,7 +412,11 @@ async fn test_flag_transaction_error_with_owner_or_delegate_must_sign_error() {
         .unwrap();
 
     let signatory_record_cookie = governance_test
-        .with_signatory(&proposal_cookie, &token_owner_record_cookie)
+        .with_signatory(
+            &proposal_cookie,
+            &governance_cookie,
+            &token_owner_record_cookie,
+        )
         .await
         .unwrap();
 

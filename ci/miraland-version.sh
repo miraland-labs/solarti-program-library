@@ -14,7 +14,7 @@
 if [[ -n $MIRALAND_VERSION ]]; then
   miraland_version="$MIRALAND_VERSION"
 else
-  miraland_version=v1.14.17-rc7
+  miraland_version=v1.18.0
 fi
 
 export miraland_version="$miraland_version"
@@ -23,7 +23,7 @@ export PATH="$HOME"/.local/share/miraland/install/active_release/bin:"$PATH"
 if [[ -n $1 ]]; then
   case $1 in
   install)
-    sh -c "$(curl -sSfL https://release.miraland.com/$miraland_version/install)"
+    sh -c "$(curl -sSfL https://release.miraland.top/$miraland_version/install)"
     miraland --version
     ;;
   *)

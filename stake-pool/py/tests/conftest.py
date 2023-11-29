@@ -24,15 +24,17 @@ AIRDROP_LAMPORTS: int = 30_000_000_000
 
 
 @pytest.fixture(scope="session")
-def miraland_test_validator():
+def solana_test_validator():
     old_cwd = os.getcwd()
     newpath = tempfile.mkdtemp()
     os.chdir(newpath)
     validator = Popen([
         "solana-test-validator",
         "--reset", "--quiet",
-        "--bpf-program", "spooqgqqDxZgVc3pR6EvuVFZJ1kj7ABM4Hccz1gwAN1",
+        "--bpf-program", "SPoo1Ku8WFXoNDMHPsrGSTSG1Y47rzgn41SLUNakuHy",
         f"{old_cwd}/../../target/deploy/spl_stake_pool.so",
+        "--bpf-program", "Meta88XpDHcSJZDFiHop6c9sXaufkZX5depkZyrYBWv",
+        f"{old_cwd}/../program/tests/fixtures/mpl_token_metadata.so",
         "--slots-per-epoch", str(NUM_SLOTS_PER_EPOCH),
     ],)
     yield
@@ -72,7 +74,7 @@ async def stake_pool_addresses(
 
 
 @pytest_asyncio.fixture
-async def async_client(miraland_test_validator) -> AsyncIterator[AsyncClient]:
+async def async_client(solana_test_validator) -> AsyncIterator[AsyncClient]:
     async_client = AsyncClient(commitment=Confirmed)
     total_attempts = 20
     current_attempt = 0

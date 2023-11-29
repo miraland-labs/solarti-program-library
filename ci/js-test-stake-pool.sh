@@ -2,10 +2,10 @@
 
 set -ex
 cd "$(dirname "$0")/.."
-source ./ci/miraland-version.sh install
+
+pnpm install
+pnpm build
 
 cd stake-pool/js
-npm install
-npm run lint
-npm run build
-npm run test
+pnpm lint
+pnpm test

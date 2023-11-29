@@ -41,7 +41,7 @@ or MLN from the reserve.
 
 This means that stake pool managers and stakers must be comfortable with
 creating and delegating stakes, which are more advanced operations than sending and
-receiving SPL tokens and MLN. Additional information on stake operations are
+receiving Solarti tokens and MLN. Additional information on stake operations are
 available at:
 
 - https://docs.solana.com/cli/delegate-stake
@@ -74,7 +74,7 @@ Once the stake becomes active, which happens at the following epoch boundary
 (maximum 2 days), the user can deposit their stake into the pool using the
 `deposit-stake` instruction.
 
-In exchange for their deposit (MLN or stake), the user receives SPL tokens
+In exchange for their deposit (MLN or stake), the user receives Solarti tokens
 representing their fractional ownership in pool. A percentage of the rewards
 earned by the pool goes to the pool manager as an epoch fee.
 

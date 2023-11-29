@@ -1,13 +1,14 @@
-#![allow(clippy::integer_arithmetic)]
+#![allow(clippy::arithmetic_side_effects)]
 #![cfg(feature = "test-sbf")]
 
 mod helpers;
 
 use {
+    bincode::deserialize,
     borsh::BorshSerialize,
     helpers::*,
     solana_program::{
-        borsh::try_from_slice_unchecked,
+        borsh0_10::try_from_slice_unchecked,
         instruction::{AccountMeta, Instruction, InstructionError},
         pubkey::Pubkey,
         stake, system_instruction, sysvar,
@@ -62,7 +63,7 @@ async fn setup() -> (ProgramTestContext, StakePoolAccounts, ValidatorStakeAccoun
             validator_stake.validator_stake_seed,
         )
         .await;
-    assert!(error.is_none());
+    assert!(error.is_none(), "{:?}", error);
     (context, stake_pool_accounts, validator_stake)
 }
 
@@ -79,7 +80,7 @@ async fn success() {
             &validator_stake.transient_stake_account,
         )
         .await;
-    assert!(error.is_none());
+    assert!(error.is_none(), "{:?}", error);
 
     let error = stake_pool_accounts
         .update_all(
@@ -90,7 +91,7 @@ async fn success() {
             false,
         )
         .await;
-    assert!(error.is_none());
+    assert!(error.is_none(), "{:?}", error);
 
     // Check if account was removed from the list of stake accounts
     let validator_list = get_account(
@@ -243,7 +244,7 @@ async fn success_at_large_value() {
             &validator_stake.transient_stake_account,
         )
         .await;
-    assert!(error.is_none());
+    assert!(error.is_none(), "{:?}", error);
 }
 
 #[tokio::test]
@@ -259,7 +260,7 @@ async fn fail_double_remove() {
             &validator_stake.transient_stake_account,
         )
         .await;
-    assert!(error.is_none());
+    assert!(error.is_none(), "{:?}", error);
 
     let error = stake_pool_accounts
         .update_all(
@@ -270,7 +271,7 @@ async fn fail_double_remove() {
             false,
         )
         .await;
-    assert!(error.is_none());
+    assert!(error.is_none(), "{:?}", error);
 
     let last_blockhash = context
         .banks_client
@@ -389,7 +390,7 @@ async fn fail_no_signature() {
 }
 
 #[tokio::test]
-async fn fail_with_activating_transient_stake() {
+async fn success_with_activating_transient_stake() {
     let (mut context, stake_pool_accounts, validator_stake) = setup().await;
 
     // increase the validator stake
@@ -405,7 +406,7 @@ async fn fail_with_activating_transient_stake() {
             validator_stake.transient_stake_seed,
         )
         .await;
-    assert!(error.is_none());
+    assert!(error.is_none(), "{:?}", error);
 
     let error = stake_pool_accounts
         .remove_validator_from_pool(
@@ -415,19 +416,20 @@ async fn fail_with_activating_transient_stake() {
             &validator_stake.stake_account,
             &validator_stake.transient_stake_account,
         )
-        .await
-        .unwrap()
-        .unwrap();
-    match error {
-        TransactionError::InstructionError(
-            _,
-            InstructionError::Custom(error_index),
-        ) => {
-            let program_error = StakePoolError::WrongStakeState as u32;
-            assert_eq!(error_index, program_error);
-        }
-        _ => panic!("Wrong error occurs while removing validator stake account while transient stake is activating"),
-    }
+        .await;
+    assert!(error.is_none(), "{:?}", error);
+
+    // transient stake should be inactive now
+    let stake = get_account(
+        &mut context.banks_client,
+        &validator_stake.transient_stake_account,
+    )
+    .await;
+    let stake_state = deserialize::<stake::state::StakeStateV2>(&stake.data).unwrap();
+    assert_ne!(
+        stake_state.stake().unwrap().delegation.deactivation_epoch,
+        u64::MAX
+    );
 }
 
 #[tokio::test]
@@ -435,7 +437,7 @@ async fn success_with_deactivating_transient_stake() {
     let (mut context, stake_pool_accounts, validator_stake) = setup().await;
 
     let rent = context.banks_client.get_rent().await.unwrap();
-    let stake_rent = rent.minimum_balance(std::mem::size_of::<stake::state::StakeState>());
+    let stake_rent = rent.minimum_balance(std::mem::size_of::<stake::state::StakeStateV2>());
     let current_minimum_delegation = stake_pool_get_minimum_delegation(
         &mut context.banks_client,
         &context.payer,
@@ -455,7 +457,7 @@ async fn success_with_deactivating_transient_stake() {
 
     // increase the validator stake
     let error = stake_pool_accounts
-        .decrease_validator_stake(
+        .decrease_validator_stake_either(
             &mut context.banks_client,
             &context.payer,
             &context.last_blockhash,
@@ -463,9 +465,10 @@ async fn success_with_deactivating_transient_stake() {
             &validator_stake.transient_stake_account,
             TEST_STAKE_AMOUNT + stake_rent,
             validator_stake.transient_stake_seed,
+            DecreaseInstruction::Reserve,
         )
         .await;
-    assert!(error.is_none());
+    assert!(error.is_none(), "{:?}", error);
 
     let error = stake_pool_accounts
         .remove_validator_from_pool(
@@ -476,7 +479,7 @@ async fn success_with_deactivating_transient_stake() {
             &validator_stake.transient_stake_account,
         )
         .await;
-    assert!(error.is_none());
+    assert!(error.is_none(), "{:?}", error);
 
     // fail deposit
     let maybe_deposit = simple_deposit_stake(
@@ -542,17 +545,18 @@ async fn success_with_deactivating_transient_stake() {
             max_validators: stake_pool_accounts.max_validators,
         },
         validators: vec![state::ValidatorStakeInfo {
-            status: state::StakeStatus::DeactivatingAll,
+            status: state::StakeStatus::DeactivatingAll.into(),
             vote_account_address: validator_stake.vote.pubkey(),
-            last_update_epoch: 0,
-            active_stake_lamports: stake_rent + current_minimum_delegation,
-            transient_stake_lamports: TEST_STAKE_AMOUNT + stake_rent,
-            transient_seed_suffix: validator_stake.transient_stake_seed,
-            unused: 0,
+            last_update_epoch: 0.into(),
+            active_stake_lamports: (stake_rent + current_minimum_delegation).into(),
+            transient_stake_lamports: (TEST_STAKE_AMOUNT + stake_rent * 2).into(),
+            transient_seed_suffix: validator_stake.transient_stake_seed.into(),
+            unused: 0.into(),
             validator_seed_suffix: validator_stake
                 .validator_stake_seed
                 .map(|s| s.get())
-                .unwrap_or(0),
+                .unwrap_or(0)
+                .into(),
         }],
     };
     assert_eq!(validator_list, expected_list);
@@ -567,7 +571,7 @@ async fn success_with_deactivating_transient_stake() {
             false,
         )
         .await;
-    assert!(error.is_none());
+    assert!(error.is_none(), "{:?}", error);
 
     let validator_list = get_account(
         &mut context.banks_client,
@@ -618,7 +622,7 @@ async fn success_resets_preferred_validator() {
             &validator_stake.transient_stake_account,
         )
         .await;
-    assert!(error.is_none());
+    assert!(error.is_none(), "{:?}", error);
 
     let error = stake_pool_accounts
         .update_all(
@@ -629,7 +633,7 @@ async fn success_resets_preferred_validator() {
             false,
         )
         .await;
-    assert!(error.is_none());
+    assert!(error.is_none(), "{:?}", error);
 
     // Check if account was removed from the list of stake accounts
     let validator_list = get_account(
@@ -663,7 +667,7 @@ async fn success_resets_preferred_validator() {
 async fn success_with_hijacked_transient_account() {
     let (mut context, stake_pool_accounts, validator_stake) = setup().await;
     let rent = context.banks_client.get_rent().await.unwrap();
-    let stake_rent = rent.minimum_balance(std::mem::size_of::<stake::state::StakeState>());
+    let stake_rent = rent.minimum_balance(std::mem::size_of::<stake::state::StakeStateV2>());
     let current_minimum_delegation = stake_pool_get_minimum_delegation(
         &mut context.banks_client,
         &context.payer,
@@ -685,12 +689,12 @@ async fn success_with_hijacked_transient_account() {
             validator_stake.transient_stake_seed,
         )
         .await;
-    assert!(error.is_none());
+    assert!(error.is_none(), "{:?}", error);
 
     // warp forward to merge
     let first_normal_slot = context.genesis_config().epoch_schedule.first_normal_slot;
     let slots_per_epoch = context.genesis_config().epoch_schedule.slots_per_epoch;
-    let mut slot = first_normal_slot + slots_per_epoch;
+    let mut slot = first_normal_slot + slots_per_epoch + 1;
     context.warp_to_slot(slot).unwrap();
     stake_pool_accounts
         .update_all(
@@ -704,7 +708,7 @@ async fn success_with_hijacked_transient_account() {
 
     // decrease
     let error = stake_pool_accounts
-        .decrease_validator_stake(
+        .decrease_validator_stake_either(
             &mut context.banks_client,
             &context.payer,
             &context.last_blockhash,
@@ -712,9 +716,10 @@ async fn success_with_hijacked_transient_account() {
             &validator_stake.transient_stake_account,
             increase_amount,
             validator_stake.transient_stake_seed,
+            DecreaseInstruction::Reserve,
         )
         .await;
-    assert!(error.is_none());
+    assert!(error.is_none(), "{:?}", error);
 
     // warp forward to merge
     slot += slots_per_epoch;
@@ -783,7 +788,7 @@ async fn success_with_hijacked_transient_account() {
         .process_transaction(transaction)
         .await
         .err();
-    assert!(error.is_none());
+    assert!(error.is_none(), "{:?}", error);
 
     // activate transient stake account
     delegate_stake_account(
@@ -806,7 +811,7 @@ async fn success_with_hijacked_transient_account() {
             &validator_stake.transient_stake_account,
         )
         .await;
-    assert!(error.is_none());
+    assert!(error.is_none(), "{:?}", error);
 
     // warp forward to merge
     slot += slots_per_epoch;
@@ -821,7 +826,7 @@ async fn success_with_hijacked_transient_account() {
             false,
         )
         .await;
-    assert!(error.is_none());
+    assert!(error.is_none(), "{:?}", error);
 
     // Check if account was removed from the list of stake accounts
     let validator_list = get_account(

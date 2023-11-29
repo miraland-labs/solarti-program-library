@@ -1,33 +1,32 @@
-#![allow(clippy::integer_arithmetic)]
-use std::borrow::Borrow;
-
-use borsh::{BorshDeserialize, BorshSerialize};
-use cookies::{TokenAccountCookie, WalletCookie};
-use solana_program::{
-    borsh::try_from_slice_unchecked, clock::Clock, instruction::Instruction,
-    program_error::ProgramError, program_pack::Pack, pubkey::Pubkey, rent::Rent,
-    stake_history::Epoch, system_instruction, system_program, sysvar,
+#![allow(clippy::arithmetic_side_effects)]
+use {
+    crate::tools::map_transaction_error,
+    bincode::deserialize,
+    borsh::{BorshDeserialize, BorshSerialize},
+    cookies::{TokenAccountCookie, WalletCookie},
+    solana_program::{
+        borsh0_10::try_from_slice_unchecked, clock::Clock, instruction::Instruction,
+        program_error::ProgramError, program_pack::Pack, pubkey::Pubkey, rent::Rent,
+        stake_history::Epoch, system_instruction, system_program, sysvar,
+    },
+    solana_program_test::{ProgramTest, ProgramTestContext},
+    solana_sdk::{
+        account::{Account, AccountSharedData, WritableAccount},
+        signature::Keypair,
+        signer::Signer,
+        transaction::Transaction,
+    },
+    spl_token::instruction::{set_authority, AuthorityType},
+    std::borrow::Borrow,
+    tools::clone_keypair,
 };
-use solana_program_test::{ProgramTest, ProgramTestContext};
-use solana_sdk::{
-    account::{Account, AccountSharedData, WritableAccount},
-    signature::Keypair,
-    signer::Signer,
-    transaction::Transaction,
-};
-
-use bincode::deserialize;
-
-use spl_token::instruction::{set_authority, AuthorityType};
-use tools::clone_keypair;
-
-use crate::tools::map_transaction_error;
 
 pub mod addins;
 pub mod cookies;
 pub mod tools;
 
-/// Program's test bench which captures test context, rent and payer and common utility functions
+/// Program's test bench which captures test context, rent and payer and common
+/// utility functions
 pub struct ProgramTestBench {
     pub context: ProgramTestContext,
     pub rent: Rent,
@@ -150,7 +149,7 @@ impl ProgramTestBench {
             .unwrap();
     }
 
-    /// Sets solarti-token program account (Mint or TokenAccount) authority
+    /// Sets spl-token program account (Mint or TokenAccount) authority
     pub async fn set_spl_token_account_authority(
         &mut self,
         account: &Pubkey,
@@ -349,7 +348,8 @@ impl ProgramTestBench {
             .unwrap_or_else(|| panic!("GET-TEST-ACCOUNT-ERROR: Account {} not found", address))
     }
 
-    /// Overrides or creates Borsh serialized account with arbitrary account data subverting normal runtime checks
+    /// Overrides or creates Borsh serialized account with arbitrary account
+    /// data subverting normal runtime checks
     pub fn set_borsh_account<T: BorshSerialize>(
         &mut self,
         program_id: &Pubkey,
@@ -357,7 +357,7 @@ impl ProgramTestBench {
         account: &T,
     ) {
         let mut account_data = vec![];
-        account.serialize(&mut account_data).unwrap();
+        borsh::to_writer(&mut account_data, &account).unwrap();
 
         let data = AccountSharedData::create(
             self.rent.minimum_balance(account_data.len()),

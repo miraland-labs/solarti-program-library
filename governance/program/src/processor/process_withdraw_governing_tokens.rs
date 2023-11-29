@@ -1,21 +1,22 @@
 //! Program state processor
 
-use solana_program::{
-    account_info::{next_account_info, AccountInfo},
-    entrypoint::ProgramResult,
-    pubkey::Pubkey,
-};
-
-use crate::{
-    error::GovernanceError,
-    state::{
-        realm::{get_realm_address_seeds, get_realm_data},
-        realm_config::get_realm_config_data_for_realm,
-        token_owner_record::{
-            get_token_owner_record_address_seeds, get_token_owner_record_data_for_seeds,
+use {
+    crate::{
+        error::GovernanceError,
+        state::{
+            realm::{get_realm_address_seeds, get_realm_data},
+            realm_config::get_realm_config_data_for_realm,
+            token_owner_record::{
+                get_token_owner_record_address_seeds, get_token_owner_record_data_for_seeds,
+            },
         },
+        tools::spl_token::{get_spl_token_mint, transfer_spl_tokens_signed},
     },
-    tools::spl_token::{get_spl_token_mint, transfer_spl_tokens_signed},
+    solana_program::{
+        account_info::{next_account_info, AccountInfo},
+        entrypoint::ProgramResult,
+        pubkey::Pubkey,
+    },
 };
 
 /// Processes WithdrawGoverningTokens instruction
@@ -77,7 +78,7 @@ pub fn process_withdraw_governing_tokens(
     )?;
 
     token_owner_record_data.governing_token_deposit_amount = 0;
-    token_owner_record_data.serialize(&mut *token_owner_record_info.data.borrow_mut())?;
+    token_owner_record_data.serialize(&mut token_owner_record_info.data.borrow_mut()[..])?;
 
     Ok(())
 }

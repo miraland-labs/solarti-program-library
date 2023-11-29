@@ -1,10 +1,9 @@
 #![allow(dead_code)]
 
 use {
-    borsh::BorshSerialize,
-    mpl_token_metadata::{pda::find_metadata_account, state::Metadata},
+    borsh::{BorshDeserialize, BorshSerialize},
     solana_program::{
-        borsh::{get_instance_packed_len, get_packed_len, try_from_slice_unchecked},
+        borsh0_10::{get_instance_packed_len, get_packed_len, try_from_slice_unchecked},
         hash::Hash,
         instruction::Instruction,
         program_option::COption,
@@ -28,13 +27,16 @@ use {
     spl_stake_pool::{
         find_deposit_authority_program_address, find_ephemeral_stake_program_address,
         find_stake_program_address, find_transient_stake_program_address,
-        find_withdraw_authority_program_address, id, instruction, minimum_delegation,
+        find_withdraw_authority_program_address, id,
+        inline_mpl_token_metadata::{self, pda::find_metadata_account},
+        instruction, minimum_delegation,
         processor::Processor,
         state::{self, FeeType, FutureEpoch, StakePool, ValidatorList},
         MINIMUM_RESERVE_LAMPORTS,
     },
     spl_token_2022::{
         extension::{ExtensionType, StateWithExtensionsOwned},
+        native_mint,
         state::{Account, Mint},
     },
     std::{convert::TryInto, num::NonZeroU32},
@@ -62,7 +64,7 @@ pub fn program_test() -> ProgramTest {
 pub fn program_test_with_metadata_program() -> ProgramTest {
     let mut program_test = ProgramTest::default();
     program_test.add_program("spl_stake_pool", id(), processor!(Processor::process));
-    program_test.add_program("mpl_token_metadata", mpl_token_metadata::id(), None);
+    program_test.add_program("mpl_token_metadata", inline_mpl_token_metadata::id(), None);
     program_test.prefer_bpf(false);
     program_test.add_program(
         "spl_token_2022",
@@ -93,7 +95,7 @@ pub async fn create_mint(
 ) -> Result<(), TransportError> {
     assert!(extension_types.is_empty() || program_id != &spl_token::id());
     let rent = banks_client.get_rent().await.unwrap();
-    let space = ExtensionType::get_account_len::<Mint>(extension_types);
+    let space = ExtensionType::try_calculate_account_len::<Mint>(extension_types).unwrap();
     let mint_rent = rent.minimum_balance(space);
     let mint_pubkey = pool_mint.pubkey();
 
@@ -224,7 +226,7 @@ pub async fn create_token_account(
     extensions: &[ExtensionType],
 ) -> Result<(), TransportError> {
     let rent = banks_client.get_rent().await.unwrap();
-    let space = ExtensionType::get_account_len::<Account>(extensions);
+    let space = ExtensionType::try_calculate_account_len::<Account>(extensions).unwrap();
     let account_rent = rent.minimum_balance(space);
 
     let mut instructions = vec![system_instruction::create_account(
@@ -430,6 +432,20 @@ pub async fn get_token_balance(banks_client: &mut BanksClient, token: &Pubkey) -
     account_info.base.amount
 }
 
+#[derive(Clone, BorshDeserialize, Debug, PartialEq, Eq)]
+pub struct Metadata {
+    pub key: u8,
+    pub update_authority: Pubkey,
+    pub mint: Pubkey,
+    pub name: String,
+    pub symbol: String,
+    pub uri: String,
+    pub seller_fee_basis_points: u16,
+    pub creators: Option<Vec<u8>>,
+    pub primary_sale_happened: bool,
+    pub is_mutable: bool,
+}
+
 pub async fn get_metadata_account(banks_client: &mut BanksClient, token_mint: &Pubkey) -> Metadata {
     let (token_metadata, _) = find_metadata_account(token_mint);
     let token_metadata_account = banks_client
@@ -600,7 +616,7 @@ pub async fn create_vote(
         0,
         &system_program::id(),
     )];
-    instructions.append(&mut vote_instruction::create_account(
+    instructions.append(&mut vote_instruction::create_account_with_config(
         &payer.pubkey(),
         &vote.pubkey(),
         &VoteInit {
@@ -609,6 +625,10 @@ pub async fn create_vote(
             ..VoteInit::default()
         },
         rent_voter,
+        vote_instruction::CreateVoteAccountConfig {
+            space: VoteStateVersions::vote_state_size_of(true) as u64,
+            ..Default::default()
+        },
     ));
 
     let transaction = Transaction::new_signed_with_payer(
@@ -631,7 +651,7 @@ pub async fn create_independent_stake_account(
 ) -> u64 {
     let rent = banks_client.get_rent().await.unwrap();
     let lamports =
-        rent.minimum_balance(std::mem::size_of::<stake::state::StakeState>()) + stake_amount;
+        rent.minimum_balance(std::mem::size_of::<stake::state::StakeStateV2>()) + stake_amount;
 
     let transaction = Transaction::new_signed_with_payer(
         &stake::instruction::create_account(
@@ -657,14 +677,14 @@ pub async fn create_blank_stake_account(
     stake: &Keypair,
 ) -> u64 {
     let rent = banks_client.get_rent().await.unwrap();
-    let lamports = rent.minimum_balance(std::mem::size_of::<stake::state::StakeState>()) + 1;
+    let lamports = rent.minimum_balance(std::mem::size_of::<stake::state::StakeStateV2>());
 
     let transaction = Transaction::new_signed_with_payer(
         &[system_instruction::create_account(
             &payer.pubkey(),
             &stake.pubkey(),
             lamports,
-            std::mem::size_of::<stake::state::StakeState>() as u64,
+            std::mem::size_of::<stake::state::StakeStateV2>() as u64,
             &stake::program::id(),
         )],
         Some(&payer.pubkey()),
@@ -1594,7 +1614,7 @@ impl StakePoolAccounts {
     }
 
     #[allow(clippy::too_many_arguments)]
-    pub async fn decrease_validator_stake(
+    pub async fn decrease_validator_stake_deprecated(
         &self,
         banks_client: &mut BanksClient,
         payer: &Keypair,
@@ -1604,12 +1624,57 @@ impl StakePoolAccounts {
         lamports: u64,
         transient_stake_seed: u64,
     ) -> Option<TransportError> {
-        let mut instructions = vec![instruction::decrease_validator_stake(
+        #[allow(deprecated)]
+        let mut instructions = vec![
+            system_instruction::transfer(
+                &payer.pubkey(),
+                transient_stake,
+                STAKE_ACCOUNT_RENT_EXEMPTION,
+            ),
+            instruction::decrease_validator_stake(
+                &id(),
+                &self.stake_pool.pubkey(),
+                &self.staker.pubkey(),
+                &self.withdraw_authority,
+                &self.validator_list.pubkey(),
+                validator_stake,
+                transient_stake,
+                lamports,
+                transient_stake_seed,
+            ),
+        ];
+        self.maybe_add_compute_budget_instruction(&mut instructions);
+        let transaction = Transaction::new_signed_with_payer(
+            &instructions,
+            Some(&payer.pubkey()),
+            &[payer, &self.staker],
+            *recent_blockhash,
+        );
+        banks_client
+            .process_transaction(transaction)
+            .await
+            .map_err(|e| e.into())
+            .err()
+    }
+
+    #[allow(clippy::too_many_arguments)]
+    pub async fn decrease_validator_stake_with_reserve(
+        &self,
+        banks_client: &mut BanksClient,
+        payer: &Keypair,
+        recent_blockhash: &Hash,
+        validator_stake: &Pubkey,
+        transient_stake: &Pubkey,
+        lamports: u64,
+        transient_stake_seed: u64,
+    ) -> Option<TransportError> {
+        let mut instructions = vec![instruction::decrease_validator_stake_with_reserve(
             &id(),
             &self.stake_pool.pubkey(),
             &self.staker.pubkey(),
             &self.withdraw_authority,
             &self.validator_list.pubkey(),
+            &self.reserve_stake.pubkey(),
             validator_stake,
             transient_stake,
             lamports,
@@ -1648,6 +1713,7 @@ impl StakePoolAccounts {
             &self.staker.pubkey(),
             &self.withdraw_authority,
             &self.validator_list.pubkey(),
+            &self.reserve_stake.pubkey(),
             validator_stake,
             ephemeral_stake,
             transient_stake,
@@ -1679,39 +1745,56 @@ impl StakePoolAccounts {
         transient_stake: &Pubkey,
         lamports: u64,
         transient_stake_seed: u64,
-        use_additional_instruction: bool,
+        instruction_type: DecreaseInstruction,
     ) -> Option<TransportError> {
-        if use_additional_instruction {
-            let ephemeral_stake_seed = 0;
-            let ephemeral_stake = find_ephemeral_stake_program_address(
-                &id(),
-                &self.stake_pool.pubkey(),
-                ephemeral_stake_seed,
-            )
-            .0;
-            self.decrease_additional_validator_stake(
-                banks_client,
-                payer,
-                recent_blockhash,
-                validator_stake,
-                &ephemeral_stake,
-                transient_stake,
-                lamports,
-                transient_stake_seed,
-                ephemeral_stake_seed,
-            )
-            .await
-        } else {
-            self.decrease_validator_stake(
-                banks_client,
-                payer,
-                recent_blockhash,
-                validator_stake,
-                transient_stake,
-                lamports,
-                transient_stake_seed,
-            )
-            .await
+        match instruction_type {
+            DecreaseInstruction::Additional => {
+                let ephemeral_stake_seed = 0;
+                let ephemeral_stake = find_ephemeral_stake_program_address(
+                    &id(),
+                    &self.stake_pool.pubkey(),
+                    ephemeral_stake_seed,
+                )
+                .0;
+                self.decrease_additional_validator_stake(
+                    banks_client,
+                    payer,
+                    recent_blockhash,
+                    validator_stake,
+                    &ephemeral_stake,
+                    transient_stake,
+                    lamports,
+                    transient_stake_seed,
+                    ephemeral_stake_seed,
+                )
+                .await
+            }
+            DecreaseInstruction::Reserve => {
+                self.decrease_validator_stake_with_reserve(
+                    banks_client,
+                    payer,
+                    recent_blockhash,
+                    validator_stake,
+                    transient_stake,
+                    lamports,
+                    transient_stake_seed,
+                )
+                .await
+            }
+            DecreaseInstruction::Deprecated =>
+            {
+                #[allow(deprecated)]
+                self.decrease_validator_stake_deprecated(
+                    banks_client,
+                    payer,
+                    recent_blockhash,
+                    validator_stake,
+                    transient_stake,
+                    lamports,
+                    transient_stake_seed,
+                )
+                .await
+            }
         }
     }
 
@@ -1870,6 +1953,7 @@ impl StakePoolAccounts {
                 &self.staker.pubkey(),
                 &self.withdraw_authority,
                 &self.validator_list.pubkey(),
+                &self.reserve_stake.pubkey(),
                 source_validator_stake,
                 source_transient_stake,
                 ephemeral_stake,
@@ -1994,7 +2078,7 @@ impl Default for StakePoolAccounts {
             token_program_id: spl_token::id(),
             pool_mint,
             pool_fee_account,
-            pool_decimals: 0,
+            pool_decimals: native_mint::DECIMALS,
             manager,
             staker,
             withdraw_authority,
@@ -2038,7 +2122,7 @@ pub async fn simple_add_validator_to_pool(
     );
 
     let rent = banks_client.get_rent().await.unwrap();
-    let stake_rent = rent.minimum_balance(std::mem::size_of::<stake::state::StakeState>());
+    let stake_rent = rent.minimum_balance(std::mem::size_of::<stake::state::StakeStateV2>());
     let current_minimum_delegation =
         stake_pool_get_minimum_delegation(banks_client, payer, recent_blockhash).await;
 
@@ -2065,7 +2149,7 @@ pub async fn simple_add_validator_to_pool(
             mln_deposit_authority,
         )
         .await;
-    assert!(error.is_none());
+    assert!(error.is_none(), "{:?}", error);
 
     create_vote(
         banks_client,
@@ -2086,7 +2170,7 @@ pub async fn simple_add_validator_to_pool(
             validator_stake.validator_stake_seed,
         )
         .await;
-    assert!(error.is_none());
+    assert!(error.is_none(), "{:?}", error);
 
     validator_stake
 }
@@ -2187,7 +2271,7 @@ impl DepositStakeAccount {
             )
             .await;
         self.pool_tokens = get_token_balance(banks_client, &self.pool_account.pubkey()).await;
-        assert!(error.is_none());
+        assert!(error.is_none(), "{:?}", error);
     }
 }
 
@@ -2296,17 +2380,19 @@ pub async fn get_validator_list_sum(
         .map(|info| info.stake_lamports().unwrap())
         .sum();
     let rent = banks_client.get_rent().await.unwrap();
-    let rent = rent.minimum_balance(std::mem::size_of::<stake::state::StakeState>());
+    let rent = rent.minimum_balance(std::mem::size_of::<stake::state::StakeStateV2>());
     validator_sum + reserve_stake.lamports - rent - MINIMUM_RESERVE_LAMPORTS
 }
 
-pub fn add_vote_account(program_test: &mut ProgramTest) -> Pubkey {
+pub fn add_vote_account_with_pubkey(
+    voter_pubkey: &Pubkey,
+    program_test: &mut ProgramTest,
+) -> Pubkey {
     let authorized_voter = Pubkey::new_unique();
     let authorized_withdrawer = Pubkey::new_unique();
     let commission = 1;
 
     // create vote account
-    let vote_pubkey = Pubkey::new_unique();
     let node_pubkey = Pubkey::new_unique();
     let vote_state = VoteStateVersions::new_current(VoteState::new(
         &VoteInit {
@@ -2324,8 +2410,13 @@ pub fn add_vote_account(program_test: &mut ProgramTest) -> Pubkey {
         false,
         Epoch::default(),
     );
-    program_test.add_account(vote_pubkey, vote_account);
-    vote_pubkey
+    program_test.add_account(*voter_pubkey, vote_account);
+    *voter_pubkey
+}
+
+pub fn add_vote_account(program_test: &mut ProgramTest) -> Pubkey {
+    let voter_pubkey = Pubkey::new_unique();
+    add_vote_account_with_pubkey(&voter_pubkey, program_test)
 }
 
 #[allow(clippy::too_many_arguments)]
@@ -2355,17 +2446,22 @@ pub fn add_validator_stake_account(
             stake: stake_amount,
             activation_epoch: FIRST_NORMAL_EPOCH,
             deactivation_epoch: u64::MAX,
-            warmup_cooldown_rate: 0.25, // default
+            ..Default::default()
         },
         credits_observed: 0,
     };
 
+    let mut data = vec![0u8; std::mem::size_of::<stake::state::StakeStateV2>()];
+    let stake_data = bincode::serialize(&stake::state::StakeStateV2::Stake(
+        meta,
+        stake,
+        stake::stake_flags::StakeFlags::empty(),
+    ))
+    .unwrap();
+    data[..stake_data.len()].copy_from_slice(&stake_data);
     let stake_account = MiralandAccount::create(
         stake_amount + STAKE_ACCOUNT_RENT_EXEMPTION,
-        bincode::serialize::<stake::state::StakeState>(&stake::state::StakeState::Stake(
-            meta, stake,
-        ))
-        .unwrap(),
+        data,
         stake::program::id(),
         false,
         Epoch::default(),
@@ -2384,14 +2480,14 @@ pub fn add_validator_stake_account(
     let active_stake_lamports = stake_amount + STAKE_ACCOUNT_RENT_EXEMPTION;
 
     validator_list.validators.push(state::ValidatorStakeInfo {
-        status,
+        status: status.into(),
         vote_account_address: *voter_pubkey,
-        active_stake_lamports,
-        transient_stake_lamports: 0,
-        last_update_epoch: FIRST_NORMAL_EPOCH,
-        transient_seed_suffix: 0,
-        unused: 0,
-        validator_seed_suffix: raw_suffix,
+        active_stake_lamports: active_stake_lamports.into(),
+        transient_stake_lamports: 0.into(),
+        last_update_epoch: FIRST_NORMAL_EPOCH.into(),
+        transient_seed_suffix: 0.into(),
+        unused: 0.into(),
+        validator_seed_suffix: raw_suffix.into(),
     });
 
     stake_pool.total_lamports += active_stake_lamports;
@@ -2414,7 +2510,7 @@ pub fn add_reserve_stake_account(
     };
     let reserve_stake_account = MiralandAccount::create(
         stake_amount + STAKE_ACCOUNT_RENT_EXEMPTION,
-        bincode::serialize::<stake::state::StakeState>(&stake::state::StakeState::Initialized(
+        bincode::serialize::<stake::state::StakeStateV2>(&stake::state::StakeStateV2::Initialized(
             meta,
         ))
         .unwrap(),
@@ -2523,6 +2619,7 @@ pub fn add_token_account(
 
 pub async fn setup_for_withdraw(
     token_program_id: Pubkey,
+    reserve_lamports: u64,
 ) -> (
     ProgramTestContext,
     StakePoolAccounts,
@@ -2539,7 +2636,7 @@ pub async fn setup_for_withdraw(
             &mut context.banks_client,
             &context.payer,
             &context.last_blockhash,
-            MINIMUM_RESERVE_LAMPORTS,
+            reserve_lamports,
         )
         .await
         .unwrap();
@@ -2606,4 +2703,11 @@ pub async fn setup_for_withdraw(
         user_stake_recipient,
         tokens_to_withdraw,
     )
+}
+
+#[derive(Copy, Clone, Debug, PartialEq)]
+pub enum DecreaseInstruction {
+    Additional,
+    Reserve,
+    Deprecated,
 }

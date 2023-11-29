@@ -1,19 +1,23 @@
 //! Error types
 
-use num_derive::FromPrimitive;
-use solana_program::{
-    decode_error::DecodeError,
-    msg,
-    program_error::{PrintProgramError, ProgramError},
+use {
+    num_derive::FromPrimitive,
+    solana_program::{
+        decode_error::DecodeError,
+        msg,
+        program_error::{PrintProgramError, ProgramError},
+    },
+    thiserror::Error,
 };
-use thiserror::Error;
 
 /// Errors that may be returned by the Governance program
+// Start Governance custom errors from 500 to avoid conflicts with programs
+// invoked via CPI
 #[derive(Clone, Debug, Eq, Error, FromPrimitive, PartialEq)]
 pub enum GovernanceError {
     /// Invalid instruction passed to program
     #[error("Invalid instruction passed to program")]
-    InvalidInstruction = 500, // Start Governance custom errors from 500 to avoid conflicts with programs invoked via CPI
+    InvalidInstruction = 500,
 
     /// Realm with the given name and governing mints already exists
     #[error("Realm with the given name and governing mints already exists")]
@@ -83,7 +87,8 @@ pub enum GovernanceError {
     #[error("Invalid Governance config: Vote threshold percentage out of range")]
     InvalidVoteThresholdPercentage, // 517
 
-    /// Proposal for the given Governance, Governing Token Mint and index already exists
+    /// Proposal for the given Governance, Governing Token Mint and index
+    /// already exists
     #[error("Proposal for the given Governance, Governing Token Mint and index already exists")]
     ProposalAlreadyExists, // 518
 
@@ -227,7 +232,8 @@ pub enum GovernanceError {
     #[error("Invalid ProgramData account Data")]
     InvalidProgramDataAccountData, // 552
 
-    /// Provided upgrade authority doesn't match current program upgrade authority
+    /// Provided upgrade authority doesn't match current program upgrade
+    /// authority
     #[error("Provided upgrade authority doesn't match current program upgrade authority")]
     InvalidUpgradeAuthority, // 553
 
@@ -355,9 +361,9 @@ pub enum GovernanceError {
     #[error("Proposal is not not executable")]
     ProposalIsNotExecutable, // 584
 
-    /// Invalid vote
-    #[error("Invalid vote")]
-    InvalidVote, // 585
+    /// Deny vote is not allowed
+    #[error("Deny vote is not allowed")]
+    DenyVoteIsNotAllowed, // 585
 
     /// Cannot execute defeated option
     #[error("Cannot execute defeated option")]
@@ -466,6 +472,54 @@ pub enum GovernanceError {
     /// Invalid State: Proposal is not in final state
     #[error("Invalid State: Proposal is not in final state")]
     InvalidStateNotFinal, // 612
+
+    ///Invalid state for proposal state transition to Completed
+    #[error("Invalid state for proposal state transition to Completed")]
+    InvalidStateToCompleteProposal, // 613
+
+    /// Invalid number of vote choices
+    #[error("Invalid number of vote choices")]
+    InvalidNumberOfVoteChoices, // 614
+
+    /// Ranked vote is not supported
+    #[error("Ranked vote is not supported")]
+    RankedVoteIsNotSupported, // 615
+
+    /// Choice weight must be 100%
+    #[error("Choice weight must be 100%")]
+    ChoiceWeightMustBe100Percent, // 616
+
+    /// Single choice only is allowed
+    #[error("Single choice only is allowed")]
+    SingleChoiceOnlyIsAllowed, // 617
+
+    /// At least single choice is required
+    #[error("At least single choice is required")]
+    AtLeastSingleChoiceIsRequired, // 618
+
+    /// Total vote weight must be 100%
+    #[error("Total vote weight must be 100%")]
+    TotalVoteWeightMustBe100Percent, // 619
+
+    /// Invalid multi choice proposal parameters
+    #[error("Invalid multi choice proposal parameters")]
+    InvalidMultiChoiceProposalParameters, // 620
+
+    /// Invalid Governance for RequiredSignatory
+    #[error("Invalid Governance for RequiredSignatory")]
+    InvalidGovernanceForRequiredSignatory,
+
+    /// SignatoryRecord already exists
+    #[error("Signatory Record has already been created")]
+    SignatoryRecordAlreadyExists,
+
+    /// Instruction has been removed
+    #[error("Instruction has been removed")]
+    InstructionDeprecated,
+
+    /// Proposal is missing signatories required by its governance
+    #[error("Proposal is missing required signatories")]
+    MissingRequiredSignatories,
 }
 
 impl PrintProgramError for GovernanceError {

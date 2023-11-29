@@ -1,22 +1,24 @@
-#![allow(clippy::integer_arithmetic)]
+#![allow(clippy::arithmetic_side_effects)]
 #![cfg(feature = "test-sbf")]
 
 mod helpers;
 
-use helpers::*;
-use solana_program_test::*;
-use solana_sdk::{
-    instruction::InstructionError,
-    signature::{Keypair, Signer},
-    transaction::{Transaction, TransactionError},
+use {
+    helpers::*,
+    solana_program_test::*,
+    solana_sdk::{
+        instruction::InstructionError,
+        signature::{Keypair, Signer},
+        transaction::{Transaction, TransactionError},
+    },
+    spl_token_lending::{
+        error::LendingError,
+        instruction::{refresh_obligation, withdraw_obligation_collateral},
+        processor::process_instruction,
+        state::INITIAL_COLLATERAL_RATIO,
+    },
+    std::u64,
 };
-use spl_token_lending::{
-    error::LendingError,
-    instruction::{refresh_obligation, withdraw_obligation_collateral},
-    processor::process_instruction,
-    state::INITIAL_COLLATERAL_RATIO,
-};
-use std::u64;
 
 #[tokio::test]
 async fn test_withdraw_fixed_amount() {
@@ -29,10 +31,10 @@ async fn test_withdraw_fixed_amount() {
     // limit to track compute unit increase
     test.set_compute_max_units(50_000);
 
-    const SOL_DEPOSIT_AMOUNT_LAMPORTS: u64 = 200 * LAMPORTS_TO_SOL * INITIAL_COLLATERAL_RATIO;
+    const MLN_DEPOSIT_AMOUNT_LAMPORTS: u64 = 200 * LAMPORTS_TO_MLN * INITIAL_COLLATERAL_RATIO;
     const USDC_BORROW_AMOUNT_FRACTIONAL: u64 = 1_000 * FRACTIONAL_TO_USDC;
-    const SOL_RESERVE_COLLATERAL_LAMPORTS: u64 = 2 * SOL_DEPOSIT_AMOUNT_LAMPORTS;
-    const WITHDRAW_AMOUNT: u64 = 100 * LAMPORTS_TO_SOL * INITIAL_COLLATERAL_RATIO;
+    const MLN_RESERVE_COLLATERAL_LAMPORTS: u64 = 2 * MLN_DEPOSIT_AMOUNT_LAMPORTS;
+    const WITHDRAW_AMOUNT: u64 = 100 * LAMPORTS_TO_MLN * INITIAL_COLLATERAL_RATIO;
 
     let user_accounts_owner = Keypair::new();
     let lending_market = add_lending_market(&mut test);
@@ -40,14 +42,14 @@ async fn test_withdraw_fixed_amount() {
     let mut reserve_config = TEST_RESERVE_CONFIG;
     reserve_config.loan_to_value_ratio = 50;
 
-    let sol_oracle = add_sol_oracle(&mut test);
-    let sol_test_reserve = add_reserve(
+    let mln_oracle = add_mln_oracle(&mut test);
+    let mln_test_reserve = add_reserve(
         &mut test,
         &lending_market,
-        &sol_oracle,
+        &mln_oracle,
         &user_accounts_owner,
         AddReserveArgs {
-            collateral_amount: SOL_RESERVE_COLLATERAL_LAMPORTS,
+            collateral_amount: MLN_RESERVE_COLLATERAL_LAMPORTS,
             liquidity_mint_pubkey: spl_token::native_mint::id(),
             liquidity_mint_decimals: 9,
             config: reserve_config,
@@ -79,7 +81,7 @@ async fn test_withdraw_fixed_amount() {
         &lending_market,
         &user_accounts_owner,
         AddObligationArgs {
-            deposits: &[(&sol_test_reserve, SOL_DEPOSIT_AMOUNT_LAMPORTS)],
+            deposits: &[(&mln_test_reserve, MLN_DEPOSIT_AMOUNT_LAMPORTS)],
             borrows: &[(&usdc_test_reserve, USDC_BORROW_AMOUNT_FRACTIONAL)],
             ..AddObligationArgs::default()
         },
@@ -95,23 +97,23 @@ async fn test_withdraw_fixed_amount() {
     test_liquidity.validate_state(&mut banks_client).await;
 
     let initial_collateral_supply_balance =
-        get_token_balance(&mut banks_client, sol_test_reserve.collateral_supply_pubkey).await;
+        get_token_balance(&mut banks_client, mln_test_reserve.collateral_supply_pubkey).await;
     let initial_user_collateral_balance =
-        get_token_balance(&mut banks_client, sol_test_reserve.user_collateral_pubkey).await;
+        get_token_balance(&mut banks_client, mln_test_reserve.user_collateral_pubkey).await;
 
     let mut transaction = Transaction::new_with_payer(
         &[
             refresh_obligation(
                 spl_token_lending::id(),
                 test_obligation.pubkey,
-                vec![sol_test_reserve.pubkey, usdc_test_reserve.pubkey],
+                vec![mln_test_reserve.pubkey, usdc_test_reserve.pubkey],
             ),
             withdraw_obligation_collateral(
                 spl_token_lending::id(),
                 WITHDRAW_AMOUNT,
-                sol_test_reserve.collateral_supply_pubkey,
-                sol_test_reserve.user_collateral_pubkey,
-                sol_test_reserve.pubkey,
+                mln_test_reserve.collateral_supply_pubkey,
+                mln_test_reserve.user_collateral_pubkey,
+                mln_test_reserve.pubkey,
                 test_obligation.pubkey,
                 lending_market.pubkey,
                 test_obligation.owner,
@@ -125,13 +127,13 @@ async fn test_withdraw_fixed_amount() {
 
     // check that collateral tokens were transferred
     let collateral_supply_balance =
-        get_token_balance(&mut banks_client, sol_test_reserve.collateral_supply_pubkey).await;
+        get_token_balance(&mut banks_client, mln_test_reserve.collateral_supply_pubkey).await;
     assert_eq!(
         collateral_supply_balance,
         initial_collateral_supply_balance - WITHDRAW_AMOUNT
     );
     let user_collateral_balance =
-        get_token_balance(&mut banks_client, sol_test_reserve.user_collateral_pubkey).await;
+        get_token_balance(&mut banks_client, mln_test_reserve.user_collateral_pubkey).await;
     assert_eq!(
         user_collateral_balance,
         initial_user_collateral_balance + WITHDRAW_AMOUNT
@@ -141,7 +143,7 @@ async fn test_withdraw_fixed_amount() {
     let collateral = &obligation.deposits[0];
     assert_eq!(
         collateral.deposited_amount,
-        SOL_DEPOSIT_AMOUNT_LAMPORTS - WITHDRAW_AMOUNT
+        MLN_DEPOSIT_AMOUNT_LAMPORTS - WITHDRAW_AMOUNT
     );
 }
 
@@ -262,10 +264,10 @@ async fn test_withdraw_too_large() {
         processor!(process_instruction),
     );
 
-    const SOL_DEPOSIT_AMOUNT_LAMPORTS: u64 = 200 * LAMPORTS_TO_SOL * INITIAL_COLLATERAL_RATIO;
+    const MLN_DEPOSIT_AMOUNT_LAMPORTS: u64 = 200 * LAMPORTS_TO_MLN * INITIAL_COLLATERAL_RATIO;
     const USDC_BORROW_AMOUNT_FRACTIONAL: u64 = 1_000 * FRACTIONAL_TO_USDC;
-    const SOL_RESERVE_COLLATERAL_LAMPORTS: u64 = 2 * SOL_DEPOSIT_AMOUNT_LAMPORTS;
-    const WITHDRAW_AMOUNT: u64 = (100 * LAMPORTS_TO_SOL * INITIAL_COLLATERAL_RATIO) + 1;
+    const MLN_RESERVE_COLLATERAL_LAMPORTS: u64 = 2 * MLN_DEPOSIT_AMOUNT_LAMPORTS;
+    const WITHDRAW_AMOUNT: u64 = (100 * LAMPORTS_TO_MLN * INITIAL_COLLATERAL_RATIO) + 1;
 
     let user_accounts_owner = Keypair::new();
     let lending_market = add_lending_market(&mut test);
@@ -273,14 +275,14 @@ async fn test_withdraw_too_large() {
     let mut reserve_config = TEST_RESERVE_CONFIG;
     reserve_config.loan_to_value_ratio = 50;
 
-    let sol_oracle = add_sol_oracle(&mut test);
-    let sol_test_reserve = add_reserve(
+    let mln_oracle = add_mln_oracle(&mut test);
+    let mln_test_reserve = add_reserve(
         &mut test,
         &lending_market,
-        &sol_oracle,
+        &mln_oracle,
         &user_accounts_owner,
         AddReserveArgs {
-            collateral_amount: SOL_RESERVE_COLLATERAL_LAMPORTS,
+            collateral_amount: MLN_RESERVE_COLLATERAL_LAMPORTS,
             liquidity_mint_pubkey: spl_token::native_mint::id(),
             liquidity_mint_decimals: 9,
             config: reserve_config,
@@ -312,7 +314,7 @@ async fn test_withdraw_too_large() {
         &lending_market,
         &user_accounts_owner,
         AddObligationArgs {
-            deposits: &[(&sol_test_reserve, SOL_DEPOSIT_AMOUNT_LAMPORTS)],
+            deposits: &[(&mln_test_reserve, MLN_DEPOSIT_AMOUNT_LAMPORTS)],
             borrows: &[(&usdc_test_reserve, USDC_BORROW_AMOUNT_FRACTIONAL)],
             ..AddObligationArgs::default()
         },
@@ -325,14 +327,14 @@ async fn test_withdraw_too_large() {
             refresh_obligation(
                 spl_token_lending::id(),
                 test_obligation.pubkey,
-                vec![sol_test_reserve.pubkey, usdc_test_reserve.pubkey],
+                vec![mln_test_reserve.pubkey, usdc_test_reserve.pubkey],
             ),
             withdraw_obligation_collateral(
                 spl_token_lending::id(),
                 WITHDRAW_AMOUNT,
-                sol_test_reserve.collateral_supply_pubkey,
-                sol_test_reserve.user_collateral_pubkey,
-                sol_test_reserve.pubkey,
+                mln_test_reserve.collateral_supply_pubkey,
+                mln_test_reserve.user_collateral_pubkey,
+                mln_test_reserve.pubkey,
                 test_obligation.pubkey,
                 lending_market.pubkey,
                 test_obligation.owner,

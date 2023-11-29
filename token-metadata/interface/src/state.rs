@@ -1,9 +1,11 @@
 //! Token-metadata interface state types
 
+#[cfg(feature = "serde-traits")]
+use serde::{Deserialize, Serialize};
 use {
     borsh::{BorshDeserialize, BorshSchema, BorshSerialize},
     solana_program::{
-        borsh::{get_instance_packed_len, try_from_slice_unchecked},
+        borsh0_10::{get_instance_packed_len, try_from_slice_unchecked},
         program_error::ProgramError,
         pubkey::Pubkey,
     },
@@ -14,9 +16,6 @@ use {
         variable_len_pack::VariableLenPack,
     },
 };
-
-#[cfg(feature = "serde-traits")]
-use serde::{Deserialize, Serialize};
 
 /// Data struct for all token-metadata, stored in a TLV entry
 ///

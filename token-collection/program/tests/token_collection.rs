@@ -152,7 +152,7 @@ async fn test_token_collection() {
     let member_space = TlvStateBorrowed::get_base_len() + std::mem::size_of::<TokenGroupMember>();
     let member_rent_lamports = rent.minimum_balance(member_space);
 
-    // Create the collections using the SPL Token Collection program
+    // Create the collections using the Solarti Token Collection program
     setup_group(
         &mut context,
         &program_id,

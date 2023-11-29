@@ -1,15 +1,17 @@
 //! VoterWeight Addin interface
 
-use solana_program::{
-    account_info::AccountInfo, clock::Clock, program_error::ProgramError, pubkey::Pubkey,
-    sysvar::Sysvar,
+use {
+    crate::{error::GovernanceError, state::token_owner_record::TokenOwnerRecordV2},
+    solana_program::{
+        account_info::AccountInfo, clock::Clock, program_error::ProgramError, pubkey::Pubkey,
+        sysvar::Sysvar,
+    },
+    spl_governance_addin_api::voter_weight::{VoterWeightAction, VoterWeightRecord},
+    spl_governance_tools::account::get_account_data,
 };
-use spl_governance_addin_api::voter_weight::{VoterWeightAction, VoterWeightRecord};
-use spl_governance_tools::account::get_account_data;
 
-use crate::{error::GovernanceError, state::token_owner_record::TokenOwnerRecordV2};
-
-/// Asserts the VoterWeightRecord hasn't expired and matches the given action and target if specified
+/// Asserts the VoterWeightRecord hasn't expired and matches the given action
+/// and target if specified
 pub fn assert_is_valid_voter_weight(
     voter_weight_record: &VoterWeightRecord,
     weight_action: VoterWeightAction,
@@ -49,7 +51,9 @@ pub fn get_voter_weight_record_data(
     get_account_data::<VoterWeightRecord>(program_id, voter_weight_record_info)
 }
 
-/// Deserializes VoterWeightRecord account, checks owner program and asserts it's for the same realm, mint and token owner as the provided TokenOwnerRecord
+/// Deserializes VoterWeightRecord account, checks owner program and asserts
+/// it's for the same realm, mint and token owner as the provided
+/// TokenOwnerRecord
 pub fn get_voter_weight_record_data_for_token_owner_record(
     program_id: &Pubkey,
     voter_weight_record_info: &AccountInfo,

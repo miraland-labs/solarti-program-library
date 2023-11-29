@@ -3,7 +3,7 @@
 use {
     solana_program::{
         account_info::{next_account_info, AccountInfo},
-        borsh::get_instance_packed_len,
+        borsh0_10::get_instance_packed_len,
         entrypoint::ProgramResult,
         msg,
         program::set_return_data,
@@ -56,7 +56,7 @@ pub fn process_initialize(
     // scope the mint authority check, in case the mint is in the same account!
     {
         // IMPORTANT: this example metadata program is designed to work with any
-        // program that implements the SPL token interface, so there is no
+        // program that implements the Solarti token interface, so there is no
         // ownership check on the mint account.
         let mint_data = mint_info.try_borrow_data()?;
         let mint = StateWithExtensions::<Mint>::unpack(&mint_data)?;
@@ -146,7 +146,8 @@ pub fn process_remove_key(
     Ok(())
 }
 
-/// Processes a [UpdateAuthority](enum.TokenMetadataInstruction.html) instruction.
+/// Processes a [UpdateAuthority](enum.TokenMetadataInstruction.html)
+/// instruction.
 pub fn process_update_authority(
     _program_id: &Pubkey,
     accounts: &[AccountInfo],

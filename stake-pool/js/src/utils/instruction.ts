@@ -1,4 +1,4 @@
-import * as BufferLayout from '@solarti/buffer-layout';
+import * as BufferLayout from '@solana/buffer-layout';
 import { Buffer } from 'buffer';
 
 /**

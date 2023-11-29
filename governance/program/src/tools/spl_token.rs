@@ -1,26 +1,28 @@
 //! General purpose Solarti token utility functions
 
-use arrayref::array_ref;
-use solana_program::{
-    account_info::AccountInfo,
-    entrypoint::ProgramResult,
-    msg,
-    program::{invoke, invoke_signed},
-    program_error::ProgramError,
-    program_option::COption,
-    program_pack::Pack,
-    pubkey::Pubkey,
-    rent::Rent,
-    system_instruction,
-};
-use spl_token::{
-    instruction::{set_authority, AuthorityType},
-    state::{Account, Mint},
+use {
+    crate::{error::GovernanceError, tools::pack::unpack_coption_pubkey},
+    arrayref::array_ref,
+    solana_program::{
+        account_info::AccountInfo,
+        entrypoint::ProgramResult,
+        msg,
+        program::{invoke, invoke_signed},
+        program_error::ProgramError,
+        program_option::COption,
+        program_pack::Pack,
+        pubkey::Pubkey,
+        rent::Rent,
+        system_instruction,
+    },
+    spl_token::{
+        instruction::{set_authority, AuthorityType},
+        state::{Account, Mint},
+    },
 };
 
-use crate::{error::GovernanceError, tools::pack::unpack_coption_pubkey};
-
-/// Creates and initializes Solarti token account with PDA using the provided PDA seeds
+/// Creates and initializes Solarti token account with PDA using the provided PDA
+/// seeds
 #[allow(clippy::too_many_arguments)]
 pub fn create_spl_token_account_signed<'a>(
     payer_info: &AccountInfo<'a>,
@@ -90,7 +92,7 @@ pub fn create_spl_token_account_signed<'a>(
     Ok(())
 }
 
-/// Transfers SPL Tokens
+/// Transfers Solarti Tokens
 pub fn transfer_spl_tokens<'a>(
     source_info: &AccountInfo<'a>,
     destination_info: &AccountInfo<'a>,
@@ -121,7 +123,7 @@ pub fn transfer_spl_tokens<'a>(
     Ok(())
 }
 
-/// Mint SPL Tokens
+/// Mint Solarti Tokens
 pub fn mint_spl_tokens_to<'a>(
     mint_info: &AccountInfo<'a>,
     destination_info: &AccountInfo<'a>,
@@ -152,7 +154,8 @@ pub fn mint_spl_tokens_to<'a>(
     Ok(())
 }
 
-/// Transfers SPL Tokens from a token account owned by the provided PDA authority with seeds
+/// Transfers Solarti Tokens from a token account owned by the provided PDA
+/// authority with seeds
 pub fn transfer_spl_tokens_signed<'a>(
     source_info: &AccountInfo<'a>,
     destination_info: &AccountInfo<'a>,
@@ -201,7 +204,8 @@ pub fn transfer_spl_tokens_signed<'a>(
     Ok(())
 }
 
-/// Burns SPL Tokens from a token account owned by the provided PDA authority with seeds
+/// Burns Solarti Tokens from a token account owned by the provided PDA authority
+/// with seeds
 pub fn burn_spl_tokens_signed<'a>(
     token_account_info: &AccountInfo<'a>,
     token_mint_info: &AccountInfo<'a>,
@@ -250,7 +254,8 @@ pub fn burn_spl_tokens_signed<'a>(
     Ok(())
 }
 
-/// Asserts the given account_info represents a valid Solarti Token account which is initialized and belongs to spl_token program
+/// Asserts the given account_info represents a valid Solarti Token account which is
+/// initialized and belongs to spl_token program
 pub fn assert_is_valid_spl_token_account(account_info: &AccountInfo) -> Result<(), ProgramError> {
     if account_info.data_is_empty() {
         return Err(GovernanceError::SplTokenAccountDoesNotExist.into());
@@ -264,7 +269,13 @@ pub fn assert_is_valid_spl_token_account(account_info: &AccountInfo) -> Result<(
         return Err(GovernanceError::SplTokenInvalidTokenAccountData.into());
     }
 
-    // TokeAccount layout:   mint(32), owner(32), amount(8), delegate(36), state(1), ...
+    // TokenAccount layout:
+    //  mint(32)
+    //  owner(32)
+    //  amount(8)
+    //  delegate(36)
+    //  state(1)
+    //  ...
     let data = account_info.try_borrow_data()?;
     let state = array_ref![data, 108, 1];
 
@@ -275,12 +286,13 @@ pub fn assert_is_valid_spl_token_account(account_info: &AccountInfo) -> Result<(
     Ok(())
 }
 
-/// Checks if the given account_info  is solarti-token token account
+/// Checks if the given account_info  is spl-token token account
 pub fn is_spl_token_account(account_info: &AccountInfo) -> bool {
     assert_is_valid_spl_token_account(account_info).is_ok()
 }
 
-/// Asserts the given mint_info represents a valid Solarti Token Mint account  which is initialized and belongs to spl_token program
+/// Asserts the given mint_info represents a valid Solarti Token Mint account  which
+/// is initialized and belongs to spl_token program
 pub fn assert_is_valid_spl_token_mint(mint_info: &AccountInfo) -> Result<(), ProgramError> {
     if mint_info.data_is_empty() {
         return Err(GovernanceError::SplTokenMintDoesNotExist.into());
@@ -305,7 +317,7 @@ pub fn assert_is_valid_spl_token_mint(mint_info: &AccountInfo) -> Result<(), Pro
     Ok(())
 }
 
-/// Checks if the given account_info is be solarti-token mint account
+/// Checks if the given account_info is be spl-token mint account
 pub fn is_spl_token_mint(mint_info: &AccountInfo) -> bool {
     assert_is_valid_spl_token_mint(mint_info).is_ok()
 }
@@ -332,7 +344,8 @@ pub fn get_spl_token_owner(token_account_info: &AccountInfo) -> Result<Pubkey, P
     Ok(Pubkey::new_from_array(*owner_data))
 }
 
-/// Computationally cheap method to just get supply from a mint without unpacking the whole object
+/// Computationally cheap method to just get supply from a mint without
+/// unpacking the whole object
 pub fn get_spl_token_mint_supply(mint_info: &AccountInfo) -> Result<u64, ProgramError> {
     assert_is_valid_spl_token_mint(mint_info)?;
     // In token program, 36, 8, 1, 1 is the layout, where the first 8 is supply u64.
@@ -343,7 +356,8 @@ pub fn get_spl_token_mint_supply(mint_info: &AccountInfo) -> Result<u64, Program
     Ok(u64::from_le_bytes(*bytes))
 }
 
-/// Computationally cheap method to just get authority from a mint without unpacking the whole object
+/// Computationally cheap method to just get authority from a mint without
+/// unpacking the whole object
 pub fn get_spl_token_mint_authority(
     mint_info: &AccountInfo,
 ) -> Result<COption<Pubkey>, ProgramError> {
@@ -355,7 +369,8 @@ pub fn get_spl_token_mint_authority(
     unpack_coption_pubkey(bytes)
 }
 
-/// Asserts current mint authority matches the given authority and it's signer of the transaction
+/// Asserts current mint authority matches the given authority and it's signer
+/// of the transaction
 pub fn assert_spl_token_mint_authority_is_signer(
     mint_info: &AccountInfo,
     mint_authority_info: &AccountInfo,
@@ -377,7 +392,8 @@ pub fn assert_spl_token_mint_authority_is_signer(
     Ok(())
 }
 
-/// Asserts current token owner matches the given owner and it's signer of the transaction
+/// Asserts current token owner matches the given owner and it's signer of the
+/// transaction
 pub fn assert_spl_token_owner_is_signer(
     token_info: &AccountInfo,
     token_owner_info: &AccountInfo,
@@ -395,7 +411,7 @@ pub fn assert_spl_token_owner_is_signer(
     Ok(())
 }
 
-/// Sets solarti-token account (Mint or TokenAccount) authority
+/// Sets spl-token account (Mint or TokenAccount) authority
 pub fn set_spl_token_account_authority<'a>(
     account_info: &AccountInfo<'a>,
     account_authority: &AccountInfo<'a>,

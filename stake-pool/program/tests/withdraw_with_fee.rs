@@ -1,4 +1,4 @@
-#![allow(clippy::integer_arithmetic)]
+#![allow(clippy::arithmetic_side_effects)]
 #![cfg(feature = "test-sbf")]
 
 mod helpers;
@@ -6,7 +6,7 @@ mod helpers;
 use {
     bincode::deserialize,
     helpers::*,
-    solana_program::{borsh::try_from_slice_unchecked, pubkey::Pubkey, stake},
+    solana_program::{borsh0_10::try_from_slice_unchecked, pubkey::Pubkey, stake},
     solana_program_test::*,
     solana_sdk::signature::{Keypair, Signer},
     spl_stake_pool::{minimum_stake_lamports, state},
@@ -22,7 +22,7 @@ async fn success_withdraw_all_fee_tokens() {
         user_transfer_authority,
         user_stake_recipient,
         tokens_to_withdraw,
-    ) = setup_for_withdraw(spl_token::id()).await;
+    ) = setup_for_withdraw(spl_token::id(), 0).await;
 
     let last_blockhash = context
         .banks_client
@@ -78,7 +78,7 @@ async fn success_withdraw_all_fee_tokens() {
             fee_tokens,
         )
         .await;
-    assert!(error.is_none());
+    assert!(error.is_none(), "{:?}", error);
 
     // Check balance is 0
     let fee_tokens = get_token_balance(
@@ -99,7 +99,7 @@ async fn success_empty_out_stake_with_fee() {
         user_transfer_authority,
         user_stake_recipient,
         tokens_to_withdraw,
-    ) = setup_for_withdraw(spl_token::id()).await;
+    ) = setup_for_withdraw(spl_token::id(), 0).await;
 
     let last_blockhash = context
         .banks_client
@@ -176,7 +176,7 @@ async fn success_empty_out_stake_with_fee() {
     )
     .await;
     let stake_state =
-        deserialize::<stake::state::StakeState>(&validator_stake_account.data).unwrap();
+        deserialize::<stake::state::StakeStateV2>(&validator_stake_account.data).unwrap();
     let meta = stake_state.meta().unwrap();
     let stake_minimum_delegation =
         stake_get_minimum_delegation(&mut context.banks_client, &context.payer, &last_blockhash)
@@ -217,7 +217,7 @@ async fn success_empty_out_stake_with_fee() {
             pool_tokens_to_withdraw,
         )
         .await;
-    assert!(error.is_none());
+    assert!(error.is_none(), "{:?}", error);
 
     // Check balance of validator stake account is MINIMUM + rent-exemption
     let validator_stake_account = get_account(
@@ -226,7 +226,7 @@ async fn success_empty_out_stake_with_fee() {
     )
     .await;
     let stake_state =
-        deserialize::<stake::state::StakeState>(&validator_stake_account.data).unwrap();
+        deserialize::<stake::state::StakeStateV2>(&validator_stake_account.data).unwrap();
     let meta = stake_state.meta().unwrap();
     assert_eq!(
         validator_stake_account.lamports,

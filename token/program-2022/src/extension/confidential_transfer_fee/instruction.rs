@@ -47,7 +47,7 @@ pub enum ConfidentialTransferFeeInstruction {
     ///
     /// Accounts expected by this instruction:
     ///
-    ///   0. `[writable]` The SPL Token mint.
+    ///   0. `[writable]` The Solarti Token mint.
     ///
     /// Data expected by this instruction:
     ///   `InitializeConfidentialTransferFeeConfigData`
@@ -185,7 +185,7 @@ pub enum ConfidentialTransferFeeInstruction {
     ///   *Multisignature owner/delegate
     ///   0. `[writable]` The token mint.
     ///   1. `[]` The confidential transfer fee multisig authority,
-    ///   2. `[signer]` Required M signer accounts for the SPL Token Multisig
+    ///   2. `[signer]` Required M signer accounts for the Solarti Token Multisig
     ///      account.
     ///
     /// Data expected by this instruction:
@@ -204,7 +204,7 @@ pub enum ConfidentialTransferFeeInstruction {
     ///   *Multisignature owner/delegate
     ///   0. `[writable]` The token mint.
     ///   1. `[]` The confidential transfer fee multisig authority,
-    ///   2. `[signer]` Required M signer accounts for the SPL Token Multisig
+    ///   2. `[signer]` Required M signer accounts for the Solarti Token Multisig
     ///      account.
     ///
     /// Data expected by this instruction:

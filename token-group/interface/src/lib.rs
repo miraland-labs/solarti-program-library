@@ -1,4 +1,4 @@
-//! Crate defining the SPL Token Group Interface
+//! Crate defining the Solarti Token Group Interface
 
 #![deny(missing_docs)]
 #![cfg_attr(not(test), forbid(unsafe_code))]

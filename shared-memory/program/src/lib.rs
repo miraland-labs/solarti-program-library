@@ -1,4 +1,4 @@
-#![allow(clippy::integer_arithmetic)]
+#![allow(clippy::arithmetic_side_effects)]
 #![deny(missing_docs)]
 //! Shared memory program for the Miraland blockchain.
 //
@@ -8,15 +8,19 @@
 // implement the typical `process_instruction` entrypoint.
 
 extern crate solana_program;
-use arrayref::{array_refs, mut_array_refs};
-use solana_program::{
-    declare_id, entrypoint::MAX_PERMITTED_DATA_INCREASE, entrypoint::SUCCESS,
-    program_error::ProgramError, pubkey::Pubkey,
-};
-use std::{
-    mem::{align_of, size_of},
-    ptr::read,
-    slice::{from_raw_parts, from_raw_parts_mut},
+use {
+    arrayref::{array_refs, mut_array_refs},
+    solana_program::{
+        declare_id,
+        entrypoint::{MAX_PERMITTED_DATA_INCREASE, SUCCESS},
+        program_error::ProgramError,
+        pubkey::Pubkey,
+    },
+    std::{
+        mem::{align_of, size_of},
+        ptr::read,
+        slice::{from_raw_parts, from_raw_parts_mut},
+    },
 };
 
 declare_id!("shmFc7FxFPiLQHchdHLMLWAS8yjroAP56dpToM3sHz1");

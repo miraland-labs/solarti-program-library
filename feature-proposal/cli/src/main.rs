@@ -116,7 +116,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
                         .value_name("FILENAME")
                         .required(true)
                         .default_value("feature-proposal.csv")
-                        .help("Allocations CSV file for use with solana-tokens"),
+                        .help("Allocations CSV file for use with miraland-tokens"),
                 )
                 .arg(
                     Arg::with_name("confirm")
@@ -337,7 +337,7 @@ fn process_propose(
     println!();
     println!("Distribute the proposal tokens to all validators by running:");
     println!(
-        "    $ solana-tokens distribute-solarti-tokens \
+        "    $ miraland-tokens distribute-solarti-tokens \
                   --from {} \
                   --input-csv {} \
                   --db-path db.{} \
@@ -348,7 +348,7 @@ fn process_propose(
         &feature_proposal_keypair.pubkey().to_string()[..8]
     );
     println!(
-        "    $ solana-tokens solarti-token-balances \
+        "    $ miraland-tokens solarti-token-balances \
                  --mint {} --input-csv {}",
         mint_address, distribution_file
     );

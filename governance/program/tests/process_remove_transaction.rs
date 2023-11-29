@@ -2,10 +2,7 @@
 
 mod program_test;
 
-use solana_program_test::tokio;
-
-use program_test::*;
-use spl_governance::error::GovernanceError;
+use {program_test::*, solana_program_test::tokio, spl_governance::error::GovernanceError};
 
 #[tokio::test]
 async fn test_remove_transaction() {
@@ -43,7 +40,7 @@ async fn test_remove_transaction() {
 
     governance_test
         .remove_transaction(
-            &mut proposal_cookie,
+            &proposal_cookie,
             &token_owner_record_cookie,
             &proposal_transaction_cookie,
         )
@@ -111,7 +108,7 @@ async fn test_replace_transaction() {
 
     governance_test
         .remove_transaction(
-            &mut proposal_cookie,
+            &proposal_cookie,
             &token_owner_record_cookie,
             &proposal_transaction_cookie,
         )
@@ -184,7 +181,7 @@ async fn test_remove_front_transaction() {
 
     governance_test
         .remove_transaction(
-            &mut proposal_cookie,
+            &proposal_cookie,
             &token_owner_record_cookie,
             &proposal_transaction_cookie,
         )
@@ -251,7 +248,7 @@ async fn test_remove_transaction_with_owner_or_delegate_must_sign_error() {
     // Act
     let err = governance_test
         .remove_transaction(
-            &mut proposal_cookie,
+            &proposal_cookie,
             &token_owner_record_cookie,
             &proposal_transaction_cookie,
         )
@@ -306,7 +303,7 @@ async fn test_remove_transaction_with_proposal_not_editable_error() {
     // Act
     let err = governance_test
         .remove_transaction(
-            &mut proposal_cookie,
+            &proposal_cookie,
             &token_owner_record_cookie,
             &proposal_transaction_cookie,
         )
@@ -371,7 +368,7 @@ async fn test_remove_transaction_with_proposal_transaction_from_other_proposal_e
     // Act
     let err = governance_test
         .remove_transaction(
-            &mut proposal_cookie,
+            &proposal_cookie,
             &token_owner_record_cookie,
             &proposal_transaction_cookie2,
         )

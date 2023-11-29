@@ -1,4 +1,4 @@
-#![allow(clippy::integer_arithmetic)]
+#![allow(clippy::arithmetic_side_effects)]
 #![cfg(feature = "test-sbf")]
 
 mod helpers;
@@ -7,7 +7,7 @@ use {
     borsh::BorshSerialize,
     helpers::*,
     solana_program::{
-        borsh::try_from_slice_unchecked,
+        borsh0_10::try_from_slice_unchecked,
         instruction::{AccountMeta, Instruction, InstructionError},
         pubkey::Pubkey,
         stake, sysvar,
@@ -88,7 +88,7 @@ async fn setup(
     .await;
 
     let first_normal_slot = context.genesis_config().epoch_schedule.first_normal_slot;
-    context.warp_to_slot(first_normal_slot).unwrap();
+    context.warp_to_slot(first_normal_slot + 1).unwrap();
     stake_pool_accounts
         .update_all(
             &mut context.banks_client,
@@ -140,7 +140,7 @@ async fn success(token_program_id: Pubkey) {
     ) = setup(token_program_id).await;
 
     let rent = context.banks_client.get_rent().await.unwrap();
-    let stake_rent = rent.minimum_balance(std::mem::size_of::<stake::state::StakeState>());
+    let stake_rent = rent.minimum_balance(std::mem::size_of::<stake::state::StakeStateV2>());
 
     // Save stake pool state before depositing
     let pre_stake_pool = get_account(
@@ -182,7 +182,7 @@ async fn success(token_program_id: Pubkey) {
             &user,
         )
         .await;
-    assert!(error.is_none());
+    assert!(error.is_none(), "{:?}", error);
 
     // Original stake account should be drained
     assert!(context
@@ -249,7 +249,10 @@ async fn success(token_program_id: Pubkey) {
         validator_stake_account.lamports,
         post_validator_stake_item.stake_lamports().unwrap()
     );
-    assert_eq!(post_validator_stake_item.transient_stake_lamports, 0);
+    assert_eq!(
+        u64::from(post_validator_stake_item.transient_stake_lamports),
+        0
+    );
 
     // Check reserve
     let post_reserve_lamports = get_account(
@@ -309,7 +312,7 @@ async fn success_with_extra_stake_lamports() {
     .await;
 
     let rent = context.banks_client.get_rent().await.unwrap();
-    let stake_rent = rent.minimum_balance(std::mem::size_of::<stake::state::StakeState>());
+    let stake_rent = rent.minimum_balance(std::mem::size_of::<stake::state::StakeStateV2>());
 
     // Save stake pool state before depositing
     let pre_stake_pool = get_account(
@@ -352,7 +355,7 @@ async fn success_with_extra_stake_lamports() {
             &referrer_token_account.pubkey(),
         )
         .await;
-    assert!(error.is_none());
+    assert!(error.is_none(), "{:?}", error);
 
     // Original stake account should be drained
     assert!(context
@@ -443,7 +446,10 @@ async fn success_with_extra_stake_lamports() {
         validator_stake_account.lamports,
         post_validator_stake_item.stake_lamports().unwrap()
     );
-    assert_eq!(post_validator_stake_item.transient_stake_lamports, 0);
+    assert_eq!(
+        u64::from(post_validator_stake_item.transient_stake_lamports),
+        0
+    );
 
     // Check reserve
     let post_reserve_lamports = get_account(
@@ -815,7 +821,7 @@ async fn success_with_slippage(token_program_id: Pubkey) {
     ) = setup(token_program_id).await;
 
     let rent = context.banks_client.get_rent().await.unwrap();
-    let stake_rent = rent.minimum_balance(std::mem::size_of::<stake::state::StakeState>());
+    let stake_rent = rent.minimum_balance(std::mem::size_of::<stake::state::StakeStateV2>());
 
     // Save stake pool state before depositing
     let pre_stake_pool = get_account(
@@ -869,7 +875,7 @@ async fn success_with_slippage(token_program_id: Pubkey) {
             tokens_issued_user,
         )
         .await;
-    assert!(error.is_none());
+    assert!(error.is_none(), "{:?}", error);
 
     // Original stake account should be drained
     assert!(context

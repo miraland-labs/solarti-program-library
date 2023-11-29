@@ -1,25 +1,26 @@
 //! Program state processor
 
-use crate::{
-    error::PoolError,
-    instruction::PoolInstruction,
-    state::{Decision, Pool, POOL_VERSION},
+use {
+    crate::{
+        error::PoolError,
+        instruction::PoolInstruction,
+        state::{Decision, Pool, POOL_VERSION},
+    },
+    borsh::BorshDeserialize,
+    solana_program::{
+        account_info::{next_account_info, AccountInfo},
+        clock::{Clock, Slot},
+        entrypoint::ProgramResult,
+        msg,
+        program::{invoke, invoke_signed},
+        program_error::ProgramError,
+        program_pack::{IsInitialized, Pack},
+        pubkey::Pubkey,
+        rent::Rent,
+        sysvar::Sysvar,
+    },
+    spl_token::state::{Account, Mint},
 };
-use borsh::{BorshDeserialize, BorshSerialize};
-use solana_program::{
-    account_info::next_account_info,
-    account_info::AccountInfo,
-    clock::{Clock, Slot},
-    entrypoint::ProgramResult,
-    msg,
-    program::{invoke, invoke_signed},
-    program_error::ProgramError,
-    program_pack::{IsInitialized, Pack},
-    pubkey::Pubkey,
-    rent::Rent,
-    sysvar::Sysvar,
-};
-use spl_token::state::{Account, Mint};
 
 /// Program state handler.
 pub struct Processor {}
@@ -300,8 +301,7 @@ impl Processor {
         pool.decide_end_slot = decide_end_slot;
         pool.decision = Decision::Undecided;
 
-        pool.serialize(&mut *pool_account_info.data.borrow_mut())
-            .map_err(|e| e.into())
+        borsh::to_writer(&mut pool_account_info.data.borrow_mut()[..], &pool).map_err(|e| e.into())
     }
 
     /// Process Deposit instruction
@@ -556,8 +556,7 @@ impl Processor {
             Decision::Fail
         };
 
-        pool.serialize(&mut *pool_account_info.data.borrow_mut())
-            .map_err(|e| e.into())
+        borsh::to_writer(&mut pool_account_info.data.borrow_mut()[..], &pool).map_err(|e| e.into())
     }
 
     /// Processes an instruction

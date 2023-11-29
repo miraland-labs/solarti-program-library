@@ -1731,7 +1731,7 @@ Although all Solarti Token accounts do have their own address on-chain, there's 
 need to surface these additional addresses to the user.
 
 There are two programs that are used by the wallet:
-* Solarti Token program: generic program that is used by all SPL Tokens
+* Solarti Token program: generic program that is used by all Solarti Tokens
 * [SPL Associated Token Account](associated-token-account.md) program: defines
   the convention and provides the mechanism for mapping the user's wallet
   address to the associated token accounts they hold.
@@ -1762,13 +1762,13 @@ The creation process is described [here](associated-token-account.md#creating-an
 
 It's highly recommended that the wallet create the associated token account for
 a given Solarti Token itself before indicating to the user that they are able to
-receive that SPL Tokens type (typically done by showing the user their receiving
+receive that Solarti Tokens type (typically done by showing the user their receiving
 address). A wallet that chooses to not perform this step may limit its user's ability
-to receive SPL Tokens from other wallets.
+to receive Solarti Tokens from other wallets.
 
 #### Sample "Add Token" workflow
 The user should first fund their associated token account when they want to
-receive SPL Tokens of a certain type to:
+receive Solarti Tokens of a certain type to:
 1. Maximize interoperability with other wallet implementations
 2. Avoid pushing the cost of creating their associated token account on the first sender
 
@@ -1856,10 +1856,10 @@ The `solarti-token gc` command provides an example implementation of this cleanu
 
 ### Token Vesting
 
-There are currently two solutions available for vesting SPL tokens:
+There are currently two solutions available for vesting Solarti tokens:
 
 #### 1) Bonfida token-vesting
-This program allows you to lock arbitrary SPL tokens and release the locked tokens with a determined unlock schedule. An `unlock schedule` is made of a `unix timestamp` and a token `amount`, when initializing a vesting contract, the creator can pass an array of `unlock schedule` with an arbitrary size giving the creator of the contract complete control of how the tokens unlock over time.
+This program allows you to lock arbitrary Solarti tokens and release the locked tokens with a determined unlock schedule. An `unlock schedule` is made of a `unix timestamp` and a token `amount`, when initializing a vesting contract, the creator can pass an array of `unlock schedule` with an arbitrary size giving the creator of the contract complete control of how the tokens unlock over time.
 
 Unlocking works by pushing a permissionless crank on the contract that moves the tokens to the pre-specified address. The recipient address of a vesting contract can be modified by the owner of the current recipient key, meaning that vesting contract locked tokens can be traded.
 

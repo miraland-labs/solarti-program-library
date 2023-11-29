@@ -1,7 +1,6 @@
 extern crate cbindgen;
 
-use std::env;
-use std::path::Path;
+use std::{env, path::Path};
 
 fn token<P: AsRef<Path>>(crate_dir: P) {
     let output_file = crate_dir.as_ref().join("inc/token.h");
@@ -32,7 +31,7 @@ fn token<P: AsRef<Path>>(crate_dir: P) {
         },
         parse: cbindgen::ParseConfig {
             parse_deps: true,
-            include: Some(vec!["solana-program".to_string(), "solana-sdk".to_string()]),
+            include: Some(vec!["miraland-program".to_string(), "miraland-sdk".to_string()]),
             ..cbindgen::ParseConfig::default()
         },
         ..cbindgen::Config::default()
@@ -62,6 +61,6 @@ fn main() {
         .parent()
         .unwrap();
 
-    token(&workspace_root.join("token/program"));
-    token_swap(&workspace_root.join("token-swap/program"));
+    token(workspace_root.join("token/program"));
+    token_swap(workspace_root.join("token-swap/program"));
 }

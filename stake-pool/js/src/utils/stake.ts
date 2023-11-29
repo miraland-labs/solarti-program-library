@@ -5,11 +5,11 @@ import {
   StakeProgram,
   SystemProgram,
   TransactionInstruction,
-} from '@solarti/web3.js';
+} from '@solana/web3.js';
 import { findStakeProgramAddress, findTransientStakeProgramAddress } from './program-address';
 import BN from 'bn.js';
 
-import { lamportsToMln } from './math';
+import { lamportsToSol } from './math';
 import { WithdrawAccount } from '../index';
 import {
   Fee,
@@ -115,7 +115,7 @@ export async function prepareWithdrawAccounts(
   accounts = accounts.sort(compareFn ? compareFn : (a, b) => b.lamports - a.lamports);
 
   const reserveStake = await connection.getAccountInfo(stakePool.reserveStake);
-  const reserveStakeBalance = (reserveStake?.lamports ?? 0) - minBalanceForRentExemption - 1;
+  const reserveStakeBalance = (reserveStake?.lamports ?? 0) - minBalanceForRentExemption;
   if (reserveStakeBalance > 0) {
     accounts.push({
       type: 'reserve',
@@ -173,7 +173,7 @@ export async function prepareWithdrawAccounts(
   // Not enough stake to withdraw the specified amount
   if (remainingAmount > 0) {
     throw new Error(
-      `No stake accounts found in this pool with enough balance to withdraw ${lamportsToMln(
+      `No stake accounts found in this pool with enough balance to withdraw ${lamportsToSol(
         amount,
       )} pool tokens.`,
     );

@@ -1,8 +1,7 @@
 use {
     crate::{
         instruction::NameRegistryInstruction,
-        state::get_seeds_and_key,
-        state::{write_data, NameRecordHeader},
+        state::{get_seeds_and_key, write_data, NameRecordHeader},
     },
     borsh::BorshDeserialize,
     solana_program::{
@@ -85,7 +84,8 @@ impl Processor {
         if name_account.data.borrow().len() == 0 {
             // Issue the name registry account
             // The creation is done in three steps: transfer, allocate and assign, because
-            // one cannot `system_instruction::create` an account to which lamports have been transfered before.
+            // one cannot `system_instruction::create` an account to which lamports have
+            // been transfered before.
             invoke(
                 &system_instruction::transfer(payer_account.key, &name_account_key, lamports),
                 &[
@@ -233,7 +233,7 @@ impl Processor {
         // Overwrite the data with zeroes
         write_data(name_account, &vec![0; name_account.data_len()], 0);
 
-        // Close the account by transferring the rent sol
+        // Close the account by transferring the rent mln
         let source_amount: &mut u64 = &mut name_account.lamports.borrow_mut();
         let dest_amount: &mut u64 = &mut refund_target.lamports.borrow_mut();
         *dest_amount = dest_amount.saturating_add(*source_amount);
@@ -262,7 +262,7 @@ impl Processor {
         match name_account.lamports().cmp(&required_lamports) {
             Ordering::Less => {
                 // Overflow cannot happen here because we already checked the sizes.
-                #[allow(clippy::integer_arithmetic)]
+                #[allow(clippy::arithmetic_side_effects)]
                 let lamports_to_add = required_lamports - name_account.lamports();
                 invoke(
                     &system_instruction::transfer(
@@ -279,7 +279,7 @@ impl Processor {
             }
             Ordering::Greater => {
                 // Overflow cannot happen here because we already checked the sizes.
-                #[allow(clippy::integer_arithmetic)]
+                #[allow(clippy::arithmetic_side_effects)]
                 let lamports_to_remove = name_account.lamports() - required_lamports;
                 let source_amount: &mut u64 = &mut name_account.lamports.borrow_mut();
                 let dest_amount: &mut u64 = &mut payer_account.lamports.borrow_mut();

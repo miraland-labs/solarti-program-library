@@ -2,7 +2,7 @@ name: Docs Publish
 
 on:
   push:
-    branches:  [master]
+    branches:  [main]
     paths:
     - 'docs/**'
 
@@ -17,7 +17,7 @@ jobs:
           node-version: '16'
         name: "installing the node.js with version 16"
       - name: "Build Docs"
-        if: ${{ github.event_name == ('push' || 'pull_request')}} && ${{github.ref == 'master'}}
+        if: ${{ github.event_name == ('push' || 'pull_request')}} && ${{github.ref == 'main'}}
         run: |
          cd docs/
          npm ci
