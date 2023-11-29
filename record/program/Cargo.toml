@@ -15,7 +15,7 @@ no-entrypoint = []
 test-sbf = []
 
 [dependencies]
-borsh = "0.10.3"
+borsh = "1.2.0"
 borsh-derive = "0.10.3"
 num-derive = "0.4"
 num-traits = "0.2"

@@ -16,7 +16,7 @@ borsh = ["dep:borsh"]
 
 [dependencies]
 base64 = { version = "0.21.5", optional = true }
-borsh = { version = "0.10.3", optional = true }
+borsh = { version = "1.2.0", optional = true }
 bytemuck = { version = "1.14.0" }
 serde = { version = "1.0.192", optional = true }
 miraland-program = "1.14.18"
