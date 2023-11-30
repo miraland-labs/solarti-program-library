@@ -84,14 +84,14 @@ address. You can add it as normal to `tests/fixtures/` after downloading it usin
 $ solana program dump Token8N5ecJeFxL83iFa2h7AgJ8AtufM7bbg63LrW89 spl_token_2022.so
 ```
 
-If you're using `solana-test-validator` for your tests, you can include it using:
+If you're using `miraland-test-validator` for your tests, you can include it using:
 
 ```console
-$ solana-test-validator -c Token8N5ecJeFxL83iFa2h7AgJ8AtufM7bbg63LrW89
+$ miraland-test-validator -c Token8N5ecJeFxL83iFa2h7AgJ8AtufM7bbg63LrW89
 ```
 
 **Note**: This step is temporary, until Token-2022 is included by default in
-`program-test` and `solana-test-validator`.
+`program-test` and `miraland-test-validator`.
 
 The token-swap does not use `program-test`, so there's a bit more
 boilerplate, but the same principle applies.

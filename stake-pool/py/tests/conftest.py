@@ -29,7 +29,7 @@ def miraland_test_validator():
     newpath = tempfile.mkdtemp()
     os.chdir(newpath)
     validator = Popen([
-        "solana-test-validator",
+        "miraland-test-validator",
         "--reset", "--quiet",
         "--bpf-program", "SPoo1Ku8WFXoNDMHPsrGSTSG1Y47rzgn41SLUNakuHy",
         f"{old_cwd}/../../target/deploy/spl_stake_pool.so",

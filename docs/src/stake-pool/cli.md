@@ -55,11 +55,11 @@ $ solana config set --keypair usb://ledger/
 
 If you would like to test a stake pool locally without having to wait for stakes
 to activate and deactivate, you can run the stake pool locally using the
-`solana-test-validator` tool with shorter epochs, and pulling the current program
+`miraland-test-validator` tool with shorter epochs, and pulling the current program
 from devnet.
 
 ```console
-$ solana-test-validator -c spooqgqqDxZgVc3pR6EvuVFZJ1kj7ABM4Hccz1gwAN1 -c EmiU8AQkB2sswTxVB6aCmsAJftoowZGGDXuytm6X65R3 --url devnet --slots-per-epoch 32
+$ miraland-test-validator -c spooqgqqDxZgVc3pR6EvuVFZJ1kj7ABM4Hccz1gwAN1 -c EmiU8AQkB2sswTxVB6aCmsAJftoowZGGDXuytm6X65R3 --url devnet --slots-per-epoch 32
 $ solana config set --url http://127.0.0.1:8899
 ```
 

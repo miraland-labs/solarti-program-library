@@ -17,7 +17,7 @@ are using the default keypair created at the default location using `solana-keyg
 Note that it is possible to override the default keypair with every command if
 needed.
 
-If you are running on localhost using `solana-test-validator`, the default keypair
+If you are running on localhost using `miraland-test-validator`, the default keypair
 will automatically start with 500,000,000 MLN.
 
 If you are running on devnet or testnet, you can airdrop funds using `solana airdrop 1`.
@@ -73,7 +73,7 @@ DrT6VGqqJT1GRVaZmuEjNim4ie7ecmNixjiycd67jyJy
 7FMebvnWnWN45KF5Fa3Y7kAJZReKU6WLzribtWDJybax
 ```
 
-Note: this will fail if another `solana-test-validator` is already running.
+Note: this will fail if another `miraland-test-validator` is already running.
 
 #### Important notes on local network
 

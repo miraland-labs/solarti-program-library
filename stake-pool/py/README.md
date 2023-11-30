@@ -39,7 +39,7 @@ Testing through `pytest`:
 $ python3 -m pytest
 ```
 
-Note: the tests all run against a `solana-test-validator` with short epochs of 64
+Note: the tests all run against a `miraland-test-validator` with short epochs of 64
 slots (25.6 seconds exactly). Some tests wait for epoch changes, so they take
 time, roughly 90 seconds total at the time of this writing.
 
