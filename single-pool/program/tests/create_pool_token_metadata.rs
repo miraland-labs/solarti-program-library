@@ -15,7 +15,7 @@ use {
 
 fn assert_metadata(vote_account: &Pubkey, metadata: &Metadata) {
     let vote_address_str = vote_account.to_string();
-    let name = format!("Solarti Single Pool {}", &vote_address_str[0..15]);
+    let name = format!("SLRTSinglePool {}", &vote_address_str[0..15]);
     let symbol = format!("st{}", &vote_address_str[0..7]);
 
     assert!(metadata.name.starts_with(&name));
