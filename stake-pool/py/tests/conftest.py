@@ -24,7 +24,7 @@ AIRDROP_LAMPORTS: int = 30_000_000_000
 
 
 @pytest.fixture(scope="session")
-def solana_test_validator():
+def miraland_test_validator():
     old_cwd = os.getcwd()
     newpath = tempfile.mkdtemp()
     os.chdir(newpath)
@@ -74,7 +74,7 @@ async def stake_pool_addresses(
 
 
 @pytest_asyncio.fixture
-async def async_client(solana_test_validator) -> AsyncIterator[AsyncClient]:
+async def async_client(miraland_test_validator) -> AsyncIterator[AsyncClient]:
     async_client = AsyncClient(commitment=Confirmed)
     total_attempts = 20
     current_attempt = 0
