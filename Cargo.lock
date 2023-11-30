@@ -845,6 +845,15 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "771fe0050b883fcc3ea2359b1a96bcfbc090b7116eae7c3c512c7a083fdf23d3"
 
 [[package]]
+name = "bs58"
+version = "0.5.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "f5353f36341f7451062466f0b755b96ac3a9547e4d7f6b70d603fc721a7d7896"
+dependencies = [
+ "tinyvec",
+]
+
+[[package]]
 name = "bstr"
 version = "1.8.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -2997,7 +3006,7 @@ dependencies = [
  "Inflector",
  "base64 0.21.5",
  "bincode",
- "bs58",
+ "bs58 0.4.0",
  "bv",
  "lazy_static",
  "miraland-config-program",
@@ -3364,7 +3373,7 @@ checksum = "2ea8a47e7b23e491f62a9f3d0d8a8dd4026ab27885f2ec072073ee62424bdc07"
 dependencies = [
  "base64 0.21.5",
  "bincode",
- "bs58",
+ "bs58 0.4.0",
  "bytes",
  "chrono",
  "crossbeam-channel",
@@ -3508,7 +3517,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "8c7e6738c25c47af085fb52c061002ee69dc1ad5ca99827899625faccb2f486b"
 dependencies = [
  "block-buffer 0.10.4",
- "bs58",
+ "bs58 0.4.0",
  "bv",
  "either",
  "generic-array",
@@ -3556,7 +3565,7 @@ version = "1.18.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "3811ab1fb6afab8e70a7652a3ae1c8559adf19ef82082746d1dbe590f94c809d"
 dependencies = [
- "bs58",
+ "bs58 0.4.0",
  "crossbeam-channel",
  "json5",
  "jsonrpc-core",
@@ -3844,7 +3853,7 @@ dependencies = [
  "blake3",
  "borsh 0.10.3",
  "borsh 0.9.3",
- "bs58",
+ "bs58 0.4.0",
  "bv",
  "bytemuck",
  "cc",
@@ -4031,7 +4040,7 @@ checksum = "cfdddf5c813ccb00081bbc3aa2d630bb2b670134e1e29986b3a2db3fb65d4bfb"
 dependencies = [
  "base64 0.21.5",
  "bincode",
- "bs58",
+ "bs58 0.4.0",
  "crossbeam-channel",
  "dashmap",
  "itertools 0.10.5",
@@ -4089,7 +4098,7 @@ dependencies = [
  "async-trait",
  "base64 0.21.5",
  "bincode",
- "bs58",
+ "bs58 0.4.0",
  "indicatif",
  "log",
  "miraland-account-decoder",
@@ -4113,7 +4122,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "59013d0ed2fdaf039dc4b1b89bb9717a84a74398d407ed0980521ad176e407c7"
 dependencies = [
  "base64 0.21.5",
- "bs58",
+ "bs58 0.4.0",
  "jsonrpc-core",
  "miraland-account-decoder",
  "miraland-sdk",
@@ -4231,7 +4240,7 @@ dependencies = [
  "bincode",
  "bitflags 2.4.1",
  "borsh 0.10.3",
- "bs58",
+ "bs58 0.4.0",
  "bytemuck",
  "byteorder",
  "chrono",
@@ -4280,7 +4289,7 @@ version = "1.18.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "de025a6426810102ec00bd9b95818cf814d180957f6f842508b93fe15fd5b3d7"
 dependencies = [
- "bs58",
+ "bs58 0.4.0",
  "proc-macro2",
  "quote",
  "rustversion",
@@ -4359,7 +4368,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "1902c56ef2100bee82c244a7c81c3382916a538ab21b167198698abef81e3931"
 dependencies = [
  "bincode",
- "bs58",
+ "bs58 0.4.0",
  "miraland-account-decoder",
  "miraland-sdk",
  "miraland-transaction-status",
@@ -4496,7 +4505,7 @@ dependencies = [
  "base64 0.21.5",
  "bincode",
  "borsh 0.10.3",
- "bs58",
+ "bs58 0.4.0",
  "lazy_static",
  "log",
  "miraland-account-decoder",
@@ -7170,7 +7179,7 @@ version = "0.7.2"
 dependencies = [
  "bincode",
  "borsh 0.10.3",
- "bs58",
+ "bs58 0.5.0",
  "clap 2.34.0",
  "miraland-account-decoder",
  "miraland-clap-utils",
