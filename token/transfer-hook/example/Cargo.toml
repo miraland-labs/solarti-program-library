@@ -25,6 +25,7 @@ miraland-sdk = "1.14.18"
 
 [lib]
 crate-type = ["cdylib", "lib"]
+name = "spl_transfer_hook_example"
 
 [package.metadata.docs.rs]
 targets = ["x86_64-unknown-linux-gnu"]
