@@ -7,6 +7,7 @@ on:
     - 'token/**'
     - 'ci/*-version.sh'
     - '.github/workflows/pull-request-token-upgrade.yml'
+    - '!token/js/**'
   push:
     branches: [main]
     paths:
@@ -14,12 +15,13 @@ on:
     - 'token/**'
     - 'ci/*-version.sh'
     - '.github/workflows/pull-request-token-upgrade.yml'
+    - '!token/js/**'
 
 jobs:
   cargo-test-sbf:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
 
       - name: Set env vars
         run: |
@@ -28,26 +30,24 @@ jobs:
           source ci/miraland-version.sh
           echo "MIRALAND_VERSION=$miraland_version" >> $GITHUB_ENV
 
-      - uses: actions-rs/toolchain@v1
+      - uses: dtolnay/rust-toolchain@master
         with:
           toolchain: ${{ env.RUST_STABLE }}
-          override: true
-          profile: minimal
 
-      - uses: actions/cache@v2
+      - uses: actions/cache@v3
         with:
           path: |
             ~/.cargo/registry
             ~/.cargo/git
           key: cargo-build-${{ hashFiles('**/Cargo.lock') }}-${{ env.RUST_STABLE}}
 
-      - uses: actions/cache@v2
+      - uses: actions/cache@v3
         with:
           path: |
             ~/.cargo/bin/rustfilt
           key: cargo-sbf-bins-${{ runner.os }}
 
-      - uses: actions/cache@v2
+      - uses: actions/cache@v3
         with:
           path: ~/.cache/miraland
           key: miraland-${{ env.MIRALAND_VERSION }}
@@ -64,7 +64,7 @@ jobs:
   cargo-build-test-cli:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
 
       - name: Set env vars
         run: |
@@ -73,20 +73,18 @@ jobs:
           source ci/miraland-version.sh
           echo "MIRALAND_VERSION=$miraland_version" >> $GITHUB_ENV
 
-      - uses: actions-rs/toolchain@v1
+      - uses: dtolnay/rust-toolchain@master
         with:
           toolchain: ${{ env.RUST_STABLE }}
-          override: true
-          profile: minimal
 
-      - uses: actions/cache@v2
+      - uses: actions/cache@v3
         with:
           path: |
             ~/.cargo/registry
             ~/.cargo/git
           key: cargo-build-${{ hashFiles('**/Cargo.lock') }}-${{ env.RUST_STABLE }}
 
-      - uses: actions/cache@v2
+      - uses: actions/cache@v3
         with:
           path: ~/.cache/miraland
           key: miraland-${{ env.MIRALAND_VERSION }}
@@ -99,9 +97,6 @@ jobs:
 
       - name: Build dependent programs
         run: |
-          cargo build-sbf --manifest-path ./token/program/Cargo.toml
-          cargo build-sbf --manifest-path ./token/program-2022/Cargo.toml
-          cargo build-sbf --manifest-path ./associated-token-account/program/Cargo.toml
           cargo build-sbf --manifest-path ./token-upgrade/program/Cargo.toml
 
       - name: Run CLI tests

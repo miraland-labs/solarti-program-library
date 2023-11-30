@@ -1,0 +1,27 @@
+question:
+  issues:
+    # Post a comment, `{issue-author}` is an optional placeholder
+    comment: >
+      Hi @{issue-author},
+
+
+      Thanks for your question!
+
+
+      We want to make sure to keep signal strong in the GitHub issue tracker &ndash; to make sure
+      that it remains the best place to track issues that affect the development of Miraland itself.
+
+
+      Questions like yours deserve a purpose-built Q&A forum. Unless there exists evidence that
+      this is a bug with Miraland itself, please post your question to the Miraland Stack Exchange
+      using this link: https://miraland.stackexchange.com/questions/ask
+
+
+      ---
+
+      _This
+      [automated message](https://github.com/miraland-labs/solarti-program-library/blob/main/.github/label-actions.yml)
+      is a result of having added the &lsquo;question&rsquo; tag_.
+
+    # Close the issue
+    close: true

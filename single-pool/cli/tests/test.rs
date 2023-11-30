@@ -18,7 +18,7 @@ use {
         system_instruction, system_program,
         transaction::Transaction,
     },
-    solana_test_validator::{TestValidator, TestValidatorGenesis, UpgradeableProgramInfo},
+    miraland_test_validator::{TestValidator, TestValidatorGenesis, UpgradeableProgramInfo},
     solana_vote_program::{
         vote_instruction::{self, CreateVoteAccountConfig},
         vote_state::{VoteInit, VoteState, VoteStateVersions},

@@ -7,7 +7,7 @@ use crate::{
 };
 use bytemuck::{Pod, Zeroable};
 use log_compute;
-use solana_logging;
+use miraland_logging;
 
 /// Enforce constraints on max depth and buffer size
 #[inline(always)]
@@ -149,7 +149,7 @@ impl<const MAX_DEPTH: usize, const MAX_BUFFER_SIZE: usize>
         self.buffer_size = 1;
         self.rightmost_proof = rightmost_proof;
         if root != recompute(rightmost_leaf, &proof, index) {
-            solana_logging!("Proof failed to verify");
+            miraland_logging!("Proof failed to verify");
             return Err(ConcurrentMerkleTreeError::InvalidProof);
         }
         Ok(root)
@@ -177,7 +177,7 @@ impl<const MAX_DEPTH: usize, const MAX_BUFFER_SIZE: usize>
     /// Returns the most recent changelog
     pub fn get_change_log(&self) -> Box<ChangeLog<MAX_DEPTH>> {
         if !self.is_initialized() {
-            solana_logging!("Tree is not initialized, returning default change log");
+            miraland_logging!("Tree is not initialized, returning default change log");
             return Box::new(ChangeLog::default());
         }
         Box::new(self.change_logs[self.active_index as usize])
@@ -208,7 +208,7 @@ impl<const MAX_DEPTH: usize, const MAX_BUFFER_SIZE: usize>
         }
 
         if leaf_index > self.rightmost_proof.index {
-            solana_logging!(
+            miraland_logging!(
                 "Received an index larger than the rightmost index {} > {}",
                 leaf_index,
                 self.rightmost_proof.index
@@ -220,7 +220,7 @@ impl<const MAX_DEPTH: usize, const MAX_BUFFER_SIZE: usize>
             let valid_root =
                 self.check_valid_leaf(current_root, leaf, &mut proof, leaf_index, true)?;
             if !valid_root {
-                solana_logging!("Proof failed to verify");
+                miraland_logging!("Proof failed to verify");
                 return Err(ConcurrentMerkleTreeError::InvalidProof);
             }
             Ok(())
@@ -385,7 +385,7 @@ impl<const MAX_DEPTH: usize, const MAX_BUFFER_SIZE: usize>
         mut changelog_buffer_index: u64,
         use_full_buffer: bool,
     ) -> bool {
-        solana_logging!(
+        miraland_logging!(
             "Fast-forwarding proof, starting index {}",
             changelog_buffer_index
         );
@@ -442,7 +442,7 @@ impl<const MAX_DEPTH: usize, const MAX_BUFFER_SIZE: usize>
             Some(matching_changelog_index) => (matching_changelog_index, false),
             None => {
                 if allow_inferred_proof {
-                    solana_logging!("Failed to find root in change log -> replaying full buffer");
+                    miraland_logging!("Failed to find root in change log -> replaying full buffer");
                     (
                         self.active_index.wrapping_sub(self.buffer_size - 1) & mask as u64,
                         true,
@@ -474,11 +474,11 @@ impl<const MAX_DEPTH: usize, const MAX_BUFFER_SIZE: usize>
         leaf_index: u32,
     ) -> bool {
         if !self.is_initialized() {
-            solana_logging!("Tree is not initialized, returning false");
+            miraland_logging!("Tree is not initialized, returning false");
             return false;
         }
         if check_leaf_index(leaf_index, MAX_DEPTH).is_err() {
-            solana_logging!("Leaf index out of bounds for max_depth");
+            miraland_logging!("Leaf index out of bounds for max_depth");
             return false;
         }
         recompute(leaf, proof, leaf_index) == self.get_root()
@@ -496,10 +496,10 @@ impl<const MAX_DEPTH: usize, const MAX_BUFFER_SIZE: usize>
         leaf_index: u32,
         allow_inferred_proof: bool,
     ) -> Result<Node, ConcurrentMerkleTreeError> {
-        solana_logging!("Active Index: {}", self.active_index);
-        solana_logging!("Rightmost Index: {}", self.rightmost_proof.index);
-        solana_logging!("Buffer Size: {}", self.buffer_size);
-        solana_logging!("Leaf Index: {}", leaf_index);
+        miraland_logging!("Active Index: {}", self.active_index);
+        miraland_logging!("Rightmost Index: {}", self.rightmost_proof.index);
+        miraland_logging!("Buffer Size: {}", self.buffer_size);
+        miraland_logging!("Leaf Index: {}", leaf_index);
         let valid_root =
             self.check_valid_leaf(current_root, leaf, proof, leaf_index, allow_inferred_proof)?;
         if !valid_root {
@@ -535,7 +535,7 @@ impl<const MAX_DEPTH: usize, const MAX_BUFFER_SIZE: usize>
                 );
             } else {
                 assert!(index == self.rightmost_proof.index);
-                solana_logging!("Appending rightmost leaf");
+                miraland_logging!("Appending rightmost leaf");
                 self.rightmost_proof.proof.copy_from_slice(proof);
                 self.rightmost_proof.index = index + 1;
                 self.rightmost_proof.leaf = change_log.get_leaf();

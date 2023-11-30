@@ -24,7 +24,7 @@ default = []
 [dependencies]
 anchor-lang = "0.26.0"
 bytemuck = "1.8.0"
-solarti-concurrent-merkle-tree = { version="0.1", path="../../../libraries/concurrent-merkle-tree", features = [ "sol-log" ]}
+solarti-concurrent-merkle-tree = { version="0.1", path="../../../libraries/concurrent-merkle-tree", features = [ "mln-log" ]}
 solarti-noop = { version = "0.1", path="../noop", features = [ "no-entrypoint" ]}
 
 [profile.release]

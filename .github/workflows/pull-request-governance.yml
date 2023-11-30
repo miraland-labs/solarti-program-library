@@ -6,12 +6,14 @@ on:
       - "governance/**"
       - "token/**"
       - "ci/*-version.sh"
+      - '!token/js/**'
   push:
     branches: [main]
     paths:
       - "governance/**"
       - "token/**"
       - "ci/*-version.sh"
+      - '!token/js/**'
 
 jobs:
   cargo-test-sbf:
@@ -27,7 +29,7 @@ jobs:
           sudo rm -rf "/usr/local/share/boost"
           sudo rm -rf "$AGENT_TOOLSDIRECTORY"
 
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
 
       - name: Set env vars
         run: |
@@ -36,26 +38,24 @@ jobs:
           source ci/miraland-version.sh
           echo "MIRALAND_VERSION=$miraland_version" >> $GITHUB_ENV
 
-      - uses: actions-rs/toolchain@v1
+      - uses: dtolnay/rust-toolchain@master
         with:
           toolchain: ${{ env.RUST_STABLE }}
-          override: true
-          profile: minimal
 
-      - uses: actions/cache@v2
+      - uses: actions/cache@v3
         with:
           path: |
             ~/.cargo/registry
             ~/.cargo/git
           key: cargo-build-${{ hashFiles('**/Cargo.lock') }}-${{ env.RUST_STABLE}}
 
-      - uses: actions/cache@v2
+      - uses: actions/cache@v3
         with:
           path: |
             ~/.cargo/bin/rustfilt
           key: cargo-sbf-bins-${{ runner.os }}
 
-      - uses: actions/cache@v2
+      - uses: actions/cache@v3
         with:
           path: ~/.cache/miraland
           key: miraland-${{ env.MIRALAND_VERSION }}

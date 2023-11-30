@@ -7,6 +7,7 @@ on:
     - 'token/**'
     - 'ci/*-version.sh'
     - '.github/workflows/pull-request-token.yml'
+    - '!token/js/**'
   push:
     branches: [main]
     paths:
@@ -14,12 +15,16 @@ on:
     - 'token/**'
     - 'ci/*-version.sh'
     - '.github/workflows/pull-request-token.yml'
+    - '!token/js/**'
 
 jobs:
   cargo-test-sbf:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
+
+      - name: Remove unneeded packages for more space
+        run: bash ./ci/warning/purge-ubuntu-runner.sh
 
       - name: Set env vars
         run: |
@@ -28,26 +33,24 @@ jobs:
           source ci/miraland-version.sh
           echo "MIRALAND_VERSION=$miraland_version" >> $GITHUB_ENV
 
-      - uses: actions-rs/toolchain@v1
+      - uses: dtolnay/rust-toolchain@master
         with:
           toolchain: ${{ env.RUST_STABLE }}
-          override: true
-          profile: minimal
 
-      - uses: actions/cache@v2
+      - uses: actions/cache@v3
         with:
           path: |
             ~/.cargo/registry
             ~/.cargo/git
           key: cargo-build-${{ hashFiles('**/Cargo.lock') }}-${{ env.RUST_STABLE}}
 
-      - uses: actions/cache@v2
+      - uses: actions/cache@v3
         with:
           path: |
             ~/.cargo/bin/rustfilt
           key: cargo-sbf-bins-${{ runner.os }}
 
-      - uses: actions/cache@v2
+      - uses: actions/cache@v3
         with:
           path: ~/.cache/miraland
           key: miraland-${{ env.MIRALAND_VERSION }}
@@ -61,44 +64,164 @@ jobs:
       - name: Build and test token
         run: ./ci/cargo-test-sbf.sh token
 
-      - name: Build and test ATA
-        run: ./ci/cargo-test-sbf.sh associated-token-account
+      - name: Upload programs
+        uses: actions/upload-artifact@v3
+        with:
+          name: token-programs
+          path: "target/deploy/*.so"
+          if-no-files-found: error
 
-      - name: Build and test token-2022 with "serde" activated
+  cargo-test-token-2022-serde:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set env vars
         run: |
-          cargo +"${{ env.RUST_STABLE }}" test \
+          source ci/rust-version.sh
+          echo "RUST_STABLE=$rust_stable" >> $GITHUB_ENV
+          source ci/miraland-version.sh
+          echo "MIRALAND_VERSION=$miraland_version" >> $GITHUB_ENV
+
+      - uses: dtolnay/rust-toolchain@master
+        with:
+          toolchain: ${{ env.RUST_STABLE }}
+
+      - uses: actions/cache@v3
+        with:
+          path: |
+            ~/.cargo/registry
+            ~/.cargo/git
+          key: cargo-build-${{ hashFiles('**/Cargo.lock') }}-${{ env.RUST_STABLE}}
+
+      - name: Test token-2022 with "serde" activated
+        run: |
+          cargo test \
             --manifest-path=token/program-2022/Cargo.toml \
             --features serde-traits \
             -- --nocapture
-          exit 0
 
-      - name: Upload programs
-        uses: actions/upload-artifact@v2
+  cargo-test-sbf-transfer-hook:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set env vars
+        run: |
+          source ci/rust-version.sh
+          echo "RUST_STABLE=$rust_stable" >> $GITHUB_ENV
+          source ci/miraland-version.sh
+          echo "MIRALAND_VERSION=$miraland_version" >> $GITHUB_ENV
+
+      - uses: dtolnay/rust-toolchain@master
         with:
-          name: token-programs
+          toolchain: ${{ env.RUST_STABLE }}
+
+      - uses: actions/cache@v3
+        with:
+          path: |
+            ~/.cargo/registry
+            ~/.cargo/git
+          key: cargo-build-${{ hashFiles('**/Cargo.lock') }}-${{ env.RUST_STABLE}}
+
+      - uses: actions/cache@v3
+        with:
+          path: |
+            ~/.cargo/bin/rustfilt
+          key: cargo-sbf-bins-${{ runner.os }}
+
+      - uses: actions/cache@v3
+        with:
+          path: ~/.cache/miraland
+          key: miraland-${{ env.MIRALAND_VERSION }}
+
+      - name: Install dependencies
+        run: |
+          ./ci/install-build-deps.sh
+          ./ci/install-program-deps.sh
+          echo "$HOME/.local/share/miraland/install/active_release/bin" >> $GITHUB_PATH
+
+      - name: Build and test transfer hook example
+        run: ./ci/cargo-test-sbf.sh token/transfer-hook/example
+
+      - name: Upload program
+        uses: actions/upload-artifact@v3
+        with:
+          name: spl-transfer-hook-example
+          path: "target/deploy/*.so"
+          if-no-files-found: error
+
+  cargo-test-sbf-associated-token-account:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set env vars
+        run: |
+          source ci/rust-version.sh
+          echo "RUST_STABLE=$rust_stable" >> $GITHUB_ENV
+          source ci/miraland-version.sh
+          echo "MIRALAND_VERSION=$miraland_version" >> $GITHUB_ENV
+
+      - uses: dtolnay/rust-toolchain@master
+        with:
+          toolchain: ${{ env.RUST_STABLE }}
+
+      - uses: actions/cache@v3
+        with:
+          path: |
+            ~/.cargo/registry
+            ~/.cargo/git
+          key: cargo-build-${{ hashFiles('**/Cargo.lock') }}-${{ env.RUST_STABLE}}
+
+      - uses: actions/cache@v3
+        with:
+          path: |
+            ~/.cargo/bin/rustfilt
+          key: cargo-sbf-bins-${{ runner.os }}
+
+      - uses: actions/cache@v3
+        with:
+          path: ~/.cache/miraland
+          key: miraland-${{ env.MIRALAND_VERSION }}
+
+      - name: Install dependencies
+        run: |
+          ./ci/install-build-deps.sh
+          ./ci/install-program-deps.sh
+          echo "$HOME/.local/share/miraland/install/active_release/bin" >> $GITHUB_PATH
+
+      - name: Build and test ATA
+        run: ./ci/cargo-test-sbf.sh associated-token-account
+
+      - name: Upload program
+        uses: actions/upload-artifact@v3
+        with:
+          name: associated-token-account-program
           path: "target/deploy/*.so"
           if-no-files-found: error
 
   cargo-test-sbf-twoxtx:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
+
+      - name: Remove unneeded packages for more space
+        run: bash ./ci/warning/purge-ubuntu-runner.sh
 
       - name: Set env vars
         run: |
-          echo "RUST_STABLE_VERSION=1.66.1" >> $GITHUB_ENV
+          echo "RUST_STABLE_VERSION=1.72.0" >> $GITHUB_ENV
           source ci/rust-version.sh
           echo "RUST_STABLE=$rust_stable" >> $GITHUB_ENV
           source ci/miraland-version.sh
           echo "MIRALAND_VERSION=$miraland_version" >> $GITHUB_ENV
 
-      - uses: actions-rs/toolchain@v1
+      - uses: dtolnay/rust-toolchain@master
         with:
           toolchain: ${{ env.RUST_STABLE_VERSION }}
-          override: true
-          profile: minimal
 
-      - uses: actions/cache@v2
+      - uses: actions/cache@v3
         with:
           path: |
             ~/.cargo/registry
@@ -113,39 +236,36 @@ jobs:
 
       - name: Build and test token-2022 twoxtx (TEMPORARY)
         run: |
+          cargo build-sbf --manifest-path token/program-2022/Cargo.toml
+          cargo build-sbf --manifest-path instruction-padding/program/Cargo.toml
           ./token/twoxtx-setup.sh
-          ./token/twoxtx-miraland/cargo-build-sbf --manifest-path token/program-2022/Cargo.toml
-          ./token/twoxtx-miraland/cargo-build-sbf --manifest-path instruction-padding/program/Cargo.toml
           ./token/twoxtx-miraland/cargo-test-sbf --manifest-path token/program-2022-test/Cargo.toml -- --nocapture
 
   js-test:
     runs-on: ubuntu-latest
     env:
       NODE_VERSION: 16.x
-    needs: cargo-test-sbf
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - name: Use Node.js ${{ env.NODE_VERSION }}
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
-      - uses: actions/cache@v2
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 8
+      - uses: actions/cache@v3
         with:
           path: ~/.npm
-          key: node-${{ hashFiles('token/js/package-lock.json') }}
+          key: node-${{ hashFiles('pnpm-lock.yaml') }}
           restore-keys: |
             node-
-      - name: Download programs
-        uses: actions/download-artifact@v2
-        with:
-          name: token-programs
-          path: target/deploy
       - run: ./ci/js-test-token.sh
 
   cargo-build-test-cli:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
 
       - name: Set env vars
         run: |
@@ -154,20 +274,18 @@ jobs:
           source ci/miraland-version.sh
           echo "MIRALAND_VERSION=$miraland_version" >> $GITHUB_ENV
 
-      - uses: actions-rs/toolchain@v1
+      - uses: dtolnay/rust-toolchain@master
         with:
           toolchain: ${{ env.RUST_STABLE }}
-          override: true
-          profile: minimal
 
-      - uses: actions/cache@v2
+      - uses: actions/cache@v3
         with:
           path: |
             ~/.cargo/registry
             ~/.cargo/git
           key: cargo-build-${{ hashFiles('**/Cargo.lock') }}-${{ env.RUST_STABLE }}
 
-      - uses: actions/cache@v2
+      - uses: actions/cache@v3
         with:
           path: ~/.cache/miraland
           key: miraland-${{ env.MIRALAND_VERSION }}
@@ -182,3 +300,48 @@ jobs:
         run: |
           BUILD_DEPENDENT_PROGRAMS=1 cargo build --manifest-path ./token/cli/Cargo.toml
           cargo test --manifest-path ./token/cli/Cargo.toml
+
+  cargo-build-test-transfer-hook-cli:
+    runs-on: ubuntu-latest
+    needs: [cargo-test-sbf]
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set env vars
+        run: |
+          source ci/rust-version.sh
+          echo "RUST_STABLE=$rust_stable" >> $GITHUB_ENV
+          source ci/miraland-version.sh
+          echo "MIRALAND_VERSION=$miraland_version" >> $GITHUB_ENV
+
+      - uses: dtolnay/rust-toolchain@master
+        with:
+          toolchain: ${{ env.RUST_STABLE }}
+
+      - uses: actions/cache@v3
+        with:
+          path: |
+            ~/.cargo/registry
+            ~/.cargo/git
+          key: cargo-build-${{ hashFiles('**/Cargo.lock') }}-${{ env.RUST_STABLE }}
+
+      - uses: actions/cache@v3
+        with:
+          path: ~/.cache/miraland
+          key: miraland-${{ env.MIRALAND_VERSION }}
+
+      - name: Install dependencies
+        run: |
+          ./ci/install-build-deps.sh
+          ./ci/install-program-deps.sh
+          echo "$HOME/.local/share/miraland/install/active_release/bin" >> $GITHUB_PATH
+
+      - name: Download spl-transfer-hook-example program
+        uses: actions/download-artifact@v3
+        with:
+          name: spl-transfer-hook-example
+          path: target/deploy
+
+      - name: Build and test
+        run: |
+          cargo test --manifest-path ./token/transfer-hook/cli/Cargo.toml

@@ -314,7 +314,7 @@ mod test {
     use {
         super::*,
         solana_sdk::{bpf_loader_upgradeable, signer::keypair::Keypair},
-        solana_test_validator::{TestValidator, TestValidatorGenesis, UpgradeableProgramInfo},
+        miraland_test_validator::{TestValidator, TestValidatorGenesis, UpgradeableProgramInfo},
         spl_token_client::{
             client::{
                 ProgramClient, ProgramRpcClient, ProgramRpcClientSendTransaction, SendTransaction,

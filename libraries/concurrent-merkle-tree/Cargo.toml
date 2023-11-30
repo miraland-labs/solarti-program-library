@@ -12,7 +12,7 @@ edition = "2021"
 
 [features]
 log = []
-sol-log = [ "log" ]
+mln-log = [ "log" ]
 
 [dependencies]
 miraland-program = "1.14.18"

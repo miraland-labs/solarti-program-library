@@ -1,4 +1,4 @@
-macro_rules! solana_logging {
+macro_rules! miraland_logging {
     ($message:literal, $($arg:tt)*) => {
         #[cfg(feature = "log")]
         ::solana_program::msg!($message, $($arg)*);
@@ -11,7 +11,7 @@ macro_rules! solana_logging {
 
 macro_rules! log_compute {
     () => {
-        #[cfg(all(feature = "sol-log", feature = "log"))]
+        #[cfg(all(feature = "mln-log", feature = "log"))]
         ::solana_program::log::sol_log_compute_units();
     };
 }
