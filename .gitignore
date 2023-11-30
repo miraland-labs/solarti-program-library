@@ -7,7 +7,7 @@ node_modules
 ./package-lock.json
 hfuzz_target
 hfuzz_workspace
-**/*.so
+# **/*.so
 **/.DS_Store
 test-ledger
 docker-target
