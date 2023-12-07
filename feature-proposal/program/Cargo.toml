@@ -15,7 +15,7 @@ no-entrypoint = []
 test-sbf = []
 
 [dependencies]
-borsh = "0.10.3"
+borsh = "1.2.1"
 miraland-program = "1.14.18"
 solarti-token = { version = "4.0", path = "../../token/program", features = ["no-entrypoint"] }
 

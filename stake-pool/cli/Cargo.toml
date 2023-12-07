@@ -12,7 +12,7 @@ repository = "https://github.com/miraland-labs/solarti-program-library"
 version = "0.7.2"
 
 [dependencies]
-borsh = "0.10.3"
+borsh = "1.2.1"
 clap = "2.33.3"
 serde = "1.0.193"
 serde_derive = "1.0.130"

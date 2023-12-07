@@ -11,7 +11,7 @@ license = "Apache-2.0"
 edition = "2021"
 
 [dependencies]
-borsh = "0.10.3"
+borsh = "1.2.1"
 solarti-governance-tools= { version = "0.1.4", path ="../tools"}
 miraland-program = "1.14.18"
 
