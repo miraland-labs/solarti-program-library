@@ -23,7 +23,7 @@ thiserror = "1.0.30"
 rand_distr = "0.4.3"
 rand = "0.7"
 solarti-merkle-tree-reference = { version = "0.1", path = "../merkle-tree-reference" }
-tokio = { version = "1.12", features = ["full"] }
+tokio = { version = "1.35", features = ["full"] }
 
 [lib]
 crate-type = ["cdylib", "lib"]
