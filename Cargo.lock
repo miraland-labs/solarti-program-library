@@ -1058,7 +1058,6 @@ checksum = "4ea181bf566f71cb9a5d17a59e1871af638180a18fb0035c92ae62b705207123"
 dependencies = [
  "atty",
  "bitflags 1.3.2",
- "clap_derive 3.2.25",
  "clap_lex 0.2.4",
  "indexmap 1.9.3",
  "once_cell",
@@ -1074,7 +1073,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "41fffed7514f420abec6d183b1d3acfd9099c79c3a10a06ade4f8203f1411272"
 dependencies = [
  "clap_builder",
- "clap_derive 4.4.7",
+ "clap_derive",
 ]
 
 [[package]]
@@ -1087,19 +1086,6 @@ dependencies = [
  "anstyle",
  "clap_lex 0.6.0",
  "strsim 0.10.0",
-]
-
-[[package]]
-name = "clap_derive"
-version = "3.2.25"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "ae6371b8bdc8b7d3959e9cf7b22d4435ef3e79e138688421ec654acf8c81b008"
-dependencies = [
- "heck 0.4.1",
- "proc-macro-error",
- "proc-macro2",
- "quote",
- "syn 1.0.109",
 ]
 
 [[package]]
@@ -6768,7 +6754,7 @@ name = "solarti-feature-proposal-cli"
 version = "1.2.4"
 dependencies = [
  "chrono",
- "clap 2.34.0",
+ "clap 4.4.10",
  "miraland-clap-utils",
  "miraland-cli-config",
  "miraland-client",
@@ -7110,7 +7096,7 @@ version = "1.0.0"
 dependencies = [
  "bincode",
  "borsh 0.10.3",
- "clap 3.2.25",
+ "clap 4.4.10",
  "console",
  "miraland-account-decoder",
  "miraland-clap-v3-utils",
@@ -7171,7 +7157,7 @@ dependencies = [
  "bincode",
  "borsh 0.10.3",
  "bs58",
- "clap 2.34.0",
+ "clap 4.4.10",
  "miraland-account-decoder",
  "miraland-clap-utils",
  "miraland-cli-config",
@@ -7349,7 +7335,7 @@ version = "3.1.0"
 dependencies = [
  "assert_cmd",
  "base64 0.21.5",
- "clap 2.34.0",
+ "clap 4.4.10",
  "console",
  "futures 0.3.29",
  "libtest-mimic",
@@ -7485,7 +7471,7 @@ dependencies = [
 name = "solarti-token-lending-cli"
 version = "0.2.1"
 dependencies = [
- "clap 2.34.0",
+ "clap 4.4.10",
  "miraland-clap-utils",
  "miraland-cli-config",
  "miraland-client",
@@ -7592,7 +7578,7 @@ dependencies = [
 name = "solarti-token-upgrade-cli"
 version = "0.1.3"
 dependencies = [
- "clap 3.2.25",
+ "clap 4.4.10",
  "futures-util",
  "miraland-clap-v3-utils",
  "miraland-cli-config",
@@ -7627,7 +7613,7 @@ dependencies = [
 name = "solarti-transfer-hook-cli"
 version = "0.0.1"
 dependencies = [
- "clap 3.2.25",
+ "clap 4.4.10",
  "futures-util",
  "miraland-clap-v3-utils",
  "miraland-cli-config",

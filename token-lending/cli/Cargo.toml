@@ -12,7 +12,7 @@ repository = "https://github.com/miraland-labs/solarti-program-library"
 version = "0.2.1"
 
 [dependencies]
-clap = "2.33.3"
+clap = "4.4.10"
 miraland-clap-utils = "1.14.18"
 miraland-cli-config = "1.14.18"
 miraland-client = "1.14.18"
