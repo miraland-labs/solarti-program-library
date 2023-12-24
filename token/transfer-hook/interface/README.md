@@ -99,7 +99,7 @@ automatically resolved!
 ### Account Resolution
 
 Implementers of the transfer-hook interface are encouraged to make use of the
-[spl-tlv-account-resolution](https://github.com/solana-labs/solana-program-library/tree/master/libraries/tlv-account-resolution/README.md)
+[solarti-tlv-account-resolution](https://github.com/solana-labs/solana-program-library/tree/master/libraries/tlv-account-resolution/README.md)
 library to manage the additional required accounts for their transfer hook
 program.
 
@@ -140,7 +140,7 @@ program:
 
 ### Utilities
 
-The `spl-transfer-hook-interface` library provides offchain and onchain helpers
+The `solarti-transfer-hook-interface` library provides offchain and onchain helpers
 for resolving the additional accounts required. See
 [invoke.rs](https://github.com/solana-labs/solana-program-library/tree/master/token/transfer-hook/interface/src/invoke.rs)
 for usage on-chain, and

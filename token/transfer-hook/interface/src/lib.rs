@@ -18,7 +18,7 @@ pub use solana_program;
 use solana_program::pubkey::Pubkey;
 
 /// Namespace for all programs implementing transfer-hook
-pub const NAMESPACE: &str = "spl-transfer-hook-interface";
+pub const NAMESPACE: &str = "solarti-transfer-hook-interface";
 
 /// Seed for the state
 const EXTRA_ACCOUNT_METAS_SEED: &[u8] = b"extra-account-metas";
