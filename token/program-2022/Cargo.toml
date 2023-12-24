@@ -1,6 +1,6 @@
 [package]
 name = "solarti-token-2022"
-version = "0.9.0"
+version = "1.0.0"
 description = "Solarti Program Library Token 2022"
 authors = [
   "Miraland Crafters <crafters@miraland.top>",
@@ -15,10 +15,11 @@ exclude = ["js/**"]
 no-entrypoint = []
 test-sbf = []
 serde-traits = ["dep:serde", "dep:serde_with", "dep:base64", "solarti-pod/serde-traits"]
-# Remove these features once the underlying syscalls are released on all networks
-default = ["zk-ops"]
+default = ["token-group", "zk-ops"]
+# Remove this feature once the underlying syscalls are released on all networks
 zk-ops = []
-proof-program = []
+# Remove this feature once the token group implementation has been audited
+token-group = []
 
 [dependencies]
 arrayref = "0.3.7"
@@ -26,17 +27,18 @@ bytemuck = { version = "1.14.0", features = ["derive"] }
 num-derive = "0.4"
 num-traits = "0.2"
 num_enum = "0.7.1"
-miraland-program = "1.14.18"
-miraland-zk-token-sdk = "1.14.21"
-solarti-memo = { version = "4.0", path = "../../memo/program", features = [ "no-entrypoint" ] }
-solarti-token = { version = "4.0",  path = "../program", features = ["no-entrypoint"] }
-solarti-token-group-interface = { version = "0.1.0", path = "../../token-group/interface" }
-solarti-token-metadata-interface = { version = "0.2.0", path = "../../token-metadata/interface" }
-solarti-transfer-hook-interface = { version = "0.3.0", path = "../transfer-hook/interface" }
-solarti-type-length-value = { version = "0.3.0", path = "../../libraries/type-length-value" }
-solarti-pod = { version = "0.1.0", path = "../../libraries/pod" }
+miraland-program = "1.18.2"
+miraland-security-txt = "1.1.1"
+miraland-zk-token-sdk = "1.18.2"
+solarti-memo = { version = "4.0.1", path = "../../memo/program", features = [ "no-entrypoint" ] }
+solarti-token = { version = "4.1.0",  path = "../program", features = ["no-entrypoint"] }
+solarti-token-group-interface = { version = "0.1.1", path = "../../token-group/interface" }
+solarti-token-metadata-interface = { version = "0.2.3", path = "../../token-metadata/interface" }
+solarti-transfer-hook-interface = { version = "0.4.0", path = "../transfer-hook/interface" }
+solarti-type-length-value = { version = "0.3.4", path = "../../libraries/type-length-value" }
+solarti-pod = { version = "0.1.4", path = "../../libraries/pod" }
 thiserror = "1.0"
-serde = { version = "1.0.192", optional = true }
+serde = { version = "1.0.193", optional = true }
 serde_with = { version = "3.4.0", optional = true }
 base64 = { version = "0.21.5", optional = true }
 
@@ -44,8 +46,8 @@ base64 = { version = "0.21.5", optional = true }
 lazy_static = "1.4.0"
 proptest = "1.4"
 serial_test = "2.0.0"
-miraland-program-test = "1.14.18"
-miraland-sdk = "1.14.18"
+miraland-program-test = "1.18.2"
+miraland-sdk = "1.18.2"
 serde_json = "1.0.108"
 
 [lib]
