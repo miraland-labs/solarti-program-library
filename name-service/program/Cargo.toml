@@ -22,7 +22,7 @@ miraland-program = "1.14.18"
 num-traits = "0.2"
 borsh = "0.10.3"
 num-derive = "0.4.1"
-thiserror = "1.0.50"
+thiserror = "1.0.51"
 
 [dev-dependencies]
 miraland-program-test = "1.14.18"
