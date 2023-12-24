@@ -1,7 +1,7 @@
 //! Error types
 use spl_program_error::*;
 
-/// Errors that may be returned by the spl-pod library.
+/// Errors that may be returned by the solarti-pod library.
 #[spl_program_error]
 pub enum PodSliceError {
     /// Error in checked math operation
