@@ -1,6 +1,6 @@
 [package]
 name = "solarti-token"
-version = "4.0.0"
+version = "4.1.0"
 description = "Solarti Program Library Token"
 authors = [
   "Miraland Crafters <crafters@miraland.top>",
@@ -21,15 +21,15 @@ bytemuck = "1.14.0"
 num-derive = "0.4"
 num-traits = "0.2"
 num_enum = "0.7.1"
-miraland-program = "1.14.18"
+miraland-program = "1.18.2"
 thiserror = "1.0"
 
 [dev-dependencies]
 lazy_static = "1.4.0"
 proptest = "1.4"
 serial_test = "2.0.0"
-miraland-program-test = "1.14.18"
-miraland-sdk = "1.14.18"
+miraland-program-test = "1.18.2"
+miraland-sdk = "1.18.2"
 
 [lib]
 crate-type = ["cdylib", "lib"]
