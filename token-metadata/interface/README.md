@@ -104,4 +104,4 @@ interface in their program can freely add any other data fields in a different
 TLV entry.
 
 You can find more information about TLV / type-length-value structures at the
-[spl-type-length-value repo](https://github.com/miraland-labs/solarti-program-library/tree/master/libraries/type-length-value).
+[solarti-type-length-value repo](https://github.com/miraland-labs/solarti-program-library/tree/master/libraries/type-length-value).
