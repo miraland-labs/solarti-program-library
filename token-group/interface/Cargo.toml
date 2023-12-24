@@ -1,6 +1,6 @@
 [package]
 name = "solarti-token-group-interface"
-version = "0.1.0"
+version = "0.1.1"
 description = "Solarti Program Library Token Group Interface"
 authors = [
   "Miraland Crafters <crafters@miraland.top>",
@@ -12,13 +12,13 @@ edition = "2021"
 
 [dependencies]
 bytemuck = "1.14.0"
-miraland-program = "1.14.18"
-solarti-discriminator = { version = "0.1.0" , path = "../../libraries/discriminator" }
-solarti-pod = { version = "0.1.0" , path = "../../libraries/pod", features = ["borsh"] }
-solarti-program-error = { version = "0.3.0" , path = "../../libraries/program-error" }
+miraland-program = "1.18.2"
+solarti-discriminator = { version = "0.1.5" , path = "../../libraries/discriminator" }
+solarti-pod = { version = "0.1.4" , path = "../../libraries/pod", features = ["borsh"] }
+solarti-program-error = { version = "0.3.5" , path = "../../libraries/program-error" }
 
 [dev-dependencies]
-solarti-type-length-value = { version = "0.3.0", path = "../../libraries/type-length-value", features = ["derive"] }
+solarti-type-length-value = { version = "0.3.4", path = "../../libraries/type-length-value", features = ["derive"] }
 
 [lib]
 crate-type = ["cdylib", "lib"]
