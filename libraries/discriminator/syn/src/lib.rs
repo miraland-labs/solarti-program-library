@@ -1,4 +1,4 @@
-//! Token parsing and generating library for the `spl-discriminator` library
+//! Token parsing and generating library for the `solarti-discriminator` library
 
 #![deny(missing_docs)]
 #![cfg_attr(not(test), forbid(unsafe_code))]

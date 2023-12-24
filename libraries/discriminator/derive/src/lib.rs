@@ -1,4 +1,4 @@
-//! Derive macro library for the `spl-discriminator` library
+//! Derive macro library for the `solarti-discriminator` library
 
 #![deny(missing_docs)]
 #![cfg_attr(not(test), forbid(unsafe_code))]

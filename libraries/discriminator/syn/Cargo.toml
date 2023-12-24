@@ -1,6 +1,6 @@
 [package]
 name = "solarti-discriminator-syn"
-version = "0.1.4"
+version = "0.1.5"
 description = "Token parsing and generating library for the `solarti-discriminator` library"
 authors = [
   "Miraland Crafters <crafters@miraland.top>",
