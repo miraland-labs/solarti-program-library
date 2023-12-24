@@ -1,6 +1,6 @@
 [package]
 name = "solarti-type-length-value-derive"
-version = "0.3.3"
+version = "0.3.4"
 description = "Derive Macro Library for SPL Type Length Value traits"
 authors = [
   "Miraland Crafters <crafters@miraland.top>",

@@ -31,7 +31,7 @@ describe('splDiscrimintor', () => {
 
     it('should produce the same bytes as rust library', () => {
         const expectedBytes = Buffer.from([105, 37, 101, 197, 75, 251, 102, 26]);
-        const discriminator = splDiscriminate('spl-transfer-hook-interface:execute');
+        const discriminator = splDiscriminate('solarti-transfer-hook-interface:execute');
         expect(discriminator).to.deep.equal(expectedBytes);
     });
 });

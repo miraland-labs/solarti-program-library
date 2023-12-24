@@ -1,5 +1,5 @@
 {
-    "name": "@solana/spl-type-length-value",
+    "name": "@solana/solarti-type-length-value",
     "description": "SPL Type Length Value Library",
     "version": "0.1.0",
     "author": "Solana Labs Maintainers <maintainers@solanalabs.com>",
