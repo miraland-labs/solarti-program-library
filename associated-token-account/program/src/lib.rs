@@ -89,7 +89,6 @@ fn get_associated_token_address_and_bump_seed_internal(
 ///   3. `[]` The token mint for the new associated token account
 ///   4. `[]` System program
 ///   5. `[]` Solarti Token program
-///
 #[deprecated(
     since = "1.0.5",
     note = "please use `instruction::create_associated_token_account` instead"
