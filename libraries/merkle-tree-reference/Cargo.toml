@@ -12,7 +12,7 @@ edition = "2021"
 
 [dependencies]
 miraland-program = "1.14.18"
-thiserror = "1.0.30"
+thiserror = "1.0.55"
 
 [lib]
 crate-type = ["cdylib", "lib"]
