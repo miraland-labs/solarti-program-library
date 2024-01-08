@@ -17,7 +17,7 @@ mln-log = [ "log" ]
 [dependencies]
 miraland-program = "1.14.18"
 bytemuck = "1.13.0"
-thiserror = "1.0.30"
+thiserror = "1.0.56"
 
 [dev-dependencies]
 rand_distr = "0.4.3"

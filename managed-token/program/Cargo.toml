@@ -30,7 +30,7 @@ shank = "^0.2.1"
 miraland-program = "1.14.18"
 solarti-associated-token-account = { version = "2.0", path = "../../associated-token-account/program", features = ["no-entrypoint"] }
 solarti-token = { version = "4.0", path = "../../token/program", features = ["no-entrypoint"] }
-thiserror = "^1.0.50"
+thiserror = "^1.0.56"
 
 [dev-dependencies]
 miraland-program-test = "1.14.18"
