@@ -17,7 +17,7 @@ walkdir = "2"
 clap = { version = "3", features = ["cargo"] }
 futures-util = "0.3.28"
 miraland-clap-v3-utils = "1.14.18"
-miraland-cli-config = "1.14.18"
+miraland-cli-config = "1.18.2"
 miraland-client = "1.14.18"
 miraland-logger = "1.14.18"
 miraland-remote-wallet = "1.14.18"
