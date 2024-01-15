@@ -54,7 +54,7 @@ miraland-test-validator = "1.14.19"
 assert_cmd = "2.0.12"
 libtest-mimic = "0.6"
 serial_test = "2.0.0"
-tempfile = "3.8.1"
+tempfile = "3.9.0"
 
 [[bin]]
 name = "solarti-token"

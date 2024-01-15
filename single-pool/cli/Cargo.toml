@@ -39,7 +39,7 @@ solarti-single-pool = { version = "1.0.0", path="../program", features = [ "no-e
 miraland-test-validator = "1.14.18"
 serial_test = "2.0.0"
 test-case = "3.3"
-tempfile = "3.8.1"
+tempfile = "3.9.0"
 
 [[bin]]
 name = "solarti-single-pool"
