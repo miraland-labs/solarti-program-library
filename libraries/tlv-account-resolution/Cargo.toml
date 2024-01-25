@@ -24,7 +24,7 @@ solarti-pod = { version = "0.1", path = "../pod" }
 [dev-dependencies]
 futures = "0.3.29"
 futures-util = "0.3"
-miraland-client = "1.14.18"
+miraland-client = "1.18.2"
 miraland-program-test = "1.14.18"
 miraland-sdk = "1.14.18"
 solarti-discriminator = { version = "0.1", path = "../discriminator" }
