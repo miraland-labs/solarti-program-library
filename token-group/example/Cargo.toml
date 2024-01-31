@@ -22,7 +22,7 @@ solarti-token-group-interface = { version = "0.1.0", path = "../interface" }
 solarti-type-length-value = { version = "0.3.0", path = "../../libraries/type-length-value" }
 
 [dev-dependencies]
-miraland-program-test = "1.14.18"
+miraland-program-test = "1.18.2"
 miraland-sdk = "1.14.18"
 solarti-discriminator = { version = "0.1.0", path = "../../libraries/discriminator" }
 solarti-token-client = { version = "0.4", path = "../../token/client" }

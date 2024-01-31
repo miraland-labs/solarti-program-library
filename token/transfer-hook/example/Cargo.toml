@@ -20,7 +20,7 @@ solarti-transfer-hook-interface = { version = "0.3" , path = "../interface" }
 solarti-type-length-value = { version = "0.3" , path = "../../../libraries/type-length-value" }
 
 [dev-dependencies]
-miraland-program-test = "1.14.18"
+miraland-program-test = "1.18.2"
 miraland-sdk = "1.14.18"
 
 [lib]

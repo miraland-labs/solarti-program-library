@@ -19,7 +19,7 @@ miraland-program = "1.14.18"
 solarti-token = { version = "4.0", path = "../../../token/program", features = [ "no-entrypoint" ] }
 
 [dev-dependencies]
-miraland-program-test = "1.14.18"
+miraland-program-test = "1.18.2"
 miraland-sdk = "1.14.18"
 
 [lib]
