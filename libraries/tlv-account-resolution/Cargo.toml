@@ -14,7 +14,7 @@ edition = "2021"
 test-sbf = []
 
 [dependencies]
-bytemuck = { version = "1.14.0", features = ["derive"] }
+bytemuck = { version = "1.14.1", features = ["derive"] }
 miraland-program = "1.14.18"
 solarti-discriminator = { version = "0.1", path = "../discriminator" }
 solarti-program-error = { version = "0.3", path = "../program-error" }

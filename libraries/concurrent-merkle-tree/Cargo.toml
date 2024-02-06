@@ -16,7 +16,7 @@ mln-log = [ "log" ]
 
 [dependencies]
 miraland-program = "1.14.18"
-bytemuck = "1.13.0"
+bytemuck = "1.14.1"
 thiserror = "1.0.30"
 
 [dev-dependencies]
