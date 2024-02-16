@@ -45,7 +45,7 @@ lazy_static = "1.4.0"
 proptest = "1.4"
 serial_test = "2.0.0"
 miraland-program-test = "1.14.18"
-miraland-sdk = "1.14.18"
+miraland-sdk = "1.18.2"
 serde_json = "1.0.108"
 
 [lib]

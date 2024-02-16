@@ -31,7 +31,7 @@ roots = { version = "0.0.8", optional = true }
 [dev-dependencies]
 proptest = "1.4"
 roots = "0.0.8"
-miraland-sdk = "1.14.18"
+miraland-sdk = "1.18.2"
 test-case = "3.3"
 
 [lib]

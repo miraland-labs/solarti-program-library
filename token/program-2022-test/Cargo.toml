@@ -25,7 +25,7 @@ borsh = "0.10"
 futures-util = "0.3"
 miraland-program = "1.14.18"
 miraland-program-test = "1.14.18"
-miraland-sdk = "1.14.18"
+miraland-sdk = "1.18.2"
 solarti-associated-token-account = { version = "2.0", path = "../../associated-token-account/program" }
 solarti-memo = { version = "4.0.0", path = "../../memo/program", features = ["no-entrypoint"] }
 solarti-pod = { version = "0.1.0", path = "../../libraries/pod" }

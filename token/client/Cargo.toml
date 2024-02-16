@@ -21,7 +21,7 @@ miraland-cli-output = {version = "1.14.18", optional = true }
 miraland-program-test = {version = "1.14.18"}
 miraland-rpc-client = "1.18.0"
 miraland-rpc-client-api = "1.18.0"
-miraland-sdk = "1.14.18"
+miraland-sdk = "1.18.2"
 # We never want the entrypoint for ATA, but we want the entrypoint for token when
 # testing token
 solarti-associated-token-account = { version = "2.0", path = "../../associated-token-account/program", features = ["no-entrypoint"] }

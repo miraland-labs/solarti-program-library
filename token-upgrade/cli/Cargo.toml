@@ -21,7 +21,7 @@ miraland-cli-config = "1.14.18"
 miraland-client = "1.14.18"
 miraland-logger = "1.14.18"
 miraland-remote-wallet = "1.14.18"
-miraland-sdk = "1.14.18"
+miraland-sdk = "1.18.2"
 solarti-associated-token-account = { version = "2.0", path = "../../associated-token-account/program", features = ["no-entrypoint"] }
 solarti-token = { version = "4.0", path = "../../token/program", features = ["no-entrypoint"] }
 solarti-token-2022 = { version = "0.9", path = "../../token/program-2022", features = ["no-entrypoint"] }

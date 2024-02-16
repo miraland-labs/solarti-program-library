@@ -27,7 +27,7 @@ miraland-cli-output = "1.14.18"
 miraland-client = "1.14.18"
 miraland-logger = "1.14.18"
 miraland-remote-wallet = "1.14.18"
-miraland-sdk = "1.14.18"
+miraland-sdk = "1.18.2"
 miraland-transaction-status = "1.14.18"
 miraland-vote-program = "1.14.18"
 solarti-token = { version = "4.0", path="../../token/program", features = [ "no-entrypoint" ] }

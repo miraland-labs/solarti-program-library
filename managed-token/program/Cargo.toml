@@ -34,4 +34,4 @@ thiserror = "^1.0.50"
 
 [dev-dependencies]
 miraland-program-test = "1.14.18"
-miraland-sdk = "1.14.18"
+miraland-sdk = "1.18.2"

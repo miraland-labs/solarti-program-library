@@ -34,7 +34,7 @@ thiserror = "1.0"
 assert_matches = "1.5.0"
 proptest = "1.4"
 miraland-program-test = "1.14.18"
-miraland-sdk = "1.14.18"
+miraland-sdk = "1.18.2"
 solarti-governance-test-sdk = { version = "0.1", path ="../../test-sdk"}
 solarti-governance-addin-mock = { version = "0.1", path ="../../addin-mock/program"}
 

@@ -25,7 +25,7 @@ uint = "0.9"
 [dev-dependencies]
 proptest = "1.4.0"
 miraland-program-test = "1.14.18"
-miraland-sdk = "1.14.18"
+miraland-sdk = "1.18.2"
 libm = "0.2.8"
 
 [lib]

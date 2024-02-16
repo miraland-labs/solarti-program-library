@@ -20,7 +20,7 @@ solarti-token = { version = "4.0", path = "../../../token/program", features = [
 
 [dev-dependencies]
 miraland-program-test = "1.14.18"
-miraland-sdk = "1.14.18"
+miraland-sdk = "1.18.2"
 
 [lib]
 crate-type = ["cdylib", "lib"]

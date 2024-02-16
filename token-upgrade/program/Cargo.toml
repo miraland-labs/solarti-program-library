@@ -24,7 +24,7 @@ thiserror = "1.0"
 
 [dev-dependencies]
 miraland-program-test = "1.14.18"
-miraland-sdk = "1.14.18"
+miraland-sdk = "1.18.2"
 solarti-token = { version = "4.0", path = "../../token/program", features = ["no-entrypoint"] }
 solarti-token-client = { version = "0.4", path = "../../token/client" }
 test-case = "3.3"
