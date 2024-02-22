@@ -16,7 +16,7 @@ clap = "2.33.3"
 miraland-clap-utils = "1.14.18"
 miraland-cli-config = "1.14.18"
 miraland-client = "1.14.18"
-miraland-logger = "1.14.18"
+miraland-logger = "1.18.2"
 miraland-sdk = "1.14.18"
 miraland-program = "1.14.18"
 solarti-token-lending = { version = "0.2", path="../program", features = [ "no-entrypoint" ] }

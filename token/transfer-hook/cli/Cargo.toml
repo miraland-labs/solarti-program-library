@@ -17,7 +17,7 @@ futures-util = "0.3.19"
 miraland-clap-v3-utils = "1.14.18"
 miraland-cli-config = "1.14.18"
 miraland-client = "1.14.18"
-miraland-logger = "1.14.18"
+miraland-logger = "1.18.2"
 miraland-remote-wallet = "1.14.18"
 miraland-sdk = "1.14.18"
 solarti-transfer-hook-interface = { version = "0.3", path = "../interface" }
