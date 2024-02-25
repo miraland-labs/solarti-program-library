@@ -22,7 +22,7 @@ solarti-type-length-value = { version = "0.3.4", path = "../type-length-value" }
 solarti-pod = { version = "0.1.4", path = "../pod" }
 
 [dev-dependencies]
-futures = "0.3.29"
+futures = "0.3.30"
 futures-util = "0.3"
 miraland-client = "1.18.2"
 miraland-program-test = "1.18.2"
