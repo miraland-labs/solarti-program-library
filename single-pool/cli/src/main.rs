@@ -1,7 +1,6 @@
 #![allow(clippy::arithmetic_side_effects)]
 
 use {
-    borsh::BorshSerialize,
     clap::{CommandFactory, Parser},
     miraland_clap_v3_utils::input_parsers::Amount,
     miraland_client::{
@@ -9,7 +8,7 @@ use {
         rpc_filter::{Memcmp, RpcFilterType},
     },
     solana_sdk::{
-        borsh0_10::try_from_slice_unchecked,
+        borsh1::try_from_slice_unchecked,
         pubkey::Pubkey,
         signature::{Keypair, Signature, Signer},
         stake,
@@ -133,8 +132,7 @@ async fn command_initialize(config: &Config, command_config: InitializeCli) -> C
     if command_config.skip_metadata {
         assert_eq!(
             instructions.last().unwrap().data,
-            SinglePoolInstruction::CreateTokenMetadata
-                .try_to_vec()
+            borsh::to_vec(&SinglePoolInstruction::CreateTokenMetadata)
                 .unwrap()
         );
 

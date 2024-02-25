@@ -115,7 +115,7 @@ mod tests {
     fn serialize_initialize() {
         let instruction = RecordInstruction::Initialize;
         let expected = vec![0];
-        assert_eq!(instruction.try_to_vec().unwrap(), expected);
+        assert_eq!(borsh::to_vec(&instruction).unwrap(), expected);
         assert_eq!(
             RecordInstruction::try_from_slice(&expected).unwrap(),
             instruction
@@ -124,7 +124,7 @@ mod tests {
 
     #[test]
     fn serialize_write() {
-        let data = TEST_DATA.try_to_vec().unwrap();
+        let data = borsh::to_vec(&TEST_DATA).unwrap();
         let offset = 0u64;
         let instruction = RecordInstruction::Write {
             offset: 0,
@@ -132,8 +132,8 @@ mod tests {
         };
         let mut expected = vec![1];
         expected.extend_from_slice(&offset.to_le_bytes());
-        expected.append(&mut data.try_to_vec().unwrap());
-        assert_eq!(instruction.try_to_vec().unwrap(), expected);
+        expected.append(&mut borsh::to_vec(&data).unwrap());
+        assert_eq!(borsh::to_vec(&instruction).unwrap(), expected);
         assert_eq!(
             RecordInstruction::try_from_slice(&expected).unwrap(),
             instruction
@@ -144,7 +144,7 @@ mod tests {
     fn serialize_set_authority() {
         let instruction = RecordInstruction::SetAuthority;
         let expected = vec![2];
-        assert_eq!(instruction.try_to_vec().unwrap(), expected);
+        assert_eq!(borsh::to_vec(&instruction).unwrap(), expected);
         assert_eq!(
             RecordInstruction::try_from_slice(&expected).unwrap(),
             instruction
@@ -155,7 +155,7 @@ mod tests {
     fn serialize_close_account() {
         let instruction = RecordInstruction::CloseAccount;
         let expected = vec![3];
-        assert_eq!(instruction.try_to_vec().unwrap(), expected);
+        assert_eq!(borsh::to_vec(&instruction).unwrap(), expected);
         assert_eq!(
             RecordInstruction::try_from_slice(&expected).unwrap(),
             instruction
@@ -165,7 +165,7 @@ mod tests {
     #[test]
     fn deserialize_invalid_instruction() {
         let mut expected = vec![12];
-        expected.append(&mut TEST_DATA.try_to_vec().unwrap());
+        expected.append(&mut borsh::to_vec(&TEST_DATA).unwrap());
         let err: ProgramError = RecordInstruction::try_from_slice(&expected)
             .unwrap_err()
             .into();

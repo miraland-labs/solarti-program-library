@@ -22,24 +22,24 @@ futures = "0.3"
 serde = "1.0.193"
 serde_derive = "1.0.103"
 serde_json = "1.0.108"
-miraland-account-decoder = "1.14.18"
-miraland-clap-utils = "1.14.18"
-miraland-cli-config = "1.14.18"
-miraland-cli-output = "1.14.18"
-miraland-client = "1.14.18"
-miraland-logger = "1.14.18"
-miraland-remote-wallet = "1.14.18"
-miraland-sdk = "1.14.18"
-miraland-transaction-status = "1.14.18"
+miraland-account-decoder = "1.18.2"
+miraland-clap-utils = "1.18.2"
+miraland-cli-config = "1.18.2"
+miraland-cli-output = "1.18.2"
+miraland-client = "1.18.2"
+miraland-logger = "1.18.2"
+miraland-remote-wallet = "1.18.2"
+miraland-sdk = "1.18.2"
+miraland-transaction-status = "1.18.2"
 solarti-token = { version = "4.0", path = "../program", features = [
   "no-entrypoint",
 ] }
-solarti-token-2022 = { version = "0.9", path = "../program-2022", features = [
+solarti-token-2022 = { version = "1.0", path = "../program-2022", features = [
   "no-entrypoint",
 ] }
-solarti-token-client = { version = "0.4", path = "../client" }
-solarti-token-metadata-interface = { version = "0.2", path = "../../token-metadata/interface" }
-solarti-associated-token-account = { version = "2.0", path = "../../associated-token-account/program", features = [
+solarti-token-client = { version = "0.5.0", path = "../client" }
+solarti-token-metadata-interface = { version = "0.2.3", path = "../../token-metadata/interface" }
+solarti-associated-token-account = { version = "2.1.0", path = "../../associated-token-account/program", features = [
   "no-entrypoint",
 ] }
 solarti-memo = { version = "4.0.0", path = "../../memo/program", features = [
@@ -47,10 +47,10 @@ solarti-memo = { version = "4.0.0", path = "../../memo/program", features = [
 ] }
 strum = "0.25"
 strum_macros = "0.25"
-tokio = "1.34"
+tokio = "1.35"
 
 [dev-dependencies]
-miraland-test-validator = "1.14.19"
+miraland-test-validator = "1.18.2"
 assert_cmd = "2.0.12"
 libtest-mimic = "0.6"
 serial_test = "2.0.0"

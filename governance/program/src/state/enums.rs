@@ -61,7 +61,7 @@ pub enum GovernanceAccountType {
     ProposalV2,
 
     /// Program metadata account (introduced in V2)
-    /// It stores information about the particular SPL-Governance program
+    /// It stores information about the particular Solarti-Governance program
     /// instance
     ProgramMetadata,
 

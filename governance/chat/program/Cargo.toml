@@ -17,12 +17,12 @@ test-sbf = []
 [dependencies]
 arrayref = "0.3.7"
 bincode = "1.3.2"
-borsh = "0.10.3"
+borsh = "1.3.0"
 num-derive = "0.4"
 num-traits = "0.2"
 serde = "1.0.193"
 serde_derive = "1.0.103"
-miraland-program = "1.14.18"
+miraland-program = "1.18.2"
 solarti-token = { version = "4.0", path = "../../../token/program", features = [ "no-entrypoint" ] }
 solarti-governance= { version = "3.1", path ="../../program", features = [ "no-entrypoint" ]}
 solarti-governance-tools= { version = "0.1", path ="../../tools"}
@@ -33,8 +33,8 @@ thiserror = "1.0"
 [dev-dependencies]
 assert_matches = "1.5.0"
 proptest = "1.4"
-miraland-program-test = "1.14.18"
-miraland-sdk = "1.14.18"
+miraland-program-test = "1.18.2"
+miraland-sdk = "1.18.2"
 solarti-governance-test-sdk = { version = "0.1", path ="../../test-sdk"}
 solarti-governance-addin-mock = { version = "0.1", path ="../../addin-mock/program"}
 

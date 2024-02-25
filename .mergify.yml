@@ -6,7 +6,9 @@
 pull_request_rules:
   - name: label changes from community
     conditions:
-      - author≠@core-contributors
+      - author≠@solarti-maintainers
+      - author≠@solarti-triage
+      - author≠@solarti-write
       - author≠mergify[bot]
       - author≠dependabot[bot]
     actions:

@@ -7,7 +7,7 @@ import {
   findPoolMintAuthorityAddress as findMintAuthorityModern,
   findPoolMplAuthorityAddress as findMplAuthorityModern,
   findDefaultDepositAccountAddress as findDefaultDepositModern,
-} from '@solana/spl-single-pool';
+} from '@solana/solarti-single-pool';
 
 export async function findPoolAddress(programId: PublicKey, voteAccountAddress: PublicKey) {
   return new PublicKey(await findPoolModern(programId.toBase58(), voteAccountAddress.toBase58()));

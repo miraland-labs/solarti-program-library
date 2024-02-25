@@ -147,7 +147,7 @@ jobs:
       - name: Upload program
         uses: actions/upload-artifact@v3
         with:
-          name: spl-transfer-hook-example
+          name: solarti-transfer-hook-example
           path: "target/deploy/*.so"
           if-no-files-found: error
 
@@ -336,10 +336,10 @@ jobs:
           ./ci/install-program-deps.sh
           echo "$HOME/.local/share/miraland/install/active_release/bin" >> $GITHUB_PATH
 
-      - name: Download spl-transfer-hook-example program
+      - name: Download solarti-transfer-hook-example program
         uses: actions/download-artifact@v3
         with:
-          name: spl-transfer-hook-example
+          name: solarti-transfer-hook-example
           path: target/deploy
 
       - name: Build and test

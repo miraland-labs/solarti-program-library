@@ -125,7 +125,7 @@ pub enum SinglePoolInstruction {
         name: String,
         /// Token symbol e.g. stkMLN
         symbol: String,
-        /// URI of the uploaded metadata of the spl-token
+        /// URI of the uploaded metadata of the solarti-token
         uri: String,
     },
 }
@@ -164,7 +164,7 @@ pub fn initialize_pool(program_id: &Pubkey, vote_account_address: &Pubkey) -> In
     let pool_address = find_pool_address(program_id, vote_account_address);
     let mint_address = find_pool_mint_address(program_id, &pool_address);
 
-    let data = SinglePoolInstruction::InitializePool.try_to_vec().unwrap();
+    let data = borsh::to_vec(&SinglePoolInstruction::InitializePool).unwrap();
     let accounts = vec![
         AccountMeta::new_readonly(*vote_account_address, false),
         AccountMeta::new(pool_address, false),
@@ -199,8 +199,7 @@ pub fn initialize_pool(program_id: &Pubkey, vote_account_address: &Pubkey) -> In
 pub fn reactivate_pool_stake(program_id: &Pubkey, vote_account_address: &Pubkey) -> Instruction {
     let pool_address = find_pool_address(program_id, vote_account_address);
 
-    let data = SinglePoolInstruction::ReactivatePoolStake
-        .try_to_vec()
+    let data = borsh::to_vec(&SinglePoolInstruction::ReactivatePoolStake)
         .unwrap();
     let accounts = vec![
         AccountMeta::new_readonly(*vote_account_address, false),
@@ -268,7 +267,7 @@ pub fn deposit_stake(
     user_token_account: &Pubkey,
     user_lamport_account: &Pubkey,
 ) -> Instruction {
-    let data = SinglePoolInstruction::DepositStake.try_to_vec().unwrap();
+    let data = borsh::to_vec(&SinglePoolInstruction::DepositStake).unwrap();
 
     let accounts = vec![
         AccountMeta::new_readonly(*pool_address, false),
@@ -342,11 +341,10 @@ pub fn withdraw_stake(
     user_token_account: &Pubkey,
     token_amount: u64,
 ) -> Instruction {
-    let data = SinglePoolInstruction::WithdrawStake {
+    let data = borsh::to_vec(&SinglePoolInstruction::WithdrawStake {
         user_stake_authority: *user_stake_authority,
         token_amount,
-    }
-    .try_to_vec()
+    })
     .unwrap();
 
     let accounts = vec![
@@ -415,8 +413,7 @@ pub fn create_token_metadata(
 ) -> Instruction {
     let pool_mint = find_pool_mint_address(program_id, pool_address);
     let (token_metadata, _) = find_metadata_account(&pool_mint);
-    let data = SinglePoolInstruction::CreateTokenMetadata
-        .try_to_vec()
+    let data = borsh::to_vec(&SinglePoolInstruction::CreateTokenMetadata)
         .unwrap();
 
     let accounts = vec![
@@ -455,8 +452,7 @@ pub fn update_token_metadata(
     let pool_address = find_pool_address(program_id, vote_account_address);
     let pool_mint = find_pool_mint_address(program_id, &pool_address);
     let (token_metadata, _) = find_metadata_account(&pool_mint);
-    let data = SinglePoolInstruction::UpdateTokenMetadata { name, symbol, uri }
-        .try_to_vec()
+    let data = borsh::to_vec(&SinglePoolInstruction::UpdateTokenMetadata { name, symbol, uri })
         .unwrap();
 
     let accounts = vec![

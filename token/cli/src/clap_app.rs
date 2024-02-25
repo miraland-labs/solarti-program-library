@@ -116,6 +116,8 @@ pub enum CommandName {
     DepositConfidentialTokens,
     WithdrawConfidentialTokens,
     ApplyPendingBalance,
+    UpdateGroupAddress,
+    UpdateMemberAddress,
 }
 impl fmt::Display for CommandName {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
@@ -184,6 +186,8 @@ pub enum CliAuthorityType {
     ConfidentialTransferFee,
     MetadataPointer,
     Metadata,
+    GroupPointer,
+    GroupMemberPointer,
 }
 impl TryFrom<CliAuthorityType> for AuthorityType {
     type Error = Error;
@@ -209,6 +213,8 @@ impl TryFrom<CliAuthorityType> for AuthorityType {
             CliAuthorityType::Metadata => {
                 Err("Metadata authority does not map to a token authority type".into())
             }
+            CliAuthorityType::GroupPointer => Ok(AuthorityType::GroupPointer),
+            CliAuthorityType::GroupMemberPointer => Ok(AuthorityType::GroupMemberPointer),
         }
     }
 }
@@ -584,7 +590,7 @@ pub fn app<'a, 'b>(
                 .global(true)
                 .validator(is_url_or_moniker)
                 .help(
-                    "URL for Solana's JSON RPC or moniker (or their first letter): \
+                    "URL for Miraland's JSON RPC or moniker (or their first letter): \
                        [mainnet-beta, testnet, devnet, localhost] \
                     Default from the configuration file."
                 ),
@@ -663,10 +669,33 @@ pub fn app<'a, 'b>(
                     Arg::with_name("metadata_address")
                         .long("metadata-address")
                         .value_name("ADDRESS")
+                        .validator(is_valid_pubkey)
                         .takes_value(true)
                         .conflicts_with("enable_metadata")
                         .help(
                             "Specify address that stores token metadata."
+                        ),
+                )
+                .arg(
+                    Arg::with_name("group_address")
+                        .long("group-address")
+                        .value_name("ADDRESS")
+                        .validator(is_valid_pubkey)
+                        .takes_value(true)
+                        .conflicts_with("enable_group")
+                        .help(
+                            "Specify address that stores token group configurations."
+                        ),
+                )
+                .arg(
+                    Arg::with_name("member_address")
+                        .long("member-address")
+                        .value_name("ADDRESS")
+                        .validator(is_valid_pubkey)
+                        .takes_value(true)
+                        .conflicts_with("enable_member")
+                        .help(
+                            "Specify address that stores token member configurations."
                         ),
                 )
                 .arg(
@@ -737,6 +766,22 @@ pub fn app<'a, 'b>(
                         .conflicts_with("metadata_address")
                         .takes_value(false)
                         .help("Enables metadata in the mint. The mint authority must initialize the metadata."),
+                )
+                .arg(
+                    Arg::with_name("enable_group")
+                        .long("enable-group")
+                        .conflicts_with("group_address")
+                        .takes_value(false)
+                        .help("Enables group configurations in the mint. The mint authority must initialize the group."),
+                )
+                .arg(
+                    Arg::with_name("enable_member")
+                        .long("enable-member")
+                        .conflicts_with("group_address")
+                        .conflicts_with("enable_group")
+                        .conflicts_with("member_address")
+                        .takes_value(false)
+                        .help("Enables group member configurations in the mint. The mint authority must initialize the member."),
                 )
                 .nonce_args(true)
                 .arg(memo_arg())
@@ -1336,7 +1381,7 @@ pub fn app<'a, 'b>(
         )
         .subcommand(
             SubCommand::with_name(CommandName::Wrap.into())
-                .about("Wrap native SOL in a SOL token account")
+                .about("Wrap native MLN in a MLN token account")
                 .arg(
                     Arg::with_name("amount")
                         .validator(is_amount)
@@ -1344,7 +1389,7 @@ pub fn app<'a, 'b>(
                         .takes_value(true)
                         .index(1)
                         .required(true)
-                        .help("Amount of SOL to wrap"),
+                        .help("Amount of MLN to wrap"),
                 )
                 .arg(
                     Arg::with_name("wallet_keypair")
@@ -1353,8 +1398,8 @@ pub fn app<'a, 'b>(
                         .validator(is_valid_signer)
                         .takes_value(true)
                         .help(
-                            "Specify the keypair for the wallet which will have its native SOL wrapped. \
-                             This wallet will be assigned as the owner of the wrapped SOL token account. \
+                            "Specify the keypair for the wallet which will have its native MLN wrapped. \
+                             This wallet will be assigned as the owner of the wrapped MLN token account. \
                              This may be a keypair file or the ASK keyword. \
                              Defaults to the client keypair."
                         ),
@@ -1363,7 +1408,7 @@ pub fn app<'a, 'b>(
                     Arg::with_name("create_aux_account")
                         .takes_value(false)
                         .long("create-aux-account")
-                        .help("Wrap SOL in an auxiliary account instead of associated token account"),
+                        .help("Wrap MLN in an auxiliary account instead of associated token account"),
                 )
                 .arg(
                     Arg::with_name("immutable")
@@ -1378,7 +1423,7 @@ pub fn app<'a, 'b>(
         )
         .subcommand(
             SubCommand::with_name(CommandName::Unwrap.into())
-                .about("Unwrap a SOL token account")
+                .about("Unwrap a MLN token account")
                 .arg(
                     Arg::with_name("account")
                         .validator(is_valid_pubkey)
@@ -1395,8 +1440,8 @@ pub fn app<'a, 'b>(
                         .validator(is_valid_signer)
                         .takes_value(true)
                         .help(
-                            "Specify the keypair for the wallet which owns the wrapped SOL. \
-                             This wallet will receive the unwrapped SOL. \
+                            "Specify the keypair for the wallet which owns the wrapped MLN. \
+                             This wallet will receive the unwrapped MLN. \
                              This may be a keypair file or the ASK keyword. \
                              Defaults to the client keypair."
                         ),
@@ -1482,7 +1527,7 @@ pub fn app<'a, 'b>(
                         .validator(is_valid_pubkey)
                         .value_name("REFUND_ACCOUNT_ADDRESS")
                         .takes_value(true)
-                        .help("The address of the account to receive remaining SOL [default: --owner]"),
+                        .help("The address of the account to receive remaining MLN [default: --owner]"),
                 )
                 .arg(
                     Arg::with_name("close_authority")
@@ -1530,7 +1575,7 @@ pub fn app<'a, 'b>(
                         .validator(is_valid_pubkey)
                         .value_name("REFUND_ACCOUNT_ADDRESS")
                         .takes_value(true)
-                        .help("The address of the account to receive remaining SOL [default: --owner]"),
+                        .help("The address of the account to receive remaining MLN [default: --owner]"),
                 )
                 .arg(
                     Arg::with_name("close_authority")
@@ -1649,7 +1694,7 @@ pub fn app<'a, 'b>(
         )
         .subcommand(
             SubCommand::with_name(CommandName::AccountInfo.into())
-                .about("Query details of an Solarti Token account by address (DEPRECATED: use `spl-token display`)")
+                .about("Query details of an Solarti Token account by address (DEPRECATED: use `solarti-token display`)")
                 .setting(AppSettings::Hidden)
                 .arg(
                     Arg::with_name("token")
@@ -1686,7 +1731,7 @@ pub fn app<'a, 'b>(
         )
         .subcommand(
             SubCommand::with_name(CommandName::MultisigInfo.into())
-                .about("Query details of an Solarti Token multisig account by address (DEPRECATED: use `spl-token display`)")
+                .about("Query details of an Solarti Token multisig account by address (DEPRECATED: use `solarti-token display`)")
                 .setting(AppSettings::Hidden)
                 .arg(
                     Arg::with_name("address")
@@ -1719,12 +1764,12 @@ pub fn app<'a, 'b>(
                     Arg::with_name("close_empty_associated_accounts")
                     .long("close-empty-associated-accounts")
                     .takes_value(false)
-                    .help("close all empty associated token accounts (to get SOL back)")
+                    .help("close all empty associated token accounts (to get MLN back)")
                 )
         )
         .subcommand(
             SubCommand::with_name(CommandName::SyncNative.into())
-                .about("Sync a native SOL token account to its underlying lamports")
+                .about("Sync a native MLN token account to its underlying lamports")
                 .arg(
                     owner_address_arg()
                         .index(1)
@@ -1889,6 +1934,92 @@ pub fn app<'a, 'b>(
                         .takes_value(true)
                         .help(
                             "Specify the token's metadata-pointer authority. \
+                            This may be a keypair file or the ASK keyword. \
+                            Defaults to the client keypair.",
+                        ),
+                )
+                .arg(multisig_signer_arg())
+                .nonce_args(true)
+        )
+        .subcommand(
+            SubCommand::with_name(CommandName::UpdateGroupAddress.into())
+                .about("Updates group pointer address for the mint. Requires the group pointer extension.")
+                .arg(
+                    Arg::with_name("token")
+                        .validator(is_valid_pubkey)
+                        .value_name("TOKEN_MINT_ADDRESS")
+                        .takes_value(true)
+                        .index(1)
+                        .required(true)
+                        .help("The address of the token mint to update the group pointer address"),
+                )
+                .arg(
+                    Arg::with_name("group_address")
+                        .index(2)
+                        .validator(is_valid_pubkey)
+                        .value_name("GROUP_ADDRESS")
+                        .takes_value(true)
+                        .required_unless("disable")
+                        .help("Specify address that stores token's group-pointer"),
+                )
+                .arg(
+                    Arg::with_name("disable")
+                        .long("disable")
+                        .takes_value(false)
+                        .conflicts_with("group_address")
+                        .help("Unset group pointer address.")
+                )
+                .arg(
+                    Arg::with_name("authority")
+                        .long("authority")
+                        .value_name("KEYPAIR")
+                        .validator(is_valid_signer)
+                        .takes_value(true)
+                        .help(
+                            "Specify the token's group-pointer authority. \
+                            This may be a keypair file or the ASK keyword. \
+                            Defaults to the client keypair.",
+                        ),
+                )
+                .arg(multisig_signer_arg())
+                .nonce_args(true)
+        )
+        .subcommand(
+            SubCommand::with_name(CommandName::UpdateMemberAddress.into())
+                .about("Updates group member pointer address for the mint. Requires the group member pointer extension.")
+                .arg(
+                    Arg::with_name("token")
+                        .validator(is_valid_pubkey)
+                        .value_name("TOKEN_MINT_ADDRESS")
+                        .takes_value(true)
+                        .index(1)
+                        .required(true)
+                        .help("The address of the token mint to update the group member pointer address"),
+                )
+                .arg(
+                    Arg::with_name("member_address")
+                        .index(2)
+                        .validator(is_valid_pubkey)
+                        .value_name("MEMBER_ADDRESS")
+                        .takes_value(true)
+                        .required_unless("disable")
+                        .help("Specify address that stores token's group-member-pointer"),
+                )
+                .arg(
+                    Arg::with_name("disable")
+                        .long("disable")
+                        .takes_value(false)
+                        .conflicts_with("member_address")
+                        .help("Unset group member pointer address.")
+                )
+                .arg(
+                    Arg::with_name("authority")
+                        .long("authority")
+                        .value_name("KEYPAIR")
+                        .validator(is_valid_signer)
+                        .takes_value(true)
+                        .help(
+                            "Specify the token's group-member-pointer authority. \
                             This may be a keypair file or the ASK keyword. \
                             Defaults to the client keypair.",
                         ),

@@ -1,5 +1,5 @@
-anchor_version = "0.24.2"
-miraland_version = "1.14.18"
+anchor_version = "0.26.1"
+miraland_version = "1.18.2"
 
 [workspace]
 members = [

@@ -31,7 +31,7 @@ use {
 };
 
 type PClient = Arc<dyn ProgramClient<ProgramRpcClientSendTransaction>>;
-const SVSP_CLI: &str = "../../target/debug/spl-single-pool";
+const SVSP_CLI: &str = "../../target/debug/solarti-single-pool";
 
 #[allow(dead_code)]
 pub struct Env {

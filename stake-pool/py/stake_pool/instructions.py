@@ -513,7 +513,7 @@ class CreateTokenMetadataParams(NamedTuple):
     symbol: str
     """Token symbol e.g. stkSOL."""
     uri: str
-    """URI of the uploaded metadata of the spl-token."""
+    """URI of the uploaded metadata of the solarti-token."""
 
 
 class UpdateTokenMetadataParams(NamedTuple):
@@ -540,7 +540,7 @@ class UpdateTokenMetadataParams(NamedTuple):
     symbol: str
     """Token symbol e.g. stkSOL."""
     uri: str
-    """URI of the uploaded metadata of the spl-token."""
+    """URI of the uploaded metadata of the solarti-token."""
 
 
 class InstructionType(IntEnum):

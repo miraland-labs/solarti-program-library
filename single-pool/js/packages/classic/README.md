@@ -1,7 +1,7 @@
-# `@solana/spl-single-pool-classic`
+# `@solana/solarti-single-pool-classic`
 
 A TypeScript library for interacting with the SPL Single-Validator Stake Pool program, targeting `@solana/web3.js` 1.x.
-**If you are working on the new, bleeding-edge web3.js, you want `@solana/spl-single-pool`.**
+**If you are working on the new, bleeding-edge web3.js, you want `@solana/solarti-single-pool`.**
 
 For information on installation and usage, see [SPL docs](https://spl.solana.com/single-pool).
 

@@ -68,7 +68,7 @@ function generateConfig(configType, format) {
       config.external = [
         '@coral-xyz/borsh',
         '@solana/buffer-layout',
-        '@solana/spl-token',
+        '@solana/solarti-token',
         '@solana/web3.js',
         'bn.js',
         'buffer',
@@ -96,7 +96,7 @@ function generateConfig(configType, format) {
     config.external = [
       '@coral-xyz/borsh',
       '@solana/buffer-layout',
-      '@solana/spl-token',
+      '@solana/solarti-token',
       '@solana/web3.js',
       'bn.js',
       'buffer',

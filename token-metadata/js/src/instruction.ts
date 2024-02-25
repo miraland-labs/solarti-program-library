@@ -3,7 +3,7 @@ import { getBooleanEncoder, getBytesEncoder, getDataEnumCodec, getStructEncoder 
 import { getU64Encoder } from '@solana/codecs-numbers';
 import { getStringEncoder } from '@solana/codecs-strings';
 import { getOptionEncoder } from '@solana/options';
-import { splDiscriminate } from '@solana/spl-type-length-value';
+import { splDiscriminate } from '@solana/solarti-type-length-value';
 import type { PublicKey } from '@solana/web3.js';
 import { TransactionInstruction } from '@solana/web3.js';
 

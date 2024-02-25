@@ -5,7 +5,7 @@ use {
     borsh::{BorshDeserialize, BorshSerialize},
     cookies::{TokenAccountCookie, WalletCookie},
     solana_program::{
-        borsh0_10::try_from_slice_unchecked, clock::Clock, instruction::Instruction,
+        borsh1::try_from_slice_unchecked, clock::Clock, instruction::Instruction,
         program_error::ProgramError, program_pack::Pack, pubkey::Pubkey, rent::Rent,
         stake_history::Epoch, system_instruction, system_program, sysvar,
     },
@@ -149,7 +149,7 @@ impl ProgramTestBench {
             .unwrap();
     }
 
-    /// Sets spl-token program account (Mint or TokenAccount) authority
+    /// Sets solarti-token program account (Mint or TokenAccount) authority
     pub async fn set_spl_token_account_authority(
         &mut self,
         account: &Pubkey,

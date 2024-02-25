@@ -1,6 +1,6 @@
 [package]
 name = "solarti-noop"
-version = "0.1.4"
+version = "0.1.5"
 description = "Solarti Program Library No-op Program"
 authors = [
   "Miraland Crafters <crafters@miraland.top>",
@@ -20,4 +20,4 @@ cpi = ["no-entrypoint"]
 default = []
 
 [dependencies]
-miraland-program = "1.14.18"
+miraland-program = "1.18.2"

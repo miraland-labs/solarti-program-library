@@ -15,8 +15,8 @@ set -x
 make -C examples/c
 
 # Build/test all host crates
-cargo +"$rust_stable" build --workspace --exclude solarti-token-cli --exclude solarti-token-upgrade-cli
-cargo +"$rust_stable" test --workspace --exclude solarti-token-cli --exclude solarti-token-upgrade-cli -- --nocapture
+cargo +"$rust_stable" build --workspace --exclude solarti-token-cli --exclude solarti-token-upgrade-cli --exclude solarti-single-pool-cli --exclude solarti-transfer-hook-cli
+cargo +"$rust_stable" test --workspace --exclude solarti-token-cli --exclude solarti-token-upgrade-cli --exclude solarti-single-pool-cli --exclude solarti-transfer-hook-cli -- --nocapture
 
 # Run test-client sanity check
 cargo +"$rust_stable" run --manifest-path=utils/test-client/Cargo.toml

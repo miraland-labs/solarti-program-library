@@ -105,7 +105,7 @@ pub fn create_initialize_mint_instruction(
             AccountMeta::new_readonly(system_program::id(), false),
             AccountMeta::new_readonly(spl_token::id(), false),
         ],
-        data: ManagedTokenInstruction::InitializeMint { decimals }.try_to_vec()?,
+        data: borsh::to_vec(&ManagedTokenInstruction::InitializeMint { decimals }).unwrap(),
     })
 }
 
@@ -130,7 +130,7 @@ pub fn create_initialize_account_instruction(
             AccountMeta::new_readonly(spl_associated_token_account::id(), false),
             AccountMeta::new_readonly(spl_token::id(), false),
         ],
-        data: ManagedTokenInstruction::InitializeAccount.try_to_vec()?,
+        data: borsh::to_vec(&ManagedTokenInstruction::InitializeAccount).unwrap(),
     })
 }
 
@@ -151,7 +151,7 @@ pub fn create_mint_to_instruction(
             AccountMeta::new_readonly(authority, false),
             AccountMeta::new_readonly(spl_token::id(), false),
         ],
-        data: ManagedTokenInstruction::MintTo { amount }.try_to_vec()?,
+        data: borsh::to_vec(&ManagedTokenInstruction::MintTo { amount }).unwrap(),
     })
 }
 
@@ -176,7 +176,7 @@ pub fn create_transfer_instruction(
             AccountMeta::new_readonly(freeze_authority, false),
             AccountMeta::new_readonly(spl_token::id(), false),
         ],
-        data: ManagedTokenInstruction::Transfer { amount }.try_to_vec()?,
+        data: borsh::to_vec(&ManagedTokenInstruction::Transfer { amount }).unwrap(),
     })
 }
 
@@ -202,7 +202,7 @@ pub fn create_transfer_with_delegate_instruction(
             AccountMeta::new_readonly(freeze_authority, false),
             AccountMeta::new_readonly(spl_token::id(), false),
         ],
-        data: ManagedTokenInstruction::Transfer { amount }.try_to_vec()?,
+        data: borsh::to_vec(&ManagedTokenInstruction::Transfer { amount }).unwrap(),
     })
 }
 
@@ -224,7 +224,7 @@ pub fn create_burn_instruction(
             AccountMeta::new_readonly(freeze_authority, false),
             AccountMeta::new_readonly(spl_token::id(), false),
         ],
-        data: ManagedTokenInstruction::Burn { amount }.try_to_vec()?,
+        data: borsh::to_vec(&ManagedTokenInstruction::Burn { amount }).unwrap(),
     })
 }
 
@@ -246,7 +246,7 @@ pub fn create_close_account_instruction(
             AccountMeta::new_readonly(freeze_authority, false),
             AccountMeta::new_readonly(spl_token::id(), false),
         ],
-        data: ManagedTokenInstruction::CloseAccount.try_to_vec()?,
+        data: borsh::to_vec(&ManagedTokenInstruction::CloseAccount).unwrap(),
     })
 }
 
@@ -270,7 +270,7 @@ pub fn create_approve_instruction(
             AccountMeta::new_readonly(freeze_authority, false),
             AccountMeta::new_readonly(spl_token::id(), false),
         ],
-        data: ManagedTokenInstruction::Approve { amount }.try_to_vec()?,
+        data: borsh::to_vec(&ManagedTokenInstruction::Approve { amount }).unwrap(),
     })
 }
 
@@ -291,6 +291,6 @@ pub fn create_revoke_instruction(
             AccountMeta::new_readonly(freeze_authority, false),
             AccountMeta::new_readonly(spl_token::id(), false),
         ],
-        data: ManagedTokenInstruction::Revoke.try_to_vec()?,
+        data: borsh::to_vec(&ManagedTokenInstruction::Revoke).unwrap(),
     })
 }

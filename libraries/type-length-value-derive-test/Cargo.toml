@@ -11,8 +11,8 @@ license = "Apache-2.0"
 edition = "2021"
 
 [dev-dependencies]
-borsh = "0.10"
-miraland-program = "1.14.18"
+borsh = "0.10.3"
+miraland-program = "1.18.2"
 solarti-discriminator = { version = "0.1", path = "../discriminator" }
 solarti-type-length-value = { version = "0.3", path = "../type-length-value", features = ["derive"] }
 

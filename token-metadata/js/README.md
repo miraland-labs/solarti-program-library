@@ -1,4 +1,4 @@
-# `@solana/spl-token-metadata`
+# `@solana/solarti-token-metadata`
 
 A TypeScript interface describing the instructions required for a program to implement to be considered a "token-metadata" program for SPL token mints. The interface can be implemented by any program.
 
@@ -21,11 +21,11 @@ If you've found a bug or you'd like to request a feature, please
 ## Install
 
 ```shell
-npm install --save @solana/spl-token-metadata @solana/web3.js
+npm install --save @solana/solarti-token-metadata @solana/web3.js
 ```
 _OR_
 ```shell
-yarn add @solana/spl-token-metadata @solana/web3.js
+yarn add @solana/solarti-token-metadata @solana/web3.js
 ```
 
 ## Build from Source

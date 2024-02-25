@@ -12,8 +12,8 @@
 //!
 //! While SPL ConcurrentMerkleTrees can generically store arbitrary information,
 //! one exemplified use-case is the [Bubblegum](https://github.com/metaplex-foundation/metaplex-program-library/tree/master/bubblegum) contract,
-//! which uses SPL-Compression to store encoded information about NFTs.
-//! The use of SPL-Compression within Bubblegum allows for:
+//! which uses Solarti-Compression to store encoded information about NFTs.
+//! The use of Solarti-Compression within Bubblegum allows for:
 //! - up to 1 billion NFTs to be stored in a single account on-chain (>10,000x decrease in on-chain cost)
 //! - up to 2048 concurrent updates per slot
 //!

@@ -98,7 +98,7 @@ pub fn init_pool(
     init_args: InitArgs,
 ) -> Result<Instruction, ProgramError> {
     let init_data = PoolInstruction::InitPool(init_args);
-    let data = init_data.try_to_vec()?;
+    let data = borsh::to_vec(&init_data).unwrap();
     let accounts = vec![
         AccountMeta::new(*pool, false),
         AccountMeta::new_readonly(*authority, false),
@@ -134,7 +134,7 @@ pub fn deposit(
     amount: u64,
 ) -> Result<Instruction, ProgramError> {
     let init_data = PoolInstruction::Deposit(amount);
-    let data = init_data.try_to_vec()?;
+    let data = borsh::to_vec(&init_data).unwrap();
 
     let accounts = vec![
         AccountMeta::new_readonly(*pool, false),
@@ -176,7 +176,7 @@ pub fn withdraw(
     amount: u64,
 ) -> Result<Instruction, ProgramError> {
     let init_data = PoolInstruction::Withdraw(amount);
-    let data = init_data.try_to_vec()?;
+    let data = borsh::to_vec(&init_data).unwrap();
     let accounts = vec![
         AccountMeta::new_readonly(*pool, false),
         AccountMeta::new_readonly(*authority, false),
@@ -208,7 +208,7 @@ pub fn decide(
     decision: bool,
 ) -> Result<Instruction, ProgramError> {
     let init_data = PoolInstruction::Decide(decision);
-    let data = init_data.try_to_vec()?;
+    let data = borsh::to_vec(&init_data).unwrap();
     let accounts = vec![
         AccountMeta::new(*pool, false),
         AccountMeta::new_readonly(*decider, true),

@@ -1,7 +1,7 @@
 ## Transfer-Hook Example
 
-Full example program and tests implementing the `spl-transfer-hook-interface`,
-to be used for testing a program that calls into the `spl-transfer-hook-interface`.
+Full example program and tests implementing the `solarti-transfer-hook-interface`,
+to be used for testing a program that calls into the `solarti-transfer-hook-interface`.
 
 See the
 [SPL Transfer Hook Interface](https://github.com/solana-labs/solana-program-library/tree/master/token/transfer-hook/interface)
@@ -9,7 +9,7 @@ code for more information.
 
 ### Example usage of example
 
-When testing your program that uses `spl-transfer-hook-interface`, you can also
+When testing your program that uses `solarti-transfer-hook-interface`, you can also
 import this crate, and then use it with `solana-program-test`, ie:
 
 ```rust

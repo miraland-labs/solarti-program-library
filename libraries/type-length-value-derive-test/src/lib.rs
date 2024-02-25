@@ -1,5 +1,5 @@
 //! Test crate to avoid making `borsh` a direct dependency of
-//! `spl-type-length-value`. You can't use a derive macro from within the same
+//! `solarti-type-length-value`. You can't use a derive macro from within the same
 //! crate that the macro is defined, so we need this extra crate for just
 //! testing the macro itself.
 

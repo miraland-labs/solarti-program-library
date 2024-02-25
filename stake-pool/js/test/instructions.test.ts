@@ -15,7 +15,7 @@ import {
   AccountInfo,
   LAMPORTS_PER_MLN,
 } from '@solana/web3.js';
-import { TOKEN_PROGRAM_ID, TokenAccountNotFoundError } from '@solana/spl-token';
+import { TOKEN_PROGRAM_ID, TokenAccountNotFoundError } from '@solana/solarti-token';
 import { StakePoolLayout } from '../src/layouts';
 import {
   STAKE_POOL_INSTRUCTION_LAYOUTS,

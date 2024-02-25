@@ -4,7 +4,7 @@ use {
     miraland_cli_output::OutputFormat,
     miraland_client::{nonblocking::rpc_client::RpcClient, rpc_request::TokenAccountsFilter},
     solana_sdk::{
-        bpf_loader_upgradeable, feature_set,
+        bpf_loader_upgradeable,
         hash::Hash,
         program_option::COption,
         program_pack::Pack,
@@ -18,8 +18,11 @@ use {
     spl_token_2022::{
         extension::{
             confidential_transfer::{ConfidentialTransferAccount, ConfidentialTransferMint},
+            confidential_transfer_fee::ConfidentialTransferFeeConfig,
             cpi_guard::CpiGuard,
             default_account_state::DefaultAccountState,
+            group_member_pointer::GroupMemberPointer,
+            group_pointer::GroupPointer,
             interest_bearing_mint::InterestBearingConfig,
             memo_transfer::MemoTransfer,
             metadata_pointer::MetadataPointer,
@@ -124,8 +127,11 @@ async fn main() {
         async_trial!(withdraw_excess_lamports_from_mint, test_validator, payer),
         async_trial!(withdraw_excess_lamports_from_account, test_validator, payer),
         async_trial!(metadata_pointer, test_validator, payer),
+        async_trial!(group_pointer, test_validator, payer),
+        async_trial!(group_member_pointer, test_validator, payer),
         async_trial!(transfer_hook, test_validator, payer),
         async_trial!(metadata, test_validator, payer),
+        async_trial!(confidential_transfer_with_fee, test_validator, payer),
         // GC messes with every other test, so have it on its own test validator
         async_trial!(gc, gc_test_validator, gc_payer),
     ];
@@ -162,8 +168,6 @@ async fn new_validator_for_test() -> (TestValidator, Keypair) {
             upgrade_authority: Pubkey::new_unique(),
         },
     ]);
-    // TODO Remove this once the Range Proof cost goes under 200k compute units
-    test_validator_genesis.deactivate_features(&[feature_set::native_programs_consume_cu::id()]);
     test_validator_genesis.start_async().await
 }
 
@@ -277,7 +281,7 @@ async fn create_token(config: &Config<'_>, payer: &Keypair) -> Pubkey {
         config,
         payer,
         &[
-            "spl-token",
+            "solarti-token",
             CommandName::CreateToken.into(),
             token_keypair_file.path().to_str().unwrap(),
         ],
@@ -299,7 +303,7 @@ async fn create_interest_bearing_token(
         config,
         payer,
         &[
-            "spl-token",
+            "solarti-token",
             CommandName::CreateToken.into(),
             token_keypair_file.path().to_str().unwrap(),
             "--interest-rate",
@@ -319,7 +323,7 @@ async fn create_auxiliary_account(config: &Config<'_>, payer: &Keypair, mint: Pu
         config,
         payer,
         &[
-            "spl-token",
+            "solarti-token",
             CommandName::CreateAccount.into(),
             &mint.to_string(),
             auxiliary_keypair_file.path().to_str().unwrap(),
@@ -340,7 +344,7 @@ async fn create_associated_account(
         config,
         payer,
         &[
-            "spl-token",
+            "solarti-token",
             CommandName::CreateAccount.into(),
             &mint.to_string(),
             "--owner",
@@ -363,7 +367,7 @@ async fn mint_tokens(
         config,
         payer,
         &[
-            "spl-token",
+            "solarti-token",
             CommandName::Mint.into(),
             &mint.to_string(),
             &ui_amount.to_string(),
@@ -436,7 +440,7 @@ async fn create_token_default(test_validator: &TestValidator, payer: &Keypair) {
         let result = process_test_command(
             &config,
             payer,
-            &["spl-token", CommandName::CreateToken.into()],
+            &["solarti-token", CommandName::CreateToken.into()],
         )
         .await;
         let value: serde_json::Value = serde_json::from_str(&result.unwrap()).unwrap();
@@ -453,7 +457,7 @@ async fn create_token_interest_bearing(test_validator: &TestValidator, payer: &K
         &config,
         payer,
         &[
-            "spl-token",
+            "solarti-token",
             CommandName::CreateToken.into(),
             "--interest-rate",
             &rate_bps.to_string(),
@@ -492,7 +496,7 @@ async fn set_interest_rate(test_validator: &TestValidator, payer: &Keypair) {
         &config,
         payer,
         &[
-            "spl-token",
+            "solarti-token",
             CommandName::SetInterestRate.into(),
             &token.to_string(),
             &new_rate.to_string(),
@@ -515,7 +519,7 @@ async fn supply(test_validator: &TestValidator, payer: &Keypair) {
         let result = process_test_command(
             &config,
             payer,
-            &["spl-token", CommandName::Supply.into(), &token.to_string()],
+            &["solarti-token", CommandName::Supply.into(), &token.to_string()],
         )
         .await;
         let value: serde_json::Value = serde_json::from_str(&result.unwrap()).unwrap();
@@ -532,7 +536,7 @@ async fn create_account_default(test_validator: &TestValidator, payer: &Keypair)
             &config,
             payer,
             &[
-                "spl-token",
+                "solarti-token",
                 CommandName::CreateAccount.into(),
                 &token.to_string(),
             ],
@@ -551,7 +555,7 @@ async fn account_info(test_validator: &TestValidator, payer: &Keypair) {
             &config,
             payer,
             &[
-                "spl-token",
+                "solarti-token",
                 CommandName::AccountInfo.into(),
                 &token.to_string(),
             ],
@@ -580,7 +584,7 @@ async fn balance(test_validator: &TestValidator, payer: &Keypair) {
         let result = process_test_command(
             &config,
             payer,
-            &["spl-token", CommandName::Balance.into(), &token.to_string()],
+            &["solarti-token", CommandName::Balance.into(), &token.to_string()],
         )
         .await;
         let value: serde_json::Value = serde_json::from_str(&result.unwrap()).unwrap();
@@ -601,7 +605,7 @@ async fn mint(test_validator: &TestValidator, payer: &Keypair) {
             &config,
             payer,
             &[
-                "spl-token",
+                "solarti-token",
                 CommandName::Mint.into(),
                 &token.to_string(),
                 "1",
@@ -622,7 +626,7 @@ async fn mint(test_validator: &TestValidator, payer: &Keypair) {
             &config,
             payer,
             &[
-                "spl-token",
+                "solarti-token",
                 CommandName::Mint.into(),
                 &token.to_string(),
                 "1",
@@ -644,7 +648,7 @@ async fn mint(test_validator: &TestValidator, payer: &Keypair) {
             &config,
             payer,
             &[
-                "spl-token",
+                "solarti-token",
                 CommandName::Mint.into(),
                 &token.to_string(),
                 "1",
@@ -676,7 +680,7 @@ async fn balance_after_mint(test_validator: &TestValidator, payer: &Keypair) {
         let result = process_test_command(
             &config,
             payer,
-            &["spl-token", CommandName::Balance.into(), &token.to_string()],
+            &["solarti-token", CommandName::Balance.into(), &token.to_string()],
         )
         .await;
         let value: serde_json::Value = serde_json::from_str(&result.unwrap()).unwrap();
@@ -700,7 +704,7 @@ async fn balance_after_mint_with_owner(test_validator: &TestValidator, payer: &K
             &config,
             payer,
             &[
-                "spl-token",
+                "solarti-token",
                 CommandName::Balance.into(),
                 &token.to_string(),
                 "--owner",
@@ -724,7 +728,7 @@ async fn accounts(test_validator: &TestValidator, payer: &Keypair) {
         let _account2 = create_associated_account(&config, payer, &token2, &payer.pubkey()).await;
         let token3 = create_token(&config, payer).await;
         let result =
-            process_test_command(&config, payer, &["spl-token", CommandName::Accounts.into()])
+            process_test_command(&config, payer, &["solarti-token", CommandName::Accounts.into()])
                 .await
                 .unwrap();
         assert!(result.contains(&token1.to_string()));
@@ -746,7 +750,7 @@ async fn accounts_with_owner(test_validator: &TestValidator, payer: &Keypair) {
             &config,
             payer,
             &[
-                "spl-token",
+                "solarti-token",
                 CommandName::Accounts.into(),
                 "--owner",
                 &payer.pubkey().to_string(),
@@ -772,7 +776,7 @@ async fn wrapped_sol(test_validator: &TestValidator, payer: &Keypair) {
         let _result = process_test_command(
             &config,
             payer,
-            &["spl-token", CommandName::Wrap.into(), "0.5"],
+            &["solarti-token", CommandName::Wrap.into(), "0.5"],
         )
         .await
         .unwrap();
@@ -794,7 +798,7 @@ async fn wrapped_sol(test_validator: &TestValidator, payer: &Keypair) {
             &config,
             payer,
             &[
-                "spl-token",
+                "solarti-token",
                 CommandName::Unwrap.into(),
                 &wrapped_address.to_string(),
             ],
@@ -813,7 +817,7 @@ async fn wrapped_sol(test_validator: &TestValidator, payer: &Keypair) {
         let _result = process_test_command(
             &config,
             payer,
-            &["spl-token", CommandName::Wrap.into(), "10.0"],
+            &["solarti-token", CommandName::Wrap.into(), "10.0"],
         )
         .await
         .unwrap();
@@ -824,7 +828,7 @@ async fn wrapped_sol(test_validator: &TestValidator, payer: &Keypair) {
             &config,
             payer,
             &[
-                "spl-token",
+                "solarti-token",
                 CommandName::Close.into(),
                 "--address",
                 &source.to_string(),
@@ -859,7 +863,7 @@ async fn transfer(test_validator: &TestValidator, payer: &Keypair) {
             &config,
             payer,
             &[
-                "spl-token",
+                "solarti-token",
                 CommandName::Transfer.into(),
                 &token.to_string(),
                 "10",
@@ -894,7 +898,7 @@ async fn transfer_fund_recipient(test_validator: &TestValidator, payer: &Keypair
             &config,
             payer,
             &[
-                "spl-token",
+                "solarti-token",
                 CommandName::Transfer.into(),
                 "--fund-recipient",
                 "--allow-unfunded-recipient",
@@ -953,7 +957,7 @@ async fn transfer_non_standard_recipient(test_validator: &TestValidator, payer: 
                 &config,
                 payer,
                 &[
-                    "spl-token",
+                    "solarti-token",
                     CommandName::Transfer.into(),
                     "--fund-recipient",
                     &token.to_string(),
@@ -969,7 +973,7 @@ async fn transfer_non_standard_recipient(test_validator: &TestValidator, payer: 
                 &config,
                 payer,
                 &[
-                    "spl-token",
+                    "solarti-token",
                     CommandName::Transfer.into(),
                     "--fund-recipient",
                     "--allow-unfunded-recipient",
@@ -996,7 +1000,7 @@ async fn transfer_non_standard_recipient(test_validator: &TestValidator, payer: 
                 &config,
                 payer,
                 &[
-                    "spl-token",
+                    "solarti-token",
                     CommandName::Transfer.into(),
                     "--fund-recipient",
                     &token.to_string(),
@@ -1012,7 +1016,7 @@ async fn transfer_non_standard_recipient(test_validator: &TestValidator, payer: 
                 &config,
                 payer,
                 &[
-                    "spl-token",
+                    "solarti-token",
                     CommandName::Transfer.into(),
                     "--fund-recipient",
                     "--allow-non-system-account-recipient",
@@ -1039,7 +1043,7 @@ async fn transfer_non_standard_recipient(test_validator: &TestValidator, payer: 
                 &config,
                 payer,
                 &[
-                    "spl-token",
+                    "solarti-token",
                     CommandName::Transfer.into(),
                     "--fund-recipient",
                     "--allow-non-system-account-recipient",
@@ -1057,7 +1061,7 @@ async fn transfer_non_standard_recipient(test_validator: &TestValidator, payer: 
                 &config,
                 payer,
                 &[
-                    "spl-token",
+                    "solarti-token",
                     CommandName::Transfer.into(),
                     "--fund-recipient",
                     "--allow-non-system-account-recipient",
@@ -1087,7 +1091,7 @@ async fn allow_non_system_account_recipient(test_validator: &TestValidator, paye
         &config,
         payer,
         &[
-            "spl-token",
+            "solarti-token",
             CommandName::Transfer.into(),
             "--fund-recipient",
             "--allow-non-system-account-recipient",
@@ -1150,7 +1154,7 @@ async fn close_account(test_validator: &TestValidator, payer: &Keypair) {
                 &config,
                 payer,
                 &[
-                    "spl-token",
+                    "solarti-token",
                     CommandName::Close.into(),
                     "--address",
                     &source.to_string(),
@@ -1181,7 +1185,7 @@ async fn disable_mint_authority(test_validator: &TestValidator, payer: &Keypair)
             &config,
             payer,
             &[
-                "spl-token",
+                "solarti-token",
                 CommandName::Authorize.into(),
                 &token.to_string(),
                 "mint",
@@ -1209,7 +1213,7 @@ async fn gc(test_validator: &TestValidator, payer: &Keypair) {
             &config,
             payer,
             &[
-                "spl-token",
+                "solarti-token",
                 CommandName::Accounts.into(),
                 &token.to_string(),
             ],
@@ -1227,7 +1231,7 @@ async fn gc(test_validator: &TestValidator, payer: &Keypair) {
             4
         );
         config.output_format = OutputFormat::Display; // fixup eventually?
-        let _result = process_test_command(&config, payer, &["spl-token", CommandName::Gc.into()])
+        let _result = process_test_command(&config, payer, &["solarti-token", CommandName::Gc.into()])
             .await
             .unwrap();
         config.output_format = OutputFormat::JsonCompact;
@@ -1235,7 +1239,7 @@ async fn gc(test_validator: &TestValidator, payer: &Keypair) {
             &config,
             payer,
             &[
-                "spl-token",
+                "solarti-token",
                 CommandName::Accounts.into(),
                 &token.to_string(),
             ],
@@ -1262,7 +1266,7 @@ async fn gc(test_validator: &TestValidator, payer: &Keypair) {
         mint_tokens(&config, payer, token, 1.0, ata).await.unwrap();
         mint_tokens(&config, payer, token, 1.0, aux).await.unwrap();
 
-        process_test_command(&config, payer, &["spl-token", CommandName::Gc.into()])
+        process_test_command(&config, payer, &["solarti-token", CommandName::Gc.into()])
             .await
             .unwrap();
 
@@ -1286,7 +1290,7 @@ async fn gc(test_validator: &TestValidator, payer: &Keypair) {
             &config,
             payer,
             &[
-                "spl-token",
+                "solarti-token",
                 CommandName::Gc.into(),
                 "--close-empty-associated-accounts",
             ],
@@ -1307,7 +1311,7 @@ async fn gc(test_validator: &TestValidator, payer: &Keypair) {
             &config,
             payer,
             &[
-                "spl-token",
+                "solarti-token",
                 CommandName::Gc.into(),
                 "--close-empty-associated-accounts",
             ],
@@ -1338,7 +1342,7 @@ async fn gc(test_validator: &TestValidator, payer: &Keypair) {
             &config,
             payer,
             &[
-                "spl-token",
+                "solarti-token",
                 CommandName::Authorize.into(),
                 &aux.to_string(),
                 "close",
@@ -1348,7 +1352,7 @@ async fn gc(test_validator: &TestValidator, payer: &Keypair) {
         .await
         .unwrap();
 
-        process_test_command(&config, payer, &["spl-token", CommandName::Gc.into()])
+        process_test_command(&config, payer, &["solarti-token", CommandName::Gc.into()])
             .await
             .unwrap();
 
@@ -1375,7 +1379,7 @@ async fn set_owner(test_validator: &TestValidator, payer: &Keypair) {
             &config,
             payer,
             &[
-                "spl-token",
+                "solarti-token",
                 CommandName::Authorize.into(),
                 &aux_string,
                 "owner",
@@ -1431,7 +1435,7 @@ async fn transfer_with_account_delegate(test_validator: &TestValidator, payer: &
         exec_test_cmd(
             &config,
             &[
-                "spl-token",
+                "solarti-token",
                 CommandName::Approve.into(),
                 &source.to_string(),
                 "10",
@@ -1463,7 +1467,7 @@ async fn transfer_with_account_delegate(test_validator: &TestValidator, payer: &
         let result = exec_test_cmd(
             &config,
             &[
-                "spl-token",
+                "solarti-token",
                 CommandName::Transfer.into(),
                 &token.to_string(),
                 "10",
@@ -1534,7 +1538,7 @@ async fn burn_with_account_delegate(test_validator: &TestValidator, payer: &Keyp
         exec_test_cmd(
             &config,
             &[
-                "spl-token",
+                "solarti-token",
                 CommandName::Approve.into(),
                 &source.to_string(),
                 "10",
@@ -1566,7 +1570,7 @@ async fn burn_with_account_delegate(test_validator: &TestValidator, payer: &Keyp
         let result = exec_test_cmd(
             &config,
             &[
-                "spl-token",
+                "solarti-token",
                 CommandName::Burn.into(),
                 &source.to_string(),
                 "10",
@@ -1605,7 +1609,7 @@ async fn close_mint(test_validator: &TestValidator, payer: &Keypair) {
         &config,
         payer,
         &[
-            "spl-token",
+            "solarti-token",
             CommandName::CreateToken.into(),
             token_keypair_file.path().to_str().unwrap(),
             "--enable-close",
@@ -1622,7 +1626,7 @@ async fn close_mint(test_validator: &TestValidator, payer: &Keypair) {
         &config,
         payer,
         &[
-            "spl-token",
+            "solarti-token",
             CommandName::CloseMint.into(),
             &token_pubkey.to_string(),
         ],
@@ -1645,7 +1649,7 @@ async fn burn_with_permanent_delegate(test_validator: &TestValidator, payer: &Ke
         &config,
         payer,
         &[
-            "spl-token",
+            "solarti-token",
             CommandName::CreateToken.into(),
             token_keypair_file.path().to_str().unwrap(),
             "--enable-permanent-delegate",
@@ -1679,7 +1683,7 @@ async fn burn_with_permanent_delegate(test_validator: &TestValidator, payer: &Ke
     exec_test_cmd(
         &config,
         &[
-            "spl-token",
+            "solarti-token",
             CommandName::Burn.into(),
             &source.to_string(),
             "10",
@@ -1712,7 +1716,7 @@ async fn transfer_with_permanent_delegate(test_validator: &TestValidator, payer:
         &config,
         payer,
         &[
-            "spl-token",
+            "solarti-token",
             CommandName::CreateToken.into(),
             token_keypair_file.path().to_str().unwrap(),
             "--enable-permanent-delegate",
@@ -1756,7 +1760,7 @@ async fn transfer_with_permanent_delegate(test_validator: &TestValidator, payer:
     exec_test_cmd(
         &config,
         &[
-            "spl-token",
+            "solarti-token",
             CommandName::Transfer.into(),
             &token.to_string(),
             "50",
@@ -1807,7 +1811,7 @@ async fn required_transfer_memos(test_validator: &TestValidator, payer: &Keypair
         &config,
         payer,
         &[
-            "spl-token",
+            "solarti-token",
             CommandName::EnableRequiredTransferMemos.into(),
             &destination_account.to_string(),
         ],
@@ -1833,7 +1837,7 @@ async fn required_transfer_memos(test_validator: &TestValidator, payer: &Keypair
         &config,
         payer,
         &[
-            "spl-token",
+            "solarti-token",
             CommandName::Transfer.into(),
             "--from",
             &token_account.to_string(),
@@ -1848,7 +1852,7 @@ async fn required_transfer_memos(test_validator: &TestValidator, payer: &Keypair
         &config,
         payer,
         &[
-            "spl-token",
+            "solarti-token",
             CommandName::Transfer.into(),
             "--from",
             &token_account.to_string(),
@@ -1878,7 +1882,7 @@ async fn required_transfer_memos(test_validator: &TestValidator, payer: &Keypair
         &config,
         payer,
         &[
-            "spl-token",
+            "solarti-token",
             CommandName::DisableRequiredTransferMemos.into(),
             &destination_account.to_string(),
         ],
@@ -1910,7 +1914,7 @@ async fn cpi_guard(test_validator: &TestValidator, payer: &Keypair) {
         &config,
         payer,
         &[
-            "spl-token",
+            "solarti-token",
             CommandName::EnableCpiGuard.into(),
             &token_account.to_string(),
         ],
@@ -1935,7 +1939,7 @@ async fn cpi_guard(test_validator: &TestValidator, payer: &Keypair) {
         &config,
         payer,
         &[
-            "spl-token",
+            "solarti-token",
             CommandName::DisableCpiGuard.into(),
             &token_account.to_string(),
         ],
@@ -1974,7 +1978,7 @@ async fn immutable_accounts(test_validator: &TestValidator, payer: &Keypair) {
         &config,
         payer,
         &[
-            "spl-token",
+            "solarti-token",
             CommandName::Authorize.into(),
             &account.to_string(),
             "owner",
@@ -1994,7 +1998,7 @@ async fn immutable_accounts(test_validator: &TestValidator, payer: &Keypair) {
         &config,
         payer,
         &[
-            "spl-token",
+            "solarti-token",
             CommandName::CreateAccount.into(),
             &token.to_string(),
             aux_keypair_file.path().to_str().unwrap(),
@@ -2008,7 +2012,7 @@ async fn immutable_accounts(test_validator: &TestValidator, payer: &Keypair) {
         &config,
         payer,
         &[
-            "spl-token",
+            "solarti-token",
             CommandName::Authorize.into(),
             &aux_pubkey.to_string(),
             "owner",
@@ -2023,7 +2027,7 @@ async fn immutable_accounts(test_validator: &TestValidator, payer: &Keypair) {
         &config,
         payer,
         &[
-            "spl-token",
+            "solarti-token",
             CommandName::Wrap.into(),
             "--create-aux-account",
             "--immutable",
@@ -2043,7 +2047,7 @@ async fn immutable_accounts(test_validator: &TestValidator, payer: &Keypair) {
         &config,
         payer,
         &[
-            "spl-token",
+            "solarti-token",
             CommandName::Authorize.into(),
             &accounts[0].pubkey,
             "owner",
@@ -2065,7 +2069,7 @@ async fn non_transferable(test_validator: &TestValidator, payer: &Keypair) {
         &config,
         payer,
         &[
-            "spl-token",
+            "solarti-token",
             CommandName::CreateToken.into(),
             token_keypair_file.path().to_str().unwrap(),
             "--enable-non-transferable",
@@ -2090,7 +2094,7 @@ async fn non_transferable(test_validator: &TestValidator, payer: &Keypair) {
         &config,
         payer,
         &[
-            "spl-token",
+            "solarti-token",
             CommandName::Transfer.into(),
             "--from",
             &associated_account.to_string(),
@@ -2115,7 +2119,7 @@ async fn default_account_state(test_validator: &TestValidator, payer: &Keypair) 
         &config,
         payer,
         &[
-            "spl-token",
+            "solarti-token",
             CommandName::CreateToken.into(),
             token_keypair_file.path().to_str().unwrap(),
             "--enable-freeze",
@@ -2145,7 +2149,7 @@ async fn default_account_state(test_validator: &TestValidator, payer: &Keypair) 
         &config,
         payer,
         &[
-            "spl-token",
+            "solarti-token",
             CommandName::UpdateDefaultAccountState.into(),
             &token_pubkey.to_string(),
             "initialized",
@@ -2177,7 +2181,7 @@ async fn transfer_fee(test_validator: &TestValidator, payer: &Keypair) {
         &config,
         payer,
         &[
-            "spl-token",
+            "solarti-token",
             CommandName::CreateToken.into(),
             token_keypair_file.path().to_str().unwrap(),
             "--transfer-fee",
@@ -2222,7 +2226,7 @@ async fn transfer_fee(test_validator: &TestValidator, payer: &Keypair) {
         &config,
         payer,
         &[
-            "spl-token",
+            "solarti-token",
             CommandName::Transfer.into(),
             "--from",
             &source_account.to_string(),
@@ -2247,7 +2251,7 @@ async fn transfer_fee(test_validator: &TestValidator, payer: &Keypair) {
         &config,
         payer,
         &[
-            "spl-token",
+            "solarti-token",
             CommandName::WithdrawWithheldTokens.into(),
             &token_account.to_string(),
             &token_account.to_string(),
@@ -2267,7 +2271,7 @@ async fn transfer_fee(test_validator: &TestValidator, payer: &Keypair) {
         &config,
         payer,
         &[
-            "spl-token",
+            "solarti-token",
             CommandName::Transfer.into(),
             "--from",
             &source_account.to_string(),
@@ -2289,7 +2293,7 @@ async fn transfer_fee(test_validator: &TestValidator, payer: &Keypair) {
         &config,
         payer,
         &[
-            "spl-token",
+            "solarti-token",
             CommandName::Burn.into(),
             &token_account.to_string(),
             &burn_amount.to_string(),
@@ -2309,7 +2313,7 @@ async fn transfer_fee(test_validator: &TestValidator, payer: &Keypair) {
         &config,
         payer,
         &[
-            "spl-token",
+            "solarti-token",
             CommandName::Close.into(),
             "--address",
             &token_account.to_string(),
@@ -2331,7 +2335,7 @@ async fn transfer_fee(test_validator: &TestValidator, payer: &Keypair) {
         &config,
         payer,
         &[
-            "spl-token",
+            "solarti-token",
             CommandName::WithdrawWithheldTokens.into(),
             &source_account.to_string(),
             "--include-mint",
@@ -2352,7 +2356,7 @@ async fn transfer_fee(test_validator: &TestValidator, payer: &Keypair) {
         &config,
         payer,
         &[
-            "spl-token",
+            "solarti-token",
             CommandName::SetTransferFee.into(),
             &token_pubkey.to_string(),
             &new_transfer_fee_basis_points.to_string(),
@@ -2380,7 +2384,7 @@ async fn transfer_fee(test_validator: &TestValidator, payer: &Keypair) {
         &config,
         payer,
         &[
-            "spl-token",
+            "solarti-token",
             CommandName::Authorize.into(),
             "--disable",
             &token_pubkey.to_string(),
@@ -2404,7 +2408,7 @@ async fn transfer_fee(test_validator: &TestValidator, payer: &Keypair) {
         &config,
         payer,
         &[
-            "spl-token",
+            "solarti-token",
             CommandName::Authorize.into(),
             "--disable",
             &token_pubkey.to_string(),
@@ -2441,7 +2445,7 @@ async fn confidential_transfer(test_validator: &TestValidator, payer: &Keypair) 
         &config,
         payer,
         &[
-            "spl-token",
+            "solarti-token",
             CommandName::CreateToken.into(),
             token_keypair_file.path().to_str().unwrap(),
             "--enable-confidential-transfers",
@@ -2479,7 +2483,7 @@ async fn confidential_transfer(test_validator: &TestValidator, payer: &Keypair) 
         &config,
         payer,
         &[
-            "spl-token",
+            "solarti-token",
             CommandName::UpdateConfidentialTransferSettings.into(),
             &token_pubkey.to_string(),
             "--auditor-pubkey",
@@ -2514,7 +2518,7 @@ async fn confidential_transfer(test_validator: &TestValidator, payer: &Keypair) 
         &config,
         payer,
         &[
-            "spl-token",
+            "solarti-token",
             CommandName::ConfigureConfidentialTransferAccount.into(),
             &token_pubkey.to_string(),
         ],
@@ -2536,7 +2540,7 @@ async fn confidential_transfer(test_validator: &TestValidator, payer: &Keypair) 
         &config,
         payer,
         &[
-            "spl-token",
+            "solarti-token",
             CommandName::DisableConfidentialCredits.into(),
             &token_pubkey.to_string(),
         ],
@@ -2555,7 +2559,7 @@ async fn confidential_transfer(test_validator: &TestValidator, payer: &Keypair) 
         &config,
         payer,
         &[
-            "spl-token",
+            "solarti-token",
             CommandName::EnableConfidentialCredits.into(),
             &token_pubkey.to_string(),
         ],
@@ -2575,7 +2579,7 @@ async fn confidential_transfer(test_validator: &TestValidator, payer: &Keypair) 
         &config,
         payer,
         &[
-            "spl-token",
+            "solarti-token",
             CommandName::DisableNonConfidentialCredits.into(),
             &token_pubkey.to_string(),
         ],
@@ -2594,7 +2598,7 @@ async fn confidential_transfer(test_validator: &TestValidator, payer: &Keypair) 
         &config,
         payer,
         &[
-            "spl-token",
+            "solarti-token",
             CommandName::EnableNonConfidentialCredits.into(),
             &token_pubkey.to_string(),
         ],
@@ -2619,7 +2623,7 @@ async fn confidential_transfer(test_validator: &TestValidator, payer: &Keypair) 
         &config,
         payer,
         &[
-            "spl-token",
+            "solarti-token",
             CommandName::DepositConfidentialTokens.into(),
             &token_pubkey.to_string(),
             &deposit_amount.to_string(),
@@ -2633,7 +2637,7 @@ async fn confidential_transfer(test_validator: &TestValidator, payer: &Keypair) 
         &config,
         payer,
         &[
-            "spl-token",
+            "solarti-token",
             CommandName::ApplyPendingBalance.into(),
             &token_pubkey.to_string(),
         ],
@@ -2647,7 +2651,7 @@ async fn confidential_transfer(test_validator: &TestValidator, payer: &Keypair) 
         &config,
         payer,
         &[
-            "spl-token",
+            "solarti-token",
             CommandName::ConfigureConfidentialTransferAccount.into(),
             "--address",
             &destination_account.to_string(),
@@ -2661,7 +2665,7 @@ async fn confidential_transfer(test_validator: &TestValidator, payer: &Keypair) 
         &config,
         payer,
         &[
-            "spl-token",
+            "solarti-token",
             CommandName::Transfer.into(),
             &token_pubkey.to_string(),
             &transfer_amount.to_string(),
@@ -2677,7 +2681,7 @@ async fn confidential_transfer(test_validator: &TestValidator, payer: &Keypair) 
         &config,
         payer,
         &[
-            "spl-token",
+            "solarti-token",
             CommandName::ApplyPendingBalance.into(),
             "--address",
             &destination_account.to_string(),
@@ -2692,7 +2696,7 @@ async fn confidential_transfer(test_validator: &TestValidator, payer: &Keypair) 
         &config,
         payer,
         &[
-            "spl-token",
+            "solarti-token",
             CommandName::WithdrawConfidentialTokens.into(),
             &token_pubkey.to_string(),
             &withdraw_amount.to_string(),
@@ -2708,7 +2712,7 @@ async fn confidential_transfer(test_validator: &TestValidator, payer: &Keypair) 
         &config,
         payer,
         &[
-            "spl-token",
+            "solarti-token",
             CommandName::Authorize.into(),
             &token_pubkey.to_string(),
             "confidential-transfer-mint",
@@ -2717,6 +2721,62 @@ async fn confidential_transfer(test_validator: &TestValidator, payer: &Keypair) 
     )
     .await
     .unwrap();
+}
+
+async fn confidential_transfer_with_fee(test_validator: &TestValidator, payer: &Keypair) {
+    let config = test_config_with_default_signer(test_validator, payer, &spl_token_2022::id());
+
+    // create token with confidential transfers enabled
+    let auto_approve = true;
+    let confidential_transfer_mint_authority = payer.pubkey();
+
+    let token = Keypair::new();
+    let token_keypair_file = NamedTempFile::new().unwrap();
+    write_keypair_file(&token, &token_keypair_file).unwrap();
+    let token_pubkey = token.pubkey();
+    process_test_command(
+        &config,
+        payer,
+        &[
+            "solarti-token",
+            CommandName::CreateToken.into(),
+            token_keypair_file.path().to_str().unwrap(),
+            "--enable-confidential-transfers",
+            "auto",
+            "--transfer-fee",
+            "100",
+            "1000000000",
+        ],
+    )
+    .await
+    .unwrap();
+
+    let account = config.rpc_client.get_account(&token_pubkey).await.unwrap();
+    let test_mint = StateWithExtensionsOwned::<Mint>::unpack(account.data).unwrap();
+    let extension = test_mint
+        .get_extension::<ConfidentialTransferMint>()
+        .unwrap();
+
+    assert_eq!(
+        Option::<Pubkey>::from(extension.authority),
+        Some(confidential_transfer_mint_authority),
+    );
+    assert_eq!(
+        bool::from(extension.auto_approve_new_accounts),
+        auto_approve,
+    );
+    assert_eq!(
+        Option::<ElGamalPubkey>::from(extension.auditor_elgamal_pubkey),
+        None,
+    );
+
+    let extension = test_mint
+        .get_extension::<ConfidentialTransferFeeConfig>()
+        .unwrap();
+    assert_eq!(
+        Option::<Pubkey>::from(extension.authority),
+        Some(confidential_transfer_mint_authority),
+    );
 }
 
 async fn multisig_transfer(test_validator: &TestValidator, payer: &Keypair) {
@@ -2756,7 +2816,7 @@ async fn multisig_transfer(test_validator: &TestValidator, payer: &Keypair) {
             &config,
             payer,
             [
-                "spl-token",
+                "solarti-token",
                 CommandName::CreateMultisig.into(),
                 "--address-keypair",
                 multisig_path.path().to_str().unwrap(),
@@ -2789,7 +2849,7 @@ async fn multisig_transfer(test_validator: &TestValidator, payer: &Keypair) {
         exec_test_cmd(
             &config,
             &[
-                "spl-token",
+                "solarti-token",
                 CommandName::Transfer.into(),
                 &token.to_string(),
                 "10",
@@ -2860,7 +2920,7 @@ async fn offline_multisig_transfer_with_nonce(test_validator: &TestValidator, pa
             &config,
             payer,
             [
-                "spl-token",
+                "solarti-token",
                 CommandName::CreateMultisig.into(),
                 "--address-keypair",
                 multisig_path.path().to_str().unwrap(),
@@ -2888,7 +2948,7 @@ async fn offline_multisig_transfer_with_nonce(test_validator: &TestValidator, pa
         let result = exec_test_cmd(
             &config,
             &[
-                "spl-token",
+                "solarti-token",
                 CommandName::Transfer.into(),
                 &token.to_string(),
                 "10",
@@ -2980,7 +3040,7 @@ async fn withdraw_excess_lamports_from_multisig(test_validator: &TestValidator, 
         &config,
         payer,
         [
-            "spl-token",
+            "solarti-token",
             CommandName::CreateMultisig.into(),
             "--address-keypair",
             multisig_path.path().to_str().unwrap(),
@@ -3024,7 +3084,7 @@ async fn withdraw_excess_lamports_from_multisig(test_validator: &TestValidator, 
     exec_test_cmd(
         &config,
         &[
-            "spl-token",
+            "solarti-token",
             CommandName::WithdrawExcessLamports.into(),
             &multisig_pubkey.to_string(),
             &receiver.pubkey().to_string(),
@@ -3072,7 +3132,7 @@ async fn withdraw_excess_lamports_from_mint(test_validator: &TestValidator, paye
         &config,
         payer,
         &[
-            "spl-token",
+            "solarti-token",
             CommandName::CreateToken.into(),
             token_path.path().to_str().unwrap(),
             "--program-id",
@@ -3101,7 +3161,7 @@ async fn withdraw_excess_lamports_from_mint(test_validator: &TestValidator, paye
     exec_test_cmd(
         &config,
         &[
-            "spl-token",
+            "solarti-token",
             CommandName::WithdrawExcessLamports.into(),
             &token_pubkey.to_string(),
             &receiver.pubkey().to_string(),
@@ -3141,7 +3201,7 @@ async fn withdraw_excess_lamports_from_account(test_validator: &TestValidator, p
         &config,
         payer,
         &[
-            "spl-token",
+            "solarti-token",
             CommandName::CreateToken.into(),
             token_path.path().to_str().unwrap(),
             "--program-id",
@@ -3173,7 +3233,7 @@ async fn withdraw_excess_lamports_from_account(test_validator: &TestValidator, p
     exec_test_cmd(
         &config,
         &[
-            "spl-token",
+            "solarti-token",
             CommandName::WithdrawExcessLamports.into(),
             &token_account.to_string(),
             &receiver.pubkey().to_string(),
@@ -3205,7 +3265,7 @@ async fn metadata_pointer(test_validator: &TestValidator, payer: &Keypair) {
         &config,
         payer,
         &[
-            "spl-token",
+            "solarti-token",
             CommandName::CreateToken.into(),
             "--program-id",
             &program_id.to_string(),
@@ -3233,7 +3293,7 @@ async fn metadata_pointer(test_validator: &TestValidator, payer: &Keypair) {
         &config,
         payer,
         &[
-            "spl-token",
+            "solarti-token",
             CommandName::UpdateMetadataAddress.into(),
             &mint.to_string(),
             &new_metadata_address.to_string(),
@@ -3255,7 +3315,7 @@ async fn metadata_pointer(test_validator: &TestValidator, payer: &Keypair) {
         &config,
         payer,
         &[
-            "spl-token",
+            "solarti-token",
             CommandName::UpdateMetadataAddress.into(),
             &mint.to_string(),
             "--disable",
@@ -3277,6 +3337,174 @@ async fn metadata_pointer(test_validator: &TestValidator, payer: &Keypair) {
     );
 }
 
+async fn group_pointer(test_validator: &TestValidator, payer: &Keypair) {
+    let program_id = spl_token_2022::id();
+    let config = test_config_with_default_signer(test_validator, payer, &program_id);
+    let group_address = Pubkey::new_unique();
+
+    let result = process_test_command(
+        &config,
+        payer,
+        &[
+            "solarti-token",
+            CommandName::CreateToken.into(),
+            "--program-id",
+            &program_id.to_string(),
+            "--group-address",
+            &group_address.to_string(),
+        ],
+    )
+    .await
+    .unwrap();
+
+    let value: serde_json::Value = serde_json::from_str(&result).unwrap();
+    let mint = Pubkey::from_str(value["commandOutput"]["address"].as_str().unwrap()).unwrap();
+    let account = config.rpc_client.get_account(&mint).await.unwrap();
+    let mint_state = StateWithExtensionsOwned::<Mint>::unpack(account.data).unwrap();
+
+    let extension = mint_state.get_extension::<GroupPointer>().unwrap();
+
+    assert_eq!(
+        extension.group_address,
+        Some(group_address).try_into().unwrap()
+    );
+
+    let new_group_address = Pubkey::new_unique();
+
+    let _new_result = process_test_command(
+        &config,
+        payer,
+        &[
+            "solarti-token",
+            CommandName::UpdateGroupAddress.into(),
+            &mint.to_string(),
+            &new_group_address.to_string(),
+        ],
+    )
+    .await;
+
+    let new_account = config.rpc_client.get_account(&mint).await.unwrap();
+    let new_mint_state = StateWithExtensionsOwned::<Mint>::unpack(new_account.data).unwrap();
+
+    let new_extension = new_mint_state.get_extension::<GroupPointer>().unwrap();
+
+    assert_eq!(
+        new_extension.group_address,
+        Some(new_group_address).try_into().unwrap()
+    );
+
+    let _result_with_disable = process_test_command(
+        &config,
+        payer,
+        &[
+            "solarti-token",
+            CommandName::UpdateGroupAddress.into(),
+            &mint.to_string(),
+            "--disable",
+        ],
+    )
+    .await
+    .unwrap();
+
+    let new_account_disbale = config.rpc_client.get_account(&mint).await.unwrap();
+    let new_mint_state_disable =
+        StateWithExtensionsOwned::<Mint>::unpack(new_account_disbale.data).unwrap();
+
+    let new_extension_disable = new_mint_state_disable
+        .get_extension::<GroupPointer>()
+        .unwrap();
+
+    assert_eq!(
+        new_extension_disable.group_address,
+        None.try_into().unwrap()
+    );
+}
+
+async fn group_member_pointer(test_validator: &TestValidator, payer: &Keypair) {
+    let program_id = spl_token_2022::id();
+    let config = test_config_with_default_signer(test_validator, payer, &program_id);
+    let member_address = Pubkey::new_unique();
+
+    let result = process_test_command(
+        &config,
+        payer,
+        &[
+            "solarti-token",
+            CommandName::CreateToken.into(),
+            "--program-id",
+            &program_id.to_string(),
+            "--member-address",
+            &member_address.to_string(),
+        ],
+    )
+    .await
+    .unwrap();
+
+    let value: serde_json::Value = serde_json::from_str(&result).unwrap();
+    let mint = Pubkey::from_str(value["commandOutput"]["address"].as_str().unwrap()).unwrap();
+    let account = config.rpc_client.get_account(&mint).await.unwrap();
+    let mint_state = StateWithExtensionsOwned::<Mint>::unpack(account.data).unwrap();
+
+    let extension = mint_state.get_extension::<GroupMemberPointer>().unwrap();
+
+    assert_eq!(
+        extension.member_address,
+        Some(member_address).try_into().unwrap()
+    );
+
+    let new_member_address = Pubkey::new_unique();
+
+    let _new_result = process_test_command(
+        &config,
+        payer,
+        &[
+            "solarti-token",
+            CommandName::UpdateMemberAddress.into(),
+            &mint.to_string(),
+            &new_member_address.to_string(),
+        ],
+    )
+    .await
+    .unwrap();
+
+    let new_account = config.rpc_client.get_account(&mint).await.unwrap();
+    let new_mint_state = StateWithExtensionsOwned::<Mint>::unpack(new_account.data).unwrap();
+
+    let new_extension = new_mint_state
+        .get_extension::<GroupMemberPointer>()
+        .unwrap();
+
+    assert_eq!(
+        new_extension.member_address,
+        Some(new_member_address).try_into().unwrap()
+    );
+
+    let _result_with_disable = process_test_command(
+        &config,
+        payer,
+        &[
+            "solarti-token",
+            CommandName::UpdateMemberAddress.into(),
+            &mint.to_string(),
+            "--disable",
+        ],
+    )
+    .await;
+
+    let new_account_disbale = config.rpc_client.get_account(&mint).await.unwrap();
+    let new_mint_state_disable =
+        StateWithExtensionsOwned::<Mint>::unpack(new_account_disbale.data).unwrap();
+
+    let new_extension_disable = new_mint_state_disable
+        .get_extension::<GroupMemberPointer>()
+        .unwrap();
+
+    assert_eq!(
+        new_extension_disable.member_address,
+        None.try_into().unwrap()
+    );
+}
+
 async fn transfer_hook(test_validator: &TestValidator, payer: &Keypair) {
     let program_id = spl_token_2022::id();
     let mut config = test_config_with_default_signer(test_validator, payer, &program_id);
@@ -3286,7 +3514,7 @@ async fn transfer_hook(test_validator: &TestValidator, payer: &Keypair) {
         &config,
         payer,
         &[
-            "spl-token",
+            "solarti-token",
             CommandName::CreateToken.into(),
             "--program-id",
             &program_id.to_string(),
@@ -3313,7 +3541,7 @@ async fn transfer_hook(test_validator: &TestValidator, payer: &Keypair) {
         &config,
         payer,
         &[
-            "spl-token",
+            "solarti-token",
             CommandName::SetTransferHook.into(),
             &mint.to_string(),
             &new_transfer_hook_program_id.to_string(),
@@ -3341,7 +3569,7 @@ async fn transfer_hook(test_validator: &TestValidator, payer: &Keypair) {
     let _result = exec_test_cmd(
         &config,
         &[
-            "spl-token",
+            "solarti-token",
             CommandName::Transfer.into(),
             &mint.to_string(),
             "10",
@@ -3377,7 +3605,7 @@ async fn transfer_hook(test_validator: &TestValidator, payer: &Keypair) {
         &config,
         payer,
         &[
-            "spl-token",
+            "solarti-token",
             CommandName::SetTransferHook.into(),
             &mint.to_string(),
             "--disable",
@@ -3404,7 +3632,7 @@ async fn metadata(test_validator: &TestValidator, payer: &Keypair) {
         &config,
         payer,
         &[
-            "spl-token",
+            "solarti-token",
             CommandName::CreateToken.into(),
             "--program-id",
             &program_id.to_string(),
@@ -3425,7 +3653,7 @@ async fn metadata(test_validator: &TestValidator, payer: &Keypair) {
         &config,
         payer,
         &[
-            "spl-token",
+            "solarti-token",
             CommandName::InitializeMetadata.into(),
             &mint.to_string(),
             name,
@@ -3457,7 +3685,7 @@ async fn metadata(test_validator: &TestValidator, payer: &Keypair) {
         &config,
         payer,
         &[
-            "spl-token",
+            "solarti-token",
             CommandName::UpdateMetadata.into(),
             &mint.to_string(),
             "NAME",
@@ -3480,7 +3708,7 @@ async fn metadata(test_validator: &TestValidator, payer: &Keypair) {
         &config,
         payer,
         &[
-            "spl-token",
+            "solarti-token",
             CommandName::UpdateMetadata.into(),
             &mint.to_string(),
             field,
@@ -3504,7 +3732,7 @@ async fn metadata(test_validator: &TestValidator, payer: &Keypair) {
         &config,
         payer,
         &[
-            "spl-token",
+            "solarti-token",
             CommandName::UpdateMetadata.into(),
             &mint.to_string(),
             field,
@@ -3525,7 +3753,7 @@ async fn metadata(test_validator: &TestValidator, payer: &Keypair) {
         &config,
         payer,
         &[
-            "spl-token",
+            "solarti-token",
             CommandName::UpdateMetadata.into(),
             &mint.to_string(),
             "name",
@@ -3540,7 +3768,7 @@ async fn metadata(test_validator: &TestValidator, payer: &Keypair) {
         &config,
         payer,
         &[
-            "spl-token",
+            "solarti-token",
             CommandName::Authorize.into(),
             &mint.to_string(),
             "metadata",

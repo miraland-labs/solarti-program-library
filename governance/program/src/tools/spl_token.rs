@@ -286,7 +286,7 @@ pub fn assert_is_valid_spl_token_account(account_info: &AccountInfo) -> Result<(
     Ok(())
 }
 
-/// Checks if the given account_info  is spl-token token account
+/// Checks if the given account_info  is solarti-token token account
 pub fn is_spl_token_account(account_info: &AccountInfo) -> bool {
     assert_is_valid_spl_token_account(account_info).is_ok()
 }
@@ -317,7 +317,7 @@ pub fn assert_is_valid_spl_token_mint(mint_info: &AccountInfo) -> Result<(), Pro
     Ok(())
 }
 
-/// Checks if the given account_info is be spl-token mint account
+/// Checks if the given account_info is be solarti-token mint account
 pub fn is_spl_token_mint(mint_info: &AccountInfo) -> bool {
     assert_is_valid_spl_token_mint(mint_info).is_ok()
 }
@@ -411,7 +411,7 @@ pub fn assert_spl_token_owner_is_signer(
     Ok(())
 }
 
-/// Sets spl-token account (Mint or TokenAccount) authority
+/// Sets solarti-token account (Mint or TokenAccount) authority
 pub fn set_spl_token_account_authority<'a>(
     account_info: &AccountInfo<'a>,
     account_authority: &AccountInfo<'a>,

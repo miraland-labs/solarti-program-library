@@ -14,7 +14,7 @@
 if [[ -n $ANCHOR_CLI_VERSION ]]; then
   anchor_cli_version="$ANCHOR_CLI_VERSION"
 else
-  anchor_cli_version=v0.29.0
+  anchor_cli_version=v0.26.1
 fi
 
 export anchor_cli_version="$anchor_cli_version"
@@ -23,7 +23,7 @@ if [[ -n $1 ]]; then
   case $1 in
   install)
     # cargo install --git https://github.com/coral-xyz/anchor --tag $anchor_cli_version anchor-cli --locked
-    cargo install --git https://github.com/miraland-labs/anchor --tag $anchor_cli_version anchor-cli --locked
+    cargo install --git https://github.com/miraland-labs/anchor --tag $anchor_cli_version solarti-anchor-cli --locked
     anchor --version
     ;;
   *)

@@ -14,7 +14,7 @@ import {
   createAssociatedTokenAccountIdempotentInstruction,
   getAccount,
   getAssociatedTokenAddressSync,
-} from '@solana/spl-token';
+} from '@solana/solarti-token';
 import {
   ValidatorAccount,
   arrayChunk,

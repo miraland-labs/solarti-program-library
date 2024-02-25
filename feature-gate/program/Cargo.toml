@@ -16,12 +16,12 @@ test-sbf = []
 
 [dependencies]
 num_enum = "0.7.1"
-miraland-program = "1.14.18"
+miraland-program = "1.18.2"
 solarti-program-error = { version = "0.3.0", path = "../../libraries/program-error" }
 
 [dev-dependencies]
-miraland-program-test = "1.14.18"
-miraland-sdk = "1.14.18"
+miraland-program-test = "1.18.2"
+miraland-sdk = "1.18.2"
 
 [lib]
 crate-type = ["cdylib", "lib"]

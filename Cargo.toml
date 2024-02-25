@@ -2,8 +2,6 @@
 split-debuginfo = "unpacked"
 
 [workspace]
-resolver = "2"
-
 members = [
   "associated-token-account/program",
   "associated-token-account/program-test",
@@ -49,7 +47,6 @@ members = [
   "token-group/interface",
   "token-lending/cli",
   "token-lending/program",
-  "token-lending/flash_loan_receiver",
   "token-metadata/example",
   "token-metadata/interface",
   "token-swap/program",
@@ -67,17 +64,10 @@ members = [
   "token/client",
   "utils/cgen",
   "utils/test-client",
-]
-exclude = [
-  # "farms/farm-client",
-  # "farms/farm-ctrl",
-  # "farms/farm-rpc",
-  # "farms/farm-sdk",
-  # "farms/fund",
-  # "farms/router-main",
-  # "farms/router-raydium",
-  # "farms/router-saber",
-  # "farms/router-orca",
-  # "farms/vaults",
+  "token-lending/flash_loan_receiver",
 ]
 
+exclude = [
+]
+
+resolver = "2"

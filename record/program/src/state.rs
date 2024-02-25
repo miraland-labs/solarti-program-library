@@ -68,7 +68,7 @@ pub mod tests {
         let mut expected = vec![TEST_VERSION];
         expected.extend_from_slice(&TEST_PUBKEY.to_bytes());
         expected.extend_from_slice(&TEST_DATA.bytes);
-        assert_eq!(TEST_RECORD_DATA.try_to_vec().unwrap(), expected);
+        assert_eq!(borsh::to_vec(&TEST_RECORD_DATA).unwrap(), expected);
         assert_eq!(
             RecordData::try_from_slice(&expected).unwrap(),
             TEST_RECORD_DATA
