@@ -23,7 +23,7 @@ solarti-type-length-value = { version = "0.3.4", path = "../../libraries/type-le
 solarti-pod = { version = "0.1.4", path = "../../libraries/pod", features = ["borsh"] }
 
 [dev-dependencies]
-serde_json = "1.0.108"
+serde_json = "1.0.109"
 
 [lib]
 crate-type = ["cdylib", "lib"]
