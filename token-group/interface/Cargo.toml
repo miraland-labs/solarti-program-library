@@ -11,7 +11,7 @@ license = "Apache-2.0"
 edition = "2021"
 
 [dependencies]
-bytemuck = "1.14.0"
+bytemuck = "1.15.0"
 miraland-program = "1.18.2"
 solarti-discriminator = { version = "0.1.5" , path = "../../libraries/discriminator" }
 solarti-pod = { version = "0.1.4" , path = "../../libraries/pod", features = ["borsh"] }
