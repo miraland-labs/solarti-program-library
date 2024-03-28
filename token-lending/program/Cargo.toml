@@ -16,7 +16,7 @@ test-sbf = []
 
 [dependencies]
 arrayref = "0.3.7"
-bytemuck = "1.14.0"
+bytemuck = "1.15.0"
 num-derive = "0.4"
 num-traits = "0.2"
 miraland-program = "1.18.2"
