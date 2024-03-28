@@ -45,7 +45,7 @@ solarti-associated-token-account = { version = "2.1.0", path = "../../associated
 solarti-memo = { version = "4.0.0", path = "../../memo/program", features = [
   "no-entrypoint",
 ] }
-strum = "0.25"
+strum = "0.26"
 strum_macros = "0.25"
 tokio = "1.35"
 
