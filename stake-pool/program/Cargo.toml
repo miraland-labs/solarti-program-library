@@ -21,7 +21,7 @@ bytemuck = "1.13"
 num-derive = "0.4"
 num-traits = "0.2"
 num_enum = "0.7.1"
-serde = "1.0.193"
+serde = "1.0.197"
 serde_derive = "1.0.103"
 miraland-program = "1.18.2"
 solarti-math = { version = "0.2", path = "../../libraries/math", features = [ "no-entrypoint" ] }
