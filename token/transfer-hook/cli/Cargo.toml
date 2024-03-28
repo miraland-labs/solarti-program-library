@@ -22,7 +22,7 @@ miraland-remote-wallet = "1.18.2"
 miraland-sdk = "1.18.2"
 solarti-transfer-hook-interface = { version = "0.4", path = "../interface" }
 solarti-tlv-account-resolution = { version = "0.5" , path = "../../../libraries/tlv-account-resolution" }
-strum = "0.25"
+strum = "0.26"
 strum_macros = "0.25"
 tokio = { version = "1", features = ["full"] }
 
