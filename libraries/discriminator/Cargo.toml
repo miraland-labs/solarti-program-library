@@ -1,6 +1,6 @@
 [package]
 name = "solarti-discriminator"
-version = "0.1.5"
+version = "0.1.6"
 description = "Solarti Program Library 8-Byte Discriminator Management"
 authors = [
   "Miraland Crafters <crafters@miraland.top>",
@@ -17,7 +17,7 @@ borsh = ["dep:borsh"]
 borsh = { version = "1.3.0", optional = true }
 bytemuck = { version = "1.14.0", features = ["derive"] }
 miraland-program = ">=1.18.2"
-solarti-discriminator-derive = { version = "0.1.5", path = "./derive" }
+solarti-discriminator-derive = { version = "0.1.6", path = "./derive" }
 
 [lib]
 crate-type = ["cdylib", "lib"]
