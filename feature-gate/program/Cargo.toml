@@ -1,6 +1,6 @@
 [package]
 name = "solarti-feature-gate"
-version = "0.1.0"
+version = "0.1.1"
 description = "Solarti Program Library Feature Gate Program"
 authors = [
   "Miraland Crafters <crafters@miraland.top>",
@@ -16,12 +16,12 @@ test-sbf = []
 
 [dependencies]
 num_enum = "0.7.1"
-miraland-program = "1.18.2"
+miraland-program = ">=1.18.2"
 solarti-program-error = { version = "0.3.0", path = "../../libraries/program-error" }
 
 [dev-dependencies]
-miraland-program-test = "1.18.2"
-miraland-sdk = "1.18.2"
+miraland-program-test = ">=1.18.2"
+miraland-sdk = ">=1.18.2"
 
 [lib]
 crate-type = ["cdylib", "lib"]

@@ -12,7 +12,7 @@ edition = "2021"
 
 [dev-dependencies]
 borsh = "0.10.3"
-miraland-program = "1.18.2"
+miraland-program = ">=1.18.2"
 solarti-discriminator = { version = "0.1", path = "../discriminator" }
 solarti-type-length-value = { version = "0.3", path = "../type-length-value", features = ["derive"] }
 

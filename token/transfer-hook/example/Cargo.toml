@@ -13,15 +13,15 @@ test-sbf = []
 
 [dependencies]
 arrayref = "0.3.7"
-miraland-program = "1.18.2"
+miraland-program = ">=1.18.2"
 solarti-tlv-account-resolution = { version = "0.5" , path = "../../../libraries/tlv-account-resolution" }
 solarti-token-2022 = { version = "1.0",  path = "../../program-2022", features = ["no-entrypoint"] }
 solarti-transfer-hook-interface = { version = "0.4" , path = "../interface" }
 solarti-type-length-value = { version = "0.3" , path = "../../../libraries/type-length-value" }
 
 [dev-dependencies]
-miraland-program-test = "1.18.2"
-miraland-sdk = "1.18.2"
+miraland-program-test = ">=1.18.2"
+miraland-sdk = ">=1.18.2"
 
 [lib]
 crate-type = ["cdylib", "lib"]

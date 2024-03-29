@@ -1,6 +1,6 @@
 [package]
 name = "solarti-feature-proposal"
-version = "1.0.4"
+version = "1.0.5"
 description = "Solarti Program Library Feature Proposal Program"
 authors = [
   "Miraland Crafters <crafters@miraland.top>",
@@ -16,12 +16,12 @@ test-sbf = []
 
 [dependencies]
 borsh = "1.3.0"
-miraland-program = "1.18.2"
+miraland-program = ">=1.18.2"
 solarti-token = { version = "4.0", path = "../../token/program", features = ["no-entrypoint"] }
 
 [dev-dependencies]
-miraland-program-test = "1.18.2"
-miraland-sdk = "1.18.2"
+miraland-program-test = ">=1.18.2"
+miraland-sdk = ">=1.18.2"
 
 [lib]
 crate-type = ["cdylib", "lib"]

@@ -3019,7 +3019,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-account-decoder"
-version = "1.18.2"
+version = ">=1.18.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "f59791dd92c04c2f535281f11fc7adf1f4dd1b30de6f4e3ab9a9cc0508001d73"
 dependencies = [
@@ -3043,7 +3043,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-accounts-db"
-version = "1.18.2"
+version = ">=1.18.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "315391f1ad1dd9c17e45c7f0c2076794c6b6c4be193f8cf3e41feb4359b85685"
 dependencies = [
@@ -3105,7 +3105,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-address-lookup-table-program"
-version = "1.18.2"
+version = ">=1.18.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "ed8613cc89e1426683d6e7bb8876954115325fd0e0b346bbed8b25f4b484b4d2"
 dependencies = [
@@ -3126,7 +3126,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-banks-client"
-version = "1.18.2"
+version = ">=1.18.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "eb5d9d92e6ef923ab8bbb6bedb3840f19ff6ea9a9fdc983fc9044ea3eccea51f"
 dependencies = [
@@ -3143,7 +3143,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-banks-interface"
-version = "1.18.2"
+version = ">=1.18.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "420dfd2130bb1f0d121b17052853d12ec144c28153d2edcc780aa028cd70f58d"
 dependencies = [
@@ -3154,7 +3154,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-banks-server"
-version = "1.18.2"
+version = ">=1.18.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "2d3106e4c15d5db090c0c13af34a52bb27ce06b781a206a00b4997335e69bd61"
 dependencies = [
@@ -3174,7 +3174,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-bloom"
-version = "1.18.2"
+version = ">=1.18.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "1b5f55340df28f229fc77cf350c0ae50b2de530aa9e1998ac8aed16c6f3dbc79"
 dependencies = [
@@ -3193,7 +3193,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-bpf-loader-program"
-version = "1.18.2"
+version = ">=1.18.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "8d7c05ae5a89254164b35a42cae6417bd6c5334ca6795cf0bfa0a7d005407c6f"
 dependencies = [
@@ -3212,7 +3212,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-bucket-map"
-version = "1.18.2"
+version = ">=1.18.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "c415045dd25a43ee1096b55daad9d6d4d47c74275b1e05ce1797c1819ea37963"
 dependencies = [
@@ -3230,7 +3230,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-clap-utils"
-version = "1.18.2"
+version = ">=1.18.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "35c166b7cd74c8312e984995fa5dee9d2238dbd4d54d84c6750636c39ac2f2cf"
 dependencies = [
@@ -3247,7 +3247,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-clap-v3-utils"
-version = "1.18.2"
+version = ">=1.18.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "6e55d671c6b9456b133e3abb09ad15457c3fbf035a13deafa0bfa099d41a5b9b"
 dependencies = [
@@ -3265,7 +3265,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-cli-config"
-version = "1.18.2"
+version = ">=1.18.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "8356957dee33dd40f481e9cbafdb92ae3a2734c3add402e95772094f1c455e02"
 dependencies = [
@@ -3281,7 +3281,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-cli-output"
-version = "1.18.2"
+version = ">=1.18.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "f9121362cd68a7fb09c04652a33e685893f6cf782c0e3cf9b55a98f3b7fca047"
 dependencies = [
@@ -3308,7 +3308,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-client"
-version = "1.18.2"
+version = ">=1.18.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "1a99af044590168180a54a6d982ca2858aa8a947695d1777739334e5dc4b1cdf"
 dependencies = [
@@ -3341,7 +3341,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-compute-budget-program"
-version = "1.18.2"
+version = ">=1.18.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "7d3ec53bd27e0053bacb2ab50f702edbca258b4ec6becf437e3e2594a8d06a2c"
 dependencies = [
@@ -3351,7 +3351,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-config-program"
-version = "1.18.2"
+version = ">=1.18.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "2a92ada5e36e8ee59832c268b1d5eb8de889722b3be932ade1f70e61707e967e"
 dependencies = [
@@ -3365,7 +3365,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-connection-cache"
-version = "1.18.2"
+version = ">=1.18.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "8cc34fff1162b20e8c9728c0097cf243d51c58d86b2931cef10dcb625fc2ccfc"
 dependencies = [
@@ -3387,7 +3387,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-core"
-version = "1.18.2"
+version = ">=1.18.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "d798bb89c2047fe5533172169045662dda3930e2fe46e568d8cb975c878d9ee1"
 dependencies = [
@@ -3462,7 +3462,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-cost-model"
-version = "1.18.2"
+version = ">=1.18.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "7e6c2a15d03a28ebedf5981398f1d524f962869aaf680a31092d964709afdaae"
 dependencies = [
@@ -3486,7 +3486,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-entry"
-version = "1.18.2"
+version = ">=1.18.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "a4502fab57dfa1fb3f06290c07ff6e8f5fe0b51ebf521ceebff2b76d624c38de"
 dependencies = [
@@ -3508,7 +3508,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-faucet"
-version = "1.18.2"
+version = ">=1.18.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "baff15bfa1dab5f8da76238e74573efda4cb0820a0069b73d3bc88f35b6a7234"
 dependencies = [
@@ -3532,7 +3532,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-frozen-abi"
-version = "1.18.2"
+version = ">=1.18.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "65c7d220c15996b4d34d97c5a2b3d2ccfbddbc1bada7e6b766504cad8ca41c46"
 dependencies = [
@@ -3557,7 +3557,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-frozen-abi-macro"
-version = "1.18.2"
+version = ">=1.18.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "f02915e530fa8acfe9be5c9fdd905049b294217a91f288c85f0a5d26e479e32d"
 dependencies = [
@@ -3569,7 +3569,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-geyser-plugin-interface"
-version = "1.18.2"
+version = ">=1.18.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "cd9bf4a415645a7b9eab973bb5dea6fca4fba8c915ef8a51f533d44a79f159b0"
 dependencies = [
@@ -3581,7 +3581,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-geyser-plugin-manager"
-version = "1.18.2"
+version = ">=1.18.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "ad93cbf468db40bbec7582cfb23b1103acb684809399b8ecc4a49684f893e0c3"
 dependencies = [
@@ -3608,7 +3608,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-gossip"
-version = "1.18.2"
+version = ">=1.18.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "e2897832088beb31c36d66f36d0347ba723910dfef5b44075b84782b030cb2b1"
 dependencies = [
@@ -3658,7 +3658,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-ledger"
-version = "1.18.2"
+version = ">=1.18.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "599e7a6e9f732bfb7c010fd8c164ff201e694ff75b5cb25d70ecdc57b5cd7716"
 dependencies = [
@@ -3725,7 +3725,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-loader-v4-program"
-version = "1.18.2"
+version = ">=1.18.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "baaefd8781a09017dd7af5c34517d09ca0cbe69d650aa2eddbfed63402f733d7"
 dependencies = [
@@ -3738,7 +3738,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-logger"
-version = "1.18.2"
+version = ">=1.18.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "addbe0e36f12e986f780e7ad335db0aa2925c437b543fb12c656768404c2add3"
 dependencies = [
@@ -3749,7 +3749,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-measure"
-version = "1.18.2"
+version = ">=1.18.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "9e235913646c11926d390d94ef10f3afea0019df1a0b44c2ebd46c43da2a0980"
 dependencies = [
@@ -3759,7 +3759,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-merkle-tree"
-version = "1.18.2"
+version = ">=1.18.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "8fd6570b79ed5f5cf33591f7d59a3ad60243a2b3d75cb944b5ec91504da6d23d"
 dependencies = [
@@ -3769,7 +3769,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-metrics"
-version = "1.18.2"
+version = ">=1.18.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "01a1a68e5e6c29f63371d1697f5795de691ea6469075be43fedf93ecd6c044ce"
 dependencies = [
@@ -3784,7 +3784,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-net-utils"
-version = "1.18.2"
+version = ">=1.18.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "95f5b515b07936064cc72713faae6b392a25607b278311564f843a453f13aded"
 dependencies = [
@@ -3812,7 +3812,7 @@ checksum = "09a9d96db1b8a67b40e35cc7ace86b9243a0fa28c81e598268153c6291e65eb4"
 
 [[package]]
 name = "miraland-perf"
-version = "1.18.2"
+version = ">=1.18.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "2fc4f32171160098e9a7c845415e54d229fbe4e79dce7557072bbb42fc575afb"
 dependencies = [
@@ -3841,7 +3841,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-poh"
-version = "1.18.2"
+version = ">=1.18.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "37abea7e0abc40d6db23ad1f508acf9eed3127cecdbc7e5bfa8a000a08564bff"
 dependencies = [
@@ -3859,7 +3859,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-program"
-version = "1.18.2"
+version = ">=1.18.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "248abf7fe692a5c2fdc5c30e226bb380ad3168a068d066b650bbe83cd20c6545"
 dependencies = [
@@ -3914,7 +3914,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-program-runtime"
-version = "1.18.2"
+version = ">=1.18.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "5b92a6a6b0f79ed4462189ef7fc9022d3de57dd54dc59c6624a7808ffc621445"
 dependencies = [
@@ -3942,7 +3942,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-program-test"
-version = "1.18.2"
+version = ">=1.18.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "f29116c228043d5b2c9e6a69b10a014bfa26dfd587d5732fefbbc40c4aeac473"
 dependencies = [
@@ -3972,7 +3972,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-pubsub-client"
-version = "1.18.2"
+version = ">=1.18.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "76854d764913f86c6944ea525f752b416555f295535f535f32f92274930f70c0"
 dependencies = [
@@ -3997,7 +3997,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-quic-client"
-version = "1.18.2"
+version = ">=1.18.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "9fe5f9ef83ed490c0aca90536b9e0f8fa25f2f2de3b6b10a81503510ca2d8c97"
 dependencies = [
@@ -4024,7 +4024,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-rayon-threadlimit"
-version = "1.18.2"
+version = ">=1.18.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "0842daa4efe5b4f5cdd6b2fe5b0fca0e0c02a9e1ab61d4e411e2b46c3551b3d3"
 dependencies = [
@@ -4034,7 +4034,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-remote-wallet"
-version = "1.18.2"
+version = ">=1.18.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "c589b14fd6f86012b2ae0f5445b37b603dc9cddd2660a4a034774338fd01fce6"
 dependencies = [
@@ -4055,7 +4055,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-rpc"
-version = "1.18.2"
+version = ">=1.18.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "3cd81c4152234e02dc44423f34acbf3c7467f18e9ce8dbbeb0d237a21043953d"
 dependencies = [
@@ -4112,7 +4112,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-rpc-client"
-version = "1.18.2"
+version = ">=1.18.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "16034073bc5f6c74072be9f5dc1feebef2cd89fb6104725c5d5acdbeff055436"
 dependencies = [
@@ -4138,7 +4138,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-rpc-client-api"
-version = "1.18.2"
+version = ">=1.18.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "bef3dc4157a5d4e17ce2f5c4ce98dfda39e1aff7d88c9d443ddadf239e4fb8a7"
 dependencies = [
@@ -4160,7 +4160,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-rpc-client-nonce-utils"
-version = "1.18.2"
+version = ">=1.18.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "9939b7278c7573a96ca67786ef27818def721f2a29c59b8af2f17c90cebe0541"
 dependencies = [
@@ -4173,7 +4173,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-runtime"
-version = "1.18.2"
+version = ">=1.18.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "fa0664fb1783e0bef86d78d31810195714ebed9935b4c70854eef677c59ebe98"
 dependencies = [
@@ -4252,7 +4252,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-sdk"
-version = "1.18.2"
+version = ">=1.18.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "65c43a1a6e48fb3eb565203ace086fdb99ef6cec2d9e35afb5dfe0eddd88f91a"
 dependencies = [
@@ -4306,7 +4306,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-sdk-macro"
-version = "1.18.2"
+version = ">=1.18.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "ee3764e8d5b81a86ef1ccca43170c8b38775bcc9ca48655e1858606af68e83e4"
 dependencies = [
@@ -4325,7 +4325,7 @@ checksum = "0491e2b51783e99b6031aebb96f58fb92d73855f5c80a104331bf9825dc51fef"
 
 [[package]]
 name = "miraland-send-transaction-service"
-version = "1.18.2"
+version = ">=1.18.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "bb26364923ad924ff28271b04d1e57c0731666b80ed45618d4a5632aecaf73e7"
 dependencies = [
@@ -4341,7 +4341,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-stake-program"
-version = "1.18.2"
+version = ">=1.18.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "f363bae28fa75e9f155b6dc61b72b356bf6aa185f75a368fe28df9264d89e842"
 dependencies = [
@@ -4356,7 +4356,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-storage-bigtable"
-version = "1.18.2"
+version = ">=1.18.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "4c944ec4c8b2d06a6c3a626bceef68771ba13fccfe66a9319a960a48622e1a55"
 dependencies = [
@@ -4390,7 +4390,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-storage-proto"
-version = "1.18.2"
+version = ">=1.18.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "f742cf5ca03c64584c5996a9001c341afd80748ca6103be58fbb77891ddf52dd"
 dependencies = [
@@ -4407,7 +4407,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-streamer"
-version = "1.18.2"
+version = ">=1.18.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "abd40301c05d8b202aefae746a0bff91b38ed31a536d2eb54401335891d0d3d3"
 dependencies = [
@@ -4439,7 +4439,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-system-program"
-version = "1.18.2"
+version = ">=1.18.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "24ed7e9fc423b3668cd89663f6a7905abd9483e71e607d12347221a1a8f1a43b"
 dependencies = [
@@ -4453,7 +4453,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-test-validator"
-version = "1.18.2"
+version = ">=1.18.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "fb473db786d1d156dcd1edc424078917477f39ab18abcc7aa775883e781caec9"
 dependencies = [
@@ -4485,7 +4485,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-thin-client"
-version = "1.18.2"
+version = ">=1.18.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "9d0ba81c7a7d40366b509981c9ad6891457b48644bafc1eb028ce9392e69cc69"
 dependencies = [
@@ -4500,7 +4500,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-tpu-client"
-version = "1.18.2"
+version = ">=1.18.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "c64efc35f01b2e8b56d565ec6938b0f978a8f4172162e887a43cd19a9501de24"
 dependencies = [
@@ -4524,7 +4524,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-transaction-status"
-version = "1.18.2"
+version = ">=1.18.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "90fbe7157cef2d63741a38f144675d8fe9b261e573a8adf66d780b83da18e3f4"
 dependencies = [
@@ -4549,7 +4549,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-turbine"
-version = "1.18.2"
+version = ">=1.18.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "9e75c5451deaa9400d0f4db80cd3d8b3038bfc08dff0714f514e1cf6d4cdfb02"
 dependencies = [
@@ -4586,7 +4586,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-udp-client"
-version = "1.18.2"
+version = ">=1.18.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "0a0464ec1fbe8239e527e42e6e9c7bd4f2fbef5a64b0be3ee6e185eddd4e8480"
 dependencies = [
@@ -4601,7 +4601,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-version"
-version = "1.18.2"
+version = ">=1.18.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "1736f6914f2c06e6a460d92303b77f9182a624d855e7aa5e5958d39ec85b860f"
 dependencies = [
@@ -4617,7 +4617,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-vote"
-version = "1.18.2"
+version = ">=1.18.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "e9fade98dcc2328586c764985ae552b2ddd76f2d7dcd2fdac9f67c790e9878fd"
 dependencies = [
@@ -4636,7 +4636,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-vote-program"
-version = "1.18.2"
+version = ">=1.18.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "dca3b188d3146972dcb74a8428359ad90e29219eb0245b944c7f1efcf3bd978b"
 dependencies = [
@@ -4658,7 +4658,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-wen-restart"
-version = "1.18.2"
+version = ">=1.18.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "fca242b67df3a3756f666020d3619029e39bed68925225e199cefce8da4b40ab"
 dependencies = [
@@ -4679,7 +4679,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-zk-token-proof-program"
-version = "1.18.2"
+version = ">=1.18.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "ba63db6ac5660517baae7a068ced685b0d9356f19bfbf845c50f4e035a9033dd"
 dependencies = [
@@ -4693,7 +4693,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-zk-token-sdk"
-version = "1.18.2"
+version = ">=1.18.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "835b38e6835dc2614219c367f975108362b7348b60124adeb71bbd9128cb2f52"
 dependencies = [
@@ -6972,7 +6972,7 @@ dependencies = [
 
 [[package]]
 name = "solarti-memo"
-version = "4.0.1"
+version = "4.0.2"
 dependencies = [
  "miraland-program",
  "miraland-program-test",
@@ -7328,11 +7328,11 @@ dependencies = [
  "serde_json",
  "serde_with 3.4.0",
  "serial_test",
- "solarti-memo 4.0.1",
+ "solarti-memo 4.0.2",
  "solarti-pod 0.1.4",
  "solarti-token 4.1.1",
- "solarti-token-group-interface 0.1.1",
- "solarti-token-metadata-interface 0.2.3",
+ "solarti-token-group-interface 0.1.2",
+ "solarti-token-metadata-interface 0.2.4",
  "solarti-transfer-hook-interface 0.4.0",
  "solarti-type-length-value 0.3.4",
  "thiserror",
@@ -7350,12 +7350,12 @@ dependencies = [
  "miraland-sdk",
  "solarti-associated-token-account 2.1.0",
  "solarti-instruction-padding",
- "solarti-memo 4.0.1",
+ "solarti-memo 4.0.2",
  "solarti-pod 0.1.4",
  "solarti-token-2022 1.0.1",
  "solarti-token-client",
- "solarti-token-group-interface 0.1.1",
- "solarti-token-metadata-interface 0.2.3",
+ "solarti-token-group-interface 0.1.2",
+ "solarti-token-metadata-interface 0.2.4",
  "solarti-transfer-hook-example",
  "solarti-transfer-hook-interface 0.4.0",
  "test-case",
@@ -7387,11 +7387,11 @@ dependencies = [
  "serde_json",
  "serial_test",
  "solarti-associated-token-account 2.1.0",
- "solarti-memo 4.0.1",
+ "solarti-memo 4.0.2",
  "solarti-token 4.1.1",
  "solarti-token-2022 1.0.1",
  "solarti-token-client",
- "solarti-token-metadata-interface 0.2.3",
+ "solarti-token-metadata-interface 0.2.4",
  "strum 0.25.0",
  "strum_macros 0.25.3",
  "tempfile",
@@ -7414,11 +7414,11 @@ dependencies = [
  "miraland-rpc-client-api",
  "miraland-sdk",
  "solarti-associated-token-account 2.1.0",
- "solarti-memo 4.0.1",
+ "solarti-memo 4.0.2",
  "solarti-token 4.1.1",
  "solarti-token-2022 1.0.1",
- "solarti-token-group-interface 0.1.1",
- "solarti-token-metadata-interface 0.2.3",
+ "solarti-token-group-interface 0.1.2",
+ "solarti-token-metadata-interface 0.2.4",
  "solarti-transfer-hook-interface 0.4.0",
  "thiserror",
 ]
@@ -7436,8 +7436,8 @@ dependencies = [
  "solarti-token-2022 1.0.1",
  "solarti-token-client",
  "solarti-token-group-example",
- "solarti-token-group-interface 0.1.1",
- "solarti-token-metadata-interface 0.2.3",
+ "solarti-token-group-interface 0.1.2",
+ "solarti-token-metadata-interface 0.2.4",
  "solarti-type-length-value 0.3.4",
 ]
 
@@ -7452,8 +7452,8 @@ dependencies = [
  "solarti-pod 0.1.4",
  "solarti-token-2022 1.0.1",
  "solarti-token-client",
- "solarti-token-group-interface 0.1.1",
- "solarti-token-metadata-interface 0.2.3",
+ "solarti-token-group-interface 0.1.2",
+ "solarti-token-metadata-interface 0.2.4",
  "solarti-type-length-value 0.3.4",
 ]
 
@@ -7472,7 +7472,7 @@ dependencies = [
 
 [[package]]
 name = "solarti-token-group-interface"
-version = "0.1.1"
+version = "0.1.2"
 dependencies = [
  "bytemuck",
  "miraland-program",
@@ -7525,7 +7525,7 @@ dependencies = [
  "solarti-pod 0.1.4",
  "solarti-token-2022 1.0.1",
  "solarti-token-client",
- "solarti-token-metadata-interface 0.2.3",
+ "solarti-token-metadata-interface 0.2.4",
  "solarti-type-length-value 0.3.4",
  "test-case",
 ]
@@ -7546,7 +7546,7 @@ dependencies = [
 
 [[package]]
 name = "solarti-token-metadata-interface"
-version = "0.2.3"
+version = "0.2.4"
 dependencies = [
  "borsh 1.3.0",
  "miraland-program",
@@ -8064,7 +8064,7 @@ name = "test-client"
 version = "0.1.1"
 dependencies = [
  "miraland-sdk",
- "solarti-memo 4.0.1",
+ "solarti-memo 4.0.2",
  "solarti-token 4.1.1",
  "solarti-token-swap",
 ]

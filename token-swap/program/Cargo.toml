@@ -20,7 +20,7 @@ arrayref = "0.3.7"
 enum_dispatch = "0.3.12"
 num-derive = "0.4"
 num-traits = "0.2"
-miraland-program = "1.18.2"
+miraland-program = ">=1.18.2"
 solarti-math = { version = "0.2", path = "../../libraries/math", features = [ "no-entrypoint" ] }
 solarti-token = { version = "4.0", path = "../../token/program", features = [ "no-entrypoint" ] }
 solarti-token-2022 = { version = "1.0.0", path = "../../token/program-2022", features = [ "no-entrypoint" ] }
@@ -31,7 +31,7 @@ roots = { version = "0.0.8", optional = true }
 [dev-dependencies]
 proptest = "1.4"
 roots = "0.0.8"
-miraland-sdk = "1.18.2"
+miraland-sdk = ">=1.18.2"
 test-case = "3.3"
 
 [lib]
