@@ -6987,7 +6987,7 @@ dependencies = [
 
 [[package]]
 name = "solarti-instruction-padding"
-version = "0.1.5"
+version = "0.1.6"
 dependencies = [
  "miraland-program",
  "miraland-program-test",
