@@ -3035,7 +3035,7 @@ dependencies = [
  "serde_derive",
  "serde_json",
  "solarti-token 4.1.1",
- "solarti-token-2022 1.0.1 (registry+https://github.com/rust-lang/crates.io-index)",
+ "solarti-token-2022 1.0.1",
  "solarti-token-group-interface 0.1.2",
  "solarti-token-metadata-interface 0.2.4",
  "thiserror",
@@ -3716,7 +3716,7 @@ dependencies = [
  "serde_bytes",
  "sha2 0.10.8",
  "solarti-token 4.1.1",
- "solarti-token-2022 1.0.1 (registry+https://github.com/rust-lang/crates.io-index)",
+ "solarti-token-2022 1.0.1",
  "static_assertions",
  "strum 0.24.1",
  "strum_macros 0.24.3",
@@ -4108,7 +4108,7 @@ dependencies = [
  "serde_json",
  "soketto",
  "solarti-token 4.1.1",
- "solarti-token-2022 1.0.1 (registry+https://github.com/rust-lang/crates.io-index)",
+ "solarti-token-2022 1.0.1",
  "stream-cancel",
  "thiserror",
  "tokio",
@@ -4159,7 +4159,7 @@ dependencies = [
  "serde",
  "serde_derive",
  "serde_json",
- "solarti-token-2022 1.0.1 (registry+https://github.com/rust-lang/crates.io-index)",
+ "solarti-token-2022 1.0.1",
  "thiserror",
 ]
 
@@ -4568,7 +4568,7 @@ dependencies = [
  "solarti-associated-token-account 2.1.1 (registry+https://github.com/rust-lang/crates.io-index)",
  "solarti-memo 4.0.2",
  "solarti-token 4.1.1",
- "solarti-token-2022 1.0.1 (registry+https://github.com/rust-lang/crates.io-index)",
+ "solarti-token-2022 1.0.1",
  "thiserror",
 ]
 
@@ -6643,7 +6643,7 @@ dependencies = [
  "num-derive",
  "num-traits",
  "solarti-token 4.1.2",
- "solarti-token-2022 1.0.1",
+ "solarti-token-2022 1.0.2",
  "thiserror",
 ]
 
@@ -6659,7 +6659,7 @@ dependencies = [
  "num-derive",
  "num-traits",
  "solarti-token 4.1.1",
- "solarti-token-2022 1.0.1 (registry+https://github.com/rust-lang/crates.io-index)",
+ "solarti-token-2022 1.0.1",
  "thiserror",
 ]
 
@@ -7241,7 +7241,7 @@ dependencies = [
  "solarti-math",
  "solarti-pod 0.1.7",
  "solarti-token 4.1.2",
- "solarti-token-2022 1.0.1",
+ "solarti-token-2022 1.0.2",
  "test-case",
  "thiserror",
 ]
@@ -7351,6 +7351,30 @@ dependencies = [
 [[package]]
 name = "solarti-token-2022"
 version = "1.0.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "9afc3edf283bfa8783d11438ba34dc67344924f6a704e99064a1f01904e2f965"
+dependencies = [
+ "arrayref",
+ "bytemuck",
+ "miraland-program",
+ "miraland-security-txt",
+ "miraland-zk-token-sdk",
+ "num-derive",
+ "num-traits",
+ "num_enum",
+ "solarti-memo 4.0.2",
+ "solarti-pod 0.1.6",
+ "solarti-token 4.1.1",
+ "solarti-token-group-interface 0.1.2",
+ "solarti-token-metadata-interface 0.2.4",
+ "solarti-transfer-hook-interface 0.4.1",
+ "solarti-type-length-value 0.3.5",
+ "thiserror",
+]
+
+[[package]]
+name = "solarti-token-2022"
+version = "1.0.2"
 dependencies = [
  "arrayref",
  "base64 0.21.7",
@@ -7376,30 +7400,6 @@ dependencies = [
  "solarti-token-metadata-interface 0.2.5",
  "solarti-transfer-hook-interface 0.4.2",
  "solarti-type-length-value 0.3.6",
- "thiserror",
-]
-
-[[package]]
-name = "solarti-token-2022"
-version = "1.0.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "9afc3edf283bfa8783d11438ba34dc67344924f6a704e99064a1f01904e2f965"
-dependencies = [
- "arrayref",
- "bytemuck",
- "miraland-program",
- "miraland-security-txt",
- "miraland-zk-token-sdk",
- "num-derive",
- "num-traits",
- "num_enum",
- "solarti-memo 4.0.2",
- "solarti-pod 0.1.6",
- "solarti-token 4.1.1",
- "solarti-token-group-interface 0.1.2",
- "solarti-token-metadata-interface 0.2.4",
- "solarti-transfer-hook-interface 0.4.1",
- "solarti-type-length-value 0.3.5",
  "thiserror",
 ]
 
@@ -7430,7 +7430,7 @@ dependencies = [
  "solarti-associated-token-account 2.1.1",
  "solarti-memo 4.0.3",
  "solarti-token 4.1.2",
- "solarti-token-2022 1.0.1",
+ "solarti-token-2022 1.0.2",
  "solarti-token-client",
  "solarti-token-metadata-interface 0.2.5",
  "strum 0.25.0",
@@ -7457,7 +7457,7 @@ dependencies = [
  "solarti-associated-token-account 2.1.1",
  "solarti-memo 4.0.3",
  "solarti-token 4.1.2",
- "solarti-token-2022 1.0.1",
+ "solarti-token-2022 1.0.2",
  "solarti-token-group-interface 0.1.3",
  "solarti-token-metadata-interface 0.2.5",
  "solarti-transfer-hook-interface 0.4.2",
@@ -7474,7 +7474,7 @@ dependencies = [
  "solarti-discriminator 0.1.7",
  "solarti-pod 0.1.7",
  "solarti-program-error 0.3.8",
- "solarti-token-2022 1.0.1",
+ "solarti-token-2022 1.0.2",
  "solarti-token-client",
  "solarti-token-group-example",
  "solarti-token-group-interface 0.1.3",
@@ -7491,7 +7491,7 @@ dependencies = [
  "miraland-sdk",
  "solarti-discriminator 0.1.7",
  "solarti-pod 0.1.7",
- "solarti-token-2022 1.0.1",
+ "solarti-token-2022 1.0.2",
  "solarti-token-client",
  "solarti-token-group-interface 0.1.3",
  "solarti-token-metadata-interface 0.2.5",
@@ -7564,7 +7564,7 @@ dependencies = [
  "miraland-program-test",
  "miraland-sdk",
  "solarti-pod 0.1.7",
- "solarti-token-2022 1.0.1",
+ "solarti-token-2022 1.0.2",
  "solarti-token-client",
  "solarti-token-metadata-interface 0.2.5",
  "solarti-type-length-value 0.3.6",
@@ -7614,7 +7614,7 @@ dependencies = [
  "roots",
  "solarti-math",
  "solarti-token 4.1.2",
- "solarti-token-2022 1.0.1",
+ "solarti-token-2022 1.0.2",
  "test-case",
  "thiserror",
 ]
@@ -7642,7 +7642,7 @@ dependencies = [
  "num-traits",
  "num_enum",
  "solarti-token 4.1.2",
- "solarti-token-2022 1.0.1",
+ "solarti-token-2022 1.0.2",
  "solarti-token-client",
  "test-case",
  "thiserror",
@@ -7663,7 +7663,7 @@ dependencies = [
  "miraland-test-validator",
  "solarti-associated-token-account 2.1.1",
  "solarti-token 4.1.2",
- "solarti-token-2022 1.0.1",
+ "solarti-token-2022 1.0.2",
  "solarti-token-client",
  "solarti-token-upgrade",
  "tokio",
@@ -7679,7 +7679,7 @@ dependencies = [
  "num_enum",
  "solarti-associated-token-account 2.1.1",
  "solarti-token 4.1.2",
- "solarti-token-2022 1.0.1",
+ "solarti-token-2022 1.0.2",
  "thiserror",
 ]
 
@@ -7697,7 +7697,7 @@ dependencies = [
  "miraland-sdk",
  "miraland-test-validator",
  "solarti-tlv-account-resolution 0.5.2",
- "solarti-token-2022 1.0.1",
+ "solarti-token-2022 1.0.2",
  "solarti-token-client",
  "solarti-transfer-hook-interface 0.4.2",
  "strum 0.25.0",
@@ -7714,7 +7714,7 @@ dependencies = [
  "miraland-program-test",
  "miraland-sdk",
  "solarti-tlv-account-resolution 0.5.2",
- "solarti-token-2022 1.0.1",
+ "solarti-token-2022 1.0.2",
  "solarti-transfer-hook-interface 0.4.2",
  "solarti-type-length-value 0.3.6",
 ]
