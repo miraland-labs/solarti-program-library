@@ -4565,7 +4565,7 @@ dependencies = [
  "serde",
  "serde_derive",
  "serde_json",
- "solarti-associated-token-account 2.1.1 (registry+https://github.com/rust-lang/crates.io-index)",
+ "solarti-associated-token-account 2.1.1",
  "solarti-memo 4.0.2",
  "solarti-token 4.1.1",
  "solarti-token-2022 1.0.1",
@@ -6636,20 +6636,6 @@ dependencies = [
 [[package]]
 name = "solarti-associated-token-account"
 version = "2.1.1"
-dependencies = [
- "assert_matches",
- "borsh 1.5.1",
- "miraland-program",
- "num-derive",
- "num-traits",
- "solarti-token 4.1.2",
- "solarti-token-2022 1.0.2",
- "thiserror",
-]
-
-[[package]]
-name = "solarti-associated-token-account"
-version = "2.1.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "58b7bda691a6735e213e2d3a1f244ccf4d3be369978d75be635e11093ca2558e"
 dependencies = [
@@ -6660,6 +6646,20 @@ dependencies = [
  "num-traits",
  "solarti-token 4.1.1",
  "solarti-token-2022 1.0.1",
+ "thiserror",
+]
+
+[[package]]
+name = "solarti-associated-token-account"
+version = "2.1.2"
+dependencies = [
+ "assert_matches",
+ "borsh 1.5.1",
+ "miraland-program",
+ "num-derive",
+ "num-traits",
+ "solarti-token 4.1.2",
+ "solarti-token-2022 1.0.2",
  "thiserror",
 ]
 
@@ -7004,7 +7004,7 @@ dependencies = [
  "miraland-program-test",
  "miraland-sdk",
  "shank",
- "solarti-associated-token-account 2.1.1",
+ "solarti-associated-token-account 2.1.2",
  "solarti-token 4.1.2",
  "thiserror",
 ]
@@ -7180,7 +7180,7 @@ dependencies = [
  "num-traits",
  "num_enum",
  "rand 0.8.5",
- "solarti-associated-token-account 2.1.1",
+ "solarti-associated-token-account 2.1.2",
  "solarti-token 4.1.2",
  "test-case",
  "thiserror",
@@ -7210,7 +7210,7 @@ dependencies = [
  "serde_json",
  "serde_with 3.11.0",
  "serial_test 2.0.0",
- "solarti-associated-token-account 2.1.1",
+ "solarti-associated-token-account 2.1.2",
  "solarti-single-pool",
  "solarti-token 4.1.2",
  "solarti-token-client",
@@ -7266,7 +7266,7 @@ dependencies = [
  "serde",
  "serde_derive",
  "serde_json",
- "solarti-associated-token-account 2.1.1",
+ "solarti-associated-token-account 2.1.2",
  "solarti-stake-pool",
  "solarti-token 4.1.2",
 ]
@@ -7279,7 +7279,7 @@ dependencies = [
  "miraland-program",
  "miraland-program-test",
  "miraland-sdk",
- "solarti-associated-token-account 2.1.1",
+ "solarti-associated-token-account 2.1.2",
  "solarti-token 4.1.2",
  "thiserror",
 ]
@@ -7427,7 +7427,7 @@ dependencies = [
  "serde_derive",
  "serde_json",
  "serial_test 2.0.0",
- "solarti-associated-token-account 2.1.1",
+ "solarti-associated-token-account 2.1.2",
  "solarti-memo 4.0.3",
  "solarti-token 4.1.2",
  "solarti-token-2022 1.0.2",
@@ -7454,7 +7454,7 @@ dependencies = [
  "miraland-rpc-client",
  "miraland-rpc-client-api",
  "miraland-sdk",
- "solarti-associated-token-account 2.1.1",
+ "solarti-associated-token-account 2.1.2",
  "solarti-memo 4.0.3",
  "solarti-token 4.1.2",
  "solarti-token-2022 1.0.2",
@@ -7661,7 +7661,7 @@ dependencies = [
  "miraland-remote-wallet",
  "miraland-sdk",
  "miraland-test-validator",
- "solarti-associated-token-account 2.1.1",
+ "solarti-associated-token-account 2.1.2",
  "solarti-token 4.1.2",
  "solarti-token-2022 1.0.2",
  "solarti-token-client",
@@ -7677,7 +7677,7 @@ dependencies = [
  "bytemuck",
  "miraland-program",
  "num_enum",
- "solarti-associated-token-account 2.1.1",
+ "solarti-associated-token-account 2.1.2",
  "solarti-token 4.1.2",
  "solarti-token-2022 1.0.2",
  "thiserror",
