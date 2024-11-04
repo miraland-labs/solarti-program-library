@@ -3306,7 +3306,7 @@ dependencies = [
  "semver",
  "serde",
  "serde_json",
- "solarti-memo 4.0.2 (registry+https://github.com/rust-lang/crates.io-index)",
+ "solarti-memo 4.0.2",
 ]
 
 [[package]]
@@ -3529,7 +3529,7 @@ dependencies = [
  "miraland-version",
  "serde",
  "serde_derive",
- "solarti-memo 4.0.2 (registry+https://github.com/rust-lang/crates.io-index)",
+ "solarti-memo 4.0.2",
  "thiserror",
  "tokio",
 ]
@@ -4566,7 +4566,7 @@ dependencies = [
  "serde_derive",
  "serde_json",
  "solarti-associated-token-account 2.1.1 (registry+https://github.com/rust-lang/crates.io-index)",
- "solarti-memo 4.0.2 (registry+https://github.com/rust-lang/crates.io-index)",
+ "solarti-memo 4.0.2",
  "solarti-token 4.1.1",
  "solarti-token-2022 1.0.1 (registry+https://github.com/rust-lang/crates.io-index)",
  "thiserror",
@@ -7028,19 +7028,19 @@ dependencies = [
 [[package]]
 name = "solarti-memo"
 version = "4.0.2"
-dependencies = [
- "miraland-program",
- "miraland-program-test",
- "miraland-sdk",
-]
-
-[[package]]
-name = "solarti-memo"
-version = "4.0.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "42a1b9fb055f9819437609930fbb41e48033e3c1e9d8544b9a2c0a8db7ac7b06"
 dependencies = [
  "miraland-program",
+]
+
+[[package]]
+name = "solarti-memo"
+version = "4.0.3"
+dependencies = [
+ "miraland-program",
+ "miraland-program-test",
+ "miraland-sdk",
 ]
 
 [[package]]
@@ -7369,7 +7369,7 @@ dependencies = [
  "serde_json",
  "serde_with 3.11.0",
  "serial_test 2.0.0",
- "solarti-memo 4.0.2",
+ "solarti-memo 4.0.3",
  "solarti-pod 0.1.7",
  "solarti-token 4.1.2",
  "solarti-token-group-interface 0.1.3",
@@ -7393,7 +7393,7 @@ dependencies = [
  "num-derive",
  "num-traits",
  "num_enum",
- "solarti-memo 4.0.2 (registry+https://github.com/rust-lang/crates.io-index)",
+ "solarti-memo 4.0.2",
  "solarti-pod 0.1.6",
  "solarti-token 4.1.1",
  "solarti-token-group-interface 0.1.2",
@@ -7428,7 +7428,7 @@ dependencies = [
  "serde_json",
  "serial_test 2.0.0",
  "solarti-associated-token-account 2.1.1",
- "solarti-memo 4.0.2",
+ "solarti-memo 4.0.3",
  "solarti-token 4.1.2",
  "solarti-token-2022 1.0.1",
  "solarti-token-client",
@@ -7455,7 +7455,7 @@ dependencies = [
  "miraland-rpc-client-api",
  "miraland-sdk",
  "solarti-associated-token-account 2.1.1",
- "solarti-memo 4.0.2",
+ "solarti-memo 4.0.3",
  "solarti-token 4.1.2",
  "solarti-token-2022 1.0.1",
  "solarti-token-group-interface 0.1.3",
@@ -8091,7 +8091,7 @@ name = "test-client"
 version = "0.1.1"
 dependencies = [
  "miraland-sdk",
- "solarti-memo 4.0.2",
+ "solarti-memo 4.0.3",
  "solarti-token 4.1.2",
  "solarti-token-swap",
 ]

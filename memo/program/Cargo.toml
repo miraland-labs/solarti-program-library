@@ -1,6 +1,6 @@
 [package]
 name = "solarti-memo"
-version = "4.0.2"
+version = "4.0.3"
 description = "Solarti Program Library Memo"
 authors = [
   "Miraland Crafters <crafters@miraland.top>",
