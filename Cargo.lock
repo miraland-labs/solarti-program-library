@@ -7067,6 +7067,19 @@ dependencies = [
 [[package]]
 name = "solarti-pod"
 version = "0.1.6"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "b2666687d5ff2d17e8286a183858ecb6c1ae02ec2b2eb286796d638deafdd4cb"
+dependencies = [
+ "borsh 1.5.1",
+ "bytemuck",
+ "miraland-program",
+ "miraland-zk-token-sdk",
+ "solarti-program-error 0.3.7",
+]
+
+[[package]]
+name = "solarti-pod"
+version = "0.1.7"
 dependencies = [
  "base64 0.21.7",
  "borsh 1.5.1",
@@ -7076,19 +7089,6 @@ dependencies = [
  "serde",
  "serde_json",
  "solarti-program-error 0.3.8",
-]
-
-[[package]]
-name = "solarti-pod"
-version = "0.1.6"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "b2666687d5ff2d17e8286a183858ecb6c1ae02ec2b2eb286796d638deafdd4cb"
-dependencies = [
- "borsh 1.5.1",
- "bytemuck",
- "miraland-program",
- "miraland-zk-token-sdk",
- "solarti-program-error 0.3.7",
 ]
 
 [[package]]
@@ -7239,7 +7239,7 @@ dependencies = [
  "serde",
  "serde_derive",
  "solarti-math",
- "solarti-pod 0.1.6",
+ "solarti-pod 0.1.7",
  "solarti-token 4.1.2",
  "solarti-token-2022 1.0.1",
  "test-case",
@@ -7296,9 +7296,9 @@ dependencies = [
  "miraland-program-test",
  "miraland-sdk",
  "solarti-discriminator 0.1.7",
- "solarti-pod 0.1.6",
+ "solarti-pod 0.1.7",
  "solarti-program-error 0.3.8",
- "solarti-type-length-value 0.3.5",
+ "solarti-type-length-value 0.3.6",
 ]
 
 [[package]]
@@ -7310,9 +7310,9 @@ dependencies = [
  "bytemuck",
  "miraland-program",
  "solarti-discriminator 0.1.6",
- "solarti-pod 0.1.6 (registry+https://github.com/rust-lang/crates.io-index)",
+ "solarti-pod 0.1.6",
  "solarti-program-error 0.3.7",
- "solarti-type-length-value 0.3.5 (registry+https://github.com/rust-lang/crates.io-index)",
+ "solarti-type-length-value 0.3.5",
 ]
 
 [[package]]
@@ -7370,12 +7370,12 @@ dependencies = [
  "serde_with 3.11.0",
  "serial_test 2.0.0",
  "solarti-memo 4.0.2",
- "solarti-pod 0.1.6",
+ "solarti-pod 0.1.7",
  "solarti-token 4.1.2",
  "solarti-token-group-interface 0.1.2",
  "solarti-token-metadata-interface 0.2.4",
  "solarti-transfer-hook-interface 0.4.1",
- "solarti-type-length-value 0.3.5",
+ "solarti-type-length-value 0.3.6",
  "thiserror",
 ]
 
@@ -7394,12 +7394,12 @@ dependencies = [
  "num-traits",
  "num_enum",
  "solarti-memo 4.0.2 (registry+https://github.com/rust-lang/crates.io-index)",
- "solarti-pod 0.1.6 (registry+https://github.com/rust-lang/crates.io-index)",
+ "solarti-pod 0.1.6",
  "solarti-token 4.1.1",
  "solarti-token-group-interface 0.1.2 (registry+https://github.com/rust-lang/crates.io-index)",
  "solarti-token-metadata-interface 0.2.4 (registry+https://github.com/rust-lang/crates.io-index)",
  "solarti-transfer-hook-interface 0.4.1 (registry+https://github.com/rust-lang/crates.io-index)",
- "solarti-type-length-value 0.3.5 (registry+https://github.com/rust-lang/crates.io-index)",
+ "solarti-type-length-value 0.3.5",
  "thiserror",
 ]
 
@@ -7472,14 +7472,14 @@ dependencies = [
  "miraland-program-test",
  "miraland-sdk",
  "solarti-discriminator 0.1.7",
- "solarti-pod 0.1.6",
+ "solarti-pod 0.1.7",
  "solarti-program-error 0.3.8",
  "solarti-token-2022 1.0.1",
  "solarti-token-client",
  "solarti-token-group-example",
  "solarti-token-group-interface 0.1.2",
  "solarti-token-metadata-interface 0.2.4",
- "solarti-type-length-value 0.3.5",
+ "solarti-type-length-value 0.3.6",
 ]
 
 [[package]]
@@ -7490,12 +7490,12 @@ dependencies = [
  "miraland-program-test",
  "miraland-sdk",
  "solarti-discriminator 0.1.7",
- "solarti-pod 0.1.6",
+ "solarti-pod 0.1.7",
  "solarti-token-2022 1.0.1",
  "solarti-token-client",
  "solarti-token-group-interface 0.1.2",
  "solarti-token-metadata-interface 0.2.4",
- "solarti-type-length-value 0.3.5",
+ "solarti-type-length-value 0.3.6",
 ]
 
 [[package]]
@@ -7505,9 +7505,9 @@ dependencies = [
  "bytemuck",
  "miraland-program",
  "solarti-discriminator 0.1.7",
- "solarti-pod 0.1.6",
+ "solarti-pod 0.1.7",
  "solarti-program-error 0.3.8",
- "solarti-type-length-value 0.3.5",
+ "solarti-type-length-value 0.3.6",
 ]
 
 [[package]]
@@ -7519,7 +7519,7 @@ dependencies = [
  "bytemuck",
  "miraland-program",
  "solarti-discriminator 0.1.6",
- "solarti-pod 0.1.6 (registry+https://github.com/rust-lang/crates.io-index)",
+ "solarti-pod 0.1.6",
  "solarti-program-error 0.3.7",
 ]
 
@@ -7563,11 +7563,11 @@ dependencies = [
  "miraland-program",
  "miraland-program-test",
  "miraland-sdk",
- "solarti-pod 0.1.6",
+ "solarti-pod 0.1.7",
  "solarti-token-2022 1.0.1",
  "solarti-token-client",
  "solarti-token-metadata-interface 0.2.4",
- "solarti-type-length-value 0.3.5",
+ "solarti-type-length-value 0.3.6",
  "test-case",
 ]
 
@@ -7580,9 +7580,9 @@ dependencies = [
  "serde",
  "serde_json",
  "solarti-discriminator 0.1.7",
- "solarti-pod 0.1.6",
+ "solarti-pod 0.1.7",
  "solarti-program-error 0.3.8",
- "solarti-type-length-value 0.3.5",
+ "solarti-type-length-value 0.3.6",
 ]
 
 [[package]]
@@ -7594,9 +7594,9 @@ dependencies = [
  "borsh 1.5.1",
  "miraland-program",
  "solarti-discriminator 0.1.6",
- "solarti-pod 0.1.6 (registry+https://github.com/rust-lang/crates.io-index)",
+ "solarti-pod 0.1.6",
  "solarti-program-error 0.3.7",
- "solarti-type-length-value 0.3.5 (registry+https://github.com/rust-lang/crates.io-index)",
+ "solarti-type-length-value 0.3.5",
 ]
 
 [[package]]
@@ -7716,7 +7716,7 @@ dependencies = [
  "solarti-tlv-account-resolution 0.5.1",
  "solarti-token-2022 1.0.1",
  "solarti-transfer-hook-interface 0.4.1",
- "solarti-type-length-value 0.3.5",
+ "solarti-type-length-value 0.3.6",
 ]
 
 [[package]]
@@ -7727,10 +7727,10 @@ dependencies = [
  "bytemuck",
  "miraland-program",
  "solarti-discriminator 0.1.7",
- "solarti-pod 0.1.6",
+ "solarti-pod 0.1.7",
  "solarti-program-error 0.3.8",
  "solarti-tlv-account-resolution 0.5.1",
- "solarti-type-length-value 0.3.5",
+ "solarti-type-length-value 0.3.6",
 ]
 
 [[package]]
@@ -7743,22 +7743,10 @@ dependencies = [
  "bytemuck",
  "miraland-program",
  "solarti-discriminator 0.1.6",
- "solarti-pod 0.1.6 (registry+https://github.com/rust-lang/crates.io-index)",
+ "solarti-pod 0.1.6",
  "solarti-program-error 0.3.7",
  "solarti-tlv-account-resolution 0.5.1 (registry+https://github.com/rust-lang/crates.io-index)",
- "solarti-type-length-value 0.3.5 (registry+https://github.com/rust-lang/crates.io-index)",
-]
-
-[[package]]
-name = "solarti-type-length-value"
-version = "0.3.5"
-dependencies = [
- "bytemuck",
- "miraland-program",
- "solarti-discriminator 0.1.7",
- "solarti-pod 0.1.6",
- "solarti-program-error 0.3.8",
- "solarti-type-length-value-derive",
+ "solarti-type-length-value 0.3.5",
 ]
 
 [[package]]
@@ -7770,13 +7758,25 @@ dependencies = [
  "bytemuck",
  "miraland-program",
  "solarti-discriminator 0.1.6",
- "solarti-pod 0.1.6 (registry+https://github.com/rust-lang/crates.io-index)",
+ "solarti-pod 0.1.6",
  "solarti-program-error 0.3.7",
 ]
 
 [[package]]
+name = "solarti-type-length-value"
+version = "0.3.6"
+dependencies = [
+ "bytemuck",
+ "miraland-program",
+ "solarti-discriminator 0.1.7",
+ "solarti-pod 0.1.7",
+ "solarti-program-error 0.3.8",
+ "solarti-type-length-value-derive",
+]
+
+[[package]]
 name = "solarti-type-length-value-derive"
-version = "0.3.5"
+version = "0.3.6"
 dependencies = [
  "proc-macro2",
  "quote",

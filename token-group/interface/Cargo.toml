@@ -17,7 +17,7 @@ solarti-discriminator = { version = "0.1.7", path = "../../libraries/discriminat
 solarti-pod = { version = "0.1.4", path = "../../libraries/pod", features = [
   "borsh",
 ] }
-solarti-program-error = { version = "0.3.5", path = "../../libraries/program-error" }
+solarti-program-error = { version = "0.3.8", path = "../../libraries/program-error" }
 
 [dev-dependencies]
 solarti-type-length-value = { version = "0.3.4", path = "../../libraries/type-length-value", features = [

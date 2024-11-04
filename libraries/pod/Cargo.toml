@@ -1,6 +1,6 @@
 [package]
 name = "solarti-pod"
-version = "0.1.6"
+version = "0.1.7"
 description = "Solarti Program Library Plain Old Data (Pod)"
 authors = [
   "Miraland Crafters <crafters@miraland.top>",
@@ -21,7 +21,7 @@ bytemuck = { version = "1.14.0" }
 serde = { version = "1.0.192", optional = true }
 miraland-program = ">=1.18.2, <1.19.0"
 miraland-zk-token-sdk = ">=1.18.2, <1.19.0"
-solarti-program-error = { version = "0.3.7", path = "../program-error" }
+solarti-program-error = { version = "0.3.8", path = "../program-error" }
 
 [dev-dependencies]
 serde_json = "1.0.115"
