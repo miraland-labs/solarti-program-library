@@ -6831,7 +6831,7 @@ dependencies = [
  "miraland-program-test",
  "miraland-sdk",
  "num_enum",
- "solarti-program-error 0.3.7",
+ "solarti-program-error 0.3.8",
 ]
 
 [[package]]
@@ -7075,7 +7075,7 @@ dependencies = [
  "miraland-zk-token-sdk",
  "serde",
  "serde_json",
- "solarti-program-error 0.3.7",
+ "solarti-program-error 0.3.8",
 ]
 
 [[package]]
@@ -7088,21 +7088,7 @@ dependencies = [
  "bytemuck",
  "miraland-program",
  "miraland-zk-token-sdk",
- "solarti-program-error 0.3.7 (registry+https://github.com/rust-lang/crates.io-index)",
-]
-
-[[package]]
-name = "solarti-program-error"
-version = "0.3.7"
-dependencies = [
- "lazy_static",
- "miraland-program",
- "miraland-sdk",
- "num-derive",
- "num-traits",
- "serial_test 3.1.1",
- "solarti-program-error-derive 0.3.7",
- "thiserror",
+ "solarti-program-error 0.3.7",
 ]
 
 [[package]]
@@ -7114,13 +7100,29 @@ dependencies = [
  "miraland-program",
  "num-derive",
  "num-traits",
- "solarti-program-error-derive 0.3.7 (registry+https://github.com/rust-lang/crates.io-index)",
+ "solarti-program-error-derive 0.3.7",
+ "thiserror",
+]
+
+[[package]]
+name = "solarti-program-error"
+version = "0.3.8"
+dependencies = [
+ "lazy_static",
+ "miraland-program",
+ "miraland-sdk",
+ "num-derive",
+ "num-traits",
+ "serial_test 3.1.1",
+ "solarti-program-error-derive 0.3.8",
  "thiserror",
 ]
 
 [[package]]
 name = "solarti-program-error-derive"
 version = "0.3.7"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "0442e0dc511dc147141fdbc10a0a06154cd8d46553bffb6bf194a20c900f9ae4"
 dependencies = [
  "proc-macro2",
  "quote",
@@ -7130,9 +7132,7 @@ dependencies = [
 
 [[package]]
 name = "solarti-program-error-derive"
-version = "0.3.7"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "0442e0dc511dc147141fdbc10a0a06154cd8d46553bffb6bf194a20c900f9ae4"
+version = "0.3.8"
 dependencies = [
  "proc-macro2",
  "quote",
@@ -7297,7 +7297,7 @@ dependencies = [
  "miraland-sdk",
  "solarti-discriminator 0.1.7",
  "solarti-pod 0.1.6",
- "solarti-program-error 0.3.7",
+ "solarti-program-error 0.3.8",
  "solarti-type-length-value 0.3.5",
 ]
 
@@ -7311,7 +7311,7 @@ dependencies = [
  "miraland-program",
  "solarti-discriminator 0.1.6",
  "solarti-pod 0.1.6 (registry+https://github.com/rust-lang/crates.io-index)",
- "solarti-program-error 0.3.7 (registry+https://github.com/rust-lang/crates.io-index)",
+ "solarti-program-error 0.3.7",
  "solarti-type-length-value 0.3.5 (registry+https://github.com/rust-lang/crates.io-index)",
 ]
 
@@ -7473,7 +7473,7 @@ dependencies = [
  "miraland-sdk",
  "solarti-discriminator 0.1.7",
  "solarti-pod 0.1.6",
- "solarti-program-error 0.3.7",
+ "solarti-program-error 0.3.8",
  "solarti-token-2022 1.0.1",
  "solarti-token-client",
  "solarti-token-group-example",
@@ -7506,7 +7506,7 @@ dependencies = [
  "miraland-program",
  "solarti-discriminator 0.1.7",
  "solarti-pod 0.1.6",
- "solarti-program-error 0.3.7",
+ "solarti-program-error 0.3.8",
  "solarti-type-length-value 0.3.5",
 ]
 
@@ -7520,7 +7520,7 @@ dependencies = [
  "miraland-program",
  "solarti-discriminator 0.1.6",
  "solarti-pod 0.1.6 (registry+https://github.com/rust-lang/crates.io-index)",
- "solarti-program-error 0.3.7 (registry+https://github.com/rust-lang/crates.io-index)",
+ "solarti-program-error 0.3.7",
 ]
 
 [[package]]
@@ -7581,7 +7581,7 @@ dependencies = [
  "serde_json",
  "solarti-discriminator 0.1.7",
  "solarti-pod 0.1.6",
- "solarti-program-error 0.3.7",
+ "solarti-program-error 0.3.8",
  "solarti-type-length-value 0.3.5",
 ]
 
@@ -7595,7 +7595,7 @@ dependencies = [
  "miraland-program",
  "solarti-discriminator 0.1.6",
  "solarti-pod 0.1.6 (registry+https://github.com/rust-lang/crates.io-index)",
- "solarti-program-error 0.3.7 (registry+https://github.com/rust-lang/crates.io-index)",
+ "solarti-program-error 0.3.7",
  "solarti-type-length-value 0.3.5 (registry+https://github.com/rust-lang/crates.io-index)",
 ]
 
@@ -7728,7 +7728,7 @@ dependencies = [
  "miraland-program",
  "solarti-discriminator 0.1.7",
  "solarti-pod 0.1.6",
- "solarti-program-error 0.3.7",
+ "solarti-program-error 0.3.8",
  "solarti-tlv-account-resolution 0.5.1",
  "solarti-type-length-value 0.3.5",
 ]
@@ -7744,7 +7744,7 @@ dependencies = [
  "miraland-program",
  "solarti-discriminator 0.1.6",
  "solarti-pod 0.1.6 (registry+https://github.com/rust-lang/crates.io-index)",
- "solarti-program-error 0.3.7 (registry+https://github.com/rust-lang/crates.io-index)",
+ "solarti-program-error 0.3.7",
  "solarti-tlv-account-resolution 0.5.1 (registry+https://github.com/rust-lang/crates.io-index)",
  "solarti-type-length-value 0.3.5 (registry+https://github.com/rust-lang/crates.io-index)",
 ]
@@ -7757,7 +7757,7 @@ dependencies = [
  "miraland-program",
  "solarti-discriminator 0.1.7",
  "solarti-pod 0.1.6",
- "solarti-program-error 0.3.7",
+ "solarti-program-error 0.3.8",
  "solarti-type-length-value-derive",
 ]
 
@@ -7771,7 +7771,7 @@ dependencies = [
  "miraland-program",
  "solarti-discriminator 0.1.6",
  "solarti-pod 0.1.6 (registry+https://github.com/rust-lang/crates.io-index)",
- "solarti-program-error 0.3.7 (registry+https://github.com/rust-lang/crates.io-index)",
+ "solarti-program-error 0.3.7",
 ]
 
 [[package]]

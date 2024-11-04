@@ -13,7 +13,7 @@ edition = "2021"
 [dependencies]
 bytemuck = "1.14.0"
 miraland-program = ">=1.18.2, <1.19.0"
-solarti-discriminator = { version = "0.1.5", path = "../../libraries/discriminator" }
+solarti-discriminator = { version = "0.1.7", path = "../../libraries/discriminator" }
 solarti-pod = { version = "0.1.4", path = "../../libraries/pod", features = [
   "borsh",
 ] }
