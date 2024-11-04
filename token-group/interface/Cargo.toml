@@ -14,13 +14,13 @@ edition = "2021"
 bytemuck = "1.14.0"
 miraland-program = ">=1.18.2, <1.19.0"
 solarti-discriminator = { version = "0.1.7", path = "../../libraries/discriminator" }
-solarti-pod = { version = "0.1.4", path = "../../libraries/pod", features = [
+solarti-pod = { version = "0.1.7", path = "../../libraries/pod", features = [
   "borsh",
 ] }
 solarti-program-error = { version = "0.3.8", path = "../../libraries/program-error" }
 
 [dev-dependencies]
-solarti-type-length-value = { version = "0.3.4", path = "../../libraries/type-length-value", features = [
+solarti-type-length-value = { version = "0.3.6", path = "../../libraries/type-length-value", features = [
   "derive",
 ] }
 
