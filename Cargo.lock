@@ -7374,7 +7374,7 @@ dependencies = [
  "solarti-token 4.1.2",
  "solarti-token-group-interface 0.1.3",
  "solarti-token-metadata-interface 0.2.5",
- "solarti-transfer-hook-interface 0.4.1",
+ "solarti-transfer-hook-interface 0.4.2",
  "solarti-type-length-value 0.3.6",
  "thiserror",
 ]
@@ -7398,7 +7398,7 @@ dependencies = [
  "solarti-token 4.1.1",
  "solarti-token-group-interface 0.1.2",
  "solarti-token-metadata-interface 0.2.4",
- "solarti-transfer-hook-interface 0.4.1 (registry+https://github.com/rust-lang/crates.io-index)",
+ "solarti-transfer-hook-interface 0.4.1",
  "solarti-type-length-value 0.3.5",
  "thiserror",
 ]
@@ -7460,7 +7460,7 @@ dependencies = [
  "solarti-token-2022 1.0.1",
  "solarti-token-group-interface 0.1.3",
  "solarti-token-metadata-interface 0.2.5",
- "solarti-transfer-hook-interface 0.4.1",
+ "solarti-transfer-hook-interface 0.4.2",
  "thiserror",
 ]
 
@@ -7699,7 +7699,7 @@ dependencies = [
  "solarti-tlv-account-resolution 0.5.2",
  "solarti-token-2022 1.0.1",
  "solarti-token-client",
- "solarti-transfer-hook-interface 0.4.1",
+ "solarti-transfer-hook-interface 0.4.2",
  "strum 0.25.0",
  "strum_macros 0.25.3",
  "tokio",
@@ -7715,21 +7715,7 @@ dependencies = [
  "miraland-sdk",
  "solarti-tlv-account-resolution 0.5.2",
  "solarti-token-2022 1.0.1",
- "solarti-transfer-hook-interface 0.4.1",
- "solarti-type-length-value 0.3.6",
-]
-
-[[package]]
-name = "solarti-transfer-hook-interface"
-version = "0.4.1"
-dependencies = [
- "arrayref",
- "bytemuck",
- "miraland-program",
- "solarti-discriminator 0.1.7",
- "solarti-pod 0.1.7",
- "solarti-program-error 0.3.8",
- "solarti-tlv-account-resolution 0.5.2",
+ "solarti-transfer-hook-interface 0.4.2",
  "solarti-type-length-value 0.3.6",
 ]
 
@@ -7747,6 +7733,20 @@ dependencies = [
  "solarti-program-error 0.3.7",
  "solarti-tlv-account-resolution 0.5.1",
  "solarti-type-length-value 0.3.5",
+]
+
+[[package]]
+name = "solarti-transfer-hook-interface"
+version = "0.4.2"
+dependencies = [
+ "arrayref",
+ "bytemuck",
+ "miraland-program",
+ "solarti-discriminator 0.1.7",
+ "solarti-pod 0.1.7",
+ "solarti-program-error 0.3.8",
+ "solarti-tlv-account-resolution 0.5.2",
+ "solarti-type-length-value 0.3.6",
 ]
 
 [[package]]

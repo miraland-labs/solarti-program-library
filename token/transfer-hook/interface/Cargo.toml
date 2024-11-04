@@ -1,6 +1,6 @@
 [package]
 name = "solarti-transfer-hook-interface"
-version = "0.4.1"
+version = "0.4.2"
 description = "Solarti Program Library Transfer Hook Interface"
 authors = [
   "Miraland Crafters <crafters@miraland.top>",
@@ -16,7 +16,7 @@ bytemuck = { version = "1.14.0", features = ["derive"] }
 miraland-program = ">=1.18.2, <1.19.0"
 solarti-discriminator = { version = "0.1.7", path = "../../../libraries/discriminator" }
 solarti-program-error = { version = "0.3.8", path = "../../../libraries/program-error" }
-solarti-tlv-account-resolution = { version = "0.5.1", path = "../../../libraries/tlv-account-resolution" }
+solarti-tlv-account-resolution = { version = "0.5.2", path = "../../../libraries/tlv-account-resolution" }
 solarti-type-length-value = { version = "0.3.6", path = "../../../libraries/type-length-value" }
 solarti-pod = { version = "0.1.7", path = "../../../libraries/pod" }
 
