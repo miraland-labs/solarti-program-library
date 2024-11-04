@@ -6706,8 +6706,9 @@ dependencies = [
 [[package]]
 name = "solarti-discriminator"
 version = "0.1.6"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "6a6e9a4df0d86a171b9dce3fb8a27974cc0ebdc180d37b81f2b97ee693270808"
 dependencies = [
- "borsh 1.5.1",
  "bytemuck",
  "miraland-program",
  "solarti-discriminator-derive 0.1.6",
@@ -6715,22 +6716,12 @@ dependencies = [
 
 [[package]]
 name = "solarti-discriminator"
-version = "0.1.6"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "6a6e9a4df0d86a171b9dce3fb8a27974cc0ebdc180d37b81f2b97ee693270808"
+version = "0.1.7"
 dependencies = [
+ "borsh 1.5.1",
  "bytemuck",
  "miraland-program",
- "solarti-discriminator-derive 0.1.6 (registry+https://github.com/rust-lang/crates.io-index)",
-]
-
-[[package]]
-name = "solarti-discriminator-derive"
-version = "0.1.6"
-dependencies = [
- "quote",
- "solarti-discriminator-syn 0.1.6",
- "syn 2.0.87",
+ "solarti-discriminator-derive 0.1.7",
 ]
 
 [[package]]
@@ -6740,13 +6731,24 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "41e4b0fe2046b6ea172b98a6fc08fa19399ea839e26991a547e4bdc8ca41105f"
 dependencies = [
  "quote",
- "solarti-discriminator-syn 0.1.6 (registry+https://github.com/rust-lang/crates.io-index)",
+ "solarti-discriminator-syn 0.1.6",
+ "syn 2.0.87",
+]
+
+[[package]]
+name = "solarti-discriminator-derive"
+version = "0.1.7"
+dependencies = [
+ "quote",
+ "solarti-discriminator-syn 0.1.7",
  "syn 2.0.87",
 ]
 
 [[package]]
 name = "solarti-discriminator-syn"
 version = "0.1.6"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "992cc03ec6a01bccff84a8aedf326d94170ffa7059fede704b1f84b5c7f0f0ad"
 dependencies = [
  "proc-macro2",
  "quote",
@@ -6757,9 +6759,7 @@ dependencies = [
 
 [[package]]
 name = "solarti-discriminator-syn"
-version = "0.1.6"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "992cc03ec6a01bccff84a8aedf326d94170ffa7059fede704b1f84b5c7f0f0ad"
+version = "0.1.7"
 dependencies = [
  "proc-macro2",
  "quote",
@@ -7295,7 +7295,7 @@ dependencies = [
  "miraland-program",
  "miraland-program-test",
  "miraland-sdk",
- "solarti-discriminator 0.1.6",
+ "solarti-discriminator 0.1.7",
  "solarti-pod 0.1.6",
  "solarti-program-error 0.3.7",
  "solarti-type-length-value 0.3.5",
@@ -7309,7 +7309,7 @@ checksum = "9e8f8f5e48105158c64197fc42140afb1bda18f62574918c64618fff5db525dd"
 dependencies = [
  "bytemuck",
  "miraland-program",
- "solarti-discriminator 0.1.6 (registry+https://github.com/rust-lang/crates.io-index)",
+ "solarti-discriminator 0.1.6",
  "solarti-pod 0.1.6 (registry+https://github.com/rust-lang/crates.io-index)",
  "solarti-program-error 0.3.7 (registry+https://github.com/rust-lang/crates.io-index)",
  "solarti-type-length-value 0.3.5 (registry+https://github.com/rust-lang/crates.io-index)",
@@ -7471,7 +7471,7 @@ dependencies = [
  "miraland-program",
  "miraland-program-test",
  "miraland-sdk",
- "solarti-discriminator 0.1.6",
+ "solarti-discriminator 0.1.7",
  "solarti-pod 0.1.6",
  "solarti-program-error 0.3.7",
  "solarti-token-2022 1.0.1",
@@ -7489,7 +7489,7 @@ dependencies = [
  "miraland-program",
  "miraland-program-test",
  "miraland-sdk",
- "solarti-discriminator 0.1.6",
+ "solarti-discriminator 0.1.7",
  "solarti-pod 0.1.6",
  "solarti-token-2022 1.0.1",
  "solarti-token-client",
@@ -7504,7 +7504,7 @@ version = "0.1.2"
 dependencies = [
  "bytemuck",
  "miraland-program",
- "solarti-discriminator 0.1.6",
+ "solarti-discriminator 0.1.7",
  "solarti-pod 0.1.6",
  "solarti-program-error 0.3.7",
  "solarti-type-length-value 0.3.5",
@@ -7518,7 +7518,7 @@ checksum = "ed17388ec157fe4e9297dc1b2ff4eaa5d96d7614b6b7a118618f47a7259c43f5"
 dependencies = [
  "bytemuck",
  "miraland-program",
- "solarti-discriminator 0.1.6 (registry+https://github.com/rust-lang/crates.io-index)",
+ "solarti-discriminator 0.1.6",
  "solarti-pod 0.1.6 (registry+https://github.com/rust-lang/crates.io-index)",
  "solarti-program-error 0.3.7 (registry+https://github.com/rust-lang/crates.io-index)",
 ]
@@ -7579,7 +7579,7 @@ dependencies = [
  "miraland-program",
  "serde",
  "serde_json",
- "solarti-discriminator 0.1.6",
+ "solarti-discriminator 0.1.7",
  "solarti-pod 0.1.6",
  "solarti-program-error 0.3.7",
  "solarti-type-length-value 0.3.5",
@@ -7593,7 +7593,7 @@ checksum = "789944bd6f2de8d097a72f4cd05b6534b76419717fd7d06ec624471def274ce7"
 dependencies = [
  "borsh 1.5.1",
  "miraland-program",
- "solarti-discriminator 0.1.6 (registry+https://github.com/rust-lang/crates.io-index)",
+ "solarti-discriminator 0.1.6",
  "solarti-pod 0.1.6 (registry+https://github.com/rust-lang/crates.io-index)",
  "solarti-program-error 0.3.7 (registry+https://github.com/rust-lang/crates.io-index)",
  "solarti-type-length-value 0.3.5 (registry+https://github.com/rust-lang/crates.io-index)",
@@ -7726,7 +7726,7 @@ dependencies = [
  "arrayref",
  "bytemuck",
  "miraland-program",
- "solarti-discriminator 0.1.6",
+ "solarti-discriminator 0.1.7",
  "solarti-pod 0.1.6",
  "solarti-program-error 0.3.7",
  "solarti-tlv-account-resolution 0.5.1",
@@ -7742,7 +7742,7 @@ dependencies = [
  "arrayref",
  "bytemuck",
  "miraland-program",
- "solarti-discriminator 0.1.6 (registry+https://github.com/rust-lang/crates.io-index)",
+ "solarti-discriminator 0.1.6",
  "solarti-pod 0.1.6 (registry+https://github.com/rust-lang/crates.io-index)",
  "solarti-program-error 0.3.7 (registry+https://github.com/rust-lang/crates.io-index)",
  "solarti-tlv-account-resolution 0.5.1 (registry+https://github.com/rust-lang/crates.io-index)",
@@ -7755,7 +7755,7 @@ version = "0.3.5"
 dependencies = [
  "bytemuck",
  "miraland-program",
- "solarti-discriminator 0.1.6",
+ "solarti-discriminator 0.1.7",
  "solarti-pod 0.1.6",
  "solarti-program-error 0.3.7",
  "solarti-type-length-value-derive",
@@ -7769,7 +7769,7 @@ checksum = "753b1ce13b15fcd33bcadbfcb0574a170ad71c609f6206b2a1040b504df873b7"
 dependencies = [
  "bytemuck",
  "miraland-program",
- "solarti-discriminator 0.1.6 (registry+https://github.com/rust-lang/crates.io-index)",
+ "solarti-discriminator 0.1.6",
  "solarti-pod 0.1.6 (registry+https://github.com/rust-lang/crates.io-index)",
  "solarti-program-error 0.3.7 (registry+https://github.com/rust-lang/crates.io-index)",
 ]
