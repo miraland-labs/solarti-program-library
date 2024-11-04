@@ -4,7 +4,7 @@ version = "0.1.1"
 description = "Solarti Program Library Token Collection"
 authors = [
   "Miraland Crafters <crafters@miraland.top>",
-  "Solana Labs Maintainers <maintainers@solanalabs.com>"
+  "Solana Labs Maintainers <maintainers@solanalabs.com>",
 ]
 repository = "https://github.com/miraland-labs/solarti-program-library"
 license = "Apache-2.0"
@@ -15,18 +15,22 @@ no-entrypoint = []
 test-sbf = []
 
 [dependencies]
-miraland-program = ">=1.18.2"
+miraland-program = ">=1.18.2, <1.19.0"
 solarti-pod = { version = "0.1.0", path = "../../libraries/pod" }
-solarti-program-error = { version = "0.3.0" , path = "../../libraries/program-error" }
-solarti-token-2022 = { version = "1.0.0", path = "../../token/program-2022", features = ["no-entrypoint"] }
-solarti-token-group-example = { version = "0.1.0", path = "../../token-group/example", features = ["no-entrypoint"] }
+solarti-program-error = { version = "0.3.0", path = "../../libraries/program-error" }
+solarti-token-2022 = { version = "1.0.0", path = "../../token/program-2022", features = [
+  "no-entrypoint",
+] }
+solarti-token-group-example = { version = "0.1.0", path = "../../token-group/example", features = [
+  "no-entrypoint",
+] }
 solarti-token-group-interface = { version = "0.1.0", path = "../../token-group/interface" }
 solarti-token-metadata-interface = { version = "0.2", path = "../../token-metadata/interface" }
 solarti-type-length-value = { version = "0.3.0", path = "../../libraries/type-length-value" }
 
 [dev-dependencies]
-miraland-program-test = ">=1.18.2"
-miraland-sdk = ">=1.18.2"
+miraland-program-test = ">=1.18.2, <1.19.0"
+miraland-sdk = ">=1.18.2, <1.19.0"
 solarti-discriminator = { version = "0.1.0", path = "../../libraries/discriminator" }
 solarti-token-client = { version = "0.5", path = "../../token/client" }
 

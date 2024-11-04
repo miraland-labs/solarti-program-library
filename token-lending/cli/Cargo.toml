@@ -1,7 +1,7 @@
 [package]
 authors = [
   "Miraland Crafters <crafters@miraland.top>",
-  "Solana Labs Maintainers <maintainers@solanalabs.com>"
+  "Solana Labs Maintainers <maintainers@solanalabs.com>",
 ]
 description = "SOLARTI Token Lending CLI"
 edition = "2021"
@@ -13,14 +13,18 @@ version = "0.2.1"
 
 [dependencies]
 clap = "2.33.3"
-miraland-clap-utils = ">=1.18.2"
-miraland-cli-config = ">=1.18.2"
-miraland-client = ">=1.18.2"
-miraland-logger = ">=1.18.2"
-miraland-sdk = ">=1.18.2"
-miraland-program = ">=1.18.2"
-solarti-token-lending = { version = "0.2", path="../program", features = [ "no-entrypoint" ] }
-solarti-token = { version = "4.0", path="../../token/program", features = [ "no-entrypoint" ]  }
+miraland-clap-utils = ">=1.18.2, <1.19.0"
+miraland-cli-config = ">=1.18.2, <1.19.0"
+miraland-client = ">=1.18.2, <1.19.0"
+miraland-logger = ">=1.18.2, <1.19.0"
+miraland-sdk = ">=1.18.2, <1.19.0"
+miraland-program = ">=1.18.2, <1.19.0"
+solarti-token-lending = { version = "0.2", path = "../program", features = [
+  "no-entrypoint",
+] }
+solarti-token = { version = "4.0", path = "../../token/program", features = [
+  "no-entrypoint",
+] }
 
 [[bin]]
 name = "solarti-token-lending"

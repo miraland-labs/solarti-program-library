@@ -3,7 +3,7 @@ name = "test-client"
 version = "0.1.1"
 authors = [
   "Miraland Crafters <crafters@miraland.top>",
-  "Solana Labs Maintainers <maintainers@solanalabs.com>"
+  "Solana Labs Maintainers <maintainers@solanalabs.com>",
 ]
 publish = false
 edition = "2021"
@@ -11,7 +11,9 @@ edition = "2021"
 # Used to ensure that SPL programs are buildable by external clients
 
 [dependencies]
-miraland-sdk = ">=1.18.2"
-solarti-memo = { path = "../../memo/program", features = [ "no-entrypoint" ] }
-solarti-token = { path = "../../token/program", features = [ "no-entrypoint" ] }
-solarti-token-swap = { path = "../../token-swap/program", features = [ "no-entrypoint" ] }
+miraland-sdk = ">=1.18.2, <1.19.0"
+solarti-memo = { path = "../../memo/program", features = ["no-entrypoint"] }
+solarti-token = { path = "../../token/program", features = ["no-entrypoint"] }
+solarti-token-swap = { path = "../../token-swap/program", features = [
+  "no-entrypoint",
+] }

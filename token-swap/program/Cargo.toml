@@ -4,7 +4,7 @@ version = "3.0.2"
 description = "Solarti Program Library Token Swap"
 authors = [
   "Miraland Crafters <crafters@miraland.top>",
-  "Solana Labs Maintainers <maintainers@solanalabs.com>"
+  "Solana Labs Maintainers <maintainers@solanalabs.com>",
 ]
 repository = "https://github.com/miraland-labs/solarti-program-library"
 license = "Apache-2.0"
@@ -20,10 +20,16 @@ arrayref = "0.3.7"
 enum_dispatch = "0.3.12"
 num-derive = "0.4"
 num-traits = "0.2"
-miraland-program = ">=1.18.2"
-solarti-math = { version = "0.2", path = "../../libraries/math", features = [ "no-entrypoint" ] }
-solarti-token = { version = "4.0", path = "../../token/program", features = [ "no-entrypoint" ] }
-solarti-token-2022 = { version = "1.0.0", path = "../../token/program-2022", features = [ "no-entrypoint" ] }
+miraland-program = ">=1.18.2, <1.19.0"
+solarti-math = { version = "0.2", path = "../../libraries/math", features = [
+  "no-entrypoint",
+] }
+solarti-token = { version = "4.0", path = "../../token/program", features = [
+  "no-entrypoint",
+] }
+solarti-token-2022 = { version = "1.0.0", path = "../../token/program-2022", features = [
+  "no-entrypoint",
+] }
 thiserror = "1.0"
 arbitrary = { version = "1.3", features = ["derive"], optional = true }
 roots = { version = "0.0.8", optional = true }
@@ -31,7 +37,7 @@ roots = { version = "0.0.8", optional = true }
 [dev-dependencies]
 proptest = "1.4"
 roots = "0.0.8"
-miraland-sdk = ">=1.18.2"
+miraland-sdk = ">=1.18.2, <1.19.0"
 test-case = "3.3"
 
 [lib]

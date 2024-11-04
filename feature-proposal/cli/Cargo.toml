@@ -4,7 +4,7 @@ version = "1.2.5"
 description = "SOLARTI Feature Proposal Command-line Utility"
 authors = [
   "Miraland Crafters <crafters@miraland.top>",
-  "Solana Labs Maintainers <maintainers@solanalabs.com>"
+  "Solana Labs Maintainers <maintainers@solanalabs.com>",
 ]
 repository = "https://github.com/miraland-labs/solarti-program-library"
 license = "Apache-2.0"
@@ -13,12 +13,14 @@ edition = "2021"
 [dependencies]
 chrono = "0.4.31"
 clap = "2.33.3"
-miraland-clap-utils = ">=1.18.2"
-miraland-cli-config = ">=1.18.2"
-miraland-client = ">=1.18.2"
-miraland-logger = ">=1.18.2"
-miraland-sdk = ">=1.18.2"
-solarti-feature-proposal = { version = "1.0", path = "../program", features = ["no-entrypoint"] }
+miraland-clap-utils = ">=1.18.2, <1.19.0"
+miraland-cli-config = ">=1.18.2, <1.19.0"
+miraland-client = ">=1.18.2, <1.19.0"
+miraland-logger = ">=1.18.2, <1.19.0"
+miraland-sdk = ">=1.18.2, <1.19.0"
+solarti-feature-proposal = { version = "1.0", path = "../program", features = [
+  "no-entrypoint",
+] }
 
 [[bin]]
 name = "solarti-feature-proposal"

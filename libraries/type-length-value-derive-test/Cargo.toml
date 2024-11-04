@@ -4,7 +4,7 @@ version = "0.1.0"
 description = "Testing Derive Macro Library for Solarti Type Length Value traits"
 authors = [
   "Miraland Crafters <crafters@miraland.top>",
-  "Solana Labs Maintainers <maintainers@solanalabs.com>"
+  "Solana Labs Maintainers <maintainers@solanalabs.com>",
 ]
 repository = "https://github.com/miraland-labs/solarti-program-library"
 license = "Apache-2.0"
@@ -12,9 +12,11 @@ edition = "2021"
 
 [dev-dependencies]
 borsh = "0.10.3"
-miraland-program = ">=1.18.2"
+miraland-program = ">=1.18.2, <1.19.0"
 solarti-discriminator = { version = "0.1", path = "../discriminator" }
-solarti-type-length-value = { version = "0.3", path = "../type-length-value", features = ["derive"] }
+solarti-type-length-value = { version = "0.3", path = "../type-length-value", features = [
+  "derive",
+] }
 
 [lib]
 crate-type = ["cdylib", "lib"]

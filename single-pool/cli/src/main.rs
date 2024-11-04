@@ -132,8 +132,7 @@ async fn command_initialize(config: &Config, command_config: InitializeCli) -> C
     if command_config.skip_metadata {
         assert_eq!(
             instructions.last().unwrap().data,
-            borsh::to_vec(&SinglePoolInstruction::CreateTokenMetadata)
-                .unwrap()
+            borsh::to_vec(&SinglePoolInstruction::CreateTokenMetadata).unwrap()
         );
 
         instructions.pop();
@@ -440,7 +439,7 @@ async fn command_withdraw(config: &Config, command_config: WithdrawCli) -> Comma
 
     let token_account = token.get_account_info(&token_account_address).await?;
 
-    let token_amount = match command_config.token_amount.sol_to_lamport() {
+    let token_amount = match command_config.token_amount.mln_to_lamport() {
         Amount::All => token_account.base.amount,
         Amount::Raw(amount) => amount,
         Amount::Decimal(_) => unreachable!(),

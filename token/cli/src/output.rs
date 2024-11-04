@@ -2,7 +2,6 @@
 use {
     crate::{config::Config, sort::UnsupportedAccount},
     console::{style, Emoji},
-    serde::{Deserialize, Serialize, Serializer},
     miraland_account_decoder::{
         parse_token::{UiAccountState, UiMint, UiMultisig, UiTokenAccount, UiTokenAmount},
         parse_token_extension::{
@@ -13,7 +12,10 @@ use {
             UiTransferFeeAmount, UiTransferFeeConfig, UiTransferHook, UiTransferHookAccount,
         },
     },
-    miraland_cli_output::{display::writeln_name_value, OutputFormat, QuietDisplay, VerboseDisplay},
+    miraland_cli_output::{
+        display::writeln_name_value, OutputFormat, QuietDisplay, VerboseDisplay,
+    },
+    serde::{Deserialize, Serialize, Serializer},
     std::fmt::{self, Display},
 };
 
@@ -262,7 +264,10 @@ impl fmt::Display for CliTokenAccount {
 
         if !self.is_associated {
             writeln!(f)?;
-            writeln!(f, "* Please run `solarti-token gc` to clean up Aux accounts")?;
+            writeln!(
+                f,
+                "* Please run `solarti-token gc` to clean up Aux accounts"
+            )?;
         }
 
         if self.has_permanent_delegate {
@@ -477,7 +482,10 @@ impl VerboseDisplay for CliTokenAccounts {
         }
         if gc_alert {
             writeln!(w)?;
-            writeln!(w, "* Please run `solarti-token gc` to clean up Aux accounts")?;
+            writeln!(
+                w,
+                "* Please run `solarti-token gc` to clean up Aux accounts"
+            )?;
         }
         Ok(())
     }
@@ -543,7 +551,10 @@ impl fmt::Display for CliTokenAccounts {
         }
         if gc_alert {
             writeln!(f)?;
-            writeln!(f, "* Please run `solarti-token gc` to clean up Aux accounts")?;
+            writeln!(
+                f,
+                "* Please run `solarti-token gc` to clean up Aux accounts"
+            )?;
         }
         Ok(())
     }
@@ -914,6 +925,7 @@ fn display_ui_extension(
             "  Unparseable extension:",
             "Consider upgrading to a newer version of solarti-token",
         ),
+        _ => todo!(), // MI
     }
 }
 

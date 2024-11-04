@@ -1,7 +1,7 @@
 [package]
 authors = [
   "Miraland Crafters <crafters@miraland.top>",
-  "Solana Labs Maintainers <maintainers@solanalabs.com>"
+  "Solana Labs Maintainers <maintainers@solanalabs.com>",
 ]
 description = "SOLARTI Associated Token Account Program Tests"
 edition = "2021"
@@ -14,9 +14,15 @@ version = "0.0.3"
 test-sbf = []
 
 [dev-dependencies]
-miraland-program = ">=1.18.2"
-miraland-program-test = ">=1.18.2"
-miraland-sdk = ">=1.18.2"
-solarti-associated-token-account = { version = "2", path = "../program", features = ["no-entrypoint"] }
-solarti-token = { version = "4.0", path = "../../token/program", features = ["no-entrypoint"] }
-solarti-token-2022 = { version = "1.0", path = "../../token/program-2022", features = ["no-entrypoint"] }
+miraland-program = ">=1.18.2, <1.19.0"
+miraland-program-test = ">=1.18.2, <1.19.0"
+miraland-sdk = ">=1.18.2, <1.19.0"
+solarti-associated-token-account = { version = "2", path = "../program", features = [
+  "no-entrypoint",
+] }
+solarti-token = { version = "4.0", path = "../../token/program", features = [
+  "no-entrypoint",
+] }
+solarti-token-2022 = { version = "1.0", path = "../../token/program-2022", features = [
+  "no-entrypoint",
+] }

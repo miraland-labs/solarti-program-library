@@ -4,7 +4,7 @@ version = "0.1.3"
 description = "SOLARTI Token Upgrade Command-line Utility"
 authors = [
   "Miraland Crafters <crafters@miraland.top>",
-  "Solana Labs Maintainers <maintainers@solanalabs.com>"
+  "Solana Labs Maintainers <maintainers@solanalabs.com>",
 ]
 repository = "https://github.com/miraland-labs/solarti-program-library"
 license = "Apache-2.0"
@@ -16,21 +16,29 @@ walkdir = "2"
 [dependencies]
 clap = { version = "3", features = ["cargo"] }
 futures-util = "0.3.28"
-miraland-clap-v3-utils = ">=1.18.2"
-miraland-cli-config = ">=1.18.2"
-miraland-client = ">=1.18.2"
-miraland-logger = ">=1.18.2"
-miraland-remote-wallet = ">=1.18.2"
-miraland-sdk = ">=1.18.2"
-solarti-associated-token-account = { version = "2.0", path = "../../associated-token-account/program", features = ["no-entrypoint"] }
-solarti-token = { version = "4.0", path = "../../token/program", features = ["no-entrypoint"] }
-solarti-token-2022 = { version = "1.0.0", path = "../../token/program-2022", features = ["no-entrypoint"] }
+miraland-clap-v3-utils = ">=1.18.2, <1.19.0"
+miraland-cli-config = ">=1.18.2, <1.19.0"
+miraland-client = ">=1.18.2, <1.19.0"
+miraland-logger = ">=1.18.2, <1.19.0"
+miraland-remote-wallet = ">=1.18.2, <1.19.0"
+miraland-sdk = ">=1.18.2, <1.19.0"
+solarti-associated-token-account = { version = "2.0", path = "../../associated-token-account/program", features = [
+  "no-entrypoint",
+] }
+solarti-token = { version = "4.0", path = "../../token/program", features = [
+  "no-entrypoint",
+] }
+solarti-token-2022 = { version = "1.0.0", path = "../../token/program-2022", features = [
+  "no-entrypoint",
+] }
 solarti-token-client = { version = "0.5", path = "../../token/client" }
-solarti-token-upgrade = { version = "0.1", path = "../program", features = ["no-entrypoint"] }
+solarti-token-upgrade = { version = "0.1", path = "../program", features = [
+  "no-entrypoint",
+] }
 tokio = { version = "1", features = ["full"] }
 
 [dev-dependencies]
-miraland-test-validator = ">=1.18.2"
+miraland-test-validator = ">=1.18.2, <1.19.0"
 
 [[bin]]
 name = "solarti-token-upgrade"

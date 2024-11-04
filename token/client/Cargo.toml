@@ -1,7 +1,7 @@
 [package]
 authors = [
   "Miraland Crafters <crafters@miraland.top>",
-  "Solana Labs Maintainers <maintainers@solanalabs.com>"
+  "Solana Labs Maintainers <maintainers@solanalabs.com>",
 ]
 description = "Solarti-token Rust Client"
 edition = "2021"
@@ -15,21 +15,27 @@ async-trait = "0.1"
 curve25519-dalek = "3.2.1"
 futures = "0.3.29"
 futures-util = "0.3"
-miraland-banks-interface = ">=1.18.2"
-miraland-cli-output = {version = ">=1.18.2", optional = true }
-miraland-program-test = {version = ">=1.18.2"}
-miraland-rpc-client = ">=1.18.2"
-miraland-rpc-client-api = ">=1.18.2"
-miraland-sdk = ">=1.18.2"
+miraland-banks-interface = ">=1.18.2, <1.19.0"
+miraland-cli-output = { version = ">=1.18.2, <1.19.0", optional = true }
+miraland-program-test = { version = ">=1.18.2, <1.19.0" }
+miraland-rpc-client = ">=1.18.2, <1.19.0"
+miraland-rpc-client-api = ">=1.18.2, <1.19.0"
+miraland-sdk = ">=1.18.2, <1.19.0"
 # We never want the entrypoint for ATA, but we want the entrypoint for token when
 # testing token
-solarti-associated-token-account = { version = "2.1.0", path = "../../associated-token-account/program", features = ["no-entrypoint"] }
-solarti-memo = { version = "4.0.1", path = "../../memo/program", features = ["no-entrypoint"] }
-solarti-token = { version = "4.1.0", path="../program", features = [ "no-entrypoint" ] }
-solarti-token-2022 = { version = "1.0.0", path="../program-2022" }
-solarti-token-group-interface = { version = "0.1.1", path="../../token-group/interface" }
-solarti-token-metadata-interface = { version = "0.2.3", path="../../token-metadata/interface" }
-solarti-transfer-hook-interface = { version = "0.4.0", path="../transfer-hook/interface" }
+solarti-associated-token-account = { version = "2.1.0", path = "../../associated-token-account/program", features = [
+  "no-entrypoint",
+] }
+solarti-memo = { version = "4.0.1", path = "../../memo/program", features = [
+  "no-entrypoint",
+] }
+solarti-token = { version = "4.1.0", path = "../program", features = [
+  "no-entrypoint",
+] }
+solarti-token-2022 = { version = "1.0.0", path = "../program-2022" }
+solarti-token-group-interface = { version = "0.1.1", path = "../../token-group/interface" }
+solarti-token-metadata-interface = { version = "0.2.3", path = "../../token-metadata/interface" }
+solarti-transfer-hook-interface = { version = "0.4.0", path = "../transfer-hook/interface" }
 thiserror = "1.0"
 
 [features]

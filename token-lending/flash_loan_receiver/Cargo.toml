@@ -5,8 +5,10 @@ edition = "2021"
 
 [dependencies]
 arrayref = "0.3.7"
-miraland-program = ">=1.18.2"
-solarti-token = { version = "4.0", path = "../../token/program", features=["no-entrypoint"] }
+miraland-program = ">=1.18.2, <1.19.0"
+solarti-token = { version = "4.0", path = "../../token/program", features = [
+    "no-entrypoint",
+] }
 
 [lib]
 crate-type = ["cdylib", "lib"]

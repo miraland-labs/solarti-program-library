@@ -1,5 +1,5 @@
 anchor_version = "0.26.1"
-miraland_version = ">=1.18.2"
+miraland_version = ">=1.18.2, <1.19.0"
 
 [workspace]
 members = [
@@ -10,9 +10,7 @@ members = [
   "token/program",
   "token/program-2022",
 ]
-exclude = [
-  "account-compression/"
-]
+exclude = ["account-compression/"]
 
 [provider]
 cluster = "mainnet"
