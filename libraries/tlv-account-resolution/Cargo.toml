@@ -1,6 +1,6 @@
 [package]
 name = "solarti-tlv-account-resolution"
-version = "0.5.1"
+version = "0.5.2"
 description = "Solarti Program Library TLV Account Resolution Interface"
 authors = [
   "Miraland Crafters <crafters@miraland.top>",
@@ -16,10 +16,10 @@ test-sbf = []
 [dependencies]
 bytemuck = { version = "1.14.0", features = ["derive"] }
 miraland-program = ">=1.18.2, <1.19.0"
-solarti-discriminator = { version = "0.1.5", path = "../discriminator" }
-solarti-program-error = { version = "0.3.5", path = "../program-error" }
-solarti-type-length-value = { version = "0.3.4", path = "../type-length-value" }
-solarti-pod = { version = "0.1.4", path = "../pod" }
+solarti-discriminator = { version = "0.1.7", path = "../discriminator" }
+solarti-program-error = { version = "0.3.8", path = "../program-error" }
+solarti-type-length-value = { version = "0.3.6", path = "../type-length-value" }
+solarti-pod = { version = "0.1.7", path = "../pod" }
 
 [dev-dependencies]
 futures = "0.3.29"
@@ -27,7 +27,7 @@ futures-util = "0.3"
 miraland-client = ">=1.18.2, <1.19.0"
 miraland-program-test = ">=1.18.2, <1.19.0"
 miraland-sdk = ">=1.18.2, <1.19.0"
-solarti-discriminator = { version = "0.1.5", path = "../discriminator" }
+solarti-discriminator = { version = "0.1.7", path = "../discriminator" }
 
 [lib]
 crate-type = ["cdylib", "lib"]

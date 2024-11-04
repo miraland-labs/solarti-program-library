@@ -7287,6 +7287,20 @@ dependencies = [
 [[package]]
 name = "solarti-tlv-account-resolution"
 version = "0.5.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "9e8f8f5e48105158c64197fc42140afb1bda18f62574918c64618fff5db525dd"
+dependencies = [
+ "bytemuck",
+ "miraland-program",
+ "solarti-discriminator 0.1.6",
+ "solarti-pod 0.1.6",
+ "solarti-program-error 0.3.7",
+ "solarti-type-length-value 0.3.5",
+]
+
+[[package]]
+name = "solarti-tlv-account-resolution"
+version = "0.5.2"
 dependencies = [
  "bytemuck",
  "futures 0.3.31",
@@ -7299,20 +7313,6 @@ dependencies = [
  "solarti-pod 0.1.7",
  "solarti-program-error 0.3.8",
  "solarti-type-length-value 0.3.6",
-]
-
-[[package]]
-name = "solarti-tlv-account-resolution"
-version = "0.5.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "9e8f8f5e48105158c64197fc42140afb1bda18f62574918c64618fff5db525dd"
-dependencies = [
- "bytemuck",
- "miraland-program",
- "solarti-discriminator 0.1.6",
- "solarti-pod 0.1.6",
- "solarti-program-error 0.3.7",
- "solarti-type-length-value 0.3.5",
 ]
 
 [[package]]
@@ -7696,7 +7696,7 @@ dependencies = [
  "miraland-remote-wallet",
  "miraland-sdk",
  "miraland-test-validator",
- "solarti-tlv-account-resolution 0.5.1",
+ "solarti-tlv-account-resolution 0.5.2",
  "solarti-token-2022 1.0.1",
  "solarti-token-client",
  "solarti-transfer-hook-interface 0.4.1",
@@ -7713,7 +7713,7 @@ dependencies = [
  "miraland-program",
  "miraland-program-test",
  "miraland-sdk",
- "solarti-tlv-account-resolution 0.5.1",
+ "solarti-tlv-account-resolution 0.5.2",
  "solarti-token-2022 1.0.1",
  "solarti-transfer-hook-interface 0.4.1",
  "solarti-type-length-value 0.3.6",
@@ -7729,7 +7729,7 @@ dependencies = [
  "solarti-discriminator 0.1.7",
  "solarti-pod 0.1.7",
  "solarti-program-error 0.3.8",
- "solarti-tlv-account-resolution 0.5.1",
+ "solarti-tlv-account-resolution 0.5.2",
  "solarti-type-length-value 0.3.6",
 ]
 
@@ -7745,7 +7745,7 @@ dependencies = [
  "solarti-discriminator 0.1.6",
  "solarti-pod 0.1.6",
  "solarti-program-error 0.3.7",
- "solarti-tlv-account-resolution 0.5.1 (registry+https://github.com/rust-lang/crates.io-index)",
+ "solarti-tlv-account-resolution 0.5.1",
  "solarti-type-length-value 0.3.5",
 ]
 
