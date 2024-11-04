@@ -3036,7 +3036,7 @@ dependencies = [
  "serde_json",
  "solarti-token 4.1.1",
  "solarti-token-2022 1.0.1 (registry+https://github.com/rust-lang/crates.io-index)",
- "solarti-token-group-interface 0.1.2 (registry+https://github.com/rust-lang/crates.io-index)",
+ "solarti-token-group-interface 0.1.2",
  "solarti-token-metadata-interface 0.2.4 (registry+https://github.com/rust-lang/crates.io-index)",
  "thiserror",
  "zstd",
@@ -7372,7 +7372,7 @@ dependencies = [
  "solarti-memo 4.0.2",
  "solarti-pod 0.1.7",
  "solarti-token 4.1.2",
- "solarti-token-group-interface 0.1.2",
+ "solarti-token-group-interface 0.1.3",
  "solarti-token-metadata-interface 0.2.4",
  "solarti-transfer-hook-interface 0.4.1",
  "solarti-type-length-value 0.3.6",
@@ -7396,7 +7396,7 @@ dependencies = [
  "solarti-memo 4.0.2 (registry+https://github.com/rust-lang/crates.io-index)",
  "solarti-pod 0.1.6",
  "solarti-token 4.1.1",
- "solarti-token-group-interface 0.1.2 (registry+https://github.com/rust-lang/crates.io-index)",
+ "solarti-token-group-interface 0.1.2",
  "solarti-token-metadata-interface 0.2.4 (registry+https://github.com/rust-lang/crates.io-index)",
  "solarti-transfer-hook-interface 0.4.1 (registry+https://github.com/rust-lang/crates.io-index)",
  "solarti-type-length-value 0.3.5",
@@ -7458,7 +7458,7 @@ dependencies = [
  "solarti-memo 4.0.2",
  "solarti-token 4.1.2",
  "solarti-token-2022 1.0.1",
- "solarti-token-group-interface 0.1.2",
+ "solarti-token-group-interface 0.1.3",
  "solarti-token-metadata-interface 0.2.4",
  "solarti-transfer-hook-interface 0.4.1",
  "thiserror",
@@ -7477,7 +7477,7 @@ dependencies = [
  "solarti-token-2022 1.0.1",
  "solarti-token-client",
  "solarti-token-group-example",
- "solarti-token-group-interface 0.1.2",
+ "solarti-token-group-interface 0.1.3",
  "solarti-token-metadata-interface 0.2.4",
  "solarti-type-length-value 0.3.6",
 ]
@@ -7493,20 +7493,8 @@ dependencies = [
  "solarti-pod 0.1.7",
  "solarti-token-2022 1.0.1",
  "solarti-token-client",
- "solarti-token-group-interface 0.1.2",
+ "solarti-token-group-interface 0.1.3",
  "solarti-token-metadata-interface 0.2.4",
- "solarti-type-length-value 0.3.6",
-]
-
-[[package]]
-name = "solarti-token-group-interface"
-version = "0.1.2"
-dependencies = [
- "bytemuck",
- "miraland-program",
- "solarti-discriminator 0.1.7",
- "solarti-pod 0.1.7",
- "solarti-program-error 0.3.8",
  "solarti-type-length-value 0.3.6",
 ]
 
@@ -7521,6 +7509,18 @@ dependencies = [
  "solarti-discriminator 0.1.6",
  "solarti-pod 0.1.6",
  "solarti-program-error 0.3.7",
+]
+
+[[package]]
+name = "solarti-token-group-interface"
+version = "0.1.3"
+dependencies = [
+ "bytemuck",
+ "miraland-program",
+ "solarti-discriminator 0.1.7",
+ "solarti-pod 0.1.7",
+ "solarti-program-error 0.3.8",
+ "solarti-type-length-value 0.3.6",
 ]
 
 [[package]]
