@@ -20,7 +20,7 @@ miraland-program = ">=1.18.2, <1.19.0"
 solarti-discriminator = { version = "0.1", path = "../discriminator" }
 solarti-program-error = { version = "0.3", path = "../program-error" }
 solarti-type-length-value-derive = { version = "0.3.6", path = "./derive", optional = true }
-solarti-pod = { version = "0.1.4", path = "../pod" }
+solarti-pod = { version = "0.1.7", path = "../pod" }
 
 [lib]
 crate-type = ["cdylib", "lib"]
