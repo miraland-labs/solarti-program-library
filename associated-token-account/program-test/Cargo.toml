@@ -14,9 +14,9 @@ version = "0.0.3"
 test-sbf = []
 
 [dev-dependencies]
-miraland-program = ">=1.18.2, <1.19.0"
-miraland-program-test = ">=1.18.2, <1.19.0"
-miraland-sdk = ">=1.18.2, <1.19.0"
+miraland-program = ">=1.18.5, <1.19.0"
+miraland-program-test = ">=1.18.5, <1.19.0"
+miraland-sdk = ">=1.18.5, <1.19.0"
 solarti-associated-token-account = { version = "2", path = "../program", features = [
   "no-entrypoint",
 ] }

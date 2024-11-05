@@ -18,15 +18,15 @@ test-sbf = []
 num-derive = "0.4"
 num-traits = "0.2"
 num_enum = "0.7.1"
-miraland-program = ">=1.18.2, <1.19.0"
+miraland-program = ">=1.18.5, <1.19.0"
 solarti-token-2022 = { version = "1.0.0", path = "../../token/program-2022", features = [
   "no-entrypoint",
 ] }
 thiserror = "1.0"
 
 [dev-dependencies]
-miraland-program-test = ">=1.18.2, <1.19.0"
-miraland-sdk = ">=1.18.2, <1.19.0"
+miraland-program-test = ">=1.18.5, <1.19.0"
+miraland-sdk = ">=1.18.5, <1.19.0"
 solarti-token = { version = "4.0", path = "../../token/program", features = [
   "no-entrypoint",
 ] }

@@ -1,6 +1,6 @@
 [package]
 name = "solarti-associated-token-account"
-version = "2.1.2"
+version = "2.1.3"
 description = "Solarti Program Library Associated Token Account"
 authors = [
   "Miraland Crafters <crafters@miraland.top>",
@@ -19,11 +19,11 @@ assert_matches = "1.5.0"
 borsh = "1.3.0"
 num-derive = "0.4"
 num-traits = "0.2"
-miraland-program = ">=1.18.2, <1.19.0"
-solarti-token = { version = "4.1.2", path = "../../token/program", features = [
+miraland-program = ">=1.18.5, <1.19.0"
+solarti-token = { version = "4.1.3", path = "../../token/program", features = [
   "no-entrypoint",
 ] }
-solarti-token-2022 = { version = "1.0.2", path = "../../token/program-2022", features = [
+solarti-token-2022 = { version = "1.0.3", path = "../../token/program-2022", features = [
   "no-entrypoint",
 ] }
 thiserror = "1.0"

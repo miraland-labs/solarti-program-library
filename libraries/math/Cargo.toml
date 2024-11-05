@@ -18,14 +18,14 @@ test-sbf = []
 borsh = "1.3.0"
 num-derive = "0.4"
 num-traits = "0.2"
-miraland-program = ">=1.18.2, <1.19.0"
+miraland-program = ">=1.18.5, <1.19.0"
 thiserror = "1.0"
 uint = "0.9"
 
 [dev-dependencies]
 proptest = "1.4.0"
-miraland-program-test = ">=1.18.2, <1.19.0"
-miraland-sdk = ">=1.18.2, <1.19.0"
+miraland-program-test = ">=1.18.5, <1.19.0"
+miraland-sdk = ">=1.18.5, <1.19.0"
 libm = "0.2.8"
 
 [lib]

@@ -1,6 +1,6 @@
 [package]
 name = "solarti-type-length-value"
-version = "0.3.6"
+version = "0.3.7"
 description = "Solarti Program Library Type-Length-Value Management"
 authors = [
   "Miraland Crafters <crafters@miraland.top>",
@@ -16,11 +16,11 @@ derive = ["dep:solarti-type-length-value-derive"]
 
 [dependencies]
 bytemuck = { version = "1.14.0", features = ["derive"] }
-miraland-program = ">=1.18.2, <1.19.0"
-solarti-discriminator = { version = "0.1", path = "../discriminator" }
-solarti-program-error = { version = "0.3", path = "../program-error" }
-solarti-type-length-value-derive = { version = "0.3.6", path = "./derive", optional = true }
-solarti-pod = { version = "0.1.7", path = "../pod" }
+miraland-program = ">=1.18.5, <1.19.0"
+solarti-discriminator = { version = "0.1.8", path = "../discriminator" }
+solarti-program-error = { version = "0.3.9", path = "../program-error" }
+solarti-type-length-value-derive = { version = "0.3.7", path = "./derive", optional = true }
+solarti-pod = { version = "0.1.8", path = "../pod" }
 
 [lib]
 crate-type = ["cdylib", "lib"]

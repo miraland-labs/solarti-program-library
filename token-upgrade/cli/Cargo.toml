@@ -16,12 +16,12 @@ walkdir = "2"
 [dependencies]
 clap = { version = "3", features = ["cargo"] }
 futures-util = "0.3.28"
-miraland-clap-v3-utils = ">=1.18.2, <1.19.0"
-miraland-cli-config = ">=1.18.2, <1.19.0"
-miraland-client = ">=1.18.2, <1.19.0"
-miraland-logger = ">=1.18.2, <1.19.0"
-miraland-remote-wallet = ">=1.18.2, <1.19.0"
-miraland-sdk = ">=1.18.2, <1.19.0"
+miraland-clap-v3-utils = ">=1.18.5, <1.19.0"
+miraland-cli-config = ">=1.18.5, <1.19.0"
+miraland-client = ">=1.18.5, <1.19.0"
+miraland-logger = ">=1.18.5, <1.19.0"
+miraland-remote-wallet = ">=1.18.5, <1.19.0"
+miraland-sdk = ">=1.18.5, <1.19.0"
 solarti-associated-token-account = { version = "2.0", path = "../../associated-token-account/program", features = [
   "no-entrypoint",
 ] }
@@ -38,7 +38,7 @@ solarti-token-upgrade = { version = "0.1", path = "../program", features = [
 tokio = { version = "1", features = ["full"] }
 
 [dev-dependencies]
-miraland-test-validator = ">=1.18.2, <1.19.0"
+miraland-test-validator = ">=1.18.5, <1.19.0"
 
 [[bin]]
 name = "solarti-token-upgrade"
