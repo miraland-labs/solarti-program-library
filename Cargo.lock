@@ -143,9 +143,9 @@ dependencies = [
 
 [[package]]
 name = "anstream"
-version = "0.6.17"
+version = "0.6.18"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "23a1e53f0f5d86382dafe1cf314783b2044280f406e7e1506368220ad11b1338"
+checksum = "8acc5369981196006228e28809f761875c0327210a891e941f4c683b3a99529b"
 dependencies = [
  "anstyle",
  "anstyle-parse",
@@ -221,9 +221,9 @@ dependencies = [
 
 [[package]]
 name = "arbitrary"
-version = "1.3.2"
+version = "1.4.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "7d5a26814d8dcb93b0e5a0ff3c6d80a8843bafb21b39e8e18a6f05471870e110"
+checksum = "775a8770d29db3dadcb858482cc240af7b2ffde4ac4de67d1d4955728103f0e2"
 dependencies = [
  "derive_arbitrary",
 ]
@@ -394,7 +394,7 @@ dependencies = [
  "proc-macro2",
  "quote",
  "syn 1.0.109",
- "synstructure",
+ "synstructure 0.12.6",
 ]
 
 [[package]]
@@ -1462,9 +1462,9 @@ dependencies = [
 
 [[package]]
 name = "derive_arbitrary"
-version = "1.3.2"
+version = "1.4.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "67e77553c4162a157adbf834ebae5b415acbecbeafc7a74b0e886657506a7611"
+checksum = "d475dfebcb4854d596b17b09f477616f80f17a550517f2b3615d8c205d5c802b"
 dependencies = [
  "proc-macro2",
  "quote",
@@ -2130,9 +2130,9 @@ checksum = "e5274423e17b7c9fc20b6e7e208532f9b19825d82dfd615708b70edd83df41f1"
 
 [[package]]
 name = "hashbrown"
-version = "0.15.0"
+version = "0.15.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "1e087f84d4f86bf4b218b927129862374b72199ae7d8657835f1e89000eea4fb"
+checksum = "3a9bfc1af68b1726ea47d3d5109de126281def866b33970e10fbab11b5dafab3"
 
 [[package]]
 name = "headers"
@@ -2415,6 +2415,124 @@ dependencies = [
 ]
 
 [[package]]
+name = "icu_collections"
+version = "1.5.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "db2fa452206ebee18c4b5c2274dbf1de17008e874b4dc4f0aea9d01ca79e4526"
+dependencies = [
+ "displaydoc",
+ "yoke",
+ "zerofrom",
+ "zerovec",
+]
+
+[[package]]
+name = "icu_locid"
+version = "1.5.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "13acbb8371917fc971be86fc8057c41a64b521c184808a698c02acc242dbf637"
+dependencies = [
+ "displaydoc",
+ "litemap",
+ "tinystr",
+ "writeable",
+ "zerovec",
+]
+
+[[package]]
+name = "icu_locid_transform"
+version = "1.5.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "01d11ac35de8e40fdeda00d9e1e9d92525f3f9d887cdd7aa81d727596788b54e"
+dependencies = [
+ "displaydoc",
+ "icu_locid",
+ "icu_locid_transform_data",
+ "icu_provider",
+ "tinystr",
+ "zerovec",
+]
+
+[[package]]
+name = "icu_locid_transform_data"
+version = "1.5.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "fdc8ff3388f852bede6b579ad4e978ab004f139284d7b28715f773507b946f6e"
+
+[[package]]
+name = "icu_normalizer"
+version = "1.5.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "19ce3e0da2ec68599d193c93d088142efd7f9c5d6fc9b803774855747dc6a84f"
+dependencies = [
+ "displaydoc",
+ "icu_collections",
+ "icu_normalizer_data",
+ "icu_properties",
+ "icu_provider",
+ "smallvec",
+ "utf16_iter",
+ "utf8_iter",
+ "write16",
+ "zerovec",
+]
+
+[[package]]
+name = "icu_normalizer_data"
+version = "1.5.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "f8cafbf7aa791e9b22bec55a167906f9e1215fd475cd22adfcf660e03e989516"
+
+[[package]]
+name = "icu_properties"
+version = "1.5.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "93d6020766cfc6302c15dbbc9c8778c37e62c14427cb7f6e601d849e092aeef5"
+dependencies = [
+ "displaydoc",
+ "icu_collections",
+ "icu_locid_transform",
+ "icu_properties_data",
+ "icu_provider",
+ "tinystr",
+ "zerovec",
+]
+
+[[package]]
+name = "icu_properties_data"
+version = "1.5.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "67a8effbc3dd3e4ba1afa8ad918d5684b8868b3b26500753effea8d2eed19569"
+
+[[package]]
+name = "icu_provider"
+version = "1.5.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "6ed421c8a8ef78d3e2dbc98a973be2f3770cb42b606e3ab18d6237c4dfde68d9"
+dependencies = [
+ "displaydoc",
+ "icu_locid",
+ "icu_provider_macros",
+ "stable_deref_trait",
+ "tinystr",
+ "writeable",
+ "yoke",
+ "zerofrom",
+ "zerovec",
+]
+
+[[package]]
+name = "icu_provider_macros"
+version = "1.5.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "1ec89e9337638ecdc08744df490b221a7399bf8d164eb52a665454e60e075ad6"
+dependencies = [
+ "proc-macro2",
+ "quote",
+ "syn 2.0.87",
+]
+
+[[package]]
 name = "ident_case"
 version = "1.0.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -2433,12 +2551,23 @@ dependencies = [
 
 [[package]]
 name = "idna"
-version = "0.5.0"
+version = "1.0.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "634d9b1461af396cad843f47fdba5597a4f9e6ddd4bfb6ff5d85028c25cb12f6"
+checksum = "686f825264d630750a544639377bae737628043f20d38bbc029e8f29ea968a7e"
 dependencies = [
- "unicode-bidi",
- "unicode-normalization",
+ "idna_adapter",
+ "smallvec",
+ "utf8_iter",
+]
+
+[[package]]
+name = "idna_adapter"
+version = "1.2.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "daca1df1c957320b2cf139ac61e7bd64fed304c5040df000a745aa1de3b4ef71"
+dependencies = [
+ "icu_normalizer",
+ "icu_properties",
 ]
 
 [[package]]
@@ -2506,7 +2635,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "707907fe3c25f5424cce2cb7e1cbcafee6bdbe735ca90ef77c29e84591e5b9da"
 dependencies = [
  "equivalent",
- "hashbrown 0.15.0",
+ "hashbrown 0.15.1",
  "rayon",
  "serde",
 ]
@@ -2869,6 +2998,12 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "78b3ae25bc7c8c38cec158d1f2757ee79e9b3740fbc7ccf0e59e4b08d793fa89"
 
 [[package]]
+name = "litemap"
+version = "0.7.3"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "643cb0b8d4fcc284004d5fd0d67ccf61dfffadb7f75e1e71bc420f4688a3a704"
+
+[[package]]
 name = "lock_api"
 version = "0.4.12"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -3034,10 +3169,10 @@ dependencies = [
  "serde",
  "serde_derive",
  "serde_json",
- "solarti-token 4.1.1",
- "solarti-token-2022 1.0.1",
- "solarti-token-group-interface 0.1.2",
- "solarti-token-metadata-interface 0.2.4",
+ "solarti-token 4.1.2",
+ "solarti-token-2022 1.0.2",
+ "solarti-token-group-interface 0.1.3 (registry+https://github.com/rust-lang/crates.io-index)",
+ "solarti-token-metadata-interface 0.2.5 (registry+https://github.com/rust-lang/crates.io-index)",
  "thiserror",
  "zstd",
 ]
@@ -3245,7 +3380,7 @@ dependencies = [
  "thiserror",
  "tiny-bip39",
  "uriparse",
- "url 2.5.2",
+ "url 2.5.3",
 ]
 
 [[package]]
@@ -3263,7 +3398,7 @@ dependencies = [
  "thiserror",
  "tiny-bip39",
  "uriparse",
- "url 2.5.2",
+ "url 2.5.3",
 ]
 
 [[package]]
@@ -3279,7 +3414,7 @@ dependencies = [
  "serde",
  "serde_derive",
  "serde_yaml",
- "url 2.5.2",
+ "url 2.5.3",
 ]
 
 [[package]]
@@ -3306,7 +3441,7 @@ dependencies = [
  "semver",
  "serde",
  "serde_json",
- "solarti-memo 4.0.2",
+ "solarti-memo 4.0.3 (registry+https://github.com/rust-lang/crates.io-index)",
 ]
 
 [[package]]
@@ -3529,7 +3664,7 @@ dependencies = [
  "miraland-version",
  "serde",
  "serde_derive",
- "solarti-memo 4.0.2",
+ "solarti-memo 4.0.3 (registry+https://github.com/rust-lang/crates.io-index)",
  "thiserror",
  "tokio",
 ]
@@ -3715,8 +3850,8 @@ dependencies = [
  "serde",
  "serde_bytes",
  "sha2 0.10.8",
- "solarti-token 4.1.1",
- "solarti-token-2022 1.0.1",
+ "solarti-token 4.1.2",
+ "solarti-token-2022 1.0.2",
  "static_assertions",
  "strum 0.24.1",
  "strum_macros 0.24.3",
@@ -3805,7 +3940,7 @@ dependencies = [
  "serde_derive",
  "socket2",
  "tokio",
- "url 2.5.2",
+ "url 2.5.3",
 ]
 
 [[package]]
@@ -3997,7 +4132,7 @@ dependencies = [
  "tokio-stream",
  "tokio-tungstenite",
  "tungstenite",
- "url 2.5.2",
+ "url 2.5.3",
 ]
 
 [[package]]
@@ -4107,8 +4242,8 @@ dependencies = [
  "serde_derive",
  "serde_json",
  "soketto",
- "solarti-token 4.1.1",
- "solarti-token-2022 1.0.1",
+ "solarti-token 4.1.2",
+ "solarti-token-2022 1.0.2",
  "stream-cancel",
  "thiserror",
  "tokio",
@@ -4159,7 +4294,7 @@ dependencies = [
  "serde",
  "serde_derive",
  "serde_json",
- "solarti-token-2022 1.0.1",
+ "solarti-token-2022 1.0.2",
  "thiserror",
 ]
 
@@ -4565,10 +4700,10 @@ dependencies = [
  "serde",
  "serde_derive",
  "serde_json",
- "solarti-associated-token-account 2.1.1",
- "solarti-memo 4.0.2",
- "solarti-token 4.1.1",
- "solarti-token-2022 1.0.1",
+ "solarti-associated-token-account 2.1.2 (registry+https://github.com/rust-lang/crates.io-index)",
+ "solarti-memo 4.0.3 (registry+https://github.com/rust-lang/crates.io-index)",
+ "solarti-token 4.1.2",
+ "solarti-token-2022 1.0.2",
  "thiserror",
 ]
 
@@ -5915,7 +6050,7 @@ dependencies = [
  "tokio-rustls",
  "tokio-util 0.7.12",
  "tower-service",
- "url 2.5.2",
+ "url 2.5.3",
  "wasm-bindgen",
  "wasm-bindgen-futures",
  "web-sys",
@@ -6031,9 +6166,9 @@ dependencies = [
 
 [[package]]
 name = "rustix"
-version = "0.38.38"
+version = "0.38.39"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "aa260229e6538e52293eeb577aabd09945a09d6d9cc0fc550ed7529056c2e32a"
+checksum = "375116bee2be9ed569afe2154ea6a99dfdffd257f533f187498c2a8f5feaf4ee"
 dependencies = [
  "bitflags 2.6.0",
  "errno",
@@ -6635,23 +6770,23 @@ dependencies = [
 
 [[package]]
 name = "solarti-associated-token-account"
-version = "2.1.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "58b7bda691a6735e213e2d3a1f244ccf4d3be369978d75be635e11093ca2558e"
+version = "2.1.2"
 dependencies = [
  "assert_matches",
  "borsh 1.5.1",
  "miraland-program",
  "num-derive",
  "num-traits",
- "solarti-token 4.1.1",
- "solarti-token-2022 1.0.1",
+ "solarti-token 4.1.3",
+ "solarti-token-2022 1.0.3",
  "thiserror",
 ]
 
 [[package]]
 name = "solarti-associated-token-account"
 version = "2.1.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "bc93307ce363019d28e5456296a16057a755132ff7824882372930e59f237f2b"
 dependencies = [
  "assert_matches",
  "borsh 1.5.1",
@@ -6670,7 +6805,7 @@ dependencies = [
  "arrayref",
  "borsh 1.5.1",
  "miraland-program",
- "solarti-token 4.1.2",
+ "solarti-token 4.1.3",
  "thiserror",
  "uint",
 ]
@@ -6685,7 +6820,7 @@ dependencies = [
  "miraland-sdk",
  "num-derive",
  "num-traits",
- "solarti-token 4.1.2",
+ "solarti-token 4.1.3",
  "thiserror",
  "uint",
 ]
@@ -6705,17 +6840,6 @@ dependencies = [
 
 [[package]]
 name = "solarti-discriminator"
-version = "0.1.6"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "6a6e9a4df0d86a171b9dce3fb8a27974cc0ebdc180d37b81f2b97ee693270808"
-dependencies = [
- "bytemuck",
- "miraland-program",
- "solarti-discriminator-derive 0.1.6",
-]
-
-[[package]]
-name = "solarti-discriminator"
 version = "0.1.7"
 dependencies = [
  "borsh 1.5.1",
@@ -6725,14 +6849,14 @@ dependencies = [
 ]
 
 [[package]]
-name = "solarti-discriminator-derive"
-version = "0.1.6"
+name = "solarti-discriminator"
+version = "0.1.7"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "41e4b0fe2046b6ea172b98a6fc08fa19399ea839e26991a547e4bdc8ca41105f"
+checksum = "3ffeecf1ba2c7d76676588530cc625295fbf04b531d0a2deecaf5d6ba9e0821a"
 dependencies = [
- "quote",
- "solarti-discriminator-syn 0.1.6",
- "syn 2.0.87",
+ "bytemuck",
+ "miraland-program",
+ "solarti-discriminator-derive 0.1.7 (registry+https://github.com/rust-lang/crates.io-index)",
 ]
 
 [[package]]
@@ -6745,10 +6869,19 @@ dependencies = [
 ]
 
 [[package]]
-name = "solarti-discriminator-syn"
-version = "0.1.6"
+name = "solarti-discriminator-derive"
+version = "0.1.7"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "992cc03ec6a01bccff84a8aedf326d94170ffa7059fede704b1f84b5c7f0f0ad"
+checksum = "f8f267a24e5a82ca67a9570178f5fa31d44ca2c09946c7349f53a0e486aaa5e4"
+dependencies = [
+ "quote",
+ "solarti-discriminator-syn 0.1.7 (registry+https://github.com/rust-lang/crates.io-index)",
+ "syn 2.0.87",
+]
+
+[[package]]
+name = "solarti-discriminator-syn"
+version = "0.1.7"
 dependencies = [
  "proc-macro2",
  "quote",
@@ -6760,6 +6893,8 @@ dependencies = [
 [[package]]
 name = "solarti-discriminator-syn"
 version = "0.1.7"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "fef2c4e7ff5b11a20fee534daf0ceded439283d8379b9790717b04dde423a257"
 dependencies = [
  "proc-macro2",
  "quote",
@@ -6820,7 +6955,7 @@ dependencies = [
  "miraland-program",
  "miraland-program-test",
  "miraland-sdk",
- "solarti-token 4.1.2",
+ "solarti-token 4.1.3",
 ]
 
 [[package]]
@@ -6842,7 +6977,7 @@ dependencies = [
  "miraland-program",
  "miraland-program-test",
  "miraland-sdk",
- "solarti-token 4.1.2",
+ "solarti-token 4.1.3",
 ]
 
 [[package]]
@@ -6865,7 +7000,7 @@ version = "1.0.0"
 dependencies = [
  "arrayref",
  "miraland-program",
- "solarti-token 4.1.2",
+ "solarti-token 4.1.3",
 ]
 
 [[package]]
@@ -6889,7 +7024,7 @@ dependencies = [
  "solarti-governance-addin-mock",
  "solarti-governance-test-sdk",
  "solarti-governance-tools",
- "solarti-token 4.1.2",
+ "solarti-token 4.1.3",
  "thiserror",
 ]
 
@@ -6921,7 +7056,7 @@ dependencies = [
  "solarti-governance-addin-api",
  "solarti-governance-test-sdk",
  "solarti-governance-tools",
- "solarti-token 4.1.2",
+ "solarti-token 4.1.3",
  "thiserror",
 ]
 
@@ -6946,7 +7081,7 @@ dependencies = [
  "solarti-governance-addin-mock",
  "solarti-governance-test-sdk",
  "solarti-governance-tools",
- "solarti-token 4.1.2",
+ "solarti-token 4.1.3",
  "thiserror",
 ]
 
@@ -6965,7 +7100,7 @@ dependencies = [
  "num-traits",
  "serde",
  "serde_derive",
- "solarti-token 4.1.2",
+ "solarti-token 4.1.3",
  "thiserror",
 ]
 
@@ -6981,7 +7116,7 @@ dependencies = [
  "num-traits",
  "serde",
  "serde_derive",
- "solarti-token 4.1.2",
+ "solarti-token 4.1.3",
  "thiserror",
 ]
 
@@ -7005,7 +7140,7 @@ dependencies = [
  "miraland-sdk",
  "shank",
  "solarti-associated-token-account 2.1.2",
- "solarti-token 4.1.2",
+ "solarti-token 4.1.3",
  "thiserror",
 ]
 
@@ -7027,20 +7162,20 @@ dependencies = [
 
 [[package]]
 name = "solarti-memo"
-version = "4.0.2"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "42a1b9fb055f9819437609930fbb41e48033e3c1e9d8544b9a2c0a8db7ac7b06"
-dependencies = [
- "miraland-program",
-]
-
-[[package]]
-name = "solarti-memo"
 version = "4.0.3"
 dependencies = [
  "miraland-program",
  "miraland-program-test",
  "miraland-sdk",
+]
+
+[[package]]
+name = "solarti-memo"
+version = "4.0.3"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "f414edcad5961c92135e82b7bca03c9041287c26fb1f87897b377bd8946e5b46"
+dependencies = [
+ "miraland-program",
 ]
 
 [[package]]
@@ -7066,19 +7201,6 @@ dependencies = [
 
 [[package]]
 name = "solarti-pod"
-version = "0.1.6"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "b2666687d5ff2d17e8286a183858ecb6c1ae02ec2b2eb286796d638deafdd4cb"
-dependencies = [
- "borsh 1.5.1",
- "bytemuck",
- "miraland-program",
- "miraland-zk-token-sdk",
- "solarti-program-error 0.3.7",
-]
-
-[[package]]
-name = "solarti-pod"
 version = "0.1.7"
 dependencies = [
  "base64 0.21.7",
@@ -7092,16 +7214,16 @@ dependencies = [
 ]
 
 [[package]]
-name = "solarti-program-error"
-version = "0.3.7"
+name = "solarti-pod"
+version = "0.1.7"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "79e07f5351de5bd5f5328c1aee6a2a08f0d8a7036a4fb3d855cc55a5f3fbaf0a"
+checksum = "98bbf988b4eebd81980e87fc86e4784414d9c76ad2f0bad67a78c896cf728b57"
 dependencies = [
+ "borsh 1.5.1",
+ "bytemuck",
  "miraland-program",
- "num-derive",
- "num-traits",
- "solarti-program-error-derive 0.3.7",
- "thiserror",
+ "miraland-zk-token-sdk",
+ "solarti-program-error 0.3.8 (registry+https://github.com/rust-lang/crates.io-index)",
 ]
 
 [[package]]
@@ -7119,10 +7241,21 @@ dependencies = [
 ]
 
 [[package]]
-name = "solarti-program-error-derive"
-version = "0.3.7"
+name = "solarti-program-error"
+version = "0.3.8"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "0442e0dc511dc147141fdbc10a0a06154cd8d46553bffb6bf194a20c900f9ae4"
+checksum = "84b3145448082b5754784a53513b0544580b5f5ca33efce732b48c8dd086c912"
+dependencies = [
+ "miraland-program",
+ "num-derive",
+ "num-traits",
+ "solarti-program-error-derive 0.3.8 (registry+https://github.com/rust-lang/crates.io-index)",
+ "thiserror",
+]
+
+[[package]]
+name = "solarti-program-error-derive"
+version = "0.3.8"
 dependencies = [
  "proc-macro2",
  "quote",
@@ -7133,6 +7266,8 @@ dependencies = [
 [[package]]
 name = "solarti-program-error-derive"
 version = "0.3.8"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "72ed60e309a75bc5cca35a908e52afea9f972cbd46a88638b33d1995ace1bbd8"
 dependencies = [
  "proc-macro2",
  "quote",
@@ -7181,7 +7316,7 @@ dependencies = [
  "num_enum",
  "rand 0.8.5",
  "solarti-associated-token-account 2.1.2",
- "solarti-token 4.1.2",
+ "solarti-token 4.1.3",
  "test-case",
  "thiserror",
 ]
@@ -7212,7 +7347,7 @@ dependencies = [
  "serial_test 2.0.0",
  "solarti-associated-token-account 2.1.2",
  "solarti-single-pool",
- "solarti-token 4.1.2",
+ "solarti-token 4.1.3",
  "solarti-token-client",
  "tempfile",
  "test-case",
@@ -7240,8 +7375,8 @@ dependencies = [
  "serde_derive",
  "solarti-math",
  "solarti-pod 0.1.7",
- "solarti-token 4.1.2",
- "solarti-token-2022 1.0.2",
+ "solarti-token 4.1.3",
+ "solarti-token-2022 1.0.3",
  "test-case",
  "thiserror",
 ]
@@ -7268,7 +7403,7 @@ dependencies = [
  "serde_json",
  "solarti-associated-token-account 2.1.2",
  "solarti-stake-pool",
- "solarti-token 4.1.2",
+ "solarti-token 4.1.3",
 ]
 
 [[package]]
@@ -7280,22 +7415,8 @@ dependencies = [
  "miraland-program-test",
  "miraland-sdk",
  "solarti-associated-token-account 2.1.2",
- "solarti-token 4.1.2",
+ "solarti-token 4.1.3",
  "thiserror",
-]
-
-[[package]]
-name = "solarti-tlv-account-resolution"
-version = "0.5.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "9e8f8f5e48105158c64197fc42140afb1bda18f62574918c64618fff5db525dd"
-dependencies = [
- "bytemuck",
- "miraland-program",
- "solarti-discriminator 0.1.6",
- "solarti-pod 0.1.6",
- "solarti-program-error 0.3.7",
- "solarti-type-length-value 0.3.5",
 ]
 
 [[package]]
@@ -7316,10 +7437,24 @@ dependencies = [
 ]
 
 [[package]]
-name = "solarti-token"
-version = "4.1.1"
+name = "solarti-tlv-account-resolution"
+version = "0.5.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "4ca9dd7343d8b2c6349b6fbb88562db2d7ab087a6b4621ddeab919e8c0a8d6f4"
+checksum = "9bdf3d6c1e2f2ffd5ddf5cd7165bc664dc7544f0e10143ccc532d2c819936dcd"
+dependencies = [
+ "bytemuck",
+ "miraland-program",
+ "solarti-discriminator 0.1.7 (registry+https://github.com/rust-lang/crates.io-index)",
+ "solarti-pod 0.1.7 (registry+https://github.com/rust-lang/crates.io-index)",
+ "solarti-program-error 0.3.8 (registry+https://github.com/rust-lang/crates.io-index)",
+ "solarti-type-length-value 0.3.6 (registry+https://github.com/rust-lang/crates.io-index)",
+]
+
+[[package]]
+name = "solarti-token"
+version = "4.1.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "381ba9b58cf4627486b76d463ea2b4ea0fbeb2a9feb69de7047fdfc100f5d14d"
 dependencies = [
  "arrayref",
  "bytemuck",
@@ -7332,7 +7467,7 @@ dependencies = [
 
 [[package]]
 name = "solarti-token"
-version = "4.1.2"
+version = "4.1.3"
 dependencies = [
  "arrayref",
  "bytemuck",
@@ -7350,9 +7485,9 @@ dependencies = [
 
 [[package]]
 name = "solarti-token-2022"
-version = "1.0.1"
+version = "1.0.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "9afc3edf283bfa8783d11438ba34dc67344924f6a704e99064a1f01904e2f965"
+checksum = "0d30aa32896028c91976aa6e15124b3dc9e4a1c50143b71ff7485afaba607d92"
 dependencies = [
  "arrayref",
  "bytemuck",
@@ -7362,19 +7497,19 @@ dependencies = [
  "num-derive",
  "num-traits",
  "num_enum",
- "solarti-memo 4.0.2",
- "solarti-pod 0.1.6",
- "solarti-token 4.1.1",
- "solarti-token-group-interface 0.1.2",
- "solarti-token-metadata-interface 0.2.4",
- "solarti-transfer-hook-interface 0.4.1",
- "solarti-type-length-value 0.3.5",
+ "solarti-memo 4.0.3 (registry+https://github.com/rust-lang/crates.io-index)",
+ "solarti-pod 0.1.7 (registry+https://github.com/rust-lang/crates.io-index)",
+ "solarti-token 4.1.2",
+ "solarti-token-group-interface 0.1.3 (registry+https://github.com/rust-lang/crates.io-index)",
+ "solarti-token-metadata-interface 0.2.5 (registry+https://github.com/rust-lang/crates.io-index)",
+ "solarti-transfer-hook-interface 0.4.2 (registry+https://github.com/rust-lang/crates.io-index)",
+ "solarti-type-length-value 0.3.6 (registry+https://github.com/rust-lang/crates.io-index)",
  "thiserror",
 ]
 
 [[package]]
 name = "solarti-token-2022"
-version = "1.0.2"
+version = "1.0.3"
 dependencies = [
  "arrayref",
  "base64 0.21.7",
@@ -7395,7 +7530,7 @@ dependencies = [
  "serial_test 2.0.0",
  "solarti-memo 4.0.3",
  "solarti-pod 0.1.7",
- "solarti-token 4.1.2",
+ "solarti-token 4.1.3",
  "solarti-token-group-interface 0.1.3",
  "solarti-token-metadata-interface 0.2.5",
  "solarti-transfer-hook-interface 0.4.2",
@@ -7429,8 +7564,8 @@ dependencies = [
  "serial_test 2.0.0",
  "solarti-associated-token-account 2.1.2",
  "solarti-memo 4.0.3",
- "solarti-token 4.1.2",
- "solarti-token-2022 1.0.2",
+ "solarti-token 4.1.3",
+ "solarti-token-2022 1.0.3",
  "solarti-token-client",
  "solarti-token-metadata-interface 0.2.5",
  "strum 0.25.0",
@@ -7456,8 +7591,8 @@ dependencies = [
  "miraland-sdk",
  "solarti-associated-token-account 2.1.2",
  "solarti-memo 4.0.3",
- "solarti-token 4.1.2",
- "solarti-token-2022 1.0.2",
+ "solarti-token 4.1.3",
+ "solarti-token-2022 1.0.3",
  "solarti-token-group-interface 0.1.3",
  "solarti-token-metadata-interface 0.2.5",
  "solarti-transfer-hook-interface 0.4.2",
@@ -7474,7 +7609,7 @@ dependencies = [
  "solarti-discriminator 0.1.7",
  "solarti-pod 0.1.7",
  "solarti-program-error 0.3.8",
- "solarti-token-2022 1.0.2",
+ "solarti-token-2022 1.0.3",
  "solarti-token-client",
  "solarti-token-group-example",
  "solarti-token-group-interface 0.1.3",
@@ -7491,24 +7626,11 @@ dependencies = [
  "miraland-sdk",
  "solarti-discriminator 0.1.7",
  "solarti-pod 0.1.7",
- "solarti-token-2022 1.0.2",
+ "solarti-token-2022 1.0.3",
  "solarti-token-client",
  "solarti-token-group-interface 0.1.3",
  "solarti-token-metadata-interface 0.2.5",
  "solarti-type-length-value 0.3.6",
-]
-
-[[package]]
-name = "solarti-token-group-interface"
-version = "0.1.2"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "ed17388ec157fe4e9297dc1b2ff4eaa5d96d7614b6b7a118618f47a7259c43f5"
-dependencies = [
- "bytemuck",
- "miraland-program",
- "solarti-discriminator 0.1.6",
- "solarti-pod 0.1.6",
- "solarti-program-error 0.3.7",
 ]
 
 [[package]]
@@ -7524,6 +7646,19 @@ dependencies = [
 ]
 
 [[package]]
+name = "solarti-token-group-interface"
+version = "0.1.3"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "99646bbb60201304ff7b7fe96fa97626059b7d3069feed94f7a28be7426c4a15"
+dependencies = [
+ "bytemuck",
+ "miraland-program",
+ "solarti-discriminator 0.1.7 (registry+https://github.com/rust-lang/crates.io-index)",
+ "solarti-pod 0.1.7 (registry+https://github.com/rust-lang/crates.io-index)",
+ "solarti-program-error 0.3.8 (registry+https://github.com/rust-lang/crates.io-index)",
+]
+
+[[package]]
 name = "solarti-token-lending"
 version = "0.2.1"
 dependencies = [
@@ -7536,7 +7671,7 @@ dependencies = [
  "num-derive",
  "num-traits",
  "proptest",
- "solarti-token 4.1.2",
+ "solarti-token 4.1.3",
  "thiserror",
  "uint",
 ]
@@ -7552,7 +7687,7 @@ dependencies = [
  "miraland-logger",
  "miraland-program",
  "miraland-sdk",
- "solarti-token 4.1.2",
+ "solarti-token 4.1.3",
  "solarti-token-lending",
 ]
 
@@ -7564,25 +7699,11 @@ dependencies = [
  "miraland-program-test",
  "miraland-sdk",
  "solarti-pod 0.1.7",
- "solarti-token-2022 1.0.2",
+ "solarti-token-2022 1.0.3",
  "solarti-token-client",
  "solarti-token-metadata-interface 0.2.5",
  "solarti-type-length-value 0.3.6",
  "test-case",
-]
-
-[[package]]
-name = "solarti-token-metadata-interface"
-version = "0.2.4"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "789944bd6f2de8d097a72f4cd05b6534b76419717fd7d06ec624471def274ce7"
-dependencies = [
- "borsh 1.5.1",
- "miraland-program",
- "solarti-discriminator 0.1.6",
- "solarti-pod 0.1.6",
- "solarti-program-error 0.3.7",
- "solarti-type-length-value 0.3.5",
 ]
 
 [[package]]
@@ -7600,6 +7721,20 @@ dependencies = [
 ]
 
 [[package]]
+name = "solarti-token-metadata-interface"
+version = "0.2.5"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "ccc11d61d35fadd7edf95e88a7bc2551a982cbe2356b156d03502d1fc1ce69ef"
+dependencies = [
+ "borsh 1.5.1",
+ "miraland-program",
+ "solarti-discriminator 0.1.7 (registry+https://github.com/rust-lang/crates.io-index)",
+ "solarti-pod 0.1.7 (registry+https://github.com/rust-lang/crates.io-index)",
+ "solarti-program-error 0.3.8 (registry+https://github.com/rust-lang/crates.io-index)",
+ "solarti-type-length-value 0.3.6 (registry+https://github.com/rust-lang/crates.io-index)",
+]
+
+[[package]]
 name = "solarti-token-swap"
 version = "3.0.2"
 dependencies = [
@@ -7613,8 +7748,8 @@ dependencies = [
  "proptest",
  "roots",
  "solarti-math",
- "solarti-token 4.1.2",
- "solarti-token-2022 1.0.2",
+ "solarti-token 4.1.3",
+ "solarti-token-2022 1.0.3",
  "test-case",
  "thiserror",
 ]
@@ -7627,7 +7762,7 @@ dependencies = [
  "honggfuzz",
  "miraland-program",
  "solarti-math",
- "solarti-token 4.1.2",
+ "solarti-token 4.1.3",
  "solarti-token-swap",
 ]
 
@@ -7641,8 +7776,8 @@ dependencies = [
  "num-derive",
  "num-traits",
  "num_enum",
- "solarti-token 4.1.2",
- "solarti-token-2022 1.0.2",
+ "solarti-token 4.1.3",
+ "solarti-token-2022 1.0.3",
  "solarti-token-client",
  "test-case",
  "thiserror",
@@ -7662,8 +7797,8 @@ dependencies = [
  "miraland-sdk",
  "miraland-test-validator",
  "solarti-associated-token-account 2.1.2",
- "solarti-token 4.1.2",
- "solarti-token-2022 1.0.2",
+ "solarti-token 4.1.3",
+ "solarti-token-2022 1.0.3",
  "solarti-token-client",
  "solarti-token-upgrade",
  "tokio",
@@ -7678,8 +7813,8 @@ dependencies = [
  "miraland-program",
  "num_enum",
  "solarti-associated-token-account 2.1.2",
- "solarti-token 4.1.2",
- "solarti-token-2022 1.0.2",
+ "solarti-token 4.1.3",
+ "solarti-token-2022 1.0.3",
  "thiserror",
 ]
 
@@ -7697,7 +7832,7 @@ dependencies = [
  "miraland-sdk",
  "miraland-test-validator",
  "solarti-tlv-account-resolution 0.5.2",
- "solarti-token-2022 1.0.2",
+ "solarti-token-2022 1.0.3",
  "solarti-token-client",
  "solarti-transfer-hook-interface 0.4.2",
  "strum 0.25.0",
@@ -7714,25 +7849,9 @@ dependencies = [
  "miraland-program-test",
  "miraland-sdk",
  "solarti-tlv-account-resolution 0.5.2",
- "solarti-token-2022 1.0.2",
+ "solarti-token-2022 1.0.3",
  "solarti-transfer-hook-interface 0.4.2",
  "solarti-type-length-value 0.3.6",
-]
-
-[[package]]
-name = "solarti-transfer-hook-interface"
-version = "0.4.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "627714d2cc51120123bded0a7b2e92ee1656efa6f77cc9a166521479b1840bc3"
-dependencies = [
- "arrayref",
- "bytemuck",
- "miraland-program",
- "solarti-discriminator 0.1.6",
- "solarti-pod 0.1.6",
- "solarti-program-error 0.3.7",
- "solarti-tlv-account-resolution 0.5.1",
- "solarti-type-length-value 0.3.5",
 ]
 
 [[package]]
@@ -7750,16 +7869,19 @@ dependencies = [
 ]
 
 [[package]]
-name = "solarti-type-length-value"
-version = "0.3.5"
+name = "solarti-transfer-hook-interface"
+version = "0.4.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "753b1ce13b15fcd33bcadbfcb0574a170ad71c609f6206b2a1040b504df873b7"
+checksum = "5189643c3454a352a1685aee63491af24e44c1d2f41f71446c7d72ddbbc2b7ab"
 dependencies = [
+ "arrayref",
  "bytemuck",
  "miraland-program",
- "solarti-discriminator 0.1.6",
- "solarti-pod 0.1.6",
- "solarti-program-error 0.3.7",
+ "solarti-discriminator 0.1.7 (registry+https://github.com/rust-lang/crates.io-index)",
+ "solarti-pod 0.1.7 (registry+https://github.com/rust-lang/crates.io-index)",
+ "solarti-program-error 0.3.8 (registry+https://github.com/rust-lang/crates.io-index)",
+ "solarti-tlv-account-resolution 0.5.2 (registry+https://github.com/rust-lang/crates.io-index)",
+ "solarti-type-length-value 0.3.6 (registry+https://github.com/rust-lang/crates.io-index)",
 ]
 
 [[package]]
@@ -7772,6 +7894,19 @@ dependencies = [
  "solarti-pod 0.1.7",
  "solarti-program-error 0.3.8",
  "solarti-type-length-value-derive",
+]
+
+[[package]]
+name = "solarti-type-length-value"
+version = "0.3.6"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "4be57ec1a518c9890db2f56e71f67e2233f68c646e2c5e540df3a3b19b479885"
+dependencies = [
+ "bytemuck",
+ "miraland-program",
+ "solarti-discriminator 0.1.7 (registry+https://github.com/rust-lang/crates.io-index)",
+ "solarti-pod 0.1.7 (registry+https://github.com/rust-lang/crates.io-index)",
+ "solarti-program-error 0.3.8 (registry+https://github.com/rust-lang/crates.io-index)",
 ]
 
 [[package]]
@@ -7794,6 +7929,12 @@ name = "spin"
 version = "0.9.8"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "6980e8d7511241f8acf4aebddbb1ff938df5eebe98691418c4468d0b72a96a67"
+
+[[package]]
+name = "stable_deref_trait"
+version = "1.2.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "a8f112729512f8e442d81f95a8a7ddf2b7c6b8a1a6f509a95864142b30cab2d3"
 
 [[package]]
 name = "static_assertions"
@@ -7933,6 +8074,17 @@ dependencies = [
  "quote",
  "syn 1.0.109",
  "unicode-xid",
+]
+
+[[package]]
+name = "synstructure"
+version = "0.13.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "c8af7666ab7b6390ab78131fb5b0fce11d6b7a6951602017c35fa82800708971"
+dependencies = [
+ "proc-macro2",
+ "quote",
+ "syn 2.0.87",
 ]
 
 [[package]]
@@ -8092,7 +8244,7 @@ version = "0.1.1"
 dependencies = [
  "miraland-sdk",
  "solarti-memo 4.0.3",
- "solarti-token 4.1.2",
+ "solarti-token 4.1.3",
  "solarti-token-swap",
 ]
 
@@ -8113,18 +8265,18 @@ checksum = "23d434d3f8967a09480fb04132ebe0a3e088c173e6d0ee7897abbdf4eab0f8b9"
 
 [[package]]
 name = "thiserror"
-version = "1.0.67"
+version = "1.0.68"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "3b3c6efbfc763e64eb85c11c25320f0737cb7364c4b6336db90aa9ebe27a0bbd"
+checksum = "02dd99dc800bbb97186339685293e1cc5d9df1f8fae2d0aecd9ff1c77efea892"
 dependencies = [
  "thiserror-impl",
 ]
 
 [[package]]
 name = "thiserror-impl"
-version = "1.0.67"
+version = "1.0.68"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "b607164372e89797d78b8e23a6d67d5d1038c1c65efd52e1389ef8b77caba2a6"
+checksum = "a7c61ec9a6f64d2793d8a45faba21efbe3ced62a886d44c36a009b2b519b4c7e"
 dependencies = [
  "proc-macro2",
  "quote",
@@ -8198,6 +8350,16 @@ dependencies = [
  "unicode-normalization",
  "wasm-bindgen",
  "zeroize",
+]
+
+[[package]]
+name = "tinystr"
+version = "0.7.6"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "9117f5d4db391c1cf6927e7bea3db74b9a1c1add8f7eda9ffd5364f40f57b82f"
+dependencies = [
+ "displaydoc",
+ "zerovec",
 ]
 
 [[package]]
@@ -8532,7 +8694,7 @@ dependencies = [
  "rustls",
  "sha1",
  "thiserror",
- "url 2.5.2",
+ "url 2.5.3",
  "utf-8",
  "webpki-roots 0.24.0",
 ]
@@ -8672,12 +8834,12 @@ dependencies = [
 
 [[package]]
 name = "url"
-version = "2.5.2"
+version = "2.5.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "22784dbdf76fdde8af1aeda5622b546b422b6fc585325248a2bf9f5e41e94d6c"
+checksum = "8d157f1b96d14500ffdc1f10ba712e780825526c03d9a49b4d0324b0d9113ada"
 dependencies = [
  "form_urlencoded",
- "idna 0.5.0",
+ "idna 1.0.3",
  "percent-encoding 2.3.1",
 ]
 
@@ -8686,6 +8848,18 @@ name = "utf-8"
 version = "0.7.6"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "09cc8ee72d2a9becf2f2febe0205bbed8fc6615b7cb429ad062dc7b7ddd036a9"
+
+[[package]]
+name = "utf16_iter"
+version = "1.0.5"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "c8232dd3cdaed5356e0f716d285e4b40b932ac434100fe9b7e0e8e935b9e6246"
+
+[[package]]
+name = "utf8_iter"
+version = "1.0.4"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "b6c140620e7ffbb22c2dee59cafe6084a59b5ffc27a8859a5f0d494b5d52b6be"
 
 [[package]]
 name = "utf8parse"
@@ -9087,6 +9261,18 @@ dependencies = [
 ]
 
 [[package]]
+name = "write16"
+version = "1.0.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "d1890f4022759daae28ed4fe62859b1236caebfc61ede2f63ed4e695f3f6d936"
+
+[[package]]
+name = "writeable"
+version = "0.5.5"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "1e9df38ee2d2c3c5948ea468a8406ff0db0b29ae1ffde1bcf20ef305bcc95c51"
+
+[[package]]
 name = "x509-parser"
 version = "0.14.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -9116,6 +9302,30 @@ dependencies = [
 ]
 
 [[package]]
+name = "yoke"
+version = "0.7.4"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "6c5b1314b079b0930c31e3af543d8ee1757b1951ae1e1565ec704403a7240ca5"
+dependencies = [
+ "serde",
+ "stable_deref_trait",
+ "yoke-derive",
+ "zerofrom",
+]
+
+[[package]]
+name = "yoke-derive"
+version = "0.7.4"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "28cc31741b18cb6f1d5ff12f5b7523e3d6eb0852bbbad19d73905511d9849b95"
+dependencies = [
+ "proc-macro2",
+ "quote",
+ "syn 2.0.87",
+ "synstructure 0.13.1",
+]
+
+[[package]]
 name = "zerocopy"
 version = "0.7.35"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -9137,6 +9347,27 @@ dependencies = [
 ]
 
 [[package]]
+name = "zerofrom"
+version = "0.1.4"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "91ec111ce797d0e0784a1116d0ddcdbea84322cd79e5d5ad173daeba4f93ab55"
+dependencies = [
+ "zerofrom-derive",
+]
+
+[[package]]
+name = "zerofrom-derive"
+version = "0.1.4"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "0ea7b4a3637ea8669cedf0f1fd5c286a17f3de97b8dd5a70a6c167a1730e63a5"
+dependencies = [
+ "proc-macro2",
+ "quote",
+ "syn 2.0.87",
+ "synstructure 0.13.1",
+]
+
+[[package]]
 name = "zeroize"
 version = "1.3.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -9150,6 +9381,28 @@ name = "zeroize_derive"
 version = "1.4.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "ce36e65b0d2999d2aafac989fb249189a141aee1f53c612c1f37d72631959f69"
+dependencies = [
+ "proc-macro2",
+ "quote",
+ "syn 2.0.87",
+]
+
+[[package]]
+name = "zerovec"
+version = "0.10.4"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "aa2b893d79df23bfb12d5461018d408ea19dfafe76c2c7ef6d4eba614f8ff079"
+dependencies = [
+ "yoke",
+ "zerofrom",
+ "zerovec-derive",
+]
+
+[[package]]
+name = "zerovec-derive"
+version = "0.10.3"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "6eafa6dfb17584ea3e2bd6e76e0cc15ad7af12b09abdd1ca55961bed9b1063c6"
 dependencies = [
  "proc-macro2",
  "quote",
