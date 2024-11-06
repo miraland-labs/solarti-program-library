@@ -1,6 +1,6 @@
 [package]
 name = "solarti-token-group-interface"
-version = "0.1.4"
+version = "0.1.5"
 description = "Solarti Program Library Token Group Interface"
 authors = [
   "Miraland Crafters <crafters@miraland.top>",
@@ -12,7 +12,7 @@ edition = "2021"
 
 [dependencies]
 bytemuck = "1.14.0"
-miraland-program = ">=1.18.5, <1.19.0"
+miraland-program = ">=1.18.5"
 solarti-discriminator = { version = "0.1.8", path = "../../libraries/discriminator" }
 solarti-pod = { version = "0.1.8", path = "../../libraries/pod", features = [
   "borsh",
