@@ -12,7 +12,7 @@ use {
         MAX_VALIDATORS_TO_UPDATE,
     },
     borsh::{BorshDeserialize, BorshSchema, BorshSerialize},
-    solana_program::{
+    miraland_program::{
         instruction::{AccountMeta, Instruction},
         pubkey::Pubkey,
         stake, system_program, sysvar,
@@ -84,7 +84,7 @@ pub enum StakePoolInstruction {
     ///   The stake account will have the rent-exempt amount plus
     ///   `max(
     ///     crate::MINIMUM_ACTIVE_STAKE,
-    ///     solana_program::stake::tools::get_minimum_delegation()
+    ///     miraland_program::stake::tools::get_minimum_delegation()
     ///   )`.
     ///   It is funded from the stake pool reserve.
     ///
@@ -110,7 +110,7 @@ pub enum StakePoolInstruction {
     ///
     ///   Only succeeds if the validator stake account has the minimum of
     ///   `max(crate::MINIMUM_ACTIVE_STAKE,
-    /// solana_program::stake::tools::get_minimum_delegation())`.   plus the
+    /// miraland_program::stake::tools::get_minimum_delegation())`.   plus the
     /// rent-exempt amount.
     ///
     ///   0. `[w]` Stake pool
@@ -141,7 +141,7 @@ pub enum StakePoolInstruction {
     /// The instruction only succeeds if the transient stake account does not
     /// exist. The amount of lamports to move must be at least rent-exemption
     /// plus `max(crate::MINIMUM_ACTIVE_STAKE,
-    /// solana_program::stake::tools::get_minimum_delegation())`.
+    /// miraland_program::stake::tools::get_minimum_delegation())`.
     ///
     ///  0. `[]` Stake pool
     ///  1. `[s]` Stake pool staker
@@ -170,7 +170,7 @@ pub enum StakePoolInstruction {
     /// This instruction only succeeds if the transient stake account does not
     /// exist. The minimum amount to move is rent-exemption plus
     /// `max(crate::MINIMUM_ACTIVE_STAKE,
-    /// solana_program::stake::tools::get_minimum_delegation())`.
+    /// miraland_program::stake::tools::get_minimum_delegation())`.
     ///
     ///  0. `[]` Stake pool
     ///  1. `[s]` Stake pool staker
@@ -295,7 +295,7 @@ pub enum StakePoolInstruction {
     ///   amount of pool tokens, and if the withdrawal keeps the total
     ///   staked amount above the minimum of rent-exempt amount + `max(
     ///     crate::MINIMUM_ACTIVE_STAKE,
-    ///     solana_program::stake::tools::get_minimum_delegation()
+    ///     miraland_program::stake::tools::get_minimum_delegation()
     ///   )`.
     ///
     ///   When allowing withdrawals, the order of priority goes:
@@ -441,7 +441,7 @@ pub enum StakePoolInstruction {
     ///
     /// The minimum amount to move is rent-exemption plus
     /// `max(crate::MINIMUM_ACTIVE_STAKE,
-    /// solana_program::stake::tools::get_minimum_delegation())`.
+    /// miraland_program::stake::tools::get_minimum_delegation())`.
     ///
     ///  0. `[]` Stake pool
     ///  1. `[s]` Stake pool staker
@@ -486,7 +486,7 @@ pub enum StakePoolInstruction {
     ///
     ///  The amount of lamports to move must be at least
     /// `max(crate::MINIMUM_ACTIVE_STAKE,
-    /// solana_program::stake::tools::get_minimum_delegation())`.
+    /// miraland_program::stake::tools::get_minimum_delegation())`.
     ///
     ///  0. `[]` Stake pool
     ///  1. `[s]` Stake pool staker
@@ -526,7 +526,7 @@ pub enum StakePoolInstruction {
     /// The instruction only succeeds if the transient stake account does not
     /// exist. The amount of lamports to move must be at least rent-exemption
     /// plus `max(crate::MINIMUM_ACTIVE_STAKE,
-    /// solana_program::stake::tools::get_minimum_delegation())`.
+    /// miraland_program::stake::tools::get_minimum_delegation())`.
     ///
     ///  0. `[]` Stake pool
     ///  1. `[s]` Stake pool staker
@@ -648,7 +648,7 @@ pub enum StakePoolInstruction {
     ///   amount of pool tokens, and if the withdrawal keeps the total
     ///   staked amount above the minimum of rent-exempt amount + `max(
     ///     crate::MINIMUM_ACTIVE_STAKE,
-    ///     solana_program::stake::tools::get_minimum_delegation()
+    ///     miraland_program::stake::tools::get_minimum_delegation()
     ///   )`.
     ///
     ///   0. `[w]` Stake pool

@@ -23,7 +23,7 @@ use {
         error::LendingError,
         math::{common::*, decimal::Decimal},
     },
-    solana_program::program_error::ProgramError,
+    miraland_program::program_error::ProgramError,
     std::{convert::TryFrom, fmt},
     uint::construct_uint,
 };

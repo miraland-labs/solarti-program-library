@@ -1,6 +1,6 @@
 import asyncio
 import pytest
-from solana.rpc.commitment import Confirmed
+from miraland.rpc.commitment import Confirmed
 
 from stake.constants import STAKE_LEN
 from stake_pool.actions import remove_validator_from_pool

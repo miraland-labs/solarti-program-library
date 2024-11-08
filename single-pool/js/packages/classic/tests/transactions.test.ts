@@ -1,5 +1,5 @@
 import test from 'ava';
-import { start, BanksClient, ProgramTestContext } from 'solana-bankrun';
+import { start, BanksClient, ProgramTestContext } from 'miraland-bankrun';
 import {
   Keypair,
   PublicKey,
@@ -8,7 +8,7 @@ import {
   TransactionInstruction,
   StakeProgram,
   VoteProgram,
-} from '@solana/web3.js';
+} from '@miraland/web3.js';
 import { Buffer } from 'buffer';
 import {
   getVoteAccountAddressForPool,

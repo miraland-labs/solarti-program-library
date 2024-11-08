@@ -23,8 +23,8 @@
 //! A production-ready indexer (Plerkle) can be found in the [Metaplex program library](https://github.com/metaplex-foundation/digital-asset-validator-plugin)
 
 use anchor_lang::{
+    miraland_program::sysvar::{clock::Clock, rent::Rent},
     prelude::*,
-    solana_program::sysvar::{clock::Clock, rent::Rent},
 };
 use borsh::{BorshDeserialize, BorshSerialize};
 
@@ -40,8 +40,8 @@ pub mod zero_copy;
 pub use crate::noop::{wrap_application_data_v1, Noop};
 
 use crate::canopy::{fill_in_proof_from_canopy, update_canopy};
-use crate::error::AccountCompressionError;
-use crate::events::{AccountCompressionEvent, ChangeLogEvent};
+pub use crate::error::AccountCompressionError;
+pub use crate::events::{AccountCompressionEvent, ChangeLogEvent};
 use crate::noop::wrap_event;
 use crate::state::{
     merkle_tree_get_size, ConcurrentMerkleTreeHeader, CONCURRENT_MERKLE_TREE_HEADER_SIZE_V1,
@@ -356,7 +356,7 @@ pub mod spl_account_compression {
     ///
     /// Learn more about SPL
     /// ConcurrentMerkleTree
-    /// [here](https://github.com/solana-labs/solana-program-library/tree/master/libraries/concurrent-merkle-tree)
+    /// [here](https://github.com/miraland-labs/miraland-program-library/tree/master/libraries/concurrent-merkle-tree)
     pub fn append(ctx: Context<Modify>, leaf: [u8; 32]) -> Result<()> {
         require_eq!(
             *ctx.accounts.merkle_tree.owner,

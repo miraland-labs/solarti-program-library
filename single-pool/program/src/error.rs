@@ -1,7 +1,7 @@
 //! Error types
 
 use {
-    solana_program::{
+    miraland_program::{
         decode_error::DecodeError,
         msg,
         program_error::{PrintProgramError, ProgramError},

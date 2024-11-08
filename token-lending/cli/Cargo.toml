@@ -1,11 +1,11 @@
 [package]
 authors = [
-  "Miraland Crafters <crafters@miraland.top>",
-  "Solana Labs Maintainers <maintainers@solanalabs.com>",
+  "Miraland Crafters <crafters@miraland.io>",
+  "Miraland Labs Maintainers <maintainers@miralandlabs.com>",
 ]
 description = "SOLARTI Token Lending CLI"
 edition = "2021"
-homepage = "https://spl.solana.com/token-lending"
+homepage = "https://spl.miraland.io/token-lending"
 license = "Apache-2.0"
 name = "solarti-token-lending-cli"
 repository = "https://github.com/miraland-labs/solarti-program-library"
@@ -13,12 +13,12 @@ version = "0.2.1"
 
 [dependencies]
 clap = "2.33.3"
-miraland-clap-utils = ">=1.18.5, <1.19.0"
-miraland-cli-config = ">=1.18.5, <1.19.0"
-miraland-client = ">=1.18.5, <1.19.0"
-miraland-logger = ">=1.18.5, <1.19.0"
-miraland-sdk = ">=1.18.5, <1.19.0"
-miraland-program = ">=1.18.5, <1.19.0"
+miraland-clap-utils = ">1.19.0"
+miraland-cli-config = ">1.19.0"
+miraland-client = ">1.19.0"
+miraland-logger = ">1.19.0"
+miraland-sdk = ">1.19.0"
+miraland-program = ">1.19.0"
 solarti-token-lending = { version = "0.2", path = "../program", features = [
   "no-entrypoint",
 ] }

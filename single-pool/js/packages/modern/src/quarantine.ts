@@ -4,7 +4,7 @@ import {
   Base58EncodedAddress,
   AccountRole,
   getProgramDerivedAddress,
-} from '@solana/web3.js';
+} from '@miraland/web3.js';
 
 // HERE BE DRAGONS
 // this is all the stuff that shouldnt be in our library once we can import from elsewhere

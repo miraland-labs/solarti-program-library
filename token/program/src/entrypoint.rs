@@ -2,13 +2,13 @@
 
 use {
     crate::{error::TokenError, processor::Processor},
-    solana_program::{
+    miraland_program::{
         account_info::AccountInfo, entrypoint::ProgramResult, program_error::PrintProgramError,
         pubkey::Pubkey,
     },
 };
 
-solana_program::entrypoint!(process_instruction);
+miraland_program::entrypoint!(process_instruction);
 fn process_instruction(
     program_id: &Pubkey,
     accounts: &[AccountInfo],

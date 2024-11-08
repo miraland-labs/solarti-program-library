@@ -4,9 +4,9 @@ pub mod flash_loan_receiver;
 
 use {
     assert_matches::*,
-    solana_program::{program_option::COption, program_pack::Pack, pubkey::Pubkey},
-    solana_program_test::*,
-    solana_sdk::{
+    miraland_program::{program_option::COption, program_pack::Pack, pubkey::Pubkey},
+    miraland_program_test::*,
+    miraland_sdk::{
         account::Account,
         signature::{read_keypair_file, Keypair, Signer},
         system_instruction::create_account,

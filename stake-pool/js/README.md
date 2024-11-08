@@ -21,10 +21,10 @@ The build is available at `dist/index.js` (or `dist.browser/index.iife.js` in th
 ## Browser bundle
 ```html
 <!-- Development (un-minified) -->
-<script src="https://unpkg.com/@solana/solarti-stake-pool@latest/dist.browser/index.iife.js"></script>
+<script src="https://unpkg.com/@miraland/solarti-stake-pool@latest/dist.browser/index.iife.js"></script>
 
 <!-- Production (minified) -->
-<script src="https://unpkg.com/@solana/solarti-stake-pool@latest/dist.browser/index.iife.min.js"></script>
+<script src="https://unpkg.com/@miraland/solarti-stake-pool@latest/dist.browser/index.iife.min.js"></script>
 ```
 
 ## Test
@@ -37,18 +37,18 @@ npm test
 
 ### JavaScript
 ```javascript
-const solanaStakePool = require('@solana/solarti-stake-pool');
-console.log(solanaStakePool);
+const miralandStakePool = require('@miraland/solarti-stake-pool');
+console.log(miralandStakePool);
 ```
 
 ### ES6
 ```javascript
-import * as solanaStakePool from '@solana/solarti-stake-pool';
-console.log(solanaStakePool);
+import * as miralandStakePool from '@miraland/solarti-stake-pool';
+console.log(miralandStakePool);
 ```
 
 ### Browser bundle
 ```javascript
-// `solanaStakePool` is provided in the global namespace by the script bundle.
-console.log(solanaStakePool);
+// `miralandStakePool` is provided in the global namespace by the script bundle.
+console.log(miralandStakePool);
 ```

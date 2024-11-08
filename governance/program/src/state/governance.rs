@@ -11,7 +11,7 @@ use {
         tools::structs::Reserved119,
     },
     borsh::{io::Write, BorshDeserialize, BorshSchema, BorshSerialize},
-    solana_program::{
+    miraland_program::{
         account_info::AccountInfo, program_error::ProgramError, program_pack::IsInitialized,
         pubkey::Pubkey, rent::Rent,
     },
@@ -674,7 +674,7 @@ pub fn assert_is_valid_vote_threshold(vote_threshold: &VoteThreshold) -> Result<
 
 #[cfg(test)]
 mod test {
-    use {super::*, solana_program::clock::Epoch};
+    use {super::*, miraland_program::clock::Epoch};
 
     fn create_test_governance_config() -> GovernanceConfig {
         GovernanceConfig {

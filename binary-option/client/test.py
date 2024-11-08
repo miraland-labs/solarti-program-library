@@ -4,7 +4,7 @@ import time
 from spl.token.client import Token
 
 
-api_endpoint = "https://api.devnet.solana.com/"
+api_endpoint = "https://api.devnet.miraland.io/"
 balance_data = []
 
 def await_confirmation(client, txn):

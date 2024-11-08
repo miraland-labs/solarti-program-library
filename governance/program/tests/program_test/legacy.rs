@@ -1,6 +1,6 @@
 use {
     borsh::{BorshDeserialize, BorshSchema, BorshSerialize},
-    solana_program::pubkey::Pubkey,
+    miraland_program::pubkey::Pubkey,
     spl_governance::state::{enums::GovernanceAccountType, governance::GovernanceV2},
 };
 
@@ -67,7 +67,7 @@ pub enum VoteWeightSource {
     /// Governing token account snapshots as of the time a proposal entered
     /// voting state are used as voter weights Note: Snapshot source is not
     /// supported in the current version Support for account snapshots are
-    /// required in solana and/or arweave as a prerequisite
+    /// required in miraland and/or arweave as a prerequisite
     Snapshot,
 }
 

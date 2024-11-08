@@ -1,13 +1,13 @@
 #![cfg(feature = "test-sbf")]
 
-use {solana_program::pubkey::Pubkey, solana_program_test::*};
+use {miraland_program::pubkey::Pubkey, miraland_program_test::*};
 
 mod program_test;
 
 use {
     crate::program_test::args::RealmSetupArgs,
+    miraland_sdk::signature::{Keypair, Signer},
     program_test::*,
-    solana_sdk::signature::{Keypair, Signer},
     spl_governance::{
         error::GovernanceError,
         state::{realm::get_governing_token_holding_address, realm_config::GoverningTokenType},

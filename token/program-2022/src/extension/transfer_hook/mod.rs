@@ -8,7 +8,7 @@ use {
         state::Account,
     },
     bytemuck::{Pod, Zeroable},
-    solana_program::{account_info::AccountInfo, program_error::ProgramError, pubkey::Pubkey},
+    miraland_program::{account_info::AccountInfo, program_error::ProgramError, pubkey::Pubkey},
     spl_pod::{optional_keys::OptionalNonZeroPubkey, primitives::PodBool},
 };
 

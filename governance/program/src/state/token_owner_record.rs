@@ -13,7 +13,7 @@ use {
         PROGRAM_AUTHORITY_SEED,
     },
     borsh::{io::Write, BorshDeserialize, BorshSchema, BorshSerialize},
-    solana_program::{
+    miraland_program::{
         account_info::{next_account_info, AccountInfo},
         program_error::ProgramError,
         program_pack::IsInitialized,
@@ -452,7 +452,7 @@ pub fn get_token_owner_record_data_for_proposal_owner(
 mod test {
     use {
         super::*,
-        solana_program::{borsh1::get_packed_len, stake_history::Epoch},
+        miraland_program::{borsh1::get_packed_len, stake_history::Epoch},
     };
 
     fn create_test_token_owner_record() -> TokenOwnerRecordV2 {

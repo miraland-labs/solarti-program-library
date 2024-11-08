@@ -5,11 +5,11 @@ mod program_test;
 use {
     num_traits::cast::ToPrimitive,
     program_test::*,
-    solana_program::{
+    miraland_program::{
         program_error::ProgramError, pubkey::Pubkey, system_instruction::SystemError,
     },
-    solana_program_test::tokio,
-    solana_sdk::signature::Signer,
+    miraland_program_test::tokio,
+    miraland_sdk::signature::Signer,
     spl_governance::{error::GovernanceError, instruction::add_required_signatory},
 };
 

@@ -5,8 +5,8 @@ mod program_test;
 use {
     crate::program_test::args::RealmSetupArgs,
     program_test::*,
-    solana_program::pubkey::Pubkey,
-    solana_program_test::tokio,
+    miraland_program::pubkey::Pubkey,
+    miraland_program_test::tokio,
     spl_governance::{
         error::GovernanceError,
         state::{

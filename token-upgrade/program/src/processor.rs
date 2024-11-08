@@ -5,7 +5,7 @@ use {
         collect_token_upgrade_authority_signer_seeds, error::TokenUpgradeError,
         get_token_upgrade_authority_address_and_bump_seed, instruction::TokenUpgradeInstruction,
     },
-    solana_program::{
+    miraland_program::{
         account_info::{next_account_info, AccountInfo},
         entrypoint::ProgramResult,
         msg,

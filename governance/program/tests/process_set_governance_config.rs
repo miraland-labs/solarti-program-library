@@ -4,8 +4,8 @@ mod program_test;
 
 use {
     program_test::*,
-    solana_program_test::tokio,
-    solana_sdk::{signature::Keypair, signer::Signer},
+    miraland_program_test::tokio,
+    miraland_sdk::{signature::Keypair, signer::Signer},
     spl_governance::{
         error::GovernanceError, instruction::set_governance_config, state::enums::VoteThreshold,
     },

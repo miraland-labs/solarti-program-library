@@ -3,7 +3,7 @@ use serde::{Deserialize, Serialize};
 use {
     crate::extension::{Extension, ExtensionType},
     bytemuck::{Pod, Zeroable},
-    solana_program::program_error::ProgramError,
+    miraland_program::program_error::ProgramError,
     spl_pod::{
         optional_keys::OptionalNonZeroPubkey,
         primitives::{PodI16, PodI64},

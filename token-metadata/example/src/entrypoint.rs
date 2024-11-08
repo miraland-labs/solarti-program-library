@@ -2,14 +2,14 @@
 
 use {
     crate::processor,
-    solana_program::{
+    miraland_program::{
         account_info::AccountInfo, entrypoint::ProgramResult, program_error::PrintProgramError,
         pubkey::Pubkey,
     },
     spl_token_metadata_interface::error::TokenMetadataError,
 };
 
-solana_program::entrypoint!(process_instruction);
+miraland_program::entrypoint!(process_instruction);
 fn process_instruction(
     program_id: &Pubkey,
     accounts: &[AccountInfo],

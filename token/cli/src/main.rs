@@ -1,5 +1,5 @@
 use {
-    solana_sdk::signer::Signer,
+    miraland_sdk::signer::Signer,
     spl_token_cli::{clap_app::*, command::process_command, config::Config},
     std::{str::FromStr, sync::Arc},
 };
@@ -32,7 +32,7 @@ async fn main() -> Result<(), Error> {
     )
     .await;
 
-    miraland_logger::setup_with_default("solana=info,miraland=info");
+    miraland_logger::setup_with_default("miraland=info");
     let result =
         process_command(&sub_command, matches, &config, wallet_manager, bulk_signers).await?;
     println!("{}", result);

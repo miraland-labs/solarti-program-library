@@ -1,13 +1,13 @@
 #![cfg(feature = "test-sbf")]
 
-use {solana_program::instruction::AccountMeta, solana_program_test::*};
+use {miraland_program::instruction::AccountMeta, miraland_program_test::*};
 
 mod program_test;
 
 use {
     crate::program_test::args::*,
+    miraland_sdk::signature::{Keypair, Signer},
     program_test::*,
-    solana_sdk::signature::{Keypair, Signer},
     spl_governance::{
         error::GovernanceError,
         instruction::deposit_governing_tokens,

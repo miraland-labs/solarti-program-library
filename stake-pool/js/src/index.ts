@@ -8,13 +8,13 @@ import {
   StakeProgram,
   SystemProgram,
   TransactionInstruction,
-} from '@solana/web3.js';
+} from '@miraland/web3.js';
 import {
   createApproveInstruction,
   createAssociatedTokenAccountIdempotentInstruction,
   getAccount,
   getAssociatedTokenAddressSync,
-} from '@solana/solarti-token';
+} from '@miraland/solarti-token';
 import {
   ValidatorAccount,
   arrayChunk,

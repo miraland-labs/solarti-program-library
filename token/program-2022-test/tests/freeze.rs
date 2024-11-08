@@ -3,8 +3,8 @@
 mod program_test;
 use {
     program_test::{TestContext, TokenContext},
-    solana_program_test::tokio,
-    solana_sdk::{signature::Signer, signer::keypair::Keypair},
+    miraland_program_test::tokio,
+    miraland_sdk::{signature::Signer, signer::keypair::Keypair},
     spl_token_2022::state::AccountState,
 };
 

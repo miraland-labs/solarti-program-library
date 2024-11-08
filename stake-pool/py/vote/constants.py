@@ -1,4 +1,4 @@
-from solana.publickey import PublicKey
+from miraland.publickey import PublicKey
 
 
 VOTE_PROGRAM_ID = PublicKey("Vote111111111111111111111111111111111111111")

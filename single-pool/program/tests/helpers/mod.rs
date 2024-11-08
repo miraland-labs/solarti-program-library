@@ -1,8 +1,8 @@
 #![allow(dead_code)] // needed because cargo doesnt understand test usage
 
 use {
-    solana_program_test::*,
-    solana_sdk::{
+    miraland_program_test::*,
+    miraland_sdk::{
         account::Account as MiralandAccount,
         hash::Hash,
         program_error::ProgramError,
@@ -12,7 +12,7 @@ use {
         system_instruction, system_program,
         transaction::{Transaction, TransactionError},
     },
-    solana_vote_program::{
+    miraland_vote_program::{
         self, vote_instruction,
         vote_state::{VoteInit, VoteState, VoteStateVersions},
     },

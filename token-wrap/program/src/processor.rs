@@ -2,7 +2,7 @@
 
 use {
     crate::instruction::TokenWrapInstruction,
-    solana_program::{account_info::AccountInfo, entrypoint::ProgramResult, pubkey::Pubkey},
+    miraland_program::{account_info::AccountInfo, entrypoint::ProgramResult, pubkey::Pubkey},
     spl_token_2022::instruction::decode_instruction_type,
 };
 

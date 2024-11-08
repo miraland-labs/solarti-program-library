@@ -1,5 +1,5 @@
-import { struct } from '@solana/buffer-layout';
-import { bool, u64 } from '@solana/buffer-layout-utils';
+import { struct } from '@miraland/buffer-layout';
+import { bool, u64 } from '@miraland/buffer-layout-utils';
 
 export interface LastUpdate {
     slot: bigint;

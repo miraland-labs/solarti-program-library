@@ -3,9 +3,9 @@
 use {
     crate::{error::SinglePoolError, find_pool_address},
     borsh::{BorshDeserialize, BorshSchema, BorshSerialize},
-    solana_program::{
-        account_info::AccountInfo, borsh1::try_from_slice_unchecked,
-        program_error::ProgramError, pubkey::Pubkey,
+    miraland_program::{
+        account_info::AccountInfo, borsh1::try_from_slice_unchecked, program_error::ProgramError,
+        pubkey::Pubkey,
     },
 };
 
@@ -46,7 +46,7 @@ impl SinglePool {
         }
 
         // pool vote account address is properly configured. in practice this is
-        // irrefutable because the pool is initialized from the addresss that
+        // irrefutable because the pool is initialized from the address that
         // derives it, and never modified
         if *account_info.key != find_pool_address(program_id, &pool.vote_account_address) {
             return Err(SinglePoolError::InvalidPoolAccount.into());

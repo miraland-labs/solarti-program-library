@@ -63,7 +63,7 @@ use {
     process_sign_off_proposal::*,
     process_update_program_metadata::*,
     process_withdraw_governing_tokens::*,
-    solana_program::{
+    miraland_program::{
         account_info::AccountInfo, borsh1::try_from_slice_unchecked, entrypoint::ProgramResult,
         msg, program_error::ProgramError, pubkey::Pubkey,
     },

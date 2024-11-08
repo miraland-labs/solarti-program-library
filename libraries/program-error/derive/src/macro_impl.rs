@@ -46,22 +46,22 @@ impl MacroType {
 }
 
 /// Builds the implementation of
-/// `Into<solana_program::program_error::ProgramError>` More specifically,
-/// implements `From<Self> for solana_program::program_error::ProgramError`
+/// `Into<miraland_program::program_error::ProgramError>` More specifically,
+/// implements `From<Self> for miraland_program::program_error::ProgramError`
 pub fn into_program_error(ident: &Ident) -> proc_macro2::TokenStream {
     quote! {
-        impl From<#ident> for solana_program::program_error::ProgramError {
+        impl From<#ident> for ::miraland_program::program_error::ProgramError {
             fn from(e: #ident) -> Self {
-                solana_program::program_error::ProgramError::Custom(e as u32)
+                ::miraland_program::program_error::ProgramError::Custom(e as u32)
             }
         }
     }
 }
 
-/// Builds the implementation of `solana_program::decode_error::DecodeError<T>`
+/// Builds the implementation of `miraland_program::decode_error::DecodeError<T>`
 pub fn decode_error(ident: &Ident) -> proc_macro2::TokenStream {
     quote! {
-        impl<T> solana_program::decode_error::DecodeError<T> for #ident {
+        impl<T> miraland_program::decode_error::DecodeError<T> for #ident {
             fn type_of() -> &'static str {
                 stringify!(#ident)
             }
@@ -70,7 +70,7 @@ pub fn decode_error(ident: &Ident) -> proc_macro2::TokenStream {
 }
 
 /// Builds the implementation of
-/// `solana_program::program_error::PrintProgramError`
+/// `miraland_program::program_error::PrintProgramError`
 pub fn print_program_error(
     ident: &Ident,
     variants: &Punctuated<Variant, Comma>,
@@ -81,18 +81,18 @@ pub fn print_program_error(
             .unwrap_or_else(|| String::from("Unknown custom program error"));
         quote! {
             #ident::#variant_ident => {
-                solana_program::msg!(#error_msg)
+                ::miraland_program::msg!(#error_msg)
             }
         }
     });
     quote! {
-        impl solana_program::program_error::PrintProgramError for #ident {
+        impl ::miraland_program::program_error::PrintProgramError for #ident {
             fn print<E>(&self)
             where
                 E: 'static
                     + std::error::Error
-                    + solana_program::decode_error::DecodeError<E>
-                    + solana_program::program_error::PrintProgramError
+                    + ::miraland_program::decode_error::DecodeError<E>
+                    + ::miraland_program::program_error::PrintProgramError
                     + num_traits::FromPrimitive,
             {
                 match self {
@@ -117,7 +117,7 @@ fn get_error_message(variant: &Variant) -> Option<String> {
 }
 
 /// The main function that produces the tokens required to turn your
-/// error enum into a Solana Program Error
+/// error enum into a Miraland Program Error
 pub fn spl_program_error(
     args: &SplProgramErrorArgs,
     item_enum: &mut ItemEnum,

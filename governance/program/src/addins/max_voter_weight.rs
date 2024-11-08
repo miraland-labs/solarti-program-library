@@ -2,7 +2,7 @@
 
 use {
     crate::error::GovernanceError,
-    solana_program::{
+    miraland_program::{
         account_info::AccountInfo, clock::Clock, program_error::ProgramError, pubkey::Pubkey,
         sysvar::Sysvar,
     },

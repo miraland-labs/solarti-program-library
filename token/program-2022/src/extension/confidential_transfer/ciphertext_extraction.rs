@@ -1,14 +1,14 @@
 //! Ciphertext extraction and proof related helper logic
 //!
-//! This submodule should be removed with the next upgrade to the Solana program
+//! This submodule should be removed with the next upgrade to the Miraland program
 
 use crate::{
     extension::{
         confidential_transfer::*, confidential_transfer_fee::EncryptedFee,
         transfer_fee::TransferFee,
     },
-    solana_program::program_error::ProgramError,
-    solana_zk_token_sdk::{
+    miraland_program::program_error::ProgramError,
+    miraland_zk_token_sdk::{
         curve25519::{
             ristretto::{self, PodRistrettoPoint},
             scalar::PodScalar,

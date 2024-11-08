@@ -1,4 +1,5 @@
 #![allow(clippy::arithmetic_side_effects)]
+#![allow(deprecated)]
 
 use {
     clap::{CommandFactory, Parser},
@@ -7,14 +8,14 @@ use {
         rpc_config::RpcProgramAccountsConfig,
         rpc_filter::{Memcmp, RpcFilterType},
     },
-    solana_sdk::{
+    miraland_sdk::{
         borsh1::try_from_slice_unchecked,
         pubkey::Pubkey,
         signature::{Keypair, Signature, Signer},
         stake,
         transaction::Transaction,
     },
-    solana_vote_program::{self as vote_program, vote_state::VoteState},
+    miraland_vote_program::{self as vote_program, vote_state::VoteState},
     spl_single_pool::{
         self, find_default_deposit_account_address, find_pool_address, find_pool_mint_address,
         find_pool_stake_address, instruction::SinglePoolInstruction, state::SinglePool,
@@ -45,7 +46,7 @@ async fn main() -> Result<(), Error> {
         .with_signers(&matches, &mut wallet_manager)?;
     let config = Config::new(cli, matches, &mut wallet_manager);
 
-    miraland_logger::setup_with_default("solana=info,miraland=info");
+    miraland_logger::setup_with_default("miraland=info");
 
     let res = command.execute(&config).await?;
     println!("{}", res);
@@ -407,7 +408,7 @@ async fn command_withdraw(config: &Config, command_config: WithdrawCli) -> Comma
     let stake_account = Keypair::new();
     let stake_account_address = stake_account.pubkey();
 
-    // since we cant infer pool from token account, the withdraw invocation is
+    // since we can't infer pool from token account, the withdraw invocation is
     // rather simpler first get the pool address
     let pool_address = pool_address_from_args(
         command_config.pool_address,
@@ -754,7 +755,7 @@ async fn command_create_stake(config: &Config, command_config: CreateStakeCli) -
 // display stake pool(s)
 async fn command_display(config: &Config, command_config: DisplayCli) -> CommandResult {
     if command_config.all {
-        // the filter isnt necessary now but makes the cli forward-compatible
+        // the filter isn't necessary now but makes the cli forward-compatible
         let pools = config
             .rpc_client
             .get_program_accounts_with_config(

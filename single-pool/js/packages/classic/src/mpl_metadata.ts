@@ -1,4 +1,4 @@
-import { PublicKey } from '@solana/web3.js';
+import { PublicKey } from '@miraland/web3.js';
 import { Buffer } from 'buffer';
 
 export const MPL_METADATA_PROGRAM_ID = new PublicKey('Meta88XpDHcSJZDFiHop6c9sXaufkZX5depkZyrYBWv');

@@ -3,13 +3,13 @@
     "version": "0.3.4",
     "description": "Solarti Token Lending JavaScript API",
     "license": "MIT",
-    "author": "Solana Labs Maintainers <maintainers@solanalabs.com>",
+    "author": "Miraland Labs Maintainers <maintainers@miralandlabs.com>",
     "repository": {
         "type": "git",
-        "url": "https://github.com/solana-labs/solana-program-library"
+        "url": "https://github.com/miraland-labs/miraland-program-library"
     },
     "bugs": {
-        "url": "https://github.com/solana-labs/solana-program-library/issues"
+        "url": "https://github.com/miraland-labs/miraland-program-library/issues"
     },
     "keywords": [],
     "publishConfig": {
@@ -29,8 +29,8 @@
         "lint:fix": "eslint . --ext .ts --fix && prettier --write '**/*.{ts,js,json}'"
     },
     "dependencies": {
-        "@solana/buffer-layout": "^4.0.0",
-        "@solana/buffer-layout-utils": "^0.2.0",
+        "@miraland/buffer-layout": "^4.0.0",
+        "@miraland/buffer-layout-utils": "^0.2.0",
         "bigint-buffer": "^1.1.5",
         "bignumber.js": "^9.0.1"
     },

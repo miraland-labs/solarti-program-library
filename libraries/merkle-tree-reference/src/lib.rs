@@ -1,14 +1,14 @@
 #![allow(clippy::arithmetic_side_effects)]
-use solana_program::keccak::hashv;
-use std::cell::RefCell;
-use std::collections::VecDeque;
-use std::iter::FromIterator;
-use std::rc::Rc;
+use {
+    miraland_program::keccak::hashv,
+    std::{cell::RefCell, collections::VecDeque, iter::FromIterator, rc::Rc},
+};
 
 pub type Node = [u8; 32];
 pub const EMPTY: Node = [0; 32];
 
-/// Max number of concurrent changes to tree supported before having to regenerate proofs
+/// Max number of concurrent changes to tree supported before having to
+/// regenerate proofs
 pub const MAX_SIZE: usize = 64;
 
 /// Max depth of the Merkle tree
@@ -31,7 +31,7 @@ pub fn recompute(mut leaf: Node, proof: &[Node], index: u32) -> Node {
     leaf
 }
 
-// Off-chain implentation to keep track of nodes
+// Off-chain implementation to keep track of nodes
 pub struct MerkleTree {
     pub leaf_nodes: Vec<Rc<RefCell<TreeNode>>>,
     pub root: Node,

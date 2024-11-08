@@ -5,9 +5,9 @@ mod helpers;
 
 use {
     helpers::*,
-    solana_program::{borsh0_10::try_from_slice_unchecked, program_pack::Pack, pubkey::Pubkey},
-    solana_program_test::*,
-    solana_sdk::{hash::Hash, signature::Signer, stake::state::StakeStateV2},
+    miraland_program::{borsh0_10::try_from_slice_unchecked, program_pack::Pack, pubkey::Pubkey},
+    miraland_program_test::*,
+    miraland_sdk::{hash::Hash, signature::Signer, stake::state::StakeStateV2},
     spl_stake_pool::{
         state::{StakePool, StakeStatus, ValidatorList},
         MAX_VALIDATORS_TO_UPDATE, MINIMUM_RESERVE_LAMPORTS,

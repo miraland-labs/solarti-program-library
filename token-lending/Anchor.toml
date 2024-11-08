@@ -5,7 +5,7 @@ members = ["program"]
 
 [provider]
 cluster = "devnet"
-wallet = "~/.config/solana/id.json"
+wallet = "~/.config/miraland/id.json"
 
 [programs.devnet]
 solarti-token-lending = "Lendom2HkAKTe8bLUMxDxpBd8kCYUbZjECGtx9RFV7c"

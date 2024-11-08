@@ -1,4 +1,4 @@
-use solana_program::{
+use miraland_program::{
     account_info::AccountInfo,
     entrypoint::ProgramResult,
     program::{invoke, invoke_signed},

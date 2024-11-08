@@ -1,11 +1,11 @@
-from solana.publickey import PublicKey
-from solana.keypair import Keypair
-from solana.rpc.async_api import AsyncClient
-from solana.rpc.commitment import Confirmed
-from solana.rpc.types import TxOpts
-from solana.sysvar import SYSVAR_CLOCK_PUBKEY, SYSVAR_RENT_PUBKEY
-from solana.transaction import Transaction
-import solana.system_program as sys
+from miraland.publickey import PublicKey
+from miraland.keypair import Keypair
+from miraland.rpc.async_api import AsyncClient
+from miraland.rpc.commitment import Confirmed
+from miraland.rpc.types import TxOpts
+from miraland.sysvar import SYSVAR_CLOCK_PUBKEY, SYSVAR_RENT_PUBKEY
+from miraland.transaction import Transaction
+import miraland.system_program as sys
 
 from vote.constants import VOTE_PROGRAM_ID, VOTE_STATE_LEN
 from vote.instructions import initialize, InitializeParams

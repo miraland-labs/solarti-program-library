@@ -2,16 +2,16 @@
 
 mod program_test;
 use {
-    program_test::{keypair_clone, TestContext, TokenContext},
-    solana_program_test::{
+    miraland_program_test::{
         processor,
         tokio::{self, sync::Mutex},
         ProgramTest,
     },
-    solana_sdk::{
+    miraland_sdk::{
         instruction::InstructionError, pubkey::Pubkey, signature::Signer, signer::keypair::Keypair,
         transaction::TransactionError, transport::TransportError,
     },
+    program_test::{keypair_clone, TestContext, TokenContext},
     spl_instruction_padding::instruction::wrap_instruction,
     spl_token_2022::{
         error::TokenError,
@@ -32,7 +32,7 @@ use {
 // set up a bank and bank client with spl token 2022 and the instruction padder
 // also creates a token with no extensions and inits two token accounts
 async fn make_context() -> TestContext {
-    // TODO this may be removed when we upgrade to a solana version with a fixed
+    // TODO this may be removed when we upgrade to a miraland version with a fixed
     // `get_stack_height()` stub
     if std::env::var("BPF_OUT_DIR").is_err() && std::env::var("SBF_OUT_DIR").is_err() {
         panic!("CpiGuard tests MUST be invoked with `cargo test-sbf`, NOT `cargo test --feature test-sbf`. \

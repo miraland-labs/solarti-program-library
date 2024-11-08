@@ -2,7 +2,7 @@
 use {
     crate::{error::GovernanceError, state::enums::GovernanceAccountType},
     borsh::{BorshDeserialize, BorshSchema, BorshSerialize},
-    solana_program::{
+    miraland_program::{
         account_info::AccountInfo, program_error::ProgramError, program_pack::IsInitialized,
         pubkey::Pubkey,
     },

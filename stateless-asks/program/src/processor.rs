@@ -7,7 +7,7 @@ use {
         validation_utils::{assert_is_ata, assert_keys_equal},
     },
     borsh::BorshDeserialize,
-    solana_program::{
+    miraland_program::{
         account_info::{next_account_info, AccountInfo},
         borsh1::try_from_slice_unchecked,
         entrypoint::ProgramResult,
@@ -23,8 +23,8 @@ use {
 };
 
 pub(crate) mod inline_mpl_token_metadata {
-    use {borsh::BorshDeserialize, solana_program::pubkey::Pubkey};
-    solana_program::declare_id!("Meta88XpDHcSJZDFiHop6c9sXaufkZX5depkZyrYBWv");
+    use {borsh::BorshDeserialize, miraland_program::pubkey::Pubkey};
+    miraland_program::declare_id!("Meta88XpDHcSJZDFiHop6c9sXaufkZX5depkZyrYBWv");
 
     #[derive(Clone, BorshDeserialize, Debug, PartialEq, Eq)]
     pub(crate) struct Metadata {

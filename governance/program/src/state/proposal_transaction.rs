@@ -11,7 +11,7 @@ use {
     },
     borsh::{io::Write, BorshDeserialize, BorshSchema, BorshSerialize},
     core::panic,
-    solana_program::{
+    miraland_program::{
         account_info::AccountInfo,
         clock::UnixTimestamp,
         instruction::{AccountMeta, Instruction},
@@ -257,7 +257,7 @@ mod test {
     use {
         super::*,
         base64::{engine::general_purpose, Engine as _},
-        solana_program::{bpf_loader_upgradeable, clock::Epoch},
+        miraland_program::{bpf_loader_upgradeable, clock::Epoch},
         std::str::FromStr,
     };
 

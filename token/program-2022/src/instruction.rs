@@ -17,7 +17,7 @@ use {
         extension::{transfer_fee::instruction::TransferFeeInstruction, ExtensionType},
     },
     bytemuck::Pod,
-    solana_program::{
+    miraland_program::{
         instruction::{AccountMeta, Instruction},
         program_error::ProgramError,
         program_option::COption,

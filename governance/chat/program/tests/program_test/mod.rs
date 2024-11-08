@@ -1,9 +1,9 @@
 use {
     self::cookies::TokenOwnerRecordCookie,
     crate::program_test::cookies::{ChatMessageCookie, ProposalCookie},
-    solana_program::{program_error::ProgramError, pubkey::Pubkey},
-    solana_program_test::{processor, ProgramTest},
-    solana_sdk::{signature::Keypair, signer::Signer},
+    miraland_program::{program_error::ProgramError, pubkey::Pubkey},
+    miraland_program_test::{processor, ProgramTest},
+    miraland_sdk::{signature::Keypair, signer::Signer},
     spl_governance::{
         instruction::{
             create_governance, create_proposal, create_realm, create_token_owner_record,

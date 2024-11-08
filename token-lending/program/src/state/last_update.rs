@@ -1,6 +1,6 @@
 use {
     crate::error::LendingError,
-    solana_program::{clock::Slot, program_error::ProgramError},
+    miraland_program::{clock::Slot, program_error::ProgramError},
     std::cmp::Ordering,
 };
 

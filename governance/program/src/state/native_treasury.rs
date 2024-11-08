@@ -2,7 +2,7 @@
 
 use {
     borsh::{BorshDeserialize, BorshSchema, BorshSerialize},
-    solana_program::pubkey::Pubkey,
+    miraland_program::pubkey::Pubkey,
     spl_governance_tools::account::AccountMaxSize,
 };
 

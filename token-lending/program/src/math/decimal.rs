@@ -17,7 +17,7 @@ use {
         error::LendingError,
         math::{common::*, Rate},
     },
-    solana_program::program_error::ProgramError,
+    miraland_program::program_error::ProgramError,
     std::{convert::TryFrom, fmt},
     uint::construct_uint,
 };

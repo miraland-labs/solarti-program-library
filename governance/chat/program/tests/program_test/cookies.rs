@@ -1,5 +1,5 @@
 use {
-    solana_program::pubkey::Pubkey, solana_sdk::signature::Keypair,
+    miraland_program::pubkey::Pubkey, miraland_sdk::signature::Keypair,
     spl_governance_chat::state::ChatMessage,
 };
 

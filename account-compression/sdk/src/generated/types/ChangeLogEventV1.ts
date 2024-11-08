@@ -7,7 +7,7 @@
 
 import * as web3 from '@solarti/web3.js';
 import * as beet from '@metaplex-foundation/beet';
-import * as beetSolana from '@metaplex-foundation/beet-solana';
+import * as beetMiraland from '@metaplex-foundation/beet-miraland';
 
 import { PathNode, pathNodeBeet } from './PathNode';
 export type ChangeLogEventV1 = {
@@ -24,7 +24,7 @@ export type ChangeLogEventV1 = {
 export const changeLogEventV1Beet =
   new beet.FixableBeetArgsStruct<ChangeLogEventV1>(
     [
-      ['id', beetSolana.publicKey],
+      ['id', beetMiraland.publicKey],
       ['path', beet.array(pathNodeBeet)],
       ['seq', beet.u64],
       ['index', beet.u32],

@@ -3,7 +3,7 @@
 use {
     crate::state::enums::GovernanceAccountType,
     borsh::{BorshDeserialize, BorshSchema, BorshSerialize},
-    solana_program::{
+    miraland_program::{
         account_info::AccountInfo, clock::Slot, program_error::ProgramError,
         program_pack::IsInitialized, pubkey::Pubkey,
     },

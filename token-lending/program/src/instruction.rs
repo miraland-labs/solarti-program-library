@@ -5,7 +5,7 @@ use {
         error::LendingError,
         state::{ReserveConfig, ReserveFees},
     },
-    solana_program::{
+    miraland_program::{
         instruction::{AccountMeta, Instruction},
         msg,
         program_error::ProgramError,

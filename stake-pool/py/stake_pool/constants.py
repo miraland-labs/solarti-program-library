@@ -2,7 +2,7 @@
 
 from typing import Optional, Tuple
 
-from solana.publickey import PublicKey
+from miraland.publickey import PublicKey
 from stake.constants import MINIMUM_DELEGATION
 
 STAKE_POOL_PROGRAM_ID: PublicKey = PublicKey("SPoo1Ku8WFXoNDMHPsrGSTSG1Y47rzgn41SLUNakuHy")

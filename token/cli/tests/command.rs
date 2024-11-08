@@ -3,7 +3,7 @@ use {
     libtest_mimic::{Arguments, Trial},
     miraland_cli_output::OutputFormat,
     miraland_client::{nonblocking::rpc_client::RpcClient, rpc_request::TokenAccountsFilter},
-    solana_sdk::{
+    miraland_sdk::{
         bpf_loader_upgradeable,
         hash::Hash,
         program_option::COption,
@@ -32,7 +32,7 @@ use {
             BaseStateWithExtensions, StateWithExtensionsOwned,
         },
         instruction::create_native_mint,
-        solana_zk_token_sdk::zk_token_elgamal::pod::ElGamalPubkey,
+        miraland_zk_token_sdk::zk_token_elgamal::pod::ElGamalPubkey,
         state::{Account, AccountState, Mint, Multisig},
     },
     spl_token_cli::{
@@ -231,7 +231,7 @@ async fn create_nonce(config: &Config<'_>, authority: &Keypair) -> Pubkey {
 
     let nonce_rent = config
         .rpc_client
-        .get_minimum_balance_for_rent_exemption(solana_sdk::nonce::State::size())
+        .get_minimum_balance_for_rent_exemption(miraland_sdk::nonce::State::size())
         .await
         .unwrap();
     let instr = system_instruction::create_nonce_account(
@@ -2429,7 +2429,7 @@ async fn transfer_fee(test_validator: &TestValidator, payer: &Keypair) {
 }
 
 async fn confidential_transfer(test_validator: &TestValidator, payer: &Keypair) {
-    use spl_token_2022::solana_zk_token_sdk::encryption::elgamal::ElGamalKeypair;
+    use spl_token_2022::miraland_zk_token_sdk::encryption::elgamal::ElGamalKeypair;
 
     let config = test_config_with_default_signer(test_validator, payer, &spl_token_2022::id());
 

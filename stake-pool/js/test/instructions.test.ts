@@ -14,8 +14,8 @@ import {
   SystemProgram,
   AccountInfo,
   LAMPORTS_PER_MLN,
-} from '@solana/web3.js';
-import { TOKEN_PROGRAM_ID, TokenAccountNotFoundError } from '@solana/solarti-token';
+} from '@miraland/web3.js';
+import { TOKEN_PROGRAM_ID, TokenAccountNotFoundError } from '@miraland/solarti-token';
 import { StakePoolLayout } from '../src/layouts';
 import {
   STAKE_POOL_INSTRUCTION_LAYOUTS,
@@ -246,7 +246,7 @@ describe('StakePoolProgram', () => {
       await expect(withdrawStake(connection, stakePoolAddress, tokenOwner, 1)).rejects.toThrow(
         Error(
           'Not enough token balance to withdraw 1 pool tokens.\n' +
-            '        Maximum withdraw amount is 0 pool tokens.',
+          '        Maximum withdraw amount is 0 pool tokens.',
         ),
       );
     });

@@ -3,7 +3,7 @@
 use {
     crate::get_token_upgrade_authority_address,
     num_enum::{IntoPrimitive, TryFromPrimitive},
-    solana_program::{
+    miraland_program::{
         instruction::{AccountMeta, Instruction},
         pubkey::Pubkey,
     },

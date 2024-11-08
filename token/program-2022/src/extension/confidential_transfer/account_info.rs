@@ -8,7 +8,7 @@ use {
         },
     },
     bytemuck::{Pod, Zeroable},
-    solana_zk_token_sdk::{
+    miraland_zk_token_sdk::{
         encryption::{
             auth_encryption::{AeCiphertext, AeKey},
             elgamal::{ElGamalKeypair, ElGamalPubkey, ElGamalSecretKey},

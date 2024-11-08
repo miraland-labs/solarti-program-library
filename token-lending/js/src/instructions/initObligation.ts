@@ -1,6 +1,6 @@
 import { TOKEN_PROGRAM_ID } from '@solarti/solarti-token';
 import { PublicKey, SYSVAR_CLOCK_PUBKEY, SYSVAR_RENT_PUBKEY, TransactionInstruction } from '@solarti/web3.js';
-import { struct, u8 } from '@solana/buffer-layout';
+import { struct, u8 } from '@miraland/buffer-layout';
 import { LENDING_PROGRAM_ID } from '../constants';
 import { LendingInstruction } from './instruction';
 

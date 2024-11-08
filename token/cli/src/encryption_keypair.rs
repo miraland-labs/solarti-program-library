@@ -1,11 +1,11 @@
 //! Temporary ElGamal keypair argument parser.
 //!
-//! NOTE: this module should be remoeved in the next Solana upgrade.
+//! NOTE: this module should be remoeved in the next Miraland upgrade.
 
 use {
     base64::{prelude::BASE64_STANDARD, Engine},
     clap::ArgMatches,
-    spl_token_2022::solana_zk_token_sdk::{
+    spl_token_2022::miraland_zk_token_sdk::{
         encryption::elgamal::{ElGamalKeypair, ElGamalPubkey},
         zk_token_elgamal::pod::ElGamalPubkey as PodElGamalPubkey,
     },

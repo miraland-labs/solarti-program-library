@@ -5,7 +5,7 @@ use {
         enums::ProposalState, proposal::get_proposal_data,
         token_owner_record::get_token_owner_record_data_for_proposal_owner,
     },
-    solana_program::{
+    miraland_program::{
         account_info::{next_account_info, AccountInfo},
         clock::Clock,
         entrypoint::ProgramResult,

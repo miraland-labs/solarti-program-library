@@ -3,11 +3,10 @@
 mod program_test;
 
 use {
-    program_test::program_test_2022,
-    solana_program::{instruction::*, pubkey::Pubkey},
-    solana_program_test::*,
-    solana_sdk::{
-        account::Account as SolanaAccount,
+    miraland_program::{instruction::*, pubkey::Pubkey},
+    miraland_program_test::*,
+    miraland_sdk::{
+        account::Account as MiralandAccount,
         program_option::COption,
         program_pack::Pack,
         signature::Signer,
@@ -15,6 +14,7 @@ use {
         system_instruction::create_account,
         transaction::{Transaction, TransactionError},
     },
+    program_test::program_test_2022,
     spl_associated_token_account::{
         error::AssociatedTokenAccountError,
         get_associated_token_address_with_program_id,
@@ -139,7 +139,7 @@ async fn fail_account_exists_with_wrong_owner() {
 
     let wrong_owner = Pubkey::new_unique();
     let mut associated_token_account =
-        SolanaAccount::new(1_000_000_000, Account::LEN, &spl_token_2022::id());
+        MiralandAccount::new(1_000_000_000, Account::LEN, &spl_token_2022::id());
     let token_account = Account {
         mint: token_mint_address,
         owner: wrong_owner,

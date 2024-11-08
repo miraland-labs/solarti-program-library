@@ -3,9 +3,9 @@
 #![cfg(feature = "test-sbf")]
 
 use {
-    solana_program_test::{processor, tokio, ProgramTest},
-    solana_sdk::{
-        account::Account as SolanaAccount,
+    miraland_program_test::{processor, tokio, ProgramTest},
+    miraland_sdk::{
+        account::Account as MiralandAccount,
         account_info::AccountInfo,
         entrypoint::ProgramResult,
         instruction::{AccountMeta, InstructionError},
@@ -82,11 +82,11 @@ fn setup_token_accounts(
     state.pack_base();
     program_test.add_account(
         *mint_address,
-        SolanaAccount {
+        MiralandAccount {
             lamports: 1_000_000_000,
             data: mint_data,
             owner: *program_id,
-            ..SolanaAccount::default()
+            ..MiralandAccount::default()
         },
     );
 
@@ -114,20 +114,20 @@ fn setup_token_accounts(
 
     program_test.add_account(
         *source,
-        SolanaAccount {
+        MiralandAccount {
             lamports: 1_000_000_000,
             data: account_data.clone(),
             owner: *program_id,
-            ..SolanaAccount::default()
+            ..MiralandAccount::default()
         },
     );
     program_test.add_account(
         *destination,
-        SolanaAccount {
+        MiralandAccount {
             lamports: 1_000_000_000,
             data: account_data,
             owner: *program_id,
-            ..SolanaAccount::default()
+            ..MiralandAccount::default()
         },
     );
 }

@@ -3,8 +3,8 @@ mod program_test;
 
 use {
     program_test::*,
-    solana_program_test::*,
-    solana_sdk::signature::{Keypair, Signer},
+    miraland_program_test::*,
+    miraland_sdk::signature::{Keypair, Signer},
     spl_governance::{
         error::GovernanceError, tools::bpf_loader_upgradeable::get_program_upgrade_authority,
     },

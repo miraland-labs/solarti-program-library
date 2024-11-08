@@ -5,7 +5,7 @@ use {
     arrayref::array_ref,
     borsh::BorshDeserialize,
     bytemuck::Pod,
-    solana_program::{program_error::ProgramError, program_memory::sol_memmove},
+    miraland_program::{program_error::ProgramError, program_memory::sol_memmove},
     std::mem,
 };
 

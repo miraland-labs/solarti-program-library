@@ -1,8 +1,8 @@
 import { TOKEN_PROGRAM_ID } from '@solarti/solarti-token';
 import { PublicKey, SYSVAR_RENT_PUBKEY, TransactionInstruction } from '@solarti/web3.js';
-import { blob, struct, u8 } from '@solana/buffer-layout';
+import { blob, struct, u8 } from '@miraland/buffer-layout';
 import { LENDING_PROGRAM_ID, ORACLE_PROGRAM_ID } from '../constants';
-import { publicKey } from '@solana/buffer-layout-utils';
+import { publicKey } from '@miraland/buffer-layout-utils';
 import { LendingInstruction } from './instruction';
 
 interface Data {

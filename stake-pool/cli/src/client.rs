@@ -7,7 +7,7 @@ use {
         rpc_config::{RpcAccountInfoConfig, RpcProgramAccountsConfig},
         rpc_filter::{Memcmp, RpcFilterType},
     },
-    solana_program::{
+    miraland_program::{
         borsh1::try_from_slice_unchecked, program_pack::Pack, pubkey::Pubkey, stake,
     },
     spl_stake_pool::{

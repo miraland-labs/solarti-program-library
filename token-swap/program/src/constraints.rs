@@ -10,7 +10,7 @@ use {
         },
         error::SwapError,
     },
-    solana_program::program_error::ProgramError,
+    miraland_program::program_error::ProgramError,
 };
 
 /// Encodes fee constraints, used in multihost environments where the program

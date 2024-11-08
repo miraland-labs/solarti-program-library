@@ -9,7 +9,7 @@ use {
         tools::structs::Reserved110,
     },
     borsh::{BorshDeserialize, BorshSchema, BorshSerialize},
-    solana_program::{
+    miraland_program::{
         account_info::{next_account_info, AccountInfo},
         program_error::ProgramError,
         program_pack::IsInitialized,

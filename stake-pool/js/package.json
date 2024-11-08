@@ -1,5 +1,5 @@
 {
-  "name": "@solana/solarti-stake-pool",
+  "name": "@miraland/solarti-stake-pool",
   "version": "0.7.0",
   "description": "SPL Stake Pool Program JS API",
   "scripts": {
@@ -12,15 +12,15 @@
   },
   "keywords": [],
   "contributors": [
-    "Solana Labs Maintainers <maintainers@solanalabs.com>",
+    "Miraland Labs Maintainers <maintainers@miralandlabs.com>",
     "Lieu Zheng Hong",
     "mFactory Team (https://mfactory.ch/)",
     "SolBlaze <contact@solblaze.org> (https://solblaze.org/)"
   ],
-  "homepage": "https://solana.com",
+  "homepage": "https://miraland.io",
   "repository": {
     "type": "git",
-    "url": "https://github.com/solana-labs/solana-program-library"
+    "url": "https://github.com/miraland-labs/miraland-program-library"
   },
   "publishConfig": {
     "access": "public"
@@ -44,9 +44,9 @@
   "license": "ISC",
   "dependencies": {
     "@coral-xyz/borsh": "^0.29.0",
-    "@solana/buffer-layout": "^4.0.1",
-    "@solana/solarti-token": "workspace:*",
-    "@solana/web3.js": "^1.87.6",
+    "@miraland/buffer-layout": "^4.0.1",
+    "@miraland/solarti-token": "workspace:*",
+    "@miraland/web3.js": "^1.87.6",
     "bn.js": "^5.2.0",
     "buffer": "^6.0.3",
     "superstruct": "^1.0.3"

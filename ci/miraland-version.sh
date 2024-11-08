@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 #
 # This file maintains the miraland versions for use by CI.
 #
@@ -23,7 +24,7 @@ export PATH="$HOME"/.local/share/miraland/install/active_release/bin:"$PATH"
 if [[ -n $1 ]]; then
   case $1 in
   install)
-    sh -c "$(curl -sSfL https://release.miraland.top/$miraland_version/install)"
+    sh -c "$(curl -sSfL https://release.miraland.io/$miraland_version/install)"
     miraland --version
     ;;
   *)

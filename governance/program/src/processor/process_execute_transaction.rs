@@ -8,7 +8,7 @@ use {
         proposal::{get_proposal_data_for_governance, OptionVoteResult},
         proposal_transaction::get_proposal_transaction_data_for_proposal,
     },
-    solana_program::{
+    miraland_program::{
         account_info::{next_account_info, AccountInfo},
         clock::Clock,
         entrypoint::ProgramResult,

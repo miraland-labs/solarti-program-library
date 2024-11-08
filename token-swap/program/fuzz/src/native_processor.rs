@@ -1,6 +1,6 @@
 use {
     crate::native_account_data::NativeAccountData,
-    solana_program::{
+    miraland_program::{
         account_info::AccountInfo, entrypoint::ProgramResult, instruction::Instruction,
         program_error::ProgramError, program_stubs, pubkey::Pubkey,
     },

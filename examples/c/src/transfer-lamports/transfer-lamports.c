@@ -1,7 +1,7 @@
 /**
  * @brief A program demonstrating the transfer of lamports
  */
-#include <solana_sdk.h>
+#include <miraland_sdk.h>
 
 extern uint64_t transfer(SolParameters *params) {
   // As part of the program specification the first account is the source

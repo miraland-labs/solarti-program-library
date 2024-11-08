@@ -6,9 +6,9 @@ mod program_test;
 
 use {
     program_test::{program_test, program_test_2022},
-    solana_program::{pubkey::Pubkey, system_instruction},
-    solana_program_test::*,
-    solana_sdk::{
+    miraland_program::{pubkey::Pubkey, system_instruction},
+    miraland_program_test::*,
+    miraland_sdk::{
         instruction::{AccountMeta, InstructionError},
         signature::Signer,
         signer::keypair::Keypair,

@@ -1,6 +1,6 @@
 import pytest
-from solana.keypair import Keypair
-from solana.rpc.commitment import Confirmed
+from miraland.keypair import Keypair
+from miraland.rpc.commitment import Confirmed
 
 import system.actions
 

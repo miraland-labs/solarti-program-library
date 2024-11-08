@@ -1,6 +1,6 @@
 use {
     lazy_static::lazy_static,
-    solana_program_test::find_file,
+    miraland_program_test::find_file,
     std::{process::Command, sync::Mutex},
 };
 

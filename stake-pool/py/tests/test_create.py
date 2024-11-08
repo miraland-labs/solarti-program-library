@@ -1,6 +1,6 @@
 import pytest
-from solana.keypair import Keypair
-from solana.rpc.commitment import Confirmed
+from miraland.keypair import Keypair
+from miraland.rpc.commitment import Confirmed
 from spl.token.constants import TOKEN_PROGRAM_ID
 
 from stake_pool.constants import \

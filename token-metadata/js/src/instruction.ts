@@ -1,11 +1,11 @@
-import type { StructToEncoderTuple } from '@solana/codecs-data-structures';
-import { getBooleanEncoder, getBytesEncoder, getDataEnumCodec, getStructEncoder } from '@solana/codecs-data-structures';
-import { getU64Encoder } from '@solana/codecs-numbers';
-import { getStringEncoder } from '@solana/codecs-strings';
-import { getOptionEncoder } from '@solana/options';
-import { splDiscriminate } from '@solana/solarti-type-length-value';
-import type { PublicKey } from '@solana/web3.js';
-import { TransactionInstruction } from '@solana/web3.js';
+import type { StructToEncoderTuple } from '@miraland/codecs-data-structures';
+import { getBooleanEncoder, getBytesEncoder, getDataEnumCodec, getStructEncoder } from '@miraland/codecs-data-structures';
+import { getU64Encoder } from '@miraland/codecs-numbers';
+import { getStringEncoder } from '@miraland/codecs-strings';
+import { getOptionEncoder } from '@miraland/options';
+import { splDiscriminate } from '@miraland/solarti-type-length-value';
+import type { PublicKey } from '@miraland/web3.js';
+import { TransactionInstruction } from '@miraland/web3.js';
 
 import type { Field } from './field.js';
 import { getFieldCodec, getFieldConfig } from './field.js';

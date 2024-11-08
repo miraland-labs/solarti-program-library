@@ -1,6 +1,6 @@
-import type { DataEnumToCodecTuple } from '@solana/codecs-data-structures';
-import { getStructCodec, getTupleCodec, getUnitCodec } from '@solana/codecs-data-structures';
-import { getStringCodec } from '@solana/codecs-strings';
+import type { DataEnumToCodecTuple } from '@miraland/codecs-data-structures';
+import { getStructCodec, getTupleCodec, getUnitCodec } from '@miraland/codecs-data-structures';
+import { getStringCodec } from '@miraland/codecs-strings';
 
 export enum Field {
     Name,

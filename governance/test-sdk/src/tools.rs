@@ -1,6 +1,6 @@
 use {
-    solana_program::{instruction::InstructionError, program_error::ProgramError},
-    solana_sdk::{signature::Keypair, transaction::TransactionError, transport::TransportError},
+    miraland_program::{instruction::InstructionError, program_error::ProgramError},
+    miraland_sdk::{signature::Keypair, transaction::TransactionError, transport::TransportError},
     std::convert::TryFrom,
 };
 

@@ -3,7 +3,7 @@
 A shared-memory program on the Miraland blockchain, usable for sharing data
 between programs or within cross-program invocations.
 
-Full documentation is available at https://spl.miraland.top/shared-memory
+Full documentation is available at https://spl.miraland.io/shared-memory
 
 ## Audit
 

@@ -10,7 +10,7 @@ use {
         input_validators::{is_keypair, is_url, is_valid_percentage, is_valid_pubkey},
     },
     miraland_client::rpc_client::RpcClient,
-    solana_sdk::{
+    miraland_sdk::{
         clock::UnixTimestamp,
         commitment_config::CommitmentConfig,
         program_pack::Pack,
@@ -161,7 +161,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
             verbose: matches.is_present("verbose"),
         }
     };
-    miraland_logger::setup_with_default("solana=info,miraland=info");
+    miraland_logger::setup_with_default("miraland=info");
     let rpc_client =
         RpcClient::new_with_commitment(config.json_rpc_url.clone(), CommitmentConfig::confirmed());
 
@@ -341,7 +341,7 @@ fn process_propose(
                   --from {} \
                   --input-csv {} \
                   --db-path db.{} \
-                  --fee-payer ~/.config/solana/id.json \
+                  --fee-payer ~/.config/miraland/id.json \
                   --owner <FEATURE_PROPOSAL_KEYPAIR>",
         distributor_token_address,
         distribution_file,

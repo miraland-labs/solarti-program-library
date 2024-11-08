@@ -5,8 +5,8 @@ use {
     },
     futures::{future::join_all, try_join},
     futures_util::TryFutureExt,
-    solana_program_test::tokio::time,
-    solana_sdk::{
+    miraland_program_test::tokio::time,
+    miraland_sdk::{
         account::Account as BaseAccount,
         hash::Hash,
         instruction::{AccountMeta, Instruction},
@@ -48,7 +48,7 @@ use {
         },
         instruction, offchain,
         proof::ProofLocation,
-        solana_zk_token_sdk::{
+        miraland_zk_token_sdk::{
             encryption::{
                 auth_encryption::AeKey,
                 elgamal::{ElGamalCiphertext, ElGamalKeypair, ElGamalPubkey, ElGamalSecretKey},

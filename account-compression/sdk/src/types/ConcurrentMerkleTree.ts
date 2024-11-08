@@ -1,6 +1,6 @@
 import * as beet from '@metaplex-foundation/beet';
 import { PublicKey } from '@solarti/web3.js';
-import * as beetSolana from '@metaplex-foundation/beet-solana';
+import * as beetMiraland from '@metaplex-foundation/beet-miraland';
 
 import { Path, pathBeetFactory } from './Path';
 
@@ -18,8 +18,8 @@ export type ChangeLogInternal = {
 const changeLogBeetFactory = (maxDepth: number) => {
   return new beet.BeetArgsStruct<ChangeLogInternal>(
     [
-      ['root', beetSolana.publicKey],
-      ['pathNodes', beet.uniformFixedSizeArray(beetSolana.publicKey, maxDepth)],
+      ['root', beetMiraland.publicKey],
+      ['pathNodes', beet.uniformFixedSizeArray(beetMiraland.publicKey, maxDepth)],
       ['index', beet.u32],
       ['_padding', beet.u32],
     ],

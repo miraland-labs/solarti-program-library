@@ -15,16 +15,16 @@ validator’s uptime and commission (fee).
 
 Additional information regarding staking and stake programming is available at:
 
-- https://solana.com/staking
-- https://docs.solana.com/staking/stake-programming
+- https://miraland.io/staking
+- https://docs.miraland.io/staking/stake-programming
 
 ## Background
 
 Miraland's programming model and the definitions of the Miraland terms used in this
 document are available at:
 
-- https://docs.solana.com/apps
-- https://docs.solana.com/terminology
+- https://docs.miraland.io/apps
+- https://docs.miraland.io/terminology
 
 ## Motivation
 
@@ -44,8 +44,8 @@ creating and delegating stakes, which are more advanced operations than sending 
 receiving Solarti tokens and MLN. Additional information on stake operations are
 available at:
 
-- https://docs.solana.com/cli/delegate-stake
-- https://docs.solana.com/cli/manage-stake-accounts
+- https://docs.miraland.io/cli/delegate-stake
+- https://docs.miraland.io/cli/manage-stake-accounts
 
 To reach a wider audience of users, stake pool managers are encouraged
 to provide a market for their pool's tokens, through an AMM

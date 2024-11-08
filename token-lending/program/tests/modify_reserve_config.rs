@@ -5,9 +5,9 @@ mod helpers;
 
 use {
     helpers::*,
-    solana_program::pubkey::Pubkey,
-    solana_program_test::*,
-    solana_sdk::{
+    miraland_program::pubkey::Pubkey,
+    miraland_program_test::*,
+    miraland_sdk::{
         instruction::InstructionError,
         signature::{read_keypair_file, Keypair, Signer},
         transaction::{Transaction, TransactionError},

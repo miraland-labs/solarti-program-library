@@ -1,11 +1,11 @@
-import * as BufferLayout from '@solana/buffer-layout';
+import * as BufferLayout from '@miraland/buffer-layout';
 import { Buffer } from 'buffer';
 
 /**
  * @internal
  */
 export type InstructionType = {
-  /** The Instruction index (from solana upstream program) */
+  /** The Instruction index (from miraland upstream program) */
   index: number;
   /** The BufferLayout to use to build data */
   layout: BufferLayout.Layout<any>;

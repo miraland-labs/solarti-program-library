@@ -3,13 +3,13 @@
 
 mod program_test;
 use {
-    program_test::TestContext,
-    solana_program_test::{processor, tokio, ProgramTest},
-    solana_sdk::{
-        account::Account as SolanaAccount, instruction::InstructionError, pubkey::Pubkey,
+    miraland_program_test::{processor, tokio, ProgramTest},
+    miraland_sdk::{
+        account::Account as MiralandAccount, instruction::InstructionError, pubkey::Pubkey,
         signature::Signer, signer::keypair::Keypair, transaction::TransactionError,
         transport::TransportError,
     },
+    program_test::TestContext,
     spl_token_2022::{extension::BaseStateWithExtensions, processor::Processor},
     spl_token_client::token::{ExtensionInitializationParams, TokenError as TokenClientError},
     spl_token_group_interface::{
@@ -140,7 +140,7 @@ async fn test_update_group_max_size(max_size: u32, size: u32, new_max_size: u32)
 
         context.set_account(
             &mint_keypair.pubkey(),
-            &SolanaAccount {
+            &MiralandAccount {
                 data,
                 ..group_mint_account
             }

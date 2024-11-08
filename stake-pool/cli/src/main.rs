@@ -25,7 +25,7 @@ use {
     },
     miraland_cli_output::OutputFormat,
     miraland_client::rpc_client::RpcClient,
-    solana_program::{
+    miraland_program::{
         borsh1::{get_instance_packed_len, get_packed_len},
         instruction::Instruction,
         program_pack::Pack,
@@ -33,7 +33,7 @@ use {
         stake,
     },
     miraland_remote_wallet::remote_wallet::RemoteWalletManager,
-    solana_sdk::{
+    miraland_sdk::{
         commitment_config::CommitmentConfig,
         hash::Hash,
         message::Message,
@@ -96,7 +96,7 @@ fn check_fee_payer_balance(config: &Config, required_balance: u64) -> Result<(),
 }
 
 const FEES_REFERENCE: &str = "Consider setting a minimal fee. \
-                              See https://spl.miraland.top/stake-pool/fees for more \
+                              See https://spl.miraland.io/stake-pool/fees for more \
                               information about fees and best practices. If you are \
                               aware of the possible risks of a stake pool with no fees, \
                               you may force pool creation with the --unsafe-fees flag.";
@@ -1883,7 +1883,7 @@ fn command_list_all_pools(config: &Config) -> CommandResult {
 }
 
 fn main() {
-    miraland_logger::setup_with_default("solana=info,miraland=info");
+    miraland_logger::setup_with_default("miraland=info");
 
     let matches = App::new(crate_name!())
         .about(crate_description!())

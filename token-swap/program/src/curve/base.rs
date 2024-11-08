@@ -11,7 +11,7 @@ use {
         offset::OffsetCurve,
     },
     arrayref::{array_mut_ref, array_ref, array_refs, mut_array_refs},
-    solana_program::{
+    miraland_program::{
         program_error::ProgramError,
         program_pack::{Pack, Sealed},
     },
@@ -289,7 +289,7 @@ mod test {
 
     #[test]
     fn constant_product_trade_fee() {
-        // calculation on https://github.com/solana-labs/solana-program-library/issues/341
+        // calculation on https://github.com/miraland-labs/miraland-program-library/issues/341
         let swap_source_amount = 1000;
         let swap_destination_amount = 50000;
         let trade_fee_numerator = 1;
@@ -335,7 +335,7 @@ mod test {
 
     #[test]
     fn constant_product_owner_fee() {
-        // calculation on https://github.com/solana-labs/solana-program-library/issues/341
+        // calculation on https://github.com/miraland-labs/miraland-program-library/issues/341
         let swap_source_amount = 1000;
         let swap_destination_amount = 50000;
         let trade_fee_numerator = 0;

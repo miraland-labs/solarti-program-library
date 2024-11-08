@@ -1,11 +1,11 @@
 use {
-    solana_program::{
+    miraland_program::{
         instruction::{AccountMeta, Instruction},
         pubkey::Pubkey,
         sysvar::{self},
     },
-    solana_program_test::*,
-    solana_sdk::{signature::Signer, transaction::Transaction},
+    miraland_program_test::*,
+    miraland_sdk::{signature::Signer, transaction::Transaction},
     spl_example_sysvar::processor::process_instruction,
     std::str::FromStr,
 };

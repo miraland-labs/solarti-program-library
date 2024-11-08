@@ -6,7 +6,7 @@ use {
             required_signatory::get_required_signatory_data_for_governance,
         },
     },
-    solana_program::{
+    miraland_program::{
         account_info::{next_account_info, AccountInfo},
         entrypoint::ProgramResult,
         pubkey::Pubkey,

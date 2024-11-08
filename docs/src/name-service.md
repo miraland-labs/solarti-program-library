@@ -2,10 +2,10 @@
 title: Name Service
 ---
 
-A SPL program for issuing and managing ownership of: domain names, Solana Pubkeys, URLs, Twitter handles, ipfs cid's etc..
+A SPL program for issuing and managing ownership of: domain names, Miraland Pubkeys, URLs, Twitter handles, ipfs cid's etc..
 
 This program could be used for dns, pubkey etc lookups via a browser extension
-for example, the goal is to create an easy way to identify Solana public keys
+for example, the goal is to create an easy way to identify Miraland public keys
 with various links.
 
 Broader use cases are also imaginable.

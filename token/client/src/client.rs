@@ -3,8 +3,8 @@ use {
     miraland_banks_interface::BanksTransactionResultWithSimulation,
     miraland_rpc_client::nonblocking::rpc_client::RpcClient,
     miraland_rpc_client_api::response::RpcSimulateTransactionResult,
-    solana_program_test::{tokio::sync::Mutex, BanksClient, ProgramTestContext},
-    solana_sdk::{
+    miraland_program_test::{tokio::sync::Mutex, BanksClient, ProgramTestContext},
+    miraland_sdk::{
         account::Account, hash::Hash, pubkey::Pubkey, signature::Signature,
         transaction::Transaction,
     },

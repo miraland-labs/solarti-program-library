@@ -5,7 +5,7 @@ use {
         native_account_data::NativeAccountData, native_processor::do_process_instruction,
         native_token,
     },
-    solana_program::{bpf_loader, entrypoint::ProgramResult, pubkey::Pubkey, system_program},
+    miraland_program::{bpf_loader, entrypoint::ProgramResult, pubkey::Pubkey, system_program},
     spl_token::instruction::approve,
     spl_token_swap::{
         curve::{base::SwapCurve, calculator::TradeDirection, fees::Fees},

@@ -15,7 +15,7 @@ use {
         },
         tools::{spl_token::create_spl_token_account_signed, structs::Reserved110},
     },
-    solana_program::{
+    miraland_program::{
         account_info::{next_account_info, AccountInfo},
         entrypoint::ProgramResult,
         pubkey::Pubkey,

@@ -12,6 +12,6 @@ pub mod pyth;
 pub mod state;
 
 // Export current sdk types for downstream users building with a different sdk version
-pub use solana_program;
+pub use miraland_program;
 
-solana_program::declare_id!("Lendom2HkAKTe8bLUMxDxpBd8kCYUbZjECGtx9RFV7c");
+miraland_program::declare_id!("Lendom2HkAKTe8bLUMxDxpBd8kCYUbZjECGtx9RFV7c");

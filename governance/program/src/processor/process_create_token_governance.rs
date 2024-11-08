@@ -15,7 +15,7 @@ use {
             structs::Reserved119,
         },
     },
-    solana_program::{
+    miraland_program::{
         account_info::{next_account_info, AccountInfo},
         entrypoint::ProgramResult,
         program_pack::Pack,

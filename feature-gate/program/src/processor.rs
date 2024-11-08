@@ -2,7 +2,7 @@
 
 use {
     crate::{error::FeatureGateError, instruction::FeatureGateInstruction},
-    solana_program::{
+    miraland_program::{
         account_info::{next_account_info, AccountInfo},
         entrypoint::ProgramResult,
         feature::Feature,

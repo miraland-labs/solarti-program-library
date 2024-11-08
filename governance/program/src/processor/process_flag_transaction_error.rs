@@ -7,7 +7,7 @@ use {
         proposal_transaction::get_proposal_transaction_data_for_proposal,
         token_owner_record::get_token_owner_record_data_for_proposal_owner,
     },
-    solana_program::{
+    miraland_program::{
         account_info::{next_account_info, AccountInfo},
         clock::Clock,
         entrypoint::ProgramResult,

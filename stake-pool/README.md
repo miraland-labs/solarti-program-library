@@ -1,6 +1,6 @@
 # stake-pool program
 
-Full documentation is available at https://spl.miraland.top/stake-pool
+Full documentation is available at https://spl.miraland.io/stake-pool
 
 The command-line interface tool is available in the `./cli` directory.
 

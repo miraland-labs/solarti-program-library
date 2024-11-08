@@ -2,14 +2,14 @@
 
 use {
     crate::{error::TokenError, processor::Processor},
-    solana_program::{
+    miraland_program::{
         account_info::AccountInfo, entrypoint::ProgramResult, program_error::PrintProgramError,
         pubkey::Pubkey,
     },
     miraland_security_txt::security_txt,
 };
 
-solana_program::entrypoint!(process_instruction);
+miraland_program::entrypoint!(process_instruction);
 fn process_instruction(
     program_id: &Pubkey,
     accounts: &[AccountInfo],
@@ -26,8 +26,8 @@ fn process_instruction(
 security_txt! {
     // Required fields
     name: "SPL Token-2022",
-    project_url: "https://spl.miraland.top/token-2022",
-    contacts: "link:https://github.com/miraland-labs/solarti-program-library/security/advisories/new,mailto:security@miraland.top,discord:https://miraland.top/discord",
+    project_url: "https://spl.miraland.io/token-2022",
+    contacts: "link:https://github.com/miraland-labs/solarti-program-library/security/advisories/new,mailto:security@miraland.io,discord:https://miraland.io/discord",
     policy: "https://github.com/miraland-labs/solarti-program-library/blob/main/SECURITY.md",
 
     // Optional Fields

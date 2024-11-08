@@ -10,7 +10,7 @@ into a TLV entry in an account, you can do the following:
 
 ```rust
 use {
-    solana_program::{account_info::AccountInfo, instruction::{AccountMeta, Instruction}, pubkey::Pubkey},
+    miraland_program::{account_info::AccountInfo, instruction::{AccountMeta, Instruction}, pubkey::Pubkey},
     spl_discriminator::{ArrayDiscriminator, SplDiscriminate},
     spl_tlv_account_resolution::{
         account::ExtraAccountMeta,
@@ -79,10 +79,10 @@ ExtraAccountMetaList::add_to_instruction::<_, _, MyInstruction>(
 let mut cpi_instruction = Instruction::new_with_bytes(program_id, &[0, 1, 2], vec![]);
 
 // Include all of the well-known required account infos here first
-let mut cpi_account_infos = vec![]; 
+let mut cpi_account_infos = vec![];
 
 // Provide all "remaining_account_infos" that are *not* part of any other known interface
-let remaining_account_infos = &[]; 
+let remaining_account_infos = &[];
 ExtraAccountMetaList::add_to_cpi_instruction::<MyInstruction>(
     &mut cpi_instruction,
     &mut cpi_account_infos,
@@ -138,13 +138,13 @@ This approach could also be called a "state interface".
 This library is capable of storing two types of configurations for additional
 required accounts:
 
-- Accounts with a fixed address
-- Accounts with a **dynamic program-derived address** derived from seeds that
-may come from any combination of the following:
-  - Hard-coded values, such as string literals or integers
-  - A slice of the instruction data provided to the transfer-hook program
-  - The address of another account in the total list of accounts
-  - A program id from another account in the instruction
+-   Accounts with a fixed address
+-   Accounts with a **dynamic program-derived address** derived from seeds that
+    may come from any combination of the following:
+    -   Hard-coded values, such as string literals or integers
+    -   A slice of the instruction data provided to the transfer-hook program
+    -   The address of another account in the total list of accounts
+    -   A program id from another account in the instruction
 
 When you store configurations for a dynamic Program-Derived Address within the
 additional required accounts, the PDA itself is evaluated (or resolved) at the
@@ -192,5 +192,5 @@ In the program implementation, this instruction writes the additional accounts
 into return data, making it easy for on-chain and off-chain clients to consume.
 
 See the
-[relevant sRFC](https://forum.solana.com/t/srfc-00010-additional-accounts-request-transfer-spec/122)
+[relevant sRFC](https://forum.miraland.io/t/srfc-00010-additional-accounts-request-transfer-spec/122)
 for more information about the dynamic approach.

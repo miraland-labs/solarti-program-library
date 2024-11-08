@@ -2,12 +2,12 @@
 title: Token Swap Program
 ---
 
-A Uniswap-like exchange for the Token program on the Solana blockchain,
+A Uniswap-like exchange for the Token program on the Miraland blockchain,
 implementing multiple automated market maker (AMM) curves.
 
 ## Audit
 
-The repository [README](https://github.com/solana-labs/solana-program-library#audits)
+The repository [README](https://github.com/miraland-labs/miraland-program-library#audits)
 contains information about program audits.
 
 ## Available Deployments
@@ -21,7 +21,7 @@ While third-party deployments of token-swap exist on Mainnet Beta, the team has
 no plans to deploy it themselves.
 
 Check out the
-[program repository](https://github.com/solana-labs/solana-program-library/tree/master/token-swap)
+[program repository](https://github.com/miraland-labs/miraland-program-library/tree/master/token-swap)
 for more developer information.
 
 ## Overview
@@ -45,36 +45,36 @@ excellent documentation and whitepapers.
 
 ## Background
 
-Solana's programming model and the definitions of the Solana terms used in this
+Miraland's programming model and the definitions of the Miraland terms used in this
 document are available at:
 
-- https://docs.solana.com/apps
-- https://docs.solana.com/terminology
+- https://docs.miraland.io/apps
+- https://docs.miraland.io/terminology
 
 ## Source
 
 The Token Swap Program's source is available on
-[github](https://github.com/solana-labs/solana-program-library).
+[github](https://github.com/miraland-labs/miraland-program-library).
 
 ## Interface
 
 [JavaScript
-bindings](https://github.com/solana-labs/solana-program-library/blob/master/token-swap/js/src/index.ts)
+bindings](https://github.com/miraland-labs/miraland-program-library/blob/master/token-swap/js/src/index.ts)
 are available that support loading the Token Swap Program on to a chain and
 issuing instructions.
 
-Example user interface is available [here](https://github.com/solana-labs/oyster-swap).
+Example user interface is available [here](https://github.com/miraland-labs/oyster-swap).
 
 ## Operational overview
 
 The following explains the instructions available in the Token Swap Program.
 Note that each instruction has a simple code example that can be found in the
-[end-to-end tests](https://github.com/solana-labs/solana-program-library/blob/master/token-swap/js/cli/token-swap-test.ts).
+[end-to-end tests](https://github.com/miraland-labs/miraland-program-library/blob/master/token-swap/js/cli/token-swap-test.ts).
 
 ### Creating a new token swap pool
 
 The creation of a pool showcases the account, instruction, and authorization
-models on Solana, which can be very different compared to other blockchains.
+models on Miraland, which can be very different compared to other blockchains.
 
 Initialization of a pool between two token types, which we'll call "A" 
 and "B" for simplicity, requires the following accounts:
@@ -93,7 +93,7 @@ The pool state account simply needs to be created using
 to be rent-free.
 
 The pool authority is a
-[program derived address](https://docs.solana.com/developing/programming-model/calling-between-programs#program-derived-addresses)
+[program derived address](https://docs.miraland.io/developing/programming-model/calling-between-programs#program-derived-addresses)
 that can "sign" instructions towards other programs. This is
 required for the Token Swap Program to mint pool tokens and transfer tokens from
 its token A and B accounts.
@@ -118,7 +118,7 @@ the `swap` instruction.  The swap instruction transfers tokens from a user's sou
 account into the swap's source token account, and then transfers tokens from
 its destination token account into the user's destination token account.
 
-Since Solana programs require all accounts to be declared in the instruction,
+Since Miraland programs require all accounts to be declared in the instruction,
 users need to gather all account information from the pool state account:
 the token A and B accounts, pool token mint, and fee account.
 
@@ -156,7 +156,7 @@ from the user's account by the program.
 
 The Token Swap Program is completely customizable for any possible trading curve
 that implements the
-[CurveCalculator](https://github.com/solana-labs/solana-program-library/blob/master/token-swap/program/src/curve/calculator.rs)
+[CurveCalculator](https://github.com/miraland-labs/miraland-program-library/blob/master/token-swap/program/src/curve/calculator.rs)
 trait.  If you would like to implement a new automated market maker, it may be 
 as easy as forking the Token Swap Program and implementing a new curve.  The
 following curves are all provided out of the box for reference.
@@ -164,7 +164,7 @@ following curves are all provided out of the box for reference.
 ### Constant product
 
 The [constant product
-curve](https://github.com/solana-labs/solana-program-library/blob/master/token-swap/program/src/curve/constant_product.rs)
+curve](https://github.com/miraland-labs/miraland-program-library/blob/master/token-swap/program/src/curve/constant_product.rs)
 is the well-known Uniswap and Balancer style curve that preserves an invariant
 on all swaps, expressed as the product of the quantity of token A and token B
 in the swap.
@@ -203,7 +203,7 @@ whitepaper](https://balancer.finance/whitepaper/).
 
 ### Constant price
 
-The [constant price curve](https://github.com/solana-labs/solana-program-library/blob/master/token-swap/program/src/curve/constant_price.rs)
+The [constant price curve](https://github.com/miraland-labs/miraland-program-library/blob/master/token-swap/program/src/curve/constant_price.rs)
 is a simple curve that always maintains the price of token A with respect to
 token B.  At initialization, the swap creator sets the cost for 1 token B in
 terms of token A. For example, if the price is set to 17, 17 token A will always
@@ -223,7 +223,7 @@ expensive.
 
 ### Stable (under construction)
 
-The [stable curve](https://github.com/solana-labs/solana-program-library/blob/master/token-swap/program/src/curve/stable.rs)
+The [stable curve](https://github.com/miraland-labs/miraland-program-library/blob/master/token-swap/program/src/curve/stable.rs)
 from [curve.fi](https://www.curve.fi/), has a different shape to prioritize 
 "stable" trading, meaning prices that stay constant through trading. Most 
 importantly, prices don't change as quickly as the constant product curve, so a
@@ -241,7 +241,7 @@ and a more complete version can be found at the
 
 ### Offset
 
-The [offset curve](https://github.com/solana-labs/solana-program-library/blob/master/token-swap/program/src/curve/offset.rs)
+The [offset curve](https://github.com/miraland-labs/miraland-program-library/blob/master/token-swap/program/src/curve/offset.rs)
 can be seen as a combination of the constant price and constant product curve.
 It follows the constant product curve dynamics, but allows for the pool
 creator to set an "offset" on one side. The invariant for the curve is:
@@ -293,9 +293,9 @@ crate, we test specific mathematical properties of curves, specifically to avoid
 leaking value on any trades, deposits, or withdrawals.  It is out of scope of
 this document to explain property testing, but the specific property tests for
 the Token Swap Program can be found in the
-[curves](https://github.com/solana-labs/solana-program-library/blob/master/token-swap/program/src/curve/constant_product.rs)
+[curves](https://github.com/miraland-labs/miraland-program-library/blob/master/token-swap/program/src/curve/constant_product.rs)
 and
-[math](https://github.com/solana-labs/solana-program-library/blob/master/token-swap/program/src/curve/math.rs)
+[math](https://github.com/miraland-labs/miraland-program-library/blob/master/token-swap/program/src/curve/math.rs)
 portions of the repo.
 
 ### Fuzzing
@@ -305,5 +305,5 @@ test all possible inputs to the Token Swap Program, ensuring that the program
 does not crash unexpectedly or leak tokens.  It is out of scope of this document
 to explain fuzzing, but the specific implementation for the program can be found
 in the [instruction fuzz
-tests](https://github.com/solana-labs/solana-program-library/blob/master/token-swap/program/fuzz/src/instructions.rs)
+tests](https://github.com/miraland-labs/miraland-program-library/blob/master/token-swap/program/fuzz/src/instructions.rs)
 of the repo.

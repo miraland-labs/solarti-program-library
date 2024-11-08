@@ -1,9 +1,9 @@
 #![cfg(feature = "test-sbf")]
 
 use {
-    solana_program::system_instruction,
-    solana_program_test::{processor, tokio::sync::Mutex, ProgramTest, ProgramTestContext},
-    solana_sdk::{pubkey::Pubkey, signature::Keypair, signer::Signer, transaction::Transaction},
+    miraland_program::system_instruction,
+    miraland_program_test::{processor, tokio::sync::Mutex, ProgramTest, ProgramTestContext},
+    miraland_sdk::{pubkey::Pubkey, signature::Keypair, signer::Signer, transaction::Transaction},
     spl_token_client::{
         client::{
             ProgramBanksClient, ProgramBanksClientProcessTransaction, ProgramClient,

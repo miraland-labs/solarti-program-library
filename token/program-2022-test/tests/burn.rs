@@ -3,8 +3,8 @@
 mod program_test;
 use {
     program_test::{TestContext, TokenContext},
-    solana_program_test::tokio,
-    solana_sdk::{
+    miraland_program_test::tokio,
+    miraland_sdk::{
         instruction::InstructionError, pubkey::Pubkey, signature::Signer, signer::keypair::Keypair,
         transaction::TransactionError, transport::TransportError,
     },
@@ -217,7 +217,7 @@ async fn run_burn_and_close_system_or_incinerator(context: TestContext, non_owne
     let error = token
         .close_account(
             &non_owner_account,
-            &solana_program::incinerator::id(),
+            &miraland_program::incinerator::id(),
             &carlos.pubkey(),
             &[&carlos],
         )
@@ -259,7 +259,7 @@ async fn run_burn_and_close_system_or_incinerator(context: TestContext, non_owne
     let error = token
         .close_account(
             &non_owner_account,
-            &solana_program::system_program::id(),
+            &miraland_program::system_program::id(),
             &carlos.pubkey(),
             &[&carlos],
         )
@@ -277,7 +277,7 @@ async fn run_burn_and_close_system_or_incinerator(context: TestContext, non_owne
     token
         .close_account(
             &non_owner_account,
-            &solana_program::incinerator::id(),
+            &miraland_program::incinerator::id(),
             &carlos.pubkey(),
             &[&carlos],
         )
@@ -289,12 +289,12 @@ async fn run_burn_and_close_system_or_incinerator(context: TestContext, non_owne
 async fn burn_and_close_incinerator_tokens() {
     let mut context = TestContext::new().await;
     context.init_token_with_mint(vec![]).await.unwrap();
-    run_burn_and_close_system_or_incinerator(context, &solana_program::incinerator::id()).await;
+    run_burn_and_close_system_or_incinerator(context, &miraland_program::incinerator::id()).await;
 }
 
 #[tokio::test]
 async fn burn_and_close_system_tokens() {
     let mut context = TestContext::new().await;
     context.init_token_with_mint(vec![]).await.unwrap();
-    run_burn_and_close_system_or_incinerator(context, &solana_program::system_program::id()).await;
+    run_burn_and_close_system_or_incinerator(context, &miraland_program::system_program::id()).await;
 }

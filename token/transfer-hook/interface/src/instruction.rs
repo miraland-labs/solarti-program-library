@@ -1,7 +1,7 @@
 //! Instruction types
 
 use {
-    solana_program::{
+    miraland_program::{
         instruction::{AccountMeta, Instruction},
         program_error::ProgramError,
         pubkey::Pubkey,
@@ -253,7 +253,7 @@ pub fn update_extra_account_meta_list(
 
 #[cfg(test)]
 mod test {
-    use {super::*, crate::NAMESPACE, solana_program::hash, spl_pod::bytemuck::pod_from_bytes};
+    use {super::*, crate::NAMESPACE, miraland_program::hash, spl_pod::bytemuck::pod_from_bytes};
 
     #[test]
     fn validate_packing() {

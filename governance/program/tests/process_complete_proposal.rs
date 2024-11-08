@@ -4,7 +4,7 @@ mod program_test;
 
 use {
     program_test::*,
-    solana_program_test::tokio,
+    miraland_program_test::tokio,
     spl_governance::{error::GovernanceError, state::enums::ProposalState},
 };
 

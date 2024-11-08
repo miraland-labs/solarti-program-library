@@ -1,10 +1,10 @@
 #![cfg(feature = "test-sbf")]
 
 use {
-    solana_program::instruction::InstructionError,
-    solana_program_test::{processor, tokio, ProgramTest, ProgramTestContext},
-    solana_sdk::{
-        account::Account as SolanaAccount,
+    miraland_program::instruction::InstructionError,
+    miraland_program_test::{processor, tokio, ProgramTest, ProgramTestContext},
+    miraland_sdk::{
+        account::Account as MiralandAccount,
         feature::{activate_with_lamports, Feature},
         pubkey::Pubkey,
         signature::{Keypair, Signer},
@@ -51,14 +51,14 @@ async fn test_revoke_pending_activation() {
     // Add a mock _active_ feature for testing later
     program_test.add_account(
         mock_active_feature_keypair.pubkey(),
-        SolanaAccount {
+        MiralandAccount {
             lamports: 500_000_000,
             owner: spl_feature_gate::id(),
             data: vec![
                 1, // `Some()`
                 45, 0, 0, 0, 0, 0, 0, 0, // Random slot `u64`
             ],
-            ..SolanaAccount::default()
+            ..MiralandAccount::default()
         },
     );
 

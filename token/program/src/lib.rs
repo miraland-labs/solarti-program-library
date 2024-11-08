@@ -15,8 +15,8 @@ mod entrypoint;
 
 // Export current sdk types for downstream users building with a different sdk
 // version
-pub use solana_program;
-use solana_program::{entrypoint::ProgramResult, program_error::ProgramError, pubkey::Pubkey};
+pub use miraland_program;
+use miraland_program::{entrypoint::ProgramResult, program_error::ProgramError, pubkey::Pubkey};
 
 /// Convert the UI representation of a token amount (using the decimals field
 /// defined in its mint) to the raw amount
@@ -82,7 +82,7 @@ pub fn try_ui_amount_into_amount(ui_amount: String, decimals: u8) -> Result<u64,
         .map_err(|_| ProgramError::InvalidArgument)
 }
 
-solana_program::declare_id!("Token4Q2B47VCdUy8u3rSTMMk2bGA1k7eN8qfKSzdiM");
+miraland_program::declare_id!("Token4Q2B47VCdUy8u3rSTMMk2bGA1k7eN8qfKSzdiM");
 
 /// Checks that the supplied program ID is the correct one for SOLARTI-token
 pub fn check_program_account(spl_token_program_id: &Pubkey) -> ProgramResult {

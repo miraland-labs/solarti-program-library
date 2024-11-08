@@ -7,7 +7,7 @@ use {
         state::{Decision, Pool, POOL_VERSION},
     },
     borsh::BorshDeserialize,
-    solana_program::{
+    miraland_program::{
         account_info::{next_account_info, AccountInfo},
         clock::{Clock, Slot},
         entrypoint::ProgramResult,

@@ -1,5 +1,5 @@
-import { Connection, PublicKey } from '@solana/web3.js';
-import { getVoteAccountAddressForPool as getVoteModern } from '@solana/solarti-single-pool';
+import { Connection, PublicKey } from '@miraland/web3.js';
+import { getVoteAccountAddressForPool as getVoteModern } from '@miraland/solarti-single-pool';
 
 import { rpc } from './internal.js';
 

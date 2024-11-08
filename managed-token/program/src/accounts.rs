@@ -1,6 +1,6 @@
 use {
     crate::assert_with_msg,
-    solana_program::{
+    miraland_program::{
         account_info::{next_account_info, AccountInfo},
         program_error::ProgramError,
         system_program,

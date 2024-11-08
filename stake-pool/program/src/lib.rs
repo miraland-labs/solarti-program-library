@@ -14,10 +14,10 @@ pub mod entrypoint;
 
 // Export current sdk types for downstream users building with a different sdk
 // version
-pub use solana_program;
+pub use miraland_program;
 use {
     crate::state::Fee,
-    solana_program::{pubkey::Pubkey, stake::state::Meta},
+    miraland_program::{pubkey::Pubkey, stake::state::Meta},
     std::num::NonZeroU32,
 };
 
@@ -157,7 +157,7 @@ pub fn find_ephemeral_stake_program_address(
     )
 }
 
-solana_program::declare_id!("spooqgqqDxZgVc3pR6EvuVFZJ1kj7ABM4Hccz1gwAN1");
+miraland_program::declare_id!("spooqgqqDxZgVc3pR6EvuVFZJ1kj7ABM4Hccz1gwAN1");
 
 #[cfg(test)]
 mod test {

@@ -2,10 +2,10 @@ import argparse
 import asyncio
 import json
 
-from solana.keypair import Keypair
-from solana.publickey import PublicKey
-from solana.rpc.async_api import AsyncClient
-from solana.rpc.commitment import Confirmed
+from miraland.keypair import Keypair
+from miraland.publickey import PublicKey
+from miraland.rpc.async_api import AsyncClient
+from miraland.rpc.commitment import Confirmed
 
 from stake.constants import STAKE_LEN, LAMPORTS_PER_MLN
 from stake_pool.actions import decrease_validator_stake, increase_validator_stake, update_stake_pool
@@ -120,8 +120,8 @@ if __name__ == "__main__":
     parser.add_argument('reserve_amount', metavar='RESERVE_AMOUNT', type=float,
                         help='Amount of SOL to keep in the reserve, e.g. 10.5')
     parser.add_argument('--endpoint', metavar='ENDPOINT_URL', type=str,
-                        default='https://api.mainnet-beta.solana.com',
-                        help='RPC endpoint to use, e.g. https://api.mainnet-beta.solana.com')
+                        default='https://api.mainnet-beta.miraland.io',
+                        help='RPC endpoint to use, e.g. https://api.mainnet-beta.miraland.io')
 
     args = parser.parse_args()
     stake_pool = PublicKey(args.stake_pool)

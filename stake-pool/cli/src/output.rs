@@ -1,7 +1,7 @@
 use {
     serde::{Deserialize, Serialize},
     miraland_cli_output::{QuietDisplay, VerboseDisplay},
-    solana_sdk::{native_token::Mln, pubkey::Pubkey, stake::state::Lockup},
+    miraland_sdk::{native_token::Mln, pubkey::Pubkey, stake::state::Lockup},
     spl_stake_pool::state::{
         Fee, PodStakeStatus, StakePool, StakeStatus, ValidatorList, ValidatorStakeInfo,
     },

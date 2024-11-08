@@ -9,7 +9,7 @@ use {
     bytemuck::{Pod, Zeroable},
     num_derive::{FromPrimitive, ToPrimitive},
     num_traits::{FromPrimitive, ToPrimitive},
-    solana_program::{
+    miraland_program::{
         account_info::AccountInfo,
         borsh1::get_instance_packed_len,
         msg,
@@ -1051,7 +1051,7 @@ mod test {
     use {
         super::*,
         proptest::prelude::*,
-        solana_program::{
+        miraland_program::{
             borsh1::{get_packed_len, try_from_slice_unchecked},
             clock::{DEFAULT_SLOTS_PER_EPOCH, DEFAULT_S_PER_SLOT, SECONDS_PER_DAY},
             native_token::LAMPORTS_PER_MLN,

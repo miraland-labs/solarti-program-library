@@ -27,7 +27,7 @@ use {
         tools::bpf_loader_upgradeable::get_program_data_address,
     },
     borsh::{BorshDeserialize, BorshSchema, BorshSerialize},
-    solana_program::{
+    miraland_program::{
         bpf_loader_upgradeable,
         instruction::{AccountMeta, Instruction},
         pubkey::Pubkey,
@@ -142,7 +142,7 @@ pub enum GovernanceInstruction {
     },
 
     /// Creates Governance account which can be used to govern any arbitrary
-    /// Solana account or asset
+    /// Miraland account or asset
     ///
     ///   0. `[]` Realm account the created Governance belongs to
     ///   1. `[writable]` Account Governance account.

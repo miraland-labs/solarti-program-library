@@ -1,5 +1,5 @@
-import { PublicKey, TransactionInstruction } from '@solana/web3.js';
-import { SinglePoolInstruction as PoolInstructionModern } from '@solana/solarti-single-pool';
+import { PublicKey, TransactionInstruction } from '@miraland/web3.js';
+import { SinglePoolInstruction as PoolInstructionModern } from '@miraland/solarti-single-pool';
 
 import { modernInstructionToLegacy } from './internal.js';
 

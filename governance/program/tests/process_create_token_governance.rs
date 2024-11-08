@@ -3,8 +3,8 @@ mod program_test;
 
 use {
     program_test::*,
-    solana_program_test::*,
-    solana_sdk::{signature::Keypair, signer::Signer},
+    miraland_program_test::*,
+    miraland_sdk::{signature::Keypair, signer::Signer},
     spl_governance::error::GovernanceError,
     spl_governance_tools::error::GovernanceToolsError,
     spl_token::{error::TokenError, instruction::AuthorityType},

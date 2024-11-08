@@ -3,13 +3,13 @@
 #![cfg(feature = "test-sbf")]
 
 use {
-    solana_program::{
+    miraland_program::{
         feature::{self, Feature},
         program_option::COption,
         system_program,
     },
-    solana_program_test::*,
-    solana_sdk::{
+    miraland_program_test::*,
+    miraland_sdk::{
         signature::{Keypair, Signer},
         transaction::Transaction,
     },

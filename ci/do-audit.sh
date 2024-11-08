@@ -2,6 +2,7 @@
 
 set -e
 cd "$(dirname "$0")/.."
+# shellcheck disable=SC1091
 source ./ci/rust-version.sh stable
 
 cargo_audit_ignores=(
@@ -13,7 +14,7 @@ cargo_audit_ignores=(
   # tokio: vulnerability affecting named pipes on Windows
   #
   # Exception is a stopgap to unblock CI
-  # https://github.com/solana-labs/solana/issues/29586
+  # https://github.com/miraland-labs/miraland/issues/29586
   --ignore RUSTSEC-2023-0001
 
   # ed25519-dalek: Double Public Key Signing Function Oracle Attack
@@ -31,4 +32,5 @@ cargo_audit_ignores=(
   # Remove once SPL upgrades to Miraland v1.17 or greater
   --ignore RUSTSEC-2023-0065
 )
+# shellcheck disable=SC2154
 cargo +"$rust_stable" audit "${cargo_audit_ignores[@]}"

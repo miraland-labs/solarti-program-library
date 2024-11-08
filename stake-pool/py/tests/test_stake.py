@@ -1,6 +1,6 @@
 import asyncio
 import pytest
-from solana.keypair import Keypair
+from miraland.keypair import Keypair
 
 from stake.actions import authorize, create_stake, delegate_stake
 from stake.constants import MINIMUM_DELEGATION

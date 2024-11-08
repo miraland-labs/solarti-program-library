@@ -10,7 +10,7 @@ pub mod state;
 
 // Export current sdk types for downstream users building with a different sdk
 // version Export borsh for downstream users
-pub use {borsh, solana_program};
+pub use {borsh, miraland_program};
 
 /// Namespace for all programs implementing token-metadata
 pub const NAMESPACE: &str = "spl_token_metadata_interface";

@@ -8,7 +8,7 @@ use {
             realm::{get_realm_data_for_authority, SetRealmAuthorityAction},
         },
     },
-    solana_program::{
+    miraland_program::{
         account_info::{next_account_info, AccountInfo},
         entrypoint::ProgramResult,
         pubkey::Pubkey,

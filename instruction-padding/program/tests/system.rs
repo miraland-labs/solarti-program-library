@@ -1,8 +1,8 @@
 #![cfg(feature = "test-sbf")]
 
 use {
-    solana_program_test::{processor, tokio, ProgramTest},
-    solana_sdk::{
+    miraland_program_test::{processor, tokio, ProgramTest},
+    miraland_sdk::{
         instruction::AccountMeta, native_token::LAMPORTS_PER_MLN, pubkey::Pubkey,
         signature::Signer, system_instruction, transaction::Transaction,
     },

@@ -6,7 +6,7 @@ use {
         extension::{Extension, ExtensionType},
     },
     bytemuck::{Pod, Zeroable},
-    solana_program::{clock::Epoch, entrypoint::ProgramResult},
+    miraland_program::{clock::Epoch, entrypoint::ProgramResult},
     spl_pod::{
         optional_keys::OptionalNonZeroPubkey,
         primitives::{PodU16, PodU64},
@@ -181,7 +181,7 @@ impl Extension for TransferFeeAmount {
 
 #[cfg(test)]
 pub(crate) mod test {
-    use {super::*, proptest::prelude::*, solana_program::pubkey::Pubkey, std::convert::TryFrom};
+    use {super::*, proptest::prelude::*, miraland_program::pubkey::Pubkey, std::convert::TryFrom};
 
     const NEWER_EPOCH: u64 = 100;
     const OLDER_EPOCH: u64 = 1;

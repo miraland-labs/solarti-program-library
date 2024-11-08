@@ -27,12 +27,12 @@ use {
         state::{Account, Mint, Multisig},
     },
     bytemuck::{Pod, Zeroable},
-    num_enum::{IntoPrimitive, TryFromPrimitive},
-    solana_program::{
+    miraland_program::{
         account_info::AccountInfo,
         program_error::ProgramError,
         program_pack::{IsInitialized, Pack},
     },
+    num_enum::{IntoPrimitive, TryFromPrimitive},
     spl_pod::{
         bytemuck::{pod_from_bytes, pod_from_bytes_mut, pod_get_packed_len},
         primitives::PodU16,
@@ -1352,7 +1352,7 @@ mod test {
         super::*,
         crate::state::test::{TEST_ACCOUNT, TEST_ACCOUNT_SLICE, TEST_MINT, TEST_MINT_SLICE},
         bytemuck::Pod,
-        solana_program::{
+        miraland_program::{
             account_info::{Account as GetAccount, IntoAccountInfo},
             clock::Epoch,
             entrypoint::MAX_PERMITTED_DATA_INCREASE,
@@ -2438,14 +2438,14 @@ mod test {
     }
 
     /// Test helper for mimicking the data layout an on-chain `AccountInfo`,
-    /// which permits "reallocs" as the Solana runtime does it
-    struct SolanaAccountData {
+    /// which permits "reallocs" as the Miraland runtime does it
+    struct MiralandAccountData {
         data: Vec<u8>,
         lamports: u64,
         owner: Pubkey,
     }
-    impl SolanaAccountData {
-        /// Create a new fake solana account data. The underlying vector is
+    impl MiralandAccountData {
+        /// Create a new fake miraland account data. The underlying vector is
         /// overallocated to mimic the runtime
         fn new(account_data: &[u8]) -> Self {
             let mut data = vec![];
@@ -2460,7 +2460,7 @@ mod test {
         }
 
         /// Data lops off the first 8 bytes, since those store the size of the
-        /// account for the Solana runtime
+        /// account for the Miraland runtime
         fn data(&self) -> &[u8] {
             let start = size_of::<u64>();
             let len = self.len();
@@ -2476,7 +2476,7 @@ mod test {
                 .unwrap() as usize
         }
     }
-    impl GetAccount for SolanaAccountData {
+    impl GetAccount for MiralandAccountData {
         fn get(&mut self) -> (&mut u64, &mut [u8], &Pubkey, bool, Epoch) {
             // need to pull out the data here to avoid a double-mutable borrow
             let start = size_of::<u64>();
@@ -2503,7 +2503,7 @@ mod test {
         state.base = TEST_MINT;
         state.pack_base();
 
-        let mut data = SolanaAccountData::new(&buffer);
+        let mut data = MiralandAccountData::new(&buffer);
         let key = Pubkey::new_unique();
         let account_info = (&key, &mut data).into_account_info();
 
@@ -2538,7 +2538,7 @@ mod test {
         state.base = TEST_MINT;
         state.pack_base();
 
-        let mut data = SolanaAccountData::new(&buffer);
+        let mut data = MiralandAccountData::new(&buffer);
         let key = Pubkey::new_unique();
         let account_info = (&key, &mut data).into_account_info();
 
@@ -2594,7 +2594,7 @@ mod test {
         extension.authority = test_key;
         extension.group_address = test_key;
 
-        let mut data = SolanaAccountData::new(&buffer);
+        let mut data = MiralandAccountData::new(&buffer);
         let key = Pubkey::new_unique();
         let account_info = (&key, &mut data).into_account_info();
 
@@ -2644,7 +2644,7 @@ mod test {
         extension.authority = test_key;
         extension.metadata_address = test_key;
 
-        let mut data = SolanaAccountData::new(&buffer);
+        let mut data = MiralandAccountData::new(&buffer);
         let key = Pubkey::new_unique();
         let account_info = (&key, &mut data).into_account_info();
 
@@ -2710,7 +2710,7 @@ mod test {
         extension.metadata_address = max_pubkey;
 
         // reallocate to smaller, make sure existing extension is fine
-        let mut data = SolanaAccountData::new(&buffer);
+        let mut data = MiralandAccountData::new(&buffer);
         let key = Pubkey::new_unique();
         let account_info = (&key, &mut data).into_account_info();
         let variable_len = VariableLenMintTest { data: vec![1, 2] };

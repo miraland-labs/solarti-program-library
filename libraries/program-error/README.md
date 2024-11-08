@@ -2,32 +2,32 @@
 
 Macros for implementing error-based traits on enums.
 
-- `#[derive(IntoProgramError)]`: automatically derives the trait `From<Self> for solana_program::program_error::ProgramError`.
-- `#[derive(DecodeError)]`: automatically derives the trait `solana_program::decode_error::DecodeError<T>`.
-- `#[derive(PrintProgramError)]`: automatically derives the trait `solana_program::program_error::PrintProgramError`.
-- `#[spl_program_error]`: Automatically derives all below traits:
-  - `Clone`
-  - `Debug`
-  - `Eq`
-  - `DecodeError`
-  - `IntoProgramError`
-  - `PrintProgramError`
-  - `thiserror::Error`
-  - `num_derive::FromPrimitive`
-  - `PartialEq`
+-   `#[derive(IntoProgramError)]`: automatically derives the trait `From<Self> for miraland_program::program_error::ProgramError`.
+-   `#[derive(DecodeError)]`: automatically derives the trait `miraland_program::decode_error::DecodeError<T>`.
+-   `#[derive(PrintProgramError)]`: automatically derives the trait `miraland_program::program_error::PrintProgramError`.
+-   `#[spl_program_error]`: Automatically derives all below traits:
+    -   `Clone`
+    -   `Debug`
+    -   `Eq`
+    -   `DecodeError`
+    -   `IntoProgramError`
+    -   `PrintProgramError`
+    -   `thiserror::Error`
+    -   `num_derive::FromPrimitive`
+    -   `PartialEq`
 
 ### `#[derive(IntoProgramError)]`
 
-This derive macro automatically derives the trait `From<Self> for solana_program::program_error::ProgramError`.
+This derive macro automatically derives the trait `From<Self> for miraland_program::program_error::ProgramError`.
 
 Your enum must implement the following traits in order for this macro to work:
 
-- `Clone`
-- `Debug`
-- `Eq`
-- `thiserror::Error`
-- `num_derive::FromPrimitive`
-- `PartialEq`
+-   `Clone`
+-   `Debug`
+-   `Eq`
+-   `thiserror::Error`
+-   `num_derive::FromPrimitive`
+-   `PartialEq`
 
 Sample code:
 
@@ -48,17 +48,17 @@ pub enum ExampleError {
 
 ### `#[derive(DecodeError)]`
 
-This derive macro automatically derives the trait `solana_program::decode_error::DecodeError<T>`.
+This derive macro automatically derives the trait `miraland_program::decode_error::DecodeError<T>`.
 
 Your enum must implement the following traits in order for this macro to work:
 
-- `Clone`
-- `Debug`
-- `Eq`
-- `IntoProgramError` (above)
-- `thiserror::Error`
-- `num_derive::FromPrimitive`
-- `PartialEq`
+-   `Clone`
+-   `Debug`
+-   `Eq`
+-   `IntoProgramError` (above)
+-   `thiserror::Error`
+-   `num_derive::FromPrimitive`
+-   `PartialEq`
 
 Sample code:
 
@@ -86,18 +86,18 @@ pub enum ExampleError {
 
 ### `#[derive(PrintProgramError)]`
 
-This derive macro automatically derives the trait `solana_program::program_error::PrintProgramError`.
+This derive macro automatically derives the trait `miraland_program::program_error::PrintProgramError`.
 
 Your enum must implement the following traits in order for this macro to work:
 
-- `Clone`
-- `Debug`
-- `DecodeError<T>` (above)
-- `Eq`
-- `IntoProgramError` (above)
-- `thiserror::Error`
-- `num_derive::FromPrimitive`
-- `PartialEq`
+-   `Clone`
+-   `Debug`
+-   `DecodeError<T>` (above)
+-   `Eq`
+-   `IntoProgramError` (above)
+-   `thiserror::Error`
+-   `num_derive::FromPrimitive`
+-   `PartialEq`
 
 Sample code:
 
@@ -131,28 +131,28 @@ invoked.
 
 This procedureal macro will give you all of the required implementations out of the box:
 
-- `Clone`
-- `Debug`
-- `Eq`
-- `thiserror::Error`
-- `num_derive::FromPrimitive`
-- `PartialEq`
+-   `Clone`
+-   `Debug`
+-   `Eq`
+-   `thiserror::Error`
+-   `num_derive::FromPrimitive`
+-   `PartialEq`
 
 It also imports the required crates so you don't have to in your program:
 
-- `num_derive`
-- `num_traits`
-- `thiserror`
+-   `num_derive`
+-   `num_traits`
+-   `thiserror`
 
 ---
 
 Just annotate your enum...
 
 ```rust
-use solana_program_error_derive::*;
+use miraland_program_error_derive::*;
 
 /// Example error
-#[solana_program_error]
+#[miraland_program_error]
 pub enum ExampleError {
     /// Mint has no mint authority
     #[error("Mint has no mint authority")]
@@ -261,29 +261,29 @@ impl ::core::cmp::PartialEq for ExampleError {
         __self_tag == __arg1_tag
     }
 }
-impl From<ExampleError> for solana_program::program_error::ProgramError {
+impl From<ExampleError> for miraland_program::program_error::ProgramError {
     fn from(e: ExampleError) -> Self {
-        solana_program::program_error::ProgramError::Custom(e as u32)
+        miraland_program::program_error::ProgramError::Custom(e as u32)
     }
 }
-impl<T> solana_program::decode_error::DecodeError<T> for ExampleError {
+impl<T> miraland_program::decode_error::DecodeError<T> for ExampleError {
     fn type_of() -> &'static str {
         "ExampleError"
     }
 }
-impl solana_program::program_error::PrintProgramError for ExampleError {
+impl miraland_program::program_error::PrintProgramError for ExampleError {
     fn print<E>(&self)
     where
-        E: 'static + std::error::Error + solana_program::decode_error::DecodeError<E>
-            + solana_program::program_error::PrintProgramError
+        E: 'static + std::error::Error + miraland_program::decode_error::DecodeError<E>
+            + miraland_program::program_error::PrintProgramError
             + num_traits::FromPrimitive,
     {
         match self {
             ExampleError::MintHasNoMintAuthority => {
-                ::solana_program::log::sol_log("Mint has no mint authority")
+                ::miraland_program::log::sol_log("Mint has no mint authority")
             }
             ExampleError::IncorrectMintAuthority => {
-                ::solana_program::log::sol_log(
+                ::miraland_program::log::sol_log(
                     "Incorrect mint authority has signed the instruction",
                 )
             }

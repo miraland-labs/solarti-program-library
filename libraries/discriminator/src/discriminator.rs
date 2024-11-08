@@ -2,7 +2,7 @@
 
 use {
     bytemuck::{Pod, Zeroable},
-    solana_program::{hash, program_error::ProgramError},
+    miraland_program::{hash, program_error::ProgramError},
 };
 
 /// A trait for managing 8-byte discriminators in a slab of bytes

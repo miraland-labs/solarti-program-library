@@ -8,7 +8,7 @@ use {
         realm_config::get_realm_config_data_for_realm,
         token_owner_record::get_token_owner_record_data_for_proposal_owner, vote_record::VoteKind,
     },
-    solana_program::{
+    miraland_program::{
         account_info::{next_account_info, AccountInfo},
         clock::Clock,
         entrypoint::ProgramResult,

@@ -1,11 +1,11 @@
 import pytest
 from stake_pool.actions import create_all, create_token_metadata, update_token_metadata
 from stake_pool.state import Fee, StakePool
-from solana.rpc.commitment import Confirmed
-from solana.rpc.async_api import AsyncClient
-from solana.keypair import Keypair
+from miraland.rpc.commitment import Confirmed
+from miraland.rpc.async_api import AsyncClient
+from miraland.keypair import Keypair
 from stake_pool.constants import find_metadata_account
-from solana.utils.helpers import decode_byte_string
+from miraland.utils.helpers import decode_byte_string
 
 
 @pytest.mark.asyncio

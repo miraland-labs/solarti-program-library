@@ -9,7 +9,7 @@ Token and Token-2022 concurrently.
 
 ## Prerequisites
 
-This guide requires the Solana CLI tool suite, minimum version 1.10.33 in order
+This guide requires the Miraland CLI tool suite, minimum version 1.10.33 in order
 to support all Token-2022 features.
 
 ## Motivation
@@ -81,7 +81,7 @@ In your program-test setup, you must include `spl_token_2022.so` at the correct
 address. You can add it as normal to `tests/fixtures/` after downloading it using:
 
 ```console
-$ solana program dump Token8N5ecJeFxL83iFa2h7AgJ8AtufM7bbg63LrW89 spl_token_2022.so
+$ miraland program dump Token8N5ecJeFxL83iFa2h7AgJ8AtufM7bbg63LrW89 spl_token_2022.so
 ```
 
 If you're using `miraland-test-validator` for your tests, you can include it using:
@@ -144,7 +144,7 @@ For example this could be:
 
 ```rust
 use spl_token_2022::{extension::ExtensionType, instruction::*, state::Mint};
-use solana_sdk::{system_instruction, transaction::Transaction};
+use miraland_sdk::{system_instruction, transaction::Transaction};
 
 // Calculate the space required using the `ExtensionType`
 let space = ExtensionType::get_account_len::<Mint>(&[ExtensionType::MintCloseAuthority]);
@@ -172,7 +172,7 @@ no-op.
 
 ```rust
 use spl_token_2022::{extension::ExtensionType, instruction::*, state::Account};
-use solana_sdk::{system_instruction, transaction::Transaction};
+use miraland_sdk::{system_instruction, transaction::Transaction};
 
 // Calculate the space required using the `ExtensionType`
 let space = ExtensionType::get_account_len::<Account>(&[ExtensionType::ImmutableOwner]);
@@ -301,7 +301,7 @@ the additional Token-2022 program will take up space in the transaction,
 32 bytes for the pubkey, and 1 byte for its index.
 
 On the flip side, if you're only using one token program at once, you will only
-incur 1 byte of overhead because of the deduplication of accounts in the Solana
+incur 1 byte of overhead because of the deduplication of accounts in the Miraland
 transaction format.
 
 Also note that some instructions will remain unchanged. For example, here is the
@@ -475,7 +475,7 @@ the expected error due to mismatched owner token programs.
 
 It's tedious, but at this point, we have updated our program to use both Token
 and Token-2022 simultaneously. Congratulations! You're ready to be part of the
-next stage of DeFi on Solana.
+next stage of DeFi on Miraland.
 
 ## Part III: Support All Extensions
 
@@ -678,7 +678,7 @@ the desired type, and properly handle the valid error case.
 Roughly speaking that means changing the amount traded before calculation:
 
 ```rust
-use solana_program::{clock::Clock, sysvar::Sysvar};
+use miraland_program::{clock::Clock, sysvar::Sysvar};
 use spl_token_2022::{extension::{StateWithExtensions, transfer_fee::TransferFeeConfig}, state::Mint};
 
 let mint_data = token_mint_info.data.borrow();
@@ -722,7 +722,7 @@ we'll do:
 
 ```rust
 use spl_token_2022::{extension::ExtensionType, instruction::*, state::Mint};
-use solana_sdk::{system_instruction, transaction::Transaction};
+use miraland_sdk::{system_instruction, transaction::Transaction};
 
 // Calculate the space required using the `ExtensionType`
 let space = ExtensionType::get_account_len::<Mint>(&[ExtensionType::MintCloseAuthority]);

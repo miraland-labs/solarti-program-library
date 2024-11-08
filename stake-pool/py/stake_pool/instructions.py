@@ -4,10 +4,10 @@ from enum import IntEnum
 from typing import List, NamedTuple, Optional
 from construct import Prefixed, GreedyString, Struct, Switch, Int8ul, Int32ul, Int64ul, Pass  # type: ignore
 
-from solana.publickey import PublicKey
-from solana.transaction import AccountMeta, TransactionInstruction
-from solana.system_program import SYS_PROGRAM_ID
-from solana.sysvar import SYSVAR_CLOCK_PUBKEY, SYSVAR_RENT_PUBKEY, SYSVAR_STAKE_HISTORY_PUBKEY
+from miraland.publickey import PublicKey
+from miraland.transaction import AccountMeta, TransactionInstruction
+from miraland.system_program import SYS_PROGRAM_ID
+from miraland.sysvar import SYSVAR_CLOCK_PUBKEY, SYSVAR_RENT_PUBKEY, SYSVAR_STAKE_HISTORY_PUBKEY
 from spl.token.constants import TOKEN_PROGRAM_ID
 
 from stake.constants import STAKE_PROGRAM_ID, SYSVAR_STAKE_CONFIG_ID

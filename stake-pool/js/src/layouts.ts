@@ -1,5 +1,5 @@
 import { publicKey, struct, u32, u64, u8, option, vec } from '@coral-xyz/borsh';
-import { Lockup, PublicKey } from '@solana/web3.js';
+import { Lockup, PublicKey } from '@miraland/web3.js';
 import BN from 'bn.js';
 import {
   Infer,

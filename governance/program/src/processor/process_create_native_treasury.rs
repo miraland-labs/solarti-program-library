@@ -5,7 +5,7 @@ use {
         governance::assert_is_valid_governance,
         native_treasury::{get_native_treasury_address_seeds, NativeTreasury},
     },
-    solana_program::{
+    miraland_program::{
         account_info::{next_account_info, AccountInfo},
         entrypoint::ProgramResult,
         pubkey::Pubkey,

@@ -1,6 +1,6 @@
 # Solarti Token Lending client library
 
-This is a JavaScript + TypeScript library for interacting with the [Solarti Token Lending](https://github.com/solana-labs/solana-program-library/tree/master/token-lending) program.
+This is a JavaScript + TypeScript library for interacting with the [Solarti Token Lending](https://github.com/miraland-labs/miraland-program-library/tree/master/token-lending) program.
 
 ## Install
 
@@ -18,6 +18,6 @@ npm install @solarti/solarti-token-lending @solarti/solarti-token @solarti/web3.
 
 ## Documentation
 
-- [Client library docs](https://solana-labs.github.io/solana-program-library/token-lending/)
-- [Program docs](https://github.com/solana-labs/solana-program-library/tree/master/token-lending)
-- [CLI docs](https://github.com/solana-labs/solana-program-library/tree/master/token-lending/cli)
+- [Client library docs](https://miraland-labs.github.io/miraland-program-library/token-lending/)
+- [Program docs](https://github.com/miraland-labs/miraland-program-library/tree/master/token-lending)
+- [CLI docs](https://github.com/miraland-labs/miraland-program-library/tree/master/token-lending/cli)

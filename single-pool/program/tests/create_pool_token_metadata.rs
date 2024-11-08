@@ -5,8 +5,8 @@ mod helpers;
 
 use {
     helpers::*,
-    solana_program_test::*,
-    solana_sdk::{
+    miraland_program_test::*,
+    miraland_sdk::{
         instruction::InstructionError, pubkey::Pubkey, signature::Signer,
         system_instruction::SystemError, transaction::Transaction,
     },

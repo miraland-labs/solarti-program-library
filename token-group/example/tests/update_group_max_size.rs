@@ -3,15 +3,15 @@
 mod setup;
 
 use {
-    setup::{setup_mint, setup_program_test},
-    solana_program::{instruction::InstructionError, pubkey::Pubkey, system_instruction},
-    solana_program_test::tokio,
-    solana_sdk::{
-        account::Account as SolanaAccount,
+    miraland_program::{instruction::InstructionError, pubkey::Pubkey, system_instruction},
+    miraland_program_test::tokio,
+    miraland_sdk::{
+        account::Account as MiralandAccount,
         signature::Keypair,
         signer::Signer,
         transaction::{Transaction, TransactionError},
     },
+    setup::{setup_mint, setup_program_test},
     spl_token_client::token::Token,
     spl_token_group_interface::{
         error::TokenGroupError,
@@ -137,7 +137,7 @@ async fn test_update_group_max_size() {
     group_data.size = 30.into();
     context.set_account(
         &group.pubkey(),
-        &SolanaAccount {
+        &MiralandAccount {
             data,
             ..fetched_group_account
         }

@@ -1,7 +1,7 @@
 //! Program state processor
 
 use {
-    solana_program::{
+    miraland_program::{
         account_info::{next_account_info, AccountInfo},
         borsh1::get_instance_packed_len,
         entrypoint::ProgramResult,

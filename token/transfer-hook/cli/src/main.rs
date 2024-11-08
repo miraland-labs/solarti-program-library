@@ -7,7 +7,7 @@ use {
     },
     miraland_client::nonblocking::rpc_client::RpcClient,
     miraland_remote_wallet::remote_wallet::RemoteWalletManager,
-    solana_sdk::{
+    miraland_sdk::{
         commitment_config::CommitmentConfig,
         instruction::{AccountMeta, Instruction},
         pubkey::Pubkey,
@@ -390,7 +390,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
             verbose: matches.is_present("verbose"),
         }
     };
-    miraland_logger::setup_with_default("solana=info,miraland=info");
+    miraland_logger::setup_with_default("miraland=info");
 
     if config.verbose {
         println!("JSON RPC URL: {}", config.json_rpc_url);
@@ -487,7 +487,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 mod test {
     use {
         super::*,
-        solana_sdk::{bpf_loader_upgradeable, signer::keypair::Keypair},
+        miraland_sdk::{bpf_loader_upgradeable, signer::keypair::Keypair},
         miraland_test_validator::{TestValidator, TestValidatorGenesis, UpgradeableProgramInfo},
         spl_token_client::{
             client::{

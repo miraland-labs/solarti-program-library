@@ -22,7 +22,7 @@ use {
     },
     borsh::BorshDeserialize,
     num_traits::FromPrimitive,
-    solana_program::{
+    miraland_program::{
         account_info::{next_account_info, AccountInfo},
         borsh1::try_from_slice_unchecked,
         clock::{Clock, Epoch},
@@ -704,7 +704,7 @@ impl Processor {
         destination: AccountInfo<'a>,
         amount: u64,
     ) -> Result<(), ProgramError> {
-        let ix = solana_program::system_instruction::transfer(source.key, destination.key, amount);
+        let ix = miraland_program::system_instruction::transfer(source.key, destination.key, amount);
         invoke(&ix, &[source, destination])
     }
 

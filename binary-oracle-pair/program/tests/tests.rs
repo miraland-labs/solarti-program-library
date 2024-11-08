@@ -2,9 +2,9 @@
 
 use {
     borsh::de::BorshDeserialize,
-    solana_program::{hash::Hash, program_pack::Pack, pubkey::Pubkey, system_instruction},
-    solana_program_test::*,
-    solana_sdk::{
+    miraland_program::{hash::Hash, program_pack::Pack, pubkey::Pubkey, system_instruction},
+    miraland_program_test::*,
+    miraland_sdk::{
         account::Account,
         signature::{Keypair, Signer},
         transaction::Transaction,

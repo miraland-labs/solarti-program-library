@@ -67,7 +67,7 @@ New proof for new leaf: [X7,X2']
 ```
 **Note:** We use XOR here because changelogs can get large as there can be many concurrent writes so using XOR is more efficient than a simple array search algorithm.
 
-**Note**: Solana imposes a transactions size restriction of 1232 bytes hence the program also provides the ability to cache the upper most part of the concurrent merkle tree called a "canopy" which is stored at the end of the account.
+**Note**: Miraland imposes a transactions size restriction of 1232 bytes hence the program also provides the ability to cache the upper most part of the concurrent merkle tree called a "canopy" which is stored at the end of the account.
 
 
 

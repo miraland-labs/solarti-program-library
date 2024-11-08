@@ -1,7 +1,7 @@
 use {
     crate::{error::TokenError, extension::confidential_transfer_fee::EncryptedWithheldAmount},
     bytemuck::{Pod, Zeroable},
-    solana_zk_token_sdk::{
+    miraland_zk_token_sdk::{
         encryption::{
             elgamal::{ElGamalCiphertext, ElGamalKeypair, ElGamalPubkey},
             pedersen::PedersenOpening,

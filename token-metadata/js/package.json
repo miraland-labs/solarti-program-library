@@ -1,9 +1,9 @@
 {
-    "name": "@solana/solarti-token-metadata",
+    "name": "@miraland/solarti-token-metadata",
     "description": "SPL Token Metadata Interface JS API",
     "version": "0.1.1",
-    "author": "Solana Labs Maintainers <maintainers@solanalabs.com>",
-    "repository": "https://github.com/solana-labs/solana-program-library",
+    "author": "Miraland Labs Maintainers <maintainers@miralandlabs.com>",
+    "repository": "https://github.com/miraland-labs/miraland-program-library",
     "license": "Apache-2.0",
     "type": "module",
     "sideEffects": false,
@@ -44,18 +44,18 @@
         "watch": "tsc --build --verbose --watch tsconfig.all.json"
     },
     "peerDependencies": {
-        "@solana/web3.js": "^1.87.6"
+        "@miraland/web3.js": "^1.87.6"
     },
     "dependencies": {
-        "@solana/codecs-core": "2.0.0-experimental.7123512",
-        "@solana/codecs-data-structures": "2.0.0-experimental.7123512",
-        "@solana/codecs-numbers": "2.0.0-experimental.7123512",
-        "@solana/codecs-strings": "2.0.0-experimental.7123512",
-        "@solana/options": "2.0.0-experimental.7123512",
-        "@solana/solarti-type-length-value": "workspace:*"
+        "@miraland/codecs-core": "2.0.0-experimental.7123512",
+        "@miraland/codecs-data-structures": "2.0.0-experimental.7123512",
+        "@miraland/codecs-numbers": "2.0.0-experimental.7123512",
+        "@miraland/codecs-strings": "2.0.0-experimental.7123512",
+        "@miraland/options": "2.0.0-experimental.7123512",
+        "@miraland/solarti-type-length-value": "workspace:*"
     },
     "devDependencies": {
-        "@solana/web3.js": "^1.87.6",
+        "@miraland/web3.js": "^1.87.6",
         "@types/chai": "^4.3.11",
         "@types/mocha": "^10.0.6",
         "@types/node": "^20.10.0",

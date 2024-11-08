@@ -30,16 +30,16 @@ else
 fi
 
 export rust_stable="$stable_version"
-export rust_stable_docker_image=solanalabs/rust:"$stable_version"
+export rust_stable_docker_image=miralandlabs/rust:"$stable_version"
 
 export rust_nightly=nightly-"$nightly_version"
-export rust_nightly_docker_image=solanalabs/rust-nightly:"$nightly_version"
+export rust_nightly_docker_image=miralandlabs/rust-nightly:"$nightly_version"
 
 [[ -z $1 ]] || (
 
   rustup_install() {
     declare toolchain=$1
-    if ! cargo +"$toolchain" -V > /dev/null; then
+    if ! cargo +"$toolchain" -V >/dev/null; then
       echo "$0: Missing toolchain? Installing...: $toolchain" >&2
       rustup install "$toolchain"
       cargo +"$toolchain" -V

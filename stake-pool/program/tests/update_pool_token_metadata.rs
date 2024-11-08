@@ -4,9 +4,9 @@ mod helpers;
 
 use {
     helpers::*,
-    solana_program::instruction::InstructionError,
-    solana_program_test::*,
-    solana_sdk::{
+    miraland_program::instruction::InstructionError,
+    miraland_program_test::*,
+    miraland_sdk::{
         signature::{Keypair, Signer},
         transaction::{Transaction, TransactionError},
     },

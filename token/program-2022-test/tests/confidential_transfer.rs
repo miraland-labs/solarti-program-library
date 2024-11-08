@@ -3,8 +3,8 @@
 mod program_test;
 use {
     program_test::{TestContext, TokenContext},
-    solana_program_test::tokio,
-    solana_sdk::{
+    miraland_program_test::tokio,
+    miraland_sdk::{
         instruction::InstructionError,
         pubkey::Pubkey,
         signature::Signer,
@@ -27,7 +27,7 @@ use {
             },
             BaseStateWithExtensions, ExtensionType,
         },
-        solana_zk_token_sdk::{
+        miraland_zk_token_sdk::{
             encryption::{auth_encryption::*, elgamal::*},
             zk_token_elgamal::pod::{self, Zeroable},
             zk_token_proof_instruction::*,

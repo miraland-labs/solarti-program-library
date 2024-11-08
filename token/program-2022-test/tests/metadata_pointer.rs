@@ -3,8 +3,8 @@
 mod program_test;
 use {
     program_test::TestContext,
-    solana_program_test::{processor, tokio, ProgramTest},
-    solana_sdk::{
+    miraland_program_test::{processor, tokio, ProgramTest},
+    miraland_sdk::{
         instruction::InstructionError, pubkey::Pubkey, signature::Signer, signer::keypair::Keypair,
         transaction::TransactionError, transport::TransportError,
     },

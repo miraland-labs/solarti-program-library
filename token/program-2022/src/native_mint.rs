@@ -4,7 +4,7 @@
 pub const DECIMALS: u8 = 9;
 
 // The Mint for native MLN Token accounts
-solana_program::declare_id!("968j6eVSgVdL7NeJoEjtRD7XV9LFSt4Bt6MsAtvtAxvx");
+miraland_program::declare_id!("968j6eVSgVdL7NeJoEjtRD7XV9LFSt4Bt6MsAtvtAxvx");
 
 /// Seed for the native_mint's program-derived address
 pub const PROGRAM_ADDRESS_SEEDS: &[&[u8]] = &["native-mint".as_bytes(), &[255]];
@@ -13,7 +13,7 @@ pub const PROGRAM_ADDRESS_SEEDS: &[&[u8]] = &["native-mint".as_bytes(), &[255]];
 mod tests {
     use {
         super::*,
-        solana_program::{native_token::*, pubkey::Pubkey},
+        miraland_program::{native_token::*, pubkey::Pubkey},
     };
 
     #[test]

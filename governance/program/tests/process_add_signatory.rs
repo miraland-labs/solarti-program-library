@@ -4,10 +4,10 @@ mod program_test;
 
 use {
     borsh::BorshSerialize,
+    miraland_program::program_error::ProgramError,
+    miraland_program_test::tokio,
+    miraland_sdk::{pubkey::Pubkey, signature::Signer},
     program_test::*,
-    solana_program::program_error::ProgramError,
-    solana_program_test::tokio,
-    solana_sdk::{pubkey::Pubkey, signature::Signer},
     spl_governance::{
         error::GovernanceError,
         instruction::{add_signatory, AddSignatoryAuthority, GovernanceInstruction},

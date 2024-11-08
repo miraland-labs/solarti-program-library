@@ -1,6 +1,6 @@
 """Time sensitive test, so run it first out of the bunch."""
 import pytest
-from solana.rpc.commitment import Confirmed
+from miraland.rpc.commitment import Confirmed
 from spl.token.instructions import get_associated_token_address
 
 from stake.constants import STAKE_LEN, LAMPORTS_PER_MLN

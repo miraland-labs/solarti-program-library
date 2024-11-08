@@ -15,8 +15,7 @@ use {
         },
         state::{SwapState, SwapV1, SwapVersion},
     },
-    num_traits::FromPrimitive,
-    solana_program::{
+    miraland_program::{
         account_info::{next_account_info, AccountInfo},
         clock::Clock,
         decode_error::DecodeError,
@@ -29,6 +28,7 @@ use {
         pubkey::Pubkey,
         sysvar::Sysvar,
     },
+    num_traits::FromPrimitive,
     spl_token_2022::{
         check_spl_token_program_account,
         error::TokenError,
@@ -1289,12 +1289,12 @@ mod tests {
                 swap, withdraw_all_token_types, withdraw_single_token_type_exact_amount_out,
             },
         },
-        solana_program::{
+        miraland_program::{
             clock::Clock, entrypoint::SUCCESS, instruction::Instruction, program_pack::Pack,
             program_stubs, rent::Rent,
         },
-        solana_sdk::account::{
-            create_account_for_test, create_is_signer_account_infos, Account as SolanaAccount,
+        miraland_sdk::account::{
+            create_account_for_test, create_is_signer_account_infos, Account as MiralandAccount,
         },
         spl_token_2022::{
             error::TokenError,
@@ -1399,21 +1399,21 @@ mod tests {
         transfer_fees: SwapTransferFees,
         swap_curve: SwapCurve,
         swap_key: Pubkey,
-        swap_account: SolanaAccount,
+        swap_account: MiralandAccount,
         pool_mint_key: Pubkey,
-        pool_mint_account: SolanaAccount,
+        pool_mint_account: MiralandAccount,
         pool_fee_key: Pubkey,
-        pool_fee_account: SolanaAccount,
+        pool_fee_account: MiralandAccount,
         pool_token_key: Pubkey,
-        pool_token_account: SolanaAccount,
+        pool_token_account: MiralandAccount,
         token_a_key: Pubkey,
-        token_a_account: SolanaAccount,
+        token_a_account: MiralandAccount,
         token_a_mint_key: Pubkey,
-        token_a_mint_account: SolanaAccount,
+        token_a_mint_account: MiralandAccount,
         token_b_key: Pubkey,
-        token_b_account: SolanaAccount,
+        token_b_account: MiralandAccount,
         token_b_mint_key: Pubkey,
-        token_b_mint_account: SolanaAccount,
+        token_b_mint_account: MiralandAccount,
         pool_token_program_id: Pubkey,
         token_a_program_id: Pubkey,
         token_b_program_id: Pubkey,
@@ -1433,7 +1433,7 @@ mod tests {
             token_b_program_id: &Pubkey,
         ) -> Self {
             let swap_key = Pubkey::new_unique();
-            let swap_account = SolanaAccount::new(0, SwapVersion::LATEST_LEN, &SWAP_PROGRAM_ID);
+            let swap_account = MiralandAccount::new(0, SwapVersion::LATEST_LEN, &SWAP_PROGRAM_ID);
             let (authority_key, bump_seed) =
                 Pubkey::find_program_address(&[&swap_key.to_bytes()[..]], &SWAP_PROGRAM_ID);
 
@@ -1537,13 +1537,13 @@ mod tests {
                 .unwrap(),
                 vec![
                     &mut self.swap_account,
-                    &mut SolanaAccount::default(),
+                    &mut MiralandAccount::default(),
                     &mut self.token_a_account,
                     &mut self.token_b_account,
                     &mut self.pool_mint_account,
                     &mut self.pool_fee_account,
                     &mut self.pool_token_account,
-                    &mut SolanaAccount::default(),
+                    &mut MiralandAccount::default(),
                 ],
             )
         }
@@ -1557,11 +1557,11 @@ mod tests {
             pool_amount: u64,
         ) -> (
             Pubkey,
-            SolanaAccount,
+            MiralandAccount,
             Pubkey,
-            SolanaAccount,
+            MiralandAccount,
             Pubkey,
-            SolanaAccount,
+            MiralandAccount,
         ) {
             let (token_a_key, token_a_account) = mint_token(
                 &self.token_a_program_id,
@@ -1617,7 +1617,7 @@ mod tests {
             }
         }
 
-        fn get_token_mint(&self, account_key: &Pubkey) -> (Pubkey, SolanaAccount) {
+        fn get_token_mint(&self, account_key: &Pubkey) -> (Pubkey, MiralandAccount) {
             if *account_key == self.token_a_key {
                 (self.token_a_mint_key, self.token_a_mint_account.clone())
             } else if *account_key == self.token_b_key {
@@ -1627,7 +1627,7 @@ mod tests {
             }
         }
 
-        fn get_token_account(&self, account_key: &Pubkey) -> &SolanaAccount {
+        fn get_token_account(&self, account_key: &Pubkey) -> &MiralandAccount {
             if *account_key == self.token_a_key {
                 &self.token_a_account
             } else if *account_key == self.token_b_key {
@@ -1637,7 +1637,7 @@ mod tests {
             }
         }
 
-        fn set_token_account(&mut self, account_key: &Pubkey, account: SolanaAccount) {
+        fn set_token_account(&mut self, account_key: &Pubkey, account: MiralandAccount) {
             if *account_key == self.token_a_key {
                 self.token_a_account = account;
                 return;
@@ -1653,11 +1653,11 @@ mod tests {
             &mut self,
             user_key: &Pubkey,
             user_source_key: &Pubkey,
-            user_source_account: &mut SolanaAccount,
+            user_source_account: &mut MiralandAccount,
             swap_source_key: &Pubkey,
             swap_destination_key: &Pubkey,
             user_destination_key: &Pubkey,
-            user_destination_account: &mut SolanaAccount,
+            user_destination_account: &mut MiralandAccount,
             amount_in: u64,
             minimum_amount_out: u64,
         ) -> ProgramResult {
@@ -1677,8 +1677,8 @@ mod tests {
                 .unwrap(),
                 vec![
                     user_source_account,
-                    &mut SolanaAccount::default(),
-                    &mut SolanaAccount::default(),
+                    &mut MiralandAccount::default(),
+                    &mut MiralandAccount::default(),
                 ],
             )
             .unwrap();
@@ -1716,8 +1716,8 @@ mod tests {
                 .unwrap(),
                 vec![
                     &mut self.swap_account,
-                    &mut SolanaAccount::default(),
-                    &mut SolanaAccount::default(),
+                    &mut MiralandAccount::default(),
+                    &mut MiralandAccount::default(),
                     user_source_account,
                     &mut swap_source_account,
                     &mut swap_destination_account,
@@ -1726,9 +1726,9 @@ mod tests {
                     &mut self.pool_fee_account,
                     &mut source_mint_account,
                     &mut destination_mint_account,
-                    &mut SolanaAccount::default(),
-                    &mut SolanaAccount::default(),
-                    &mut SolanaAccount::default(),
+                    &mut MiralandAccount::default(),
+                    &mut MiralandAccount::default(),
+                    &mut MiralandAccount::default(),
                 ],
             )?;
 
@@ -1743,11 +1743,11 @@ mod tests {
             &mut self,
             depositor_key: &Pubkey,
             depositor_token_a_key: &Pubkey,
-            depositor_token_a_account: &mut SolanaAccount,
+            depositor_token_a_account: &mut MiralandAccount,
             depositor_token_b_key: &Pubkey,
-            depositor_token_b_account: &mut SolanaAccount,
+            depositor_token_b_account: &mut MiralandAccount,
             depositor_pool_key: &Pubkey,
-            depositor_pool_account: &mut SolanaAccount,
+            depositor_pool_account: &mut MiralandAccount,
             pool_token_amount: u64,
             maximum_token_a_amount: u64,
             maximum_token_b_amount: u64,
@@ -1766,8 +1766,8 @@ mod tests {
                 .unwrap(),
                 vec![
                     depositor_token_a_account,
-                    &mut SolanaAccount::default(),
-                    &mut SolanaAccount::default(),
+                    &mut MiralandAccount::default(),
+                    &mut MiralandAccount::default(),
                 ],
             )
             .unwrap();
@@ -1785,8 +1785,8 @@ mod tests {
                 .unwrap(),
                 vec![
                     depositor_token_b_account,
-                    &mut SolanaAccount::default(),
-                    &mut SolanaAccount::default(),
+                    &mut MiralandAccount::default(),
+                    &mut MiralandAccount::default(),
                 ],
             )
             .unwrap();
@@ -1818,8 +1818,8 @@ mod tests {
                 .unwrap(),
                 vec![
                     &mut self.swap_account,
-                    &mut SolanaAccount::default(),
-                    &mut SolanaAccount::default(),
+                    &mut MiralandAccount::default(),
+                    &mut MiralandAccount::default(),
                     depositor_token_a_account,
                     depositor_token_b_account,
                     &mut self.token_a_account,
@@ -1828,9 +1828,9 @@ mod tests {
                     depositor_pool_account,
                     &mut self.token_a_mint_account,
                     &mut self.token_b_mint_account,
-                    &mut SolanaAccount::default(),
-                    &mut SolanaAccount::default(),
-                    &mut SolanaAccount::default(),
+                    &mut MiralandAccount::default(),
+                    &mut MiralandAccount::default(),
+                    &mut MiralandAccount::default(),
                 ],
             )
         }
@@ -1840,11 +1840,11 @@ mod tests {
             &mut self,
             user_key: &Pubkey,
             pool_key: &Pubkey,
-            pool_account: &mut SolanaAccount,
+            pool_account: &mut MiralandAccount,
             token_a_key: &Pubkey,
-            token_a_account: &mut SolanaAccount,
+            token_a_account: &mut MiralandAccount,
             token_b_key: &Pubkey,
-            token_b_account: &mut SolanaAccount,
+            token_b_account: &mut MiralandAccount,
             pool_token_amount: u64,
             minimum_token_a_amount: u64,
             minimum_token_b_amount: u64,
@@ -1864,8 +1864,8 @@ mod tests {
                 .unwrap(),
                 vec![
                     pool_account,
-                    &mut SolanaAccount::default(),
-                    &mut SolanaAccount::default(),
+                    &mut MiralandAccount::default(),
+                    &mut MiralandAccount::default(),
                 ],
             )
             .unwrap();
@@ -1900,8 +1900,8 @@ mod tests {
                 .unwrap(),
                 vec![
                     &mut self.swap_account,
-                    &mut SolanaAccount::default(),
-                    &mut SolanaAccount::default(),
+                    &mut MiralandAccount::default(),
+                    &mut MiralandAccount::default(),
                     &mut self.pool_mint_account,
                     pool_account,
                     &mut self.token_a_account,
@@ -1911,9 +1911,9 @@ mod tests {
                     &mut self.pool_fee_account,
                     &mut self.token_a_mint_account,
                     &mut self.token_b_mint_account,
-                    &mut SolanaAccount::default(),
-                    &mut SolanaAccount::default(),
-                    &mut SolanaAccount::default(),
+                    &mut MiralandAccount::default(),
+                    &mut MiralandAccount::default(),
+                    &mut MiralandAccount::default(),
                 ],
             )
         }
@@ -1923,9 +1923,9 @@ mod tests {
             &mut self,
             depositor_key: &Pubkey,
             deposit_account_key: &Pubkey,
-            deposit_token_account: &mut SolanaAccount,
+            deposit_token_account: &mut MiralandAccount,
             deposit_pool_key: &Pubkey,
-            deposit_pool_account: &mut SolanaAccount,
+            deposit_pool_account: &mut MiralandAccount,
             source_token_amount: u64,
             minimum_pool_token_amount: u64,
         ) -> ProgramResult {
@@ -1943,8 +1943,8 @@ mod tests {
                 .unwrap(),
                 vec![
                     deposit_token_account,
-                    &mut SolanaAccount::default(),
-                    &mut SolanaAccount::default(),
+                    &mut MiralandAccount::default(),
+                    &mut MiralandAccount::default(),
                 ],
             )
             .unwrap();
@@ -1980,16 +1980,16 @@ mod tests {
                 .unwrap(),
                 vec![
                     &mut self.swap_account,
-                    &mut SolanaAccount::default(),
-                    &mut SolanaAccount::default(),
+                    &mut MiralandAccount::default(),
+                    &mut MiralandAccount::default(),
                     deposit_token_account,
                     &mut self.token_a_account,
                     &mut self.token_b_account,
                     &mut self.pool_mint_account,
                     deposit_pool_account,
                     &mut source_mint_account,
-                    &mut SolanaAccount::default(),
-                    &mut SolanaAccount::default(),
+                    &mut MiralandAccount::default(),
+                    &mut MiralandAccount::default(),
                 ],
             )
         }
@@ -1999,9 +1999,9 @@ mod tests {
             &mut self,
             user_key: &Pubkey,
             pool_key: &Pubkey,
-            pool_account: &mut SolanaAccount,
+            pool_account: &mut MiralandAccount,
             destination_key: &Pubkey,
-            destination_account: &mut SolanaAccount,
+            destination_account: &mut MiralandAccount,
             destination_token_amount: u64,
             maximum_pool_token_amount: u64,
         ) -> ProgramResult {
@@ -2020,8 +2020,8 @@ mod tests {
                 .unwrap(),
                 vec![
                     pool_account,
-                    &mut SolanaAccount::default(),
-                    &mut SolanaAccount::default(),
+                    &mut MiralandAccount::default(),
+                    &mut MiralandAccount::default(),
                 ],
             )
             .unwrap();
@@ -2059,8 +2059,8 @@ mod tests {
                 .unwrap(),
                 vec![
                     &mut self.swap_account,
-                    &mut SolanaAccount::default(),
-                    &mut SolanaAccount::default(),
+                    &mut MiralandAccount::default(),
+                    &mut MiralandAccount::default(),
                     &mut self.pool_mint_account,
                     pool_account,
                     &mut self.token_a_account,
@@ -2068,8 +2068,8 @@ mod tests {
                     destination_account,
                     &mut self.pool_fee_account,
                     &mut destination_mint_account,
-                    &mut SolanaAccount::default(),
-                    &mut SolanaAccount::default(),
+                    &mut MiralandAccount::default(),
+                    &mut MiralandAccount::default(),
                 ],
             )
         }
@@ -2085,7 +2085,7 @@ mod tests {
 
     fn do_process_instruction_with_fee_constraints(
         instruction: Instruction,
-        accounts: Vec<&mut SolanaAccount>,
+        accounts: Vec<&mut MiralandAccount>,
         swap_constraints: &Option<SwapConstraints>,
     ) -> ProgramResult {
         test_syscall_stubs();
@@ -2146,7 +2146,7 @@ mod tests {
 
     fn do_process_instruction(
         instruction: Instruction,
-        accounts: Vec<&mut SolanaAccount>,
+        accounts: Vec<&mut MiralandAccount>,
     ) -> ProgramResult {
         do_process_instruction_with_fee_constraints(instruction, accounts, &SWAP_CONSTRAINTS)
     }
@@ -2154,11 +2154,11 @@ mod tests {
     fn mint_token(
         program_id: &Pubkey,
         mint_key: &Pubkey,
-        mint_account: &mut SolanaAccount,
+        mint_account: &mut MiralandAccount,
         mint_authority_key: &Pubkey,
         account_owner_key: &Pubkey,
         amount: u64,
-    ) -> (Pubkey, SolanaAccount) {
+    ) -> (Pubkey, MiralandAccount) {
         let account_key = Pubkey::new_unique();
         let space = if *program_id == spl_token_2022::id() {
             ExtensionType::try_calculate_account_len::<Account>(&[
@@ -2170,8 +2170,8 @@ mod tests {
             Account::get_packed_len()
         };
         let minimum_balance = Rent::default().minimum_balance(space);
-        let mut account_account = SolanaAccount::new(minimum_balance, space, program_id);
-        let mut mint_authority_account = SolanaAccount::default();
+        let mut account_account = MiralandAccount::new(minimum_balance, space, program_id);
+        let mut mint_authority_account = MiralandAccount::default();
         let mut rent_sysvar_account = create_account_for_test(&Rent::free());
 
         // no-ops in normal token, so we're good to run it either way
@@ -2221,7 +2221,7 @@ mod tests {
         freeze_authority: Option<&Pubkey>,
         close_authority: Option<&Pubkey>,
         fees: &TransferFee,
-    ) -> (Pubkey, SolanaAccount) {
+    ) -> (Pubkey, MiralandAccount) {
         let mint_key = Pubkey::new_unique();
         let space = if *program_id == spl_token_2022::id() {
             if close_authority.is_some() {
@@ -2240,7 +2240,7 @@ mod tests {
             Mint::get_packed_len()
         };
         let minimum_balance = Rent::default().minimum_balance(space);
-        let mut mint_account = SolanaAccount::new(minimum_balance, space, program_id);
+        let mut mint_account = MiralandAccount::new(minimum_balance, space, program_id);
         let mut rent_sysvar_account = create_account_for_test(&Rent::free());
 
         if *program_id == spl_token_2022::id() {
@@ -2280,12 +2280,12 @@ mod tests {
     fn test_token_program_id_error(token_program_id: Pubkey) {
         test_syscall_stubs();
         let swap_key = Pubkey::new_unique();
-        let mut mint = (Pubkey::new_unique(), SolanaAccount::default());
-        let mut destination = (Pubkey::new_unique(), SolanaAccount::default());
-        let token_program = (token_program_id, SolanaAccount::default());
+        let mut mint = (Pubkey::new_unique(), MiralandAccount::default());
+        let mut destination = (Pubkey::new_unique(), MiralandAccount::default());
+        let token_program = (token_program_id, MiralandAccount::default());
         let (authority_key, bump_seed) =
             Pubkey::find_program_address(&[&swap_key.to_bytes()[..]], &SWAP_PROGRAM_ID);
-        let mut authority = (authority_key, SolanaAccount::default());
+        let mut authority = (authority_key, MiralandAccount::default());
         let swap_bytes = swap_key.to_bytes();
         let authority_signature_seeds = [&swap_bytes[..32], &[bump_seed]];
         let signers = &[&authority_signature_seeds[..]];
@@ -2313,7 +2313,7 @@ mod tests {
         let swap_key = Pubkey::new_unique();
         let mut mint = (
             Pubkey::new_unique(),
-            SolanaAccount::new(
+            MiralandAccount::new(
                 mint_minimum_balance(),
                 spl_token::state::Mint::get_packed_len(),
                 &token_program_id,
@@ -2321,16 +2321,16 @@ mod tests {
         );
         let mut destination = (
             Pubkey::new_unique(),
-            SolanaAccount::new(
+            MiralandAccount::new(
                 account_minimum_balance(),
                 spl_token::state::Account::get_packed_len(),
                 &token_program_id,
             ),
         );
-        let mut token_program = (token_program_id, SolanaAccount::default());
+        let mut token_program = (token_program_id, MiralandAccount::default());
         let (authority_key, bump_seed) =
             Pubkey::find_program_address(&[&swap_key.to_bytes()[..]], &SWAP_PROGRAM_ID);
-        let mut authority = (authority_key, SolanaAccount::default());
+        let mut authority = (authority_key, MiralandAccount::default());
         let swap_bytes = swap_key.to_bytes();
         let authority_signature_seeds = [&swap_bytes[..32], &[bump_seed]];
         let signers = &[&authority_signature_seeds[..]];
@@ -2452,7 +2452,7 @@ mod tests {
         // uninitialized token a account
         {
             let old_account = accounts.token_a_account;
-            accounts.token_a_account = SolanaAccount::new(0, 0, &token_a_program_id);
+            accounts.token_a_account = MiralandAccount::new(0, 0, &token_a_program_id);
             assert_eq!(
                 Err(SwapError::ExpectedAccount.into()),
                 accounts.initialize_swap()
@@ -2463,7 +2463,7 @@ mod tests {
         // uninitialized token b account
         {
             let old_account = accounts.token_b_account;
-            accounts.token_b_account = SolanaAccount::new(0, 0, &token_b_program_id);
+            accounts.token_b_account = MiralandAccount::new(0, 0, &token_b_program_id);
             assert_eq!(
                 Err(SwapError::ExpectedAccount.into()),
                 accounts.initialize_swap()
@@ -2474,7 +2474,7 @@ mod tests {
         // uninitialized pool mint
         {
             let old_account = accounts.pool_mint_account;
-            accounts.pool_mint_account = SolanaAccount::new(0, 0, &pool_token_program_id);
+            accounts.pool_mint_account = MiralandAccount::new(0, 0, &pool_token_program_id);
             assert_eq!(
                 Err(SwapError::ExpectedMint.into()),
                 accounts.initialize_swap()
@@ -2773,8 +2773,8 @@ mod tests {
                 .unwrap(),
                 vec![
                     &mut accounts.token_a_account,
-                    &mut SolanaAccount::default(),
-                    &mut SolanaAccount::default(),
+                    &mut MiralandAccount::default(),
+                    &mut MiralandAccount::default(),
                 ],
             )
             .unwrap();
@@ -2791,7 +2791,10 @@ mod tests {
                     &[],
                 )
                 .unwrap(),
-                vec![&mut accounts.token_a_account, &mut SolanaAccount::default()],
+                vec![
+                    &mut accounts.token_a_account,
+                    &mut MiralandAccount::default(),
+                ],
             )
             .unwrap();
         }
@@ -2810,8 +2813,8 @@ mod tests {
                 .unwrap(),
                 vec![
                     &mut accounts.token_b_account,
-                    &mut SolanaAccount::default(),
-                    &mut SolanaAccount::default(),
+                    &mut MiralandAccount::default(),
+                    &mut MiralandAccount::default(),
                 ],
             )
             .unwrap();
@@ -2828,7 +2831,10 @@ mod tests {
                     &[],
                 )
                 .unwrap(),
-                vec![&mut accounts.token_b_account, &mut SolanaAccount::default()],
+                vec![
+                    &mut accounts.token_b_account,
+                    &mut MiralandAccount::default(),
+                ],
             )
             .unwrap();
         }
@@ -2845,7 +2851,10 @@ mod tests {
                     &[],
                 )
                 .unwrap(),
-                vec![&mut accounts.token_a_account, &mut SolanaAccount::default()],
+                vec![
+                    &mut accounts.token_a_account,
+                    &mut MiralandAccount::default(),
+                ],
             )
             .unwrap();
             assert_eq!(
@@ -2863,7 +2872,10 @@ mod tests {
                     &[],
                 )
                 .unwrap(),
-                vec![&mut accounts.token_a_account, &mut SolanaAccount::default()],
+                vec![
+                    &mut accounts.token_a_account,
+                    &mut MiralandAccount::default(),
+                ],
             )
             .unwrap();
         }
@@ -2880,7 +2892,10 @@ mod tests {
                     &[],
                 )
                 .unwrap(),
-                vec![&mut accounts.token_b_account, &mut SolanaAccount::default()],
+                vec![
+                    &mut accounts.token_b_account,
+                    &mut MiralandAccount::default(),
+                ],
             )
             .unwrap();
             assert_eq!(
@@ -2898,7 +2913,10 @@ mod tests {
                     &[],
                 )
                 .unwrap(),
-                vec![&mut accounts.token_b_account, &mut SolanaAccount::default()],
+                vec![
+                    &mut accounts.token_b_account,
+                    &mut MiralandAccount::default(),
+                ],
             )
             .unwrap();
         }
@@ -2925,13 +2943,13 @@ mod tests {
                     .unwrap(),
                     vec![
                         &mut accounts.swap_account,
-                        &mut SolanaAccount::default(),
+                        &mut MiralandAccount::default(),
                         &mut accounts.token_a_account,
                         &mut accounts.token_b_account,
                         &mut accounts.pool_mint_account,
                         &mut accounts.pool_fee_account,
                         &mut accounts.pool_token_account,
-                        &mut SolanaAccount::default(),
+                        &mut MiralandAccount::default(),
                     ],
                 )
             );
@@ -3150,13 +3168,13 @@ mod tests {
                     .unwrap(),
                     vec![
                         &mut accounts.swap_account,
-                        &mut SolanaAccount::default(),
+                        &mut MiralandAccount::default(),
                         &mut accounts.token_a_account,
                         &mut accounts.token_b_account,
                         &mut accounts.pool_mint_account,
                         &mut accounts.pool_fee_account,
                         &mut accounts.pool_token_account,
-                        &mut SolanaAccount::default(),
+                        &mut MiralandAccount::default(),
                     ],
                     &constraints,
                 )
@@ -3225,13 +3243,13 @@ mod tests {
                     .unwrap(),
                     vec![
                         &mut accounts.swap_account,
-                        &mut SolanaAccount::default(),
+                        &mut MiralandAccount::default(),
                         &mut accounts.token_a_account,
                         &mut accounts.token_b_account,
                         &mut accounts.pool_mint_account,
                         &mut accounts.pool_fee_account,
                         &mut accounts.pool_token_account,
-                        &mut SolanaAccount::default(),
+                        &mut MiralandAccount::default(),
                     ],
                     &constraints,
                 )
@@ -3296,13 +3314,13 @@ mod tests {
                 .unwrap(),
                 vec![
                     &mut accounts.swap_account,
-                    &mut SolanaAccount::default(),
+                    &mut MiralandAccount::default(),
                     &mut accounts.token_a_account,
                     &mut accounts.token_b_account,
                     &mut accounts.pool_mint_account,
                     &mut accounts.pool_fee_account,
                     &mut accounts.pool_token_account,
-                    &mut SolanaAccount::default(),
+                    &mut MiralandAccount::default(),
                 ],
                 &constraints,
             )
@@ -3671,8 +3689,8 @@ mod tests {
                     .unwrap(),
                     vec![
                         &mut accounts.swap_account,
-                        &mut SolanaAccount::default(),
-                        &mut SolanaAccount::default(),
+                        &mut MiralandAccount::default(),
+                        &mut MiralandAccount::default(),
                         &mut token_a_account,
                         &mut token_b_account,
                         &mut accounts.token_a_account,
@@ -3681,9 +3699,9 @@ mod tests {
                         &mut pool_account,
                         &mut accounts.token_a_mint_account,
                         &mut accounts.token_b_mint_account,
-                        &mut SolanaAccount::default(),
-                        &mut SolanaAccount::default(),
-                        &mut SolanaAccount::default(),
+                        &mut MiralandAccount::default(),
+                        &mut MiralandAccount::default(),
+                        &mut MiralandAccount::default(),
                     ],
                 )
             );
@@ -3728,8 +3746,8 @@ mod tests {
                     .unwrap(),
                     vec![
                         &mut accounts.swap_account,
-                        &mut SolanaAccount::default(),
-                        &mut SolanaAccount::default(),
+                        &mut MiralandAccount::default(),
+                        &mut MiralandAccount::default(),
                         &mut token_a_account,
                         &mut token_b_account,
                         &mut accounts.token_a_account,
@@ -3738,9 +3756,9 @@ mod tests {
                         &mut pool_account,
                         &mut accounts.token_a_mint_account,
                         &mut accounts.token_b_mint_account,
-                        &mut SolanaAccount::default(),
-                        &mut SolanaAccount::default(),
-                        &mut SolanaAccount::default(),
+                        &mut MiralandAccount::default(),
+                        &mut MiralandAccount::default(),
+                        &mut MiralandAccount::default(),
                     ],
                 )
             );
@@ -4377,8 +4395,8 @@ mod tests {
                     .unwrap(),
                     vec![
                         &mut accounts.swap_account,
-                        &mut SolanaAccount::default(),
-                        &mut SolanaAccount::default(),
+                        &mut MiralandAccount::default(),
+                        &mut MiralandAccount::default(),
                         &mut accounts.pool_mint_account,
                         &mut pool_account,
                         &mut accounts.token_a_account,
@@ -4388,9 +4406,9 @@ mod tests {
                         &mut accounts.pool_fee_account,
                         &mut accounts.token_a_mint_account,
                         &mut accounts.token_b_mint_account,
-                        &mut SolanaAccount::default(),
-                        &mut SolanaAccount::default(),
-                        &mut SolanaAccount::default(),
+                        &mut MiralandAccount::default(),
+                        &mut MiralandAccount::default(),
+                        &mut MiralandAccount::default(),
                     ],
                 )
             );
@@ -4442,8 +4460,8 @@ mod tests {
                     .unwrap(),
                     vec![
                         &mut accounts.swap_account,
-                        &mut SolanaAccount::default(),
-                        &mut SolanaAccount::default(),
+                        &mut MiralandAccount::default(),
+                        &mut MiralandAccount::default(),
                         &mut accounts.pool_mint_account,
                         &mut pool_account,
                         &mut accounts.token_a_account,
@@ -4453,9 +4471,9 @@ mod tests {
                         &mut accounts.pool_fee_account,
                         &mut accounts.token_a_mint_account,
                         &mut accounts.token_b_mint_account,
-                        &mut SolanaAccount::default(),
-                        &mut SolanaAccount::default(),
-                        &mut SolanaAccount::default(),
+                        &mut MiralandAccount::default(),
+                        &mut MiralandAccount::default(),
+                        &mut MiralandAccount::default(),
                     ],
                 )
             );
@@ -5104,16 +5122,16 @@ mod tests {
                     .unwrap(),
                     vec![
                         &mut accounts.swap_account,
-                        &mut SolanaAccount::default(),
-                        &mut SolanaAccount::default(),
+                        &mut MiralandAccount::default(),
+                        &mut MiralandAccount::default(),
                         &mut token_a_account,
                         &mut accounts.token_a_account,
                         &mut accounts.token_b_account,
                         &mut accounts.pool_mint_account,
                         &mut pool_account,
                         &mut accounts.token_a_mint_account,
-                        &mut SolanaAccount::default(),
-                        &mut SolanaAccount::default(),
+                        &mut MiralandAccount::default(),
+                        &mut MiralandAccount::default(),
                     ],
                 )
             );
@@ -5154,16 +5172,16 @@ mod tests {
                     .unwrap(),
                     vec![
                         &mut accounts.swap_account,
-                        &mut SolanaAccount::default(),
-                        &mut SolanaAccount::default(),
+                        &mut MiralandAccount::default(),
+                        &mut MiralandAccount::default(),
                         &mut token_a_account,
                         &mut accounts.token_a_account,
                         &mut accounts.token_b_account,
                         &mut accounts.pool_mint_account,
                         &mut pool_account,
                         &mut accounts.token_a_mint_account,
-                        &mut SolanaAccount::default(),
-                        &mut SolanaAccount::default(),
+                        &mut MiralandAccount::default(),
+                        &mut MiralandAccount::default(),
                     ],
                 )
             );
@@ -5705,8 +5723,8 @@ mod tests {
                     .unwrap(),
                     vec![
                         &mut accounts.swap_account,
-                        &mut SolanaAccount::default(),
-                        &mut SolanaAccount::default(),
+                        &mut MiralandAccount::default(),
+                        &mut MiralandAccount::default(),
                         &mut accounts.pool_mint_account,
                         &mut pool_account,
                         &mut accounts.token_a_account,
@@ -5714,8 +5732,8 @@ mod tests {
                         &mut token_a_account,
                         &mut accounts.pool_fee_account,
                         &mut accounts.token_a_mint_account,
-                        &mut SolanaAccount::default(),
-                        &mut SolanaAccount::default(),
+                        &mut MiralandAccount::default(),
+                        &mut MiralandAccount::default(),
                     ],
                 )
             );
@@ -5763,8 +5781,8 @@ mod tests {
                     .unwrap(),
                     vec![
                         &mut accounts.swap_account,
-                        &mut SolanaAccount::default(),
-                        &mut SolanaAccount::default(),
+                        &mut MiralandAccount::default(),
+                        &mut MiralandAccount::default(),
                         &mut accounts.pool_mint_account,
                         &mut pool_account,
                         &mut accounts.token_a_account,
@@ -5772,8 +5790,8 @@ mod tests {
                         &mut token_a_account,
                         &mut accounts.pool_fee_account,
                         &mut accounts.token_a_mint_account,
-                        &mut SolanaAccount::default(),
-                        &mut SolanaAccount::default(),
+                        &mut MiralandAccount::default(),
+                        &mut MiralandAccount::default(),
                     ],
                 )
             );
@@ -6522,13 +6540,13 @@ mod tests {
             .unwrap(),
             vec![
                 &mut accounts.swap_account,
-                &mut SolanaAccount::default(),
+                &mut MiralandAccount::default(),
                 &mut accounts.token_a_account,
                 &mut accounts.token_b_account,
                 &mut accounts.pool_mint_account,
                 &mut accounts.pool_fee_account,
                 &mut accounts.pool_token_account,
-                &mut SolanaAccount::default(),
+                &mut MiralandAccount::default(),
             ],
             &constraints,
         )
@@ -6581,8 +6599,8 @@ mod tests {
             .unwrap(),
             vec![
                 &mut accounts.swap_account,
-                &mut SolanaAccount::default(),
-                &mut SolanaAccount::default(),
+                &mut MiralandAccount::default(),
+                &mut MiralandAccount::default(),
                 &mut token_a_account,
                 &mut accounts.token_a_account,
                 &mut accounts.token_b_account,
@@ -6591,9 +6609,9 @@ mod tests {
                 &mut accounts.pool_fee_account,
                 &mut accounts.token_a_mint_account,
                 &mut accounts.token_b_mint_account,
-                &mut SolanaAccount::default(),
-                &mut SolanaAccount::default(),
-                &mut SolanaAccount::default(),
+                &mut MiralandAccount::default(),
+                &mut MiralandAccount::default(),
+                &mut MiralandAccount::default(),
                 &mut pool_account,
             ],
             &constraints,
@@ -6799,8 +6817,8 @@ mod tests {
                     .unwrap(),
                     vec![
                         &mut accounts.swap_account,
-                        &mut SolanaAccount::default(),
-                        &mut SolanaAccount::default(),
+                        &mut MiralandAccount::default(),
+                        &mut MiralandAccount::default(),
                         &mut token_a_account,
                         &mut accounts.token_a_account,
                         &mut accounts.token_b_account,
@@ -6809,9 +6827,9 @@ mod tests {
                         &mut accounts.pool_fee_account,
                         &mut accounts.token_a_mint_account,
                         &mut accounts.token_b_mint_account,
-                        &mut SolanaAccount::default(),
-                        &mut SolanaAccount::default(),
-                        &mut SolanaAccount::default(),
+                        &mut MiralandAccount::default(),
+                        &mut MiralandAccount::default(),
+                        &mut MiralandAccount::default(),
                     ],
                 ),
             );
@@ -6882,8 +6900,8 @@ mod tests {
                     .unwrap(),
                     vec![
                         &mut accounts.swap_account,
-                        &mut SolanaAccount::default(),
-                        &mut SolanaAccount::default(),
+                        &mut MiralandAccount::default(),
+                        &mut MiralandAccount::default(),
                         &mut token_a_account.clone(),
                         &mut token_a_account,
                         &mut token_b_account.clone(),
@@ -6892,9 +6910,9 @@ mod tests {
                         &mut accounts.pool_fee_account,
                         &mut accounts.token_a_mint_account,
                         &mut accounts.token_b_mint_account,
-                        &mut SolanaAccount::default(),
-                        &mut SolanaAccount::default(),
-                        &mut SolanaAccount::default(),
+                        &mut MiralandAccount::default(),
+                        &mut MiralandAccount::default(),
+                        &mut MiralandAccount::default(),
                     ],
                 ),
             );
@@ -7064,8 +7082,8 @@ mod tests {
                     .unwrap(),
                     vec![
                         &mut accounts.swap_account,
-                        &mut SolanaAccount::default(),
-                        &mut SolanaAccount::default(),
+                        &mut MiralandAccount::default(),
+                        &mut MiralandAccount::default(),
                         &mut token_a_account,
                         &mut accounts.token_a_account,
                         &mut accounts.token_b_account,
@@ -7074,9 +7092,9 @@ mod tests {
                         &mut accounts.pool_fee_account,
                         &mut accounts.token_a_mint_account,
                         &mut accounts.token_b_mint_account,
-                        &mut SolanaAccount::default(),
-                        &mut SolanaAccount::default(),
-                        &mut SolanaAccount::default(),
+                        &mut MiralandAccount::default(),
+                        &mut MiralandAccount::default(),
+                        &mut MiralandAccount::default(),
                     ],
                 ),
             );
@@ -7230,8 +7248,8 @@ mod tests {
                 .unwrap(),
                 vec![
                     &mut accounts.swap_account,
-                    &mut SolanaAccount::default(),
-                    &mut SolanaAccount::default(),
+                    &mut MiralandAccount::default(),
+                    &mut MiralandAccount::default(),
                     &mut token_a_account,
                     &mut accounts.token_a_account,
                     &mut accounts.token_b_account,
@@ -7240,9 +7258,9 @@ mod tests {
                     &mut accounts.pool_fee_account,
                     &mut accounts.token_a_mint_account,
                     &mut accounts.token_b_mint_account,
-                    &mut SolanaAccount::default(),
-                    &mut SolanaAccount::default(),
-                    &mut SolanaAccount::default(),
+                    &mut MiralandAccount::default(),
+                    &mut MiralandAccount::default(),
+                    &mut MiralandAccount::default(),
                 ],
                 &constraints,
             )
@@ -7312,8 +7330,8 @@ mod tests {
                     .unwrap(),
                     vec![
                         &mut accounts.swap_account,
-                        &mut SolanaAccount::default(),
-                        &mut SolanaAccount::default(),
+                        &mut MiralandAccount::default(),
+                        &mut MiralandAccount::default(),
                         &mut token_a_account,
                         &mut accounts.token_a_account,
                         &mut accounts.token_b_account,
@@ -7322,9 +7340,9 @@ mod tests {
                         &mut accounts.pool_fee_account,
                         &mut accounts.token_a_mint_account,
                         &mut accounts.token_b_mint_account,
-                        &mut SolanaAccount::default(),
-                        &mut SolanaAccount::default(),
-                        &mut SolanaAccount::default(),
+                        &mut MiralandAccount::default(),
+                        &mut MiralandAccount::default(),
+                        &mut MiralandAccount::default(),
                         &mut bad_token_a_account,
                     ],
                     &constraints,
@@ -7924,7 +7942,7 @@ mod tests {
         );
 
         let destination_key = Pubkey::new_unique();
-        let mut destination = SolanaAccount::new(
+        let mut destination = MiralandAccount::new(
             account_minimum_balance(),
             Account::get_packed_len(),
             &withdrawer_key,
@@ -7942,7 +7960,7 @@ mod tests {
             vec![
                 &mut accounts.pool_fee_account,
                 &mut destination,
-                &mut SolanaAccount::default(),
+                &mut MiralandAccount::default(),
             ],
         )
         .unwrap();
@@ -7962,8 +7980,8 @@ mod tests {
             .unwrap(),
             vec![
                 &mut pool_account,
-                &mut SolanaAccount::default(),
-                &mut SolanaAccount::default(),
+                &mut MiralandAccount::default(),
+                &mut MiralandAccount::default(),
             ],
         )
         .unwrap();
@@ -7995,8 +8013,8 @@ mod tests {
             .unwrap(),
             vec![
                 &mut accounts.swap_account,
-                &mut SolanaAccount::default(),
-                &mut SolanaAccount::default(),
+                &mut MiralandAccount::default(),
+                &mut MiralandAccount::default(),
                 &mut accounts.pool_mint_account,
                 &mut pool_account,
                 &mut accounts.token_a_account,
@@ -8006,9 +8024,9 @@ mod tests {
                 &mut accounts.pool_fee_account,
                 &mut accounts.token_a_mint_account,
                 &mut accounts.token_b_mint_account,
-                &mut SolanaAccount::default(),
-                &mut SolanaAccount::default(),
-                &mut SolanaAccount::default(),
+                &mut MiralandAccount::default(),
+                &mut MiralandAccount::default(),
+                &mut MiralandAccount::default(),
             ],
         )
         .unwrap();
@@ -8080,7 +8098,7 @@ mod tests {
         );
 
         let destination_key = Pubkey::new_unique();
-        let mut destination = SolanaAccount::new(
+        let mut destination = MiralandAccount::new(
             account_minimum_balance(),
             Account::get_packed_len(),
             &withdrawer_key,
@@ -8098,7 +8116,7 @@ mod tests {
             vec![
                 &mut accounts.pool_fee_account,
                 &mut destination,
-                &mut SolanaAccount::default(),
+                &mut MiralandAccount::default(),
             ],
         )
         .unwrap();
@@ -8117,8 +8135,8 @@ mod tests {
             .unwrap(),
             vec![
                 &mut pool_account,
-                &mut SolanaAccount::default(),
-                &mut SolanaAccount::default(),
+                &mut MiralandAccount::default(),
+                &mut MiralandAccount::default(),
             ],
         )
         .unwrap();
@@ -8146,8 +8164,8 @@ mod tests {
             .unwrap(),
             vec![
                 &mut accounts.swap_account,
-                &mut SolanaAccount::default(),
-                &mut SolanaAccount::default(),
+                &mut MiralandAccount::default(),
+                &mut MiralandAccount::default(),
                 &mut accounts.pool_mint_account,
                 &mut pool_account,
                 &mut accounts.token_a_account,
@@ -8155,8 +8173,8 @@ mod tests {
                 &mut token_a_account,
                 &mut accounts.pool_fee_account,
                 &mut accounts.token_a_mint_account,
-                &mut SolanaAccount::default(),
-                &mut SolanaAccount::default(),
+                &mut MiralandAccount::default(),
+                &mut MiralandAccount::default(),
             ],
         )
         .unwrap();
@@ -8227,13 +8245,13 @@ mod tests {
             .unwrap(),
             vec![
                 &mut accounts.swap_account,
-                &mut SolanaAccount::default(),
+                &mut MiralandAccount::default(),
                 &mut accounts.token_a_account,
                 &mut accounts.token_b_account,
                 &mut accounts.pool_mint_account,
                 &mut accounts.pool_fee_account,
                 &mut accounts.pool_token_account,
-                &mut SolanaAccount::default(),
+                &mut MiralandAccount::default(),
             ],
             &constraints,
         )
@@ -8257,7 +8275,7 @@ mod tests {
         );
 
         let destination_key = Pubkey::new_unique();
-        let mut destination = SolanaAccount::new(
+        let mut destination = MiralandAccount::new(
             account_minimum_balance(),
             Account::get_packed_len(),
             owner_key,
@@ -8275,7 +8293,7 @@ mod tests {
             vec![
                 &mut accounts.pool_fee_account,
                 &mut destination,
-                &mut SolanaAccount::default(),
+                &mut MiralandAccount::default(),
             ],
         )
         .unwrap();
@@ -8306,8 +8324,8 @@ mod tests {
             .unwrap(),
             vec![
                 &mut accounts.swap_account,
-                &mut SolanaAccount::default(),
-                &mut SolanaAccount::default(),
+                &mut MiralandAccount::default(),
+                &mut MiralandAccount::default(),
                 &mut token_a_account,
                 &mut accounts.token_a_account,
                 &mut accounts.token_b_account,
@@ -8316,9 +8334,9 @@ mod tests {
                 &mut accounts.pool_fee_account,
                 &mut accounts.token_a_mint_account,
                 &mut accounts.token_b_mint_account,
-                &mut SolanaAccount::default(),
-                &mut SolanaAccount::default(),
-                &mut SolanaAccount::default(),
+                &mut MiralandAccount::default(),
+                &mut MiralandAccount::default(),
+                &mut MiralandAccount::default(),
                 &mut pool_account,
             ],
             &constraints,

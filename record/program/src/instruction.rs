@@ -3,7 +3,7 @@
 use {
     crate::id,
     borsh::{BorshDeserialize, BorshSerialize},
-    solana_program::{
+    miraland_program::{
         instruction::{AccountMeta, Instruction},
         pubkey::Pubkey,
     },
@@ -109,7 +109,7 @@ pub fn close_account(record_account: &Pubkey, signer: &Pubkey, receiver: &Pubkey
 
 #[cfg(test)]
 mod tests {
-    use {super::*, crate::state::tests::TEST_DATA, solana_program::program_error::ProgramError};
+    use {super::*, crate::state::tests::TEST_DATA, miraland_program::program_error::ProgramError};
 
     #[test]
     fn serialize_initialize() {

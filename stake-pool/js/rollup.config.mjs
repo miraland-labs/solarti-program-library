@@ -39,13 +39,13 @@ function generateConfig(configType, format) {
         {
           file: 'dist/index.iife.js',
           format: 'iife',
-          name: 'solanaStakePool',
+          name: 'miralandStakePool',
           sourcemap: true,
         },
         {
           file: 'dist/index.iife.min.js',
           format: 'iife',
-          name: 'solanaStakePool',
+          name: 'miralandStakePool',
           sourcemap: true,
           plugins: [terser({ mangle: false, compress: false })],
         },
@@ -67,9 +67,9 @@ function generateConfig(configType, format) {
       // Prevent dependencies from being bundled
       config.external = [
         '@coral-xyz/borsh',
-        '@solana/buffer-layout',
-        '@solana/solarti-token',
-        '@solana/web3.js',
+        '@miraland/buffer-layout',
+        '@miraland/solarti-token',
+        '@miraland/web3.js',
         'bn.js',
         'buffer',
       ];
@@ -95,9 +95,9 @@ function generateConfig(configType, format) {
     // Prevent dependencies from being bundled
     config.external = [
       '@coral-xyz/borsh',
-      '@solana/buffer-layout',
-      '@solana/solarti-token',
-      '@solana/web3.js',
+      '@miraland/buffer-layout',
+      '@miraland/solarti-token',
+      '@miraland/web3.js',
       'bn.js',
       'buffer',
     ];

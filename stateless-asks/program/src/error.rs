@@ -1,4 +1,4 @@
-use {solana_program::program_error::ProgramError, thiserror::Error};
+use {miraland_program::program_error::ProgramError, thiserror::Error};
 
 #[derive(Error, Debug, Copy, Clone)]
 pub enum UtilError {

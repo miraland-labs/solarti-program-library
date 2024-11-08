@@ -1,6 +1,6 @@
 import pytest
-from solana.rpc.commitment import Confirmed
-from solana.keypair import Keypair
+from miraland.rpc.commitment import Confirmed
+from miraland.keypair import Keypair
 from spl.token.instructions import get_associated_token_address
 
 from stake.actions import create_stake, delegate_stake

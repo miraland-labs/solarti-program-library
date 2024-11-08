@@ -2,7 +2,7 @@
 
 use {
     borsh::{BorshDeserialize, BorshSerialize},
-    solana_program::pubkey::Pubkey,
+    miraland_program::pubkey::Pubkey,
 };
 
 /// Uninitialized version value, all instances are at least version 1

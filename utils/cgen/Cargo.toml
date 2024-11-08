@@ -2,8 +2,8 @@
 name = "cgen"
 version = "0.1.0"
 authors = [
-  "Miraland Crafters <crafters@miraland.top>",
-  "Solana Labs Maintainers <maintainers@solanalabs.com>"
+  "Miraland Crafters <crafters@miraland.io>",
+  "Miraland Labs Maintainers <maintainers@miralandlabs.com>",
 ]
 publish = false
 edition = "2021"

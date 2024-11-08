@@ -29,7 +29,7 @@ pub mod coption_fromstr {
             de::{Error, Unexpected, Visitor},
             Deserializer, Serializer,
         },
-        solana_program::program_option::COption,
+        miraland_program::program_option::COption,
         std::{
             fmt::{self, Display},
             marker::PhantomData,
@@ -106,7 +106,7 @@ pub mod aeciphertext_fromstr {
             de::{Error, Visitor},
             Deserializer, Serializer,
         },
-        solana_zk_token_sdk::zk_token_elgamal::pod::AeCiphertext,
+        miraland_zk_token_sdk::zk_token_elgamal::pod::AeCiphertext,
         std::fmt,
     };
 
@@ -154,7 +154,7 @@ pub mod elgamalpubkey_fromstr {
             de::{Error, Visitor},
             Deserializer, Serializer,
         },
-        solana_zk_token_sdk::zk_token_elgamal::pod::ElGamalPubkey,
+        miraland_zk_token_sdk::zk_token_elgamal::pod::ElGamalPubkey,
         std::fmt,
     };
 
@@ -203,7 +203,7 @@ pub mod decrypthandle_fromstr {
             de::{Error, Visitor},
             Deserializer, Serializer,
         },
-        solana_zk_token_sdk::zk_token_elgamal::pod::DecryptHandle,
+        miraland_zk_token_sdk::zk_token_elgamal::pod::DecryptHandle,
         std::fmt,
     };
 

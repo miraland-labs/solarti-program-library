@@ -3,14 +3,14 @@
 #![cfg(feature = "test-sbf")]
 
 use {
-    solana_program::{
+    miraland_program::{
         instruction::{AccountMeta, Instruction},
         pubkey::Pubkey,
         rent::Rent,
         system_program,
     },
-    solana_program_test::*,
-    solana_sdk::{account::Account, signature::Signer, transaction::Transaction},
+    miraland_program_test::*,
+    miraland_sdk::{account::Account, signature::Signer, transaction::Transaction},
     spl_example_cross_program_invocation::processor::{process_instruction, SIZE},
     std::str::FromStr,
 };

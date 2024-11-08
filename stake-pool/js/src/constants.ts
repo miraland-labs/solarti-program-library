@@ -1,5 +1,5 @@
 import { Buffer } from 'buffer';
-import { LAMPORTS_PER_MLN, PublicKey } from '@solana/web3.js';
+import { LAMPORTS_PER_MLN, PublicKey } from '@miraland/web3.js';
 
 // Public key that identifies the metadata program.
 export const METADATA_PROGRAM_ID = new PublicKey('Meta88XpDHcSJZDFiHop6c9sXaufkZX5depkZyrYBWv');

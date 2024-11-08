@@ -1,6 +1,6 @@
 //! Program instruction processor
 
-use solana_program::{
+use miraland_program::{
     account_info::AccountInfo, entrypoint::ProgramResult, log::sol_log_slice, pubkey::Pubkey,
 };
 

@@ -5,8 +5,8 @@ mod helpers;
 
 use {
     helpers::*,
-    solana_program_test::*,
-    solana_sdk::{program_pack::Pack, signature::Signer, stake, transaction::Transaction},
+    miraland_program_test::*,
+    miraland_sdk::{program_pack::Pack, signature::Signer, stake, transaction::Transaction},
     spl_single_pool::{error::SinglePoolError, id, instruction},
     spl_token::state::Mint,
 };

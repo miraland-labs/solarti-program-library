@@ -2,7 +2,7 @@
 
 mod program_test;
 
-use {program_test::*, solana_program_test::tokio, spl_governance::error::GovernanceError};
+use {program_test::*, miraland_program_test::tokio, spl_governance::error::GovernanceError};
 
 #[tokio::test]
 async fn test_insert_transaction() {

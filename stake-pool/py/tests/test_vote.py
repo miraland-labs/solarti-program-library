@@ -1,7 +1,7 @@
 import pytest
-from solana.keypair import Keypair
-from solana.publickey import PublicKey
-from solana.rpc.commitment import Confirmed
+from miraland.keypair import Keypair
+from miraland.publickey import PublicKey
+from miraland.rpc.commitment import Confirmed
 
 from vote.actions import create_vote
 from vote.constants import VOTE_PROGRAM_ID

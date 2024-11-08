@@ -3,7 +3,7 @@
 use {
     crate::{error::GovernanceError, tools::pack::unpack_coption_pubkey},
     arrayref::array_ref,
-    solana_program::{
+    miraland_program::{
         account_info::AccountInfo,
         entrypoint::ProgramResult,
         msg,

@@ -3,12 +3,12 @@
 ### Example program
 
 Here is an example program that only implements the required "execute" instruction,
-assuming that the proper account data is already written to the appropriate 
+assuming that the proper account data is already written to the appropriate
 program-derived address defined by the interface.
 
 ```rust
 use {
-    solana_program::{entrypoint::ProgramResult, program_error::ProgramError},
+    miraland_program::{entrypoint::ProgramResult, program_error::ProgramError},
     spl_tlv_account_resolution::state::ExtraAccountMetaList,
     spl_transfer_hook_interface::instruction::{ExecuteInstruction, TransferHookInstruction},
     spl_type_length_value::state::TlvStateBorrowed,
@@ -76,7 +76,7 @@ implements the interface and then configure their token mint to use their progra
 
 During transfer, Token-2022 calls into the program with the accounts specified
 at a well-defined program-derived address for that mint and program id. This
-call happens after all other transfer logic, so the accounts reflect the *end*
+call happens after all other transfer logic, so the accounts reflect the _end_
 state of the transfer.
 
 ### How to Use
@@ -99,14 +99,14 @@ automatically resolved!
 ### Account Resolution
 
 Implementers of the transfer-hook interface are encouraged to make use of the
-[solarti-tlv-account-resolution](https://github.com/solana-labs/solana-program-library/tree/master/libraries/tlv-account-resolution/README.md)
+[solarti-tlv-account-resolution](https://github.com/miraland-labs/miraland-program-library/tree/master/libraries/tlv-account-resolution/README.md)
 library to manage the additional required accounts for their transfer hook
 program.
 
 TLV Account Resolution is capable of powering on-chain account resolution
 when an instruction that requires extra accounts is invoked.
 Read more about how account resolution works in the repository's
-[README file](https://github.com/solana-labs/solana-program-library/tree/master/libraries/tlv-account-resolution/README.md).
+[README file](https://github.com/miraland-labs/miraland-program-library/tree/master/libraries/tlv-account-resolution/README.md).
 
 ### An Example
 
@@ -142,8 +142,8 @@ program:
 
 The `solarti-transfer-hook-interface` library provides offchain and onchain helpers
 for resolving the additional accounts required. See
-[invoke.rs](https://github.com/solana-labs/solana-program-library/tree/master/token/transfer-hook/interface/src/invoke.rs)
+[invoke.rs](https://github.com/miraland-labs/miraland-program-library/tree/master/token/transfer-hook/interface/src/invoke.rs)
 for usage on-chain, and
-[offchain.rs](https://github.com/solana-labs/solana-program-library/tree/master/token/transfer-hook/interface/src/offchain.rs)
+[offchain.rs](https://github.com/miraland-labs/miraland-program-library/tree/master/token/transfer-hook/interface/src/offchain.rs)
 for fetching the additional required account metas with any async off-chain client
 like `BanksClient` or `RpcClient`.

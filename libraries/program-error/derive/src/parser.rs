@@ -11,7 +11,7 @@ use {
 
 /// Possible arguments to the `#[spl_program_error]` attribute
 pub struct SplProgramErrorArgs {
-    /// Whether to hash the error codes using `solana_program::hash`
+    /// Whether to hash the error codes using `miraland_program::hash`
     /// or to use the default error code assigned by `num_traits`.
     pub hash_error_code_start: Option<u32>,
 }

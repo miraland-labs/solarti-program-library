@@ -2,8 +2,8 @@
 
 use {
     borsh::BorshDeserialize,
-    solana_program_test::BanksClient,
-    solana_sdk::{
+    miraland_program_test::BanksClient,
+    miraland_sdk::{
         borsh0_10::try_from_slice_unchecked,
         hash::Hash,
         program_pack::Pack,

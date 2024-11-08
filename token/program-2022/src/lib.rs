@@ -22,14 +22,14 @@ mod entrypoint;
 
 // Export current sdk types for downstream users building with a different sdk
 // version
-use solana_program::{
+use miraland_program::{
     entrypoint::ProgramResult,
     program_error::ProgramError,
     program_memory::sol_memcmp,
     pubkey::{Pubkey, PUBKEY_BYTES},
     system_program,
 };
-pub use {solana_program, solana_zk_token_sdk};
+pub use {miraland_program, miraland_zk_token_sdk};
 
 /// Convert the UI representation of a token amount (using the decimals field
 /// defined in its mint) to the raw amount
@@ -95,7 +95,7 @@ pub fn try_ui_amount_into_amount(ui_amount: String, decimals: u8) -> Result<u64,
         .map_err(|_| ProgramError::InvalidArgument)
 }
 
-solana_program::declare_id!("Token8N5ecJeFxL83iFa2h7AgJ8AtufM7bbg63LrW89");
+miraland_program::declare_id!("Token8N5ecJeFxL83iFa2h7AgJ8AtufM7bbg63LrW89");
 
 /// Checks that the supplied program ID is correct for solarti-token-2022
 pub fn check_program_account(spl_token_program_id: &Pubkey) -> ProgramResult {
@@ -117,7 +117,7 @@ pub fn check_spl_token_program_account(spl_token_program_id: &Pubkey) -> Program
 /// Checks that the supplied program ID is correct for the ZK Token proof
 /// program
 pub fn check_zk_token_proof_program_account(zk_token_proof_program_id: &Pubkey) -> ProgramResult {
-    if zk_token_proof_program_id != &solana_zk_token_sdk::zk_token_proof_program::id() {
+    if zk_token_proof_program_id != &miraland_zk_token_sdk::zk_token_proof_program::id() {
         return Err(ProgramError::IncorrectProgramId);
     }
     Ok(())

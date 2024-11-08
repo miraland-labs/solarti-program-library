@@ -1,6 +1,6 @@
 #[cfg(not(target_os = "solana"))]
-use solana_zk_token_sdk::encryption::auth_encryption::AeCiphertext;
-pub use solana_zk_token_sdk::{
+use miraland_zk_token_sdk::encryption::auth_encryption::AeCiphertext;
+pub use miraland_zk_token_sdk::{
     zk_token_proof_instruction::*, zk_token_proof_state::ProofContextState,
 };
 #[cfg(feature = "serde-traits")]
@@ -17,7 +17,7 @@ use {
     },
     bytemuck::Zeroable, // `Pod` comes from zk_token_proof_instruction
     num_enum::{IntoPrimitive, TryFromPrimitive},
-    solana_program::{
+    miraland_program::{
         instruction::{AccountMeta, Instruction},
         program_error::ProgramError,
         pubkey::Pubkey,

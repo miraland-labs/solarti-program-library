@@ -4,19 +4,19 @@ A TypeScript library for interacting with the Solarti Token and Token-2022 progr
 
 ## Links
 
-- [TypeScript Docs](https://solana-labs.github.io/solana-program-library/token/js/)
-- [FAQs (Frequently Asked Questions)](#faqs)
-- [Install](#install)
-- [Build from Source](#build-from-source)
+-   [TypeScript Docs](https://miraland-labs.github.io/miraland-program-library/token/js/)
+-   [FAQs (Frequently Asked Questions)](#faqs)
+-   [Install](#install)
+-   [Build from Source](#build-from-source)
 
 ## FAQs
 
 ### How can I get support?
 
-Please ask questions in the Solana Stack Exchange: https://solana.stackexchange.com/
+Please ask questions in the Miraland Stack Exchange: https://miraland.stackexchange.com/
 
 If you've found a bug or you'd like to request a feature, please
-[open an issue](https://github.com/solana-labs/solana-program-library/issues/new).
+[open an issue](https://github.com/miraland-labs/miraland-program-library/issues/new).
 
 ### No export named Token
 
@@ -27,7 +27,9 @@ Please see [upgrading from 0.1.x](#upgrading-from-0.1.x).
 ```shell
 npm install --save @solarti/solarti-token @solarti/web3.js
 ```
+
 _OR_
+
 ```shell
 yarn add @solarti/solarti-token @solarti/web3.js
 ```
@@ -36,40 +38,47 @@ yarn add @solarti/solarti-token @solarti/web3.js
 
 0. Prerequisites
 
-* Node 16+
-* NPM 8+
+-   Node 16+
+-   NPM 8+
 
 1. Clone the project:
+
 ```shell
 git clone https://github.com/miraland-labs/solarti-program-library.git
 ```
 
 2. Navigate to the library:
+
 ```shell
 cd solarti-program-library/token/js
 ```
 
 3. Install the dependencies:
+
 ```shell
 npm install
 ```
 
 4. Build the library:
+
 ```shell
 npm run build
 ```
 
 5. Build the on-chain programs:
+
 ```shell
 npm run test:build-programs
 ```
 
 6. Run the tests:
+
 ```shell
 npm run test
 ```
 
 7. Run the example:
+
 ```shell
 npm run example
 ```
@@ -100,5 +109,5 @@ npm install @solarti/solarti-token@0.1.8
 ```
 
 Otherwise you can find documentation on how to use new versions on the
-[SPL docs](https://spl.solana.com/token) or
-[Solana Cookbook](https://solanacookbook.com/references/token.html).
+[SPL docs](https://spl.miraland.io/token) or
+[Miraland Cookbook](https://miralandcookbook.com/references/token.html).

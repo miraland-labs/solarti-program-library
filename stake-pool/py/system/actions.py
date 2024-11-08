@@ -1,6 +1,6 @@
-from solana.publickey import PublicKey
-from solana.rpc.async_api import AsyncClient
-from solana.rpc.commitment import Confirmed
+from miraland.publickey import PublicKey
+from miraland.rpc.async_api import AsyncClient
+from miraland.rpc.commitment import Confirmed
 
 
 async def airdrop(client: AsyncClient, receiver: PublicKey, lamports: int):

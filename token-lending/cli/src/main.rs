@@ -11,8 +11,8 @@ use {
         keypair::signer_from_path,
     },
     miraland_client::rpc_client::RpcClient,
-    solana_program::{native_token::lamports_to_mln, program_pack::Pack, pubkey::Pubkey},
-    solana_sdk::{
+    miraland_program::{native_token::lamports_to_mln, program_pack::Pack, pubkey::Pubkey},
+    miraland_sdk::{
         commitment_config::CommitmentConfig,
         message::Message,
         signature::{Keypair, Signer},
@@ -48,7 +48,7 @@ type CommandResult = Result<(), Error>;
 const PYTH_PROGRAM_ID: &str = "gSbePebfvPy7tRqimPoVecS2UsBvYv46ynrzWocc92s";
 
 fn main() {
-    miraland_logger::setup_with_default("solana=info,miraland=info");
+    miraland_logger::setup_with_default("miraland=info");
 
     let default_lending_program_id: &str = &spl_token_lending::id().to_string();
 

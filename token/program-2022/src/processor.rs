@@ -30,7 +30,7 @@ use {
         native_mint,
         state::{Account, AccountState, Mint, Multisig},
     },
-    solana_program::{
+    miraland_program::{
         account_info::{next_account_info, AccountInfo},
         clock::Clock,
         entrypoint::ProgramResult,
@@ -1131,7 +1131,7 @@ impl Processor {
                     authority_info_data_len,
                     account_info_iter.as_slice(),
                 )?;
-            } else if !solana_program::incinerator::check_id(destination_account_info.key) {
+            } else if !miraland_program::incinerator::check_id(destination_account_info.key) {
                 return Err(ProgramError::InvalidAccountData);
             }
 
@@ -1787,7 +1787,7 @@ fn delete_account(account_info: &AccountInfo) -> Result<(), ProgramError> {
     account_info.assign(&system_program::id());
     let mut account_data = account_info.data.borrow_mut();
     let data_len = account_data.len();
-    solana_program::program_memory::sol_memset(*account_data, 0, data_len);
+    miraland_program::program_memory::sol_memset(*account_data, 0, data_len);
     Ok(())
 }
 
@@ -1805,17 +1805,17 @@ mod tests {
         crate::{
             extension::transfer_fee::instruction::initialize_transfer_fee_config, instruction::*,
         },
-        serial_test::serial,
-        solana_program::{
+        miraland_program::{
             account_info::IntoAccountInfo,
             clock::Epoch,
             instruction::Instruction,
             program_error::{self, PrintProgramError},
             sysvar::{clock::Clock, rent},
         },
-        solana_sdk::account::{
-            create_account_for_test, create_is_signer_account_infos, Account as SolanaAccount,
+        miraland_sdk::account::{
+            create_account_for_test, create_is_signer_account_infos, Account as MiralandAccount,
         },
+        serial_test::serial,
         std::sync::{Arc, RwLock},
     };
 
@@ -1828,7 +1828,7 @@ mod tests {
     }
 
     struct SyscallStubs {}
-    impl solana_sdk::program_stubs::SyscallStubs for SyscallStubs {
+    impl miraland_sdk::program_stubs::SyscallStubs for SyscallStubs {
         fn sol_log(&self, _message: &str) {}
 
         fn sol_invoke_signed(
@@ -1844,7 +1844,7 @@ mod tests {
             unsafe {
                 *(var_addr as *mut _ as *mut Clock) = Clock::default();
             }
-            solana_program::entrypoint::SUCCESS
+            miraland_program::entrypoint::SUCCESS
         }
 
         fn sol_get_epoch_schedule_sysvar(&self, _var_addr: *mut u8) -> u64 {
@@ -1860,7 +1860,7 @@ mod tests {
             unsafe {
                 *(var_addr as *mut _ as *mut Rent) = Rent::default();
             }
-            solana_program::entrypoint::SUCCESS
+            miraland_program::entrypoint::SUCCESS
         }
 
         fn sol_set_return_data(&self, data: &[u8]) {
@@ -1870,14 +1870,14 @@ mod tests {
 
     fn do_process_instruction(
         instruction: Instruction,
-        accounts: Vec<&mut SolanaAccount>,
+        accounts: Vec<&mut MiralandAccount>,
     ) -> ProgramResult {
         {
             use std::sync::Once;
             static ONCE: Once = Once::new();
 
             ONCE.call_once(|| {
-                solana_sdk::program_stubs::set_syscall_stubs(Box::new(SyscallStubs {}));
+                miraland_sdk::program_stubs::set_syscall_stubs(Box::new(SyscallStubs {}));
             });
         }
 
@@ -1903,7 +1903,7 @@ mod tests {
         TokenError::MintMismatch.into()
     }
 
-    fn rent_sysvar() -> SolanaAccount {
+    fn rent_sysvar() -> MiralandAccount {
         create_account_for_test(&Rent::default())
     }
 
@@ -1919,10 +1919,10 @@ mod tests {
         Rent::default().minimum_balance(Multisig::get_packed_len())
     }
 
-    fn native_mint() -> SolanaAccount {
+    fn native_mint() -> MiralandAccount {
         let mut rent_sysvar = rent_sysvar();
         let mut mint_account =
-            SolanaAccount::new(mint_minimum_balance(), Mint::get_packed_len(), &crate::id());
+            MiralandAccount::new(mint_minimum_balance(), Mint::get_packed_len(), &crate::id());
         do_process_instruction(
             initialize_mint(
                 &crate::id(),
@@ -1967,10 +1967,10 @@ mod tests {
         let program_id = crate::id();
         let owner_key = Pubkey::new_unique();
         let mint_key = Pubkey::new_unique();
-        let mut mint_account = SolanaAccount::new(42, Mint::get_packed_len(), &program_id);
+        let mut mint_account = MiralandAccount::new(42, Mint::get_packed_len(), &program_id);
         let mint2_key = Pubkey::new_unique();
         let mut mint2_account =
-            SolanaAccount::new(mint_minimum_balance(), Mint::get_packed_len(), &program_id);
+            MiralandAccount::new(mint_minimum_balance(), Mint::get_packed_len(), &program_id);
         let mut rent_sysvar = rent_sysvar();
 
         // mint is not rent exempt
@@ -2015,10 +2015,10 @@ mod tests {
         let program_id = crate::id();
         let owner_key = Pubkey::new_unique();
         let mint_key = Pubkey::new_unique();
-        let mut mint_account = SolanaAccount::new(42, Mint::get_packed_len(), &program_id);
+        let mut mint_account = MiralandAccount::new(42, Mint::get_packed_len(), &program_id);
         let mint2_key = Pubkey::new_unique();
         let mut mint2_account =
-            SolanaAccount::new(mint_minimum_balance(), Mint::get_packed_len(), &program_id);
+            MiralandAccount::new(mint_minimum_balance(), Mint::get_packed_len(), &program_id);
 
         // mint is not rent exempt
         assert_eq!(
@@ -2061,12 +2061,12 @@ mod tests {
     fn test_initialize_mint_account() {
         let program_id = crate::id();
         let account_key = Pubkey::new_unique();
-        let mut account_account = SolanaAccount::new(42, Account::get_packed_len(), &program_id);
+        let mut account_account = MiralandAccount::new(42, Account::get_packed_len(), &program_id);
         let owner_key = Pubkey::new_unique();
-        let mut owner_account = SolanaAccount::default();
+        let mut owner_account = MiralandAccount::default();
         let mint_key = Pubkey::new_unique();
         let mut mint_account =
-            SolanaAccount::new(mint_minimum_balance(), Mint::get_packed_len(), &program_id);
+            MiralandAccount::new(mint_minimum_balance(), Mint::get_packed_len(), &program_id);
         let mut rent_sysvar = rent_sysvar();
 
         // account is not rent exempt
@@ -2154,46 +2154,46 @@ mod tests {
     fn test_transfer_dups() {
         let program_id = crate::id();
         let account1_key = Pubkey::new_unique();
-        let mut account1_account = SolanaAccount::new(
+        let mut account1_account = MiralandAccount::new(
             account_minimum_balance(),
             Account::get_packed_len(),
             &program_id,
         );
         let mut account1_info: AccountInfo = (&account1_key, true, &mut account1_account).into();
         let account2_key = Pubkey::new_unique();
-        let mut account2_account = SolanaAccount::new(
+        let mut account2_account = MiralandAccount::new(
             account_minimum_balance(),
             Account::get_packed_len(),
             &program_id,
         );
         let mut account2_info: AccountInfo = (&account2_key, false, &mut account2_account).into();
         let account3_key = Pubkey::new_unique();
-        let mut account3_account = SolanaAccount::new(
+        let mut account3_account = MiralandAccount::new(
             account_minimum_balance(),
             Account::get_packed_len(),
             &program_id,
         );
         let account3_info: AccountInfo = (&account3_key, false, &mut account3_account).into();
         let account4_key = Pubkey::new_unique();
-        let mut account4_account = SolanaAccount::new(
+        let mut account4_account = MiralandAccount::new(
             account_minimum_balance(),
             Account::get_packed_len(),
             &program_id,
         );
         let account4_info: AccountInfo = (&account4_key, true, &mut account4_account).into();
         let multisig_key = Pubkey::new_unique();
-        let mut multisig_account = SolanaAccount::new(
+        let mut multisig_account = MiralandAccount::new(
             multisig_minimum_balance(),
             Multisig::get_packed_len(),
             &program_id,
         );
         let multisig_info: AccountInfo = (&multisig_key, true, &mut multisig_account).into();
         let owner_key = Pubkey::new_unique();
-        let mut owner_account = SolanaAccount::default();
+        let mut owner_account = MiralandAccount::default();
         let owner_info: AccountInfo = (&owner_key, true, &mut owner_account).into();
         let mint_key = Pubkey::new_unique();
         let mut mint_account =
-            SolanaAccount::new(mint_minimum_balance(), Mint::get_packed_len(), &program_id);
+            MiralandAccount::new(mint_minimum_balance(), Mint::get_packed_len(), &program_id);
         let mint_info: AccountInfo = (&mint_key, false, &mut mint_account).into();
         let rent_key = rent::id();
         let mut rent_sysvar = rent_sysvar();
@@ -2465,38 +2465,38 @@ mod tests {
     fn test_transfer() {
         let program_id = crate::id();
         let account_key = Pubkey::new_unique();
-        let mut account_account = SolanaAccount::new(
+        let mut account_account = MiralandAccount::new(
             account_minimum_balance(),
             Account::get_packed_len(),
             &program_id,
         );
         let account2_key = Pubkey::new_unique();
-        let mut account2_account = SolanaAccount::new(
+        let mut account2_account = MiralandAccount::new(
             account_minimum_balance(),
             Account::get_packed_len(),
             &program_id,
         );
         let account3_key = Pubkey::new_unique();
-        let mut account3_account = SolanaAccount::new(
+        let mut account3_account = MiralandAccount::new(
             account_minimum_balance(),
             Account::get_packed_len(),
             &program_id,
         );
         let delegate_key = Pubkey::new_unique();
-        let mut delegate_account = SolanaAccount::default();
+        let mut delegate_account = MiralandAccount::default();
         let mismatch_key = Pubkey::new_unique();
-        let mut mismatch_account = SolanaAccount::new(
+        let mut mismatch_account = MiralandAccount::new(
             account_minimum_balance(),
             Account::get_packed_len(),
             &program_id,
         );
         let owner_key = Pubkey::new_unique();
-        let mut owner_account = SolanaAccount::default();
+        let mut owner_account = MiralandAccount::default();
         let owner2_key = Pubkey::new_unique();
-        let mut owner2_account = SolanaAccount::default();
+        let mut owner2_account = MiralandAccount::default();
         let mint_key = Pubkey::new_unique();
         let mut mint_account =
-            SolanaAccount::new(mint_minimum_balance(), Mint::get_packed_len(), &program_id);
+            MiralandAccount::new(mint_minimum_balance(), Mint::get_packed_len(), &program_id);
         let mint2_key = Pubkey::new_unique();
         let mut rent_sysvar = rent_sysvar();
 
@@ -2975,32 +2975,32 @@ mod tests {
     fn test_self_transfer() {
         let program_id = crate::id();
         let account_key = Pubkey::new_unique();
-        let mut account_account = SolanaAccount::new(
+        let mut account_account = MiralandAccount::new(
             account_minimum_balance(),
             Account::get_packed_len(),
             &program_id,
         );
         let account2_key = Pubkey::new_unique();
-        let mut account2_account = SolanaAccount::new(
+        let mut account2_account = MiralandAccount::new(
             account_minimum_balance(),
             Account::get_packed_len(),
             &program_id,
         );
         let account3_key = Pubkey::new_unique();
-        let mut account3_account = SolanaAccount::new(
+        let mut account3_account = MiralandAccount::new(
             account_minimum_balance(),
             Account::get_packed_len(),
             &program_id,
         );
         let delegate_key = Pubkey::new_unique();
-        let mut delegate_account = SolanaAccount::default();
+        let mut delegate_account = MiralandAccount::default();
         let owner_key = Pubkey::new_unique();
-        let mut owner_account = SolanaAccount::default();
+        let mut owner_account = MiralandAccount::default();
         let owner2_key = Pubkey::new_unique();
-        let mut owner2_account = SolanaAccount::default();
+        let mut owner2_account = MiralandAccount::default();
         let mint_key = Pubkey::new_unique();
         let mut mint_account =
-            SolanaAccount::new(mint_minimum_balance(), Mint::get_packed_len(), &program_id);
+            MiralandAccount::new(mint_minimum_balance(), Mint::get_packed_len(), &program_id);
         let mut rent_sysvar = rent_sysvar();
 
         // create mint
@@ -3512,16 +3512,16 @@ mod tests {
     fn test_mintable_token_with_zero_supply() {
         let program_id = crate::id();
         let account_key = Pubkey::new_unique();
-        let mut account_account = SolanaAccount::new(
+        let mut account_account = MiralandAccount::new(
             account_minimum_balance(),
             Account::get_packed_len(),
             &program_id,
         );
         let owner_key = Pubkey::new_unique();
-        let mut owner_account = SolanaAccount::default();
+        let mut owner_account = MiralandAccount::default();
         let mint_key = Pubkey::new_unique();
         let mut mint_account =
-            SolanaAccount::new(mint_minimum_balance(), Mint::get_packed_len(), &program_id);
+            MiralandAccount::new(mint_minimum_balance(), Mint::get_packed_len(), &program_id);
         let mut rent_sysvar = rent_sysvar();
 
         // create mint-able token with zero supply
@@ -3611,39 +3611,39 @@ mod tests {
     fn test_approve_dups() {
         let program_id = crate::id();
         let account1_key = Pubkey::new_unique();
-        let mut account1_account = SolanaAccount::new(
+        let mut account1_account = MiralandAccount::new(
             account_minimum_balance(),
             Account::get_packed_len(),
             &program_id,
         );
         let account1_info: AccountInfo = (&account1_key, true, &mut account1_account).into();
         let account2_key = Pubkey::new_unique();
-        let mut account2_account = SolanaAccount::new(
+        let mut account2_account = MiralandAccount::new(
             account_minimum_balance(),
             Account::get_packed_len(),
             &program_id,
         );
         let account2_info: AccountInfo = (&account2_key, false, &mut account2_account).into();
         let account3_key = Pubkey::new_unique();
-        let mut account3_account = SolanaAccount::new(
+        let mut account3_account = MiralandAccount::new(
             account_minimum_balance(),
             Account::get_packed_len(),
             &program_id,
         );
         let account3_info: AccountInfo = (&account3_key, true, &mut account3_account).into();
         let multisig_key = Pubkey::new_unique();
-        let mut multisig_account = SolanaAccount::new(
+        let mut multisig_account = MiralandAccount::new(
             multisig_minimum_balance(),
             Multisig::get_packed_len(),
             &program_id,
         );
         let multisig_info: AccountInfo = (&multisig_key, true, &mut multisig_account).into();
         let owner_key = Pubkey::new_unique();
-        let mut owner_account = SolanaAccount::default();
+        let mut owner_account = MiralandAccount::default();
         let owner_info: AccountInfo = (&owner_key, true, &mut owner_account).into();
         let mint_key = Pubkey::new_unique();
         let mut mint_account =
-            SolanaAccount::new(mint_minimum_balance(), Mint::get_packed_len(), &program_id);
+            MiralandAccount::new(mint_minimum_balance(), Mint::get_packed_len(), &program_id);
         let mint_info: AccountInfo = (&mint_key, false, &mut mint_account).into();
         let rent_key = rent::id();
         let mut rent_sysvar = rent_sysvar();
@@ -3852,26 +3852,26 @@ mod tests {
     fn test_approve() {
         let program_id = crate::id();
         let account_key = Pubkey::new_unique();
-        let mut account_account = SolanaAccount::new(
+        let mut account_account = MiralandAccount::new(
             account_minimum_balance(),
             Account::get_packed_len(),
             &program_id,
         );
         let account2_key = Pubkey::new_unique();
-        let mut account2_account = SolanaAccount::new(
+        let mut account2_account = MiralandAccount::new(
             account_minimum_balance(),
             Account::get_packed_len(),
             &program_id,
         );
         let delegate_key = Pubkey::new_unique();
-        let mut delegate_account = SolanaAccount::default();
+        let mut delegate_account = MiralandAccount::default();
         let owner_key = Pubkey::new_unique();
-        let mut owner_account = SolanaAccount::default();
+        let mut owner_account = MiralandAccount::default();
         let owner2_key = Pubkey::new_unique();
-        let mut owner2_account = SolanaAccount::default();
+        let mut owner2_account = MiralandAccount::default();
         let mint_key = Pubkey::new_unique();
         let mut mint_account =
-            SolanaAccount::new(mint_minimum_balance(), Mint::get_packed_len(), &program_id);
+            MiralandAccount::new(mint_minimum_balance(), Mint::get_packed_len(), &program_id);
         let mut rent_sysvar = rent_sysvar();
 
         // create mint
@@ -4095,7 +4095,7 @@ mod tests {
     fn test_set_authority_dups() {
         let program_id = crate::id();
         let account1_key = Pubkey::new_unique();
-        let mut account1_account = SolanaAccount::new(
+        let mut account1_account = MiralandAccount::new(
             account_minimum_balance(),
             Account::get_packed_len(),
             &program_id,
@@ -4104,7 +4104,7 @@ mod tests {
         let owner_key = Pubkey::new_unique();
         let mint_key = Pubkey::new_unique();
         let mut mint_account =
-            SolanaAccount::new(mint_minimum_balance(), Mint::get_packed_len(), &program_id);
+            MiralandAccount::new(mint_minimum_balance(), Mint::get_packed_len(), &program_id);
         let mint_info: AccountInfo = (&mint_key, true, &mut mint_account).into();
         let rent_key = rent::id();
         let mut rent_sysvar = rent_sysvar();
@@ -4198,29 +4198,29 @@ mod tests {
     fn test_set_authority() {
         let program_id = crate::id();
         let account_key = Pubkey::new_unique();
-        let mut account_account = SolanaAccount::new(
+        let mut account_account = MiralandAccount::new(
             account_minimum_balance(),
             Account::get_packed_len(),
             &program_id,
         );
         let account2_key = Pubkey::new_unique();
-        let mut account2_account = SolanaAccount::new(
+        let mut account2_account = MiralandAccount::new(
             account_minimum_balance(),
             Account::get_packed_len(),
             &program_id,
         );
         let owner_key = Pubkey::new_unique();
-        let mut owner_account = SolanaAccount::default();
+        let mut owner_account = MiralandAccount::default();
         let owner2_key = Pubkey::new_unique();
-        let mut owner2_account = SolanaAccount::default();
+        let mut owner2_account = MiralandAccount::default();
         let owner3_key = Pubkey::new_unique();
-        let mut owner3_account = SolanaAccount::default();
+        let mut owner3_account = MiralandAccount::default();
         let mint_key = Pubkey::new_unique();
         let mut mint_account =
-            SolanaAccount::new(mint_minimum_balance(), Mint::get_packed_len(), &program_id);
+            MiralandAccount::new(mint_minimum_balance(), Mint::get_packed_len(), &program_id);
         let mint2_key = Pubkey::new_unique();
         let mut mint2_account =
-            SolanaAccount::new(mint_minimum_balance(), Mint::get_packed_len(), &program_id);
+            MiralandAccount::new(mint_minimum_balance(), Mint::get_packed_len(), &program_id);
         let mut rent_sysvar = rent_sysvar();
 
         // create new mint with owner
@@ -4584,18 +4584,18 @@ mod tests {
         let account_len =
             ExtensionType::try_calculate_account_len::<Account>(&[ExtensionType::ImmutableOwner])
                 .unwrap();
-        let mut account_account = SolanaAccount::new(
+        let mut account_account = MiralandAccount::new(
             Rent::default().minimum_balance(account_len),
             account_len,
             &program_id,
         );
         let owner_key = Pubkey::new_unique();
-        let mut owner_account = SolanaAccount::default();
+        let mut owner_account = MiralandAccount::default();
         let owner2_key = Pubkey::new_unique();
 
         let mint_key = Pubkey::new_unique();
         let mut mint_account =
-            SolanaAccount::new(mint_minimum_balance(), Mint::get_packed_len(), &program_id);
+            MiralandAccount::new(mint_minimum_balance(), Mint::get_packed_len(), &program_id);
         let mut rent_sysvar = rent_sysvar();
 
         // create mint
@@ -4650,18 +4650,18 @@ mod tests {
     fn test_mint_to_dups() {
         let program_id = crate::id();
         let account1_key = Pubkey::new_unique();
-        let mut account1_account = SolanaAccount::new(
+        let mut account1_account = MiralandAccount::new(
             account_minimum_balance(),
             Account::get_packed_len(),
             &program_id,
         );
         let account1_info: AccountInfo = (&account1_key, true, &mut account1_account).into();
         let owner_key = Pubkey::new_unique();
-        let mut owner_account = SolanaAccount::default();
+        let mut owner_account = MiralandAccount::default();
         let owner_info: AccountInfo = (&owner_key, true, &mut owner_account).into();
         let mint_key = Pubkey::new_unique();
         let mut mint_account =
-            SolanaAccount::new(mint_minimum_balance(), Mint::get_packed_len(), &program_id);
+            MiralandAccount::new(mint_minimum_balance(), Mint::get_packed_len(), &program_id);
         let mint_info: AccountInfo = (&mint_key, true, &mut mint_account).into();
         let rent_key = rent::id();
         let mut rent_sysvar = rent_sysvar();
@@ -4746,39 +4746,39 @@ mod tests {
     fn test_mint_to() {
         let program_id = crate::id();
         let account_key = Pubkey::new_unique();
-        let mut account_account = SolanaAccount::new(
+        let mut account_account = MiralandAccount::new(
             account_minimum_balance(),
             Account::get_packed_len(),
             &program_id,
         );
         let account2_key = Pubkey::new_unique();
-        let mut account2_account = SolanaAccount::new(
+        let mut account2_account = MiralandAccount::new(
             account_minimum_balance(),
             Account::get_packed_len(),
             &program_id,
         );
         let account3_key = Pubkey::new_unique();
-        let mut account3_account = SolanaAccount::new(
+        let mut account3_account = MiralandAccount::new(
             account_minimum_balance(),
             Account::get_packed_len(),
             &program_id,
         );
         let mismatch_key = Pubkey::new_unique();
-        let mut mismatch_account = SolanaAccount::new(
+        let mut mismatch_account = MiralandAccount::new(
             account_minimum_balance(),
             Account::get_packed_len(),
             &program_id,
         );
         let owner_key = Pubkey::new_unique();
-        let mut owner_account = SolanaAccount::default();
+        let mut owner_account = MiralandAccount::default();
         let owner2_key = Pubkey::new_unique();
-        let mut owner2_account = SolanaAccount::default();
+        let mut owner2_account = MiralandAccount::default();
         let mint_key = Pubkey::new_unique();
         let mut mint_account =
-            SolanaAccount::new(mint_minimum_balance(), Mint::get_packed_len(), &program_id);
+            MiralandAccount::new(mint_minimum_balance(), Mint::get_packed_len(), &program_id);
         let mint2_key = Pubkey::new_unique();
         let uninitialized_key = Pubkey::new_unique();
-        let mut uninitialized_account = SolanaAccount::new(
+        let mut uninitialized_account = MiralandAccount::new(
             account_minimum_balance(),
             Account::get_packed_len(),
             &program_id,
@@ -4973,18 +4973,18 @@ mod tests {
     fn test_burn_dups() {
         let program_id = crate::id();
         let account1_key = Pubkey::new_unique();
-        let mut account1_account = SolanaAccount::new(
+        let mut account1_account = MiralandAccount::new(
             account_minimum_balance(),
             Account::get_packed_len(),
             &program_id,
         );
         let account1_info: AccountInfo = (&account1_key, true, &mut account1_account).into();
         let owner_key = Pubkey::new_unique();
-        let mut owner_account = SolanaAccount::default();
+        let mut owner_account = MiralandAccount::default();
         let owner_info: AccountInfo = (&owner_key, true, &mut owner_account).into();
         let mint_key = Pubkey::new_unique();
         let mut mint_account =
-            SolanaAccount::new(mint_minimum_balance(), Mint::get_packed_len(), &program_id);
+            MiralandAccount::new(mint_minimum_balance(), Mint::get_packed_len(), &program_id);
         let mint_info: AccountInfo = (&mint_key, true, &mut mint_account).into();
         let rent_key = rent::id();
         let mut rent_sysvar = rent_sysvar();
@@ -5173,38 +5173,38 @@ mod tests {
     fn test_burn() {
         let program_id = crate::id();
         let account_key = Pubkey::new_unique();
-        let mut account_account = SolanaAccount::new(
+        let mut account_account = MiralandAccount::new(
             account_minimum_balance(),
             Account::get_packed_len(),
             &program_id,
         );
         let account2_key = Pubkey::new_unique();
-        let mut account2_account = SolanaAccount::new(
+        let mut account2_account = MiralandAccount::new(
             account_minimum_balance(),
             Account::get_packed_len(),
             &program_id,
         );
         let account3_key = Pubkey::new_unique();
-        let mut account3_account = SolanaAccount::new(
+        let mut account3_account = MiralandAccount::new(
             account_minimum_balance(),
             Account::get_packed_len(),
             &program_id,
         );
         let delegate_key = Pubkey::new_unique();
-        let mut delegate_account = SolanaAccount::default();
+        let mut delegate_account = MiralandAccount::default();
         let mismatch_key = Pubkey::new_unique();
-        let mut mismatch_account = SolanaAccount::new(
+        let mut mismatch_account = MiralandAccount::new(
             account_minimum_balance(),
             Account::get_packed_len(),
             &program_id,
         );
         let owner_key = Pubkey::new_unique();
-        let mut owner_account = SolanaAccount::default();
+        let mut owner_account = MiralandAccount::default();
         let owner2_key = Pubkey::new_unique();
-        let mut owner2_account = SolanaAccount::default();
+        let mut owner2_account = MiralandAccount::default();
         let mint_key = Pubkey::new_unique();
         let mut mint_account =
-            SolanaAccount::new(mint_minimum_balance(), Mint::get_packed_len(), &program_id);
+            MiralandAccount::new(mint_minimum_balance(), Mint::get_packed_len(), &program_id);
         let mint2_key = Pubkey::new_unique();
         let mut rent_sysvar = rent_sysvar();
 
@@ -5468,32 +5468,33 @@ mod tests {
         let program_id = crate::id();
         let mint_key = Pubkey::new_unique();
         let mut mint_account =
-            SolanaAccount::new(mint_minimum_balance(), Mint::get_packed_len(), &program_id);
+            MiralandAccount::new(mint_minimum_balance(), Mint::get_packed_len(), &program_id);
         let account_key = Pubkey::new_unique();
-        let mut account = SolanaAccount::new(
+        let mut account = MiralandAccount::new(
             account_minimum_balance(),
             Account::get_packed_len(),
             &program_id,
         );
         let account2_key = Pubkey::new_unique();
-        let mut account2_account = SolanaAccount::new(
+        let mut account2_account = MiralandAccount::new(
             account_minimum_balance(),
             Account::get_packed_len(),
             &program_id,
         );
         let owner_key = Pubkey::new_unique();
-        let mut owner_account = SolanaAccount::default();
+        let mut owner_account = MiralandAccount::default();
         let multisig_key = Pubkey::new_unique();
-        let mut multisig_account = SolanaAccount::new(42, Multisig::get_packed_len(), &program_id);
+        let mut multisig_account =
+            MiralandAccount::new(42, Multisig::get_packed_len(), &program_id);
         let multisig_delegate_key = Pubkey::new_unique();
-        let mut multisig_delegate_account = SolanaAccount::new(
+        let mut multisig_delegate_account = MiralandAccount::new(
             multisig_minimum_balance(),
             Multisig::get_packed_len(),
             &program_id,
         );
         let signer_keys = vec![Pubkey::new_unique(); MAX_SIGNERS];
         let signer_key_refs: Vec<&Pubkey> = signer_keys.iter().collect();
-        let mut signer_accounts = vec![SolanaAccount::new(0, 0, &program_id); MAX_SIGNERS];
+        let mut signer_accounts = vec![MiralandAccount::new(0, 0, &program_id); MAX_SIGNERS];
         let mut rent_sysvar = rent_sysvar();
 
         // multisig is not rent exempt
@@ -5769,14 +5770,14 @@ mod tests {
 
         // freeze account
         let account3_key = Pubkey::new_unique();
-        let mut account3_account = SolanaAccount::new(
+        let mut account3_account = MiralandAccount::new(
             account_minimum_balance(),
             Account::get_packed_len(),
             &program_id,
         );
         let mint2_key = Pubkey::new_unique();
         let mut mint2_account =
-            SolanaAccount::new(mint_minimum_balance(), Mint::get_packed_len(), &program_id);
+            MiralandAccount::new(mint_minimum_balance(), Mint::get_packed_len(), &program_id);
         do_process_instruction(
             initialize_mint(
                 &program_id,
@@ -6134,7 +6135,7 @@ mod tests {
         let owner_key = Pubkey::new_unique();
         let mint_key = Pubkey::new_unique();
         let mut mint_account =
-            SolanaAccount::new(mint_minimum_balance(), Mint::get_packed_len(), &program_id);
+            MiralandAccount::new(mint_minimum_balance(), Mint::get_packed_len(), &program_id);
         let mint_info: AccountInfo = (&mint_key, false, &mut mint_account).into();
         let rent_key = rent::id();
         let mut rent_sysvar = rent_sysvar();
@@ -6148,7 +6149,7 @@ mod tests {
         .unwrap();
 
         let to_close_key = Pubkey::new_unique();
-        let mut to_close_account = SolanaAccount::new(
+        let mut to_close_account = MiralandAccount::new(
             account_minimum_balance(),
             Account::get_packed_len(),
             &program_id,
@@ -6156,7 +6157,7 @@ mod tests {
         let to_close_account_info: AccountInfo =
             (&to_close_key, true, &mut to_close_account).into();
         let destination_account_key = Pubkey::new_unique();
-        let mut destination_account = SolanaAccount::new(
+        let mut destination_account = MiralandAccount::new(
             account_minimum_balance(),
             Account::get_packed_len(),
             &program_id,
@@ -6201,7 +6202,7 @@ mod tests {
         let owner_key = Pubkey::new_unique();
         let mint_key = Pubkey::new_unique();
         let mut mint_account =
-            SolanaAccount::new(mint_minimum_balance(), Mint::get_packed_len(), &program_id);
+            MiralandAccount::new(mint_minimum_balance(), Mint::get_packed_len(), &program_id);
         let mint_info: AccountInfo = (&mint_key, false, &mut mint_account).into();
         let rent_key = rent::id();
         let mut rent_sysvar = rent_sysvar();
@@ -6215,7 +6216,7 @@ mod tests {
         .unwrap();
 
         let to_close_key = Pubkey::new_unique();
-        let mut to_close_account = SolanaAccount::new(
+        let mut to_close_account = MiralandAccount::new(
             account_minimum_balance(),
             Account::get_packed_len(),
             &program_id,
@@ -6223,7 +6224,7 @@ mod tests {
         let to_close_account_info: AccountInfo =
             (&to_close_key, true, &mut to_close_account).into();
         let destination_account_key = Pubkey::new_unique();
-        let mut destination_account = SolanaAccount::new(
+        let mut destination_account = MiralandAccount::new(
             account_minimum_balance(),
             Account::get_packed_len(),
             &program_id,
@@ -6269,29 +6270,29 @@ mod tests {
         let program_id = crate::id();
         let mint_key = Pubkey::new_unique();
         let mut mint_account =
-            SolanaAccount::new(mint_minimum_balance(), Mint::get_packed_len(), &program_id);
+            MiralandAccount::new(mint_minimum_balance(), Mint::get_packed_len(), &program_id);
         let account_key = Pubkey::new_unique();
-        let mut account_account = SolanaAccount::new(
+        let mut account_account = MiralandAccount::new(
             account_minimum_balance(),
             Account::get_packed_len(),
             &program_id,
         );
         let account2_key = Pubkey::new_unique();
-        let mut account2_account = SolanaAccount::new(
+        let mut account2_account = MiralandAccount::new(
             account_minimum_balance() + 42,
             Account::get_packed_len(),
             &program_id,
         );
         let account3_key = Pubkey::new_unique();
-        let mut account3_account = SolanaAccount::new(
+        let mut account3_account = MiralandAccount::new(
             account_minimum_balance(),
             Account::get_packed_len(),
             &program_id,
         );
         let owner_key = Pubkey::new_unique();
-        let mut owner_account = SolanaAccount::default();
+        let mut owner_account = MiralandAccount::default();
         let owner2_key = Pubkey::new_unique();
-        let mut owner2_account = SolanaAccount::default();
+        let mut owner2_account = MiralandAccount::default();
         let mut rent_sysvar = rent_sysvar();
 
         // uninitialized
@@ -6408,13 +6409,13 @@ mod tests {
 
         // fund and initialize new non-native account to test close authority
         let account_key = Pubkey::new_unique();
-        let mut account_account = SolanaAccount::new(
+        let mut account_account = MiralandAccount::new(
             account_minimum_balance(),
             Account::get_packed_len(),
             &program_id,
         );
         let owner2_key = Pubkey::new_unique();
-        let mut owner2_account = SolanaAccount::new(
+        let mut owner2_account = MiralandAccount::new(
             account_minimum_balance(),
             Account::get_packed_len(),
             &program_id,
@@ -6495,23 +6496,23 @@ mod tests {
         let program_id = crate::id();
         let mut mint_account = native_mint();
         let account_key = Pubkey::new_unique();
-        let mut account_account = SolanaAccount::new(
+        let mut account_account = MiralandAccount::new(
             account_minimum_balance() + 40,
             Account::get_packed_len(),
             &program_id,
         );
         let account2_key = Pubkey::new_unique();
-        let mut account2_account = SolanaAccount::new(
+        let mut account2_account = MiralandAccount::new(
             account_minimum_balance(),
             Account::get_packed_len(),
             &program_id,
         );
         let account3_key = Pubkey::new_unique();
-        let mut account3_account = SolanaAccount::new(account_minimum_balance(), 0, &program_id);
+        let mut account3_account = MiralandAccount::new(account_minimum_balance(), 0, &program_id);
         let owner_key = Pubkey::new_unique();
-        let mut owner_account = SolanaAccount::default();
+        let mut owner_account = MiralandAccount::default();
         let owner2_key = Pubkey::new_unique();
-        let mut owner2_account = SolanaAccount::default();
+        let mut owner2_account = MiralandAccount::default();
         let owner3_key = Pubkey::new_unique();
         let mut rent_sysvar = rent_sysvar();
 
@@ -6577,7 +6578,7 @@ mod tests {
         // burn unsupported
         let bogus_mint_key = Pubkey::new_unique();
         let mut bogus_mint_account =
-            SolanaAccount::new(mint_minimum_balance(), Mint::get_packed_len(), &program_id);
+            MiralandAccount::new(mint_minimum_balance(), Mint::get_packed_len(), &program_id);
         do_process_instruction(
             initialize_mint(&program_id, &bogus_mint_key, &owner_key, None, 2).unwrap(),
             vec![&mut bogus_mint_account, &mut rent_sysvar],
@@ -6709,26 +6710,26 @@ mod tests {
     fn test_overflow() {
         let program_id = crate::id();
         let account_key = Pubkey::new_unique();
-        let mut account_account = SolanaAccount::new(
+        let mut account_account = MiralandAccount::new(
             account_minimum_balance(),
             Account::get_packed_len(),
             &program_id,
         );
         let account2_key = Pubkey::new_unique();
-        let mut account2_account = SolanaAccount::new(
+        let mut account2_account = MiralandAccount::new(
             account_minimum_balance(),
             Account::get_packed_len(),
             &program_id,
         );
         let owner_key = Pubkey::new_unique();
-        let mut owner_account = SolanaAccount::default();
+        let mut owner_account = MiralandAccount::default();
         let owner2_key = Pubkey::new_unique();
-        let mut owner2_account = SolanaAccount::default();
+        let mut owner2_account = MiralandAccount::default();
         let mint_owner_key = Pubkey::new_unique();
-        let mut mint_owner_account = SolanaAccount::default();
+        let mut mint_owner_account = MiralandAccount::default();
         let mint_key = Pubkey::new_unique();
         let mut mint_account =
-            SolanaAccount::new(mint_minimum_balance(), Mint::get_packed_len(), &program_id);
+            MiralandAccount::new(mint_minimum_balance(), Mint::get_packed_len(), &program_id);
         let mut rent_sysvar = rent_sysvar();
 
         // create new mint with owner
@@ -6887,22 +6888,22 @@ mod tests {
     fn test_frozen() {
         let program_id = crate::id();
         let account_key = Pubkey::new_unique();
-        let mut account_account = SolanaAccount::new(
+        let mut account_account = MiralandAccount::new(
             account_minimum_balance(),
             Account::get_packed_len(),
             &program_id,
         );
         let account2_key = Pubkey::new_unique();
-        let mut account2_account = SolanaAccount::new(
+        let mut account2_account = MiralandAccount::new(
             account_minimum_balance(),
             Account::get_packed_len(),
             &program_id,
         );
         let owner_key = Pubkey::new_unique();
-        let mut owner_account = SolanaAccount::default();
+        let mut owner_account = MiralandAccount::default();
         let mint_key = Pubkey::new_unique();
         let mut mint_account =
-            SolanaAccount::new(mint_minimum_balance(), Mint::get_packed_len(), &program_id);
+            MiralandAccount::new(mint_minimum_balance(), Mint::get_packed_len(), &program_id);
         let mut rent_sysvar = rent_sysvar();
 
         // create new mint and fund first account
@@ -7000,7 +7001,7 @@ mod tests {
         account.state = AccountState::Frozen;
         Account::pack(account, &mut account_account.data).unwrap();
         let delegate_key = Pubkey::new_unique();
-        let mut delegate_account = SolanaAccount::default();
+        let mut delegate_account = MiralandAccount::default();
         assert_eq!(
             Err(TokenError::AccountFrozen.into()),
             do_process_instruction(
@@ -7075,7 +7076,7 @@ mod tests {
     fn test_freeze_thaw_dups() {
         let program_id = crate::id();
         let account1_key = Pubkey::new_unique();
-        let mut account1_account = SolanaAccount::new(
+        let mut account1_account = MiralandAccount::new(
             account_minimum_balance(),
             Account::get_packed_len(),
             &program_id,
@@ -7084,7 +7085,7 @@ mod tests {
         let owner_key = Pubkey::new_unique();
         let mint_key = Pubkey::new_unique();
         let mut mint_account =
-            SolanaAccount::new(mint_minimum_balance(), Mint::get_packed_len(), &program_id);
+            MiralandAccount::new(mint_minimum_balance(), Mint::get_packed_len(), &program_id);
         let mint_info: AccountInfo = (&mint_key, true, &mut mint_account).into();
         let rent_key = rent::id();
         let mut rent_sysvar = rent_sysvar();
@@ -7139,20 +7140,20 @@ mod tests {
     fn test_freeze_account() {
         let program_id = crate::id();
         let account_key = Pubkey::new_unique();
-        let mut account_account = SolanaAccount::new(
+        let mut account_account = MiralandAccount::new(
             account_minimum_balance(),
             Account::get_packed_len(),
             &program_id,
         );
         let account_owner_key = Pubkey::new_unique();
-        let mut account_owner_account = SolanaAccount::default();
+        let mut account_owner_account = MiralandAccount::default();
         let owner_key = Pubkey::new_unique();
-        let mut owner_account = SolanaAccount::default();
+        let mut owner_account = MiralandAccount::default();
         let owner2_key = Pubkey::new_unique();
-        let mut owner2_account = SolanaAccount::default();
+        let mut owner2_account = MiralandAccount::default();
         let mint_key = Pubkey::new_unique();
         let mut mint_account =
-            SolanaAccount::new(mint_minimum_balance(), Mint::get_packed_len(), &program_id);
+            MiralandAccount::new(mint_minimum_balance(), Mint::get_packed_len(), &program_id);
         let mut rent_sysvar = rent_sysvar();
 
         // create new mint with owner different from account owner
@@ -7252,26 +7253,26 @@ mod tests {
     fn test_initialize_account2_and_3() {
         let program_id = crate::id();
         let account_key = Pubkey::new_unique();
-        let mut account_account = SolanaAccount::new(
+        let mut account_account = MiralandAccount::new(
             account_minimum_balance(),
             Account::get_packed_len(),
             &program_id,
         );
-        let mut account2_account = SolanaAccount::new(
+        let mut account2_account = MiralandAccount::new(
             account_minimum_balance(),
             Account::get_packed_len(),
             &program_id,
         );
-        let mut account3_account = SolanaAccount::new(
+        let mut account3_account = MiralandAccount::new(
             account_minimum_balance(),
             Account::get_packed_len(),
             &program_id,
         );
         let owner_key = Pubkey::new_unique();
-        let mut owner_account = SolanaAccount::default();
+        let mut owner_account = MiralandAccount::default();
         let mint_key = Pubkey::new_unique();
         let mut mint_account =
-            SolanaAccount::new(mint_minimum_balance(), Mint::get_packed_len(), &program_id);
+            MiralandAccount::new(mint_minimum_balance(), Mint::get_packed_len(), &program_id);
         let mut rent_sysvar = rent_sysvar();
 
         // create mint
@@ -7314,23 +7315,23 @@ mod tests {
         let program_id = crate::id();
         let mint_key = Pubkey::new_unique();
         let mut mint_account =
-            SolanaAccount::new(mint_minimum_balance(), Mint::get_packed_len(), &program_id);
+            MiralandAccount::new(mint_minimum_balance(), Mint::get_packed_len(), &program_id);
         let native_account_key = Pubkey::new_unique();
         let lamports = 40;
-        let mut native_account = SolanaAccount::new(
+        let mut native_account = MiralandAccount::new(
             account_minimum_balance() + lamports,
             Account::get_packed_len(),
             &program_id,
         );
         let non_native_account_key = Pubkey::new_unique();
-        let mut non_native_account = SolanaAccount::new(
+        let mut non_native_account = MiralandAccount::new(
             account_minimum_balance() + 50,
             Account::get_packed_len(),
             &program_id,
         );
 
         let owner_key = Pubkey::new_unique();
-        let mut owner_account = SolanaAccount::default();
+        let mut owner_account = MiralandAccount::default();
         let mut rent_sysvar = rent_sysvar();
 
         // initialize non-native mint
@@ -7450,12 +7451,12 @@ mod tests {
         // see integration tests for return-data validity
         let program_id = crate::id();
         let owner_key = Pubkey::new_unique();
-        let mut owner_account = SolanaAccount::default();
+        let mut owner_account = MiralandAccount::default();
         let mut rent_sysvar = rent_sysvar();
 
         // Base mint
         let mut mint_account =
-            SolanaAccount::new(mint_minimum_balance(), Mint::get_packed_len(), &program_id);
+            MiralandAccount::new(mint_minimum_balance(), Mint::get_packed_len(), &program_id);
         let mint_key = Pubkey::new_unique();
         do_process_instruction(
             initialize_mint(&program_id, &mint_key, &owner_key, None, 2).unwrap(),
@@ -7515,7 +7516,7 @@ mod tests {
         let mint_len =
             ExtensionType::try_calculate_account_len::<Mint>(&[ExtensionType::TransferFeeConfig])
                 .unwrap();
-        let mut extended_mint_account = SolanaAccount::new(
+        let mut extended_mint_account = MiralandAccount::new(
             Rent::default().minimum_balance(mint_len),
             mint_len,
             &program_id,
@@ -7560,7 +7561,7 @@ mod tests {
         .unwrap();
 
         // Invalid mint
-        let mut invalid_mint_account = SolanaAccount::new(
+        let mut invalid_mint_account = MiralandAccount::new(
             account_minimum_balance(),
             Account::get_packed_len(),
             &program_id,
@@ -7587,7 +7588,7 @@ mod tests {
 
         // Invalid mint owner
         let invalid_program_id = Pubkey::new_unique();
-        let mut invalid_mint_account = SolanaAccount::new(
+        let mut invalid_mint_account = MiralandAccount::new(
             mint_minimum_balance(),
             Mint::get_packed_len(),
             &invalid_program_id,
@@ -7643,7 +7644,7 @@ mod tests {
         let owner_key = Pubkey::new_unique();
         let mint_key = Pubkey::new_unique();
         let mut mint_account =
-            SolanaAccount::new(mint_minimum_balance(), Mint::get_packed_len(), &program_id);
+            MiralandAccount::new(mint_minimum_balance(), Mint::get_packed_len(), &program_id);
         let mut rent_sysvar = rent_sysvar();
 
         // fail if an invalid mint is passed in
@@ -7698,7 +7699,7 @@ mod tests {
         let owner_key = Pubkey::new_unique();
         let mint_key = Pubkey::new_unique();
         let mut mint_account =
-            SolanaAccount::new(mint_minimum_balance(), Mint::get_packed_len(), &program_id);
+            MiralandAccount::new(mint_minimum_balance(), Mint::get_packed_len(), &program_id);
         let mut rent_sysvar = rent_sysvar();
 
         // fail if an invalid mint is passed in
@@ -7819,7 +7820,7 @@ mod tests {
             static ONCE: Once = Once::new();
 
             ONCE.call_once(|| {
-                solana_sdk::program_stubs::set_syscall_stubs(Box::new(SyscallStubs {}));
+                miraland_sdk::program_stubs::set_syscall_stubs(Box::new(SyscallStubs {}));
             });
         }
         let program_id = crate::id();
@@ -7840,7 +7841,7 @@ mod tests {
         );
 
         let multisig_key = Pubkey::new_unique();
-        let mut multisig_account = SolanaAccount::new(0, Multisig::get_packed_len(), &program_id);
+        let mut multisig_account = MiralandAccount::new(0, Multisig::get_packed_len(), &program_id);
         let excess_lamports = 4_000_000_000_000;
         multisig_account.lamports = excess_lamports + multisig_minimum_balance();
         let mut signer_keys = [Pubkey::default(); MAX_SIGNERS];
@@ -7907,7 +7908,7 @@ mod tests {
 
         let program_id = crate::id();
         let account_key = Pubkey::new_unique();
-        let mut account_account = SolanaAccount::new(
+        let mut account_account = MiralandAccount::new(
             excess_lamports + account_minimum_balance(),
             Account::get_packed_len(),
             &program_id,
@@ -7931,7 +7932,7 @@ mod tests {
         );
         let mint_key = Pubkey::new_unique();
         let mut mint_account =
-            SolanaAccount::new(mint_minimum_balance(), Mint::get_packed_len(), &program_id);
+            MiralandAccount::new(mint_minimum_balance(), Mint::get_packed_len(), &program_id);
 
         let mut rent_sysvar = rent_sysvar();
         do_process_instruction(
@@ -8001,7 +8002,7 @@ mod tests {
             Epoch::default(),
         );
         let mint_key = Pubkey::new_unique();
-        let mut mint_account = SolanaAccount::new(
+        let mut mint_account = MiralandAccount::new(
             excess_lamports + mint_minimum_balance(),
             Mint::get_packed_len(),
             &program_id,

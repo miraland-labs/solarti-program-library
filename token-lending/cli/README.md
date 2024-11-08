@@ -2,9 +2,10 @@
 
 A basic command line interface for initializing lending markets and reserves for Solarti Token Lending.
 
-See https://spl.solana.com/token-lending for more details
+See https://spl.miraland.io/token-lending for more details
 
 ## Install the CLI
+
 ```shell
 cargo install solarti-token-lending-cli
 ```
@@ -22,6 +23,7 @@ A lending market is a collection of reserves that can be configured to borrow an
 The lending market owner must sign to add reserves.
 
 ### Usage
+
 ```shell
 solarti-token-lending \
   --program      PUBKEY \
@@ -29,13 +31,15 @@ solarti-token-lending \
   create-market \
   --market-owner PUBKEY
 ```
-- `--program` is the lending program ID.
-- `--fee-payer` will sign to pay transaction fees.
-- `--market-owner` is the lending market owner pubkey.
+
+-   `--program` is the lending program ID.
+-   `--fee-payer` will sign to pay transaction fees.
+-   `--market-owner` is the lending market owner pubkey.
 
 Run `solarti-token-lending create-market --help` for more details and options.
 
 ### Example
+
 ```shell
 solarti-token-lending \
   --program      6TvznH3B2e3p2mbhufNBpgSrLx6UkgvxtVQvopEZ2kuH \
@@ -46,6 +50,7 @@ solarti-token-lending \
 # Creating lending market 7uX9ywsk1X2j6wLoywMDVQLNWAqhDpVqZzL4qm4CuMMT
 # Signature: 51mi4Ve42h4PQ1RXjfz141T6KCdqnB3UDyhEejviVHrX4SnQCMx86TZa9CWUT3efFYkkmfmseG5ZQr2TZTHJ8S95
 ```
+
 Note the lending market pubkey (e.g. `7uX9ywsk1X2j6wLoywMDVQLNWAqhDpVqZzL4qm4CuMMT`). You'll use this to add reserves.
 
 ## Add a reserve to your market
@@ -53,6 +58,7 @@ Note the lending market pubkey (e.g. `7uX9ywsk1X2j6wLoywMDVQLNWAqhDpVqZzL4qm4CuM
 A reserve is a liquidity pool that can be deposited into, borrowed from, and optionally used as collateral for borrows.
 
 ### Usage
+
 ```shell
 solarti-token-lending \
   --program      PUBKEY \
@@ -66,19 +72,21 @@ solarti-token-lending \
   --pyth-product PUBKEY \
   --pyth-price   PUBKEY
 ```
-- `--program` is the lending program ID.
-- `--fee-payer` will sign to pay transaction fees.
-- `--market-owner` will sign as the lending market owner.
-- `--source-owner` will sign as the source liquidity owner.
-- `--market` is the lending market pubkey.
-- `--source` is the Solarti Token account pubkey (owned by `--source-owner`).
-- `--amount` is the amount of tokens to deposit.
-- `--pyth-product` and `--pyth-price` are oracle
-  accounts [provided by Pyth](https://pyth.network/developers/consumers/accounts).
+
+-   `--program` is the lending program ID.
+-   `--fee-payer` will sign to pay transaction fees.
+-   `--market-owner` will sign as the lending market owner.
+-   `--source-owner` will sign as the source liquidity owner.
+-   `--market` is the lending market pubkey.
+-   `--source` is the Solarti Token account pubkey (owned by `--source-owner`).
+-   `--amount` is the amount of tokens to deposit.
+-   `--pyth-product` and `--pyth-price` are oracle
+    accounts [provided by Pyth](https://pyth.network/developers/consumers/accounts).
 
 Run `solarti-token-lending add-reserve --help` for more details and options.
 
 ### Example
+
 ```shell
 solarti-token-lending \
   --program      6TvznH3B2e3p2mbhufNBpgSrLx6UkgvxtVQvopEZ2kuH \

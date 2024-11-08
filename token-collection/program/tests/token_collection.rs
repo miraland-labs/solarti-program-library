@@ -4,9 +4,9 @@ mod setup;
 
 use {
     setup::{setup_group, setup_mint_and_metadata, setup_program_test},
-    solana_program::{pubkey::Pubkey, system_instruction},
-    solana_program_test::tokio,
-    solana_sdk::{signature::Keypair, signer::Signer, transaction::Transaction},
+    miraland_program::{pubkey::Pubkey, system_instruction},
+    miraland_program_test::tokio,
+    miraland_sdk::{signature::Keypair, signer::Signer, transaction::Transaction},
     spl_token_client::token::Token,
     spl_token_group_interface::{
         instruction::initialize_member,

@@ -11,6 +11,6 @@ pub mod processor;
 
 // Export current SDK types for downstream users building with a different SDK
 // version
-pub use solana_program;
+pub use miraland_program;
 
-solana_program::declare_id!("Feature111111111111111111111111111111111111");
+miraland_program::declare_id!("Feature111111111111111111111111111111111111");

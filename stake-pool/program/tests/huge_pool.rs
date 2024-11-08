@@ -5,9 +5,9 @@ mod helpers;
 
 use {
     helpers::*,
-    solana_program::{borsh0_10::try_from_slice_unchecked, pubkey::Pubkey, stake},
-    solana_program_test::*,
-    solana_sdk::{
+    miraland_program::{borsh0_10::try_from_slice_unchecked, pubkey::Pubkey, stake},
+    miraland_program_test::*,
+    miraland_sdk::{
         native_token::LAMPORTS_PER_MLN,
         signature::{Keypair, Signer},
         transaction::Transaction,

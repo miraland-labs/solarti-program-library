@@ -7,10 +7,10 @@ import tempfile
 from typing import AsyncIterator, List, Tuple
 from subprocess import Popen
 
-from solana.keypair import Keypair
-from solana.publickey import PublicKey
-from solana.rpc.async_api import AsyncClient
-from solana.rpc.commitment import Confirmed
+from miraland.keypair import Keypair
+from miraland.publickey import PublicKey
+from miraland.rpc.async_api import AsyncClient
+from miraland.rpc.commitment import Confirmed
 
 from spl.token.instructions import get_associated_token_address
 
@@ -61,7 +61,7 @@ async def stake_pool_addresses(
 ) -> Tuple[PublicKey, PublicKey, PublicKey]:
     fee = Fee(numerator=1, denominator=1000)
     referral_fee = 20
-    # Change back to `wait_for_next_epoch_if_soon` once https://github.com/solana-labs/solana/pull/26851 is available
+    # Change back to `wait_for_next_epoch_if_soon` once https://github.com/miraland-labs/miraland/pull/26851 is available
     await waiter.wait_for_next_epoch(async_client)
     stake_pool_addresses = await create_all(async_client, payer, fee, referral_fee)
     stake_pool = stake_pool_addresses[0]

@@ -1,8 +1,8 @@
 #![cfg(feature = "test-sbf")]
 
 use {
-    program_test::GovernanceChatProgramTest, solana_program_test::tokio,
-    solana_sdk::signature::Keypair, spl_governance::error::GovernanceError,
+    miraland_program_test::tokio, miraland_sdk::signature::Keypair,
+    program_test::GovernanceChatProgramTest, spl_governance::error::GovernanceError,
     spl_governance_chat::error::GovernanceChatError,
 };
 

@@ -4,11 +4,11 @@
 pub const DECIMALS: u8 = 9;
 
 // The Mint for native MLN Token accounts
-solana_program::declare_id!("MLN1111111111111111111111111111111111111111");
+miraland_program::declare_id!("MLN1111111111111111111111111111111111111111");
 
 #[cfg(test)]
 mod tests {
-    use {super::*, solana_program::native_token::*};
+    use {super::*, miraland_program::native_token::*};
 
     #[test]
     fn test_decimals() {

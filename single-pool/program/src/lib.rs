@@ -13,10 +13,10 @@ pub mod entrypoint;
 
 // export current sdk types for downstream users building with a different sdk
 // version
-pub use solana_program;
-use solana_program::{pubkey::Pubkey, stake};
+pub use miraland_program;
+use miraland_program::{pubkey::Pubkey, stake};
 
-solana_program::declare_id!("sspo6fgaigrd3ZgLBp5K4x3dHr7xxREdVYJEsEku8xa");
+miraland_program::declare_id!("sspo6fgaigrd3ZgLBp5K4x3dHr7xxREdVYJEsEku8xa");
 
 const POOL_PREFIX: &[u8] = b"pool";
 const POOL_STAKE_PREFIX: &[u8] = b"stake";

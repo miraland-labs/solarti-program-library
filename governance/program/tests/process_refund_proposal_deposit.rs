@@ -1,6 +1,6 @@
 #![cfg(feature = "test-sbf")]
 
-use {solana_program::program_error::ProgramError, solana_program_test::*};
+use {miraland_program::program_error::ProgramError, miraland_program_test::*};
 
 mod program_test;
 

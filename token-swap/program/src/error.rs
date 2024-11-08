@@ -1,12 +1,12 @@
 //! Error types
 
 use {
-    num_derive::FromPrimitive,
-    solana_program::{
+    miraland_program::{
         decode_error::DecodeError,
         msg,
         program_error::{PrintProgramError, ProgramError},
     },
+    num_derive::FromPrimitive,
     thiserror::Error,
 };
 
@@ -149,7 +149,9 @@ impl PrintProgramError for SwapError {
             SwapError::InvalidOutputOwner => {
                 msg!("Error: Output pool account owner cannot be the program address")
             }
-            SwapError::ExpectedMint => msg!("Error: Deserialized account is not an Solarti Token mint"),
+            SwapError::ExpectedMint => {
+                msg!("Error: Deserialized account is not an Solarti Token mint")
+            }
             SwapError::ExpectedAccount => {
                 msg!("Error: Deserialized account is not an Solarti Token account")
             }

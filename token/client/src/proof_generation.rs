@@ -12,7 +12,7 @@ use {
             ciphertext_extraction::{transfer_amount_source_ciphertext, SourceDecryptHandles},
             processor::verify_and_split_deposit_amount,
         },
-        solana_zk_token_sdk::{
+        miraland_zk_token_sdk::{
             encryption::{
                 auth_encryption::{AeCiphertext, AeKey},
                 elgamal::{DecryptHandle, ElGamalCiphertext, ElGamalKeypair, ElGamalPubkey},

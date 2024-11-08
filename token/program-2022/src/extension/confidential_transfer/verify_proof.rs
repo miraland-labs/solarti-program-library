@@ -7,14 +7,14 @@ use {
         },
         proof::decode_proof_instruction_context,
     },
-    solana_program::{
+    miraland_program::{
         account_info::{next_account_info, AccountInfo},
         msg,
         program::invoke,
         program_error::ProgramError,
         sysvar::instructions::get_instruction_relative,
     },
-    solana_zk_token_sdk::zk_token_proof_instruction::{self, ContextStateInfo},
+    miraland_zk_token_sdk::zk_token_proof_instruction::{self, ContextStateInfo},
     std::slice::Iter,
 };
 

@@ -6,7 +6,7 @@ This on-chain program provides an interface for composing smart-contracts to cre
 
 ## Motivation
 
--  The high throughput of the Solana blockchain has increased the creation of Non fungible assets i.e NFTs due to their custodial ownership and censorship resistance characteristics. However, the practical use cases of these NFTs are limited by network storage costs when these are created at scale. It's rather inexpensive to mint a single non fungible token, however as you increase the quantity the cost of storing the asset's data on-chain becomes uneconomical.
+-  The high throughput of the Miraland blockchain has increased the creation of Non fungible assets i.e NFTs due to their custodial ownership and censorship resistance characteristics. However, the practical use cases of these NFTs are limited by network storage costs when these are created at scale. It's rather inexpensive to mint a single non fungible token, however as you increase the quantity the cost of storing the asset's data on-chain becomes uneconomical.
 
 - To fix this we must ensure the cost per token is as close to zero as possible. The solution is to store a compressed hash of the asset data on chain while maintaining the actual data off chain in a database. The program provides a way to verify the off chain data on chain and also make concurrent writes to the data. In order to do this we introduced a new data structure called a Concurrent Merkle Tree that avoids proof collision while making concurrent writes.
 
@@ -28,7 +28,7 @@ The crux of this is the concurrent merkle tree and we shall learn about it in th
 ## Source
 
 The Account Compression Program's source is available on
-[github](https://github.com/solana-labs/solana-program-library).
+[github](https://github.com/miraland-labs/miraland-program-library).
 
 
 ## Interface

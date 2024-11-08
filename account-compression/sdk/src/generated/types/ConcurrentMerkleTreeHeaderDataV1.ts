@@ -7,7 +7,7 @@
 
 import * as web3 from '@solarti/web3.js';
 import * as beet from '@metaplex-foundation/beet';
-import * as beetSolana from '@metaplex-foundation/beet-solana';
+import * as beetMiraland from '@metaplex-foundation/beet-miraland';
 export type ConcurrentMerkleTreeHeaderDataV1 = {
   maxBufferSize: number;
   maxDepth: number;
@@ -25,7 +25,7 @@ export const concurrentMerkleTreeHeaderDataV1Beet =
     [
       ['maxBufferSize', beet.u32],
       ['maxDepth', beet.u32],
-      ['authority', beetSolana.publicKey],
+      ['authority', beetMiraland.publicKey],
       ['creationSlot', beet.u64],
       ['padding', beet.uniformFixedSizeArray(beet.u8, 6)],
     ],

@@ -3,7 +3,7 @@ import {
   Transaction,
   TransactionVersion,
   Base58EncodedAddress,
-} from '@solana/web3.js';
+} from '@miraland/web3.js';
 
 import {
   findPoolAddress,

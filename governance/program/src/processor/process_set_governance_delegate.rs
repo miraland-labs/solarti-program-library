@@ -2,7 +2,7 @@
 
 use {
     crate::state::token_owner_record::get_token_owner_record_data,
-    solana_program::{
+    miraland_program::{
         account_info::{next_account_info, AccountInfo},
         entrypoint::ProgramResult,
         pubkey::Pubkey,

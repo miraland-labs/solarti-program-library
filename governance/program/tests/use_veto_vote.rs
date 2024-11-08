@@ -4,8 +4,8 @@ mod program_test;
 use {
     crate::program_test::args::{PluginSetupArgs, RealmSetupArgs},
     program_test::*,
-    solana_program::instruction::AccountMeta,
-    solana_program_test::tokio,
+    miraland_program::instruction::AccountMeta,
+    miraland_program_test::tokio,
     spl_governance::{
         error::GovernanceError,
         state::{

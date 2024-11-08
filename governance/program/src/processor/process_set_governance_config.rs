@@ -7,7 +7,7 @@ use {
             assert_is_valid_governance_config, get_governance_data, GovernanceConfig,
         },
     },
-    solana_program::{
+    miraland_program::{
         account_info::{next_account_info, AccountInfo},
         entrypoint::ProgramResult,
         pubkey::Pubkey,

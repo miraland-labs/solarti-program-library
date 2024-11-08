@@ -5,8 +5,8 @@ mod helpers;
 
 use {
     helpers::*,
-    solana_program_test::*,
-    solana_sdk::{
+    miraland_program_test::*,
+    miraland_sdk::{
         borsh0_10::try_from_slice_unchecked,
         instruction::InstructionError,
         signature::{Keypair, Signer},

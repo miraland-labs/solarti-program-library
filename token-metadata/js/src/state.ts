@@ -1,6 +1,6 @@
-import { PublicKey } from '@solana/web3.js';
-import { getArrayCodec, getBytesCodec, getStructCodec, getTupleCodec } from '@solana/codecs-data-structures';
-import { getStringCodec } from '@solana/codecs-strings';
+import { PublicKey } from '@miraland/web3.js';
+import { getArrayCodec, getBytesCodec, getStructCodec, getTupleCodec } from '@miraland/codecs-data-structures';
+import { getStringCodec } from '@miraland/codecs-strings';
 
 export const TOKEN_METADATA_DISCRIMINATOR = Buffer.from([112, 132, 90, 90, 11, 88, 157, 87]);
 
@@ -55,18 +55,18 @@ export function unpack(buffer: Buffer | Uint8Array): TokenMetadata {
 
     return isNonePubkey(data[0].updateAuthority)
         ? {
-              mint: new PublicKey(data[0].mint),
-              name: data[0].name,
-              symbol: data[0].symbol,
-              uri: data[0].uri,
-              additionalMetadata: data[0].additionalMetadata,
-          }
+            mint: new PublicKey(data[0].mint),
+            name: data[0].name,
+            symbol: data[0].symbol,
+            uri: data[0].uri,
+            additionalMetadata: data[0].additionalMetadata,
+        }
         : {
-              updateAuthority: new PublicKey(data[0].updateAuthority),
-              mint: new PublicKey(data[0].mint),
-              name: data[0].name,
-              symbol: data[0].symbol,
-              uri: data[0].uri,
-              additionalMetadata: data[0].additionalMetadata,
-          };
+            updateAuthority: new PublicKey(data[0].updateAuthority),
+            mint: new PublicKey(data[0].mint),
+            name: data[0].name,
+            symbol: data[0].symbol,
+            uri: data[0].uri,
+            additionalMetadata: data[0].additionalMetadata,
+        };
 }

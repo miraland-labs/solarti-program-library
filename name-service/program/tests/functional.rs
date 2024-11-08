@@ -1,10 +1,10 @@
 #![cfg(feature = "test-sbf")]
 use {
-    solana_program::{hash::hashv, instruction::Instruction, program_pack::Pack, pubkey::Pubkey},
-    solana_program_test::{
+    miraland_program::{hash::hashv, instruction::Instruction, program_pack::Pack, pubkey::Pubkey},
+    miraland_program_test::{
         processor, tokio, ProgramTest, ProgramTestBanksClientExt, ProgramTestContext,
     },
-    solana_sdk::{
+    miraland_sdk::{
         signature::{Keypair, Signer},
         transaction::Transaction,
         transport::TransportError,

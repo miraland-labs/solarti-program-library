@@ -3,7 +3,7 @@
 use {
     crate::error::GovernanceToolsError,
     borsh::{BorshDeserialize, BorshSerialize},
-    solana_program::{
+    miraland_program::{
         account_info::AccountInfo,
         borsh1::try_from_slice_unchecked,
         msg,

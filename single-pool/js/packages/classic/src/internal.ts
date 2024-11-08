@@ -1,4 +1,4 @@
-import { Connection, Transaction, TransactionInstruction, PublicKey } from '@solana/web3.js';
+import { Connection, Transaction, TransactionInstruction, PublicKey } from '@miraland/web3.js';
 import { Buffer } from 'buffer';
 
 export function rpc(connection: Connection) {

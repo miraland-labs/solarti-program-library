@@ -11,7 +11,7 @@ use {
     },
     miraland_cli_output::OutputFormat,
     miraland_remote_wallet::remote_wallet::RemoteWalletManager,
-    solana_sdk::{pubkey::Pubkey, signer::Signer},
+    miraland_sdk::{pubkey::Pubkey, signer::Signer},
     spl_single_pool::{self, find_pool_address},
     std::{rc::Rc, str::FromStr, sync::Arc},
 };
@@ -31,7 +31,7 @@ pub struct Cli {
     #[clap(global(true), long, alias = "dryrun")]
     pub dry_run: bool,
 
-    /// URL for Solana's JSON RPC or moniker (or their first letter):
+    /// URL for Miraland's JSON RPC or moniker (or their first letter):
     /// [mainnet-beta, testnet, devnet, localhost].
     /// Default from the configuration file.
     #[clap(
@@ -318,7 +318,7 @@ fn pool_source_group() -> ArgGroup<'static> {
 pub fn parse_address(path: &str, name: &str) -> Result<Pubkey, String> {
     if is_valid_pubkey(path).is_ok() {
         // this all is ugly but safe
-        // wallet_manager doesnt need to be shared, it just saves cycles to cache it
+        // wallet_manager doesn't need to be shared, it just saves cycles to cache it
         // and the only way argmatches default fails with an unchecked lookup is in the
         // prompt branch which seems unlikely to ever be used for pubkeys
         // the usb lookup in signer_from_path_with_config is safe
@@ -374,7 +374,7 @@ pub fn pool_address_from_args(maybe_pool: Option<Pubkey>, maybe_vote: Option<Pub
     }
 }
 
-// all this is because solana clap v3 utils signer handlers dont work with
+// all this is because miraland clap v3 utils signer handlers dont work with
 // derive syntax which means its impossible to parse keypairs or addresses in
 // value_parser instead, we take the input into a string wrapper from the cli
 // and then once the first pass is over, we do a second manual pass converting

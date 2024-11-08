@@ -1,6 +1,6 @@
 use {
-    solana_program_test::BanksClient,
-    solana_sdk::{
+    miraland_program_test::BanksClient,
+    miraland_sdk::{
         hash::Hash,
         program_pack::Pack,
         pubkey::Pubkey,

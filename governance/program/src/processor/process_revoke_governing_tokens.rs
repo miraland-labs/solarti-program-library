@@ -10,7 +10,7 @@ use {
         },
         tools::spl_token::{assert_spl_token_mint_authority_is_signer, burn_spl_tokens_signed},
     },
-    solana_program::{
+    miraland_program::{
         account_info::{next_account_info, AccountInfo},
         entrypoint::ProgramResult,
         pubkey::Pubkey,

@@ -15,11 +15,11 @@ use {
         },
         instruction::{encode_instruction, TokenInstruction},
         proof::ProofLocation,
-        solana_zk_token_sdk::zk_token_elgamal::pod::ElGamalPubkey,
+        miraland_zk_token_sdk::zk_token_elgamal::pod::ElGamalPubkey,
     },
     bytemuck::{Pod, Zeroable},
     num_enum::{IntoPrimitive, TryFromPrimitive},
-    solana_program::{
+    miraland_program::{
         instruction::{AccountMeta, Instruction},
         program_error::ProgramError,
         pubkey::Pubkey,

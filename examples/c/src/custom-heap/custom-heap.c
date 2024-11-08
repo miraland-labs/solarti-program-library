@@ -1,7 +1,7 @@
 /**
  * @brief A program demonstrating the implementation of a custom heap
  */
-#include <solana_sdk.h>
+#include <miraland_sdk.h>
 
 /// Start address of the memory region used for program heap.
 #define HEAP_START_ADDRESS_ (uint64_t)0x300000000

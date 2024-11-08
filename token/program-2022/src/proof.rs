@@ -2,8 +2,8 @@
 
 use {
     bytemuck::Pod,
-    solana_program::{instruction::Instruction, msg, program_error::ProgramError, pubkey::Pubkey},
-    solana_zk_token_sdk::{
+    miraland_program::{instruction::Instruction, msg, program_error::ProgramError, pubkey::Pubkey},
+    miraland_zk_token_sdk::{
         instruction::ZkProofData, zk_token_proof_instruction::ProofInstruction,
         zk_token_proof_program,
     },

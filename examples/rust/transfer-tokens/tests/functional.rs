@@ -1,13 +1,13 @@
 use {
-    solana_program::{
+    miraland_program::{
         instruction::{AccountMeta, Instruction},
         program_pack::Pack,
         pubkey::Pubkey,
         rent::Rent,
         system_instruction,
     },
-    solana_program_test::{processor, tokio, ProgramTest},
-    solana_sdk::{signature::Signer, signer::keypair::Keypair, transaction::Transaction},
+    miraland_program_test::{processor, tokio, ProgramTest},
+    miraland_sdk::{signature::Signer, signer::keypair::Keypair, transaction::Transaction},
     spl_example_transfer_tokens::processor::process_instruction,
     spl_token::state::{Account, Mint},
     std::str::FromStr,

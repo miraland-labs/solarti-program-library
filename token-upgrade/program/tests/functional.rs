@@ -3,12 +3,12 @@
 #![cfg(feature = "test-sbf")]
 
 use {
-    solana_program_test::{
+    miraland_program_test::{
         processor,
         tokio::{self, sync::Mutex},
         ProgramTest, ProgramTestContext,
     },
-    solana_sdk::{
+    miraland_sdk::{
         instruction::{AccountMeta, InstructionError},
         pubkey::Pubkey,
         signature::Signer,

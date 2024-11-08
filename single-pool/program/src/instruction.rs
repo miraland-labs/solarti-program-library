@@ -11,7 +11,7 @@ use {
         state::SinglePool,
     },
     borsh::{BorshDeserialize, BorshSerialize},
-    solana_program::{
+    miraland_program::{
         instruction::{AccountMeta, Instruction},
         program_pack::Pack,
         pubkey::Pubkey,

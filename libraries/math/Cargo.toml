@@ -1,10 +1,10 @@
 [package]
 name = "solarti-math"
-version = "0.2.1"
+version = "0.2.2"
 description = "Solarti Program Library Math"
 authors = [
-  "Miraland Crafters <crafters@miraland.top>",
-  "Solana Labs Maintainers <maintainers@solanalabs.com>",
+  "Miraland Crafters <crafters@miraland.io>",
+  "Miraland Labs Maintainers <maintainers@miralandlabs.com>",
 ]
 repository = "https://github.com/miraland-labs/solarti-program-library"
 license = "Apache-2.0"
@@ -15,17 +15,17 @@ no-entrypoint = []
 test-sbf = []
 
 [dependencies]
-borsh = "1.3.0"
+borsh = "1.5.1"
 num-derive = "0.4"
 num-traits = "0.2"
-miraland-program = ">=1.18.5, <1.19.0"
+miraland-program = ">1.19.0"
 thiserror = "1.0"
 uint = "0.9"
 
 [dev-dependencies]
-proptest = "1.4.0"
-miraland-program-test = ">=1.18.5, <1.19.0"
-miraland-sdk = ">=1.18.5, <1.19.0"
+proptest = "1.5.0"
+miraland-program-test = ">1.19.0"
+miraland-sdk = ">1.19.0"
 libm = "0.2.8"
 
 [lib]

@@ -4,18 +4,18 @@ Full example program and tests implementing the `solarti-transfer-hook-interface
 to be used for testing a program that calls into the `solarti-transfer-hook-interface`.
 
 See the
-[SPL Transfer Hook Interface](https://github.com/solana-labs/solana-program-library/tree/master/token/transfer-hook/interface)
+[SPL Transfer Hook Interface](https://github.com/miraland-labs/miraland-program-library/tree/master/token/transfer-hook/interface)
 code for more information.
 
 ### Example usage of example
 
 When testing your program that uses `solarti-transfer-hook-interface`, you can also
-import this crate, and then use it with `solana-program-test`, ie:
+import this crate, and then use it with `miraland-program-test`, ie:
 
 ```rust
 use {
-    solana_program_test::{processor, ProgramTest},
-    solana_sdk::{account::Account, instruction::AccountMeta},
+    miraland_program_test::{processor, ProgramTest},
+    miraland_sdk::{account::Account, instruction::AccountMeta},
     spl_transfer_hook_example::state::example_data,
     spl_transfer_hook_interface::get_extra_account_metas_address,
 };

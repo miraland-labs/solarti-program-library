@@ -7,7 +7,7 @@ use {
     },
     arrayref::{array_mut_ref, array_ref, array_refs, mut_array_refs},
     enum_dispatch::enum_dispatch,
-    solana_program::{
+    miraland_program::{
         account_info::AccountInfo,
         msg,
         program_error::ProgramError,

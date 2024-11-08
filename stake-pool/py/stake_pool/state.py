@@ -4,8 +4,8 @@ from enum import IntEnum
 from typing import List, NamedTuple, Optional
 from construct import Bytes, Container, Struct, Switch, Int8ul, Int32ul, Int64ul, Pass  # type: ignore
 
-from solana.publickey import PublicKey
-from solana.utils.helpers import decode_byte_string
+from miraland.publickey import PublicKey
+from miraland.utils.helpers import decode_byte_string
 from stake.state import Lockup, LOCKUP_LAYOUT
 
 PUBLIC_KEY_LAYOUT = Bytes(32)

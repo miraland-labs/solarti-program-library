@@ -3,8 +3,8 @@
 use {
     crate::get_account,
     bincode::deserialize,
-    solana_program_test::BanksClient,
-    solana_sdk::{
+    miraland_program_test::BanksClient,
+    miraland_sdk::{
         hash::Hash,
         pubkey::Pubkey,
         signature::{Keypair, Signer},

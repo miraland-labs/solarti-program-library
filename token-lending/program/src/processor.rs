@@ -14,7 +14,7 @@ use {
         },
     },
     num_traits::FromPrimitive,
-    solana_program::{
+    miraland_program::{
         account_info::{next_account_info, AccountInfo},
         decode_error::DecodeError,
         entrypoint::ProgramResult,
@@ -27,7 +27,7 @@ use {
         sysvar::{clock::Clock, rent::Rent, Sysvar},
     },
     spl_token::{
-        solana_program::instruction::AccountMeta,
+        miraland_program::instruction::AccountMeta,
         state::{Account, Mint},
     },
     std::convert::TryInto,

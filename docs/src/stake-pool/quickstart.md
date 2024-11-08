@@ -9,18 +9,18 @@ right away.
 
 This guide requires the Miraland CLI tool suite and Stake Pool CLI tool.
 
-- [Install the Miraland Tools](https://docs.solana.com/cli/install-solana-cli-tools)
+- [Install the Miraland Tools](https://docs.miraland.io/cli/install-miraland-cli-tools)
 - [Install the Stake Pool CLI](cli.md)
 
 You must also have an account with MLN. The guide will assume that you
-are using the default keypair created at the default location using `solana-keygen new`.
+are using the default keypair created at the default location using `miraland-keygen new`.
 Note that it is possible to override the default keypair with every command if
 needed.
 
 If you are running on localhost using `miraland-test-validator`, the default keypair
 will automatically start with 500,000,000 MLN.
 
-If you are running on devnet or testnet, you can airdrop funds using `solana airdrop 1`.
+If you are running on devnet or testnet, you can airdrop funds using `miraland airdrop 1`.
 
 If you are running on mainnet-beta, you must purchase funds some other way, from
 an exchange, a friend, etc.
@@ -28,7 +28,7 @@ an exchange, a friend, etc.
 ## Sample scripts
 
 This guide uses the
-[sample scripts on GitHub](https://github.com/solana-labs/solana-program-library/tree/master/stake-pool/cli/scripts)
+[sample scripts on GitHub](https://github.com/miraland-labs/miraland-program-library/tree/master/stake-pool/cli/scripts)
 to run everything quickly and easily.
 
 You'll see the following scripts:
@@ -83,10 +83,10 @@ it to fail with: `Custom program error: 0x11`. This is totally normal, and will
 not happen on the other networks. You simply need to re-run the command.
 
 Since there is no voting activity on the test validator network, you will
-need to use the secret `--force` flag with `solana delegate-stake`, ie:
+need to use the secret `--force` flag with `miraland delegate-stake`, ie:
 
 ```bash
-$ solana delegate-stake --force stake.json CzDy6uxLTko5Jjcdm46AozMmrARY6R2aDBagdemiBuiT
+$ miraland delegate-stake --force stake.json CzDy6uxLTko5Jjcdm46AozMmrARY6R2aDBagdemiBuiT
 ```
 
 ## Step 1: Create the stake pool
@@ -208,10 +208,10 @@ network, and decide how much stake to allocate to each validator.
 
 The Miraland Foundation maintains an open-source bot for its delegation program,
 which can be adapated for your stake pool. The source code is part of the
-[stake-o-matic GitHub repo](https://github.com/solana-labs/stake-o-matic/tree/master/bot).
+[stake-o-matic GitHub repo](https://github.com/miraland-labs/stake-o-matic/tree/master/bot).
 
 Additionally, there is a work-in-progress Python stake pool bot, found at the
-[stake-pool-py on GitHub](https://github.com/solana-labs/solana-program-library/tree/master/stake-pool/py).
+[stake-pool-py on GitHub](https://github.com/miraland-labs/miraland-program-library/tree/master/stake-pool/py).
 
 For our example, we will run a simple pool rebalancer, which increases the stake
 on each validator in the list by the given amount. There are no checks or logic

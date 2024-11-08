@@ -8,10 +8,10 @@ pub mod processor;
 pub mod state;
 
 // Export current SDK types for downstream users building with a different SDK version
-pub use solana_program;
-use solana_program::{program_pack::Pack, pubkey::Pubkey};
+pub use miraland_program;
+use miraland_program::{program_pack::Pack, pubkey::Pubkey};
 
-solana_program::declare_id!("FeatQtFWK7aZCvBCVURnhLaUvrm2m8tPN4jHhriettbc");
+miraland_program::declare_id!("FeatQtFWK7aZCvBCVURnhLaUvrm2m8tPN4jHhriettbc");
 
 pub(crate) fn get_mint_address_with_seed(feature_proposal_address: &Pubkey) -> (Pubkey, u8) {
     Pubkey::find_program_address(&[&feature_proposal_address.to_bytes(), br"mint"], &id())

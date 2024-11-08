@@ -1,7 +1,7 @@
 # SPL Governance
 
 SPL Governance is a program the chief purpose of which is to provide core building blocks and primitives to create
-Decentralized Autonomous Organizations (DAOs) on Solana blockchain.
+Decentralized Autonomous Organizations (DAOs) on Miraland blockchain.
 
 The program is DAO type and asset type agnostic and can be used to build any type of DAOs
 which can own and manage any type of assets.
@@ -11,7 +11,7 @@ we may want a voting population to vote on disbursement of funds collectively.
 It can also control upgrades of itself and other programs through democratic means.
 
 In the simplest form the program can be used for Multisig control over a shared wallet (treasury account) or as
-a Multisig upgrade authority for Solana programs
+a Multisig upgrade authority for Miraland programs
 
 ## Architecture
 
@@ -22,7 +22,7 @@ For example the default implementation of the program takes deposits of the gove
 voting power but it can be swapped with a custom program implementation which can implement any custom requirements
 like token locking, token escrows, NFT voting or multi token governance structures.
 
-The plugins are ordinary Solana programs and can be written using any supporting technology like Anchor framework
+The plugins are ordinary Miraland programs and can be written using any supporting technology like Anchor framework
 for example.
 
 ## Deployment
@@ -51,15 +51,15 @@ There are two instances available for anybody to use on mainnet
 
 There are two UIs available which showcase the programs capabilities:
 
-- [Realms Explorer](https://github.com/solana-labs/oyster) project (part of Oyster monorepo) provides basic and data
-  oriented UI to create and manage DAOs: [realms-explorer](https://realms-explorer.com/)
+-   [Realms Explorer](https://github.com/miraland-labs/oyster) project (part of Oyster monorepo) provides basic and data
+    oriented UI to create and manage DAOs: [realms-explorer](https://realms-explorer.com/)
 
-  It's a good starting point for developers to learn about the program and interact with it
+    It's a good starting point for developers to learn about the program and interact with it
 
-- [Governance UI](https://github.com/solana-labs/governance-ui) project build together
-  with the [MNGO](https://mango.markets/) team: [governance-ui](https://realms.today)
+-   [Governance UI](https://github.com/miraland-labs/governance-ui) project build together
+    with the [MNGO](https://mango.markets/) team: [governance-ui](https://realms.today)
 
-  This is advanced, user friendly and tasks oriented UI used by most of the existing DAOs on Solana
+    This is advanced, user friendly and tasks oriented UI used by most of the existing DAOs on Miraland
 
 ## Client SDK
 
@@ -91,7 +91,7 @@ use the deposited amount as their voting weight to vote on Proposals within that
 
 The basic building block of governance to update programs is the ProgramGovernance account.
 It ties a governed Program ID and holds configuration options defining governance rules.
-The governed Program ID is used as the seed for a [Program Derived Address](https://docs.solana.com/developing/programming-model/calling-between-programs#program-derived-addresses),
+The governed Program ID is used as the seed for a [Program Derived Address](https://docs.miraland.io/developing/programming-model/calling-between-programs#program-derived-addresses),
 and this program derived address is what is used as the address of the Governance account for your Program ID.
 
 What this means is that there can only ever be ONE Governance account for a given Program.
@@ -123,7 +123,7 @@ Bpf-upgradable-loader allows any signer who has Upgrade authority over a Buffer 
 to upgrade it using its Upgrade command.
 Normally, this is the developer who created and deployed the program, and this creation of the Buffer account containing
 the new program data and overwriting of the existing Program account's data with it is handled in the background for you
-by the Solana program deploy cli command.
+by the Miraland program deploy cli command.
 However, in order for Governance to be useful, Governance now needs this authority.
 
 In similar fashion for Mint and Token governances the relevant authorities to mint and transfer tokens
@@ -139,7 +139,7 @@ and has a set of executable instructions to it, a name and a description.
 It goes through various states (draft, voting, executing, ...) and users can vote on it
 if they have relevant Community or Council tokens.
 Its rules are determined by the Governance account that it is tied to, and when it executes,
-it is only eligible to use the [Program Derived Address](https://docs.solana.com/developing/programming-model/calling-between-programs#program-derived-addresses)
+it is only eligible to use the [Program Derived Address](https://docs.miraland.io/developing/programming-model/calling-between-programs#program-derived-addresses)
 authority given by the Governance account.
 So a Proposal for Sushi cannot for instance upgrade the Program for Uniswap.
 
@@ -177,7 +177,7 @@ Each Governance Realm that gets created has the option to also have a Council mi
 A council mint is simply a separate mint from the Community mint.
 What this means is that users can submit Proposals that have a different voting population from a different mint
 that can affect the same DAO. A practical application of this policy may be to have a very large population control
-major version bumps of Solana via normal MLN, for instance, but hot fixes be controlled via Council tokens,
+major version bumps of Miraland via normal MLN, for instance, but hot fixes be controlled via Council tokens,
 of which there may be only 30, and which may be themselves minted and distributed via proposals by the governing population.
 
 Another important use case is to use the Council for DAO inception. At the beginning of a DAO life
@@ -200,5 +200,5 @@ the DAO until the token is distributed.
 
 ## Audit
 
-The repository [README](https://github.com/solana-labs/solana-program-library#audits)
+The repository [README](https://github.com/miraland-labs/miraland-program-library#audits)
 contains information about program audits.

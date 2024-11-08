@@ -3,7 +3,7 @@
 use {
     crate::id,
     borsh::{BorshDeserialize, BorshSerialize},
-    solana_program::instruction::Instruction,
+    miraland_program::instruction::Instruction,
 };
 
 /// Instructions supported by the math program, used for testing instruction
@@ -107,6 +107,43 @@ pub enum MathInstruction {
         exponent: f64,
     },
 
+    /// Multiply two u128 values
+    ///
+    /// No accounts required for this instruction
+    U128Multiply {
+        /// The multiplicand
+        multiplicand: u128,
+        /// The multipier
+        multiplier: u128,
+    },
+    /// Divide two u128 values
+    ///
+    /// No accounts required for this instruction
+    U128Divide {
+        /// The dividend
+        dividend: u128,
+        /// The divisor
+        divisor: u128,
+    },
+    /// Multiply two f64 values
+    ///
+    /// No accounts required for this instruction
+    F64Multiply {
+        /// The multiplicand
+        multiplicand: f64,
+        /// The multipier
+        multiplier: f64,
+    },
+    /// Divide two f64 values
+    ///
+    /// No accounts required for this instruction
+    F64Divide {
+        /// The dividend
+        dividend: f64,
+        /// The divisor
+        divisor: f64,
+    },
+
     /// Don't do anything for comparison
     ///
     /// No accounts required for this instruction
@@ -118,8 +155,7 @@ pub fn precise_sqrt(radicand: u64) -> Instruction {
     Instruction {
         program_id: id(),
         accounts: vec![],
-        data: borsh::to_vec(&MathInstruction::PreciseSquareRoot { radicand })
-            .unwrap(),
+        data: borsh::to_vec(&MathInstruction::PreciseSquareRoot { radicand }).unwrap(),
     }
 }
 
@@ -128,8 +164,7 @@ pub fn sqrt_u64(radicand: u64) -> Instruction {
     Instruction {
         program_id: id(),
         accounts: vec![],
-        data: borsh::to_vec(&MathInstruction::SquareRootU64 { radicand })
-            .unwrap(),
+        data: borsh::to_vec(&MathInstruction::SquareRootU64 { radicand }).unwrap(),
     }
 }
 
@@ -138,8 +173,7 @@ pub fn sqrt_u128(radicand: u128) -> Instruction {
     Instruction {
         program_id: id(),
         accounts: vec![],
-        data: borsh::to_vec(&MathInstruction::SquareRootU128 { radicand })
-            .unwrap(),
+        data: borsh::to_vec(&MathInstruction::SquareRootU128 { radicand }).unwrap(),
     }
 }
 
@@ -161,8 +195,7 @@ pub fn u64_divide(dividend: u64, divisor: u64) -> Instruction {
     Instruction {
         program_id: id(),
         accounts: vec![],
-        data: borsh::to_vec(&MathInstruction::U64Divide { dividend, divisor })
-            .unwrap(),
+        data: borsh::to_vec(&MathInstruction::U64Divide { dividend, divisor }).unwrap(),
     }
 }
 
@@ -184,8 +217,7 @@ pub fn f32_divide(dividend: f32, divisor: f32) -> Instruction {
     Instruction {
         program_id: id(),
         accounts: vec![],
-        data: borsh::to_vec(&MathInstruction::F32Divide { dividend, divisor })
-            .unwrap(),
+        data: borsh::to_vec(&MathInstruction::F32Divide { dividend, divisor }).unwrap(),
     }
 }
 
@@ -194,8 +226,7 @@ pub fn f32_exponentiate(base: f32, exponent: f32) -> Instruction {
     Instruction {
         program_id: id(),
         accounts: vec![],
-        data: borsh::to_vec(&MathInstruction::F32Exponentiate { base, exponent })
-            .unwrap(),
+        data: borsh::to_vec(&MathInstruction::F32Exponentiate { base, exponent }).unwrap(),
     }
 }
 
@@ -204,8 +235,7 @@ pub fn f32_natural_log(argument: f32) -> Instruction {
     Instruction {
         program_id: id(),
         accounts: vec![],
-        data: borsh::to_vec(&MathInstruction::F32NaturalLog { argument })
-            .unwrap(),
+        data: borsh::to_vec(&MathInstruction::F32NaturalLog { argument }).unwrap(),
     }
 }
 
@@ -214,8 +244,7 @@ pub fn f32_normal_cdf(argument: f32) -> Instruction {
     Instruction {
         program_id: id(),
         accounts: vec![],
-        data: borsh::to_vec(&MathInstruction::F32NormalCDF { argument })
-            .unwrap(),
+        data: borsh::to_vec(&MathInstruction::F32NormalCDF { argument }).unwrap(),
     }
 }
 
@@ -224,8 +253,51 @@ pub fn f64_pow(base: f64, exponent: f64) -> Instruction {
     Instruction {
         program_id: id(),
         accounts: vec![],
-        data: borsh::to_vec(&MathInstruction::F64Pow { base, exponent })
-            .unwrap(),
+        data: borsh::to_vec(&MathInstruction::F64Pow { base, exponent }).unwrap(),
+    }
+}
+
+/// Create U128 Multiplication instruction
+pub fn u128_multiply(multiplicand: u128, multiplier: u128) -> Instruction {
+    Instruction {
+        program_id: id(),
+        accounts: vec![],
+        data: borsh::to_vec(&MathInstruction::U128Multiply {
+            multiplicand,
+            multiplier,
+        })
+        .unwrap(),
+    }
+}
+
+/// Create U128 Division instruction
+pub fn u128_divide(dividend: u128, divisor: u128) -> Instruction {
+    Instruction {
+        program_id: id(),
+        accounts: vec![],
+        data: borsh::to_vec(&MathInstruction::U128Divide { dividend, divisor }).unwrap(),
+    }
+}
+
+/// Create F64 Multiplication instruction
+pub fn f64_multiply(multiplicand: f64, multiplier: f64) -> Instruction {
+    Instruction {
+        program_id: id(),
+        accounts: vec![],
+        data: borsh::to_vec(&MathInstruction::F64Multiply {
+            multiplicand,
+            multiplier,
+        })
+        .unwrap(),
+    }
+}
+
+/// Create F64 Division instruction
+pub fn f64_divide(dividend: f64, divisor: f64) -> Instruction {
+    Instruction {
+        program_id: id(),
+        accounts: vec![],
+        data: borsh::to_vec(&MathInstruction::F64Divide { dividend, divisor }).unwrap(),
     }
 }
 
@@ -248,8 +320,7 @@ mod tests {
         assert_eq!(0, instruction.accounts.len());
         assert_eq!(
             instruction.data,
-            borsh::to_vec(&MathInstruction::PreciseSquareRoot { radicand: u64::MAX })
-                .unwrap()
+            borsh::to_vec(&MathInstruction::PreciseSquareRoot { radicand: u64::MAX }).unwrap()
         );
         assert_eq!(instruction.program_id, crate::id());
     }
@@ -260,8 +331,7 @@ mod tests {
         assert_eq!(0, instruction.accounts.len());
         assert_eq!(
             instruction.data,
-            borsh::to_vec(&MathInstruction::SquareRootU64 { radicand: u64::MAX })
-                .unwrap()
+            borsh::to_vec(&MathInstruction::SquareRootU64 { radicand: u64::MAX }).unwrap()
         );
         assert_eq!(instruction.program_id, crate::id());
     }
@@ -361,8 +431,7 @@ mod tests {
         assert_eq!(0, instruction.accounts.len());
         assert_eq!(
             instruction.data,
-            borsh::to_vec(&MathInstruction::F32NaturalLog { argument: f32::MAX })
-                .unwrap()
+            borsh::to_vec(&MathInstruction::F32NaturalLog { argument: f32::MAX }).unwrap()
         );
         assert_eq!(instruction.program_id, crate::id())
     }
@@ -373,8 +442,7 @@ mod tests {
         assert_eq!(0, instruction.accounts.len());
         assert_eq!(
             instruction.data,
-            borsh::to_vec(&MathInstruction::F32NormalCDF { argument: f32::MAX })
-                .unwrap()
+            borsh::to_vec(&MathInstruction::F32NormalCDF { argument: f32::MAX }).unwrap()
         );
         assert_eq!(instruction.program_id, crate::id())
     }

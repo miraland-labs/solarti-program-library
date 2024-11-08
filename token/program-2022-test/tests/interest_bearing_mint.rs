@@ -3,12 +3,12 @@
 mod program_test;
 use {
     program_test::{keypair_clone, TestContext, TokenContext},
-    solana_program_test::{
+    miraland_program_test::{
         processor,
         tokio::{self, sync::Mutex},
         ProgramTest,
     },
-    solana_sdk::{
+    miraland_sdk::{
         account_info::{next_account_info, AccountInfo},
         entrypoint::ProgramResult,
         instruction::{AccountMeta, Instruction, InstructionError},

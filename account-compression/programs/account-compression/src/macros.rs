@@ -6,6 +6,7 @@ enum TreeLoad {
 
 /// This macro applies functions on a ConcurrentMerkleT:ee and emits leaf information
 /// needed to sync the merkle tree state with off-chain indexers.
+#[macro_export]
 macro_rules! _merkle_tree_depth_size_apply_fn {
     ($max_depth:literal, $max_size:literal, $id:ident, $bytes:ident, $func:ident, TreeLoad::Mutable, $($arg:tt)*)
      => {
@@ -51,12 +52,21 @@ macro_rules! _merkle_tree_depth_size_apply_fn {
 /// This applies a given function on a ConcurrentMerkleTree by
 /// allowing the compiler to infer the size of the tree based
 /// upon the header information stored on-chain
+#[macro_export]
 macro_rules! _merkle_tree_apply_fn {
     ($header:ident, $($arg:tt)*) => {
         // Note: max_buffer_size MUST be a power of 2
         match ($header.get_max_depth(), $header.get_max_buffer_size()) {
             (3, 8) => _merkle_tree_depth_size_apply_fn!(3, 8, $($arg)*),
             (5, 8) => _merkle_tree_depth_size_apply_fn!(5, 8, $($arg)*),
+            (6, 16) => _merkle_tree_depth_size_apply_fn!(6, 16, $($arg)*),
+            (7, 16) => _merkle_tree_depth_size_apply_fn!(7, 16, $($arg)*),
+            (8, 16) => _merkle_tree_depth_size_apply_fn!(8, 16, $($arg)*),
+            (9, 16) => _merkle_tree_depth_size_apply_fn!(9, 16, $($arg)*),
+            (10, 32) => _merkle_tree_depth_size_apply_fn!(10, 32, $($arg)*),
+            (11, 32) => _merkle_tree_depth_size_apply_fn!(11, 32, $($arg)*),
+            (12, 32) => _merkle_tree_depth_size_apply_fn!(12, 32, $($arg)*),
+            (13, 32) => _merkle_tree_depth_size_apply_fn!(13, 32, $($arg)*),
             (14, 64) => _merkle_tree_depth_size_apply_fn!(14, 64, $($arg)*),
             (14, 256) => _merkle_tree_depth_size_apply_fn!(14, 256, $($arg)*),
             (14, 1024) => _merkle_tree_depth_size_apply_fn!(14, 1024, $($arg)*),

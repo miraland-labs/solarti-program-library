@@ -4,7 +4,7 @@ import {
   Base58EncodedAddress,
   getProgramDerivedAddress,
   createAddressWithSeed,
-} from '@solana/web3.js';
+} from '@miraland/web3.js';
 
 import { MPL_METADATA_PROGRAM_ID } from './internal.js';
 import { STAKE_PROGRAM_ID } from './quarantine.js';

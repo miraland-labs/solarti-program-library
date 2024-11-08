@@ -3,7 +3,7 @@
 pub use spl_tlv_account_resolution::state::{AccountDataResult, AccountFetchError};
 use {
     crate::{get_extra_account_metas_address, instruction::ExecuteInstruction},
-    solana_program::{
+    miraland_program::{
         instruction::{AccountMeta, Instruction},
         program_error::ProgramError,
         pubkey::Pubkey,
@@ -21,7 +21,7 @@ use {
 /// ```rust,ignore
 /// use futures_util::TryFutureExt;
 /// use miraland_client::nonblocking::rpc_client::RpcClient;
-/// use solana_program::pubkey::Pubkey;
+/// use miraland_program::pubkey::Pubkey;
 ///
 /// let program_id = Pubkey::new_unique();
 /// let mint = Pubkey::new_unique();

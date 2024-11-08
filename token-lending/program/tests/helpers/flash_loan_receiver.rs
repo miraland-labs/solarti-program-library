@@ -1,8 +1,8 @@
 use {
     crate::helpers::flash_loan_receiver::FlashLoanReceiverError::InvalidInstruction,
-    solana_program::{account_info::AccountInfo, entrypoint::ProgramResult, msg, pubkey::Pubkey},
+    miraland_program::{account_info::AccountInfo, entrypoint::ProgramResult, msg, pubkey::Pubkey},
     spl_token::{
-        solana_program::{
+        miraland_program::{
             account_info::next_account_info, program::invoke_signed, program_error::ProgramError,
             program_pack::Pack,
         },
@@ -31,7 +31,7 @@ pub enum FlashLoanReceiverInstruction {
     },
 }
 
-solana_program::entrypoint!(process_instruction);
+miraland_program::entrypoint!(process_instruction);
 pub fn process_instruction(
     program_id: &Pubkey,
     accounts: &[AccountInfo],

@@ -1,4 +1,4 @@
-import { PublicKey } from '@solana/web3.js';
+import { PublicKey } from '@miraland/web3.js';
 import { expect } from 'chai';
 
 import type { TokenMetadata } from '../src/state';

@@ -4,13 +4,13 @@ use {
     bincode::deserialize,
     borsh::{BorshDeserialize, BorshSerialize},
     cookies::{TokenAccountCookie, WalletCookie},
-    solana_program::{
+    miraland_program::{
         borsh1::try_from_slice_unchecked, clock::Clock, instruction::Instruction,
         program_error::ProgramError, program_pack::Pack, pubkey::Pubkey, rent::Rent,
         stake_history::Epoch, system_instruction, system_program, sysvar,
     },
-    solana_program_test::{ProgramTest, ProgramTestContext},
-    solana_sdk::{
+    miraland_program_test::{ProgramTest, ProgramTestContext},
+    miraland_sdk::{
         account::{Account, AccountSharedData, WritableAccount},
         signature::Keypair,
         signer::Signer,

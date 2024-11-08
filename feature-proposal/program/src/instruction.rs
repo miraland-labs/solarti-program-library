@@ -3,7 +3,7 @@
 use {
     crate::{state::AcceptanceCriteria, *},
     borsh::{BorshDeserialize, BorshSchema, BorshSerialize},
-    solana_program::{
+    miraland_program::{
         instruction::{AccountMeta, Instruction},
         msg,
         program_error::ProgramError,
@@ -28,7 +28,7 @@ pub enum FeatureProposalInstruction {
     ///   program.  Tokens transfers to this address are irrevocable and
     ///   permanent.
     /// * A new feature id account that has been funded and allocated (as
-    ///   described in `solana_program::feature`)
+    ///   described in `miraland_program::feature`)
     ///
     /// On successful execution of the instruction, the feature proposer is
     /// expected to distribute the tokens in the distributor token account
@@ -134,7 +134,7 @@ pub fn propose(
             AccountMeta::new(distributor_token_address, false),
             AccountMeta::new(acceptance_token_address, false),
             AccountMeta::new(feature_id_address, false),
-            AccountMeta::new_readonly(solana_program::system_program::id(), false),
+            AccountMeta::new_readonly(miraland_program::system_program::id(), false),
             AccountMeta::new_readonly(spl_token::id(), false),
             AccountMeta::new_readonly(sysvar::rent::id(), false),
         ],
@@ -157,7 +157,7 @@ pub fn tally(feature_proposal_address: &Pubkey) -> Instruction {
             AccountMeta::new(*feature_proposal_address, false),
             AccountMeta::new_readonly(acceptance_token_address, false),
             AccountMeta::new(feature_id_address, false),
-            AccountMeta::new_readonly(solana_program::system_program::id(), false),
+            AccountMeta::new_readonly(miraland_program::system_program::id(), false),
             AccountMeta::new_readonly(sysvar::clock::id(), false),
         ],
         data: FeatureProposalInstruction::Tally.pack_into_vec(),
@@ -172,7 +172,7 @@ mod tests {
     fn test_get_packed_len() {
         assert_eq!(
             FeatureProposalInstruction::get_packed_len(),
-            solana_program::borsh1::get_packed_len::<FeatureProposalInstruction>()
+            miraland_program::borsh1::get_packed_len::<FeatureProposalInstruction>()
         )
     }
 

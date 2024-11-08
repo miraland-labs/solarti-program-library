@@ -3,11 +3,11 @@
 mod program_test;
 use {
     program_test::{TestContext, TokenContext},
-    solana_program_test::{
+    miraland_program_test::{
         tokio::{self, sync::Mutex},
         ProgramTestContext,
     },
-    solana_sdk::{
+    miraland_sdk::{
         instruction::InstructionError,
         pubkey::Pubkey,
         signature::Signer,

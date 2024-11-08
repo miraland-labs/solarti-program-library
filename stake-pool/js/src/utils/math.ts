@@ -1,5 +1,5 @@
 import BN from 'bn.js';
-import { LAMPORTS_PER_MLN } from '@solana/web3.js';
+import { LAMPORTS_PER_MLN } from '@miraland/web3.js';
 
 export function solToLamports(amount: number): number {
   if (isNaN(amount)) return Number(0);

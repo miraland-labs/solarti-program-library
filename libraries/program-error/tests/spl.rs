@@ -42,7 +42,7 @@ fn test_library_error_codes() {
     fn get_error_code_check(hash_input: &str) -> u32 {
         let mut nonce: u32 = 0;
         loop {
-            let hash = solana_program::hash::hashv(&[hash_input.as_bytes(), &nonce.to_le_bytes()]);
+            let hash = miraland_program::hash::hashv(&[hash_input.as_bytes(), &nonce.to_le_bytes()]);
             let mut bytes = [0u8; 4];
             bytes.copy_from_slice(&hash.to_bytes()[13..17]);
             let error_code = u32::from_le_bytes(bytes);

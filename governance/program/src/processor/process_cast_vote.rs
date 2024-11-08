@@ -16,7 +16,7 @@ use {
             vote_record::{get_vote_kind, get_vote_record_address_seeds, Vote, VoteRecordV2},
         },
     },
-    solana_program::{
+    miraland_program::{
         account_info::{next_account_info, AccountInfo},
         clock::Clock,
         entrypoint::ProgramResult,

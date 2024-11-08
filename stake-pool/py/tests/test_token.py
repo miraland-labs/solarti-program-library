@@ -1,5 +1,5 @@
 import pytest
-from solana.keypair import Keypair
+from miraland.keypair import Keypair
 
 from spl_token.actions import create_mint, create_associated_token_account
 

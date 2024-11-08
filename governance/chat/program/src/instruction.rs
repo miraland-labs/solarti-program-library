@@ -3,7 +3,7 @@
 use {
     crate::state::MessageBody,
     borsh::{BorshDeserialize, BorshSchema, BorshSerialize},
-    solana_program::{
+    miraland_program::{
         instruction::{AccountMeta, Instruction},
         pubkey::Pubkey,
         system_program,

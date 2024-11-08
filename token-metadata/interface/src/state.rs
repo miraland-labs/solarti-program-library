@@ -4,7 +4,7 @@
 use serde::{Deserialize, Serialize};
 use {
     borsh::{BorshDeserialize, BorshSchema, BorshSerialize},
-    solana_program::{
+    miraland_program::{
         borsh1::{get_instance_packed_len, try_from_slice_unchecked},
         program_error::ProgramError,
         pubkey::Pubkey,
@@ -125,7 +125,7 @@ pub enum Field {
 
 #[cfg(test)]
 mod tests {
-    use {super::*, crate::NAMESPACE, solana_program::hash};
+    use {super::*, crate::NAMESPACE, miraland_program::hash};
 
     #[test]
     fn discriminator() {

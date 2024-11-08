@@ -1,13 +1,13 @@
 use {
     crate::get_authority,
     borsh::{BorshDeserialize, BorshSerialize},
-    shank::ShankInstruction,
-    solana_program::{
+    miraland_program::{
         instruction::{AccountMeta, Instruction},
         program_error::ProgramError,
         pubkey::Pubkey,
         system_program,
     },
+    shank::ShankInstruction,
     spl_associated_token_account::get_associated_token_address,
 };
 

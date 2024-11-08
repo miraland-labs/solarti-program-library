@@ -9,6 +9,6 @@ pub mod system_utils;
 pub mod validation_utils;
 // Export current sdk types for downstream users building with a different sdk
 // version
-pub use solana_program;
+pub use miraland_program;
 
-solana_program::declare_id!("bopttqXMCA1EctcDSXLzjbP672NLu1667tENLbD9tLL");
+miraland_program::declare_id!("bopttqXMCA1EctcDSXLzjbP672NLu1667tENLbD9tLL");

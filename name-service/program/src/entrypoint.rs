@@ -1,13 +1,13 @@
 use {
     crate::{error::NameServiceError, processor::Processor},
     num_traits::FromPrimitive,
-    solana_program::{
+    miraland_program::{
         account_info::AccountInfo, decode_error::DecodeError, entrypoint::ProgramResult, msg,
         program_error::PrintProgramError, pubkey::Pubkey,
     },
 };
 
-solana_program::entrypoint!(process_instruction);
+miraland_program::entrypoint!(process_instruction);
 
 pub fn process_instruction(
     program_id: &Pubkey,

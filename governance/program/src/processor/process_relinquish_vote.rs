@@ -12,7 +12,7 @@ use {
             vote_record::{get_vote_record_data_for_proposal_and_token_owner_record, Vote},
         },
     },
-    solana_program::{
+    miraland_program::{
         account_info::{next_account_info, AccountInfo},
         clock::Clock,
         entrypoint::ProgramResult,

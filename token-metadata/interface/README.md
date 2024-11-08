@@ -18,7 +18,7 @@ Coming soon!
 
 ### Motivation
 
-Token creators on Solana need all sorts of functionality for their token-metadata,
+Token creators on Miraland need all sorts of functionality for their token-metadata,
 and the Metaplex Token-Metadata program has been the one place for all metadata
 needs, leading to a feature-rich program that still might not serve all needs.
 
@@ -29,9 +29,9 @@ compatibility with existing solutions.
 With this proposal implemented, fungible and non-fungible token creators will
 have two options:
 
-* implement the interface in their own program, so they can eventually extend it
-with new functionality or even other interfaces
-* use a reference program that implements the simplest case
+-   implement the interface in their own program, so they can eventually extend it
+    with new functionality or even other interfaces
+-   use a reference program that implements the simplest case
 
 ### Required Instructions
 

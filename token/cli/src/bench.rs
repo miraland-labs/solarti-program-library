@@ -8,7 +8,7 @@ use {
         tpu_client::TpuClient, tpu_client::TpuClientConfig,
     },
     miraland_remote_wallet::remote_wallet::RemoteWalletManager,
-    solana_sdk::{
+    miraland_sdk::{
         message::Message, native_token::lamports_to_mln, native_token::Mln, program_pack::Pack,
         pubkey::Pubkey, signature::Signer, system_instruction,
     },

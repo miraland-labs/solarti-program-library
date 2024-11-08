@@ -9,9 +9,10 @@
 
 pub mod account;
 pub mod error;
+pub mod pubkey_data;
 pub mod seeds;
 pub mod state;
 
 // Export current sdk types for downstream users building with a different sdk
 // version
-pub use solana_program;
+pub use miraland_program;

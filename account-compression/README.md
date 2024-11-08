@@ -2,7 +2,7 @@
 
 This on-chain program provides an interface for composing smart-contracts to create and use
 SPL ConcurrentMerkleTrees. The primary application of using SPL ConcurrentMerkleTrees is
-to make edits to off-chain data with on-chain verification. 
+to make edits to off-chain data with on-chain verification.
 
 This program is targeted towards supporting [Metaplex Compressed NFTs](https://github.com/metaplex-foundation/metaplex-program-library/tree/master/bubblegum) and may be subject to change.
 
@@ -12,17 +12,17 @@ A _**rough draft**_ of the whitepaper for SPL ConcurrentMerkleTree's can be foun
 
 ## Rust Packages
 
-* `solarti-account-compression`: SDK for interacting with account compression program
-* `solarti-noop`: SDK for interacting with no op program, primarily for circumventing log truncation
-* `solarti-concurrent-merkle-tree`: SDK for creating SPL ConcurrentMerkleTrees
+-   `solarti-account-compression`: SDK for interacting with account compression program
+-   `solarti-noop`: SDK for interacting with no op program, primarily for circumventing log truncation
+-   `solarti-concurrent-merkle-tree`: SDK for creating SPL ConcurrentMerkleTrees
 
 ## Typescript SDK
 
-`@solarti/solarti-account-compression` is generated using Metaplex Foundation's [Solita](https://github.com/metaplex-foundation/solita/). 
+`@solarti/solarti-account-compression` is generated using Metaplex Foundation's [Solita](https://github.com/metaplex-foundation/solita/).
 
 ## Testing and Development
 
-Testing contracts locally requires the SDK to be built. 
+Testing contracts locally requires the SDK to be built.
 
 With a built local SDK, the test suite can be ran with:
 
@@ -32,5 +32,5 @@ With a built local SDK, the test suite can be ran with:
 
 ## Audit
 
-The repository [README](https://github.com/solana-labs/solana-program-library#audits)
+The repository [README](https://github.com/miraland-labs/miraland-program-library#audits)
 contains information about program audits.

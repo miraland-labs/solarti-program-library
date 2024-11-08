@@ -2,7 +2,7 @@
 
 use {
     borsh::{BorshDeserialize, BorshSchema, BorshSerialize},
-    solana_program::{clock::Slot, program_pack::IsInitialized, pubkey::Pubkey},
+    miraland_program::{clock::Slot, program_pack::IsInitialized, pubkey::Pubkey},
     spl_governance_tools::account::AccountMaxSize,
 };
 

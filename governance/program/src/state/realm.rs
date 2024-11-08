@@ -13,7 +13,7 @@ use {
         PROGRAM_AUTHORITY_SEED,
     },
     borsh::{io::Write, BorshDeserialize, BorshSchema, BorshSerialize},
-    solana_program::{
+    miraland_program::{
         account_info::{next_account_info, AccountInfo},
         program_error::ProgramError,
         program_pack::IsInitialized,
@@ -480,7 +480,7 @@ mod test {
 
     use {
         super::*, crate::instruction::GovernanceInstruction,
-        solana_program::borsh1::try_from_slice_unchecked,
+        miraland_program::borsh1::try_from_slice_unchecked,
     };
 
     #[test]

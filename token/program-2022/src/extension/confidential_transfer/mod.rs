@@ -4,8 +4,10 @@ use {
         extension::{Extension, ExtensionType},
     },
     bytemuck::{Pod, Zeroable},
-    solana_program::entrypoint::ProgramResult,
-    solana_zk_token_sdk::zk_token_elgamal::pod::{AeCiphertext, ElGamalCiphertext, ElGamalPubkey},
+    miraland_program::entrypoint::ProgramResult,
+    miraland_zk_token_sdk::zk_token_elgamal::pod::{
+        AeCiphertext, ElGamalCiphertext, ElGamalPubkey,
+    },
     spl_pod::{
         bytemuck::pod_from_bytes,
         optional_keys::{OptionalNonZeroElGamalPubkey, OptionalNonZeroPubkey},
@@ -35,7 +37,7 @@ pub mod verify_proof;
 /// transfers in the Confidential Transfer Extension.
 ///
 /// The logic in this submodule should belong to the `miraland-zk-token-sdk` and
-/// will be removed with the next upgrade to the Solana program.
+/// will be removed with the next upgrade to the Miraland program.
 #[cfg(not(target_os = "solana"))]
 pub mod split_proof_generation;
 
@@ -45,7 +47,7 @@ pub mod account_info;
 
 /// Ciphertext extraction and proof related helper logic
 ///
-/// This submodule should be removed with the next upgrade to the Solana program
+/// This submodule should be removed with the next upgrade to the Miraland program
 pub mod ciphertext_extraction;
 
 /// ElGamal ciphertext containing an account balance

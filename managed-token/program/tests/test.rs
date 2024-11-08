@@ -1,7 +1,7 @@
 use {
-    solana_program::program_option::COption,
-    solana_program_test::*,
-    solana_sdk::{
+    miraland_program::program_option::COption,
+    miraland_program_test::*,
+    miraland_sdk::{
         commitment_config::CommitmentLevel,
         instruction::Instruction,
         native_token::LAMPORTS_PER_MLN,

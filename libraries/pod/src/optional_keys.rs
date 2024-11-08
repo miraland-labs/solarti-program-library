@@ -10,8 +10,8 @@ use {
 };
 use {
     bytemuck::{Pod, Zeroable},
-    solana_program::{program_error::ProgramError, program_option::COption, pubkey::Pubkey},
-    solana_zk_token_sdk::zk_token_elgamal::pod::ElGamalPubkey,
+    miraland_program::{program_error::ProgramError, program_option::COption, pubkey::Pubkey},
+    miraland_zk_token_sdk::zk_token_elgamal::pod::ElGamalPubkey,
 };
 
 /// A Pubkey that encodes `None` as all `0`, meant to be usable as a Pod type,
@@ -231,7 +231,7 @@ impl<'de> Deserialize<'de> for OptionalNonZeroElGamalPubkey {
 
 #[cfg(test)]
 mod tests {
-    use {super::*, crate::bytemuck::pod_from_bytes, solana_program::pubkey::PUBKEY_BYTES};
+    use {super::*, crate::bytemuck::pod_from_bytes, miraland_program::pubkey::PUBKEY_BYTES};
 
     #[test]
     fn test_pod_non_zero_option() {

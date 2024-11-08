@@ -13,7 +13,7 @@ use {
         PROGRAM_AUTHORITY_SEED,
     },
     borsh::{io::Write, BorshDeserialize, BorshSchema, BorshSerialize},
-    solana_program::{
+    miraland_program::{
         account_info::AccountInfo, program_error::ProgramError, program_pack::IsInitialized,
         pubkey::Pubkey,
     },
@@ -274,7 +274,7 @@ pub fn get_vote_record_address<'a>(
 #[cfg(test)]
 mod test {
 
-    use {super::*, solana_program::clock::Epoch};
+    use {super::*, miraland_program::clock::Epoch};
 
     #[test]
     fn test_vote_record_v1_to_v2_serialisation_roundtrip() {

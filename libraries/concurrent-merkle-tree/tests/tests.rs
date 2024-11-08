@@ -1,10 +1,13 @@
 #![allow(clippy::arithmetic_side_effects)]
-use rand::thread_rng;
-use rand::{self, Rng};
-use spl_concurrent_merkle_tree::concurrent_merkle_tree::ConcurrentMerkleTree;
-use spl_concurrent_merkle_tree::error::ConcurrentMerkleTreeError;
-use spl_concurrent_merkle_tree::node::{Node, EMPTY};
-use spl_merkle_tree_reference::MerkleTree;
+use {
+    rand::{self, thread_rng, Rng},
+    spl_concurrent_merkle_tree::{
+        concurrent_merkle_tree::ConcurrentMerkleTree,
+        error::ConcurrentMerkleTreeError,
+        node::{Node, EMPTY},
+    },
+    spl_merkle_tree_reference::MerkleTree,
+};
 
 const DEPTH: usize = 10;
 const BUFFER_SIZE: usize = 64;
@@ -139,7 +142,7 @@ async fn test_prove_leaf() {
     // Up to BUFFER_SIZE old
     let num_leaves_to_try = 10;
     for _ in 0..num_leaves_to_try {
-        let leaf_idx = rng.gen_range(0, 1 << DEPTH);
+        let leaf_idx = rng.gen_range(0..1 << DEPTH);
         let _last_leaf_idx = off_chain_tree.leaf_nodes.len() - 1;
         let root = off_chain_tree.get_root();
         let leaf = off_chain_tree.get_leaf(leaf_idx);
@@ -148,9 +151,9 @@ async fn test_prove_leaf() {
         // While executing random replaces, check
         for _ in 0..(BUFFER_SIZE - 1) {
             let new_leaf = rng.gen::<Node>();
-            let mut random_leaf_idx = rng.gen_range(0, 1 << DEPTH);
+            let mut random_leaf_idx = rng.gen_range(0..1 << DEPTH);
             while random_leaf_idx == leaf_idx {
-                random_leaf_idx = rng.gen_range(0, 1 << DEPTH);
+                random_leaf_idx = rng.gen_range(0..1 << DEPTH);
             }
 
             cmt.set_leaf(
@@ -275,7 +278,7 @@ async fn test_replaces() {
     // Replaces leaves in a random order by x capacity
     let test_capacity: usize = 1 << (DEPTH - 1);
     for _ in 0..(test_capacity) {
-        let index = rng.gen_range(0, test_capacity) % (1 << DEPTH);
+        let index = rng.gen_range(0..test_capacity) % (1 << DEPTH);
         let leaf = rng.gen::<[u8; 32]>();
         cmt.set_leaf(
             tree.get_root(),
@@ -320,14 +323,14 @@ async fn test_mixed() {
     let tree_capacity: usize = 1 << DEPTH;
     while tree_size < tree_capacity {
         let leaf = rng.gen::<[u8; 32]>();
-        let random_num: u32 = rng.gen_range(0, 10);
+        let random_num: u32 = rng.gen_range(0..10);
         if random_num < 5 {
             println!("{} append", tree_size);
             cmt.append(leaf).unwrap();
             tree.add_leaf(leaf, tree_size);
             tree_size += 1;
         } else {
-            let index = rng.gen_range(0, tree_size) % (tree_size);
+            let index = rng.gen_range(0..tree_size) % (tree_size);
             println!("{} replace {}", tree_size, index);
             cmt.set_leaf(
                 tree.get_root(),
@@ -441,7 +444,8 @@ async fn test_append_bug_repro_2() {
 }
 
 #[tokio::test(flavor = "multi_thread")]
-/// Test that empty trees are checked properly by adding & removing leaves one by one
+/// Test that empty trees are checked properly by adding & removing leaves one
+/// by one
 async fn test_prove_tree_empty_incremental() {
     let (mut cmt, mut tree) = setup();
     let mut rng = thread_rng();
@@ -449,7 +453,8 @@ async fn test_prove_tree_empty_incremental() {
 
     cmt.prove_tree_is_empty().unwrap();
 
-    // Append a random leaf & remove it, and make sure that the tree is empty at the end
+    // Append a random leaf & remove it, and make sure that the tree is empty at the
+    // end
     let tree_size = 64;
     for i in 0..tree_size {
         let leaf = rng.gen::<[u8; 32]>();
@@ -483,7 +488,8 @@ async fn test_prove_tree_empty_incremental() {
 }
 
 #[tokio::test(flavor = "multi_thread")]
-/// Test that empty trees are checked properly by adding & removing leaves in a batch
+/// Test that empty trees are checked properly by adding & removing leaves in a
+/// batch
 async fn test_prove_tree_empty_batched() {
     let (mut cmt, mut tree) = setup();
     let mut rng = thread_rng();

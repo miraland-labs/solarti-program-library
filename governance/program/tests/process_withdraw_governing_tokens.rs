@@ -1,8 +1,8 @@
 #![cfg(feature = "test-sbf")]
 
 use {
-    solana_program::{instruction::AccountMeta, pubkey::Pubkey},
-    solana_program_test::*,
+    miraland_program::{instruction::AccountMeta, pubkey::Pubkey},
+    miraland_program_test::*,
 };
 
 mod program_test;
@@ -10,7 +10,7 @@ mod program_test;
 use {
     crate::program_test::args::RealmSetupArgs,
     program_test::*,
-    solana_sdk::signature::Signer,
+    miraland_sdk::signature::Signer,
     spl_governance::{
         error::GovernanceError,
         instruction::withdraw_governing_tokens,

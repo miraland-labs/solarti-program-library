@@ -11,7 +11,7 @@ use {
     miraland_cli_output::OutputFormat,
     miraland_client::nonblocking::rpc_client::RpcClient,
     miraland_remote_wallet::remote_wallet::RemoteWalletManager,
-    solana_sdk::{
+    miraland_sdk::{
         account::Account as RawAccount, commitment_config::CommitmentConfig, hash::Hash,
         pubkey::Pubkey, signature::Signer,
     },

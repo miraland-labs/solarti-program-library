@@ -9,7 +9,7 @@ mod tests {
     use {
         super::*,
         serial_test::serial,
-        solana_program::{
+        miraland_program::{
             decode_error::DecodeError,
             program_error::{PrintProgramError, ProgramError},
         },
@@ -24,7 +24,7 @@ mod tests {
         *EXPECTED_DATA.write().unwrap() = expected_data;
     }
     pub struct SyscallStubs {}
-    impl solana_sdk::program_stubs::SyscallStubs for SyscallStubs {
+    impl miraland_sdk::program_stubs::SyscallStubs for SyscallStubs {
         fn sol_log(&self, message: &str) {
             assert_eq!(
                 message,
@@ -73,7 +73,7 @@ mod tests {
         static ONCE: Once = Once::new();
 
         ONCE.call_once(|| {
-            solana_sdk::program_stubs::set_syscall_stubs(Box::new(SyscallStubs {}));
+            miraland_sdk::program_stubs::set_syscall_stubs(Box::new(SyscallStubs {}));
         });
         // `Into<ProgramError>`
         assert_eq!(
@@ -112,7 +112,7 @@ mod tests {
         static ONCE: Once = Once::new();
 
         ONCE.call_once(|| {
-            solana_sdk::program_stubs::set_syscall_stubs(Box::new(SyscallStubs {}));
+            miraland_sdk::program_stubs::set_syscall_stubs(Box::new(SyscallStubs {}));
         });
         // `Into<ProgramError>`
         assert_eq!(

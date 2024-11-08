@@ -5,7 +5,7 @@ use {
         proposal::get_proposal_data,
         proposal_deposit::get_proposal_deposit_data_for_proposal_and_deposit_payer,
     },
-    solana_program::{
+    miraland_program::{
         account_info::{next_account_info, AccountInfo},
         entrypoint::ProgramResult,
         pubkey::Pubkey,

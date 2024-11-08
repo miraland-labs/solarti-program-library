@@ -9,7 +9,7 @@ use {
         curve::{base::SwapCurve, fees::Fees},
         error::SwapError,
     },
-    solana_program::{
+    miraland_program::{
         instruction::{AccountMeta, Instruction},
         program_error::ProgramError,
         program_pack::Pack,

@@ -1,10 +1,9 @@
 #![allow(clippy::arithmetic_side_effects)]
 
 use {
-    serial_test::serial,
-    miraland_cli_config::Config as SolanaConfig,
+    miraland_cli_config::Config as MiralandConfig,
     miraland_client::nonblocking::rpc_client::RpcClient,
-    solana_sdk::{
+    miraland_sdk::{
         bpf_loader_upgradeable,
         clock::Epoch,
         epoch_schedule::{EpochSchedule, MINIMUM_SLOTS_PER_EPOCH},
@@ -19,10 +18,11 @@ use {
         transaction::Transaction,
     },
     miraland_test_validator::{TestValidator, TestValidatorGenesis, UpgradeableProgramInfo},
-    solana_vote_program::{
+    miraland_vote_program::{
         vote_instruction::{self, CreateVoteAccountConfig},
         vote_state::{VoteInit, VoteState, VoteStateVersions},
     },
+    serial_test::serial,
     spl_token_client::client::{ProgramClient, ProgramRpcClient, ProgramRpcClientSendTransaction},
     std::{path::PathBuf, process::Command, str::FromStr, sync::Arc, time::Duration},
     tempfile::NamedTempFile,
@@ -66,13 +66,13 @@ async fn setup(initialize: bool) -> Env {
     // write a full config file with our rpc and payer to disk
     let config_file = NamedTempFile::new().unwrap();
     let config_file_path = config_file.path().to_str().unwrap();
-    let solana_config = SolanaConfig {
+    let miraland_config = MiralandConfig {
         json_rpc_url: validator.rpc_url(),
         websocket_url: validator.rpc_pubsub_url(),
         keypair_path: keypair_file.path().to_str().unwrap().to_string(),
-        ..SolanaConfig::default()
+        ..MiralandConfig::default()
     };
-    solana_config.save(config_file_path).unwrap();
+    miraland_config.save(config_file_path).unwrap();
 
     // make vote and stake accounts
     let vote_account = create_vote_account(&program_client, &payer, &payer.pubkey()).await;
@@ -182,7 +182,7 @@ async fn create_vote_account(
         },
         vote_rent,
         CreateVoteAccountConfig {
-            space: VoteStateVersions::vote_state_size_of(true) as u64,
+            space: VoteState::size_of() as u64,
             ..Default::default()
         },
     ));

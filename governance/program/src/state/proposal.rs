@@ -23,7 +23,7 @@ use {
         PROGRAM_AUTHORITY_SEED,
     },
     borsh::{io::Write, BorshDeserialize, BorshSchema, BorshSerialize},
-    solana_program::{
+    miraland_program::{
         account_info::{next_account_info, AccountInfo},
         clock::{Slot, UnixTimestamp},
         program_error::ProgramError,
@@ -1263,7 +1263,7 @@ mod test {
             vote_record::VoteChoice,
         },
         proptest::prelude::*,
-        solana_program::clock::Epoch,
+        miraland_program::clock::Epoch,
     };
 
     fn create_test_proposal() -> ProposalV2 {

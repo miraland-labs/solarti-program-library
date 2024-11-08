@@ -3,8 +3,8 @@
 mod program_test;
 use {
     program_test::{TestContext, TokenContext},
-    solana_program_test::tokio,
-    solana_sdk::{
+    miraland_program_test::tokio,
+    miraland_sdk::{
         instruction::InstructionError,
         program_option::COption,
         program_pack::Pack,
@@ -22,7 +22,7 @@ use {
             ExtensionType,
         },
         instruction, native_mint,
-        solana_zk_token_sdk::zk_token_elgamal::pod::ElGamalPubkey,
+        miraland_zk_token_sdk::zk_token_elgamal::pod::ElGamalPubkey,
         state::Mint,
     },
     spl_token_client::token::ExtensionInitializationParams,

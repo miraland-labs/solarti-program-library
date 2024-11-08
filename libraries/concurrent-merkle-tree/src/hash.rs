@@ -1,5 +1,7 @@
-use crate::node::{empty_node, Node};
-use solana_program::keccak::hashv;
+use {
+    crate::node::{empty_node, Node},
+    miraland_program::keccak::hashv,
+};
 
 /// Recomputes root of the Merkle tree from Node & proof
 pub fn recompute(leaf: Node, proof: &[Node], index: u32) -> Node {
@@ -10,7 +12,8 @@ pub fn recompute(leaf: Node, proof: &[Node], index: u32) -> Node {
     current_node
 }
 
-/// Computes the parent node of `node` and `sibling` and copies the result into `node`
+/// Computes the parent node of `node` and `sibling` and copies the result into
+/// `node`
 #[inline(always)]
 pub fn hash_to_parent(node: &mut Node, sibling: &Node, is_left: bool) {
     let parent = if is_left {

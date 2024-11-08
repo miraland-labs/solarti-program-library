@@ -48,7 +48,7 @@ impl SplDiscriminate for MyOtherPodValue {
 let account_size = TlvState::get_base_len() + std::mem::size_of::<MyPodValue>() + \
     TlvState::get_base_len() + std::mem::size_of::<MyOtherPodValue>();
 
-// Buffer likely comes from a Solana `solana_program::account_info::AccountInfo`,
+// Buffer likely comes from a Miraland `miraland_program::account_info::AccountInfo`,
 // but this example just uses a vector.
 let mut buffer = vec![0; account_size];
 
@@ -93,7 +93,7 @@ let value2 = state.get_value_with_repetition::<MyOtherPodValue>(2).unwrap();
 
 ## Motivation
 
-The Solana blockchain exposes slabs of bytes to on-chain programs, allowing program
+The Miraland blockchain exposes slabs of bytes to on-chain programs, allowing program
 writers to intepret these bytes and change them however they wish. Currently,
 programs interpet account bytes as being only of one type. For example, an token
 mint account is only ever a token mint, an AMM pool account is only ever an AMM pool,
@@ -135,7 +135,7 @@ trait on your type.
 ```rust
 use {
     borsh::{BorshDeserialize, BorshSerialize},
-    solana_program::borsh::{get_instance_packed_len, try_from_slice_unchecked},
+    miraland_program::borsh::{get_instance_packed_len, try_from_slice_unchecked},
     spl_type_length_value::{
         state::{TlvState, TlvStateMut},
         variable_len_pack::VariableLenPack
@@ -166,7 +166,7 @@ let initial_data = "This is a pretty cool test!";
 let tlv_size = 4 + initial_data.len();
 let account_size = TlvState::get_base_len() + tlv_size;
 
-// Buffer likely comes from a Solana `solana_program::account_info::AccountInfo`,
+// Buffer likely comes from a Miraland `miraland_program::account_info::AccountInfo`,
 // but this example just uses a vector.
 let mut buffer = vec![0; account_size];
 let mut state = TlvStateMut::unpack(&mut buffer).unwrap();

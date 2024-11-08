@@ -5,7 +5,7 @@ Library with utilities for working with Type-Length-Value structures in js.
 ## Example usage
 
 ```ts
-import { TlvState, SplDiscriminator } from '@solana/solarti-type-length-value';
+import { TlvState, SplDiscriminator } from '@miraland/solarti-type-length-value';
 
 const tlv = new TlvState(tlvData, discriminatorSize, lengthSize);
 const discriminator = splDiscriminate("<discriminator-hash-input>", discriminatorSize);

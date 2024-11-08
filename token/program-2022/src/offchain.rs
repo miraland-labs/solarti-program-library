@@ -6,7 +6,7 @@ use {
         extension::{transfer_hook, StateWithExtensions},
         state::Mint,
     },
-    solana_program::{instruction::Instruction, program_error::ProgramError, pubkey::Pubkey},
+    miraland_program::{instruction::Instruction, program_error::ProgramError, pubkey::Pubkey},
     spl_transfer_hook_interface::offchain::resolve_extra_account_metas,
     std::future::Future,
 };
@@ -21,7 +21,7 @@ use {
 /// ```rust,ignore
 /// use futures_util::TryFutureExt;
 /// use miraland_client::nonblocking::rpc_client::RpcClient;
-/// use solana_program::pubkey::Pubkey;
+/// use miraland_program::pubkey::Pubkey;
 ///
 /// let mint = Pubkey::new_unique();
 /// let client = RpcClient::new_mock("succeeds".to_string());

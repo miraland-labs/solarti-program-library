@@ -3,8 +3,8 @@
 #![cfg(feature = "test-sbf")]
 
 use {
-    solana_program_test::*,
-    solana_sdk::{
+    miraland_program_test::*,
+    miraland_sdk::{
         account::Account,
         instruction::{AccountMeta, Instruction, InstructionError},
         pubkey::Pubkey,

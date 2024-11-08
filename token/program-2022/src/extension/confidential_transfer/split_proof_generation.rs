@@ -2,7 +2,7 @@
 //! transfers in the Confidential Transfer Extension.
 //!
 //! The logic in this submodule should belong to the `miraland-zk-token-sdk` and
-//! will be removed with the next upgrade to the Solana program.
+//! will be removed with the next upgrade to the Miraland program.
 
 use crate::{
     extension::confidential_transfer::{
@@ -10,7 +10,7 @@ use crate::{
         processor::verify_and_split_deposit_amount,
         *,
     },
-    solana_zk_token_sdk::{
+    miraland_zk_token_sdk::{
         encryption::{
             auth_encryption::{AeCiphertext, AeKey},
             elgamal::{DecryptHandle, ElGamalCiphertext, ElGamalKeypair, ElGamalPubkey},

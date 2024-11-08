@@ -1,8 +1,8 @@
 #![allow(dead_code)]
 
 use {
-    solana_program_test::{processor, tokio::sync::Mutex, ProgramTest, ProgramTestContext},
-    solana_sdk::signer::{keypair::Keypair, Signer},
+    miraland_program_test::{processor, tokio::sync::Mutex, ProgramTest, ProgramTestContext},
+    miraland_sdk::signer::{keypair::Keypair, Signer},
     spl_token_2022::{id, native_mint, processor::Processor},
     spl_token_client::{
         client::{ProgramBanksClient, ProgramBanksClientProcessTransaction, ProgramClient},

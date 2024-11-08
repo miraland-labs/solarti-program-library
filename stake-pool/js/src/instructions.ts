@@ -7,9 +7,9 @@ import {
   StakeProgram,
   SystemProgram,
   TransactionInstruction,
-} from '@solana/web3.js';
-import * as BufferLayout from '@solana/buffer-layout';
-import { TOKEN_PROGRAM_ID } from '@solana/solarti-token';
+} from '@miraland/web3.js';
+import * as BufferLayout from '@miraland/buffer-layout';
+import { TOKEN_PROGRAM_ID } from '@miraland/solarti-token';
 import { InstructionType, encodeData, decodeData } from './utils';
 import BN from 'bn.js';
 import {

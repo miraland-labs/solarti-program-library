@@ -8,9 +8,9 @@ use {
     assert_matches::assert_matches,
     bincode::deserialize,
     helpers::*,
-    solana_program::{clock::Epoch, instruction::InstructionError, pubkey::Pubkey, stake},
-    solana_program_test::*,
-    solana_sdk::{
+    miraland_program::{clock::Epoch, instruction::InstructionError, pubkey::Pubkey, stake},
+    miraland_program_test::*,
+    miraland_sdk::{
         signature::{Keypair, Signer},
         transaction::{Transaction, TransactionError},
     },

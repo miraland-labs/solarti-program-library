@@ -2,15 +2,15 @@
 
 use {
     borsh::BorshSerialize,
-    solana_program::{
+    miraland_program::{
         borsh0_10::get_packed_len,
         instruction::{AccountMeta, Instruction, InstructionError},
         pubkey::Pubkey,
         rent::Rent,
         system_instruction,
     },
-    solana_program_test::*,
-    solana_sdk::{
+    miraland_program_test::*,
+    miraland_sdk::{
         signature::{Keypair, Signer},
         transaction::{Transaction, TransactionError},
     },

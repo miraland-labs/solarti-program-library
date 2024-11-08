@@ -1,5 +1,5 @@
-// Errors match those in rust https://github.com/solana-labs/solana-program-library/blob/master/token-metadata/interface/src/error.rs
-// Code follows: https://github.com/solana-labs/solana-program-library/blob/master/token/js/src/errors.tshttps://github.com/solana-labs/solana-program-library/blob/master/token/js/src/errors.ts
+// Errors match those in rust https://github.com/miraland-labs/miraland-program-library/blob/master/token-metadata/interface/src/error.rs
+// Code follows: https://github.com/miraland-labs/miraland-program-library/blob/master/token/js/src/errors.tshttps://github.com/miraland-labs/miraland-program-library/blob/master/token/js/src/errors.ts
 
 /** Base class for errors */
 export class TokenMetadataError extends Error {

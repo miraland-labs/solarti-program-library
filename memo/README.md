@@ -6,9 +6,9 @@ signers of the transaction, and if so, logs their addresses. It can be used to
 record a string on-chain, stored in the instruction data of a successful
 transaction, and optionally verify the originator.
 
-Full documentation is available at https://spl.solana.com/memo
+Full documentation is available at https://spl.miraland.io/memo
 
 ## Audit
 
-The repository [README](https://github.com/solana-labs/solana-program-library#audits)
+The repository [README](https://github.com/miraland-labs/miraland-program-library#audits)
 contains information about program audits.

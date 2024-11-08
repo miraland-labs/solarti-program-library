@@ -4,7 +4,7 @@
 mod helpers;
 
 use {
-    helpers::*, solana_program_test::*, solana_sdk::signature::Keypair,
+    helpers::*, miraland_program_test::*, miraland_sdk::signature::Keypair,
     spl_token_lending::processor::process_instruction,
 };
 

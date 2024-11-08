@@ -9,7 +9,7 @@ import {
   WritableSignerAccount,
   IInstruction,
   AccountRole,
-} from '@solana/web3.js';
+} from '@miraland/web3.js';
 
 import {
   PoolMintAuthorityAddress,

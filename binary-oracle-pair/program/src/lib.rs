@@ -9,8 +9,9 @@ pub mod state;
 #[cfg(not(feature = "no-entrypoint"))]
 mod entrypoint;
 
-// Export current sdk types for downstream users building with a different sdk version
-pub use solana_program;
+// Export current sdk types for downstream users building with a different sdk
+// version
+pub use miraland_program;
 
 // Binary Oracle Pair id
-solana_program::declare_id!("borp1gGAKmL4HqvZSNHdVBFfnsMEZZ1ho9UCuMyya8g");
+miraland_program::declare_id!("borp1gGAKmL4HqvZSNHdVBFfnsMEZZ1ho9UCuMyya8g");

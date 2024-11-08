@@ -14,8 +14,8 @@ pub mod onchain;
 
 // Export current sdk types for downstream users building with a different sdk
 // version
-pub use solana_program;
-use solana_program::pubkey::Pubkey;
+pub use miraland_program;
+use miraland_program::pubkey::Pubkey;
 
 /// Namespace for all programs implementing transfer-hook
 pub const NAMESPACE: &str = "solarti-transfer-hook-interface";

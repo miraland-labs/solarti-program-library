@@ -17,7 +17,7 @@ use {
         VOTE_STATE_DISCRIMINATOR_END,
     },
     borsh::BorshDeserialize,
-    solana_program::{
+    miraland_program::{
         account_info::{next_account_info, AccountInfo},
         borsh1::{get_packed_len, try_from_slice_unchecked},
         entrypoint::ProgramResult,
@@ -1052,7 +1052,7 @@ impl Processor {
         }
 
         let vote_address_str = pool.vote_account_address.to_string();
-        let token_name = format!("SLRTSinglePool {}", &vote_address_str[0..15]);
+        let token_name = format!("Solarti Single Pool {}", &vote_address_str[0..15]);
         let token_symbol = format!("st{}", &vote_address_str[0..7]);
 
         let new_metadata_instruction = create_metadata_accounts_v3(

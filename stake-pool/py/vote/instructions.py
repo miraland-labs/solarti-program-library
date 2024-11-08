@@ -5,9 +5,9 @@ from typing import NamedTuple
 
 from construct import Bytes, Struct, Switch, Int8ul, Int32ul, Pass  # type: ignore
 
-from solana.publickey import PublicKey
-from solana.sysvar import SYSVAR_CLOCK_PUBKEY, SYSVAR_RENT_PUBKEY
-from solana.transaction import AccountMeta, TransactionInstruction
+from miraland.publickey import PublicKey
+from miraland.sysvar import SYSVAR_CLOCK_PUBKEY, SYSVAR_RENT_PUBKEY
+from miraland.transaction import AccountMeta, TransactionInstruction
 
 from vote.constants import VOTE_PROGRAM_ID
 

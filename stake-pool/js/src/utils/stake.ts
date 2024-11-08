@@ -5,7 +5,7 @@ import {
   StakeProgram,
   SystemProgram,
   TransactionInstruction,
-} from '@solana/web3.js';
+} from '@miraland/web3.js';
 import { findStakeProgramAddress, findTransientStakeProgramAddress } from './program-address';
 import BN from 'bn.js';
 

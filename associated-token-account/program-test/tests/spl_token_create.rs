@@ -8,9 +8,9 @@ mod program_test;
 use spl_associated_token_account::create_associated_token_account as deprecated_create_associated_token_account;
 use {
     program_test::program_test,
-    solana_program::pubkey::Pubkey,
-    solana_program_test::*,
-    solana_sdk::{program_pack::Pack, signature::Signer, transaction::Transaction},
+    miraland_program::pubkey::Pubkey,
+    miraland_program_test::*,
+    miraland_sdk::{program_pack::Pack, signature::Signer, transaction::Transaction},
     spl_associated_token_account::{
         get_associated_token_address, instruction::create_associated_token_account,
     },

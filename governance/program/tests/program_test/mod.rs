@@ -1,7 +1,7 @@
 #![allow(clippy::arithmetic_side_effects)]
 use {
     borsh::BorshSerialize,
-    solana_program::{
+    miraland_program::{
         bpf_loader_upgradeable::{self, UpgradeableLoaderState},
         clock::{Slot, UnixTimestamp},
         instruction::{AccountMeta, Instruction},
@@ -10,8 +10,8 @@ use {
         pubkey::Pubkey,
         system_instruction,
     },
-    solana_program_test::*,
-    solana_sdk::signature::{Keypair, Signer},
+    miraland_program_test::*,
+    miraland_sdk::signature::{Keypair, Signer},
     spl_governance::{
         instruction::{
             add_required_signatory, add_signatory, cancel_proposal, cast_vote, complete_proposal,
@@ -1544,8 +1544,8 @@ impl GovernanceProgramTest {
 
         let program_data_address = get_program_data_address(&program_keypair.pubkey());
 
-        // Load solana_bpf_rust_upgradeable program taken from solana test programs
-        let path_buf = find_file("solana_bpf_rust_upgradeable.so").unwrap();
+        // Load miraland_bpf_rust_upgradeable program taken from miraland test programs
+        let path_buf = find_file("miraland_bpf_rust_upgradeable.so").unwrap();
         let program_data = read_file(path_buf);
 
         let program_buffer_rent =
@@ -2625,8 +2625,8 @@ impl GovernanceProgramTest {
         let program_buffer_keypair = Keypair::new();
         let buffer_authority_keypair = Keypair::new();
 
-        // Load solana_bpf_rust_upgraded program taken from solana test programs
-        let path_buf = find_file("solana_bpf_rust_upgraded.so").unwrap();
+        // Load miraland_bpf_rust_upgraded program taken from miraland test programs
+        let path_buf = find_file("miraland_bpf_rust_upgraded.so").unwrap();
         let program_data = read_file(path_buf);
 
         let program_buffer_rent =

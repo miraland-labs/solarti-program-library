@@ -1,9 +1,9 @@
 {
-    "name": "@solana/solarti-type-length-value",
+    "name": "@miraland/solarti-type-length-value",
     "description": "SPL Type Length Value Library",
     "version": "0.1.0",
-    "author": "Solana Labs Maintainers <maintainers@solanalabs.com>",
-    "repository": "https://github.com/solana-labs/solana-program-library",
+    "author": "Miraland Labs Maintainers <maintainers@miralandlabs.com>",
+    "repository": "https://github.com/miraland-labs/miraland-program-library",
     "license": "Apache-2.0",
     "type": "module",
     "sideEffects": false,

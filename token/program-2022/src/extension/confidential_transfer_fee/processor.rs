@@ -1,6 +1,6 @@
 // Remove feature once zk ops syscalls are enabled on all networks
 #[cfg(feature = "zk-ops")]
-use solana_zk_token_sdk::zk_token_elgamal::ops as syscall;
+use miraland_zk_token_sdk::zk_token_elgamal::ops as syscall;
 use {
     crate::{
         check_program_account, check_zk_token_proof_program_account,
@@ -29,11 +29,11 @@ use {
         instruction::{decode_instruction_data, decode_instruction_type},
         processor::Processor,
         proof::decode_proof_instruction_context,
-        solana_zk_token_sdk::zk_token_elgamal::pod::ElGamalPubkey,
+        miraland_zk_token_sdk::zk_token_elgamal::pod::ElGamalPubkey,
         state::{Account, Mint},
     },
     bytemuck::Zeroable,
-    solana_program::{
+    miraland_program::{
         account_info::{next_account_info, AccountInfo},
         entrypoint::ProgramResult,
         msg,

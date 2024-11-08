@@ -4,9 +4,9 @@ mod program_test;
 
 use {
     program_test::*,
-    solana_program::pubkey::Pubkey,
-    solana_program_test::tokio,
-    solana_sdk::signature::Signer,
+    miraland_program::pubkey::Pubkey,
+    miraland_program_test::tokio,
+    miraland_sdk::signature::Signer,
     spl_governance::{error::GovernanceError, instruction::remove_required_signatory},
     spl_governance_tools::error::GovernanceToolsError,
 };

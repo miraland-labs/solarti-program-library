@@ -5,7 +5,7 @@ use {
         math::{Decimal, Rate, TryAdd, TryDiv, TryMul, TrySub},
     },
     arrayref::{array_mut_ref, array_ref, array_refs, mut_array_refs},
-    solana_program::{
+    miraland_program::{
         clock::Slot,
         entrypoint::ProgramResult,
         msg,

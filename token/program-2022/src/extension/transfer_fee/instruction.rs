@@ -5,7 +5,7 @@ use {
 };
 use {
     crate::{check_program_account, error::TokenError, instruction::TokenInstruction},
-    solana_program::{
+    miraland_program::{
         instruction::{AccountMeta, Instruction},
         program_error::ProgramError,
         program_option::COption,

@@ -1,9 +1,9 @@
 use {
-    solana_program_test::{
+    miraland_program_test::{
         tokio::{self, sync::Mutex},
         ProgramTest,
     },
-    solana_sdk::{
+    miraland_sdk::{
         program_option::COption,
         signer::{keypair::Keypair, Signer},
     },

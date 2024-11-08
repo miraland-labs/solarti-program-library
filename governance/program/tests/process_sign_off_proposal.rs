@@ -3,10 +3,10 @@
 mod program_test;
 
 use {
+    miraland_program::pubkey::Pubkey,
+    miraland_program_test::tokio,
+    miraland_sdk::signature::{Keypair, Signer},
     program_test::*,
-    solana_program::pubkey::Pubkey,
-    solana_program_test::tokio,
-    solana_sdk::signature::{Keypair, Signer},
     spl_governance::{error::GovernanceError, state::enums::ProposalState},
     spl_governance_tools::error::GovernanceToolsError,
 };

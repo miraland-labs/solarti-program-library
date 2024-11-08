@@ -5,8 +5,8 @@ mod helpers;
 
 use {
     helpers::*,
-    solana_program_test::*,
-    solana_sdk::{
+    miraland_program_test::*,
+    miraland_sdk::{
         signature::Signer,
         signer::keypair::Keypair,
         stake::state::{Authorized, Lockup},

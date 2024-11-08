@@ -3,7 +3,7 @@
 use {
     num_derive::FromPrimitive,
     num_traits::FromPrimitive,
-    solana_program::{
+    miraland_program::{
         decode_error::DecodeError,
         msg,
         program_error::{PrintProgramError, ProgramError},

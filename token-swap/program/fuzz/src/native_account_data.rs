@@ -1,4 +1,4 @@
-use solana_program::{account_info::AccountInfo, clock::Epoch, pubkey::Pubkey};
+use miraland_program::{account_info::AccountInfo, clock::Epoch, pubkey::Pubkey};
 
 #[derive(Clone)]
 pub struct NativeAccountData {

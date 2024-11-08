@@ -2,7 +2,7 @@
 
 use {
     borsh::{BorshDeserialize, BorshSerialize},
-    solana_program::{
+    miraland_program::{
         borsh0_10::{get_instance_packed_len, get_packed_len, try_from_slice_unchecked},
         hash::Hash,
         instruction::Instruction,
@@ -11,8 +11,8 @@ use {
         pubkey::Pubkey,
         stake, system_instruction, system_program,
     },
-    solana_program_test::{processor, BanksClient, ProgramTest, ProgramTestContext},
-    solana_sdk::{
+    miraland_program_test::{processor, BanksClient, ProgramTest, ProgramTestContext},
+    miraland_sdk::{
         account::{Account as MiralandAccount, WritableAccount},
         clock::{Clock, Epoch},
         compute_budget::ComputeBudgetInstruction,
@@ -20,7 +20,7 @@ use {
         transaction::Transaction,
         transport::TransportError,
     },
-    solana_vote_program::{
+    miraland_vote_program::{
         self, vote_instruction,
         vote_state::{VoteInit, VoteState, VoteStateVersions},
     },
@@ -2406,7 +2406,7 @@ pub fn add_vote_account_with_pubkey(
     let vote_account = MiralandAccount::create(
         ACCOUNT_RENT_EXEMPTION,
         bincode::serialize::<VoteStateVersions>(&vote_state).unwrap(),
-        solana_vote_program::id(),
+        miraland_vote_program::id(),
         false,
         Epoch::default(),
     );

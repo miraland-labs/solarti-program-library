@@ -1,6 +1,6 @@
 use anchor_lang::{
+    miraland_program::{msg, program_error::ProgramError},
     prelude::*,
-    solana_program::{msg, program_error::ProgramError},
 };
 use bytemuck::PodCastError;
 use spl_concurrent_merkle_tree::error::ConcurrentMerkleTreeError;

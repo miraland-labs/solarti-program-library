@@ -6,7 +6,7 @@
  */
 
 import * as web3 from '@solarti/web3.js';
-import * as beetSolana from '@metaplex-foundation/beet-solana';
+import * as beetMiraland from '@metaplex-foundation/beet-miraland';
 import * as beet from '@metaplex-foundation/beet';
 
 /**
@@ -29,7 +29,7 @@ export const transferAuthorityStruct = new beet.BeetArgsStruct<
 >(
   [
     ['instructionDiscriminator', beet.uniformFixedSizeArray(beet.u8, 8)],
-    ['newAuthority', beetSolana.publicKey],
+    ['newAuthority', beetMiraland.publicKey],
   ],
   'TransferAuthorityInstructionArgs'
 );

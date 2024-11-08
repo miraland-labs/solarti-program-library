@@ -2,13 +2,13 @@
 //! `miraplex-token-metadata' NOTE: this file is sym-linked in `solarti-single-pool`, so
 //! be careful with changes!
 
-solana_program::declare_id!("Meta88XpDHcSJZDFiHop6c9sXaufkZX5depkZyrYBWv");
+miraland_program::declare_id!("Meta88XpDHcSJZDFiHop6c9sXaufkZX5depkZyrYBWv");
 
 pub(crate) mod instruction {
     use {
         super::state::DataV2,
         borsh::{BorshDeserialize, BorshSerialize},
-        solana_program::{
+        miraland_program::{
             instruction::{AccountMeta, Instruction},
             pubkey::Pubkey,
         },
@@ -61,7 +61,7 @@ pub(crate) mod instruction {
                 AccountMeta::new_readonly(mint_authority, true),
                 AccountMeta::new(payer, true),
                 AccountMeta::new_readonly(update_authority, true),
-                AccountMeta::new_readonly(solana_program::system_program::ID, false),
+                AccountMeta::new_readonly(miraland_program::system_program::ID, false),
             ],
             data,
         }
@@ -106,7 +106,7 @@ pub(crate) mod instruction {
 
 /// PDA creation helpers
 pub mod pda {
-    use {super::ID, solana_program::pubkey::Pubkey};
+    use {super::ID, miraland_program::pubkey::Pubkey};
     const PREFIX: &str = "metadata";
     /// Helper to find a metadata account address
     pub fn find_metadata_account(mint: &Pubkey) -> (Pubkey, u8) {

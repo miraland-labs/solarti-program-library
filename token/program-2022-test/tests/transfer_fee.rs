@@ -2,12 +2,12 @@
 
 mod program_test;
 use {
-    program_test::{TestContext, TokenContext},
-    solana_program_test::tokio,
-    solana_sdk::{
+    miraland_program_test::tokio,
+    miraland_sdk::{
         instruction::InstructionError, program_option::COption, pubkey::Pubkey, signature::Signer,
         signer::keypair::Keypair, transaction::TransactionError, transport::TransportError,
     },
+    program_test::{TestContext, TokenContext},
     spl_token_2022::{
         error::TokenError,
         extension::{
@@ -1267,7 +1267,7 @@ async fn max_harvest_withheld_tokens_to_mint() {
     } = create_mint_with_accounts(alice_amount).await;
 
     // harvest from max accounts, which is around 35, AKA 34 accounts + 1 mint
-    // see https://docs.solana.com/proposals/transactions-v2#problem
+    // see https://docs.miraland.io/proposals/transactions-v2#problem
     let mut accounts = vec![];
     let max_accounts = 34;
     for _ in 0..max_accounts {
@@ -1308,7 +1308,7 @@ async fn max_withdraw_withheld_tokens_from_accounts() {
 
     // withdraw from max accounts, which is around 35: 1 mint, 1 destination, 1
     // authority, 32 accounts
-    // see https://docs.solana.com/proposals/transactions-v2#problem
+    // see https://docs.miraland.io/proposals/transactions-v2#problem
     let destination = Keypair::new();
     token
         .create_auxiliary_token_account(&destination, &alice.pubkey())

@@ -3,7 +3,7 @@
 use {
     crate::error::GovernanceError,
     bincode::deserialize,
-    solana_program::{
+    miraland_program::{
         account_info::AccountInfo,
         bpf_loader_upgradeable::{self, UpgradeableLoaderState},
         program::invoke,

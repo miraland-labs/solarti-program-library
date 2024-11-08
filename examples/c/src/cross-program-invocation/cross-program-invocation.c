@@ -1,15 +1,17 @@
 /**
  * @brief A program demonstrating cross program invocations
  */
-#include <solana_sdk.h>
+#include <miraland_sdk.h>
 
 /// Amount of bytes of account data to allocate
 #define SIZE 42
 
-extern uint64_t do_invoke(SolParameters *params) {
+extern uint64_t do_invoke(SolParameters *params)
+{
   // As part of the program specification the first account is the system
   // program's executable account and the second is the account to allocate
-  if (params->ka_num != 2) {
+  if (params->ka_num != 2)
+  {
     return ERROR_NOT_ENOUGH_ACCOUNT_KEYS;
   }
   SolAccountInfo *system_program_info = &params->ka[0];
@@ -24,14 +26,16 @@ extern uint64_t do_invoke(SolParameters *params) {
   SolPubkey expected_allocated_key;
   if (SUCCESS != sol_create_program_address(seeds, SOL_ARRAY_SIZE(seeds),
                                             params->program_id,
-                                            &expected_allocated_key)) {
+                                            &expected_allocated_key))
+  {
     return ERROR_INVALID_INSTRUCTION_DATA;
   }
-  if (!SolPubkey_same(&expected_allocated_key, allocated_info->key)) {
+  if (!SolPubkey_same(&expected_allocated_key, allocated_info->key))
+  {
     return ERROR_INVALID_ARGUMENT;
   }
   /*
-  System program instruction source: https://github.com/solana-labs/solana/blob/master/sdk/program/src/system_instruction.rs
+  System program instruction source: https://github.com/miraland-labs/miraland/blob/master/sdk/program/src/system_instruction.rs
   Enum Values:
   0: CreateAccount
   1: Assign
@@ -58,11 +62,13 @@ extern uint64_t do_invoke(SolParameters *params) {
                            signers_seeds, SOL_ARRAY_SIZE(signers_seeds));
 }
 
-extern uint64_t entrypoint(const uint8_t *input) {
+extern uint64_t entrypoint(const uint8_t *input)
+{
   SolAccountInfo accounts[2];
   SolParameters params = (SolParameters){.ka = accounts};
 
-  if (!sol_deserialize(input, &params, SOL_ARRAY_SIZE(accounts))) {
+  if (!sol_deserialize(input, &params, SOL_ARRAY_SIZE(accounts)))
+  {
     return ERROR_INVALID_ARGUMENT;
   }
 

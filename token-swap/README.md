@@ -2,7 +2,7 @@
 
 A Uniswap-like exchange for the Token program on the Miraland blockchain.
 
-Full documentation is available at https://spl.miraland.top/token-swap
+Full documentation is available at https://spl.miraland.io/token-swap
 
 JavaScript bindings are available in the `./js` directory.
 
@@ -58,8 +58,8 @@ exact problem.
 ### Integration tests
 
 You can test the JavaScript bindings and on-chain interactions using
-`miraland-test-validator`, included in the Miraland Tool Suite.  See the
-[CLI installation instructions](https://docs.miraland.top/cli/install-miraland-cli-tools).
+`miraland-test-validator`, included in the Miraland Tool Suite. See the
+[CLI installation instructions](https://docs.miraland.io/cli/install-miraland-cli-tools).
 
 From `./js`, install the required modules:
 

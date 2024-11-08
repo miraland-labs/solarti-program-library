@@ -1,11 +1,11 @@
 [package]
 authors = [
-  "Miraland Crafters <crafters@miraland.top>",
-  "Solana Labs Maintainers <maintainers@solanalabs.com>",
+  "Miraland Crafters <crafters@miraland.io>",
+  "Miraland Labs Maintainers <maintainers@miralandlabs.com>",
 ]
 description = "Solarti-Token Command-line Utility"
 edition = "2021"
-homepage = "https://spl.miraland.top/token"
+homepage = "https://spl.miraland.io/token"
 license = "Apache-2.0"
 name = "solarti-transfer-hook-cli"
 repository = "https://github.com/miraland-labs/solarti-program-library"
@@ -14,24 +14,24 @@ version = "0.2.0"
 [dependencies]
 clap = { version = "3", features = ["cargo"] }
 futures-util = "0.3.19"
-miraland-clap-v3-utils = ">=1.18.5, <1.19.0"
-miraland-cli-config = ">=1.18.5, <1.19.0"
-miraland-client = ">=1.18.5, <1.19.0"
-miraland-logger = ">=1.18.5, <1.19.0"
-miraland-remote-wallet = ">=1.18.5, <1.19.0"
-miraland-sdk = ">=1.18.5, <1.19.0"
+miraland-clap-v3-utils = ">1.19.0"
+miraland-cli-config = ">1.19.0"
+miraland-client = ">1.19.0"
+miraland-logger = ">1.19.0"
+miraland-remote-wallet = ">1.19.0"
+miraland-sdk = ">1.19.0"
 solarti-transfer-hook-interface = { version = "0.4", path = "../interface" }
-solarti-tlv-account-resolution = { version = "0.5", path = "../../../libraries/tlv-account-resolution" }
+solarti-tlv-account-resolution = { version = "0.5.5", path = "../../../libraries/tlv-account-resolution" }
 strum = "0.25"
 strum_macros = "0.25"
 tokio = { version = "1", features = ["full"] }
 
 [dev-dependencies]
-miraland-test-validator = ">=1.18.5, <1.19.0"
-solarti-token-2022 = { version = "1.0", path = "../../program-2022", features = [
+miraland-test-validator = ">1.19.0"
+solarti-token-2022 = { version = "1.1.0", path = "../../program-2022", features = [
   "no-entrypoint",
 ] }
-solarti-token-client = { version = "0.5", path = "../../client" }
+solarti-token-client = { version = "0.6.0", path = "../../client" }
 
 [[bin]]
 name = "solarti-transfer-hook"

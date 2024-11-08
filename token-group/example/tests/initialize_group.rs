@@ -3,14 +3,14 @@
 mod setup;
 
 use {
-    setup::{setup_mint, setup_program_test},
-    solana_program::{instruction::InstructionError, pubkey::Pubkey, system_instruction},
-    solana_program_test::tokio,
-    solana_sdk::{
+    miraland_program::{instruction::InstructionError, pubkey::Pubkey, system_instruction},
+    miraland_program_test::tokio,
+    miraland_sdk::{
         signature::Keypair,
         signer::Signer,
         transaction::{Transaction, TransactionError},
     },
+    setup::{setup_mint, setup_program_test},
     spl_token_client::token::Token,
     spl_token_group_interface::{instruction::initialize_group, state::TokenGroup},
     spl_type_length_value::{

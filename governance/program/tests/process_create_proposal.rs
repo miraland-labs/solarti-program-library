@@ -1,15 +1,15 @@
 #![cfg(feature = "test-sbf")]
 
 use {
-    solana_program::{instruction::AccountMeta, pubkey::Pubkey},
-    solana_program_test::*,
+    miraland_program::{instruction::AccountMeta, pubkey::Pubkey},
+    miraland_program_test::*,
 };
 
 mod program_test;
 
 use {
+    miraland_sdk::signature::Keypair,
     program_test::*,
-    solana_sdk::signature::Keypair,
     spl_governance::{
         error::GovernanceError,
         state::{enums::VoteThreshold, governance::SECURITY_DEPOSIT_BASE_LAMPORTS},

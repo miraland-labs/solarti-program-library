@@ -3,10 +3,10 @@
 mod program_test;
 
 use {
+    miraland_program::{instruction::AccountMeta, pubkey::Pubkey},
+    miraland_program_test::tokio,
+    miraland_sdk::signer::Signer,
     program_test::*,
-    solana_program::{instruction::AccountMeta, pubkey::Pubkey},
-    solana_program_test::tokio,
-    solana_sdk::signer::Signer,
     spl_governance::{
         error::GovernanceError,
         instruction::{cast_vote, relinquish_vote},

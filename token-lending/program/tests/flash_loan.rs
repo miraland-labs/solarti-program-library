@@ -5,14 +5,14 @@ mod helpers;
 
 use {
     helpers::*,
-    solana_program::instruction::AccountMeta,
-    solana_program_test::*,
-    solana_sdk::{
+    miraland_program::instruction::AccountMeta,
+    miraland_program_test::*,
+    miraland_sdk::{
         pubkey::Pubkey,
         signature::{Keypair, Signer},
         transaction::{Transaction, TransactionError},
     },
-    spl_token::solana_program::instruction::InstructionError,
+    spl_token::miraland_program::instruction::InstructionError,
     spl_token_lending::{
         error::LendingError, instruction::flash_loan, processor::process_instruction,
     },

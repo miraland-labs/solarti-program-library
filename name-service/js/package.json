@@ -3,15 +3,15 @@
   "version": "0.1.4",
   "description": "SPL Name Service JavaScript API",
   "license": "MIT",
-  "author": "Solana Labs Maintainers <maintainers@solanalabs.com>",
+  "author": "Miraland Labs Maintainers <maintainers@miralandlabs.com>",
   "contributors": [
     {
       "name": "Miraland Crafters",
-      "email": "crafters@miraland.top",
-      "url": "https://miraland.top/"
+      "email": "crafters@miraland.io",
+      "url": "https://miraland.io/"
     }
   ],
-  "homepage": "https://miraland.top/",
+  "homepage": "https://miraland.io/",
   "repository": {
     "type": "git",
     "url": "https://github.com/miraland-labs/solarti-program-library"

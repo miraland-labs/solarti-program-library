@@ -7,7 +7,7 @@ pub mod token;
 /// transfers.
 ///
 /// The logic in this submodule should belong to the `miraland-zk-token-sdk` and
-/// will be removed with an upgrade to the Solana program in the future.
+/// will be removed with an upgrade to the Miraland program in the future.
 pub mod proof_generation;
 
 pub use spl_token_2022;

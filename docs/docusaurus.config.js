@@ -1,33 +1,33 @@
 module.exports = {
   title: "Solarti Program Library Docs",
   tagline:
-    "Solana is an open source project implementing a new, high-performance, permissionless blockchain.",
-  url: "https://spl.solana.com",
+    "Miraland is an open source project implementing a new, high-performance, permissionless blockchain.",
+  url: "https://spl.miraland.io",
   baseUrl: "/",
   favicon: "img/favicon.ico",
-  organizationName: "solana-labs", // Usually your GitHub org/user name.
-  projectName: "solana-program-library", // Usually your repo name.
+  organizationName: "miraland-labs", // Usually your GitHub org/user name.
+  projectName: "miraland-program-library", // Usually your repo name.
   themeConfig: {
     navbar: {
       logo: {
-        alt: "Solana Logo",
+        alt: "Miraland Logo",
         src: "img/logo-horizontal.svg",
         srcDark: "img/logo-horizontal-dark.svg",
       },
       items: [
         {
-          href: "https://docs.solana.com/",
+          href: "https://docs.miraland.io/",
           label: "Docs »",
           position: "left",
         },
         {
-          href: "https://solana.com/discord",
+          href: "https://miraland.io/discord",
           label: "Chat",
           position: "right",
         },
 
         {
-          href: "https://github.com/solana-labs/solana-program-library",
+          href: "https://github.com/miraland-labs/miraland-program-library",
           label: "GitHub",
           position: "right",
         },
@@ -41,15 +41,15 @@ module.exports = {
           items: [
             {
               label: "Discord",
-              href: "https://solana.com/discord",
+              href: "https://miraland.io/discord",
             },
             {
               label: "Twitter",
-              href: "https://twitter.com/solana",
+              href: "https://twitter.com/miracleland6",
             },
             {
               label: "Forums",
-              href: "https://forums.solana.com",
+              href: "https://forums.miraland.io",
             },
           ],
         },
@@ -58,12 +58,12 @@ module.exports = {
           items: [
             {
               label: "GitHub",
-              href: "https://github.com/solana-labs/solana-program-library",
+              href: "https://github.com/miraland-labs/miraland-program-library",
             },
           ],
         },
       ],
-      copyright: `Copyright © ${new Date().getFullYear()} Solana Foundation`,
+      copyright: `Copyright © ${new Date().getFullYear()} Miraland Foundation`,
     },
   },
   plugins: [require.resolve('docusaurus-lunr-search')],

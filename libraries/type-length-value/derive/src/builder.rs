@@ -74,16 +74,16 @@ impl From<&SplBorshVariableLenPackBuilder> for TokenStream {
         let where_clause = &builder.where_clause;
         quote! {
             impl #generics spl_type_length_value::variable_len_pack::VariableLenPack for #ident #generics #where_clause {
-                fn pack_into_slice(&self, dst: &mut [u8]) -> Result<(), solana_program::program_error::ProgramError> {
+                fn pack_into_slice(&self, dst: &mut [u8]) -> Result<(), miraland_program::program_error::ProgramError> {
                     borsh::to_writer(&mut dst[..], self).map_err(Into::into)
                 }
 
-                fn unpack_from_slice(src: &[u8]) -> Result<Self, solana_program::program_error::ProgramError> {
-                    solana_program::borsh0_10::try_from_slice_unchecked(src).map_err(Into::into)
+                fn unpack_from_slice(src: &[u8]) -> Result<Self, miraland_program::program_error::ProgramError> {
+                    miraland_program::borsh1::try_from_slice_unchecked(src).map_err(Into::into)
                 }
 
-                fn get_packed_len(&self) -> Result<usize, solana_program::program_error::ProgramError> {
-                    solana_program::borsh0_10::get_instance_packed_len(self).map_err(Into::into)
+                fn get_packed_len(&self) -> Result<usize, miraland_program::program_error::ProgramError> {
+                    miraland_program::borsh1::get_instance_packed_len(self).map_err(Into::into)
                 }
             }
         }

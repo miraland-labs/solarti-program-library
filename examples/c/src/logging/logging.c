@@ -1,7 +1,7 @@
 /**
  * @brief A program demonstrating logging
  */
-#include <solana_sdk.h>
+#include <miraland_sdk.h>
 
 extern uint64_t logging(SolParameters *params) {
   // Log a string

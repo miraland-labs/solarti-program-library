@@ -5,7 +5,7 @@ use {
     miraland_cli_output::OutputFormat,
     miraland_client::nonblocking::rpc_client::RpcClient,
     miraland_remote_wallet::remote_wallet::RemoteWalletManager,
-    solana_sdk::{commitment_config::CommitmentConfig, signature::Signer},
+    miraland_sdk::{commitment_config::CommitmentConfig, signature::Signer},
     spl_token_client::client::{ProgramClient, ProgramRpcClient, ProgramRpcClientSendTransaction},
     std::{process::exit, rc::Rc, sync::Arc},
 };
@@ -106,7 +106,7 @@ impl Config {
         } else {
             Err("default signer is required, please specify a valid default signer by identifying a \
                  valid configuration file using the --config argument, or by creating a valid config \
-                 at the default location of ~/.config/solana/cli/config.yml using the solana config \
+                 at the default location of ~/.config/miraland/cli/config.yml using the miraland config \
                  command".to_string().into())
         }
     }
@@ -118,7 +118,7 @@ impl Config {
         } else {
             Err("fee payer is required, please specify a valid fee payer using the --payer argument, or \
                  by identifying a valid configuration file using the --config argument, or by creating a \
-                 valid config at the default location of ~/.config/solana/cli/config.yml using the solana \
+                 valid config at the default location of ~/.config/miraland/cli/config.yml using the miraland \
                  config command".to_string().into())
         }
     }

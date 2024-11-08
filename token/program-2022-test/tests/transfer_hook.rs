@@ -4,8 +4,8 @@ mod program_test;
 use {
     futures_util::TryFutureExt,
     program_test::{TestContext, TokenContext},
-    solana_program_test::{processor, tokio, ProgramTest},
-    solana_sdk::{
+    miraland_program_test::{processor, tokio, ProgramTest},
+    miraland_sdk::{
         account::Account,
         account_info::{next_account_info, AccountInfo},
         entrypoint::ProgramResult,

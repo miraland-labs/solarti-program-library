@@ -11,7 +11,7 @@ use {
         realm::RealmConfig,
     },
     borsh::{BorshDeserialize, BorshSchema, BorshSerialize},
-    solana_program::{
+    miraland_program::{
         clock::{Slot, UnixTimestamp},
         program_pack::IsInitialized,
         pubkey::Pubkey,

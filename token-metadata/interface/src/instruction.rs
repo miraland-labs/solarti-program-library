@@ -5,7 +5,7 @@ use serde::{Deserialize, Serialize};
 use {
     crate::state::Field,
     borsh::{BorshDeserialize, BorshSerialize},
-    solana_program::{
+    miraland_program::{
         instruction::{AccountMeta, Instruction},
         program_error::ProgramError,
         pubkey::Pubkey,
@@ -324,7 +324,7 @@ pub fn emit(
 mod test {
     #[cfg(feature = "serde-traits")]
     use std::str::FromStr;
-    use {super::*, crate::NAMESPACE, solana_program::hash};
+    use {super::*, crate::NAMESPACE, miraland_program::hash};
 
     fn check_pack_unpack<T: BorshSerialize>(
         instruction: TokenMetadataInstruction,

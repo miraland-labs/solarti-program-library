@@ -9,10 +9,10 @@ pub mod state;
 
 // Export current SDK types for downstream users building with a different SDK
 // version
-pub use solana_program;
-use solana_program::pubkey::Pubkey;
+pub use miraland_program;
+use miraland_program::pubkey::Pubkey;
 
-solana_program::declare_id!("TwraquV316UJbMASVTGv1h8HVTUYreiKW228j6T2gpU");
+miraland_program::declare_id!("TwraquV316UJbMASVTGv1h8HVTUYreiKW228j6T2gpU");
 
 
 const WRAPPED_MINT_SEED: &[u8] = br"mint";

@@ -32,7 +32,7 @@ export const HASH_PREFIX = 'SPL Name Service';
 /**
  * Creates a name account with the given rent budget, allocated space, owner and class.
  *
- * @param connection The solana connection object to the RPC node
+ * @param connection The miraland connection object to the RPC node
  * @param name The name of the new account
  * @param space The space in bytes allocated to the account
  * @param payerKey The allocation cost payer
@@ -89,7 +89,7 @@ export async function createNameRegistry(
 /**
  * Overwrite the data of the given name registry.
  *
- * @param connection The solana connection object to the RPC node
+ * @param connection The miraland connection object to the RPC node
  * @param name The name of the name registry to update
  * @param offset The offset to which the data should be written into the registry
  * @param input_data The data to be written
@@ -134,7 +134,7 @@ export async function updateNameRegistryData(
 /**
  * Change the owner of a given name account.
  *
- * @param connection The solana connection object to the RPC node
+ * @param connection The miraland connection object to the RPC node
  * @param name The name of the name account
  * @param newOwner The new owner to be set
  * @param curentNameOwner the current name Owner
@@ -180,7 +180,7 @@ export async function transferNameOwnership(
 /**
  * Delete the name account and transfer the rent to the target.
  *
- * @param connection The solana connection object to the RPC node
+ * @param connection The miraland connection object to the RPC node
  * @param name The name of the name account
  * @param refundTargetKey The refund destination address
  * @param nameClass The class of this name, if it exsists
@@ -222,7 +222,7 @@ export async function deleteNameRegistry(
 /**
  * Realloc the name account space.
  *
- * @param connection The solana connection object to the RPC node
+ * @param connection The miraland connection object to the RPC node
  * @param name The name of the name account
  * @param space The new space to be allocated
  * @param payerKey The allocation cost payer if new space is larger than current or the refund destination if smaller

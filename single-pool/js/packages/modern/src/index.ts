@@ -1,4 +1,4 @@
-import { getAddressCodec } from '@solana/web3.js';
+import { getAddressCodec } from '@miraland/web3.js';
 
 import { PoolAddress, VoteAccountAddress } from './addresses.js';
 

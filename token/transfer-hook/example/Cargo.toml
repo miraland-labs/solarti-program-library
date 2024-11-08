@@ -1,8 +1,8 @@
 [package]
 name = "solarti-transfer-hook-example"
-version = "0.4.0"
+version = "0.4.5"
 description = "Solarti Program Library Transfer Hook Example Program"
-authors = ["Miraland Labs Maintainers <maintainers@miraland.top>"]
+authors = ["Miraland Labs Maintainers <maintainers@miraland.io>"]
 repository = "https://github.com/miraland-labs/solarti-program-library"
 license = "Apache-2.0"
 edition = "2021"
@@ -13,17 +13,17 @@ test-sbf = []
 
 [dependencies]
 arrayref = "0.3.7"
-miraland-program = ">=1.18.5, <1.19.0"
-solarti-tlv-account-resolution = { version = "0.5", path = "../../../libraries/tlv-account-resolution" }
-solarti-token-2022 = { version = "1.0", path = "../../program-2022", features = [
+miraland-program = ">1.19.0"
+solarti-tlv-account-resolution = { version = "0.5.5", path = "../../../libraries/tlv-account-resolution" }
+solarti-token-2022 = { version = "1.1.0", path = "../../program-2022", features = [
     "no-entrypoint",
 ] }
-solarti-transfer-hook-interface = { version = "0.4", path = "../interface" }
-solarti-type-length-value = { version = "0.3", path = "../../../libraries/type-length-value" }
+solarti-transfer-hook-interface = { version = "0.4.5", path = "../interface" }
+solarti-type-length-value = { version = "0.3.9", path = "../../../libraries/type-length-value" }
 
 [dev-dependencies]
-miraland-program-test = ">=1.18.5, <1.19.0"
-miraland-sdk = ">=1.18.5, <1.19.0"
+miraland-program-test = ">1.19.0"
+miraland-sdk = ">1.19.0"
 
 [lib]
 crate-type = ["cdylib", "lib"]

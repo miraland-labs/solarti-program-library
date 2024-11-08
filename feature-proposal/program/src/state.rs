@@ -1,7 +1,7 @@
 //! Program state
 use {
     borsh::{BorshDeserialize, BorshSchema, BorshSerialize},
-    solana_program::{
+    miraland_program::{
         clock::UnixTimestamp,
         msg,
         program_error::ProgramError,
@@ -69,7 +69,7 @@ mod tests {
     fn test_get_packed_len() {
         assert_eq!(
             FeatureProposal::get_packed_len(),
-            solana_program::borsh1::get_packed_len::<FeatureProposal>()
+            miraland_program::borsh1::get_packed_len::<FeatureProposal>()
         );
     }
 

@@ -3,8 +3,8 @@
 mod program_test;
 use {
     program_test::TestContext,
-    solana_program_test::tokio,
-    solana_sdk::{
+    miraland_program_test::tokio,
+    miraland_sdk::{
         instruction::InstructionError,
         program_pack::Pack,
         pubkey::Pubkey,

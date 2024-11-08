@@ -3,7 +3,7 @@
 #![cfg(not(feature = "no-entrypoint"))]
 
 use {
-    solana_program::{
+    miraland_program::{
         account_info::AccountInfo,
         entrypoint::{ProgramResult, HEAP_LENGTH, HEAP_START_ADDRESS},
         pubkey::Pubkey,
@@ -45,7 +45,7 @@ unsafe impl std::alloc::GlobalAlloc for BumpAllocator {
 #[global_allocator]
 static A: BumpAllocator = BumpAllocator;
 
-solana_program::entrypoint!(process_instruction);
+miraland_program::entrypoint!(process_instruction);
 fn process_instruction(
     program_id: &Pubkey,
     accounts: &[AccountInfo],

@@ -3,8 +3,8 @@
 mod program_test;
 use {
     program_test::{setup, setup_metadata, setup_mint, setup_update_field},
-    solana_program_test::{tokio, ProgramTestBanksClientExt},
-    solana_sdk::{
+    miraland_program_test::{tokio, ProgramTestBanksClientExt},
+    miraland_sdk::{
         instruction::InstructionError,
         pubkey::Pubkey,
         signature::Signer,

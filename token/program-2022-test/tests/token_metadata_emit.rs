@@ -3,8 +3,8 @@
 mod program_test;
 use {
     program_test::TestContext,
-    solana_program_test::{processor, tokio, ProgramTest},
-    solana_sdk::{
+    miraland_program_test::{processor, tokio, ProgramTest},
+    miraland_sdk::{
         borsh0_10::try_from_slice_unchecked, program::MAX_RETURN_DATA, pubkey::Pubkey,
         signature::Signer, signer::keypair::Keypair, transaction::Transaction,
     },

@@ -12,7 +12,7 @@ We note that this overview exists mainly to provide the design intuition behind
 the underlying cryptography that is used in the confidential extension. Some of
 the description of the protocol in the overview could differ from the actual
 implementation. We refer to the subsequent subsections, the [source
-code](https://github.com/solana-labs/solana-program-library), and the
+code](https://github.com/miraland-labs/miraland-program-library), and the
 documentations within for the precise details of the underlying cryptography.
 
 ## Tokens with Encryption and Proofs

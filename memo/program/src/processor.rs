@@ -1,7 +1,7 @@
 //! Program state processor
 
 use {
-    solana_program::{
+    miraland_program::{
         account_info::AccountInfo, entrypoint::ProgramResult, msg, program_error::ProgramError,
         pubkey::Pubkey,
     },
@@ -40,10 +40,10 @@ pub fn process_instruction(
 mod tests {
     use {
         super::*,
-        solana_program::{
+        miraland_program::{
             account_info::IntoAccountInfo, program_error::ProgramError, pubkey::Pubkey,
         },
-        solana_sdk::account::Account,
+        miraland_sdk::account::Account,
     };
 
     #[test]

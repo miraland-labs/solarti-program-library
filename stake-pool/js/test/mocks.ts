@@ -1,7 +1,7 @@
-import { AccountInfo, LAMPORTS_PER_MLN, PublicKey, StakeProgram } from '@solana/web3.js';
+import { AccountInfo, LAMPORTS_PER_MLN, PublicKey, StakeProgram } from '@miraland/web3.js';
 import BN from 'bn.js';
 import { ValidatorStakeInfo } from '../src';
-import { AccountLayout, TOKEN_PROGRAM_ID } from '@solana/solarti-token';
+import { AccountLayout, TOKEN_PROGRAM_ID } from '@miraland/solarti-token';
 import { ValidatorListLayout, ValidatorStakeInfoStatus } from '../src/layouts';
 
 export const CONSTANTS = {

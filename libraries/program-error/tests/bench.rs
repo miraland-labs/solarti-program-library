@@ -12,32 +12,32 @@ pub enum ExampleError {
     IncorrectMintAuthority,
 }
 
-impl From<ExampleError> for solana_program::program_error::ProgramError {
+impl From<ExampleError> for miraland_program::program_error::ProgramError {
     fn from(e: ExampleError) -> Self {
-        solana_program::program_error::ProgramError::Custom(e as u32)
+        miraland_program::program_error::ProgramError::Custom(e as u32)
     }
 }
-impl<T> solana_program::decode_error::DecodeError<T> for ExampleError {
+impl<T> miraland_program::decode_error::DecodeError<T> for ExampleError {
     fn type_of() -> &'static str {
         "ExampleError"
     }
 }
 
-impl solana_program::program_error::PrintProgramError for ExampleError {
+impl miraland_program::program_error::PrintProgramError for ExampleError {
     fn print<E>(&self)
     where
         E: 'static
             + std::error::Error
-            + solana_program::decode_error::DecodeError<E>
-            + solana_program::program_error::PrintProgramError
+            + miraland_program::decode_error::DecodeError<E>
+            + miraland_program::program_error::PrintProgramError
             + num_traits::FromPrimitive,
     {
         match self {
             ExampleError::MintHasNoMintAuthority => {
-                solana_program::msg!("Mint has no mint authority")
+                miraland_program::msg!("Mint has no mint authority")
             }
             ExampleError::IncorrectMintAuthority => {
-                solana_program::msg!("Incorrect mint authority has signed the instruction")
+                miraland_program::msg!("Incorrect mint authority has signed the instruction")
             }
         }
     }

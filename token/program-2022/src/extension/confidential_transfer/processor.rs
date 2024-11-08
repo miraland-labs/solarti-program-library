@@ -2,7 +2,7 @@
 #[cfg(feature = "zk-ops")]
 use {
     crate::extension::non_transferable::NonTransferable,
-    solana_zk_token_sdk::zk_token_elgamal::ops as syscall,
+    miraland_zk_token_sdk::zk_token_elgamal::ops as syscall,
 };
 use {
     crate::{
@@ -22,7 +22,7 @@ use {
         processor::Processor,
         state::{Account, Mint},
     },
-    solana_program::{
+    miraland_program::{
         account_info::{next_account_info, AccountInfo},
         clock::Clock,
         entrypoint::ProgramResult,

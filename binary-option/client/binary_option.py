@@ -5,12 +5,12 @@ import base64
 import base58
 import struct
 
-from solana.publickey import PublicKey 
-from solana.transaction import Transaction, AccountMeta, TransactionInstruction
-from solana.account import Account 
-from solana.rpc.api import Client
-import solana.rpc.types as types
-from solana.system_program import transfer, TransferParams
+from miraland.publickey import PublicKey 
+from miraland.transaction import Transaction, AccountMeta, TransactionInstruction
+from miraland.account import Account 
+from miraland.rpc.api import Client
+import miraland.rpc.types as types
+from miraland.system_program import transfer, TransferParams
 from spl.token._layouts import MINT_LAYOUT, ACCOUNT_LAYOUT
 from spl.token.instructions import (
     get_associated_token_address, create_associated_token_account,

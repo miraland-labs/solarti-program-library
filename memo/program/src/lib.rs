@@ -7,18 +7,18 @@ mod entrypoint;
 pub mod processor;
 
 // Export current sdk types for downstream users building with a different sdk version
-pub use solana_program;
-use solana_program::{
+pub use miraland_program;
+use miraland_program::{
     instruction::{AccountMeta, Instruction},
     pubkey::Pubkey,
 };
 
 /// Legacy symbols from Memo v1
 pub mod v1 {
-    solana_program::declare_id!("MemojWWmbFiRdUEQtRpMkeeyNB181Mr9uWEzdrgHUnc");
+    miraland_program::declare_id!("MemojWWmbFiRdUEQtRpMkeeyNB181Mr9uWEzdrgHUnc");
 }
 
-solana_program::declare_id!("MemoE5FsL5zWDjihivRfHTpkR8RdviRbziKsfGS9Ntd");
+miraland_program::declare_id!("MemoE5FsL5zWDjihivRfHTpkR8RdviRbziKsfGS9Ntd");
 
 /// Build a memo instruction, possibly signed
 ///
