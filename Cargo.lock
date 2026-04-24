@@ -7598,7 +7598,7 @@ dependencies = [
  "solarti-token-client",
  "solarti-token-metadata-interface 0.2.7",
  "strum 0.25.0",
- "strum_macros 0.25.3",
+ "strum_macros 0.28.0",
  "tempfile",
  "tokio",
  "walkdir",
@@ -7865,7 +7865,7 @@ dependencies = [
  "solarti-token-client",
  "solarti-transfer-hook-interface 0.4.4",
  "strum 0.25.0",
- "strum_macros 0.25.3",
+ "strum_macros 0.28.0",
  "tokio",
 ]
 
@@ -8030,14 +8030,13 @@ dependencies = [
 
 [[package]]
 name = "strum_macros"
-version = "0.25.3"
+version = "0.28.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "23dc1fa9ac9c169a78ba62f0b841814b7abae11bdd047b9c58f893439e309ea0"
+checksum = "ab85eea0270ee17587ed4156089e10b9e6880ee688791d45a905f5b1ca36f664"
 dependencies = [
- "heck 0.4.1",
+ "heck 0.5.0",
  "proc-macro2",
  "quote",
- "rustversion",
  "syn 2.0.87",
 ]
 

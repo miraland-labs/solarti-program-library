@@ -46,7 +46,7 @@ solarti-memo = { version = "4.0.0", path = "../../memo/program", features = [
   "no-entrypoint",
 ] }
 strum = "0.25"
-strum_macros = "0.25"
+strum_macros = "0.28"
 tokio = "1.35"
 
 [dev-dependencies]
