@@ -48,7 +48,7 @@ solarti-type-length-value = { version = "0.3.7", path = "../../libraries/type-le
 solarti-pod = { version = "0.1.8", path = "../../libraries/pod" }
 thiserror = "1.0"
 serde = { version = "1.0.193", optional = true }
-serde_with = { version = "3.4.0", optional = true }
+serde_with = { version = "3.18.0", optional = true }
 base64 = { version = "0.21.5", optional = true }
 
 [dev-dependencies]
